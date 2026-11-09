@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSGT Module 4 — Study Guide</title>
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --muted: #444444;
+    --bg: #ffffff;
+    --line: #cccccc;
+    --rule: #999999;
+    --accent: #1d4ed8;
+    --space: 1.5rem;
+    --radius: 0;
+    --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+    --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-mono: "Courier New", Courier, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    font-size: 17px;
+    font-weight: 500;
+  }
+  .wrap {
+    max-width: 68ch;
+    margin: 0 auto;
+    padding: 2.5rem 1rem 4rem;
+  }
+  header {
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+  }
+  h1 {
+    font-family: var(--font-serif);
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0;
+  }
+  .meta {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    font-weight: 500;
+    color: var(--muted);
+    margin-top: 1rem;
+  }
+  h2 {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 3rem 0 1rem;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.4rem;
+  }
+  h2 > a { text-decoration: none; color: inherit; }
+  h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 2rem 0 0.5rem;
+  }
+  h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 1.5rem 0 0.5rem;
+  }
+  p {
+    margin: 0 0 1rem;
+    line-height: 1.6;
+  }
+  .wrap > div { line-height: 1.6; }
+  ul, ol, blockquote, pre, figure { line-height: 1.6; }
+  td { line-height: 1.5; }
+  strong, em, span, b, i { line-height: 1.6; }
+  .theory {
+    border-left: 3px solid var(--ink);
+    padding: 1rem 1.25rem;
+    margin: 1.75rem 0;
+    font-size: 0.98rem;
+  }
+  .theory p:first-child { margin-top: 0; }
+  .theory p:last-child { margin-bottom: 0; }
+  .source {
+    display: block;
+    font-size: 0.78rem;
+    line-height: 1.4;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+  }
+  .eq {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 1.25rem 0;
+    padding: 0.75rem 1rem;
+    background: #f5f5f5;
+    border: 1px solid var(--line);
+    color: var(--ink);
+    overflow-x: auto;
+  }
+  .eq-note {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--muted);
+    text-align: center;
+    margin-top: -0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .example {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+    font-size: 0.95rem;
+    background: #fafafa;
+  }
+  .example-title {
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0;
+    color: var(--muted);
+  }
+  .example .eq { margin: 0.75rem 0; background: #ffffff; border: 1px solid var(--line); }
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    border: 1px solid var(--line);
+    background: #fafafa;
+    padding: 1rem 1.25rem;
+  }
+  .steps li {
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+  .steps li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.1rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    background: var(--ink);
+    border-radius: 50%;
+  }
+  .steps li:last-child { margin-bottom: 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.75rem 0;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 0.625rem 0.875rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: #f0f0f0;
+    font-weight: 700;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+  }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .kbd {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    background: #f0f0f0;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 0.1rem 0.4rem;
+  }
+  .toc {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 2rem 0;
+    background: #fafafa;
+  }
+  .toc ol { margin: 0; padding-left: 1.25rem; }
+  .toc li { margin-bottom: 0.35rem; font-size: 0.95rem; }
+  .toc a { color: var(--ink); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .nav {
+    margin: 1.5rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .nav a {
+    padding: 0.25rem 0.6rem;
+    border: 1px solid var(--line);
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.85rem;
+    border-radius: 3px;
+  }
+  .nav a:hover { background: #f0f0f0; }
+  .practice {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: #fafafa;
+  }
+  .practice h3 { margin-top: 0; }
+  .answer-key {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: #fafafa;
+  }
+  .answer-key h3 { margin-top: 0; }
+  .common-mistakes {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: #fafafa;
+  }
+  .common-mistakes h3 { margin-top: 0; }
+  .self-learning {
+    border-left: 3px solid var(--muted);
+    padding: 1rem 1.25rem;
+    margin: 1.75rem 0;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+  .self-learning p { margin-bottom: 0.75rem; }
+  .revision-sheet {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: #fafafa;
+  }
+  .revision-sheet h3 { margin-top: 0; }
+  .warning {
+    color: #b00020;
+    font-weight: 700;
+  }
+  .mu-badge {
+    display: inline-block;
+    background: #eef2ff;
+    border: 1px solid var(--accent);
+    color: #1d4ed8;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+    margin-left: 0.5rem;
+  }
+  .exam-q {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+    background: #fafafa;
+  }
+  .exam-q-title {
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    letter-spacing: 0;
+    color: var(--muted);
+  }
+  .exam-source {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  svg { width: 100%; max-width: 440px; height: auto; display: block; margin: 1rem auto; padding: 0.5rem; background: #fff; border: 1px solid var(--line); }
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+  .references {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 2rem 0;
+    background: #fafafa;
+  }
+  .references h3 { margin-top: 0; }
+  .references p { margin: 0.5rem 0; }
+  .references ul { margin: 0.5rem 0; padding-left: 1.5rem; }
+  ::selection { background: var(--ink); color: var(--bg); }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  @media (max-width: 600px) {
+    .wrap { padding: 1.5rem 1rem 3rem; }
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.4rem; }
+    .eq { font-size: 1.15rem; }
+  }
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    .wrap { padding: 1rem 0.75rem 3rem; }
+    h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.3rem; margin-top: 2.25rem; }
+    table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; font-size: 0.85rem; }
+    th, td { padding: 0.45rem 0.55rem; }
+    .theory, .example, .practice, .answer-key, .common-mistakes, .revision-sheet, .references, .exam-q, .steps, .toc, .self-learning { padding: 0.75rem; }
+    .eq { font-size: 1rem; padding: 0.6rem 0.5rem; text-align: left; }
+    .kbd { word-break: break-word; }
+    .nav a { padding: 0.4rem 0.7rem; }
+    svg { max-width: 100%; padding: 0.25rem; }
+  }
+  @media print {
+    body { font-size: 12pt; line-height: 1.4; color: #000; background: #fff; }
+    .wrap { max-width: 100%; padding: 0; }
+    header { border-bottom: 1px solid #000; margin-bottom: 1.5rem; padding-bottom: 0.75rem; }
+    h2 { margin: 2rem 0 0.75rem; border-bottom: 1px solid #000; padding-bottom: 0.3rem; }
+    h3 { margin: 1.5rem 0 0.4rem; }
+    .toc, .nav { display: none; }
+    .example, .practice, .answer-key, .revision-sheet, .steps, .theory, .common-mistakes, .references, .exam-q {
+      border: 1px solid #999;
+      background: #fff !important;
+      page-break-inside: avoid;
+    }
+    .eq { background: #fff; border: 1px solid #999; page-break-inside: avoid; }
+    .eq-note { display: none; }
+    a { text-decoration: none; color: #000; }
+    svg { border: 1px solid #000; }
+    footer { margin-top: 2rem; border-top: 1px solid #000; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <a href="../index.html" style="display:inline-block;margin:0 0 1rem;font-size:0.85rem;color:#0a0a0a;">← All modules</a>
+
+
+  <header>
+    <h1>DSGT Module 4</h1>
+    <p class="subtitle">Counting: Pigeonhole Principle · Inclusion-Exclusion · Recurrence Relations</p>
+    <div class="meta">CSE AIML · Sem III · End Sem Preparation · Source: Mrs. Shamal Bagal PPTs + DSGT Syllabus + Mumbai University Question Papers</div>
+  </header>
+
+  <div class="toc">
+    <ol>
+      <li><a href="#syllabus">Module 4 — Syllabus</a></li>
+      <li><a href="#php">1 · Pigeonhole Principle (4.1)</a></li>
+      <li><a href="#iep">2 · Inclusion-Exclusion Principle (4.2)</a></li>
+      <li><a href="#recurrence">3 · Recurrence Relations (4.3)</a></li>
+      <li><a href="#mu-questions">Mumbai University Previous Exam Questions</a></li>
+      <li><a href="#self-learning">Syllabus Self-Learning Topics</a></li>
+      <li><a href="#practice">Exam Practice Section</a></li>
+      <li><a href="#answer-key">Answer Key</a></li>
+      <li><a href="#revision">Last-Minute Revision Sheet</a></li>
+      <li><a href="#references">References &amp; Attribution</a></li>
+    </ol>
+  </div>
+
+  <nav class="nav">
+    <a href="#php">Pigeonhole</a>
+    <a href="#iep">Inclusion-Exclusion</a>
+    <a href="#recurrence">Recurrences</a>
+    <a href="#mu-questions">Mumbai Univ. Exams</a>
+    <a href="#practice">Practice</a>
+    <a href="#revision">Revision</a>
+    <a href="#references">References</a>
+  </nav>
+
+  <h2 id="syllabus">Module 4: Syllabus</h2>
+  <p><strong>Module IV: Counting</strong> · 5 hours · CO4</p>
+  <div class="eq">Pigeonhole Principle, Inclusion-Exclusion Principle. Recurrence relations, Solving recurrence relations.</div>
+
+  <table>
+    <tr><th>Section</th><th>Topic</th><th>What it covers</th></tr>
+    <tr><td><strong>4.1</strong></td><td>Pigeonhole Principle</td><td>More items than containers → at least one container holds multiples. An existence proof.</td></tr>
+    <tr><td><strong>4.2</strong></td><td>Inclusion-Exclusion Principle</td><td>Counting overlapping groups without double-counting shared elements.</td></tr>
+    <tr><td><strong>4.3</strong></td><td>Recurrence Relations</td><td>Defining a sequence from previous terms, then finding a closed-form formula.</td></tr>
+  </table>
+
+  <p><strong>Exam format:</strong> 6 questions, 15 marks each. Question 1 is compulsory. The remaining questions mix parts from different modules. You answer 4 of 6. Module 4 may appear in Question 1 or as one part of any other question. You must be able to solve one pigeonhole problem, one inclusion-exclusion problem, and one recurrence problem without preparation.</p>
+
+  <h2 id="php">1 · Pigeonhole Principle (4.1)</h2>
+
+  <div class="theory">
+    <span class="source">Teacher’s framing: 20 pigeons, 19 holes</span>
+    <p>Suppose 20 pigeons fly into 19 pigeonholes. Because there are more pigeons than holes, at least one hole must contain at least two pigeons.</p>
+    <p>Proof: if every hole held at most one pigeon, at most 19 pigeons could be accommodated. We have 20. Therefore at least one hole holds two or more.</p>
+    <p>That is the entire principle. It is a proof technique: you use it to show that something must exist, without constructing it. You prove existence by contradiction.</p>
+  </div>
+
+  <div class="theory">
+    <span class="source">Basic vs Generalized — the difference</span>
+    <p><strong>Basic Pigeonhole Principle:</strong> If <span class="kbd">k + 1</span> or more objects are placed into <span class="kbd">k</span> boxes, at least one box contains two or more objects.</p>
+    <p><strong>Generalized Pigeonhole Principle:</strong> If <span class="kbd">n</span> objects are placed into <span class="kbd">m</span> boxes, at least one box contains at least <span class="kbd">⌈n/m⌉</span> objects.</p>
+    <p class="eq-note">⌈ ⌉ is the ceiling function: round up. 21 objects into 10 boxes → ⌈21/10⌉ = 3.</p>
+    <p>The basic form only tells you that one box has ≥ 2. The generalized form tells you the <em>minimum count</em> in the fullest box. If the question asks “at least how many,” use the generalized form.</p>
+  </div>
+
+  <h3>Guarantee Questions — Formula</h3>
+  <p>To guarantee that at least <span class="kbd">k</span> objects are in one box, when there are <span class="kbd">m</span> boxes:</p>
+  <div class="eq">n = m(k − 1) + 1</div>
+  <p class="eq-note"><span class="kbd">m</span> = number of boxes / categories &nbsp;·&nbsp; <span class="kbd">k</span> = number of objects that must be guaranteed in at least one box &nbsp;·&nbsp; <span class="kbd">n</span> = minimum number of objects required.</p>
+  <p>Why: with <span class="kbd">m(k − 1)</span> objects you can put exactly <span class="kbd">k − 1</span> in each box and avoid the guarantee. The <span class="kbd">+1</span> forces it.</p>
+
+  <h3>Worked Examples</h3>
+
+  <div class="example">
+    <div class="example-title">Example 1: Birth month</div>
+    <p>Pigeons (<span class="kbd">n</span>) = 100 people &nbsp;·&nbsp; Holes (<span class="kbd">m</span>) = 12 months</p>
+    <div class="eq">⌈100 / 12⌉ = 9</div>
+    <p>At least <strong>9</strong> people share a birth month.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Example 2: Dictionary pages</div>
+    <p>Pigeons (<span class="kbd">n</span>) = 40,325 pages &nbsp;·&nbsp; Holes (<span class="kbd">m</span>) = 25 dictionaries</p>
+    <div class="eq">40,325 ÷ 25 = 1,613 exactly</div>
+    <p>One dictionary has at least <strong>1,613 pages</strong>.</p>
+    <p class="warning">Note: this guide corrects the answer from 1,614 to 1,613. The calculation is exact: 40,325 ÷ 25 = 1,613.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Example 3: Weekday birthdays</div>
+    <p><span class="kbd">n = 30</span>, <span class="kbd">m = 7</span> days</p>
+    <div class="eq">⌈30 / 7⌉ = 5</div>
+    <p>At least <strong>5</strong> people share a weekday birthday.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Example 4: Family money</div>
+    <p><span class="kbd">n = 2886</span> rupees &nbsp;·&nbsp; <span class="kbd">m = 7</span> members</p>
+    <div class="eq">⌈2886 / 7⌉ = 413</div>
+    <p>One member has at least <strong>Rs. 413</strong>.</p>
+    <p class="warning">Note: the teacher’s slide concludes Rs. 416 — that is a slide error. The correct guaranteed minimum is Rs. 413.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Example 5: Books on shelves</div>
+    <p><span class="kbd">n = 9</span>, <span class="kbd">m = 4</span></p>
+    <div class="eq">⌈9 / 4⌉ = 3</div>
+    <p>One shelf has at least <strong>3 books</strong>.</p>
+    <svg viewBox="0 0 360 165" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="phpT"><title id="phpT">9 books spread over 4 shelves: the fullest shelf has 3</title><text x="180" y="18" text-anchor="middle" font-size="13" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">9 books → 4 shelves</text><rect x="11" y="30" width="74" height="84" fill="#eef2ff" stroke="#1d4ed8" stroke-width="2.5"/><circle cx="27" cy="98" r="9" fill="#1d4ed8"/><circle cx="48" cy="98" r="9" fill="#1d4ed8"/><circle cx="69" cy="98" r="9" fill="#1d4ed8"/><text x="48" y="134" text-anchor="middle" font-size="12" font-weight="400" fill="#444" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">Shelf 1</text><text x="48" y="152" text-anchor="middle" font-size="13" font-weight="700" fill="#1d4ed8" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">3 books</text><rect x="99" y="30" width="74" height="84" fill="none" stroke="#0a0a0a" stroke-width="1.5"/><circle cx="126" cy="98" r="9" fill="#0a0a0a"/><circle cx="146" cy="98" r="9" fill="#0a0a0a"/><text x="136" y="134" text-anchor="middle" font-size="12" font-weight="400" fill="#444" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">Shelf 2</text><text x="136" y="152" text-anchor="middle" font-size="13" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">2 books</text><rect x="187" y="30" width="74" height="84" fill="none" stroke="#0a0a0a" stroke-width="1.5"/><circle cx="214" cy="98" r="9" fill="#0a0a0a"/><circle cx="234" cy="98" r="9" fill="#0a0a0a"/><text x="224" y="134" text-anchor="middle" font-size="12" font-weight="400" fill="#444" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">Shelf 3</text><text x="224" y="152" text-anchor="middle" font-size="13" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">2 books</text><rect x="275" y="30" width="74" height="84" fill="none" stroke="#0a0a0a" stroke-width="1.5"/><circle cx="302" cy="98" r="9" fill="#0a0a0a"/><circle cx="322" cy="98" r="9" fill="#0a0a0a"/><text x="312" y="134" text-anchor="middle" font-size="12" font-weight="400" fill="#444" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">Shelf 4</text><text x="312" y="152" text-anchor="middle" font-size="13" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">2 books</text></svg>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Example 6: Guarantee 9 share a weekday</div>
+    <p><span class="kbd">m = 7</span>, want <span class="kbd">k = 9</span> in one box</p>
+    <div class="eq">n = 7(9 − 1) + 1 = 7(8) + 1 = 57</div>
+    <p>You need <strong>57 people</strong> to guarantee that at least 9 share a weekday birthday.</p>
+    <p class="warning">Note: the teacher’s slide says “So n = 7” then “57 people.” The slide contains a typo — the answer is 57.</p>
+  </div>
+
+  <table>
+    <tr><th>Exam pattern</th><th>Method</th></tr>
+    <tr><td>“Guarantee” questions</td><td>Use n = m(k − 1) + 1.</td></tr>
+    <tr><td>“Show that at least…”</td><td>Count items and containers. Apply ⌈n/m⌉.</td></tr>
+    <tr><td>Money or items distributed among people</td><td>Money = pigeons; people = holes.</td></tr>
+    <tr><td>Birthdays, months, days</td><td>People = pigeons; months/days = holes.</td></tr>
+  </table>
+  <p>Identify what are the pigeons and what are the holes. Everything after that is arithmetic: ⌈n/m⌉.</p>
+
+  <h2 id="iep">2 · Inclusion-Exclusion Principle (4.2)</h2>
+
+  <div class="theory">
+    <span class="source">Source: LibreTexts, “Other Basic Counting Techniques”</span>
+    <p>When groups overlap, adding their sizes counts the shared elements twice. Inclusion-exclusion corrects this: add the sizes of the individual groups, then subtract the sizes of their overlaps.</p>
+    <p>If two sets <span class="kbd">A</span> and <span class="kbd">B</span> do not overlap, <span class="kbd">|A ∪ B| = |A| + |B|</span>. If they do overlap, <span class="kbd">|A| + |B|</span> counts <span class="kbd">|A ∩ B|</span> twice, once in <span class="kbd">A</span> and once in <span class="kbd">B</span>. Subtracting the overlap once gives the correct total.</p>
+  </div>
+
+  <div class="theory">
+    <span class="source">Source: LibreTexts, three-set union</span>
+    <p>For three sets <span class="kbd">A</span>, <span class="kbd">B</span>, <span class="kbd">C</span>, the pairwise intersections <span class="kbd">A ∩ B</span>, <span class="kbd">A ∩ C</span>, <span class="kbd">B ∩ C</span> are overcounted. Subtracting all three overcompensates, because <span class="kbd">A ∩ B ∩ C</span> has been subtracted too many times, so it must be added back in. The signs alternate: add singles, subtract pairs, add triples.</p>
+  </div>
+
+  <div class="eq">|A ∪ B| = |A| + |B| − |A ∩ B|</div>
+  <p class="eq-note">Two sets: add both, subtract the overlap.</p>
+
+  <div class="eq">|A ∪ B ∪ C| = |A| + |B| + |C| − |A ∩ B| − |A ∩ C| − |B ∩ C| + |A ∩ B ∩ C|</div>
+  <p class="eq-note">Three sets: add singles, subtract pairs, add triples.</p>
+
+  <h3>Three-Set Venn Diagram — All Seven Regions</h3>
+  <svg viewBox="0 0 360 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="vennTitle">
+  <title id="vennTitle">Three-set Venn diagram with all seven regions labeled</title>
+  <rect x="5" y="5" width="350" height="330" fill="none" stroke="#999" stroke-width="1.5"/>
+  <circle cx="135" cy="120" r="85" fill="#1d4ed8" fill-opacity="0.10" stroke="#0a0a0a" stroke-width="2"/>
+  <circle cx="225" cy="120" r="85" fill="#0a0a0a" fill-opacity="0.08" stroke="#0a0a0a" stroke-width="2"/>
+  <circle cx="180" cy="198" r="85" fill="#b00020" fill-opacity="0.08" stroke="#0a0a0a" stroke-width="2"/>
+  <text x="95" y="97" text-anchor="middle" font-size="13" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">Only A</text>
+  <text x="265" y="97" text-anchor="middle" font-size="13" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">Only B</text>
+  <text x="180" y="253" text-anchor="middle" font-size="13" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">Only C</text>
+  <text x="180" y="74" text-anchor="middle" font-size="13" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">A∩B</text>
+  <text x="180" y="88" text-anchor="middle" font-size="11" font-weight="400" fill="#444" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">only</text>
+  <text x="125" y="163" text-anchor="middle" font-size="13" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">A∩C</text>
+  <text x="125" y="177" text-anchor="middle" font-size="11" font-weight="400" fill="#444" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">only</text>
+  <text x="235" y="163" text-anchor="middle" font-size="13" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">B∩C</text>
+  <text x="235" y="177" text-anchor="middle" font-size="11" font-weight="400" fill="#444" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">only</text>
+  <text x="180" y="140" text-anchor="middle" font-size="12" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">A∩B∩C</text>
+  <text x="16" y="46" text-anchor="start" font-size="20" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">A</text>
+  <text x="344" y="46" text-anchor="end" font-size="20" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">B</text>
+  <text x="285" y="298" text-anchor="middle" font-size="20" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">C</text>
+  <text x="14" y="22" text-anchor="start" font-size="12" font-weight="600" fill="#444" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">U</text>
+  </svg>
+  <p class="eq-note">Pair labels (A∩B etc.) mean those two sets only, not the third. The seven regions: Only A, Only B, Only C, A &amp; B only, A &amp; C only, B &amp; C only, A &amp; B &amp; C.</p>
+
+  <h3>Worked Examples</h3>
+
+  <div class="example">
+    <div class="example-title">Example 1: Students taking subjects</div>
+    <p><span class="warning">Slide wording note:</span> the teacher’s slide mentions “Maths, Physics, and English” in the text but the listed sets and calculation use Physics, English, and Biology. The worked solution below uses the sets shown in the calculation (Physics, English, Biology).</p>
+    <p>49 Physics, 37 English, 21 Biology. 9 study P&E, 5 study E&B, 4 study P&B, 3 study all three. Total students?</p>
+    <div class="eq">49 + 37 + 21 − 9 − 5 − 4 + 3 = <strong>92</strong></div>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Example 2: Hospital patients</div>
+    <p>29 typhoid, 32 malaria, 14 both. How many have typhoid or malaria or both?</p>
+    <div class="eq">|T ∪ M| = 29 + 32 − 14 = <strong>47</strong></div>
+    <svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="twoT"><title id="twoT">Two-set Venn diagram: only typhoid 15, both 14, only malaria 18</title><circle cx="132" cy="105" r="70" fill="#1d4ed8" fill-opacity="0.10" stroke="#0a0a0a" stroke-width="2"/><circle cx="228" cy="105" r="70" fill="#0a0a0a" fill-opacity="0.08" stroke="#0a0a0a" stroke-width="2"/><text x="110" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">T = 29</text><text x="250" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">M = 32</text><text x="108" y="106" text-anchor="middle" font-size="17" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">15</text><text x="108" y="122" text-anchor="middle" font-size="11" font-weight="400" fill="#444" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">only T</text><text x="180" y="106" text-anchor="middle" font-size="17" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">14</text><text x="180" y="122" text-anchor="middle" font-size="11" font-weight="400" fill="#444" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">both</text><text x="252" y="106" text-anchor="middle" font-size="17" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">18</text><text x="252" y="122" text-anchor="middle" font-size="11" font-weight="400" fill="#444" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">only M</text><text x="180" y="206" text-anchor="middle" font-size="13" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">T ∪ M = 15 + 14 + 18 = 47</text></svg>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Example 3: Survey of 100 students</div>
+    <p>45 Math, 40 Physics, 35 Chemistry. 15 M&P, 12 P&C, 10 M&C, 5 all three. How many take at least one subject?</p>
+    <div class="eq">(45+40+35) − (15+12+10) + 5 = 120 − 37 + 5 = <strong>88</strong></div>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Example 4: Tourists, Spanish and French</div>
+    <p>60 tourists, everyone speaks at least one language. 40 Spanish, 25 French. How many speak both?</p>
+    <div class="eq">60 = 40 + 25 − |S ∩ F|<br>|S ∩ F| = 65 − 60 = <strong>5</strong></div>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Example 5: Integers 1 to 500 divisible by 2, 3, or 5</div>
+    <ul style="margin:0.5rem 0; padding-left:1.25rem;">
+      <li>Divisible by 2: ⌊500/2⌋ = 250</li>
+      <li>Divisible by 3: ⌊500/3⌋ = 166</li>
+      <li>Divisible by 5: ⌊500/5⌋ = 100</li>
+      <li>Divisible by 6: ⌊500/6⌋ = 83</li>
+      <li>Divisible by 10: ⌊500/10⌋ = 50</li>
+      <li>Divisible by 15: ⌊500/15⌋ = 33</li>
+      <li>Divisible by 30: ⌊500/30⌋ = 16</li>
+    </ul>
+    <div class="eq">(250+166+100) − (83+50+33) + 16 = 516 − 166 + 16 = <strong>366</strong></div>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Example 6: School music groups, none</div>
+    <p>200 students. 80 Band, 60 Choir, 50 Orchestra. 30 B&C, 25 B&O, 20 C&O, 10 all three. How many are in none?</p>
+    <p>First, at least one:</p>
+    <div class="eq">(80+60+50) − (30+25+20) + 10 = 190 − 75 + 10 = 125</div>
+    <p>Then none:</p>
+    <div class="eq">200 − 125 = <strong>75</strong></div>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Example 7: Region-only question (exactly two sets)</div>
+    <p>In a class, 20 take Maths, 18 take Physics, 15 take Chemistry. 8 take M&P, 6 take M&C, 5 take P&C, and 3 take all three. How many take <strong>exactly two</strong> subjects?</p>
+    <p>Exactly two = (M&P only) + (M&C only) + (P&C only)</p>
+    <ul>
+      <li>M&P only = 8 − 3 = 5</li>
+      <li>M&C only = 6 − 3 = 3</li>
+      <li>P&C only = 5 − 3 = 2</li>
+    </ul>
+    <div class="eq">5 + 3 + 2 = <strong>10</strong></div>
+  </div>
+
+  <table>
+    <tr><th>Exam pattern</th><th>Method</th></tr>
+    <tr><td>“How many take at least one?”</td><td>Direct IEP formula (the union).</td></tr>
+    <tr><td>“How many are in none?”</td><td>Total minus the union.</td></tr>
+    <tr><td>“How many do both?” (union given)</td><td>Rearrange: |A ∩ B| = |A| + |B| − |A ∪ B|</td></tr>
+    <tr><td>“Integers from 1 to N divisible by…”</td><td>Floor division for set sizes; LCM for intersections.</td></tr>
+    <tr><td>Three-set word problems</td><td>Draw a Venn diagram and label all 7 regions.</td></tr>
+    <tr><td>Exactly one / exactly two / all three</td><td>Subtract higher-order overlaps from pairwise intersections.</td></tr>
+  </table>
+  <p>The most common error on three-set problems is forgetting to add back |A ∩ B ∩ C|. It was subtracted three times in the pairwise step, so it must be added once.</p>
+
+  <h2 id="recurrence">3 · Recurrence Relations (4.3)</h2>
+
+  <div class="theory">
+    <span class="source">Source: Oscar Levin, “Discrete Mathematics: An Open Introduction,” Section 2.4</span>
+    <p>A recurrence relation expresses each term of a sequence in terms of previous terms. Your teacher’s form: <span class="kbd">T(n) = T(n−1) + f(n)</span>. A recurrence relation is a recursive definition <em>without</em> initial conditions. With initial conditions, it defines the entire sequence.</p>
+    <p><strong>Important:</strong> a recurrence relation requires a sufficient set of initial conditions to uniquely determine the sequence. For a second-order recurrence (one involving aₙ₋₁ and aₙ₋₂), two initial values are normally required — typically a₀ and a₁.</p>
+    <p>Recursive definitions are often easier to find than closed formulas. Solving a recurrence means finding a function of <span class="kbd">n</span>, a closed formula, that satisfies both the recurrence and the initial conditions. This is analogous to solving differential equations: finding the solution may be difficult, but verifying it is easy: just substitute it back in.</p>
+  </div>
+
+  <div class="theory">
+    <span class="source">Source: Oscar Levin, Characteristic Root Technique (Section 2.4)</span>
+    <p>Consider <span class="kbd">aₙ = aₙ₋₁ + 6aₙ₋₂</span>, or <span class="kbd">aₙ − aₙ₋₁ − 6aₙ₋₂ = 0</span>. Iteration becomes unwieldy, so guess a geometric form <span class="kbd">rⁿ</span>. Substituting gives <span class="kbd">rⁿ − rⁿ⁻¹ − 6rⁿ⁻² = 0</span>. If <span class="kbd">r ≠ 0</span>, divide by the smallest power of <span class="kbd">r</span> to get <span class="kbd">r² − r − 6 = 0</span>, which factors to <span class="kbd">(r − 3)(r + 2) = 0</span>. Thus <span class="kbd">r = 3</span> or <span class="kbd">r = −2</span>. Both <span class="kbd">(−2)ⁿ</span> and <span class="kbd">3ⁿ</span> are solutions, as is any linear combination <span class="kbd">a(−2)ⁿ + b·3ⁿ</span>. The polynomial <span class="kbd">r² − r − 6</span> is the characteristic equation; its roots are the characteristic roots. If <span class="kbd">r = 0</span>, check it separately as a possible root.</p>
+  </div>
+
+  <h3>How to Form and Solve the Characteristic Equation</h3>
+  <ol class="steps">
+    <li>Write the recurrence in standard form: <span class="kbd">aₙ − c₁aₙ₋₁ − c₂aₙ₋₂ = 0</span>.</li>
+    <li>Assume a solution <span class="kbd">aₙ = rⁿ</span> and substitute.</li>
+    <li>If <span class="kbd">r ≠ 0</span>, divide by the smallest power of <span class="kbd">r</span> to get the characteristic equation (a polynomial in <span class="kbd">r</span>). Check <span class="kbd">r = 0</span> separately as a possible root.</li>
+    <li>Factorise the characteristic equation and find its roots <span class="kbd">r₁, r₂</span>.</li>
+    <li>Construct the general solution based on the roots (distinct or repeated).</li>
+    <li>Use the initial conditions to solve for the constants.</li>
+    <li>Verify by substituting back into the recurrence.</li>
+  </ol>
+
+  <h3>Case A: Two Distinct Real Roots</h3>
+  <p>If the characteristic equation has distinct roots <span class="kbd">r₁</span> and <span class="kbd">r₂</span>, the solution is:</p>
+  <div class="eq">aₙ = A(r₁ⁿ) + B(r₂ⁿ)</div>
+  <p class="eq-note"><span class="kbd">A</span> and <span class="kbd">B</span> are determined by initial conditions.</p>
+
+  <div class="example">
+    <div class="example-title">Teacher’s recurrence 1 — repeated roots</div>
+    <p><span class="kbd">aₙ = 6aₙ₋₁ − 9aₙ₋₂</span>, <span class="kbd">a₀ = 1</span>, <span class="kbd">a₁ = 4</span></p>
+    <p>Standard form: <span class="kbd">aₙ − 6aₙ₋₁ + 9aₙ₋₂ = 0</span></p>
+    <p>Characteristic: <span class="kbd">r² − 6r + 9 = 0</span> → <span class="kbd">(r − 3)² = 0</span> → root <strong>3</strong>, repeated</p>
+    <p>General: <span class="kbd">aₙ = A(3ⁿ) + Bn(3ⁿ)</span></p>
+    <ul>
+      <li><span class="kbd">n=0:</span> A = 1</li>
+      <li><span class="kbd">n=1:</span> 3A + 3B = 4 → 3 + 3B = 4 → B = 1/3</li>
+    </ul>
+    <div class="eq"><strong>aₙ = 3ⁿ + (n/3)·3ⁿ</strong></div>
+    <p>Verify: a₂ = 6(4) − 9(1) = 24 − 9 = 15. Formula: 9 + (2/3)·9 = 9 + 6 = 15. ✓</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Teacher’s recurrence 2 — distinct roots</div>
+    <p><span class="kbd">aₙ = 5aₙ₋₁ + 14aₙ₋₂</span>, <span class="kbd">a₀ = 2</span>, <span class="kbd">a₁ = 5</span></p>
+    <p>Standard form: <span class="kbd">aₙ − 5aₙ₋₁ − 14aₙ₋₂ = 0</span></p>
+    <p>Characteristic: <span class="kbd">r² − 5r − 14 = 0</span> → <span class="kbd">(r − 7)(r + 2) = 0</span> → roots <strong>7, −2</strong></p>
+    <p>General: <span class="kbd">aₙ = A(7ⁿ) + B(−2)ⁿ</span></p>
+    <ul>
+      <li><span class="kbd">n=0:</span> A + B = 2</li>
+      <li><span class="kbd">n=1:</span> 7A − 2B = 5</li>
+    </ul>
+    <p>From A = 2 − B: 7(2 − B) − 2B = 5 → 14 − 7B − 2B = 5 → −9B = −9 → B = 1, A = 1.</p>
+    <div class="eq"><strong>aₙ = 7ⁿ + (−2)ⁿ</strong></div>
+    <p>Verify: a₂ = 5(5) + 14(2) = 25 + 28 = 53. Formula: 49 + 4 = 53. ✓</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Teacher’s recurrence 3 — distinct roots</div>
+    <p><span class="kbd">aₙ = 5aₙ₋₁ + 6aₙ₋₂</span>, <span class="kbd">a₀ = 3</span>, <span class="kbd">a₁ = 13</span></p>
+    <p>Standard form: <span class="kbd">aₙ − 5aₙ₋₁ − 6aₙ₋₂ = 0</span></p>
+    <p>Characteristic: <span class="kbd">r² − 5r − 6 = 0</span> → <span class="kbd">(r − 6)(r + 1) = 0</span> → roots <strong>6, −1</strong></p>
+    <p>General: <span class="kbd">aₙ = A(6ⁿ) + B(−1)ⁿ</span></p>
+    <ul>
+      <li><span class="kbd">n=0:</span> A + B = 3</li>
+      <li><span class="kbd">n=1:</span> 6A − B = 13</li>
+    </ul>
+    <p>Adding: 7A = 16 → <span class="kbd">A = 16/7</span>. Then B = 3 − 16/7 = 5/7.</p>
+    <div class="eq"><strong>aₙ = (16/7)·6ⁿ + (5/7)·(−1)ⁿ</strong></div>
+    <p>Verify: a₂ = 5(13) + 6(3) = 65 + 18 = 83. Formula: (16/7)·36 + (5/7)·1 = 576/7 + 5/7 = 581/7 = 83. ✓</p>
+  </div>
+
+  <h3>Case B: Repeated Root</h3>
+  <p>If the characteristic polynomial has only one root <span class="kbd">r</span> (it factors as <span class="kbd">(x − r)²</span>), then <span class="kbd">rⁿ</span> is a solution, but <span class="kbd">aₙ = ar₁ⁿ + br₂ⁿ</span> cannot satisfy all initial conditions because <span class="kbd">r₁ⁿ</span> and <span class="kbd">r₂ⁿ</span> are indistinguishable. The solution is:</p>
+  <div class="eq">aₙ = arⁿ + bnrⁿ</div>
+  <p class="eq-note">The extra <span class="kbd">n</span> in <span class="kbd">bnrⁿ</span> allows solving for both constants.</p>
+
+  <h3>Case C: Non-Homogeneous (Additional Material)</h3>
+  <p class="warning">This section is labelled as additional material. Confirm with your teacher whether non-homogeneous recurrences are in the examination scope. The particular-solution guessing method below is supplementary material prepared for this study guide; it is not attributed to Levin’s textbook.</p>
+  <p>When an extra term appears on the right: <span class="kbd">aₙ = c₁aₙ₋₁ + c₂aₙ₋₂ + f(n)</span>:</p>
+  <ol class="steps">
+    <li>Solve the homogeneous part (ignore <span class="kbd">f(n)</span>) → <span class="kbd">aₙ⁽ʰ⁾</span>.</li>
+    <li>Guess a particular solution <span class="kbd">aₙ⁽ᵖ⁾</span> based on the form of <span class="kbd">f(n)</span>.</li>
+    <li>General solution: <span class="kbd">aₙ = aₙ⁽ʰ⁾ + aₙ⁽ᵖ⁾</span>.</li>
+    <li>Apply initial conditions.</li>
+  </ol>
+
+  <table>
+    <tr><th>Form of <span class="kbd">f(n)</span></th><th>Guess for <span class="kbd">aₙ⁽ᵖ⁾</span></th></tr>
+    <tr><td>Constant <span class="kbd">k</span></td><td><span class="kbd">C</span></td></tr>
+    <tr><td>Linear <span class="kbd">an + b</span></td><td><span class="kbd">Cn + D</span></td></tr>
+    <tr><td><span class="kbd">kⁿ</span></td><td><span class="kbd">C · kⁿ</span></td></tr>
+    <tr><td>Polynomial degree <span class="kbd">d</span></td><td>Polynomial degree <span class="kbd">d</span></td></tr>
+  </table>
+  <p>If your guess matches the homogeneous solution, multiply by <span class="kbd">n</span> until it does not.</p>
+
+  <div class="example">
+    <div class="example-title">Additional practice — non-homogeneous with constant right side</div>
+    <p><span class="kbd">aₙ₊₂ − 5aₙ₊₁ + 6aₙ = 2</span>, <span class="kbd">a₀ = 1</span>, <span class="kbd">a₁ = −1</span></p>
+    <p>Homogeneous: <span class="kbd">r² − 5r + 6 = 0</span> → roots <strong>2, 3</strong> → <span class="kbd">aₙ⁽ʰ⁾ = A(2ⁿ) + B(3ⁿ)</span></p>
+    <p>Particular guess (constant): <span class="kbd">K − 5K + 6K = 2</span> → <span class="kbd">2K = 2</span> → <span class="kbd">K = 1</span></p>
+    <p>General: <span class="kbd">aₙ = A(2ⁿ) + B(3ⁿ) + 1</span></p>
+    <ul>
+      <li><span class="kbd">n=0:</span> A + B + 1 = 1 → A + B = 0</li>
+      <li><span class="kbd">n=1:</span> 2A + 3B + 1 = −1 → 2A + 3B = −2</li>
+    </ul>
+    <p>From A = −B: −2B + 3B = −2 → B = −2, A = 2.</p>
+    <div class="eq"><strong>aₙ = 2·2ⁿ − 2·3ⁿ + 1</strong></div>
+    <p>Verify: a₂ = 5(−1) − 6(1) + 2 = −9. Formula: 8 − 18 + 1 = −9. ✓</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Additional practice — distinct roots with negative answer</div>
+    <p><span class="kbd">aₙ − 9aₙ₋₁ + 20aₙ₋₂ = 0</span>, <span class="kbd">a₀ = −3</span>, <span class="kbd">a₁ = −10</span></p>
+    <p>Characteristic: <span class="kbd">r² − 9r + 20 = 0</span> → <span class="kbd">(r − 4)(r − 5) = 0</span> → roots <strong>4, 5</strong></p>
+    <p>General: <span class="kbd">aₙ = A(4ⁿ) + B(5ⁿ)</span></p>
+    <ul>
+      <li><span class="kbd">n=0:</span> A + B = −3</li>
+      <li><span class="kbd">n=1:</span> 4A + 5B = −10</li>
+    </ul>
+    <p>From A = −3 − B: 4(−3 − B) + 5B = −10 → −12 − 4B + 5B = −10 → B = 2, A = −5.</p>
+    <div class="eq"><strong>aₙ = −5·4ⁿ + 2·5ⁿ</strong></div>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Additional practice — third-order recurrence (not a confirmed teacher-provided exam pattern)</div>
+    <p><span class="kbd">cₙ = 6cₙ₋₁ − 11cₙ₋₂ + 6cₙ₋₃</span>, <span class="kbd">c₀ = 2</span>, <span class="kbd">c₁ = 5</span>, <span class="kbd">c₂ = 15</span></p>
+    <p>Characteristic: <span class="kbd">r³ − 6r² + 11r − 6 = 0</span>. Try r = 1: 1 − 6 + 11 − 6 = 0, so r = 1 is a root. Factor out (r − 1): <span class="kbd">(r − 1)(r² − 5r + 6) = 0</span> → roots <strong>1, 2, 3</strong></p>
+    <p>General: <span class="kbd">cₙ = A + B(2ⁿ) + C(3ⁿ)</span></p>
+    <ul>
+      <li><span class="kbd">n=0:</span> A + B + C = 2</li>
+      <li><span class="kbd">n=1:</span> A + 2B + 3C = 5</li>
+      <li><span class="kbd">n=2:</span> A + 4B + 9C = 15</li>
+    </ul>
+    <p>Subtracting row 1 from row 2: B + 2C = 3. Subtracting row 2 from row 3: 2B + 6C = 10 → B + 3C = 5. Subtracting: C = 2, B = −1, A = 1.</p>
+    <div class="eq"><strong>cₙ = 1 − 2ⁿ + 2·3ⁿ</strong></div>
+  </div>
+
+  <h2 id="mu-questions">Mumbai University Previous Examination Questions — Module 4</h2>
+  <div class="practice">
+    <h3>Verified Mumbai University Previous End-Semester Questions</h3>
+    <p>The following questions appeared in Mumbai University end-semester examinations. They are marked with a badge for easy identification.</p>
+
+    <div class="exam-q">
+      <div class="exam-q-title">Winter 2025 — Q1(c): Programming Contest — Pigeonhole Principle (5 marks)</div>
+      <div class="exam-source">Source: NEP DSGT Winter 2025 — Q1(c)</div>
+      <p>A programming contest has 240 participants and 12 judging terminals.</p>
+      <ol>
+        <li>Using Pigeonhole Principle, find the minimum number of contestants who must end up using the same terminal.</li>
+        <li>Explain how this insight helps in contest scheduling, load balancing, and avoiding terminal bottlenecks.</li>
+      </ol>
+      <p><strong>Solution:</strong></p>
+      <p>Pigeons (<span class="kbd">n</span>) = 240 participants &nbsp;·&nbsp; Holes (<span class="kbd">m</span>) = 12 judging terminals</p>
+      <div class="eq">⌈240 / 12⌉ = ⌈20⌉ = 20</div>
+      <p>At least <strong>20 participants</strong> must end up using the same terminal.</p>
+      <p><strong>Reasoning:</strong> If we try to distribute 240 participants evenly across 12 terminals, each terminal gets exactly 20 participants. If every terminal had at most 19 participants, the total would be at most 19 × 12 = 228, which is less than 240. So at least one terminal has 20 or more participants.</p>
+      <p><strong>Application:</strong> This insight helps in contest scheduling by ensuring that at least one terminal will have a full load of 20 participants, allowing organizers to plan for worst-case load balancing and avoid terminal bottlenecks by provisioning adequate resources at the busiest terminal.</p>
+    </div>
+
+    <div class="exam-q">
+      <div class="exam-q-title">Winter 2025 — Q2(a): Campus Event App — Inclusion-Exclusion (8 marks)</div>
+      <div class="exam-source">Source: NEP DSGT Winter 2025 — Q2(a)</div>
+      <p>A campus event app records students who use three app sections:</p>
+      <table>
+        <tr><th>Category</th><th>Count</th></tr>
+        <tr><td>E (Event Announcements)</td><td>140</td></tr>
+        <tr><td>C (Clubs &amp; Communities)</td><td>110</td></tr>
+        <tr><td>R (Reels / Short videos)</td><td>120</td></tr>
+        <tr><td>E ∩ C</td><td>65</td></tr>
+        <tr><td>E ∩ R</td><td>70</td></tr>
+        <tr><td>C ∩ R</td><td>55</td></tr>
+        <tr><td>Total Students</td><td>200</td></tr>
+      </table>
+      <ol>
+        <li>Using inclusion-exclusion, compute how many students use all three sections.</li>
+        <li>Find students who use only one section.</li>
+        <li>Explain how this analysis helps app developers target notifications and improve UI.</li>
+      </ol>
+      <p><strong>Solution:</strong></p>
+      <p>Let <span class="kbd">|E ∪ C ∪ R| = 200</span> (every student uses at least one section).</p>
+      <p>Using inclusion-exclusion:</p>
+      <div class="eq">|E ∪ C ∪ R| = |E| + |C| + |R| − |E ∩ C| − |E ∩ R| − |C ∩ R| + |E ∩ C ∩ R|</div>
+      <div class="eq">200 = 140 + 110 + 120 − 65 − 70 − 55 + |E ∩ C ∩ R|</div>
+      <div class="eq">200 = 370 − 190 + |E ∩ C ∩ R|</div>
+      <div class="eq">200 = 180 + |E ∩ C ∩ R| → |E ∩ C ∩ R| = 20</div>
+      <p><strong>20 students</strong> use all three sections.</p>
+      <p><strong>Only one section:</strong></p>
+      <ul>
+        <li>Only E = 140 − 65 − 70 + 20 = 25</li>
+        <li>Only C = 110 − 65 − 55 + 20 = 10</li>
+        <li>Only R = 120 − 70 − 55 + 20 = 15</li>
+        <li>Total only one = 25 + 10 + 15 = <strong>50 students</strong></li>
+      </ul>
+      <p><strong>Application:</strong> App developers can target notifications to the 25 students who only use Event Announcements, 10 who only use Clubs & Communities, and 15 who only use Reels. UI improvements can prioritize the most-used section per user segment.</p>
+    </div>
+
+    <div class="exam-q">
+      <div class="exam-q-title">Winter 2025 — Q5(b): Student Club Followers — Recurrence Relation (8 marks)</div>
+      <div class="exam-source">Source: NEP DSGT Winter 2025 — Q5(b)</div>
+      <p>A student club records followers using recurrence: <span class="kbd">Fₙ = 4Fₙ₋₁ − 4Fₙ₋₂</span> with <span class="kbd">F₀ = 10</span> (core team) and <span class="kbd">F₁ = 30</span> (after first promotion).</p>
+      <ol>
+        <li>Solve the recurrence relation.</li>
+        <li>Describe the growth pattern (linear/exponential).</li>
+        <li>Comment whether such growth is realistic for a campus club in long term.</li>
+      </ol>
+      <p><strong>Solution:</strong></p>
+      <p>Standard form: <span class="kbd">aₙ − 4aₙ₋₁ + 4aₙ₋₂ = 0</span></p>
+      <p>Characteristic: <span class="kbd">r² − 4r + 4 = 0</span> → <span class="kbd">(r − 2)² = 0</span> → root <strong>2</strong>, repeated</p>
+      <p>General: <span class="kbd">aₙ = A(2ⁿ) + Bn(2ⁿ)</span></p>
+      <ul>
+        <li><span class="kbd">n=0:</span> A = 10</li>
+        <li><span class="kbd">n=1:</span> 2A + 2B = 30 → 20 + 2B = 30 → B = 5</li>
+      </ul>
+      <div class="eq"><strong>Fₙ = 10·2ⁿ + 5n·2ⁿ = (10 + 5n)·2ⁿ</strong></div>
+      <p><strong>Growth pattern:</strong> Exponential growth with a linear factor <span class="kbd">(10 + 5n)</span>. The dominant term is <span class="kbd">5n·2ⁿ</span>, which grows exponentially.</p>
+      <p><strong>Realistic?</strong> No. Exponential growth of followers is not realistic for a campus club in the long term because the total student population is finite. Eventually, the club will saturate the available student population and growth will slow down (logistic growth rather than exponential).</p>
+    </div>
+
+    <div class="exam-q">
+      <div class="exam-q-title">Summer 2026 — Q1(c): Socks Drawer — Pigeonhole Principle (5 marks)</div>
+      <div class="exam-source">Source: NEP DSGT Summer 2026 — Q1(c)</div>
+      <p>A quality control department stores 10 pairs of socks of different colors in a drawer for packaging verification.</p>
+      <ol>
+        <li>Using the Pigeonhole Principle, find the minimum number of socks that must be selected randomly to guarantee that at least one matching pair of the same color is obtained.</li>
+        <li>Justify your answer with suitable reasoning.</li>
+      </ol>
+      <p><strong>Solution:</strong></p>
+      <p>Pigeons = socks pulled out &nbsp;·&nbsp; Holes = 10 colors</p>
+      <p>To guarantee at least 2 socks of the same color (<span class="kbd">k = 2</span>):</p>
+      <div class="eq">n = m(k − 1) + 1 = 10(2 − 1) + 1 = 11</div>
+      <p><strong>11 socks</strong> must be pulled out to guarantee a matching pair.</p>
+      <p><strong>Reasoning:</strong> With 10 socks, you could pull exactly one sock of each color (10 different colors, no match). The 11th sock must match one of the previously pulled socks because there are only 10 colors available.</p>
+    </div>
+
+    <div class="exam-q">
+      <div class="exam-q-title">Summer 2026 — Q2(a): Pharmaceutical Trial — Inclusion-Exclusion (8 marks)</div>
+      <div class="exam-source">Source: NEP DSGT Summer 2026 — Q2(a)</div>
+      <p>A pharmaceutical company conducts a drug trial on 1000 people:</p>
+      <table>
+        <tr><th>Symptom</th><th>Count</th></tr>
+        <tr><td>A</td><td>122</td></tr>
+        <tr><td>B</td><td>88</td></tr>
+        <tr><td>C</td><td>112</td></tr>
+        <tr><td>A ∩ B</td><td>27</td></tr>
+        <tr><td>A ∩ C</td><td>29</td></tr>
+        <tr><td>B ∩ C</td><td>32</td></tr>
+        <tr><td>A ∩ B ∩ C</td><td>10</td></tr>
+      </table>
+      <ol>
+        <li>How many people develop at least one symptom?</li>
+        <li>Determine the number of people who show exactly one symptom.</li>
+        <li>Construct a Venn diagram and fill all regions appropriately.</li>
+      </ol>
+      <p><strong>Solution:</strong></p>
+      <div class="eq">|A ∪ B ∪ C| = |A| + |B| + |C| − |A ∩ B| − |A ∩ C| − |B ∩ C| + |A ∩ B ∩ C|</div>
+      <div class="eq">= 122 + 88 + 112 − 27 − 29 − 32 + 10</div>
+      <div class="eq">= 322 − 88 + 10 = 244</div>
+      <p><strong>244 people</strong> develop at least one symptom.</p>
+      <p><strong>Only one symptom:</strong></p>
+      <ul>
+        <li>Only A = 122 − 27 − 29 + 10 = 76</li>
+        <li>Only B = 88 − 27 − 32 + 10 = 39</li>
+        <li>Only C = 112 − 29 − 32 + 10 = 61</li>
+        <li>Total exactly one = 76 + 39 + 61 = <strong>176 patients</strong></li>
+      </ul>
+      <p><strong>Venn diagram (all regions):</strong> pair-only regions are 27 − 10 = 17, 29 − 10 = 19, 32 − 10 = 22. Outside all three: 1000 − 244 = 756.</p>
+      <svg viewBox="0 0 360 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="vennSummer">
+  <title id="vennSummer">Venn diagram for the drug trial with every region filled</title>
+  <rect x="5" y="5" width="350" height="330" fill="none" stroke="#999" stroke-width="1.5"/>
+  <circle cx="135" cy="120" r="85" fill="#1d4ed8" fill-opacity="0.10" stroke="#0a0a0a" stroke-width="2"/>
+  <circle cx="225" cy="120" r="85" fill="#0a0a0a" fill-opacity="0.08" stroke="#0a0a0a" stroke-width="2"/>
+  <circle cx="180" cy="198" r="85" fill="#b00020" fill-opacity="0.08" stroke="#0a0a0a" stroke-width="2"/>
+  <text x="95" y="92" text-anchor="middle" font-size="17" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">76</text>
+  <text x="95" y="106" text-anchor="middle" font-size="11" font-weight="400" fill="#444" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">A only</text>
+  <text x="265" y="92" text-anchor="middle" font-size="17" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">39</text>
+  <text x="265" y="106" text-anchor="middle" font-size="11" font-weight="400" fill="#444" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">B only</text>
+  <text x="180" y="248" text-anchor="middle" font-size="17" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">61</text>
+  <text x="180" y="262" text-anchor="middle" font-size="11" font-weight="400" fill="#444" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">C only</text>
+  <text x="180" y="74" text-anchor="middle" font-size="17" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">17</text>
+  <text x="180" y="88" text-anchor="middle" font-size="11" font-weight="400" fill="#444" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">A∩B only</text>
+  <text x="125" y="163" text-anchor="middle" font-size="17" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">19</text>
+  <text x="125" y="177" text-anchor="middle" font-size="11" font-weight="400" fill="#444" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">A∩C only</text>
+  <text x="235" y="163" text-anchor="middle" font-size="17" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">22</text>
+  <text x="235" y="177" text-anchor="middle" font-size="11" font-weight="400" fill="#444" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">B∩C only</text>
+  <text x="180" y="130" text-anchor="middle" font-size="17" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">10</text>
+  <text x="180" y="144" text-anchor="middle" font-size="11" font-weight="400" fill="#444" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">A∩B∩C</text>
+  <text x="16" y="46" text-anchor="start" font-size="14" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">A = 122</text>
+  <text x="344" y="46" text-anchor="end" font-size="14" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">B = 88</text>
+  <text x="285" y="298" text-anchor="middle" font-size="14" font-weight="700" fill="#0a0a0a" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">C = 112</text>
+  <text x="14" y="22" text-anchor="start" font-size="12" font-weight="600" fill="#444" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">U = 1000</text>
+  <text x="14" y="326" text-anchor="start" font-size="12" font-weight="700" fill="#444" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">Outside: 756</text>
+  </svg>
+    </div>
+
+    <div class="exam-q">
+      <div class="exam-q-title">Summer 2026 — Q5(b): Financial Portfolio — Non-Homogeneous Recurrence (7 marks)</div>
+      <div class="exam-source">Source: NEP DSGT Summer 2026 — Q5(b)</div>
+      <p>A financial analytics company models the quarterly growth of a digital investment portfolio using: <span class="kbd">Fₙ = 3Fₙ₋₁ + 10Fₙ₋₂ + 7·5ⁿ</span> with <span class="kbd">F₀ = 4</span>, <span class="kbd">F₁ = −3</span>.</p>
+      <ol>
+        <li>Solve the recurrence relation.</li>
+        <li>Determine the general expression for <span class="kbd">Fₙ</span>.</li>
+        <li>Analyze the effect of the exponential forcing term <span class="kbd">7·5ⁿ</span>.</li>
+      </ol>
+      <p><strong>Solution:</strong></p>
+      <p>Homogeneous part: <span class="kbd">r² − 3r − 10 = 0</span> → <span class="kbd">(r − 5)(r + 2) = 0</span> → roots <strong>5, −2</strong></p>
+      <p>Homogeneous solution: <span class="kbd">aₙ⁽ʰ⁾ = A(5ⁿ) + B(−2)ⁿ</span></p>
+      <p>Particular solution: forcing term is <span class="kbd">7·5ⁿ</span>. Since <span class="kbd">5</span> is a root of the characteristic equation, guess <span class="kbd">aₙ⁽ᵖ⁾ = Cn·5ⁿ</span>:</p>
+      <div class="eq">Cn·5ⁿ = 3·C(n−1)·5ⁿ⁻¹ + 10·C(n−2)·5ⁿ⁻² + 7·5ⁿ</div>
+      <div class="eq">Divide by 5ⁿ⁻²: 25Cn = 15C(n−1) + 10C(n−2) + 175</div>
+      <div class="eq">25Cn = 15Cn − 15C + 10Cn − 20C + 175</div>
+      <div class="eq">25Cn = 25Cn − 35C + 175</div>
+      <div class="eq">35C = 175 → C = 5</div>
+      <p>General solution: <span class="kbd">Fₙ = A(5ⁿ) + B(−2)ⁿ + 5n·5ⁿ</span></p>
+      <ul>
+        <li><span class="kbd">n=0:</span> A + B = 4</li>
+        <li><span class="kbd">n=1:</span> 5A − 2B + 25 = −3 → 5A − 2B = −28</li>
+      </ul>
+      <p>From A = 4 − B: 5(4 − B) − 2B = −28 → 20 − 5B − 2B = −28 → −7B = −48 → B = 48/7</p>
+      <p>A = 4 − 48/7 = (28 − 48)/7 = −20/7</p>
+      <div class="eq"><strong>Fₙ = (−20/7)·5ⁿ + (48/7)·(−2)ⁿ + 5n·5ⁿ</strong></div>
+      <p><strong>Analysis:</strong> The forcing term <span class="kbd">7·5ⁿ</span> introduces an exponential growth component <span class="kbd">5n·5ⁿ</span> which dominates as <span class="kbd">n</span> increases. Since <span class="kbd">5</span> is both a characteristic root and the base of the forcing term, the particular solution includes the extra factor <span class="kbd">n</span>.</p>
+    </div>
+
+    <div class="exam-q">
+      <div class="exam-q-title">Summer 2026 — Q6(a): Ring Modulo 4 (8 marks)</div>
+      <div class="exam-source">Source: NEP DSGT Summer 2026 — Q6(a)</div>
+      <p>Consider Z₄ = {0, 1, 2, 3} under addition and multiplication modulo 4.</p>
+      <ol>
+        <li>Construct both operation tables.</li>
+        <li>Verify the ring properties.</li>
+        <li>Explain additive identity, additive inverses, multiplicative associativity and distributivity.</li>
+        <li>Conclude whether Z₄ forms a ring.</li>
+      </ol>
+      <p><strong>Solution:</strong></p>
+      <p><strong>Addition table (+₄):</strong></p>
+      <table>
+        <tr><th>+₄</th><th>0</th><th>1</th><th>2</th><th>3</th></tr>
+        <tr><td>0</td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+        <tr><td>1</td><td>1</td><td>2</td><td>3</td><td>0</td></tr>
+        <tr><td>2</td><td>2</td><td>3</td><td>0</td><td>1</td></tr>
+        <tr><td>3</td><td>3</td><td>0</td><td>1</td><td>2</td></tr>
+      </table>
+      <p><strong>Multiplication table (·₄):</strong></p>
+      <table>
+        <tr><th>·₄</th><th>0</th><th>1</th><th>2</th><th>3</th></tr>
+        <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>1</td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+        <tr><td>2</td><td>0</td><td>2</td><td>0</td><td>2</td></tr>
+        <tr><td>3</td><td>0</td><td>3</td><td>2</td><td>1</td></tr>
+      </table>
+      <ol>
+        <li><strong>(Z₄, +₄) is an abelian group:</strong> Closed, associative, identity = 0, inverses = 0→0, 1→3, 2→2, 3→1, commutative.</li>
+        <li><strong>(Z₄, ·₄) is a semigroup:</strong> Closed, associative.</li>
+        <li><strong>Distributive:</strong> Holds (inherited from integers).</li>
+        <li><strong>Conclusion:</strong> Z₄ forms a ring under addition and multiplication modulo 4. It is commutative, has multiplicative identity 1, but has zero divisors (2·₄2=0), so it is NOT an integral domain.</li>
+      </ol>
+    </div>
+  </div>
+
+  <h2 id="self-learning">Syllabus Self-Learning Topics</h2>
+  <div class="self-learning">
+    <p><strong>These are syllabus self-learning topics. They are not presented as confirmed exam questions.</strong></p>
+    <h3>Applications of recurrence relations in analysing recursive algorithms</h3>
+    <p>Recurrence relations model the running time of recursive algorithms. For example, a divide-and-conquer algorithm that splits a problem of size n into two subproblems of size n/2 and does O(n) work to combine them satisfies T(n) = 2T(n/2) + n, which solves to O(n log n).</p>
+    <h3>Applications of counting techniques in probability</h3>
+    <p>Counting techniques (permutations, combinations, inclusion-exclusion) are used to compute probabilities when all outcomes are equally likely: P(event) = (favourable outcomes) / (total outcomes). For example, the probability of drawing a specific hand of cards uses combinations.</p>
+    <h3>Applications of counting techniques in decision-making</h3>
+    <p>Counting techniques help in decision-making under uncertainty, such as enumerating possible schedules, resource allocations, or outcomes in games to choose the option with the best expected result.</p>
+  </div>
+
+  <h2 id="practice">Exam Practice Section</h2>
+  <div class="practice">
+    <h3>Practice Questions</h3>
+
+    <h4>Pigeonhole Principle</h4>
+    <ol>
+      <li>Show that among any 13 people, at least two were born in the same month.</li>
+      <li>How many students must be in a class to guarantee that at least two were born on the same day of the week?</li>
+      <li>A drawer has 10 black socks and 12 blue socks. In the dark, how many socks must you pull out to guarantee a matching pair?</li>
+      <li>Prove that in any set of 6 integers, there are two whose difference is divisible by 5.</li>
+      <li>How many people must you have to guarantee that at least 9 of them will have birthdays in the same day of the week?</li>
+      <li>240 participants and 12 judging terminals — how many must share a terminal?</li>
+      <li>10 pairs of socks of different colors — how many socks to guarantee a matching pair?</li>
+    </ol>
+
+    <h4>Inclusion-Exclusion Principle</h4>
+    <ol>
+      <li>In a class of 40 students, 25 play cricket, 20 play football, and 10 play both. How many play at least one sport? How many play neither?</li>
+      <li>100 students take Mathematics, Physics, or Chemistry. 50 take Maths, 40 take Physics, 30 take Chemistry. 15 take M&P, 10 take M&C, 8 take P&C, and 5 take all three. How many take at least one subject?</li>
+      <li>How many integers from 1 to 100 are divisible by neither 2 nor 3?</li>
+      <li>Three sets A, B, C: |A|=40, |B|=35, |C|=30, |A∩B|=12, |A∩C|=10, |B∩C|=8, |A∩B∩C|=5. How many elements are in exactly two of the sets?</li>
+      <li>In a school of 200 students, 80 are in Band, 60 in Choir, 50 in Orchestra. 30 are in B&C, 25 in B&O, 20 in C&O, and 10 in all three. How many are in none?</li>
+      <li>200 students use a campus event app: 140 use Events, 110 use Clubs, 120 use Reels. E∩C=65, E∩R=70, C∩R=55. How many use all three?</li>
+      <li>1000 patients in a drug trial: 122 symptom A, 88 symptom B, 112 symptom C. A∩B=27, A∩C=29, B∩C=32, A∩B∩C=10. How many have at least one symptom?</li>
+    </ol>
+
+    <h4>Recurrence Relations</h4>
+    <ol>
+      <li>Solve aₙ = 5aₙ₋₁ − 6aₙ₋₂ with a₀ = 1, a₁ = 4.</li>
+      <li>Solve aₙ = 6aₙ₋₁ − 9aₙ₋₂ with a₀ = 1, a₁ = 4.</li>
+      <li>Solve aₙ = 5aₙ₋₁ + 14aₙ₋₂ with a₀ = 2, a₁ = 5.</li>
+      <li>Solve aₙ = 5aₙ₋₁ + 6aₙ₋₂ with a₀ = 3, a₁ = 13.</li>
+      <li>Solve aₙ = 3aₙ₋₁ + 4 with a₀ = 2.</li>
+      <li>Solve aₙ₊₂ − 5aₙ₊₁ + 6aₙ = 2 with a₀ = 1, a₁ = −1.</li>
+      <li>Solve aₙ − 9aₙ₋₁ + 20aₙ₋₂ = 0 with a₀ = −3, a₁ = −10.</li>
+      <li>Solve aₙ = 4aₙ₋₁ − 4aₙ₋₂ with a₀ = 10, a₁ = 30.</li>
+      <li>Solve aₙ = 3aₙ₋₁ + 10aₙ₋₂ + 7·5ⁿ with a₀ = 4, a₁ = −3.</li>
+    </ol>
+  </div>
+
+  <h2 id="answer-key">Answer Key</h2>
+  <div class="answer-key">
+    <h3>Answers</h3>
+
+    <h4>Pigeonhole Principle</h4>
+    <ol>
+      <li><strong>2 people.</strong> 13 people into 12 months → ⌈13/12⌉ = 2.</li>
+      <li><strong>8 students.</strong> n = 7(2 − 1) + 1 = 8.</li>
+      <li><strong>3 socks.</strong> Worst case: 1 black + 1 blue. The 3rd sock must match one.</li>
+      <li><strong>Two integers share a remainder mod 5.</strong> 6 integers into 5 remainders → two share remainder r, so 5 | (a − b).</li>
+      <li><strong>57 people.</strong> n = 7(9 − 1) + 1 = 57.</li>
+      <li><strong>20 participants.</strong> ⌈240 / 12⌉ = 20.</li>
+      <li><strong>11 socks.</strong> n = 10(2 − 1) + 1 = 11.</li>
+    </ol>
+
+    <h4>Inclusion-Exclusion Principle</h4>
+    <ol>
+      <li><strong>35 play at least one;</strong> 5 play neither. |C ∪ F| = 25 + 20 − 10 = 35. Neither = 40 − 35 = 5.</li>
+      <li><strong>92.</strong> (50+40+30) − (15+10+8) + 5 = 120 − 33 + 5 = 92.</li>
+      <li><strong>33.</strong> Divisible by 2: 50; by 3: 33; by 6: 16. Union = 50 + 33 − 16 = 67. Neither = 100 − 67 = 33.</li>
+      <li><strong>15.</strong> Exactly two = |A∩B| + |A∩C| + |B∩C| − 3|A∩B∩C| = 12 + 10 + 8 − 15 = 15.</li>
+      <li><strong>75.</strong> Union = (80+60+50) − (30+25+20) + 10 = 125. None = 200 − 125 = 75.</li>
+      <li><strong>20 students</strong> use all three sections. |E ∪ C ∪ R| = 140 + 110 + 120 − 65 − 70 − 55 + |E ∩ C ∩ R| = 200 → |E ∩ C ∩ R| = 20.</li>
+      <li><strong>244 patients</strong> develop at least one symptom. |A ∪ B ∪ C| = 122 + 88 + 112 − 27 − 29 − 32 + 10 = 244.</li>
+    </ol>
+
+    <h4>Recurrence Relations</h4>
+    <ol>
+      <li><strong>aₙ = −2ⁿ + 2·3ⁿ</strong></li>
+      <li><strong>aₙ = 3ⁿ + (n/3)·3ⁿ</strong></li>
+      <li><strong>aₙ = 7ⁿ + (−2)ⁿ</strong></li>
+      <li><strong>aₙ = (16/7)·6ⁿ + (5/7)·(−1)ⁿ</strong></li>
+      <li><strong>aₙ = 4·3ⁿ − 2</strong></li>
+      <li><strong>aₙ = 2·2ⁿ − 2·3ⁿ + 1</strong></li>
+      <li><strong>aₙ = −5·4ⁿ + 2·5ⁿ</strong></li>
+      <li><strong>aₙ = (10 + 5n)·2ⁿ</strong></li>
+      <li><strong>Fₙ = (−20/7)·5ⁿ + (48/7)·(−2)ⁿ + 5n·5ⁿ</strong></li>
+    </ol>
+  </div>
+
+  <div class="common-mistakes">
+    <h3>Common Mistakes</h3>
+    <h4>Pigeonhole</h4>
+    <ul>
+      <li>Confusing basic PHP (≥ 2 exists) with generalized PHP (minimum count in fullest box).</li>
+      <li>Using the wrong formula for guarantee questions — use n = m(k − 1) + 1, not just ⌈n/m⌉.</li>
+    </ul>
+    <h4>Inclusion-Exclusion</h4>
+    <ul>
+      <li>Forgetting to add back |A ∩ B ∩ C| on three-set problems.</li>
+      <li>Confusing “exactly two” with “at least two.”</li>
+    </ul>
+    <h4>Recurrence</h4>
+    <ul>
+      <li>Leaving out the particular solution when the right side is non-zero.</li>
+      <li>Forgetting that a second-order recurrence needs two initial conditions.</li>
+      <li>Not verifying the closed formula by substituting back into the recurrence.</li>
+    </ul>
+  </div>
+
+  <h2 id="revision">Last-Minute Revision Sheet</h2>
+  <div class="revision-sheet">
+    <h3>Definitions</h3>
+    <table>
+      <tr><th>Structure</th><th>Required Properties</th></tr>
+      <tr><td>Semigroup</td><td>Closure, associativity</td></tr>
+      <tr><td>Monoid</td><td>Closure, associativity, identity</td></tr>
+      <tr><td>Group</td><td>Closure, associativity, identity, inverse</td></tr>
+      <tr><td>Abelian group</td><td>Group + commutativity</td></tr>
+      <tr><td>Cyclic group</td><td>Abelian group with a generator</td></tr>
+      <tr><td>Subgroup</td><td>Non-empty subset that is itself a group under same operation</td></tr>
+      <tr><td>Ring</td><td>Abelian group under +, associative ·, distributive laws</td></tr>
+      <tr><td>Commutative ring</td><td>Ring + commutative multiplication</td></tr>
+      <tr><td>Integral domain</td><td>Commutative ring + no zero divisors</td></tr>
+      <tr><td>Field</td><td>Commutative ring + every non-zero element has multiplicative inverse</td></tr>
+    </table>
+
+    <h3>Verification Checklist</h3>
+    <table>
+      <tr><th>To prove it is a…</th><th>Check these conditions</th></tr>
+      <tr><td>Semigroup</td><td>Closed? Associative?</td></tr>
+      <tr><td>Monoid</td><td>Semigroup + identity?</td></tr>
+      <tr><td>Group</td><td>Monoid + inverses?</td></tr>
+      <tr><td>Abelian group</td><td>Group + commutative?</td></tr>
+      <tr><td>Cyclic group</td><td>Abelian + has a generator?</td></tr>
+      <tr><td>Ring</td><td>(R,+) abelian group? · associative? Distributive?</td></tr>
+      <tr><td>Integral domain</td><td>Commutative ring + no zero divisors?</td></tr>
+      <tr><td>Field</td><td>Commutative ring + every non-zero has inverse?</td></tr>
+    </table>
+
+    <h3>Important Formulas</h3>
+    <div class="eq">(a * b)⁻¹ = b⁻¹ * a⁻¹</div>
+    <div class="eq">a +ₘ b = (a + b) mod m</div>
+    <div class="eq">a ·ₚ b = (a · b) mod p</div>
+
+    <h3>Common Exam Patterns</h3>
+    <ul>
+      <li>“Show that (S, *) is a semigroup/monoid/group” — check each condition one by one.</li>
+      <li>“Is (S, *) abelian?” — check commutativity.</li>
+      <li>“Is (S, *) cyclic?” — find a generator or show none exists.</li>
+      <li>“Construct composition table for modulo n” — fill all entries, then check closure, identity, inverses, commutativity.</li>
+      <li>“Is (R, +, ·) a ring?” — check (R,+) abelian group, · associative, distributive laws.</li>
+    </ul>
+  </div>
+
+  <h2 id="references">References &amp; Attribution</h2>
+  <div class="references">
+    <h3>References</h3>
+    <p>The following external sources were used to prepare this study guide. All explanations are paraphrased unless directly quoted.</p>
+    <ul>
+      <li><strong>LibreTexts — “Other Basic Counting Techniques” (Inclusion-Exclusion Principle)</strong><br>
+      Author: Joy Morris<br>
+      Source: <a href="https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Combinatorics_%28Morris%29/02%3A_Enumeration/10%3A_Other_Basic_Counting_Techniques/10.02%3A_Inclusion-Exclusion" target="_blank" rel="noopener noreferrer">Inclusion-Exclusion Principle</a><br>
+      Material used: paraphrased explanations of the inclusion-exclusion principle for two and three sets.</li>
+      <li><strong>Oscar Levin — Discrete Mathematics: An Open Introduction, Second Edition</strong><br>
+      Source: <a href="https://discrete.openmathbooks.org/pdfs/dmoi-tablet-dl1.pdf" target="_blank" rel="noopener noreferrer">dmoi-tablet-dl1.pdf</a><br>
+      Material used: Section 2.4, “Solving Recurrence Relations” (pages 138–145), characteristic root technique for homogeneous recurrences with distinct and repeated roots.<br>
+      Note: The general non-homogeneous particular-solution guessing method is supplementary material prepared for this study guide and is not attributed to Levin’s textbook.</li>
+    </ul>
+    <p><strong>Teacher-provided material:</strong> All worked examples and explanations marked “Teacher’s” come from Mrs. Shamal Bagal’s lecture presentations (Module 4 Piegeonhole 4.1, Recurrence 4.3; Module 4 The Inclusion-Exclusion Principle 4.2).</p>
+    <p><strong>Previous examination questions:</strong> Questions marked with <span class="mu-badge">MUMBAI UNIVERSITY</span> are from NEP DSGT Winter 2025 and NEP DSGT Summer 2026 end-semester examination papers. Question-bank questions are from Prelim Question Bank.doc and Prelim Question Bank(1).doc. IAT sample questions are from IAT1 sample questions.doc and IAT2 sample questions.doc.</p>
+  </div>
+
+  <footer>
+    DSGT Module 4 Study Guide · Built from Mrs. Shamal Bagal’s PPTs, the official DSGT portion syllabus,<br>
+    theory from Oscar Levin’s <em>Discrete Mathematics: An Open Introduction</em> and LibreTexts (Joy Morris),<br>
+    and previous examination questions from NEP DSGT Winter 2025 and Summer 2026.
+  </footer>
+</div>
+
+</body>
+</html>

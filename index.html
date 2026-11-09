@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSGT Study Guides</title>
+<style>
+  :root { --ink:#0a0a0a; --muted:#444; --bg:#fff; --line:#ccc; --accent:#1d4ed8; }
+  * { box-sizing: border-box; }
+  body { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; color:var(--ink); background:var(--bg); line-height:1.6; margin:0; font-size:17px; font-weight:500; }
+  .wrap { max-width:68ch; margin:0 auto; padding:2.5rem 1rem 4rem; }
+  header { border-bottom:2px solid var(--ink); margin-bottom:2rem; padding-bottom:1rem; }
+  h1 { font-family:Georgia,Cambria,"Times New Roman",serif; font-size:2.25rem; line-height:1.25; margin:0 0 .5rem; letter-spacing:-.01em; }
+  .subtitle { color:var(--muted); font-size:1rem; font-weight:400; margin:0; }
+  .meta { font-size:.85rem; color:var(--muted); margin-top:1rem; }
+  .grid { display:grid; grid-template-columns:1fr; gap:.75rem; }
+  .card { display:flex; flex-direction:column; gap:.2rem; border:1px solid var(--line); background:#fafafa; padding:1rem 1.25rem; text-decoration:none; color:var(--ink); min-height:44px; }
+  a.card { border-left:3px solid var(--ink); }
+  a.card:hover, a.card:focus-visible { background:#f0f0f0; outline:2px solid var(--ink); outline-offset:2px; }
+  .num { font-size:.78rem; font-weight:700; letter-spacing:.04em; color:var(--muted); text-transform:uppercase; }
+  .name { font-family:Georgia,Cambria,serif; font-size:1.25rem; font-weight:700; line-height:1.3; }
+  .go { font-size:.9rem; color:var(--accent); font-weight:600; }
+  .soon { color:var(--muted); background:#fff; border-style:dashed; }
+  .soon .go { color:var(--muted); font-weight:500; }
+  footer { margin-top:3rem; padding-top:1.25rem; border-top:1px solid var(--line); color:var(--muted); font-size:.85rem; text-align:center; }
+  @media (min-width:640px) { .grid { grid-template-columns:1fr 1fr; } }
+  @media (max-width:600px) { .wrap { padding:1rem .75rem 3rem; } h1 { font-size:1.7rem; } body { font-size:16px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>DSGT Study Guides</h1>
+    <p class="subtitle">Discrete Structures and Graph Theory</p>
+    <div class="meta">CSE AIML · Sem III · End Sem Preparation</div>
+  </header>
+  <main class="grid">
+    <div class="card soon" aria-disabled="true"><span class="num">Module 1</span><span class="name">Crisp Set Theory and Logic</span><span class="go">Coming soon</span></div>
+    <div class="card soon" aria-disabled="true"><span class="num">Module 2</span><span class="name">Mathematical Relations</span><span class="go">Coming soon</span></div>
+    <div class="card soon" aria-disabled="true"><span class="num">Module 3</span><span class="name">Functions</span><span class="go">Coming soon</span></div>
+    <a class="card" href="modules/module-4.html"><span class="num">Module 4</span><span class="name">Counting</span><span class="go">Open guide →</span></a>
+    <a class="card" href="modules/module-5.html"><span class="num">Module 5</span><span class="name">Algebraic Structures</span><span class="go">Open guide →</span></a>
+    <div class="card soon" aria-disabled="true"><span class="num">Module 6</span><span class="name">Graph Theory</span><span class="go">Coming soon</span></div>
+  </main>
+  <footer>More modules will appear here as they are added.</footer>
+</div>
+</body>
+</html>

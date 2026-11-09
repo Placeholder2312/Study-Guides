@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSGT Module 5 — Study Guide</title>
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --muted: #444444;
+    --bg: #ffffff;
+    --line: #cccccc;
+    --rule: #999999;
+    --space: 1.5rem;
+    --radius: 0;
+    --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+    --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-mono: "Courier New", Courier, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    font-size: 17px;
+    font-weight: 500;
+  }
+  .wrap {
+    max-width: 68ch;
+    margin: 0 auto;
+    padding: 2.5rem 1rem 4rem;
+  }
+  header {
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+  }
+  h1 {
+    font-family: var(--font-serif);
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0;
+  }
+  .meta {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    font-weight: 500;
+    color: var(--muted);
+    margin-top: 1rem;
+  }
+  h2 {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 3rem 0 1rem;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.4rem;
+  }
+  h2 > a { text-decoration: none; color: inherit; }
+  h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 2rem 0 0.5rem;
+  }
+  h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 1.5rem 0 0.5rem;
+  }
+  p {
+    margin: 0 0 1rem;
+    line-height: 1.6;
+  }
+  div { line-height: 1.6; }
+  ul, ol, blockquote, pre, figure { line-height: 1.6; }
+  td { line-height: 1.5; }
+  strong, em, span, b, i { line-height: 1.6; }
+  .theory {
+    border-left: 3px solid var(--ink);
+    padding: 1rem 1.25rem;
+    margin: 1.75rem 0;
+    font-size: 0.98rem;
+  }
+  .theory p:first-child { margin-top: 0; }
+  .theory p:last-child { margin-bottom: 0; }
+  .source {
+    display: block;
+    font-size: 0.78rem;
+    line-height: 1.4;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+  }
+  .eq {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 1.25rem 0;
+    padding: 0.75rem 1rem;
+    background: #f5f5f5;
+    border: 1px solid var(--line);
+    color: var(--ink);
+    overflow-x: auto;
+  }
+  .eq-note {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--muted);
+    text-align: center;
+    margin-top: -0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .example {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+    font-size: 0.95rem;
+    background: #fafafa;
+  }
+  .example-title {
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0;
+    color: var(--muted);
+  }
+  .example .eq { margin: 0.75rem 0; background: #ffffff; border: 1px solid var(--line); }
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    border: 1px solid var(--line);
+    background: #fafafa;
+    padding: 1rem 1.25rem;
+  }
+  .steps li {
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+  .steps li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.1rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    background: var(--ink);
+    border-radius: 50%;
+  }
+  .steps li:last-child { margin-bottom: 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.75rem 0;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 0.625rem 0.875rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: #f0f0f0;
+    font-weight: 700;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+  }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .kbd {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    background: #f0f0f0;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 0.1rem 0.4rem;
+  }
+  .toc {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 2rem 0;
+    background: #fafafa;
+  }
+  .toc ol { margin: 0; padding-left: 1.25rem; }
+  .toc li { margin-bottom: 0.35rem; font-size: 0.95rem; }
+  .toc a { color: var(--ink); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .nav {
+    margin: 1.5rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .nav a {
+    padding: 0.25rem 0.6rem;
+    border: 1px solid var(--line);
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.85rem;
+    border-radius: 3px;
+  }
+  .nav a:hover { background: #f0f0f0; }
+  .practice {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: #fafafa;
+  }
+  .practice h3 { margin-top: 0; }
+  .answer-key {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: #fafafa;
+  }
+  .answer-key h3 { margin-top: 0; }
+  .common-mistakes {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: #fafafa;
+  }
+  .common-mistakes h3 { margin-top: 0; }
+  .self-learning {
+    border-left: 3px solid var(--muted);
+    padding: 1rem 1.25rem;
+    margin: 1.75rem 0;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+  .self-learning p { margin-bottom: 0.75rem; }
+  .revision-sheet {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: #fafafa;
+  }
+  .revision-sheet h3 { margin-top: 0; }
+  .warning {
+    color: #b00020;
+    font-weight: 700;
+  }
+  .exam-q {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+    background: #fafafa;
+  }
+  .exam-q-title {
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    letter-spacing: 0;
+    color: var(--muted);
+  }
+  .exam-source {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  svg { max-width: 100%; height: auto; display: block; margin: 1rem auto; padding: 0.5rem; background: #fafafa; border: 1px solid var(--line); }
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+  .references {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 2rem 0;
+    background: #fafafa;
+  }
+  .references h3 { margin-top: 0; }
+  .references p { margin: 0.5rem 0; }
+  .references ul { margin: 0.5rem 0; padding-left: 1.5rem; }
+  ::selection { background: var(--ink); color: var(--bg); }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    .wrap { padding: 1rem 0.75rem 3rem; }
+    h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.3rem; margin-top: 2.25rem; }
+    table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; font-size: 0.85rem; }
+    th, td { padding: 0.45rem 0.55rem; }
+    .theory, .example, .practice, .answer-key, .common-mistakes, .revision-sheet, .references, .exam-q, .steps, .toc, .self-learning { padding: 0.75rem; }
+    .eq { font-size: 1rem; padding: 0.6rem 0.5rem; text-align: left; overflow-wrap: anywhere; }
+    .kbd { word-break: break-word; }
+    .nav a { padding: 0.4rem 0.7rem; }
+    svg { max-width: 100%; padding: 0.25rem; }
+  }
+  @media print {
+    body { font-size: 12pt; line-height: 1.4; color: #000; background: #fff; }
+    .wrap { max-width: 100%; padding: 0; }
+    header { border-bottom: 1px solid #000; margin-bottom: 1.5rem; padding-bottom: 0.75rem; }
+    h2 { margin: 2rem 0 0.75rem; border-bottom: 1px solid #000; padding-bottom: 0.3rem; }
+    h3 { margin: 1.5rem 0 0.4rem; }
+    .toc, .nav { display: none; }
+    .example, .practice, .answer-key, .revision-sheet, .steps, .theory, .common-mistakes, .references, .exam-q {
+      border: 1px solid #999;
+      background: #fff !important;
+      page-break-inside: avoid;
+    }
+    .eq { background: #fff; border: 1px solid #999; page-break-inside: avoid; }
+    .eq-note { display: none; }
+    a { text-decoration: none; color: #000; }
+    svg { border: 1px solid #000; }
+    footer { margin-top: 2rem; border-top: 1px solid #000; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <a href="../index.html" style="display:inline-block;margin:0 0 1rem;font-size:0.85rem;color:#0a0a0a;">← All modules</a>
+
+
+  <header>
+    <h1>DSGT Module 5</h1>
+    <p class="subtitle">Algebraic Structures: Groups, Rings, and Related Systems</p>
+    <div class="meta">CSE AIML · Sem III · End Sem Preparation · Source: Mrs. Shamal Bagal PPTs + DSGT Syllabus + DSGT Questions Bank</div>
+  </header>
+
+  <div class="toc">
+    <ol>
+      <li><a href="#syllabus">Module 5 — Syllabus</a></li>
+      <li><a href="#intro">Section 1 — Introduction to Algebraic Structures</a></li>
+      <li><a href="#semigroup">Section 2 — Semigroup</a></li>
+      <li><a href="#monoid">Section 3 — Monoid</a></li>
+      <li><a href="#groups">Section 4 — Groups</a></li>
+      <li><a href="#subgroups">Section 5 — Subgroups</a></li>
+      <li><a href="#abelian">Section 6 — Abelian Groups</a></li>
+      <li><a href="#cyclic">Section 7 — Cyclic Groups</a></li>
+      <li><a href="#modular">Section 8 — Modular Arithmetic and Groups</a></li>
+      <li><a href="#rings">Section 9 — Rings</a></li>
+      <li><a href="#self-learning">Section 10 — Self-Learning: Error Correcting Codes</a></li>
+      <li><a href="#previous-exams">Previous End-Semester Questions</a></li>
+      <li><a href="#answer-key">Answer Key</a></li>
+      <li><a href="#revision">Last-Minute Revision Sheet</a></li>
+      <li><a href="#references">References &amp; Attribution</a></li>
+    </ol>
+  </div>
+
+  <nav class="nav">
+    <a href="#intro">Intro</a>
+    <a href="#semigroup">Semigroup</a>
+    <a href="#monoid">Monoid</a>
+    <a href="#groups">Groups</a>
+    <a href="#subgroups">Subgroups</a>
+    <a href="#abelian">Abelian</a>
+    <a href="#cyclic">Cyclic</a>
+    <a href="#modular">Modular</a>
+    <a href="#rings">Rings</a>
+    <a href="#previous-exams">Previous Exams</a>
+    <a href="#revision">Revision</a>
+    <a href="#references">References</a>
+  </nav>
+
+  <h2 id="syllabus">Module 5: Syllabus</h2>
+  <p><strong>Module V: Algebraic Structures</strong> · 7 hours · CO5</p>
+  <div class="eq">Algebraic structures with one binary operation: Semi group, Monoid, Groups, Subgroups, Abelian Group, and Cyclic group. Algebraic structures with two binary operations: Ring.</div>
+
+  <table>
+    <tr><th>Section</th><th>Topic</th><th>What it covers</th></tr>
+    <tr><td><strong>5.1</strong></td><td>Algebraic Structures (one operation)</td><td>Semi group, Monoid, Groups, Subgroups, Abelian group, Cyclic group</td></tr>
+    <tr><td><strong>5.2</strong></td><td>Algebraic Structures (two operations)</td><td>Ring</td></tr>
+    <tr><td><strong>Self-learning</strong></td><td>Error Correcting Codes</td><td>Applications of algebraic structures in coding theory</td></tr>
+  </table>
+
+  <p><strong>Exam format:</strong> 6 questions, 15 marks each. Question 1 is compulsory. The remaining questions mix parts from different modules. You answer 4 of 6. Module 5 may appear in Question 1 or as one part of any other question. You must be able to verify whether a given algebraic system is a semigroup, monoid, group, abelian group, cyclic group, or ring without preparation.</p>
+
+  <h2 id="intro">Section 1 — Introduction to Algebraic Structures</h2>
+
+  <div class="theory">
+    <span class="source">Teacher’s framing: Mrs. Shamal Bagal, Module 5 Algebraic Structures PPT</span>
+    <p>An <strong>algebraic structure</strong> is a non-empty set <span class="kbd">S</span> together with one or more binary operations defined on it. We write it as <span class="kbd">(S, *)</span> where <span class="kbd">*</span> is the binary operation.</p>
+    <p>A <strong>binary operation</strong> on a set <span class="kbd">S</span> is a rule that combines any two elements of <span class="kbd">S</span> to produce another element of <span class="kbd">S</span>. Mathematically, it is a function <span class="kbd">*: S × S → S</span>.</p>
+    <p>Example: Addition on real numbers is a binary operation: <span class="kbd">+: R × S → R</span> given by <span class="kbd">(a, b) → a + b</span>.</p>
+  </div>
+
+  <h3>The Five Core Properties</h3>
+
+  <div class="theory">
+    <span class="source">Teacher’s framing: Properties of Algebraic System</span>
+    <p><strong>1. Closure property:</strong> A binary operation <span class="kbd">*</span> on a set <span class="kbd">S</span> is closed if <span class="kbd">a * b ∈ S</span> for all <span class="kbd">a, b ∈ S</span>. Every result of the operation must stay inside the set.</p>
+    <p>Example: Addition is closed on natural numbers because adding two natural numbers always gives a natural number.</p>
+    <p>Counter-example: Subtraction is <em>not</em> closed on natural numbers because <span class="kbd">3 − 5 = −2</span>, which is not a natural number.</p>
+  </div>
+
+  <div class="theory">
+    <span class="source">Teacher’s framing: Properties of Algebraic System</span>
+    <p><strong>2. Associative property:</strong> A binary operation <span class="kbd">*</span> is associative if <span class="kbd">(a * b) * c = a * (b * c)</span> for all <span class="kbd">a, b, c ∈ S</span>. The grouping of operations does not change the result.</p>
+    <p>Example: Multiplication on integers is associative: <span class="kbd">(−2 × 6) × (−5) = −60</span> and <span class="kbd">−2 × (6 × −5) = −60</span>.</p>
+    <p>Counter-example: Subtraction is not associative because <span class="kbd">(5 − 3) − 2 = 0</span> but <span class="kbd">5 − (3 − 2) = 4</span>.</p>
+  </div>
+
+  <div class="theory">
+    <span class="source">Teacher’s framing: Properties of Algebraic System</span>
+    <p><strong>3. Commutative property:</strong> A binary operation <span class="kbd">*</span> is commutative if <span class="kbd">a * b = b * a</span> for all <span class="kbd">a, b ∈ S</span>. The order of operands does not matter.</p>
+    <p>Example: Addition on natural numbers is commutative because <span class="kbd">5 + 9 = 9 + 5 = 14</span>.</p>
+  </div>
+
+  <div class="theory">
+    <span class="source">Teacher’s framing: Properties of Algebraic System</span>
+    <p><strong>4. Identity element:</strong> An element <span class="kbd">e ∈ S</span> is an identity for operation <span class="kbd">*</span> if <span class="kbd">a * e = e * a = a</span> for all <span class="kbd">a ∈ S</span>. The identity element leaves every element unchanged.</p>
+  </div>
+
+  <div class="theory">
+    <span class="source">Teacher’s framing: Properties of Algebraic System</span>
+    <p><strong>5. Inverse element:</strong> Let <span class="kbd">(A, *)</span> be an algebraic system with identity <span class="kbd">e</span>. An element <span class="kbd">b</span> is the inverse of <span class="kbd">a</span> if <span class="kbd">a * b = b * a = e</span>.</p>
+  </div>
+
+  <div class="theory">
+    <span class="source">Teacher’s framing: Types of Numbers</span>
+    <p><strong>Types of numbers used throughout this module:</strong></p>
+    <ul>
+      <li>Natural numbers (N): {1, 2, 3, 4, …} — positive numbers only</li>
+      <li>Whole numbers (W): {0, 1, 2, 3, 4, …} — natural numbers plus zero</li>
+      <li>Integers (Z): {…, −3, −2, −1, 0, 1, 2, 3, …} — whole numbers plus negatives</li>
+      <li>Rational numbers (Q): Numbers of the form <span class="kbd">a/b</span> where <span class="kbd">a, b ∈ Z</span> and <span class="kbd">b ≠ 0</span></li>
+      <li>Real numbers (R): All numbers on the number line, including rationals and irrationals</li>
+      <li>Imaginary/Complex numbers: Numbers involving <span class="kbd">√−1 = i</span>. Note: The teacher’s PPT uses “imaginary numbers” and “complex numbers” interchangeably. Strictly speaking, imaginary numbers are a subset of complex numbers.</li>
+    </ul>
+  </div>
+
+  <table>
+    <tr><th>Property</th><th>Meaning</th><th>Example</th></tr>
+    <tr><td>Closure</td><td>a * b stays in the set</td><td>Addition on N: 3 + 5 = 8 ∈ N</td></tr>
+    <tr><td>Associativity</td><td>(a * b) * c = a * (b * c)</td><td>Multiplication on Z: (−2 × 6) × (−5) = −2 × (6 × −5)</td></tr>
+    <tr><td>Commutativity</td><td>a * b = b * a</td><td>Addition on N: 5 + 9 = 9 + 5</td></tr>
+    <tr><td>Identity</td><td>a * e = e * a = a</td><td>Multiplication on R*: a × 1 = a</td></tr>
+    <tr><td>Inverse</td><td>a * b = b * a = e</td><td>Multiplication on R*: a × (1/a) = 1</td></tr>
+  </table>
+
+  <h2 id="semigroup">Section 2 — Semigroup</h2>
+
+  <div class="theory">
+    <span class="source">Teacher’s framing: Semi Group</span>
+    <p>An algebraic system <span class="kbd">(A, *)</span> is a <strong>semigroup</strong> if it satisfies two conditions:</p>
+    <ol class="steps">
+      <li><span class="kbd">*</span> is a closed operation on <span class="kbd">A</span>.</li>
+      <li><span class="kbd">*</span> is an associative operation on <span class="kbd">A</span>, i.e., <span class="kbd">(a * b) * c = a * (b * c)</span> for all <span class="kbd">a, b, c ∈ A</span>.</li>
+    </ol>
+    <p>A semigroup need not have an identity element or inverses.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Teacher’s Example: Maximum operation on integers</div>
+    <p>Let <span class="kbd">Z</span> be the set of integers, and define <span class="kbd">n * m = maximum of (n, m)</span>. Show that <span class="kbd">(Z, *)</span> is a semigroup.</p>
+    <ul>
+      <li><strong>Closure:</strong> <span class="kbd">a * b = maximum of (a, b)</span> is always an integer, so <span class="kbd">a * b ∈ Z</span> for all <span class="kbd">a, b ∈ Z</span>.</li>
+      <li><strong>Associativity:</strong> <span class="kbd">(a * b) * c = maximum of {a, b, c} = a * (b * c)</span> for all integers <span class="kbd">a, b, c</span>.</li>
+    </ul>
+    <p>Therefore, <span class="kbd">(Z, *)</span> is a semigroup.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Teacher’s Example: Is (Z, *) a monoid?</div>
+    <p>Is there an identity element <span class="kbd">x</span> such that <span class="kbd">a * x = maximum of (a, x) = a</span> for all <span class="kbd">a ∈ Z</span>?</p>
+    <p>No. There is no integer <span class="kbd">x</span> such that <span class="kbd">maximum of (a, x) = a</span> for all <span class="kbd">a ∈ Z</span>, because we could always choose <span class="kbd">a = x − 1</span>, giving <span class="kbd">maximum of (x − 1, x) = x ≠ x − 1</span>.</p>
+    <p>Therefore, <span class="kbd">(Z, *)</span> is <strong>not a monoid</strong> — it has no identity element.</p>
+  </div>
+
+  <h2 id="monoid">Section 3 — Monoid</h2>
+
+  <div class="theory">
+    <span class="source">Teacher’s framing: Monoid</span>
+    <p>An algebraic system <span class="kbd">(A, *)</span> is a <strong>monoid</strong> if it satisfies three conditions:</p>
+    <ol class="steps">
+      <li><span class="kbd">*</span> is a closed operation in <span class="kbd">A</span>.</li>
+      <li><span class="kbd">*</span> is an associative operation in <span class="kbd">A</span>.</li>
+      <li>There is an <strong>identity element</strong> in <span class="kbd">A</span>.</li>
+    </ol>
+    <p>A monoid is a semigroup with an identity element. It need not have inverses.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Teacher’s Example: Strings under concatenation</div>
+    <p>Let <span class="kbd">S</span> be the set of all strings, and let <span class="kbd">+</span> denote concatenation. Show that <span class="kbd">(S, +)</span> is a monoid.</p>
+    <ul>
+      <li><strong>Closure:</strong> Concatenation of two strings is again a string, so <span class="kbd">s1 + s2 ∈ S</span>.</li>
+      <li><strong>Associativity:</strong> Concatenation is associative: <span class="kbd">(s1 + s2) + s3 = s1 + (s2 + s3)</span>.</li>
+      <li><strong>Identity:</strong> The null string <span class="kbd">λ</span> satisfies <span class="kbd">s1 + λ = s1</span> for all strings <span class="kbd">s1</span>.</li>
+    </ul>
+    <p>Therefore, <span class="kbd">(S, +)</span> is a monoid.</p>
+    <p>Is it a group? No. The inverse of a non-empty string does not exist under concatenation (you cannot concatenate anything with "abc" to get the null string "").</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Teacher’s Example: Functions from a finite set to itself under composition</div>
+    <p>Let <span class="kbd">S</span> be a finite set, and let <span class="kbd">F(S)</span> be the collection of all functions <span class="kbd">f: S → S</span> under composition <span class="kbd">∘</span>. Show that <span class="kbd">(F(S), ∘)</span> is a monoid.</p>
+    <ul>
+      <li><strong>Closure:</strong> Composition of two functions on <span class="kbd">S</span> is again a function on <span class="kbd">S</span>, so <span class="kbd">f1 ∘ f2 ∈ F(S)</span>.</li>
+      <li><strong>Associativity:</strong> Composition is associative: <span class="kbd">(f1 ∘ f2) ∘ f3 = f1 ∘ (f2 ∘ f3)</span>.</li>
+      <li><strong>Identity:</strong> The identity function <span class="kbd">I: S → S</span> satisfies <span class="kbd">f1 ∘ I = f1</span>.</li>
+    </ul>
+    <p>Therefore, <span class="kbd">(F(S), ∘)</span> is a monoid.</p>
+    <p>Is it a group? No. The inverse of a non-bijective function does not exist.</p>
+  </div>
+
+  <h2 id="groups">Section 4 — Groups</h2>
+
+  <div class="theory">
+    <span class="source">Teacher’s framing: Group</span>
+    <p>An algebraic system <span class="kbd">(G, *)</span> is a <strong>group</strong> if it satisfies four conditions:</p>
+    <ol class="steps">
+      <li><span class="kbd">*</span> is a closed operation.</li>
+      <li><span class="kbd">*</span> is an associative operation.</li>
+      <li>There is an <strong>identity</strong> in <span class="kbd">G</span>.</li>
+      <li>Every element in <span class="kbd">G</span> has an <strong>inverse</strong> in <span class="kbd">G</span>.</li>
+    </ol>
+    <p>A group is a monoid with inverses. Every element must be able to "undo" itself via the inverse.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Teacher’s Example: Non-zero real numbers under multiplication</div>
+    <p>Show that <span class="kbd">R*</span> = set of all non-zero real numbers is a group under multiplication.</p>
+    <ol>
+      <li><strong>Closure:</strong> Product of two non-zero real numbers is a non-zero real number, so <span class="kbd">a · b ∈ R*</span>.</li>
+      <li><strong>Associativity:</strong> Multiplication of real numbers is associative: <span class="kbd">(a · b) · c = a · (b · c)</span>.</li>
+      <li><strong>Identity:</strong> <span class="kbd">1 ∈ R*</span> and <span class="kbd">a · 1 = a</span> for all <span class="kbd">a ∈ R*</span>.</li>
+      <li><strong>Inverse:</strong> For each <span class="kbd">a ∈ R*</span>, we have <span class="kbd">1/a ∈ R*</span> such that <span class="kbd">a · (1/a) = 1</span>.</li>
+    </ol>
+    <p>Commutativity also holds (<span class="kbd">a · b = b · a</span>), so <span class="kbd">(R*, ·)</span> is an abelian group.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Teacher’s Example: Real numbers under multiplication is NOT a group</div>
+    <p>0 ∈ R. The multiplicative inverse of 0 does not exist (there is no number <span class="kbd">x</span> such that <span class="kbd">0 · x = 1</span>).</p>
+    <p>Therefore, <span class="kbd">(R, ·)</span> is not a group.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Teacher’s Example: Non-singular matrices under multiplication</div>
+    <p>Let <span class="kbd">M</span> be the set of all non-singular matrices of order <span class="kbd">n × n</span>. Show that <span class="kbd">(M, ·)</span> is a group under matrix multiplication.</p>
+    <ol>
+      <li><strong>Closure:</strong> <span class="kbd">|AB| = |A| · |B| ≠ 0</span> since <span class="kbd">A</span> and <span class="kbd">B</span> are non-singular, so <span class="kbd">AB ∈ M</span>.</li>
+      <li><strong>Associativity:</strong> Matrix multiplication is associative: <span class="kbd">(AB)C = A(BC)</span>.</li>
+      <li><strong>Identity:</strong> <span class="kbd">I_n ∈ M</span> and <span class="kbd">A I_n = A</span> for all <span class="kbd">A ∈ M</span>.</li>
+      <li><strong>Inverse:</strong> For each <span class="kbd">A ∈ M</span>, we have <span class="kbd">A⁻¹ ∈ M</span> such that <span class="kbd">A A⁻¹ = I</span>.</li>
+    </ol>
+    <p>Matrix multiplication is not commutative, so <span class="kbd">M</span> is a group but not an abelian group.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Teacher’s Example: Positive rational numbers under a * b = ab/2</div>
+    <p>Let <span class="kbd">A</span> be the set of all positive rational numbers. Define <span class="kbd">a * b = (ab)/2</span>. Show that <span class="kbd">(A, *)</span> is an abelian group.</p>
+    <ol>
+      <li><strong>Closure:</strong> Product of two positive rational numbers is a positive rational number, so <span class="kbd">a * b ∈ A</span>.</li>
+      <li><strong>Associativity:</strong> <span class="kbd">(a * b) * c = (ab/2) * c = (abc)/4</span> and <span class="kbd">a * (b * c) = a * (bc/2) = (abc)/4</span>.</li>
+      <li><strong>Identity:</strong> Let <span class="kbd">e</span> be the identity. Then <span class="kbd">a * e = (ae)/2 = a</span>, so <span class="kbd">e = 2</span>, and <span class="kbd">2 ∈ A</span>.</li>
+      <li><strong>Inverse:</strong> For each <span class="kbd">a ∈ A</span>, we need <span class="kbd">a * b = 2</span>. So <span class="kbd">(ab)/2 = 2</span>, giving <span class="kbd">b = 4/a</span>, which is in <span class="kbd">A</span>.</li>
+      <li><strong>Commutativity:</strong> <span class="kbd">a * b = (ab)/2 = (ba)/2 = b * a</span>.</li>
+    </ol>
+    <p>Therefore, <span class="kbd">(A, *)</span> is an abelian group with identity 2 and inverse 4/a.</p>
+  </div>
+
+  <div class="theory">
+    <span class="source">Teacher’s framing: Uniqueness proofs</span>
+    <p><strong>Theorem:</strong> In a group <span class="kbd">(G, *)</span>, the identity element is unique.</p>
+    <p><strong>Proof:</strong> Let <span class="kbd">e₁</span> and <span class="kbd">e₂</span> be two identity elements. Then <span class="kbd">e₁ * e₂ = e₁</span> (since <span class="kbd">e₂</span> is identity) and <span class="kbd">e₁ * e₂ = e₂</span> (since <span class="kbd">e₁</span> is identity). Therefore <span class="kbd">e₁ = e₂</span>.</p>
+    <p><strong>Theorem:</strong> In a group <span class="kbd">(G, *)</span>, the inverse of any element is unique.</p>
+    <p><strong>Proof:</strong> Let <span class="kbd">b</span> and <span class="kbd">c</span> both be inverses of <span class="kbd">a</span>. Then <span class="kbd">a * b = e</span> and <span class="kbd">a * c = e</span>, so <span class="kbd">a * b = a * c</span>. By left cancellation, <span class="kbd">b = c</span>.</p>
+    <p><strong>Theorem:</strong> <span class="kbd">(a * b)⁻¹ = b⁻¹ * a⁻¹</span> for all <span class="kbd">a, b ∈ G</span>.</p>
+    <p><strong>Theorem:</strong> If <span class="kbd">a * a = a</span> in a group, then <span class="kbd">a = e</span> (the identity).</p>
+    <p><strong>Proof:</strong> <span class="kbd">a * a = a * e</span>, so by left cancellation <span class="kbd">a = e</span>.</p>
+  </div>
+
+  <h2 id="subgroups">Section 5 — Subgroups</h2>
+
+  <div class="theory">
+    <span class="source">Teacher’s framing: Subgroups</span>
+    <p>Let <span class="kbd">(G, ⋆)</span> be a group and <span class="kbd">H</span> be a non-empty subset of <span class="kbd">G</span>. If <span class="kbd">(H, ⋆)</span> is itself a group, then <span class="kbd">H</span> is called a <strong>subgroup</strong> of <span class="kbd">G</span>.</p>
+    <p>A subgroup satisfies all four group laws: closure, associativity, identity element, and inverse law.</p>
+    <p>Any subset of a group <span class="kbd">G</span> is called a <strong>complex</strong> of <span class="kbd">G</span> (not necessarily a subgroup).</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Subgroup example: Even integers under addition</div>
+    <p>Let <span class="kbd">2Z = {…, −4, −2, 0, 2, 4, …}</span> be the set of even integers under addition.</p>
+    <ul>
+      <li><strong>Closure:</strong> Sum of two even integers is even.</li>
+      <li><strong>Associativity:</strong> Integer addition is associative.</li>
+      <li><strong>Identity:</strong> <span class="kbd">0 ∈ 2Z</span> and <span class="kbd">a + 0 = a</span>.</li>
+      <li><strong>Inverse:</strong> For each <span class="kbd">a ∈ 2Z</span>, <span class="kbd">−a ∈ 2Z</span> and <span class="kbd">a + (−a) = 0</span>.</li>
+    </ul>
+    <p>Therefore, <span class="kbd">(2Z, +)</span> is a subgroup of <span class="kbd">(Z, +)</span>.</p>
+  </div>
+
+  <h2 id="abelian">Section 6 — Abelian Groups</h2>
+
+  <div class="theory">
+    <span class="source">Teacher’s framing: Abelian group (Commutative group)</span>
+    <p>A group <span class="kbd">(G, *)</span> is said to be <strong>abelian</strong> (or <strong>commutative</strong>) if <span class="kbd">a * b = b * a</span> for all <span class="kbd">a, b ∈ G</span>.</p>
+    <p>An abelian group satisfies five properties: closure, associativity, identity, inverse, and commutativity.</p>
+  </div>
+
+  <table>
+    <tr><th>Property</th><td>Group</td><td>Abelian Group</td></tr>
+    <tr><td>Closure</td><td>✓</td><td>✓</td></tr>
+    <tr><td>Associativity</td><td>✓</td><td>✓</td></tr>
+    <tr><td>Identity</td><td>✓</td><td>✓</td></tr>
+    <tr><td>Inverse</td><td>✓</td><td>✓</td></tr>
+    <tr><td>Commutativity</td><td>✗ (not required)</td><td>✓ (required)</td></tr>
+  </table>
+
+  <div class="example">
+    <div class="example-title">Abelian group example: Non-zero real numbers under multiplication</div>
+    <p>As shown earlier, <span class="kbd">(R*, ·)</span> is abelian because multiplication of real numbers is commutative.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Non-abelian group example: Non-singular matrices under multiplication</div>
+    <p>As shown earlier, <span class="kbd">M</span> (non-singular <span class="kbd">n × n</span> matrices) is a group but not abelian because matrix multiplication is not commutative.</p>
+  </div>
+
+  <h2 id="cyclic">Section 7 — Cyclic Groups</h2>
+
+  <div class="theory">
+    <span class="source">Source: External reference — Oscar Levin, “Discrete Mathematics: An Open Introduction”</span>
+    <p>The teacher’s PPT does not cover cyclic groups. This topic is explicitly listed in the official syllabus, so it is included here using an external reference.</p>
+    <p>A group <span class="kbd">(G, *)</span> is <strong>cyclic</strong> if there exists an element <span class="kbd">g ∈ G</span> such that every element of <span class="kbd">G</span> can be written as <span class="kbd">gⁿ</span> (some power of <span class="kbd">g</span>) for some integer <span class="kbd">n</span>. The element <span class="kbd">g</span> is called a <strong>generator</strong> of the group.</p>
+    <p>In additive notation, <span class="kbd">G</span> is cyclic if every element is <span class="kbd">n·g</span> (some multiple of <span class="kbd">g</span>) for some integer <span class="kbd">n</span>.</p>
+    <p>A cyclic group is generated by a single element. If <span class="kbd">G = ⟨g⟩</span>, we say <span class="kbd">G</span> is generated by <span class="kbd">g</span>.</p>
+    <p>Finite cyclic groups: If <span class="kbd">g</span> has finite order <span class="kbd">m</span> (smallest positive integer such that <span class="kbd">gᵐ = e</span>), then <span class="kbd">G = {e, g, g², …, gᵐ⁻¹}</span> and <span class="kbd">|G| = m</span>.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Example: Z₆ = {0, 1, 2, 3, 4, 5} under addition modulo 6</div>
+    <p>Is Z₆ cyclic? Yes. Consider the element 1:</p>
+    <ul>
+      <li>1·1 = 1</li>
+      <li>2·1 = 2</li>
+      <li>3·1 = 3</li>
+      <li>4·1 = 4</li>
+      <li>5·1 = 5</li>
+      <li>6·1 = 0 (mod 6)</li>
+    </ul>
+    <p>Since multiples of 1 generate all elements of Z₆, 1 is a generator. The element 5 is also a generator (5·1=5, 5·2=4, 5·3=3, 5·4=2, 5·5=1, 5·6=0).</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Example: Z₇* = {1, 2, 3, 4, 5, 6} under multiplication modulo 7</div>
+    <p>Is Z₇* cyclic? Yes. Consider powers of 3 mod 7:</p>
+    <ul>
+      <li>3¹ = 3</li>
+      <li>3² = 9 ≡ 2</li>
+      <li>3³ = 27 ≡ 6</li>
+      <li>3⁴ = 81 ≡ 4</li>
+      <li>3⁵ = 243 ≡ 5</li>
+      <li>3⁶ = 729 ≡ 1</li>
+    </ul>
+    <p>All six elements appear, so 3 is a generator. The element 5 is also a generator.</p>
+    <p>The element 2 is not a generator: 2¹=2, 2²=4, 2³=1, and then it repeats — only {1, 2, 4} are generated.</p>
+  </div>
+
+  <div class="theory">
+    <span class="source">Cyclic vs non-cyclic groups</span>
+    <p>A group is <strong>cyclic</strong> if it has a generator — one element whose powers (or multiples) produce every element of the group.</p>
+    <p>A group is <strong>non-cyclic</strong> if no single element generates the entire group. Example: Z₂ × Z₂ (the Klein four-group) is not cyclic because every non-identity element has order 2, so no element generates all 4 elements.</p>
+    <p>Every cyclic group is abelian, but not every abelian group is cyclic.</p>
+  </div>
+
+  <h2 id="modular">Section 8 — Modular Arithmetic and Groups</h2>
+
+  <div class="theory">
+    <span class="source">Teacher’s framing: Modulo systems</span>
+    <p><strong>Addition modulo m (+ₘ):</strong> For positive integer m and integers a, b:</p>
+    <div class="eq">a +ₘ b = a + b &nbsp;&nbsp; if a + b &lt; m</div>
+    <div class="eq">a +ₘ b = r &nbsp;&nbsp; if a + b ≥ m, where r is the remainder when a + b is divided by m</div>
+    <p><strong>Multiplication modulo p (×ₚ):</strong> For positive integer p and integers a, b:</p>
+    <div class="eq">a ×ₚ b = ab &nbsp;&nbsp; if ab &lt; p</div>
+    <div class="eq">a ×ₚ b = r &nbsp;&nbsp; if ab ≥ p, where r is the remainder when ab is divided by p</div>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Teacher’s Example: G = {0, 1, 2, 3, 4, 5} under addition modulo 6</div>
+    <p>Composition table for (G, +₆):</p>
+    <table>
+      <tr><th>+₆</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+      <tr><td>0</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+      <tr><td>1</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>0</td></tr>
+      <tr><td>2</td><td>2</td><td>3</td><td>4</td><td>5</td><td>0</td><td>1</td></tr>
+      <tr><td>3</td><td>3</td><td>4</td><td>5</td><td>0</td><td>1</td><td>2</td></tr>
+      <tr><td>4</td><td>4</td><td>5</td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+      <tr><td>5</td><td>5</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+    </table>
+    <ol>
+      <li><strong>Closure:</strong> All entries are elements of G, so G is closed under +₆.</li>
+      <li><strong>Associativity:</strong> Addition modulo 6 is associative. Example: (2 +₆ 3) +₆ 4 = 5 +₆ 4 = 3 and 2 +₆ (3 +₆ 4) = 2 +₆ 1 = 3.</li>
+      <li><strong>Identity:</strong> The first row coincides with the header row, so 0 is the identity element.</li>
+      <li><strong>Inverse:</strong> From the table, inverses are: 0→0, 1→5, 2→4, 3→3, 4→2, 5→1.</li>
+      <li><strong>Commutativity:</strong> Rows and columns are identical, so +₆ is commutative.</li>
+    </ol>
+    <p>Therefore, (G, +₆) is an abelian group.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Teacher’s Example: G = {1, 2, 3, 4, 5, 6} under multiplication modulo 7</div>
+    <p>Composition table for (G, ×₇):</p>
+    <table>
+      <tr><th>×₇</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr>
+      <tr><td>1</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
+      <tr><td>2</td><td>2</td><td>4</td><td>6</td><td>1</td><td>3</td><td>5</td></tr>
+      <tr><td>3</td><td>3</td><td>6</td><td>2</td><td>5</td><td>1</td><td>4</td></tr>
+      <tr><td>4</td><td>4</td><td>1</td><td>5</td><td>2</td><td>6</td><td>3</td></tr>
+      <tr><td>5</td><td>5</td><td>3</td><td>1</td><td>6</td><td>4</td><td>2</td></tr>
+      <tr><td>6</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td></tr>
+    </table>
+    <ol>
+      <li><strong>Closure:</strong> All entries are in G, so G is closed under ×₇.</li>
+      <li><strong>Associativity:</strong> Multiplication modulo 7 is associative. Example: (2 ×₇ 3) ×₇ 4 = 6 ×₇ 4 = 3 and 2 ×₇ (3 ×₇ 4) = 2 ×₇ 5 = 3.</li>
+      <li><strong>Identity:</strong> 1 is the identity element.</li>
+      <li><strong>Inverse:</strong> From the table: 1→1, 2→4, 3→5, 4→2, 5→3, 6→6.</li>
+      <li><strong>Commutativity:</strong> Rows and columns are identical, so ×₇ is commutative.</li>
+    </ol>
+    <p>Therefore, (G, ×₇) is an abelian group.</p>
+    <p class="warning">Correction: The teacher’s PPT lists inverses as “1, 4, 5, 2, 5, 6” which is incorrect. The correct inverses are: 1→1, 2→4, 3→5, 4→2, 5→3, 6→6. Note that 5 ×₇ 3 = 15 ≡ 1 (mod 7), so the inverse of 5 is 3, not 5. And 5 ×₇ 5 = 25 ≡ 4 (mod 7), not 1.</p>
+  </div>
+
+  <h2 id="rings">Section 9 — Rings</h2>
+
+  <div class="theory">
+    <span class="source">Teacher’s framing: Module 5 ring5.2 PPT</span>
+    <p>A <strong>ring</strong> is a set R equipped with two binary operations, usually denoted + (addition) and · (multiplication), such that:</p>
+    <ol class="steps">
+      <li>(R, +) is an abelian group.</li>
+      <li>Multiplication is associative: a · (b · c) = (a · b) · c for all a, b, c ∈ R.</li>
+      <li>Multiplication distributes over addition: a · (b + c) = a · b + a · c and (a + b) · c = a · c + b · c for all a, b, c ∈ R.</li>
+    </ol>
+    <p>The multiplication operation need not have an identity element. The multiplication operation need not be commutative.</p>
+    <p>A ring differs from a group in that it has two binary operations instead of one.</p>
+  </div>
+
+  <div class="theory">
+    <span class="source">Teacher’s framing: Ring properties</span>
+    <p>A ring must satisfy:</p>
+    <ul>
+      <li>Closure under addition and multiplication</li>
+      <li>Associativity of addition and multiplication</li>
+      <li>Distributivity of multiplication over addition</li>
+      <li>Existence of additive identity (0) and additive inverse (−a)</li>
+    </ul>
+  </div>
+
+  <h3>Related Concepts</h3>
+
+  <div class="theory">
+    <span class="source">Teacher’s framing: Commutative rings</span>
+    <p>A <strong>commutative ring</strong> is a ring in which multiplication is commutative: a · b = b · a for all a, b ∈ R.</p>
+  </div>
+
+  <div class="theory">
+    <span class="source">Teacher’s framing: Integral domains</span>
+    <p>An <strong>integral domain</strong> is a commutative ring with no zero divisors. If a · b = 0, then either a = 0 or b = 0.</p>
+    <p>Integral domains ensure unique factorization of elements into primes.</p>
+  </div>
+
+  <div class="theory">
+    <span class="source">Teacher’s framing: Fields</span>
+    <p>A <strong>field</strong> is a commutative ring in which every nonzero element has a multiplicative inverse.</p>
+  </div>
+
+  <div class="theory">
+    <span class="source">Teacher’s framing: Subrings</span>
+    <p>A <strong>subring</strong> is a subset of a ring that is itself a ring under the same operations.</p>
+  </div>
+
+  <div class="theory">
+    <span class="source">Teacher’s framing: Ring homomorphisms</span>
+    <p>A <strong>ring homomorphism</strong> is a function between two rings that preserves addition and multiplication.</p>
+  </div>
+
+  <table>
+    <tr><th>Structure</th><th>Operations</th><th>Key Properties</th></tr>
+    <tr><td>Group</td><td>One (*)</td><td>Closure, associativity, identity, inverse</td></tr>
+    <tr><td>Abelian group</td><td>One (*)</td><td>Group + commutativity</td></tr>
+    <tr><td>Ring</td><td>Two (+, ·)</td><td>Abelian group under +, associative ·, distributive laws</td></tr>
+    <tr><td>Commutative ring</td><td>Two (+, ·)</td><td>Ring + commutative ·</td></tr>
+    <tr><td>Integral domain</td><td>Two (+, ·)</td><td>Commutative ring + no zero divisors</td></tr>
+    <tr><td>Field</td><td>Two (+, ·)</td><td>Commutative ring + every non-zero element has multiplicative inverse</td></tr>
+  </table>
+
+  <div class="example">
+    <div class="example-title">Teacher’s Example A: A = {0, 2, 4, 6, 8} under addition and multiplication modulo 10</div>
+    <p>Addition table (+₁₀):</p>
+    <table>
+      <tr><th>+₁₀</th><th>0</th><th>2</th><th>4</th><th>6</th><th>8</th></tr>
+      <tr><td>0</td><td>0</td><td>2</td><td>4</td><td>6</td><td>8</td></tr>
+      <tr><td>2</td><td>2</td><td>4</td><td>6</td><td>8</td><td>0</td></tr>
+      <tr><td>4</td><td>4</td><td>6</td><td>8</td><td>0</td><td>2</td></tr>
+      <tr><td>6</td><td>6</td><td>8</td><td>0</td><td>2</td><td>4</td></tr>
+      <tr><td>8</td><td>8</td><td>0</td><td>2</td><td>4</td><td>6</td></tr>
+    </table>
+    <p>Multiplication table (·₁₀):</p>
+    <table>
+      <tr><th>·₁₀</th><th>0</th><th>2</th><th>4</th><th>6</th><th>8</th></tr>
+      <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td>2</td><td>0</td><td>4</td><td>8</td><td>2</td><td>6</td></tr>
+      <tr><td>4</td><td>0</td><td>8</td><td>6</td><td>4</td><td>2</td></tr>
+      <tr><td>6</td><td>0</td><td>2</td><td>4</td><td>6</td><td>8</td></tr>
+      <tr><td>8</td><td>0</td><td>6</td><td>2</td><td>8</td><td>4</td></tr>
+    </table>
+    <ol>
+      <li><strong>Condition 1 — (A, +₁₀) is an abelian group:</strong>
+        <ul>
+          <li><strong>Closure:</strong> All entries are in A.</li>
+          <li><strong>Associativity:</strong> Inherited from integers.</li>
+          <li><strong>Identity:</strong> 0 is the additive identity.</li>
+          <li><strong>Inverse:</strong> 0→0, 2→8, 4→6, 6→4, 8→2.</li>
+          <li><strong>Commutativity:</strong> Table is symmetric.</li>
+        </ul>
+      </li>
+      <li><strong>Condition 2 — (A, ·₁₀) is a semigroup:</strong>
+        <ul>
+          <li><strong>Closure:</strong> All entries are in A.</li>
+          <li><strong>Associativity:</strong> Inherited from integers.</li>
+        </ul>
+      </li>
+      <li><strong>Condition 3 — Distributive laws:</strong> Holds (inherited from integers).</li>
+    </ol>
+    <p><strong>Verdict:</strong> (A, +₁₀, ·₁₀) is a ring.</p>
+    <p><strong>Additional observations:</strong> The multiplication table is symmetric, so it is a commutative ring. Element 6 is the multiplicative unity (6 ·₁₀ x = x for all x ∈ A). Checking for zero divisors: no pair of non-zero elements multiplies to 0, so there are no zero divisors. Since it is a finite commutative ring with unity and no zero divisors, A is actually an integral domain (and being finite, also a field).</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Teacher’s Example B: B = {0, 3, 6, 9} under addition and multiplication modulo 12</div>
+    <p>Addition table (+₁₂):</p>
+    <table>
+      <tr><th>+₁₂</th><th>0</th><th>3</th><th>6</th><th>9</th></tr>
+      <tr><td>0</td><td>0</td><td>3</td><td>6</td><td>9</td></tr>
+      <tr><td>3</td><td>3</td><td>6</td><td>9</td><td>0</td></tr>
+      <tr><td>6</td><td>6</td><td>9</td><td>0</td><td>3</td></tr>
+      <tr><td>9</td><td>9</td><td>0</td><td>3</td><td>6</td></tr>
+    </table>
+    <p>Multiplication table (·₁₂):</p>
+    <table>
+      <tr><th>·₁₂</th><th>0</th><th>3</th><th>6</th><th>9</th></tr>
+      <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td>3</td><td>0</td><td>9</td><td>6</td><td>3</td></tr>
+      <tr><td>6</td><td>0</td><td>6</td><td>0</td><td>6</td></tr>
+      <tr><td>9</td><td>0</td><td>3</td><td>6</td><td>9</td></tr>
+    </table>
+    <ol>
+      <li><strong>Condition 1 — (B, +₁₂) is an abelian group:</strong>
+        <ul>
+          <li><strong>Closure:</strong> All entries are in B.</li>
+          <li><strong>Associativity:</strong> Inherited from integers.</li>
+          <li><strong>Identity:</strong> 0 is the additive identity.</li>
+          <li><strong>Inverse:</strong> 0→0, 3→9, 6→6, 9→3.</li>
+          <li><strong>Commutativity:</strong> Table is symmetric.</li>
+        </ul>
+      </li>
+      <li><strong>Condition 2 — (B, ·₁₂) is a semigroup:</strong>
+        <ul>
+          <li><strong>Closure:</strong> All entries are in B.</li>
+          <li><strong>Associativity:</strong> Inherited from integers.</li>
+        </ul>
+      </li>
+      <li><strong>Condition 3 — Distributive laws:</strong> Holds (inherited from integers).</li>
+    </ol>
+    <p><strong>Verdict:</strong> (B, +₁₂, ·₁₂) is a ring.</p>
+    <p><strong>Additional observations:</strong> Commutative ring. Multiplicative unity is 9 (9 ·₁₂ x = x for all x ∈ B). Zero divisors exist: 6 ·₁₂ 6 = 36 ≡ 0 (mod 12) but 6 ≠ 0. Since it has zero divisors, it is NOT an integral domain and NOT a field.</p>
+  </div>
+
+  <h2 id="self-learning">Section 10 — Self-Learning: Error Correcting Codes</h2>
+
+  <div class="self-learning">
+    <p>This is a syllabus self-learning topic. It is not presented as a confirmed exam question.</p>
+    <p>Error correcting codes are methods for detecting and correcting errors that occur during data transmission or storage.</p>
+    <p>Connection to algebraic structures: Coding theory uses finite fields (Galois fields) and related algebraic systems. For example, polynomial rings over finite fields are used to construct Reed-Solomon codes, which are used in CDs, DVDs, QR codes, and satellite communications.</p>
+    <p>Simple example: A parity bit is added to a binary string to make the total number of 1s even (even parity). If a single bit flips during transmission, the receiver detects the error because the parity is wrong. However, it cannot correct the error — only detect it. More sophisticated codes like Hamming codes can both detect and correct errors using parity-check matrices over the field Z₂.</p>
+    <p>Why it matters: Error correcting codes enable reliable digital communication despite noise in transmission channels.</p>
+  </div>
+
+  <h2 id="previous-exams">Previous End-Semester Questions</h2>
+  <div class="practice">
+    <h3>Previous Examination Questions</h3>
+    <div class="exam-q">
+      <div class="exam-q-title">Winter 2025 — Q4(a): Multiplication Modulo 7 — QR-based Token System (8 marks)</div>
+      <div class="exam-source">Source: NEP DSGT Winter 2025 — Q4(a)</div>
+      <p>The transformation is T(a) = (a × k) mod 7, where a ∈ {1, 2, 3, 4, 5, 6}.</p>
+      <ol>
+        <li><strong>Construct the multiplication table modulo 7.</strong></li>
+        <li><strong>Find the inverses of 2, 3 and 5.</strong></li>
+        <li><strong>Determine whether the set forms a group.</strong></li>
+        <li><strong>Discuss reversibility, forgery prevention and predictable validation.</strong></li>
+      </ol>
+      <p><strong>Solution:</strong></p>
+      <ol>
+        <li>Multiplication table modulo 7:</li>
+      </ol>
+      <table>
+        <tr><th>×₇</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr>
+        <tr><td>1</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
+        <tr><td>2</td><td>2</td><td>4</td><td>6</td><td>1</td><td>3</td><td>5</td></tr>
+        <tr><td>3</td><td>3</td><td>6</td><td>2</td><td>5</td><td>1</td><td>4</td></tr>
+        <tr><td>4</td><td>4</td><td>1</td><td>5</td><td>2</td><td>6</td><td>3</td></tr>
+        <tr><td>5</td><td>5</td><td>3</td><td>1</td><td>6</td><td>4</td><td>2</td></tr>
+        <tr><td>6</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td></tr>
+      </table>
+      <ol>
+        <li>Inverses: 2⁻¹=4, 3⁻¹=5, 5⁻¹=3 (since 2×₇4=1, 3×₇5=1, 5×₇3=1).</li>
+        <li><strong>Group:</strong> Closed (all entries in {1..6}), associative (inherited from integers), identity = 1, inverses exist for all elements, commutative. Therefore {1..6} under ×₇ is an abelian group.</li>
+        <li><strong>Discussion:</strong> The transformation T(a) = (a × k) mod 7 is invertible when k ∈ {1..6} because every non-zero element mod 7 has a multiplicative inverse. This means the transformation can be reversed: T⁻¹(b) = (b × k⁻¹) mod 7. This provides predictability (anyone with k can validate) but does not by itself guarantee cryptographic security or prevent forgery — forgery resistance requires additional cryptographic properties beyond simple modular multiplication.</li>
+      </ol>
+    </div>
+
+    <div class="exam-q">
+      <div class="exam-q-title">Winter 2025 — Q6(a): Ring Modulo 6 (8 marks)</div>
+      <div class="exam-source">Source: NEP DSGT Winter 2025 — Q6(a)</div>
+      <p>Consider Z₆ with addition and multiplication modulo 6.</p>
+      <ol>
+        <li>Check whether addition forms an Abelian group.</li>
+        <li>Check closure and associativity.</li>
+        <li>Verify distributivity.</li>
+        <li>Conclude whether Z₆ forms a ring.</li>
+      </ol>
+      <p><strong>Solution:</strong></p>
+      <ol>
+        <li><strong>Addition modulo 6 forms an abelian group:</strong> The table above shows closure, associativity, identity = 0, inverses exist, commutativity holds.</li>
+        <li><strong>Multiplication modulo 6 closure and associativity:</strong> All products of elements in Z₆ remain in Z₆ (closure). Multiplication modulo 6 is associative (inherited from integers).</li>
+        <li><strong>Distributivity:</strong> Multiplication distributes over addition modulo 6 (inherited from integers).</li>
+        <li><strong>Conclusion:</strong> Z₆ forms a ring under addition and multiplication modulo 6.</li>
+      </ol>
+    </div>
+
+    <div class="exam-q">
+      <div class="exam-q-title">Summer 2026 — Q4(a): Multiplicative Group Modulo 7 (8 marks)</div>
+      <div class="exam-source">Source: NEP DSGT Summer 2026 — Q4(a)</div>
+      <p>Consider G = {1, 2, 3, 4, 5, 6} under multiplication modulo 7.</p>
+      <ol>
+        <li>Construct the multiplication table.</li>
+        <li>Find the inverses of 2, 3, 5 and 6.</li>
+        <li>Determine whether G is cyclic.</li>
+        <li>Identify at least one generator and justify.</li>
+      </ol>
+      <p><strong>Solution:</strong></p>
+      <ol>
+        <li>Multiplication table modulo 7 (shown above).</li>
+        <li>Inverses: 2⁻¹=4, 3⁻¹=5, 5⁻¹=3, 6⁻¹=6.</li>
+        <li><strong>Cyclic:</strong> Yes. Powers of 3 mod 7 generate all elements: 3¹=3, 3²=2, 3³=6, 3⁴=4, 3⁵=5, 3⁶=1. So 3 is a generator. Similarly, 5 is a generator.</li>
+        <li>3 and 5 are generators of the group.</li>
+      </ol>
+    </div>
+
+    <div class="exam-q">
+      <div class="exam-q-title">Summer 2026 — Q6(a): Ring Modulo 4 (8 marks)</div>
+      <div class="exam-source">Source: NEP DSGT Summer 2026 — Q6(a)</div>
+      <p>Consider Z₄ = {0, 1, 2, 3} under addition and multiplication modulo 4.</p>
+      <ol>
+        <li>Construct both operation tables.</li>
+        <li>Verify the ring properties.</li>
+        <li>Explain additive identity, additive inverses, multiplicative associativity and distributivity.</li>
+        <li>Conclude whether Z₄ forms a ring.</li>
+      </ol>
+      <p><strong>Solution:</strong></p>
+      <p><strong>Addition table (+₄):</strong></p>
+      <table>
+        <tr><th>+₄</th><th>0</th><th>1</th><th>2</th><th>3</th></tr>
+        <tr><td>0</td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+        <tr><td>1</td><td>1</td><td>2</td><td>3</td><td>0</td></tr>
+        <tr><td>2</td><td>2</td><td>3</td><td>0</td><td>1</td></tr>
+        <tr><td>3</td><td>3</td><td>0</td><td>1</td><td>2</td></tr>
+      </table>
+      <p><strong>Multiplication table (·₄):</strong></p>
+      <table>
+        <tr><th>·₄</th><th>0</th><th>1</th><th>2</th><th>3</th></tr>
+        <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>1</td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+        <tr><td>2</td><td>0</td><td>2</td><td>0</td><td>2</td></tr>
+        <tr><td>3</td><td>0</td><td>3</td><td>2</td><td>1</td></tr>
+      </table>
+      <ol>
+        <li><strong>(Z₄, +₄) is an abelian group:</strong> Closed, associative, identity = 0, inverses = 0→0, 1→3, 2→2, 3→1, commutative.</li>
+        <li><strong>(Z₄, ·₄) is a semigroup:</strong> Closed, associative.</li>
+        <li><strong>Distributive:</strong> Holds (inherited from integers).</li>
+        <li><strong>Conclusion:</strong> Z₄ forms a ring under addition and multiplication modulo 4. It is commutative, has multiplicative identity 1, but has zero divisors (2·₄2=0), so it is NOT an integral domain.</li>
+      </ol>
+    </div>
+  </div>
+
+  <h2 id="answer-key">Answer Key</h2>
+  <div class="answer-key">
+    <h3>Answers</h3>
+
+    <h4>Binary Operations and Properties</h4>
+    <ol>
+      <li>Addition on N: For any a, b ∈ N, a + b ∈ N. Subtraction on N: Not closed because 3 − 5 = −2 ∉ N.</li>
+      <li>No. Division by zero is undefined.</li>
+      <li>Closure: a * b ∈ S for all a, b ∈ S. Example: addition on N. Associativity: (a * b) * c = a * (b * c). Example: multiplication on Z. Commutativity: a * b = b * a. Example: addition on N. Identity: a * e = e * a = a. Example: multiplication on R*, identity = 1. Inverse: a * b = b * a = e. Example: multiplication on R*, inverse of a is 1/a.</li>
+    </ol>
+
+    <h4>Semigroup and Monoid</h4>
+    <ol>
+      <li>Semigroup: Closed (max of two integers is integer), associative. Not monoid: No identity element.</li>
+      <li>Monoid: Closed (concatenation of strings is string), associative, identity = null string. Not group: Non-empty strings have no inverse.</li>
+      <li>Monoid: Closed (composition of functions is function), associative, identity = identity function. Not necessarily group: Non-bijective functions have no inverse.</li>
+    </ol>
+
+    <h4>Groups</h4>
+    <ol>
+      <li>Abelian group: Closed, associative, identity = 1, inverse = 1/a, commutative.</li>
+      <li>Not a group: 0 ∈ R has no multiplicative inverse.</li>
+      <li>Group, not abelian: Non-singular matrices form a group under multiplication, but matrix multiplication is not commutative.</li>
+      <li>Abelian group: Closed, associative, identity = 2, inverse = 4/a, commutative.</li>
+      <li>Identity unique: If e₁ and e₂ are identities, then e₁*e₂ = e₁ and e₁*e₂ = e₂, so e₁ = e₂.</li>
+      <li>Inverse unique: If b and c are both inverses of a, then a*b = a*c = e, so b = c by cancellation.</li>
+    </ol>
+
+    <h4>Subgroups and Abelian Groups</h4>
+    <ol>
+      <li>Subgroup: Even integers under addition: closed, associative, identity = 0, inverse = −a. All elements of 2Z are in Z, so 2Z is a subgroup of Z.</li>
+      <li>Abelian: Non-zero real numbers under multiplication. Non-abelian: Non-singular matrices under multiplication.</li>
+      <li>Difference: An abelian group additionally requires commutativity (a * b = b * a).</li>
+    </ol>
+
+    <h4>Cyclic Groups</h4>
+    <ol>
+      <li>Cyclic: Multiples of 1 mod 6 generate all elements {0,1,2,3,4,5}. Generators are 1 and 5.</li>
+      <li>Cyclic: Powers of 3 mod 7 generate all elements {1,2,3,4,5,6}. Generators are 3 and 5.</li>
+      <li>No. Example: Z₂ × Z₂ is abelian but not cyclic.</li>
+    </ol>
+
+    <h4>Modular Arithmetic</h4>
+    <ol>
+      <li>Group: Addition mod 4 on {0,1,2,3}: closed, associative, identity = 0, inverses = 0→0, 1→3, 2→2, 3→1, commutative. Abelian group.</li>
+      <li>Inverses in Z₇*: 1→1, 2→4, 3→5, 4→2, 5→3, 6→6.</li>
+    </ol>
+
+    <h4>Rings</h4>
+    <ol>
+      <li>Ring: (A,+₁₀) abelian group, (A,·₁₀) semigroup, distributive laws hold.</li>
+      <li>Ring: (B,+₁₂) abelian group, (B,·₁₂) semigroup, distributive laws hold.</li>
+      <li>Difference: A field is a commutative ring where every non-zero element has a multiplicative inverse.</li>
+      <li>Yes, zero divisors: 6 ·₁₂ 6 = 36 ≡ 0 (mod 12), but 6 ≠ 0.</li>
+    </ol>
+  </div>
+
+  <div class="common-mistakes">
+    <h3>Common Mistakes</h3>
+    <h4>Binary Operations</h4>
+    <ul>
+      <li>Confusing subtraction/division as binary operations on all real numbers — division by zero is undefined.</li>
+      <li>Confusing imaginary numbers with complex numbers — imaginary numbers are a subset of complex numbers.</li>
+    </ul>
+    <h4>Semigroup vs Monoid vs Group</h4>
+    <ul>
+      <li>Forgetting that a monoid needs an identity but a semigroup does not.</li>
+      <li>Forgetting that a group needs inverses but a monoid does not.</li>
+    </ul>
+    <h4>Groups</h4>
+    <ul>
+      <li>Assuming real numbers under multiplication form a group — 0 has no inverse.</li>
+      <li>Assuming all groups are abelian — matrix multiplication is not commutative.</li>
+    </ul>
+    <h4>Cyclic Groups</h4>
+    <ul>
+      <li>Assuming every abelian group is cyclic — Z₂ × Z₂ is abelian but not cyclic.</li>
+    </ul>
+    <h4>Modular Arithmetic</h4>
+    <ul>
+      <li>Important error in teacher’s PPT: Inverses in Z₇* are listed as “1, 4, 5, 2, 5, 6” but the correct inverses are “1, 4, 5, 2, 3, 6”. The inverse of 5 is 3 (5×3=15≡1 mod 7), not 5 (5×5=25≡4 mod 7).</li>
+    </ul>
+    <h4>Rings</h4>
+    <ul>
+      <li>Forgetting that a ring’s multiplication need not have an identity element.</li>
+      <li>Confusing integral domain (no zero divisors) with field (every non-zero element has inverse).</li>
+    </ul>
+  </div>
+
+  <h2 id="revision">Last-Minute Revision Sheet</h2>
+  <div class="revision-sheet">
+    <h3>Definitions</h3>
+    <table>
+      <tr><th>Structure</th><th>Required Properties</th></tr>
+      <tr><td>Semigroup</td><td>Closure, associativity</td></tr>
+      <tr><td>Monoid</td><td>Closure, associativity, identity</td></tr>
+      <tr><td>Group</td><td>Closure, associativity, identity, inverse</td></tr>
+      <tr><td>Abelian group</td><td>Group + commutativity</td></tr>
+      <tr><td>Cyclic group</td><td>Abelian group with a generator</td></tr>
+      <tr><td>Subgroup</td><td>Non-empty subset that is itself a group under same operation</td></tr>
+      <tr><td>Ring</td><td>Abelian group under +, associative ·, distributive laws</td></tr>
+      <tr><td>Commutative ring</td><td>Ring + commutative multiplication</td></tr>
+      <tr><td>Integral domain</td><td>Commutative ring + no zero divisors</td></tr>
+      <tr><td>Field</td><td>Commutative ring + every non-zero element has multiplicative inverse</td></tr>
+    </table>
+
+    <h3>Verification Checklist</h3>
+    <table>
+      <tr><th>To prove it is a…</th><th>Check these conditions</th></tr>
+      <tr><td>Semigroup</td><td>Closed? Associative?</td></tr>
+      <tr><td>Monoid</td><td>Semigroup + identity?</td></tr>
+      <tr><td>Group</td><td>Monoid + inverses?</td></tr>
+      <tr><td>Abelian group</td><td>Group + commutative?</td></tr>
+      <tr><td>Cyclic group</td><td>Abelian + has a generator?</td></tr>
+      <tr><td>Ring</td><td>(R,+) abelian group? · associative? Distributive?</td></tr>
+      <tr><td>Integral domain</td><td>Commutative ring + no zero divisors?</td></tr>
+      <tr><td>Field</td><td>Commutative ring + every non-zero has inverse?</td></tr>
+    </table>
+
+    <h3>Important Formulas</h3>
+    <div class="eq">(a * b)⁻¹ = b⁻¹ * a⁻¹</div>
+    <div class="eq">a +ₘ b = (a + b) mod m</div>
+    <div class="eq">a ·ₚ b = (a · b) mod p</div>
+
+    <h3>Common Exam Patterns</h3>
+    <ul>
+      <li>“Show that (S, *) is a semigroup/monoid/group” — check each condition one by one.</li>
+      <li>“Is (S, *) abelian?” — check commutativity.</li>
+      <li>“Is (S, *) cyclic?” — find a generator or show none exists.</li>
+      <li>“Construct composition table for modulo n” — fill all entries, then check closure, identity, inverses, commutativity.</li>
+      <li>“Is (R, +, ·) a ring?” — check (R,+) abelian group, · associative, distributive laws.</li>
+    </ul>
+  </div>
+
+  <h2 id="references">References &amp; Attribution</h2>
+  <div class="references">
+    <h3>References</h3>
+    <p>The following external sources were used to prepare this study guide. All explanations are paraphrased unless directly quoted.</p>
+    <ul>
+      <li><strong>Oscar Levin — Discrete Mathematics: An Open Introduction, Second Edition</strong><br>
+      Source: <a href="https://discrete.openmathbooks.org/pdfs/dmoi-tablet-dl1.pdf" target="_blank" rel="noopener noreferrer">dmoi-tablet-dl1.pdf</a><br>
+      Material used: Cyclic groups definition, generator, finite cyclic groups (Section referenced for cyclic group content not covered in teacher’s PPT).</li>
+    </ul>
+    <p><strong>Teacher-provided material:</strong> All worked examples and explanations marked “Teacher’s” come from Mrs. Shamal Bagal’s lecture presentations (Module 5 Algebraic Structure PPT and Module 5 ring5.2 PPT).</p>
+    <p><strong>Question bank material:</strong> Questions incorporated from the DSGT Questions question bank: Prelim Question Bank.doc, Prelim Question Bank(1).doc, IAT1 sample questions.doc, IAT2 sample questions.doc, NEP DSGT Winter 2025.pdf, NEP DSGT Summer 2026.pdf. Where questions appear in multiple documents, they are included once with all source labels noted.</p>
+  </div>
+
+  <footer>
+    DSGT Module 5 Study Guide · Built from Mrs. Shamal Bagal’s PPTs, the official DSGT portion syllabus,<br>
+    and external reference from Oscar Levin’s <em>Discrete Mathematics: An Open Introduction</em> (cyclic groups).
+  </footer>
+
+</div>
+
+</body>
+</html>
