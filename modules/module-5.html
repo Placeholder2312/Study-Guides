@@ -604,6 +604,7 @@
     <p><strong>Theorem:</strong> In a group <span class="kbd">(G, *)</span>, the inverse of any element is unique.</p>
     <p><strong>Proof:</strong> Let <span class="kbd">b</span> and <span class="kbd">c</span> both be inverses of <span class="kbd">a</span>. Then <span class="kbd">a * b = e</span> and <span class="kbd">a * c = e</span>, so <span class="kbd">a * b = a * c</span>. By left cancellation, <span class="kbd">b = c</span>.</p>
     <p><strong>Theorem:</strong> <span class="kbd">(a * b)⁻¹ = b⁻¹ * a⁻¹</span> for all <span class="kbd">a, b ∈ G</span>.</p>
+    <p><strong>Proof:</strong> <span class="kbd">(a * b) * (b⁻¹ * a⁻¹) = a * (b * b⁻¹) * a⁻¹ = a * e * a⁻¹ = a * a⁻¹ = e</span>. Similarly <span class="kbd">(b⁻¹ * a⁻¹) * (a * b) = b⁻¹ * (a⁻¹ * a) * b = b⁻¹ * e * b = e</span>. So <span class="kbd">b⁻¹ * a⁻¹</span> is an inverse of <span class="kbd">a * b</span>, and inverses are unique, hence <span class="kbd">(a * b)⁻¹ = b⁻¹ * a⁻¹</span>.</p>
     <p><strong>Theorem:</strong> If <span class="kbd">a * a = a</span> in a group, then <span class="kbd">a = e</span> (the identity).</p>
     <p><strong>Proof:</strong> <span class="kbd">a * a = a * e</span>, so by left cancellation <span class="kbd">a = e</span>.</p>
   </div>
@@ -627,6 +628,13 @@
       <li><strong>Inverse:</strong> For each <span class="kbd">a ∈ 2Z</span>, <span class="kbd">−a ∈ 2Z</span> and <span class="kbd">a + (−a) = 0</span>.</li>
     </ul>
     <p>Therefore, <span class="kbd">(2Z, +)</span> is a subgroup of <span class="kbd">(Z, +)</span>.</p>
+  </div>
+
+  <div class="theory">
+    <span class="source">Added for exam use: standard result (not from the teacher’s PPT)</span>
+    <p><strong>Subgroup test:</strong> A non-empty subset <span class="kbd">H</span> of a group <span class="kbd">(G, *)</span> is a subgroup if and only if <span class="kbd">a, b ∈ H ⇒ a * b⁻¹ ∈ H</span>. In additive notation: <span class="kbd">a, b ∈ H ⇒ a − b ∈ H</span>.</p>
+    <p><strong>Why it works:</strong> Take <span class="kbd">a ∈ H</span>. Then <span class="kbd">a * a⁻¹ = e ∈ H</span>. Then <span class="kbd">e * a⁻¹ = a⁻¹ ∈ H</span>. For <span class="kbd">a, b ∈ H</span>, <span class="kbd">b⁻¹ ∈ H</span>, so <span class="kbd">a * (b⁻¹)⁻¹ = a * b ∈ H</span>. Associativity is inherited from G.</p>
+    <p><strong>Example:</strong> For <span class="kbd">2Z</span> in <span class="kbd">(Z, +)</span>: if <span class="kbd">a, b</span> are even then <span class="kbd">a − b</span> is even, so <span class="kbd">2Z</span> is a subgroup.</p>
   </div>
 
   <h2 id="abelian">Section 6 — Abelian Groups</h2>
@@ -795,7 +803,7 @@
   <div class="theory">
     <span class="source">Teacher’s framing: Integral domains</span>
     <p>An <strong>integral domain</strong> is a commutative ring with no zero divisors. If a · b = 0, then either a = 0 or b = 0.</p>
-    <p>Integral domains ensure unique factorization of elements into primes.</p>
+    <p>In an integral domain the cancellation law holds: if <span class="kbd">a · b = a · c</span> and <span class="kbd">a ≠ 0</span>, then <span class="kbd">b = c</span>. Example: <span class="kbd">Z</span> is an integral domain; <span class="kbd">Z₆</span> is not, because <span class="kbd">2 · 3 = 0</span> with <span class="kbd">2, 3 ≠ 0</span>.</p>
   </div>
 
   <div class="theory">
@@ -959,11 +967,21 @@
         <li>Conclude whether Z₆ forms a ring.</li>
       </ol>
       <p><strong>Solution:</strong></p>
+      <p><strong>Multiplication table (·₆):</strong></p>
+      <table>
+        <tr><th>·₆</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+        <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>1</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+        <tr><td>2</td><td>0</td><td>2</td><td>4</td><td>0</td><td>2</td><td>4</td></tr>
+        <tr><td>3</td><td>0</td><td>3</td><td>0</td><td>3</td><td>0</td><td>3</td></tr>
+        <tr><td>4</td><td>0</td><td>4</td><td>2</td><td>0</td><td>4</td><td>2</td></tr>
+        <tr><td>5</td><td>0</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td></tr>
+      </table>
       <ol>
-        <li><strong>Addition modulo 6 forms an abelian group:</strong> The table above shows closure, associativity, identity = 0, inverses exist, commutativity holds.</li>
+        <li><strong>Addition modulo 6 forms an abelian group:</strong> The +₆ table (Section 8) shows closure, associativity, identity = 0, inverses 0→0, 1→5, 2→4, 3→3, 4→2, 5→1, and commutativity.</li>
         <li><strong>Multiplication modulo 6 closure and associativity:</strong> All products of elements in Z₆ remain in Z₆ (closure). Multiplication modulo 6 is associative (inherited from integers).</li>
         <li><strong>Distributivity:</strong> Multiplication distributes over addition modulo 6 (inherited from integers).</li>
-        <li><strong>Conclusion:</strong> Z₆ forms a ring under addition and multiplication modulo 6.</li>
+        <li><strong>Conclusion:</strong> Z₆ forms a ring under addition and multiplication modulo 6. It is commutative (the ·₆ table is symmetric) and has multiplicative identity 1. It has zero divisors (2·₆3 = 0 and 3·₆4 = 0), so it is NOT an integral domain, and it is not a field (2 has no inverse: no 1 in row 2).</li>
       </ol>
     </div>
 
@@ -1143,6 +1161,7 @@
 
     <h3>Important Formulas</h3>
     <div class="eq">(a * b)⁻¹ = b⁻¹ * a⁻¹</div>
+    <div class="eq">Subgroup test: a, b ∈ H ⇒ a * b⁻¹ ∈ H</div>
     <div class="eq">a +ₘ b = (a + b) mod m</div>
     <div class="eq">a ·ₚ b = (a · b) mod p</div>
 

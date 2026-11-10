@@ -699,8 +699,8 @@
   <div class="eq">aₙ = arⁿ + bnrⁿ</div>
   <p class="eq-note">The extra <span class="kbd">n</span> in <span class="kbd">bnrⁿ</span> allows solving for both constants.</p>
 
-  <h3>Case C: Non-Homogeneous (Additional Material)</h3>
-  <p class="warning">This section is labelled as additional material. Confirm with your teacher whether non-homogeneous recurrences are in the examination scope. The particular-solution guessing method below is supplementary material prepared for this study guide; it is not attributed to Levin’s textbook.</p>
+  <h3>Case C: Non-Homogeneous (Extra Term on the Right)</h3>
+  <p class="eq-note">Exam-relevant: Summer 2026 Q5(b) is non-homogeneous (solved in the Mumbai University section below). The particular-solution guessing method is added in this guide and is not from Levin’s Section 2.4.</p>
   <p>When an extra term appears on the right: <span class="kbd">aₙ = c₁aₙ₋₁ + c₂aₙ₋₂ + f(n)</span>:</p>
   <ol class="steps">
     <li>Solve the homogeneous part (ignore <span class="kbd">f(n)</span>) → <span class="kbd">aₙ⁽ʰ⁾</span>.</li>
@@ -713,10 +713,11 @@
     <tr><th>Form of <span class="kbd">f(n)</span></th><th>Guess for <span class="kbd">aₙ⁽ᵖ⁾</span></th></tr>
     <tr><td>Constant <span class="kbd">k</span></td><td><span class="kbd">C</span></td></tr>
     <tr><td>Linear <span class="kbd">an + b</span></td><td><span class="kbd">Cn + D</span></td></tr>
-    <tr><td><span class="kbd">kⁿ</span></td><td><span class="kbd">C · kⁿ</span></td></tr>
+    <tr><td><span class="kbd">kⁿ</span> (k is not a characteristic root)</td><td><span class="kbd">C · kⁿ</span></td></tr>
+    <tr><td><span class="kbd">kⁿ</span> (k is a characteristic root)</td><td><span class="kbd">C · n · kⁿ</span> (<span class="kbd">C · n² · kⁿ</span> if k is a double root)</td></tr>
     <tr><td>Polynomial degree <span class="kbd">d</span></td><td>Polynomial degree <span class="kbd">d</span></td></tr>
   </table>
-  <p>If your guess matches the homogeneous solution, multiply by <span class="kbd">n</span> until it does not.</p>
+  <p>If your guess matches the homogeneous solution, multiply by <span class="kbd">n</span> until it does not. Example: for <span class="kbd">f(n) = 7·5ⁿ</span> with roots 5 and −2, 5 is a root, so guess <span class="kbd">C·n·5ⁿ</span>.</p>
 
   <div class="example">
     <div class="example-title">Additional practice — non-homogeneous with constant right side</div>
@@ -945,40 +946,6 @@
       <p><strong>Analysis:</strong> The forcing term <span class="kbd">7·5ⁿ</span> introduces an exponential growth component <span class="kbd">5n·5ⁿ</span> which dominates as <span class="kbd">n</span> increases. Since <span class="kbd">5</span> is both a characteristic root and the base of the forcing term, the particular solution includes the extra factor <span class="kbd">n</span>.</p>
     </div>
 
-    <div class="exam-q">
-      <div class="exam-q-title">Summer 2026 — Q6(a): Ring Modulo 4 (8 marks)</div>
-      <div class="exam-source">Source: NEP DSGT Summer 2026 — Q6(a)</div>
-      <p>Consider Z₄ = {0, 1, 2, 3} under addition and multiplication modulo 4.</p>
-      <ol>
-        <li>Construct both operation tables.</li>
-        <li>Verify the ring properties.</li>
-        <li>Explain additive identity, additive inverses, multiplicative associativity and distributivity.</li>
-        <li>Conclude whether Z₄ forms a ring.</li>
-      </ol>
-      <p><strong>Solution:</strong></p>
-      <p><strong>Addition table (+₄):</strong></p>
-      <table>
-        <tr><th>+₄</th><th>0</th><th>1</th><th>2</th><th>3</th></tr>
-        <tr><td>0</td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
-        <tr><td>1</td><td>1</td><td>2</td><td>3</td><td>0</td></tr>
-        <tr><td>2</td><td>2</td><td>3</td><td>0</td><td>1</td></tr>
-        <tr><td>3</td><td>3</td><td>0</td><td>1</td><td>2</td></tr>
-      </table>
-      <p><strong>Multiplication table (·₄):</strong></p>
-      <table>
-        <tr><th>·₄</th><th>0</th><th>1</th><th>2</th><th>3</th></tr>
-        <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-        <tr><td>1</td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
-        <tr><td>2</td><td>0</td><td>2</td><td>0</td><td>2</td></tr>
-        <tr><td>3</td><td>0</td><td>3</td><td>2</td><td>1</td></tr>
-      </table>
-      <ol>
-        <li><strong>(Z₄, +₄) is an abelian group:</strong> Closed, associative, identity = 0, inverses = 0→0, 1→3, 2→2, 3→1, commutative.</li>
-        <li><strong>(Z₄, ·₄) is a semigroup:</strong> Closed, associative.</li>
-        <li><strong>Distributive:</strong> Holds (inherited from integers).</li>
-        <li><strong>Conclusion:</strong> Z₄ forms a ring under addition and multiplication modulo 4. It is commutative, has multiplicative identity 1, but has zero divisors (2·₄2=0), so it is NOT an integral domain.</li>
-      </ol>
-    </div>
   </div>
 
   <h2 id="self-learning">Syllabus Self-Learning Topics</h2>
@@ -1094,46 +1061,55 @@
 
   <h2 id="revision">Last-Minute Revision Sheet</h2>
   <div class="revision-sheet">
-    <h3>Definitions</h3>
+    <h3>Pigeonhole</h3>
     <table>
-      <tr><th>Structure</th><th>Required Properties</th></tr>
-      <tr><td>Semigroup</td><td>Closure, associativity</td></tr>
-      <tr><td>Monoid</td><td>Closure, associativity, identity</td></tr>
-      <tr><td>Group</td><td>Closure, associativity, identity, inverse</td></tr>
-      <tr><td>Abelian group</td><td>Group + commutativity</td></tr>
-      <tr><td>Cyclic group</td><td>Abelian group with a generator</td></tr>
-      <tr><td>Subgroup</td><td>Non-empty subset that is itself a group under same operation</td></tr>
-      <tr><td>Ring</td><td>Abelian group under +, associative ·, distributive laws</td></tr>
-      <tr><td>Commutative ring</td><td>Ring + commutative multiplication</td></tr>
-      <tr><td>Integral domain</td><td>Commutative ring + no zero divisors</td></tr>
-      <tr><td>Field</td><td>Commutative ring + every non-zero element has multiplicative inverse</td></tr>
+      <tr><th>Situation</th><th>Use</th></tr>
+      <tr><td>Basic: k + 1 objects, k boxes</td><td>Some box has at least 2</td></tr>
+      <tr><td>Generalized: n objects, m boxes</td><td>Some box has at least ⌈n / m⌉</td></tr>
+      <tr><td>“Guarantee k in one box” (m boxes)</td><td>n = m(k − 1) + 1</td></tr>
     </table>
+    <p>First identify the pigeons (objects) and the holes (categories). Then it is arithmetic.</p>
 
-    <h3>Verification Checklist</h3>
+    <h3>Inclusion-Exclusion</h3>
+    <div class="eq">|A ∪ B| = |A| + |B| − |A ∩ B|</div>
+    <div class="eq">|A ∪ B ∪ C| = |A| + |B| + |C| − |A ∩ B| − |A ∩ C| − |B ∩ C| + |A ∩ B ∩ C|</div>
     <table>
-      <tr><th>To prove it is a…</th><th>Check these conditions</th></tr>
-      <tr><td>Semigroup</td><td>Closed? Associative?</td></tr>
-      <tr><td>Monoid</td><td>Semigroup + identity?</td></tr>
-      <tr><td>Group</td><td>Monoid + inverses?</td></tr>
-      <tr><td>Abelian group</td><td>Group + commutative?</td></tr>
-      <tr><td>Cyclic group</td><td>Abelian + has a generator?</td></tr>
-      <tr><td>Ring</td><td>(R,+) abelian group? · associative? Distributive?</td></tr>
-      <tr><td>Integral domain</td><td>Commutative ring + no zero divisors?</td></tr>
-      <tr><td>Field</td><td>Commutative ring + every non-zero has inverse?</td></tr>
+      <tr><th>Asked</th><th>Compute</th></tr>
+      <tr><td>None of the sets</td><td>Total − |A ∪ B ∪ C|</td></tr>
+      <tr><td>Only A</td><td>|A| − |A ∩ B| − |A ∩ C| + |A ∩ B ∩ C|</td></tr>
+      <tr><td>A and B only</td><td>|A ∩ B| − |A ∩ B ∩ C|</td></tr>
+      <tr><td>Exactly two sets</td><td>|A ∩ B| + |A ∩ C| + |B ∩ C| − 3|A ∩ B ∩ C|</td></tr>
+      <tr><td>Integers 1 to N divisible by d</td><td>⌊N / d⌋ (use the LCM for intersections)</td></tr>
     </table>
+    <p>Three-set Venn: fill the centre first, then the pair-only regions, then the single-only regions.</p>
 
-    <h3>Important Formulas</h3>
-    <div class="eq">(a * b)⁻¹ = b⁻¹ * a⁻¹</div>
-    <div class="eq">a +ₘ b = (a + b) mod m</div>
-    <div class="eq">a ·ₚ b = (a · b) mod p</div>
+    <h3>Recurrence Relations</h3>
+    <table>
+      <tr><th>Characteristic roots</th><th>General solution</th></tr>
+      <tr><td>Distinct r₁, r₂</td><td>aₙ = A·r₁ⁿ + B·r₂ⁿ</td></tr>
+      <tr><td>Repeated r</td><td>aₙ = (A + Bn)·rⁿ</td></tr>
+      <tr><td>Non-homogeneous</td><td>aₙ = homogeneous solution + particular solution</td></tr>
+    </table>
+    <table>
+      <tr><th>Right-hand side f(n)</th><th>Guess</th></tr>
+      <tr><td>Constant</td><td>C</td></tr>
+      <tr><td>Linear</td><td>Cn + D</td></tr>
+      <tr><td>kⁿ, k not a root</td><td>C·kⁿ</td></tr>
+      <tr><td>kⁿ, k a root</td><td>C·n·kⁿ</td></tr>
+    </table>
+    <ol class="steps">
+      <li>Write in standard form and form the characteristic equation.</li>
+      <li>Find the roots and write the general solution.</li>
+      <li>Use the initial conditions to find the constants.</li>
+      <li>Verify by computing a₂ both ways.</li>
+    </ol>
 
-    <h3>Common Exam Patterns</h3>
+    <h3>Patterns from the Question Papers</h3>
     <ul>
-      <li>“Show that (S, *) is a semigroup/monoid/group” — check each condition one by one.</li>
-      <li>“Is (S, *) abelian?” — check commutativity.</li>
-      <li>“Is (S, *) cyclic?” — find a generator or show none exists.</li>
-      <li>“Construct composition table for modulo n” — fill all entries, then check closure, identity, inverses, commutativity.</li>
-      <li>“Is (R, +, ·) a ring?” — check (R,+) abelian group, · associative, distributive laws.</li>
+      <li>Pigeonhole, 5 marks: ⌈n / m⌉ (Winter 2025 Q1(c)) or m(k − 1) + 1 (Summer 2026 Q1(c)), plus a short justification.</li>
+      <li>Inclusion-exclusion, 8 marks: a three-set table (Winter 2025 Q2(a), Summer 2026 Q2(a)). Find the union or the triple intersection, then the “only one” counts, then a Venn diagram.</li>
+      <li>Recurrence, 7–8 marks: repeated root (Winter 2025 Q5(b)) or non-homogeneous with the extra factor n (Summer 2026 Q5(b)).</li>
+      <li>Most parts end with an “explain how this helps” sub-question. Write one or two sentences on the real-world use.</li>
     </ul>
   </div>
 
