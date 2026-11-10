@@ -1,5 +1,9 @@
 # Study-Guides
 
-DSGT study guides as a static site. `index.html` is the homepage; guides live in `modules/`.
+Static study-guide site. `index.html` lists subjects; each subject has its own folder.
 
-To add a module: put `module-N.html` in `modules/` and change that module's card in `index.html` from a `div.card.soon` to an `a.card` linking to it.
+- `dsgt/` Discrete Structures and Graph Theory (`index.html`, `modules/module-N.html`)
+- `maths/` Mathematics for Computer Engineering (`index.html`, `modules/module-N.html`)
+
+To add a module: put `module-N.html` in the subject's `modules/` folder and change its card in that subject's `index.html` from `div.card.soon` to an `a.card`.
+To add a subject: create a folder with the same layout and add a card in the root `index.html`.

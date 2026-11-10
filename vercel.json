@@ -1,3 +1,6 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/modules/:path*", "destination": "/dsgt/modules/:path*", "permanent": false }
+  ]
 }

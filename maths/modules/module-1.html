@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matrices Study Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&display=swap">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" async></script>
+<style>
+/* Layout concept: a plain, left-aligned reading column with hanging chapter numerals.
+   No cards. Hairline rules separate things; one tinted block marks each key statement. Light only. */
+:root {
+  --bg: #FFF6EC;
+  --ink: #33201A;
+  --ink-soft: #6B4E40;
+  --rule: #EBCDB2;
+  --tint: #FFE4CB;
+  --apricot: #F3943F;
+  --accent-ink: #9C4207;
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  --font-body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 17px; line-height: 1.65;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 72px;
+}
+.wrap { max-width: 44rem; margin-left: clamp(0px, 7vw, 6rem); }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; line-height: 1.15; margin: 0; letter-spacing: -.01em; }
+p { margin: 0 0 .9rem; }
+a { color: var(--accent-ink); }
+:focus-visible { outline: 3px solid var(--apricot); outline-offset: 2px; }
+
+header.top { padding: 56px 0 8px; }
+.kicker { font-size: .85rem; font-weight: 600; color: var(--accent-ink); margin-bottom: 10px; }
+h1 { font-size: clamp(2.2rem, 7vw, 3.3rem); font-weight: 800; }
+.lede { font-size: 1.1rem; color: var(--ink-soft); margin: 16px 0 6px; max-width: 34em; }
+.meta { font-size: .9rem; color: var(--ink-soft); margin: 0; }
+
+nav.contents { margin: 30px 0 0; padding: 16px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+nav.contents h2 { font-size: .85rem; font-family: var(--font-body); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 8px; }
+nav.contents ol { margin: 0; padding-left: 1.4rem; columns: 2 14rem; column-gap: 2rem; }
+nav.contents li { padding: 3px 0; break-inside: avoid; }
+nav.contents li.done::after { content: " ✓"; color: var(--accent-ink); font-weight: 700; }
+nav.contents .more { margin-top: 8px; font-size: .92rem; }
+
+.chapter { margin-top: 64px; scroll-margin-top: 16px; }
+h2.ch { display: flex; align-items: baseline; gap: 14px; font-size: clamp(1.6rem, 5vw, 2.2rem); font-weight: 800; margin-bottom: 14px; }
+h2.ch .no { color: var(--apricot); font-weight: 800; min-width: .7em; }
+h2.plainh { font-size: clamp(1.5rem, 5vw, 2rem); font-weight: 800; margin-bottom: 12px; }
+h3 { font-size: 1.15rem; font-weight: 700; margin: 30px 0 8px; }
+.src { font-family: var(--font-body); font-size: .85rem; font-weight: 500; color: var(--ink-soft); margin-left: 8px; }
+
+.key { background: var(--tint); border-radius: 4px; padding: 14px 18px; margin: 20px 0; }
+.key > :last-child { margin-bottom: 0; }
+.lab { font-weight: 700; color: var(--accent-ink); }
+.note { margin: 18px 0; }
+.worked { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 12px 0 4px; margin: 20px 0; }
+.worked .lab { display: block; font-size: .85rem; margin-bottom: 4px; }
+
+ol.steps { margin: 14px 0; padding-left: 1.4rem; }
+ol.steps li { padding-left: .3rem; margin-bottom: .35rem; }
+ol.steps li::marker { color: var(--accent-ink); font-weight: 700; }
+ul.plain { margin: 0 0 .9rem; padding-left: 1.2rem; }
+ul.plain li { margin-bottom: .35rem; }
+
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; margin: .8em 0 !important; padding: 2px 0; }
+mjx-container { color: var(--ink); }
+mjx-container[display="true"] { min-width: 0 !important; }
+.scroll { overflow-x: auto; max-width: 100%; }
+table { border-collapse: collapse; width: 100%; font-size: .95rem; margin: 10px 0; }
+td, th { overflow-wrap: anywhere; }
+th, td { text-align: left; vertical-align: top; padding: 8px 14px 8px 0; border-bottom: 1px solid var(--rule); }
+th { font-size: .8rem; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-soft); }
+
+.studied { display: flex; align-items: center; gap: 10px; margin-top: 22px; min-height: 44px; font-weight: 600; cursor: pointer; }
+.studied input { width: 22px; height: 22px; accent-color: var(--apricot); cursor: pointer; }
+
+details { border-bottom: 1px solid var(--rule); }
+details:first-of-type { border-top: 1px solid var(--rule); }
+summary { cursor: pointer; padding: 12px 0; min-height: 44px; font-weight: 600; list-style: none; display: flex; gap: 12px; align-items: baseline; }
+summary::-webkit-details-marker { display: none; }
+summary::before { content: "+"; color: var(--accent-ink); font-weight: 700; width: 1ch; flex: none; }
+details[open] > summary::before { content: "\2212"; }
+details .ans { padding: 0 0 12px 2ch; }
+details .ans > :last-child { margin-bottom: 0; }
+
+ol.qs { list-style: none; padding: 0; margin: 20px 0 0; counter-reset: q; }
+ol.qs > li { counter-increment: q; padding: 16px 0; border-top: 1px solid var(--rule); }
+ol.qs > li:last-child { border-bottom: 1px solid var(--rule); }
+ol.qs .qh { font-size: .88rem; color: var(--ink-soft); margin-bottom: 4px; }
+ol.qs .qh::before { content: "Q" counter(q); font-family: var(--font-display); font-weight: 800; font-size: 1.05rem; color: var(--ink); margin-right: 10px; }
+ol.qs p { margin: 0; }
+
+.answers-head { margin-top: 72px; padding-top: 18px; border-top: 3px solid var(--apricot); }
+.sheet h3 { margin-top: 18px; }
+footer { margin-top: 64px; padding-top: 18px; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: .9rem; }
+@media (max-width: 700px) {
+  .wrap { margin-left: 0; }
+  body { font-size: 16px; }
+  nav.contents ol { columns: 1; }
+  table { font-size: .88rem; }
+  th, td { padding: 7px 8px 7px 0; }
+  header.top { padding-top: 32px; }
+  .chapter { margin-top: 48px; }
+  .key { padding: 12px 14px; }
+  details .ans { padding-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+.backlink { display: inline-block; margin-top: 20px; min-height: 44px; line-height: 44px; font-weight: 600; font-size: .9rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="backlink" href="../index.html">← All modules</a>
+<header class="top">
+  <div class="kicker">Mathematics for Computer Engineering · Module 1</div>
+  <h1>Linear Algebra: Theory of Matrices</h1>
+  <p class="lede">Eigenvalues, eigenvectors, Cayley–Hamilton and diagonalisation, taught from your teacher's own notes and examples.</p>
+  <p class="meta">Course 2023111 · B.E. CSE (AI &amp; ML), Semester III · 5 teaching hours · CO1</p>
+</header>
+
+<nav class="contents" aria-label="Contents">
+  <h2>Study in this order</h2>
+  <ol id="toc">
+    <li><a href="#c1">The big idea</a></li>
+    <li><a href="#c2">The recipe, with a full example</a></li>
+    <li><a href="#c3">The four types of problem</a></li>
+    <li><a href="#c4">Properties of eigenvalues</a></li>
+    <li><a href="#c5">Cayley–Hamilton theorem</a></li>
+    <li><a href="#c6">Similarity and diagonalisation</a></li>
+  </ol>
+  <p class="more"><a href="#recall">Quick recall</a> · <a href="#practice">Practice set</a> · <a href="#answers">Answer key</a> · <a href="#sheet">Revision sheet</a></p>
+</nav>
+<p class="note" style="margin-top:18px"><span class="lab">How to use this.</span> Cover the working in each example and try it first. Tick a chapter when you are done. Answers are kept at the very end so you can attempt the practice set properly.</p>
+
+<!-- 1 -->
+<section class="chapter" id="c1" data-ch="1">
+  <h2 class="ch"><span class="no">1</span>The big idea</h2>
+  <p>A square matrix \(A\) acts on a column vector \(X\) and gives back a new vector \(AX\). Most vectors change direction. A few special ones keep their direction and are only stretched or shrunk. Those are the eigenvectors, and the stretch factor is the eigenvalue.</p>
+  <div class="key">
+    \[ AX = \lambda X, \qquad X \neq 0 \]
+    <p>\(A\) is an \(n\times n\) matrix, \(X\) is a non-zero column vector (the <b>eigenvector</b>) and \(\lambda\) is a number (the <b>eigenvalue</b>). The zero vector is excluded because \(A\cdot0=\lambda\cdot0\) holds for every \(\lambda\) and tells you nothing.</p>
+  </div>
+  <h3>Definitions from the notes</h3>
+  <div class="scroll"><table>
+    <tr><th>Name</th><th>Meaning</th></tr>
+    <tr><td>Characteristic matrix</td><td>\(A-\lambda I\), where \(I\) is the unit matrix of the same order</td></tr>
+    <tr><td>Characteristic equation</td><td>\(|A-\lambda I|=0\)</td></tr>
+    <tr><td>Eigenvalues</td><td>The roots of that equation (also called characteristic, latent or proper values)</td></tr>
+    <tr><td>Eigenvector for \(\lambda\)</td><td>A non-zero column \(X\) with \([A-\lambda I]X=0\)</td></tr>
+  </table></div>
+  <p style="margin-top:14px">We solve \(|A-\lambda I|=0\) because \([A-\lambda I]X=0\) has a non-zero solution only when \(A-\lambda I\) is singular. For a \(3\times3\) matrix you also get two quick checks:</p>
+  \[ \lambda_1+\lambda_2+\lambda_3=\text{sum of the diagonal elements},\qquad \lambda_1\lambda_2\lambda_3=|A| \]
+  <label class="studied"><input type="checkbox" data-done="1"> Studied (notes p. 1)</label>
+</section>
+
+<!-- 2 -->
+<section class="chapter" id="c2" data-ch="2">
+  <h2 class="ch"><span class="no">2</span>The recipe, with a full example</h2>
+  <ol class="steps">
+    <li>Write \(|A-\lambda I|=0\).</li>
+    <li>Solve it to get the roots \(\lambda_1,\lambda_2,\lambda_3\).</li>
+    <li>For each root, form \([A-\lambda_1 I]x=0\).</li>
+    <li>Row-reduce that matrix to echelon form.</li>
+    <li>With \(n\) unknowns and rank \(r\), you get \(n-r\) independent parameters.</li>
+    <li>Use Cramer's rule when it is quicker.</li>
+    <li>Solve and write the eigenvectors.</li>
+  </ol>
+  <div class="key">
+    <span class="lab">Shortcut for a 3×3 characteristic equation</span>
+    \[ \lambda^3 - S_1\lambda^2 + S_2\lambda - |A| = 0 \]
+    <p>\(S_1\) is the sum of the diagonal elements. \(S_2\) is the sum of the three \(2\times2\) minors found by deleting row \(i\) and column \(i\) in turn. Every example in the notes starts this way.</p>
+  </div>
+  <p><span class="lab">Cramer's cross-multiplication.</span> For two equations \(a_1x+b_1y+c_1z=0\) and \(a_2x+b_2y+c_2z=0\), take two rows of \(A-\lambda I\) that are not multiples of each other:</p>
+  \[ \frac{x}{\begin{vmatrix}b_1&c_1\\b_2&c_2\end{vmatrix}}=\frac{-y}{\begin{vmatrix}a_1&c_1\\a_2&c_2\end{vmatrix}}=\frac{z}{\begin{vmatrix}a_1&b_1\\a_2&b_2\end{vmatrix}} \]
+
+  <div class="worked">
+    <span class="lab">Worked example <span class="src">notes pp. 2–4</span></span>
+    <p>Find the eigenvalues and eigenvectors of</p>
+    \[ A=\begin{bmatrix}2&-1&1\\1&2&-1\\1&-1&2\end{bmatrix} \]
+    <p><b>Characteristic equation.</b> \(S_1=6\), \(S_2=(4-1)+(4-1)+(4+1)=11\), \(|A|=6\), so</p>
+    \[ \lambda^3-6\lambda^2+11\lambda-6=0 \;\Rightarrow\; \lambda=1,2,3 \]
+    <p><b>\(\lambda=1\).</b> \(A-I\) gives \(x_1-x_2+x_3=0\) and \(x_1+x_2-x_3=0\). Adding them gives \(x_1=0\), then \(x_2=x_3\).</p>
+    \[ X_1=\begin{bmatrix}0\\1\\1\end{bmatrix} \]
+    <p><b>\(\lambda=2\).</b> \(A-2I\) gives \(-x_2+x_3=0\) and \(x_1-x_3=0\), so all entries are equal.</p>
+    \[ X_2=\begin{bmatrix}1\\1\\1\end{bmatrix} \]
+    <p><b>\(\lambda=3\).</b> \(A-3I\) gives \(-x_1-x_2+x_3=0\) and \(x_1-x_2-x_3=0\). Adding them gives \(x_2=0\), then \(x_1=x_3\).</p>
+    \[ X_3=\begin{bmatrix}1\\0\\1\end{bmatrix} \]
+    <p><b>Check:</b> \(AX_3=[3,0,3]^T=3X_3\).</p>
+    <p><b>Independent?</b> Put \(k_1X_1+k_2X_2+k_3X_3=0\). This gives \(k_2+k_3=0\), \(k_1+k_2=0\) and \(k_1+k_2+k_3=0\). The last minus the second gives \(k_3=0\), then \(k_2=0\) and \(k_1=0\). Only the zero combination works, so the vectors are linearly independent.</p>
+  </div>
+  <p class="note"><span class="lab">Watch out.</span> Any non-zero multiple of an eigenvector is also an eigenvector, so \([0,2,2]^T\) and \([0,1,1]^T\) are both right. The notes reduce to the smallest whole numbers, so do the same in the exam.</p>
+  <label class="studied"><input type="checkbox" data-done="2"> Studied (notes pp. 2–4)</label>
+</section>
+
+<!-- 3 -->
+<section class="chapter" id="c3" data-ch="3">
+  <h2 class="ch"><span class="no">3</span>The four types of problem</h2>
+  <p>Your teacher sorts every question by two yes/no tests: is the matrix symmetric (\(A=A^T\)), and are the eigenvalues distinct or repeated? The method never changes. What changes is how many eigenvectors a repeated root gives.</p>
+  <div class="scroll"><table>
+    <tr><th>Type</th><th>Matrix</th><th>Eigenvalues</th><th>Example below</th></tr>
+    <tr><td>I</td><td>Non-symmetric</td><td>Distinct</td><td>Chapter 2</td></tr>
+    <tr><td>II</td><td>Symmetric</td><td>Distinct</td><td>\(0,3,15\)</td></tr>
+    <tr><td>III</td><td>Non-symmetric</td><td>Repeated</td><td>\(1,1,5\)</td></tr>
+    <tr><td>IV</td><td>Symmetric</td><td>Repeated</td><td>\(2,2,5\)</td></tr>
+  </table></div>
+
+  <div class="worked">
+    <span class="lab">Type II <span class="src">notes pp. 5–6</span></span>
+    \[ A=\begin{bmatrix}8&-6&2\\-6&7&-4\\2&-4&3\end{bmatrix},\quad S_1=18,\; S_2=45,\; |A|=0 \]
+    \[ \lambda^3-18\lambda^2+45\lambda=0 \Rightarrow \lambda=0,3,15 \]
+    <p>Using the first two rows with Cramer's rule for each root:</p>
+    <div class="scroll"><table>
+      <tr><th>\(\lambda\)</th><th>Cross-products</th><th>Eigenvector</th></tr>
+      <tr><td>0</td><td>\(\tfrac{x_1}{10}=\tfrac{x_2}{20}=\tfrac{x_3}{20}\)</td><td>\([1,\,2,\,2]^T\)</td></tr>
+      <tr><td>3</td><td>\(\tfrac{x_1}{16}=\tfrac{x_2}{8}=\tfrac{x_3}{-16}\)</td><td>\([2,\,1,\,-2]^T\)</td></tr>
+      <tr><td>15</td><td>\(\tfrac{x_1}{40}=\tfrac{x_2}{-40}=\tfrac{x_3}{20}\)</td><td>\([2,\,-2,\,1]^T\)</td></tr>
+    </table></div>
+    <p>Check: \(0+3+15=18=S_1\) and \(0\cdot3\cdot15=0=|A|\). Extra, not in the notes: for a symmetric matrix the eigenvectors of different eigenvalues are perpendicular, e.g. \([1,2,2]\cdot[2,1,-2]=0\).</p>
+  </div>
+
+  <div class="worked">
+    <span class="lab">Type III <span class="src">notes pp. 7–8</span></span>
+    \[ A=\begin{bmatrix}2&2&1\\1&3&1\\1&2&2\end{bmatrix},\quad \lambda^3-7\lambda^2+11\lambda-5=0 \Rightarrow \lambda=1,1,5 \]
+    <p><b>\(\lambda=1\) (repeated).</b> \(A-I\) has three identical rows \([1,2,1]\), so the rank is \(r=1\) and there are \(n-r=2\) independent parameters. The one equation is \(x_1+2x_2+x_3=0\). Put \(x_2=s,\,x_3=t\), so \(x_1=-2s-t\). Two eigenvectors:</p>
+    \[ \begin{bmatrix}2\\-1\\0\end{bmatrix}\ \text{and}\ \begin{bmatrix}1\\0\\-1\end{bmatrix} \]
+    <p><b>\(\lambda=5\).</b> Row reduction gives \(x_1+2x_2-3x_3=0\) and \(-4x_2+4x_3=0\), so \(x_1=x_2=x_3\). Rank 2, one parameter:</p>
+    \[ \begin{bmatrix}1\\1\\1\end{bmatrix} \]
+  </div>
+
+  <div class="worked">
+    <span class="lab">Type IV <span class="src">notes pp. 8–9</span></span>
+    \[ A=\begin{bmatrix}3&-1&1\\-1&3&-1\\1&-1&3\end{bmatrix},\quad \lambda^3-9\lambda^2+24\lambda-20=0 \Rightarrow \lambda=2,2,5 \]
+    <p><b>\(\lambda=2\).</b> \(A-2I\) reduces to \(x_1-x_2+x_3=0\). Rank 1, so 2 parameters. With \(x_2=s,\,x_3=t\) we get \(x_1=s-t\):</p>
+    \[ \begin{bmatrix}1\\1\\0\end{bmatrix}\ \text{and}\ \begin{bmatrix}-1\\0\\1\end{bmatrix} \]
+    <p><b>\(\lambda=5\).</b> The first two rows give \(\tfrac{x_1}{3}=\tfrac{x_2}{-3}=\tfrac{x_3}{3}\):</p>
+    \[ \begin{bmatrix}1\\-1\\1\end{bmatrix} \]
+  </div>
+  <p class="note"><span class="lab">The rule that decides everything.</span> A root gives \(n-r\) independent eigenvectors, where \(r\) is the rank of \(A-\lambda I\). A repeated root may give fewer vectors than its repeat count. Chapter 6 uses this to decide whether a matrix can be diagonalised.</p>
+  <label class="studied"><input type="checkbox" data-done="3"> Studied (notes pp. 5–9)</label>
+</section>
+
+<!-- 4 -->
+<section class="chapter" id="c4" data-ch="4">
+  <h2 class="ch"><span class="no">4</span>Properties of eigenvalues</h2>
+  <p>The syllabus asks for these without proof. Knowing them lets you skip the full calculation in many questions.</p>
+  <ul class="plain">
+    <li><b>Theorem 1.</b> \(\lambda\) is an eigenvalue of \(A\) exactly when some non-zero \(X\) satisfies \(AX=\lambda X\).</li>
+    <li><b>Theorem 2.</b> If \(X\) is an eigenvector for \(\lambda\), so is \(kX\) for any non-zero scalar \(k\).</li>
+    <li><b>Theorem 3.</b> One eigenvector cannot belong to two different eigenvalues.</li>
+    <li><b>Theorem 4.</b> Eigenvectors of distinct eigenvalues are linearly independent.</li>
+  </ul>
+  <h3>The nine notes as a lookup table</h3>
+  <div class="scroll"><table>
+    <tr><th>If \(\lambda\) is an eigenvalue of \(A\)</th><th>then this is an eigenvalue of</th></tr>
+    <tr><td>\(\lambda\)</td><td>\(A^T\)</td></tr>
+    <tr><td>\(\lambda^m\)</td><td>\(A^m\)</td></tr>
+    <tr><td>\(1/\lambda\)</td><td>\(A^{-1}\)</td></tr>
+    <tr><td>\(k\lambda\)</td><td>\(kA\)</td></tr>
+    <tr><td>\(|A|/\lambda\)</td><td>\(\operatorname{adj}A\)</td></tr>
+    <tr><td>\(1\), and \(k\)</td><td>\(I\), and \(kI\)</td></tr>
+    <tr><td>at least one \(\lambda=0\)</td><td>when \(|A|=0\)</td></tr>
+    <tr><td>the diagonal entries</td><td>any triangular matrix</td></tr>
+  </table></div>
+  <p style="margin-top:12px">For a polynomial in \(A\), apply the same polynomial to each eigenvalue. If \(f(A)=A^2-2A+I\), the eigenvalues of \(f(A)\) are \(f(\lambda)=\lambda^2-2\lambda+1\).</p>
+  <div class="worked">
+    <span class="lab">Three examples <span class="src">notes pp. 10–11</span></span>
+    <p><b>a) Sum and product only.</b> For \(A=\begin{bmatrix}-17&18&-6\\-18&19&-6\\-9&9&-2\end{bmatrix}\):</p>
+    \[ \text{Sum}=-17+19-2=0,\qquad \text{Product}=|A|=-2 \]
+    <p><b>b) Eigenvalues of \(A^2-2A+I\)</b> for \(A=\begin{bmatrix}2&0&-2\\0&1&-4\\0&0&4\end{bmatrix}\). It is triangular, so \(\lambda=2,1,4\). With \(f(\lambda)=(\lambda-1)^2\):</p>
+    \[ f(2)=1,\quad f(1)=0,\quad f(4)=9 \]
+    <p><b>c) Eigenvalues of \(\operatorname{adj}A\)</b> for \(A=\begin{bmatrix}2&0&-1\\0&2&0\\-1&0&2\end{bmatrix}\). Here \(\lambda=1,2,3\) and \(|A|=6\), so use \(|A|/\lambda\):</p>
+    \[ \frac61=6,\quad \frac62=3,\quad \frac63=2 \]
+  </div>
+  <label class="studied"><input type="checkbox" data-done="4"> Studied (notes pp. 10–11)</label>
+</section>
+
+<!-- 5 -->
+<section class="chapter" id="c5" data-ch="5">
+  <h2 class="ch"><span class="no">5</span>Cayley–Hamilton theorem</h2>
+  <div class="key">
+    <p><b>Every square matrix satisfies its own characteristic equation.</b> If \(\lambda^3-S_1\lambda^2+S_2\lambda-|A|=0\), then</p>
+    \[ A^3-S_1A^2+S_2A-|A|\,I=0 \]
+    <p>The constant term becomes \(|A|\) times the identity matrix, not a bare number. No proof is needed for the exam.</p>
+  </div>
+  <p>You will be asked to <b>verify</b> it, to <b>find \(A^{-1}\)</b>, or to <b>reduce a high power</b> of \(A\).</p>
+  <div class="worked">
+    <span class="lab">Verify, then find \(A^{-1}\) and \(A^4\) <span class="src">notes pp. 14–15</span></span>
+    \[ A=\begin{bmatrix}1&2&3\\2&-1&4\\3&1&-1\end{bmatrix},\quad S_1=-1,\; S_2=-18,\; |A|=40 \]
+    \[ \lambda^3+\lambda^2-18\lambda-40=0 \;\Rightarrow\; A^3+A^2-18A-40I=0 \tag{1} \]
+    <p><b>Verify.</b> The powers are</p>
+    \[ A^2=\begin{bmatrix}14&3&8\\12&9&-2\\2&4&14\end{bmatrix},\qquad A^3=\begin{bmatrix}44&33&46\\24&13&74\\52&14&8\end{bmatrix} \]
+    <p>and \(A^3+A^2-18A-40I\) is the zero matrix entry by entry. Top-left: \(44+14-18-40=0\). Middle: \(13+9+18-40=0\).</p>
+    <p><b>Inverse.</b> Multiply (1) by \(A^{-1}\): \(A^2+A-18I-40A^{-1}=0\), so</p>
+    \[ A^{-1}=\frac1{40}\left(A^2+A-18I\right)=\frac1{40}\begin{bmatrix}-3&5&11\\14&-10&2\\5&5&-5\end{bmatrix} \]
+    <p><b>Fourth power.</b> Multiply (1) by \(A\): \(A^4=40A+18A^2-A^3\), which gives</p>
+    \[ A^4=\begin{bmatrix}248&101&218\\272&109&50\\104&98&204\end{bmatrix} \]
+  </div>
+  <p>The notes also verify the theorem for \(A=\begin{bmatrix}3&2&1\\1&2&2\\3&2&1\end{bmatrix}\), where \(\lambda^3-6\lambda^2+2\lambda=0\), using \(A^2=\begin{bmatrix}14&12&8\\11&10&7\\14&12&8\end{bmatrix}\) and \(A^3=\begin{bmatrix}78&68&46\\64&56&38\\78&68&46\end{bmatrix}\). Try one entry: top-left is \(78-84+6=0\).</p>
+  <p class="note"><span class="lab">Reducing a long polynomial.</span> Divide it by the characteristic polynomial. The quotient part becomes zero at \(A\), so only the remainder is left. Practice question 4 is built this way.</p>
+  <p class="note"><span class="lab">Watch out.</span> \(A^{-1}\) exists only if \(|A|\neq0\). If the constant term of the characteristic equation is 0, the inverse method fails.</p>
+  <label class="studied"><input type="checkbox" data-done="5"> Studied (notes pp. 13–15)</label>
+</section>
+
+<!-- 6 -->
+<section class="chapter" id="c6" data-ch="6">
+  <h2 class="ch"><span class="no">6</span>Similarity and diagonalisation</h2>
+  <p>\(B\) is <b>similar</b> to \(A\) if there is a non-singular matrix \(M\) with \(B=M^{-1}AM\).</p>
+  <div class="key">
+    <p><b>Diagonalisation theorem.</b> If \(A\) has distinct eigenvalues, then \(D=M^{-1}AM\) is diagonal. \(M\) has the eigenvectors as its columns, and \(D\) has the eigenvalues on its diagonal <b>in the same order</b>.</p>
+  </div>
+  <p>For a repeated eigenvalue there are two counts. The <b>algebraic multiplicity</b> is how many times it is repeated as a root. The <b>geometric multiplicity</b> is the number of independent eigenvectors it has, which is \(n-r\).</p>
+  <div class="scroll"><table>
+    <tr><th>Situation</th><th>Diagonalisable?</th></tr>
+    <tr><td>All eigenvalues distinct</td><td>Yes, always</td></tr>
+    <tr><td>Repeated roots, and geometric = algebraic for every root</td><td>Yes</td></tr>
+    <tr><td>A repeated root with geometric &lt; algebraic</td><td>No</td></tr>
+  </table></div>
+
+  <div class="worked">
+    <span class="lab">Example 1: distinct roots <span class="src">notes pp. 17–18</span></span>
+    <p>The Type II matrix from Chapter 3 has eigenvalues \(0,3,15\), so it is diagonalisable. List the eigenvectors in the same order:</p>
+    \[ M=\begin{bmatrix}1&2&2\\2&1&-2\\2&-2&1\end{bmatrix},\qquad D=\begin{bmatrix}0&0&0\\0&3&0\\0&0&15\end{bmatrix} \]
+    <p>and \(M^{-1}AM=D\).</p>
+  </div>
+  <div class="worked">
+    <span class="lab">Example 2: a repeated root that still works <span class="src">notes pp. 19–20</span></span>
+    \[ A=\begin{bmatrix}-9&4&4\\-8&3&4\\-16&8&7\end{bmatrix},\quad \lambda^3-\lambda^2-5\lambda-3=0 \Rightarrow \lambda=-1,-1,3 \]
+    <p><b>\(\lambda=-1\).</b> \(A+I\) has rows that are all multiples of \([-2,1,1]\), so \(r=1\) and \(n-r=2\). Algebraic 2 equals geometric 2. Eigenvectors \([1,2,0]^T\) and \([1,0,2]^T\).</p>
+    <p><b>\(\lambda=3\).</b> \(r=2\), so one eigenvector, \([1,1,2]^T\). Algebraic 1 equals geometric 1.</p>
+    <p>Both match, so \(A\) is diagonalisable:</p>
+    \[ D=\begin{bmatrix}-1&0&0\\0&-1&0\\0&0&3\end{bmatrix},\qquad M=\begin{bmatrix}1&1&1\\2&0&1\\0&2&2\end{bmatrix} \]
+  </div>
+  <div class="worked">
+    <span class="lab">Example 3: not diagonalisable <span class="src">extra, not in the notes</span></span>
+    <p>The syllabus names non-diagonalisable matrices, but the teacher's notes only show diagonalisable cases. The smallest useful one:</p>
+    \[ A=\begin{bmatrix}2&1&0\\0&2&0\\0&0&3\end{bmatrix},\qquad \lambda=2,2,3 \]
+    <p>For \(\lambda=2\), \(A-2I=\begin{bmatrix}0&1&0\\0&0&0\\0&0&1\end{bmatrix}\) has rank 2, so there is only \(3-2=1\) eigenvector. Algebraic 2 is bigger than geometric 1, so \(A\) is <b>not</b> diagonalisable.</p>
+  </div>
+  <p class="note"><span class="lab">Wording in your notes.</span> On page 16, notes (iii) and (v) say "algebraic" where "geometric" is meant. The number of independent eigenvectors is the geometric multiplicity. Use the definitions above in the exam.</p>
+  <p class="note"><span class="lab">Self-learning topics.</span> The syllabus lists these for Module 1 separately: derogatory and non-derogatory matrices, functions of a square matrix, linear transformations, quadratic forms. The teacher's notes do not cover them, so they are not taught here.</p>
+  <label class="studied"><input type="checkbox" data-done="6"> Studied (notes pp. 16–20)</label>
+</section>
+
+<!-- recall -->
+<section class="chapter" id="recall">
+  <h2 class="plainh">Quick recall</h2>
+  <p>Say the answer aloud, then open the line.</p>
+  <details><summary>What is the defining equation of an eigenvalue and eigenvector?</summary><div class="ans">\(AX=\lambda X\) with \(X\neq0\), equivalent to \([A-\lambda I]X=0\).</div></details>
+  <details><summary>Why do we solve \(|A-\lambda I|=0\)?</summary><div class="ans">A non-zero \(X\) exists only when \(A-\lambda I\) is singular, so its determinant is zero.</div></details>
+  <details><summary>Sum and product of the eigenvalues?</summary><div class="ans">The sum of the diagonal elements, and \(|A|\).</div></details>
+  <details><summary>How do you build the 3×3 characteristic equation quickly?</summary><div class="ans">\(\lambda^3-S_1\lambda^2+S_2\lambda-|A|=0\), with \(S_1\) the diagonal sum and \(S_2\) the sum of the three diagonal minors.</div></details>
+  <details><summary>How many eigenvectors does a root give?</summary><div class="ans">\(n-r\), where \(r\) is the rank of \(A-\lambda I\).</div></details>
+  <details><summary>Eigenvalues of \(A^{-1}\), \(A^m\), \(kA\) and \(\operatorname{adj}A\)?</summary><div class="ans">\(1/\lambda\), \(\lambda^m\), \(k\lambda\) and \(|A|/\lambda\).</div></details>
+  <details><summary>Eigenvalues of a triangular matrix?</summary><div class="ans">Its diagonal entries.</div></details>
+  <details><summary>State Cayley–Hamilton and give two uses.</summary><div class="ans">Every square matrix satisfies its own characteristic equation. Use it to find \(A^{-1}\) and to reduce higher powers of \(A\).</div></details>
+  <details><summary>When is \(A\) diagonalisable?</summary><div class="ans">When geometric equals algebraic multiplicity for every eigenvalue. Distinct eigenvalues guarantee it.</div></details>
+  <details><summary>In \(D=M^{-1}AM\), what are \(M\) and \(D\)?</summary><div class="ans">\(M\) has the eigenvectors as columns. \(D\) is diagonal with the eigenvalues in the matching order.</div></details>
+</section>
+
+<!-- practice -->
+<section class="chapter" id="practice">
+  <h2 class="plainh">Practice set</h2>
+  <p>Questions 2 to 6 are the five questions from your Tutorial 1 sheet. The rest are extra. The end-semester paper has six questions of 20 marks, question 1 is compulsory, you answer three, and parts (a) and (b) come from different modules. Attempt each question on paper before opening the answer key.</p>
+  <ol class="qs">
+    <li><div class="qh">Basic · 4 marks · extra</div><p>For \(A=\begin{bmatrix}3&5&7\\0&-2&4\\0&0&6\end{bmatrix}\): (a) write the eigenvalues, (b) find their sum and product, (c) find the eigenvalues of \(A^2\), \(A^{-1}\) and \(2A\).</p></li>
+    <li><div class="qh">Exam-level · 8 marks · Tutorial 1, Q1</div><p>Find the eigenvalues and eigenvectors of \(A=\begin{bmatrix}-9&4&4\\-8&3&4\\-16&8&7\end{bmatrix}\).</p></li>
+    <li><div class="qh">Exam-level · 6 marks · Tutorial 1, Q2</div><p>Show that \(A=\begin{bmatrix}8&-8&-2\\4&-3&-2\\3&-4&1\end{bmatrix}\) is diagonalisable.</p></li>
+    <li><div class="qh">Exam-level · 8 marks · Tutorial 1, Q3</div><p>Verify Cayley–Hamilton for \(A=\begin{bmatrix}3&10&5\\-2&-3&-4\\3&5&7\end{bmatrix}\) and hence find the matrix represented by \(A^6-6A^5+9A^4+4A^3-12A^2+2A-I\).</p></li>
+    <li><div class="qh">Challenging · 8 marks · Tutorial 1, Q4</div><p>Prove that \(A=\begin{bmatrix}1&-6&-4\\0&4&-2\\0&-6&-3\end{bmatrix}\) is diagonalisable. Describe the diagonal matrix and the transforming matrix.</p></li>
+    <li><div class="qh">Exam-level · 6 marks · Tutorial 1, Q5</div><p>Using Cayley–Hamilton for \(A=\begin{bmatrix}1&2&-2\\-1&3&0\\0&-2&1\end{bmatrix}\), prove that \(A^{-1}=A^2-5A+9I\).</p></li>
+    <li><div class="qh">Basic · 4 marks · extra</div><p>Verify Cayley–Hamilton for \(A=\begin{bmatrix}1&2\\3&4\end{bmatrix}\) and use it to find \(A^{-1}\).</p></li>
+    <li><div class="qh">Basic · 4 marks · extra</div><p>For \(A=\begin{bmatrix}1&2&3\\0&2&4\\0&0&3\end{bmatrix}\), find the eigenvalues of \(\operatorname{adj}A\) and of \(A^3\).</p></li>
+    <li><div class="qh">Challenging · 5 marks · extra</div><p>Is \(A=\begin{bmatrix}1&1\\0&1\end{bmatrix}\) diagonalisable? Justify using multiplicities.</p></li>
+  </ol>
+</section>
+
+<!-- answers -->
+<section class="answers-head" id="answers">
+  <h2 class="plainh">Answer key</h2>
+  <p>Stop here until you have tried the practice set on paper.</p>
+  <details><summary>Q1</summary><div class="ans">
+    <p>(a) Triangular, so the eigenvalues are the diagonal entries: \(3,-2,6\).</p>
+    <p>(b) Sum \(=7\), product \(=3\cdot(-2)\cdot6=-36\).</p>
+    <p>(c) \(A^2\): \(9,4,36\). \(A^{-1}\): \(\tfrac13,-\tfrac12,\tfrac16\). \(2A\): \(6,-4,12\).</p></div></details>
+  <details><summary>Q2</summary><div class="ans">
+    <p>\(\lambda^3-\lambda^2-5\lambda-3=0\), so \(\lambda=-1,-1,3\). This is the matrix from Chapter 6, Example 2.</p>
+    <p>For \(\lambda=-1\): \([1,2,0]^T\) and \([1,0,2]^T\). For \(\lambda=3\): \([1,1,2]^T\).</p></div></details>
+  <details><summary>Q3</summary><div class="ans">
+    <p>The eigenvalues are \(1,2,3\). All three are distinct, so by the diagonalisation theorem \(A\) is diagonalisable.</p></div></details>
+  <details><summary>Q4</summary><div class="ans">
+    <p>\(\lambda^3-7\lambda^2+16\lambda-12=0\), so \(A^3-7A^2+16A-12I=0\). Verify by computing \(A^2\) and \(A^3\).</p>
+    <p>Divide \(\lambda^6-6\lambda^5+9\lambda^4+4\lambda^3-12\lambda^2+2\lambda-1\) by \(\lambda^3-7\lambda^2+16\lambda-12\). The quotient is \(\lambda^3+\lambda^2\) and the remainder is \(2\lambda-1\). The characteristic polynomial vanishes at \(A\), so the expression equals</p>
+    \[ 2A-I=\begin{bmatrix}5&20&10\\-4&-7&-8\\6&10&13\end{bmatrix} \]</div></details>
+  <details><summary>Q5</summary><div class="ans">
+    <p>Expanding along the first column, \(|A-\lambda I|=(1-\lambda)(\lambda^2-\lambda-24)\). The eigenvalues are \(1\) and \(\tfrac{1\pm\sqrt{97}}2\), three distinct real numbers, so \(A\) is diagonalisable.</p>
+    <p>\(D\) is diagonal with these three values. \(M\) has the matching eigenvectors as columns. For \(\lambda=1\) the eigenvector is \([1,0,0]^T\). The other two involve \(\sqrt{97}\).</p></div></details>
+  <details><summary>Q6</summary><div class="ans">
+    <p>\(S_1=5\), \(S_2=9\), \(|A|=1\), so \(A^3-5A^2+9A-I=0\). Multiply by \(A^{-1}\): \(A^2-5A+9I-A^{-1}=0\), hence \(A^{-1}=A^2-5A+9I\).</p></div></details>
+  <details><summary>Q7</summary><div class="ans">
+    <p>\(\lambda^2-5\lambda-2=0\). \(A^2=\begin{bmatrix}7&10\\15&22\end{bmatrix}\) and \(A^2-5A=\begin{bmatrix}2&0\\0&2\end{bmatrix}=2I\), so \(A^2-5A-2I=0\).</p>
+    <p>Multiply by \(A^{-1}\): \(A-5I-2A^{-1}=0\), so \(A^{-1}=\tfrac12(A-5I)=\begin{bmatrix}-2&1\\\tfrac32&-\tfrac12\end{bmatrix}\).</p></div></details>
+  <details><summary>Q8</summary><div class="ans">
+    <p>The eigenvalues of \(A\) are \(1,2,3\) and \(|A|=6\). For \(\operatorname{adj}A\): \(6,3,2\). For \(A^3\): \(1,8,27\).</p></div></details>
+  <details><summary>Q9</summary><div class="ans">
+    <p>\(\lambda=1\) is repeated, so its algebraic multiplicity is 2. \(A-I=\begin{bmatrix}0&1\\0&0\end{bmatrix}\) has rank 1, so there is \(2-1=1\) eigenvector. Geometric 1 is less than algebraic 2, so \(A\) is not diagonalisable.</p></div></details>
+</section>
+
+<!-- sheet -->
+<section class="chapter sheet" id="sheet">
+  <h2 class="plainh">Revision sheet</h2>
+  <h3>Core</h3>
+  <ul class="plain">
+    <li>\(AX=\lambda X\), \(X\neq0\). Solve \(|A-\lambda I|=0\), then \([A-\lambda I]X=0\).</li>
+    <li>Sum of eigenvalues is the diagonal sum. Product is \(|A|\).</li>
+    <li>3×3: \(\lambda^3-S_1\lambda^2+S_2\lambda-|A|=0\).</li>
+    <li>Independent eigenvectors for a root: \(n-r\).</li>
+  </ul>
+  <h3>Properties</h3>
+  <ul class="plain">
+    <li>\(A^m\to\lambda^m\), \(A^{-1}\to1/\lambda\), \(kA\to k\lambda\), \(\operatorname{adj}A\to|A|/\lambda\), \(f(A)\to f(\lambda)\).</li>
+    <li>Triangular: the diagonal entries. \(|A|=0\): some eigenvalue is 0.</li>
+  </ul>
+  <h3>Cayley–Hamilton</h3>
+  <ul class="plain">
+    <li>Replace \(\lambda\) by \(A\), and the constant term by \(|A|I\).</li>
+    <li>Multiply by \(A^{-1}\) for the inverse, by \(A\) for the next power.</li>
+  </ul>
+  <h3>Diagonalisation</h3>
+  <ul class="plain">
+    <li>\(D=M^{-1}AM\). Columns of \(M\) are eigenvectors, \(D\) holds eigenvalues in the same order.</li>
+    <li>Distinct eigenvalues: yes. Repeated: yes only if geometric equals algebraic for every root.</li>
+  </ul>
+</section>
+
+<footer>
+  <p><b>Where this comes from.</b> The teacher's handwritten Module 1 notes (20 pages) and Tutorial 1, as transcribed in the Study-Guides repository. Page references point to the original notes. Anything marked "extra" is not in the notes.</p>
+  <p><b>Slips in the notes.</b> Page 3 has a mismatched sign in a Cramer line. Page 4 says \(k_1=-k_2\) follows from equation (i) when it follows from (ii). Page 12 writes one bracket of \(S_2\) as \((2-6)\) instead of \((12-6)\). Page 14 has struck-out working. Page 16 mislabels multiplicities. Page 18 has a sign slip in one Cramer determinant. None changes a final answer.</p>
+</footer>
+</div>
+
+<script>
+(function () {
+  var KEY = 'matrices-study-guide-progress';
+  var done = [];
+  try { done = JSON.parse(localStorage.getItem(KEY) || '[]'); if (!Array.isArray(done)) done = []; } catch (e) { done = []; }
+  var items = document.querySelectorAll('#toc li');
+  function paint() {
+    document.querySelectorAll('input[data-done]').forEach(function (b) {
+      b.checked = done.indexOf(b.getAttribute('data-done')) !== -1;
+    });
+    items.forEach(function (li, i) { li.classList.toggle('done', done.indexOf(String(i + 1)) !== -1); });
+  }
+  document.addEventListener('change', function (e) {
+    var b = e.target;
+    if (!b || !b.getAttribute || !b.getAttribute('data-done')) return;
+    var id = b.getAttribute('data-done');
+    var i = done.indexOf(id);
+    if (b.checked && i === -1) done.push(id);
+    if (!b.checked && i !== -1) done.splice(i, 1);
+    try { localStorage.setItem(KEY, JSON.stringify(done)); } catch (err) {}
+    paint();
+  });
+  paint();
+
+  /* Shrink wide display maths to fit the screen instead of scrolling sideways (floor 60%). */
+  function fit() {
+    document.querySelectorAll('mjx-container[display="true"]').forEach(function (c) {
+      c.style.fontSize = '';
+      var avail = c.clientWidth, need = c.scrollWidth;
+      if (avail > 0 && need > avail + 1) {
+        c.style.fontSize = Math.max(0.6, avail / need * 0.98) + 'em';
+      }
+    });
+  }
+  function start() {
+    if (window.MathJax && MathJax.startup && MathJax.startup.promise) {
+      MathJax.startup.promise.then(fit);
+    } else { setTimeout(start, 200); }
+  }
+  start();
+  var t;
+  window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(fit, 150); });
+})();
+</script>
+</body>
+</html>
