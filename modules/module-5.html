@@ -28,9 +28,10 @@
     padding: 0;
     font-size: 17px;
     font-weight: 500;
+    text-wrap: pretty;
   }
   .wrap {
-    max-width: 68ch;
+    max-width: 62ch;
     margin: 0 auto;
     padding: 2.5rem 1rem 4rem;
   }
@@ -70,6 +71,7 @@
     padding-bottom: 0.4rem;
   }
   h2 > a { text-decoration: none; color: inherit; }
+  h1, h2, h3, h4 { text-wrap: balance; }
   h3 {
     font-size: 1.15rem;
     font-weight: 600;
@@ -228,21 +230,21 @@
     margin: 1.5rem 0;
     background: var(--surface);
   }
-  .practice h3 { margin-top: 0; }
+  .practice > h3:first-of-type { margin-top: 0; }
   .answer-key {
     border: 1px solid var(--line);
     padding: 1rem 1.25rem;
     margin: 1.5rem 0;
     background: var(--surface);
   }
-  .answer-key h3 { margin-top: 0; }
+  .answer-key > h3:first-of-type { margin-top: 0; }
   .common-mistakes {
     border: 1px solid var(--line);
     padding: 1rem 1.25rem;
     margin: 1.5rem 0;
     background: var(--surface);
   }
-  .common-mistakes h3 { margin-top: 0; }
+  .common-mistakes > h3:first-of-type { margin-top: 0; }
   .self-learning {
     border-left: 3px solid var(--muted);
     padding: 1rem 1.25rem;
@@ -257,7 +259,7 @@
     margin: 1.5rem 0;
     background: var(--surface);
   }
-  .revision-sheet h3 { margin-top: 0; }
+  .revision-sheet > h3:first-of-type { margin-top: 0; }
   .warning {
     color: var(--danger);
     font-weight: 700;
@@ -298,7 +300,7 @@
     margin: 2rem 0;
     background: var(--surface);
   }
-  .references h3 { margin-top: 0; }
+  .references > h3:first-of-type { margin-top: 0; }
   .references p { margin: 0.5rem 0; }
   .references ul { margin: 0.5rem 0; padding-left: 1.5rem; }
   ::selection { background: var(--ink); color: var(--bg); }
