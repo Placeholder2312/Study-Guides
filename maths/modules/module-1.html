@@ -88,19 +88,17 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex="0"]:focus-
 }
 .toc-toggle{display:none}
 .toc-collapse{
-  display:block;margin:0 0 .9rem;cursor:pointer;background:var(--bg);color:var(--muted);
-  border:1px solid var(--line);padding:.38rem .6rem;border-radius:var(--radius);
-  font:400 .72rem/1.2 var(--font-sans);letter-spacing:.05em;text-transform:uppercase;
+  position:fixed;left:4px;top:50%;transform:translateY(-50%);z-index:55;
+  display:flex;align-items:center;justify-content:center;width:22px;height:44px;padding:0;
+  background:transparent;border:0;border-radius:var(--radius);color:var(--muted);
+  opacity:.4;cursor:pointer;transition:opacity .15s;
 }
-.toc-collapse:hover{border-color:var(--ink);color:var(--ink)}
+.toc-collapse:hover,.toc-collapse:focus-visible{opacity:1;color:var(--ink)}
+.toc-collapse svg{width:14px;height:14px;display:block;transition:transform .15s}
+.toc-collapse[aria-expanded="false"] svg{transform:rotate(180deg)}
 .layout.toc-collapsed{grid-template-columns:minmax(0,1fr)}
-.layout.toc-collapsed .sidebar{
-  position:fixed;top:1.25rem;left:1.25rem;z-index:50;max-height:none;overflow:visible;
-  border-right:0;padding-right:0;
-}
+.layout.toc-collapsed .sidebar{display:none}
 .layout.toc-collapsed #content{margin-left:auto;margin-right:auto;width:100%}
-.layout.toc-collapsed .toc{display:none}
-.layout.toc-collapsed .toc-collapse{margin-bottom:0}
 .toc-title{margin:.1rem 0 .7rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
 .toc-root,.toc-sub{list-style:none;margin:0;padding:0}
 .toc-sub{margin:.1rem 0 .5rem}
@@ -273,7 +271,7 @@ footer{border-top:2px solid var(--ink);margin-top:1rem;background:var(--bg)}
 /* print */
 @page{margin:14mm 12mm}
 @media print{
-  .progress,.skip,.crumbs,.sidebar,.toc-toggle,.nav,#section-nav,.render-error{display:none !important}
+  .progress,.skip,.crumbs,.sidebar,.toc-toggle,.toc-collapse,.nav,#section-nav,.render-error{display:none !important}
   body{font-size:11pt;line-height:1.5;color:#000}
   .site-header{border-bottom:1px solid #000}
   .header-inner{padding:0 0 .8rem;max-width:none}
@@ -322,9 +320,10 @@ footer{border-top:2px solid var(--ink);margin-top:1rem;background:var(--bg)}
   <nav class="nav" id="section-nav" aria-label="Guide sections"></nav>
 </header>
 
+<button class="toc-collapse" id="toc-collapse" type="button" aria-expanded="true" aria-controls="sidebar" aria-label="Hide contents" title="Hide contents"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><path d="M7 2L2 7l5 5M12 2L7 7l5 5"/></svg></button>
+
 <div class="layout">
   <aside class="sidebar" id="sidebar">
-    <button class="toc-collapse" id="toc-collapse" type="button" aria-expanded="true" aria-controls="toc-list">&laquo; Hide contents</button>
     <button class="toc-toggle" id="toc-toggle" type="button" aria-expanded="false" aria-controls="toc-list">Contents</button>
     <nav class="toc" aria-label="Table of contents">
       <p class="toc-title">On this page</p>
@@ -3285,7 +3284,9 @@ window.MathJax = {
     function setCollapsed(collapsed) {
       layoutEl.classList.toggle('toc-collapsed', collapsed);
       collapseBtn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
-      collapseBtn.innerHTML = collapsed ? 'Contents &raquo;' : '&laquo; Hide contents';
+      var label = collapsed ? 'Show contents' : 'Hide contents';
+      collapseBtn.setAttribute('aria-label', label);
+      collapseBtn.title = label;
       try { localStorage.setItem('toc-collapsed', collapsed ? '1' : '0'); } catch (e) {}
     }
 
