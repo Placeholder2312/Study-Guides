@@ -1,6 +1,47 @@
 {
   "cleanUrls": true,
+  "trailingSlash": false,
   "redirects": [
-    { "source": "/modules/:path*", "destination": "/dsgt/modules/:path*", "permanent": false }
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "study-guides-two.vercel.app"
+        }
+      ],
+      "destination": "https://study-guides-placeholder.vercel.app/:path*",
+      "permanent": false
+    },
+    {
+      "source": "/modules/module-4",
+      "destination": "/dsgt/modules/module-4",
+      "permanent": false
+    },
+    {
+      "source": "/modules/module-4.html",
+      "destination": "/dsgt/modules/module-4",
+      "permanent": false
+    },
+    {
+      "source": "/modules/module-5",
+      "destination": "/dsgt/modules/module-5",
+      "permanent": false
+    },
+    {
+      "source": "/modules/module-5.html",
+      "destination": "/dsgt/modules/module-5",
+      "permanent": false
+    },
+    {
+      "source": "/dsgt/modules/module-1",
+      "destination": "/dsgt",
+      "permanent": false
+    },
+    {
+      "source": "/dsgt/modules/module-1.html",
+      "destination": "/dsgt",
+      "permanent": false
+    }
   ]
 }

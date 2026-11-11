@@ -66,6 +66,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex="0"]:focus-
 .math-fallback{border-left:3px solid #b00020;background:#fff5f5;padding:.6rem .8rem;color:#7a0016}
 
 /* section pill nav */
+.crumbs{margin:0 0 .4rem;font:600 .9rem var(--font-sans)}
+.crumbs a{display:inline-block;min-height:44px;line-height:44px;color:var(--ink)}
 .nav{display:flex;flex-wrap:wrap;gap:.4rem;max-width:1160px;margin:0 auto;padding:0 2rem 1.7rem}
 .nav a{
   font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;
@@ -256,7 +258,7 @@ footer{border-top:2px solid var(--ink);margin-top:1rem;background:var(--bg)}
 /* print */
 @page{margin:14mm 12mm}
 @media print{
-  .progress,.skip,.sidebar,.toc-toggle,.nav,#section-nav,.render-error{display:none !important}
+  .progress,.skip,.crumbs,.sidebar,.toc-toggle,.nav,#section-nav,.render-error{display:none !important}
   body{font-size:11pt;line-height:1.5;color:#000}
   .site-header{border-bottom:1px solid #000}
   .header-inner{padding:0 0 .8rem;max-width:none}
@@ -288,6 +290,7 @@ footer{border-top:2px solid var(--ink);margin-top:1rem;background:var(--bg)}
 
 <header class="site-header">
   <div class="header-inner">
+    <p class="crumbs"><a href="/">All subjects</a> · <a href="/maths">Mathematics modules</a></p>
     <p class="eyebrow">University of Mumbai · Mathematics for Computer Engineering · 2023111 · Module I</p>
     <h1>Linear Algebra <span class="h1-sub">Theory of Matrices — study guide</span></h1>
     <p class="subtitle">A complete, source-referenced guide for B.E. Computer Science and Engineering (Artificial Intelligence and Machine Learning), Semester III, NEP 2020: worked examples, verified university questions, graded practice, and a separate answer key.</p>
