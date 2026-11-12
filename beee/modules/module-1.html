@@ -287,7 +287,7 @@
       <text x="145" y="52" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">6 Ω</text>
       <text x="252" y="140" font-size="13" font-weight="700" fill="var(--ink)">3 Ω</text>
       <text x="332" y="140" font-size="13" font-weight="700" fill="var(--ink)">6 Ω</text>
-      <text x="18" y="140" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">12 V</text>
+      <text x="15" y="140" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">12 V</text>
       <text x="58" y="64" font-size="15" font-weight="700" fill="var(--ink)">+</text>
       <text x="58" y="214" font-size="15" font-weight="700" fill="var(--ink)">−</text>
       <text x="235" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="var(--accent)">A</text>
@@ -396,45 +396,45 @@
   </div>
 
   <figure>
-    <svg viewBox="0 0 520 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="figSourceTitle">
+    <svg viewBox="0 0 520 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="figSourceTitle">
       <title id="figSourceTitle">Four source models: ideal voltage source, practical voltage source, ideal current source and practical current source</title>
       <g fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <!-- (a) ideal voltage -->
-        <path d="M130 55 V80 M130 128 V175"/>
-        <circle cx="130" cy="104" r="24"/>
-        <path d="M122 104 H138 M130 96 V112"/>
-        <!-- (b) practical voltage -->
-        <path d="M390 55 V70 M390 96 V104 M390 128 V175"/>
-        <path d="M390 70 L390 76 L381 82 L399 92 L381 102 L399 112 L390 118 L390 124"/>
-        <circle cx="390" cy="150" r="0"/>
-        <circle cx="390" cy="150" r="24"/>
-        <path d="M382 150 H398 M390 142 V158"/>
+        <path d="M130 50 V101 M130 149 V200"/>
+        <circle cx="130" cy="125" r="24"/>
+        <!-- (b) practical voltage: r in series with the emf -->
+        <path d="M390 50 V70 L381 76 L399 86 L381 96 L399 106 L390 112 V128 M390 172 V200"/>
+        <circle cx="390" cy="150" r="22"/>
         <!-- (c) ideal current -->
-        <path d="M130 240 V275 M130 323 V355"/>
-        <circle cx="130" cy="299" r="24"/>
-        <path d="M130 310 V288 M124 296 L130 288 L136 296"/>
-        <!-- (d) practical current -->
-        <path d="M330 240 H430 V275 M430 323 V355 H330 V240"/>
-        <circle cx="350" cy="299" r="24"/>
-        <path d="M350 310 V288 M344 296 L350 288 L356 296"/>
-        <path d="M430 275 V281 L421 287 L439 297 L421 307 L439 317 L430 323"/>
+        <path d="M130 282 V321 M130 369 V420"/>
+        <circle cx="130" cy="345" r="24"/>
+        <path d="M130 356 V334 M124 342 L130 334 L136 342"/>
+        <!-- (d) practical current: r in parallel with the source -->
+        <path d="M345 300 V321 M345 369 V400 M345 300 H435 M345 400 H435 M390 300 V282 M390 400 V420"/>
+        <circle cx="345" cy="345" r="24"/>
+        <path d="M345 356 V334 M339 342 L345 334 L351 342"/>
+        <path d="M435 300 V326 L426 332 L444 342 L426 352 L444 362 L435 368 V400"/>
       </g>
+      <circle cx="390" cy="300" r="4" fill="var(--ink)"/>
+      <circle cx="390" cy="400" r="4" fill="var(--ink)"/>
       <text x="130" y="30" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">(a) Ideal voltage source</text>
       <text x="390" y="30" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">(b) Practical voltage source</text>
-      <text x="130" y="220" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">(c) Ideal current source</text>
-      <text x="390" y="220" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">(d) Practical current source</text>
-      <text x="150" y="70" font-size="14" font-weight="700" fill="var(--ink)">+</text>
-      <text x="150" y="155" font-size="14" font-weight="700" fill="var(--ink)">−</text>
-      <text x="405" y="66" font-size="14" font-weight="700" fill="var(--ink)">+</text>
-      <text x="405" y="170" font-size="14" font-weight="700" fill="var(--ink)">−</text>
-      <text x="404" y="118" font-size="12" font-weight="700" fill="var(--ink)">r</text>
-      <text x="130" y="108" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)">V</text>
-      <text x="390" y="154" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)">ε</text>
-      <text x="158" y="304" font-size="13" font-weight="700" fill="var(--ink)">I</text>
-      <text x="378" y="304" font-size="13" font-weight="700" fill="var(--ink)">I</text>
-      <text x="446" y="304" font-size="12" font-weight="700" fill="var(--ink)">r</text>
-      <text x="48" y="350" text-anchor="middle" font-size="11" fill="var(--muted)">holds V fixed</text>
-      <text x="308" y="380" text-anchor="middle" font-size="11" fill="var(--muted)">holds I fixed; r is in parallel</text>
+      <text x="130" y="262" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">(c) Ideal current source</text>
+      <text x="390" y="262" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">(d) Practical current source</text>
+      <text x="150" y="66" font-size="14" font-weight="700" fill="var(--ink)">+</text>
+      <text x="150" y="196" font-size="14" font-weight="700" fill="var(--ink)">−</text>
+      <text x="408" y="66" font-size="14" font-weight="700" fill="var(--ink)">+</text>
+      <text x="408" y="196" font-size="14" font-weight="700" fill="var(--ink)">−</text>
+      <text x="410" y="100" font-size="12" font-weight="700" fill="var(--ink)">r</text>
+      <text x="130" y="130" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)">V</text>
+      <text x="390" y="155" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)">ε</text>
+      <text x="160" y="350" font-size="13" font-weight="700" fill="var(--ink)">I</text>
+      <text x="375" y="350" font-size="13" font-weight="700" fill="var(--ink)">I</text>
+      <text x="452" y="351" font-size="12" font-weight="700" fill="var(--ink)">r</text>
+      <text x="130" y="224" text-anchor="middle" font-size="11" fill="var(--muted)">holds V fixed</text>
+      <text x="390" y="224" text-anchor="middle" font-size="11" fill="var(--muted)">r is in series with ε</text>
+      <text x="130" y="452" text-anchor="middle" font-size="11" fill="var(--muted)">holds I fixed</text>
+      <text x="390" y="452" text-anchor="middle" font-size="11" fill="var(--muted)">r is in parallel</text>
     </svg>
     <p class="figcap">Figure 2. The four source models. A practical voltage source is an ideal emf ε in series with r; a practical current source is an ideal current source in parallel with r. The two practical models can be made exactly equivalent by source transformation.</p>
   </figure>
@@ -479,24 +479,26 @@
         <path d="M130 60 L140 60 L146 51 L156 69 L166 51 L176 69 L186 51 L190 60 H250"/>
         <path d="M90 180 H250"/>
         <path d="M76 120 H104 M82 128 H98"/>
-        <path d="M340 60 V100 M340 144 V180 M340 60 H405 M340 180 H490"/>
+        <path d="M340 60 V100 M340 144 V180"/>
         <circle cx="340" cy="122" r="22"/>
         <path d="M340 134 V110 M334 118 L340 110 L346 118"/>
-        <path d="M450 60 V100 M450 100 L450 106 L441 112 L459 122 L441 132 L459 142 L450 148 L450 180"/>
-        <path d="M340 60 H490 M340 180 H490 M490 60 V180"/>
+        <path d="M450 60 V100 L450 106 L441 112 L459 122 L441 132 L459 142 L450 148 L450 180"/>
+        <path d="M340 60 H490 M340 180 H490"/>
       </g>
-      <text x="160" y="40" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">18 V</text>
+      <circle cx="450" cy="60" r="3.5" fill="var(--ink)"/>
+      <circle cx="450" cy="180" r="3.5" fill="var(--ink)"/>
       <text x="170" y="93" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">6 Ω</text>
-      <text x="58" y="132" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">+</text>
-      <text x="58" y="168" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">−</text>
-      <text x="250" y="52" font-size="12" font-weight="700" fill="var(--accent)">A</text>
-      <text x="250" y="195" font-size="12" font-weight="700" fill="var(--accent)">B</text>
+      <text x="62" y="128" text-anchor="end" font-size="12" font-weight="700" fill="var(--ink)">18 V</text>
+      <text x="112" y="114" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">+</text>
+      <text x="112" y="152" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">−</text>
+      <text x="250" y="48" text-anchor="middle" font-size="12" font-weight="700" fill="var(--accent)">A</text>
+      <text x="250" y="198" text-anchor="middle" font-size="12" font-weight="700" fill="var(--accent)">B</text>
       <text x="300" y="132" text-anchor="middle" font-size="18" font-weight="700" fill="var(--ink)">≡</text>
       <text x="370" y="126" font-size="12" font-weight="700" fill="var(--ink)">3 A</text>
-      <text x="440" y="93" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">6 Ω</text>
-      <text x="490" y="52" font-size="12" font-weight="700" fill="var(--accent)">A</text>
-      <text x="490" y="195" font-size="12" font-weight="700" fill="var(--accent)">B</text>
-      <text x="310" y="225" text-anchor="middle" font-size="11" fill="var(--muted)">V_s = 18 V, R_s = 6 Ω &nbsp;→&nbsp; I_s = 18/6 = 3 A, R_p = 6 Ω</text>
+      <text x="468" y="126" font-size="13" font-weight="700" fill="var(--ink)">6 Ω</text>
+      <text x="490" y="48" text-anchor="middle" font-size="12" font-weight="700" fill="var(--accent)">A</text>
+      <text x="490" y="198" text-anchor="middle" font-size="12" font-weight="700" fill="var(--accent)">B</text>
+      <text x="310" y="225" text-anchor="middle" font-size="11" fill="var(--muted)">V<tspan dy="3" font-size="8">s</tspan><tspan dy="-3"> = 18 V, R</tspan><tspan dy="3" font-size="8">s</tspan><tspan dy="-3"> = 6 Ω &#160;→&#160; I</tspan><tspan dy="3" font-size="8">s</tspan><tspan dy="-3"> = 18/6 = 3 A, R</tspan><tspan dy="3" font-size="8">p</tspan><tspan dy="-3"> = 6 Ω</tspan></text>
     </svg>
     <p class="figcap">Figure 3. The voltage source and the current source are equivalent at terminals A–B. The arrow points from the − terminal to the + terminal inside the source, so the current leaves the + terminal into the external circuit.</p>
   </figure>
@@ -579,7 +581,7 @@
       <text x="58" y="64" font-size="15" font-weight="700" fill="var(--ink)">+</text>
       <text x="58" y="214" font-size="15" font-weight="700" fill="var(--ink)">−</text>
       <text x="220" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="var(--accent)">A</text>
-      <text x="190" y="232" text-anchor="middle" font-size="11" fill="var(--muted)">Find V_A by KCL; check both meshes by KVL</text>
+      <text x="190" y="232" text-anchor="middle" font-size="11" fill="var(--muted)">Find V<tspan dy="3" font-size="8">A</tspan><tspan dy="-3"> by KCL; check both meshes by KVL</tspan></text>
     </svg>
     <p class="figcap">Figure 4. The two right-hand resistors are in parallel between node A and ground. KCL at A and KVL around the two meshes must give the same answer.</p>
   </figure>
@@ -768,7 +770,7 @@
       <text x="413" y="64" font-size="15" font-weight="700" fill="var(--ink)">+</text>
       <text x="413" y="214" font-size="15" font-weight="700" fill="var(--ink)">−</text>
       <text x="230" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="var(--accent)">A</text>
-      <text x="225" y="235" text-anchor="middle" font-size="11" fill="var(--muted)">One unknown node voltage V_A</text>
+      <text x="225" y="235" text-anchor="middle" font-size="11" fill="var(--muted)">One unknown node voltage V<tspan dy="3" font-size="8">A</tspan></text>
     </svg>
     <p class="figcap">Figure 6. Node A is the only unknown node. Both sources have one terminal at the reference, so each source fixes the voltage at its own end of the resistor.</p>
   </figure>
@@ -907,7 +909,7 @@
       <text x="340" y="154" font-size="11" font-weight="700" fill="var(--ink)">2 Ω</text>
       <text x="432" y="154" font-size="11" font-weight="700" fill="var(--ink)">6 Ω</text>
       <text x="410" y="190" font-size="11" font-weight="700" fill="var(--ink)">6 Ω</text>
-      <text x="388" y="126" text-anchor="end" font-size="11" font-weight="700" fill="var(--accent)">S</text>
+      <text x="400" y="112" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">S</text>
       <text x="150" y="248" text-anchor="middle" font-size="10" fill="var(--muted)">Original bridge</text>
       <text x="400" y="248" text-anchor="middle" font-size="10" fill="var(--muted)">After Δ C-D-B → Y</text>
     </svg>
@@ -1055,10 +1057,10 @@
   </ul>
 
   <figure>
-    <svg viewBox="0 0 800 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="figThevTitle">
+    <svg viewBox="0 0 880 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="figThevTitle">
       <title id="figThevTitle">Original circuit, its Thevenin equivalent and its Norton equivalent</title>
+      <!-- (a) original network -->
       <g fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <!-- original -->
         <path d="M50 60 V110 M50 118 V190"/>
         <path d="M36 110 H64 M42 118 H58"/>
         <path d="M50 60 H80"/>
@@ -1069,53 +1071,59 @@
         <path d="M50 190 H350"/>
         <circle cx="290" cy="125" r="22"/>
         <path d="M290 137 V113 M284 121 L290 113 L296 121"/>
-        <!-- thevenin -->
-        <path d="M450 60 V110 M450 118 V190"/>
-        <path d="M436 110 H464 M442 118 H458"/>
-        <path d="M450 60 H480"/>
-        <path d="M480 60 L490 60 L496 51 L506 69 L516 51 L526 69 L536 51 L540 60 H590"/>
-        <path d="M590 60 V95 M590 95 L590 101 L581 107 L599 117 L581 127 L599 137 L590 143 L590 155 V190"/>
-        <path d="M450 190 H590"/>
-        <!-- norton -->
-        <path d="M650 60 V95 M650 95 V190"/>
-        <path d="M650 60 H710 V95 M710 95 L710 101 L701 107 L719 117 L701 127 L719 137 L710 143 L710 155 V190"/>
-        <path d="M650 60 H770 V95 M770 95 L770 101 L761 107 L779 117 L761 127 L779 137 L770 143 L770 155 V190"/>
-        <path d="M650 190 H770"/>
-        <circle cx="650" cy="125" r="22"/>
-        <path d="M650 137 V113 M644 121 L650 113 L656 121"/>
       </g>
       <circle cx="220" cy="60" r="4" fill="var(--ink)"/>
       <circle cx="290" cy="60" r="4" fill="var(--ink)"/>
       <circle cx="350" cy="60" r="4" fill="var(--ink)"/>
-      <circle cx="590" cy="60" r="4" fill="var(--ink)"/>
-      <circle cx="710" cy="60" r="4" fill="var(--ink)"/>
-      <circle cx="770" cy="60" r="4" fill="var(--ink)"/>
-      <text x="50" y="48" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">A</text>
       <text x="350" y="48" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">A</text>
-      <text x="590" y="48" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">A</text>
-      <text x="770" y="48" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">A</text>
-      <text x="50" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">B</text>
       <text x="350" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">B</text>
-      <text x="590" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">B</text>
-      <text x="770" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">B</text>
       <text x="110" y="44" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">3 Ω</text>
       <text x="238" y="130" font-size="11" font-weight="700" fill="var(--ink)">6 Ω</text>
-      <text x="310" y="130" font-size="11" font-weight="700" fill="var(--ink)">6 A</text>
+      <text x="298" y="172" font-size="11" font-weight="700" fill="var(--ink)">6 A</text>
       <text x="368" y="130" font-size="11" font-weight="700" fill="var(--ink)">2 Ω</text>
       <text x="18" y="130" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">12 V</text>
       <text x="60" y="56" font-size="13" font-weight="700" fill="var(--ink)">+</text>
       <text x="60" y="204" font-size="13" font-weight="700" fill="var(--ink)">−</text>
-      <text x="510" y="44" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">2 Ω</text>
-      <text x="608" y="130" font-size="11" font-weight="700" fill="var(--ink)">2 Ω</text>
-      <text x="422" y="130" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">20 V</text>
-      <text x="460" y="56" font-size="13" font-weight="700" fill="var(--ink)">+</text>
-      <text x="460" y="204" font-size="13" font-weight="700" fill="var(--ink)">−</text>
-      <text x="690" y="44" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">2 Ω</text>
-      <text x="675" y="130" font-size="11" font-weight="700" fill="var(--ink)">10 A</text>
-      <text x="790" y="130" font-size="11" font-weight="700" fill="var(--ink)">2 Ω</text>
       <text x="200" y="245" text-anchor="middle" font-size="10" fill="var(--muted)">(a) Original network with load</text>
-      <text x="520" y="245" text-anchor="middle" font-size="10" fill="var(--muted)">(b) Thevenin equivalent</text>
-      <text x="710" y="245" text-anchor="middle" font-size="10" fill="var(--muted)">(c) Norton equivalent</text>
+      <!-- (b) Thevenin equivalent -->
+      <g transform="translate(10 0)">
+        <g fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M450 60 V110 M450 118 V190"/>
+          <path d="M436 110 H464 M442 118 H458"/>
+          <path d="M450 60 H480"/>
+          <path d="M480 60 L490 60 L496 51 L506 69 L516 51 L526 69 L536 51 L540 60 H590"/>
+          <path d="M590 60 V95 M590 95 L590 101 L581 107 L599 117 L581 127 L599 137 L590 143 L590 155 V190"/>
+          <path d="M450 190 H590"/>
+        </g>
+        <circle cx="590" cy="60" r="4" fill="var(--ink)"/>
+        <text x="590" y="48" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">A</text>
+        <text x="590" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">B</text>
+        <text x="510" y="44" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">2 Ω</text>
+        <text x="608" y="130" font-size="11" font-weight="700" fill="var(--ink)">2 Ω</text>
+        <text x="428" y="130" text-anchor="end" font-size="11" font-weight="700" fill="var(--ink)">20 V</text>
+        <text x="460" y="56" font-size="13" font-weight="700" fill="var(--ink)">+</text>
+        <text x="460" y="204" font-size="13" font-weight="700" fill="var(--ink)">−</text>
+        <text x="520" y="245" text-anchor="middle" font-size="10" fill="var(--muted)">(b) Thevenin equivalent</text>
+      </g>
+      <!-- (c) Norton equivalent -->
+      <g transform="translate(70 0)">
+        <g fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M650 60 V95 M650 95 V190"/>
+          <path d="M650 60 H710 V95 M710 95 L710 101 L701 107 L719 117 L701 127 L719 137 L710 143 L710 155 V190"/>
+          <path d="M650 60 H770 V95 M770 95 L770 101 L761 107 L779 117 L761 127 L779 137 L770 143 L770 155 V190"/>
+          <path d="M650 190 H770"/>
+          <circle cx="650" cy="125" r="22"/>
+          <path d="M650 137 V113 M644 121 L650 113 L656 121"/>
+        </g>
+        <circle cx="710" cy="60" r="4" fill="var(--ink)"/>
+        <circle cx="770" cy="60" r="4" fill="var(--ink)"/>
+        <text x="770" y="48" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">A</text>
+        <text x="770" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">B</text>
+        <text x="658" y="172" font-size="11" font-weight="700" fill="var(--ink)">10 A</text>
+        <text x="727" y="130" font-size="11" font-weight="700" fill="var(--ink)">2 Ω</text>
+        <text x="790" y="130" font-size="11" font-weight="700" fill="var(--ink)">2 Ω</text>
+        <text x="710" y="245" text-anchor="middle" font-size="10" fill="var(--muted)">(c) Norton equivalent</text>
+      </g>
     </svg>
     <p class="figcap">Figure 10. The same network in three forms. The load is the 2 Ω resistor on the right. In (b), <span class="v">V</span><sub>th</sub> = 20 V and <span class="v">R</span><sub>th</sub> = 2 Ω. In (c), <span class="v">I</span><sub>N</sub> = 10 A and <span class="v">R</span><sub>N</sub> = 2 Ω. All three give 5 A through the load.</p>
   </figure>
@@ -1254,14 +1262,14 @@
         <path d="M50 190 H350 M50 190 V40"/>
         <path d="M50 190 L40 190 M50 190 L50 200"/>
       </g>
-      <path d="M50 190 L57 150.3 L67.5 113.2 L85 83.3 L102.5 72.4 L120 70 L155 74.8 L190 83.3 L260 100 L330 113.2" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
+      <path d="M50.0 190.0 L53.5 168.2 L57.0 150.3 L60.5 135.6 L64.0 123.3 L67.5 113.2 L71.0 104.8 L74.5 97.8 L78.0 92.0 L81.5 87.3 L85.0 83.3 L88.5 80.1 L92.0 77.5 L95.5 75.4 L99.0 73.7 L102.5 72.4 L106.0 71.5 L109.5 70.8 L113.0 70.3 L116.5 70.1 L120.0 70.0 L123.5 70.1 L127.0 70.3 L130.5 70.6 L134.0 71.0 L137.5 71.5 L141.0 72.0 L144.5 72.7 L148.0 73.3 L151.5 74.0 L155.0 74.8 L158.5 75.6 L162.0 76.4 L165.5 77.2 L169.0 78.1 L172.5 78.9 L176.0 79.8 L179.5 80.7 L183.0 81.6 L186.5 82.4 L190.0 83.3 L193.5 84.2 L197.0 85.1 L200.5 86.0 L204.0 86.9 L207.5 87.8 L211.0 88.6 L214.5 89.5 L218.0 90.3 L221.5 91.2 L225.0 92.0 L228.5 92.9 L232.0 93.7 L235.5 94.5 L239.0 95.3 L242.5 96.1 L246.0 96.9 L249.5 97.7 L253.0 98.5 L256.5 99.2 L260.0 100.0 L263.5 100.7 L267.0 101.5 L270.5 102.2 L274.0 102.9 L277.5 103.6 L281.0 104.3 L284.5 105.0 L288.0 105.7 L291.5 106.4 L295.0 107.0 L298.5 107.7 L302.0 108.3 L305.5 109.0 L309.0 109.6 L312.5 110.2 L316.0 110.8 L319.5 111.4 L323.0 112.0 L326.5 112.6 L330.0 113.2 L333.5 113.8 L337.0 114.3 L340.5 114.9 L344.0 115.4" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="M120 190 V70 M50 70 H120" fill="none" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="4 4"/>
-      <text x="120" y="215" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">R_th</text>
-      <text x="42" y="70" text-anchor="end" font-size="11" font-weight="700" fill="var(--ink)">P_max</text>
-      <text x="350" y="215" text-anchor="end" font-size="11" fill="var(--muted)">R_L →</text>
-      <text x="30" y="40" text-anchor="middle" font-size="11" fill="var(--muted)">P_L ↑</text>
+      <text x="120" y="215" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">R<tspan dy="3" font-size="8">th</tspan></text>
+      <text x="42" y="74" text-anchor="end" font-size="11" font-weight="700" fill="var(--ink)">P<tspan dy="3" font-size="8">max</tspan></text>
+      <text x="350" y="215" text-anchor="end" font-size="11" fill="var(--muted)">R<tspan dy="3" font-size="8">L</tspan> →</text>
+      <text x="30" y="40" text-anchor="middle" font-size="11" fill="var(--muted)">P<tspan dy="3" font-size="8">L</tspan> ↑</text>
       <circle cx="120" cy="70" r="4" fill="var(--accent)"/>
-      <text x="200" y="45" text-anchor="middle" font-size="11" fill="var(--muted)">P_L = V_th² R_L / (R_th + R_L)²</text>
+      <text x="215" y="45" text-anchor="middle" font-size="11" fill="var(--muted)">P<tspan dy="3" font-size="8">L</tspan><tspan dy="-3"> = V</tspan><tspan dy="3" font-size="8">th</tspan><tspan dy="-3">² R</tspan><tspan dy="3" font-size="8">L</tspan><tspan dy="-3"> / (R</tspan><tspan dy="3" font-size="8">th</tspan><tspan dy="-3"> + R</tspan><tspan dy="3" font-size="8">L</tspan><tspan dy="-3">)²</tspan></text>
     </svg>
     <p class="figcap">Figure 11. Load power rises, peaks at <span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub>, then falls. At the peak, half the source power is lost in <span class="v">R</span><sub>th</sub>.</p>
   </figure>
