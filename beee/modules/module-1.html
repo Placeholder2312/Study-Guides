@@ -1,0 +1,1889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BEEE Module 1 — DC Circuits · Study Guide</title>
+<meta name="description" content="Complete source-based study guide for BEEE (ESC102) Module 1: DC Circuits — Kirchhoff's laws, mesh and nodal analysis, star-delta, superposition, Thevenin, Norton and maximum power transfer.">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --muted: #444444;
+    --bg: #ffffff;
+    --line: #cccccc;
+    --rule: #999999;
+    --accent: #1d4ed8;
+    --space: 1.5rem;
+    --radius: 0;
+    --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+    --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-mono: "Courier New", Courier, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    font-size: 17px;
+    font-weight: 500;
+    text-wrap: pretty;
+  }
+  .wrap { max-width: 64ch; margin: 0 auto; padding: 2.5rem 1rem 4rem; }
+  header { border-bottom: 2px solid var(--ink); margin-bottom: 2.5rem; padding-bottom: 1rem; }
+  h1 { font-family: var(--font-serif); font-size: 2.25rem; font-weight: 700; line-height: 1.25; margin: 0 0 0.5rem; letter-spacing: -0.01em; }
+  .subtitle { color: var(--muted); font-size: 1rem; font-weight: 400; margin: 0; }
+  .meta { font-size: 0.85rem; line-height: 1.5; font-weight: 500; color: var(--muted); margin-top: 1rem; }
+  h2 { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; line-height: 1.3; margin: 3rem 0 1rem; border-bottom: 1px solid var(--line); padding-bottom: 0.4rem; }
+  h2 > a { text-decoration: none; color: inherit; }
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h3 { font-size: 1.15rem; font-weight: 600; line-height: 1.3; margin: 2rem 0 0.5rem; }
+  h4 { font-size: 1rem; font-weight: 600; line-height: 1.3; margin: 1.5rem 0 0.5rem; }
+  p { margin: 0 0 1rem; line-height: 1.6; }
+  ul, ol, blockquote, pre, figure { line-height: 1.6; }
+  td { line-height: 1.5; }
+  .v { font-family: var(--font-serif); font-style: italic; }
+  .theory { border-left: 3px solid var(--ink); padding: 1rem 1.25rem; margin: 1.75rem 0; font-size: 0.98rem; }
+  .theory p:first-child { margin-top: 0; }
+  .theory p:last-child { margin-bottom: 0; }
+  .quote { border-left: 3px solid var(--accent); background: var(--surface); padding: 0.9rem 1.15rem; margin: 1.25rem 0; }
+  .quote p { font-family: var(--font-serif); font-size: 1.02rem; font-style: italic; margin: 0 0 0.5rem; }
+  .quote p:last-child { margin-bottom: 0; }
+  .attrib { display: block; font-family: var(--font-sans); font-style: normal; font-size: 0.78rem; line-height: 1.45; font-weight: 600; color: var(--muted); margin-top: 0.55rem; }
+  .source { display: block; font-size: 0.78rem; line-height: 1.4; font-weight: 600; color: var(--muted); letter-spacing: 0.04em; margin-bottom: 0.5rem; }
+  .eq { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 600; text-align: center; margin: 1.25rem 0; padding: 0.75rem 1rem; background: var(--surface-eq); border: 1px solid var(--line); color: var(--ink); overflow-x: auto; }
+  .eq-note { font-size: 0.85rem; line-height: 1.4; color: var(--muted); text-align: center; margin-top: -0.75rem; margin-bottom: 1.5rem; }
+  .example { border: 1px solid var(--line); padding: 1rem 1.25rem; margin: 1.5rem 0; font-size: 0.95rem; background: var(--surface); }
+  .example-title { font-weight: 700; line-height: 1.3; margin-bottom: 0.6rem; font-size: 0.8rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+  .example .eq { margin: 0.75rem 0; background: var(--bg); border: 1px solid var(--line); }
+  .example p { margin-bottom: 0.65rem; }
+  .steps { list-style: none; padding: 0; margin: 1.5rem 0; border: 1px solid var(--line); background: var(--surface); padding: 1rem 1.25rem; }
+  .steps li { margin-bottom: 0.75rem; font-size: 0.95rem; padding-left: 1.5rem; position: relative; }
+  .steps li::before { content: ""; position: absolute; left: 0; top: 0.35rem; width: 0.6rem; height: 0.6rem; background: var(--ink); border-radius: 50%; }
+  .steps li:last-child { margin-bottom: 0; }
+  table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.92rem; }
+  th, td { border: 1px solid var(--line); padding: 0.625rem 0.875rem; text-align: left; vertical-align: top; }
+  th { background: var(--surface-hi); font-weight: 700; font-size: 0.82rem; line-height: 1.4; letter-spacing: 0.04em; }
+  tr:nth-child(even) td { background: var(--surface-alt); }
+  .kbd { font-family: var(--font-mono); font-size: 0.875rem; line-height: 1.4; background: var(--surface-hi); border: 1px solid var(--line); border-radius: 3px; padding: 0.1rem 0.4rem; }
+  .toc { border: 1px solid var(--line); padding: 1rem 1.25rem; margin: 2rem 0; background: var(--surface); }
+  .toc ol { margin: 0; padding-left: 1.25rem; }
+  .toc li { margin-bottom: 0.35rem; font-size: 0.95rem; }
+  .toc a { color: var(--ink); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .nav { margin: 1.5rem 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .nav a { padding: 0.25rem 0.6rem; border: 1px solid var(--line); text-decoration: none; color: var(--ink); font-size: 0.85rem; border-radius: 3px; }
+  .nav a:hover { background: var(--surface-hi); }
+  .practice, .answer-key, .common-mistakes, .revision-sheet, .references, .exam-q, .callout { border: 1px solid var(--line); padding: 1rem 1.25rem; margin: 1.5rem 0; background: var(--surface); }
+  .practice > h3:first-of-type, .answer-key > h3:first-of-type, .common-mistakes > h3:first-of-type, .revision-sheet > h3:first-of-type, .references > h3:first-of-type { margin-top: 0; }
+  .self-learning { border-left: 3px solid var(--muted); padding: 1rem 1.25rem; margin: 1.75rem 0; font-size: 0.95rem; color: var(--muted); }
+  .self-learning p { margin-bottom: 0.75rem; }
+  .warning { color: var(--danger); font-weight: 700; }
+  .mu-badge { display: inline-block; background: var(--accent-soft); border: 1px solid var(--accent); color: var(--accent); font-size: 0.75rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 3px; letter-spacing: 0.04em; margin-left: 0.5rem; }
+  .tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid var(--line); padding: 0.12rem 0.4rem; margin-right: 0.3rem; color: var(--muted); vertical-align: 0.1em; }
+  .tag.q { border-color: var(--accent); color: var(--accent); }
+  .tag.c { border-color: var(--ink); color: var(--ink); }
+  .exam-q { border: 1px solid var(--line); padding: 1rem 1.25rem; margin: 1.25rem 0; background: var(--surface); }
+  .exam-q-title { font-weight: 700; line-height: 1.3; margin-bottom: 0.5rem; font-size: 0.9rem; letter-spacing: 0; color: var(--muted); }
+  .exam-source { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom: 0.5rem; }
+  figure { margin: 1.5rem 0; }
+  svg { width: 100%; max-width: 100%; height: auto; display: block; margin: 0 auto; padding: 0.5rem; background: var(--bg); border: 1px solid var(--line); }
+  svg text { paint-order: stroke; stroke: var(--bg); stroke-width: 2.5px; stroke-linejoin: round; }
+  .figcap { font-size: 0.8rem; line-height: 1.45; color: var(--muted); text-align: center; margin: 0.45rem 0 0; }
+  .two { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+  @media (min-width: 640px) { .two { grid-template-columns: 1fr 1fr; } }
+  .given-grid { display: grid; grid-template-columns: 1fr; gap: 0.25rem 1rem; margin: 0.75rem 0; font-size: 0.93rem; }
+  @media (min-width: 560px) { .given-grid { grid-template-columns: 8.5rem 1fr; } }
+  .given-grid dt { font-weight: 700; }
+  .given-grid dd { margin: 0; }
+  .method-note { border: 1px dashed var(--line); padding: 0.75rem 1rem; margin: 1rem 0; font-size: 0.95rem; }
+  .small { font-size: 0.88rem; color: var(--muted); }
+  footer { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; line-height: 1.5; text-align: center; }
+  .references p { margin: 0.5rem 0; }
+  .references ul { margin: 0.5rem 0; padding-left: 1.5rem; }
+  ::selection { background: var(--ink); color: var(--bg); }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    .wrap { padding: 1rem 0.75rem 3rem; }
+    h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.3rem; margin-top: 2.25rem; }
+    table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; font-size: 0.85rem; }
+    th, td { padding: 0.45rem 0.55rem; }
+    .theory, .example, .practice, .answer-key, .common-mistakes, .revision-sheet, .references, .exam-q, .steps, .toc, .self-learning, .quote, .callout { padding: 0.75rem; }
+    .eq { font-size: 1rem; padding: 0.6rem 0.5rem; text-align: left; }
+    .kbd { word-break: break-word; }
+    .nav a { padding: 0.4rem 0.7rem; }
+    svg { padding: 0.25rem; }
+  }
+  @media print {
+    body { font-size: 12pt; line-height: 1.4; color: #000; background: #fff; }
+    .wrap { max-width: 100%; padding: 0; }
+    header { border-bottom: 1px solid #000; margin-bottom: 1.5rem; padding-bottom: 0.75rem; }
+    h2 { margin: 2rem 0 0.75rem; border-bottom: 1px solid #000; padding-bottom: 0.3rem; }
+    h3 { margin: 1.5rem 0 0.4rem; }
+    .toc, .nav { display: none; }
+    .example, .practice, .answer-key, .revision-sheet, .steps, .theory, .common-mistakes, .references, .exam-q, .quote, .callout { border: 1px solid #999; background: #fff !important; page-break-inside: avoid; }
+    .eq { background: #fff; border: 1px solid #999; page-break-inside: avoid; }
+    .eq-note { display: none; }
+    a { text-decoration: none; color: #000; }
+    svg { border: 1px solid #000; }
+    footer { margin-top: 2rem; border-top: 1px solid #000; }
+  }
+</style>
+<script>(function(){try{var t=localStorage.getItem('sg-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<style id="theme">
+  :root { color-scheme: light; --ink:#0a0a0a;--muted:#444444;--bg:#ffffff;--line:#cccccc;--rule:#999999;--accent:#1d4ed8;--accent-soft:#eef2ff;--danger:#b00020;--surface:#fafafa;--surface-alt:#f9f9f9;--surface-eq:#f5f5f5;--surface-hi:#f0f0f0; }
+  :root[data-theme="dark"] { color-scheme: dark; --ink:#ececec;--muted:#a8a8ad;--bg:#0f0f11;--line:#34343a;--rule:#5a5a62;--accent:#8ab0ff;--accent-soft:#1b2540;--danger:#ff7b8f;--surface:#17171a;--surface-alt:#1b1b1f;--surface-eq:#1e1e23;--surface-hi:#26262c; }
+  :root[data-theme="dark"] svg text[fill="var(--muted)"] { fill: var(--ink); }
+  .topbar { display:flex; align-items:center; justify-content:space-between; gap:.5rem; margin:0 0 1rem; }
+  .topbar .back { display:inline-flex; align-items:center; min-height:44px; font-size:.85rem; font-weight:600; color:var(--ink); }
+  .theme-toggle { font:inherit; font-size:.85rem; font-weight:600; color:var(--ink); background:var(--bg); border:1px solid var(--ink); border-radius:0; padding:.4rem .8rem; min-height:44px; min-width:44px; cursor:pointer; margin-left:auto; }
+  .theme-toggle:hover { background:var(--surface-hi); }
+  .theme-toggle:focus-visible { outline:2px solid var(--ink); outline-offset:2px; }
+  @media print {
+    :root, :root[data-theme="dark"], :root:not([data-theme="light"]) { color-scheme: light; --ink:#0a0a0a;--muted:#444444;--bg:#ffffff;--line:#cccccc;--rule:#999999;--accent:#1d4ed8;--accent-soft:#eef2ff;--danger:#b00020;--surface:#fafafa;--surface-alt:#f9f9f9;--surface-eq:#f5f5f5;--surface-hi:#f0f0f0; }
+    .topbar { display:none; }
+  }
+</style>
+</head>
+<body id="top">
+
+<div class="wrap">
+  <div class="topbar"><a class="back" href="/beee">← All modules</a><button class="theme-toggle" type="button" id="themeToggle"></button></div>
+
+  <header>
+    <h1>BEEE Module 1 — DC Circuits</h1>
+    <p class="subtitle">Kirchhoff · Mesh &amp; Nodal · Star–Delta · Superposition · Thevenin · Norton · Maximum Power</p>
+    <div class="meta">B.E. CSE (AI &amp; ML) · Semester I · ESC102 · NEP 2020 · Module I · 10 teaching hours · CO1<br>Mumbai University · Complete study guide with source excerpts, worked examples and a separate answer key</div>
+  </header>
+
+  <div class="callout">
+    <p><strong>How this guide labels evidence.</strong> This page separates four kinds of material so you always know what you are reading:</p>
+    <ul>
+      <li><span class="tag c">Course</span> <strong>Course material</strong> — Assignment 1, Assignment 2 and the Unit 1 practice question bank set by <strong>Dr. Nirmala K.</strong> These are identified by their document names. They are <em>not</em> university question papers.</li>
+      <li><span class="tag q">Paper</span> <strong>University paper</strong> — an actual Mumbai University examination. The June 2025 NEP paper (code N10415) is the only supplied paper for this course and scheme. C-scheme paper 58654 is a different course/scheme and is flagged separately.</li>
+      <li><span class="tag q">Quote</span> <strong>Quotation</strong> — the exact words of a named author, with work, section and link. Quotations are kept short and are visually distinct.</li>
+      <li><span class="tag">Guide</span> <strong>Guide explanation and worked solutions</strong> — written for this page. They are not presented as quotations or as official university solutions.</li>
+    </ul>
+    <p class="small">No Unit 1 slide deck was supplied. The course-specific primary material is the two assignments, the practice question bank and the June 2025 paper. Where a scanned diagram is ambiguous, the assumption used is printed with the answer rather than hidden.</p>
+  </div>
+
+  <h2 id="syllabus">Syllabus — what is examinable</h2>
+  <p>The official NEP 2020 syllabus for <strong>ESC102 Basic Electrical and Electronics Engineering</strong>, B.E. Computer Engineering (AI &amp; ML), places Module I in Semester I. The exact wording is:</p>
+  <div class="quote">
+    <p>“DC Circuits: (Only independent sources) Kirchhoff’s Laws, Ideal and Practical Voltage and Current Sources, Source Transformation, Mesh and Nodal Analysis (no super node and super mesh) Star-Delta / Delta-Star Transformations, Superposition Theorem, Thevenin’s Theorem, Norton’s Theorem and Maximum Power Transfer Theorem.”</p>
+    <span class="attrib">University of Mumbai, Faculty of Science &amp; Technology, NEP 2020 syllabus for B.E. CSE (AI &amp; ML), Module I of ESC102. 10 hours, CO1. <a href="https://mu.ac.in/old/wp-content/uploads/2025/02/6.14N-CSE-AIML.pdf">Syllabus PDF</a>.</span>
+  </div>
+
+  <table>
+    <tr><th>Topic</th><th>What you must be able to do</th><th>Section</th></tr>
+    <tr><td>Kirchhoff’s laws</td><td>Write KCL at a node and KVL around a loop with correct signs.</td><td><a href="#kcl-kvl">KCL &amp; KVL</a></td></tr>
+    <tr><td>Ideal and practical sources</td><td>Draw and explain the terminal behaviour of ideal/practical voltage and current sources.</td><td><a href="#sources">Sources</a></td></tr>
+    <tr><td>Source transformation</td><td>Convert a voltage source with series resistance to a current source with parallel resistance, and back.</td><td><a href="#source-transformation">Source transformation</a></td></tr>
+    <tr><td>Mesh analysis</td><td>Assign mesh currents, write KVL for each mesh, solve for branch currents. <strong>No supermesh.</strong></td><td><a href="#mesh">Mesh</a></td></tr>
+    <tr><td>Nodal analysis</td><td>Choose a reference, write KCL at each node, solve for node voltages. <strong>No supernode.</strong></td><td><a href="#nodal">Nodal</a></td></tr>
+    <tr><td>Star–delta / delta–star</td><td>Convert three-terminal networks and use the conversion to reduce a bridge.</td><td><a href="#star-delta">Star–Delta</a></td></tr>
+    <tr><td>Superposition</td><td>Find a voltage or current by adding the contributions of independent sources one at a time.</td><td><a href="#superposition">Superposition</a></td></tr>
+    <tr><td>Thevenin</td><td>Reduce any linear two-terminal network to <span class="v">V</span><sub>th</sub> in series with <span class="v">R</span><sub>th</sub>.</td><td><a href="#thevenin">Thevenin</a></td></tr>
+    <tr><td>Norton</td><td>Reduce the same network to <span class="v">I</span><sub>N</sub> in parallel with <span class="v">R</span><sub>N</sub>.</td><td><a href="#norton">Norton</a></td></tr>
+    <tr><td>Maximum power transfer</td><td>Find the load that receives maximum power and calculate that power.</td><td><a href="#mpt">Maximum power</a></td></tr>
+  </table>
+
+  <div class="method-note">
+    <p><strong>Scope limit.</strong> The syllabus says “only independent sources” and explicitly excludes <strong>supernodes</strong> and <strong>supermeshes</strong>. This guide does not teach dependent sources, supernodes, supermeshes, or advanced network theorems. If your teacher covers them later, they belong to a different module or a different course.</p>
+  </div>
+
+  <h3>Exam pattern — read this before you plan revision</h3>
+  <p>The official NEP syllabus gives the end-semester pattern as <strong>six questions of 15 marks each; Question 1 is compulsory; a total of four questions must be answered</strong> (Question 1 plus any three of Questions 2–6); <strong>2 hours; 60 marks</strong>. The supplied <strong>June 2025 NEP paper (code N10415)</strong> uses exactly this pattern: <strong>60 marks, 2 hours, Question 1 compulsory, attempt any three of the remaining five</strong>. The paper therefore confirms the official scheme rather than contradicting it.</p>
+  <p>The <em>content</em> of Module I is stable, but the <em>arrangement</em> of a paper can vary: Question 1 may be split into several short parts, and a 15-mark question may mix a Module I numerical with a theory part from another module. Read the marks printed against each part and allocate time accordingly. If your department issues a different paper pattern for your batch, follow the department’s version.</p>
+  <p>The C-scheme papers (subject code 58654, December 2024 and Summer 2025) are from a different course and scheme. They are useful for extra practice only, and are labelled as such wherever a question is mentioned.</p>
+
+  <div class="toc">
+    <ol>
+      <li><a href="#prereq">Prerequisites — from charge to power</a></li>
+      <li><a href="#conventions">Circuit language, polarity and sign conventions</a></li>
+      <li><a href="#sources">Ideal and practical sources</a></li>
+      <li><a href="#source-transformation">Source transformation</a></li>
+      <li><a href="#kcl-kvl">Kirchhoff’s laws (KCL and KVL)</a></li>
+      <li><a href="#mesh">Mesh analysis</a></li>
+      <li><a href="#nodal">Nodal analysis</a></li>
+      <li><a href="#star-delta">Star–delta and delta–star conversion</a></li>
+      <li><a href="#superposition">Superposition theorem</a></li>
+      <li><a href="#thevenin">Thevenin’s theorem</a></li>
+      <li><a href="#norton">Norton’s theorem</a></li>
+      <li><a href="#mpt">Maximum power transfer theorem</a></li>
+      <li><a href="#choose">Choosing a method under exam pressure</a></li>
+      <li><a href="#assignments">Course assignments (Dr. Nirmala K.)</a></li>
+      <li><a href="#qb">Teacher’s Unit 1 practice question bank</a></li>
+      <li><a href="#papers">University paper questions</a></li>
+      <li><a href="#practice">Practice — Basic / Exam-level / Challenging</a></li>
+      <li><a href="#answer-key">Full answer key</a></li>
+      <li><a href="#revision">Last-minute revision sheet</a></li>
+      <li><a href="#references">References and attribution</a></li>
+    </ol>
+  </div>
+
+  <nav class="nav">
+    <a href="#prereq">Prerequisites</a>
+    <a href="#sources">Sources</a>
+    <a href="#kcl-kvl">KCL/KVL</a>
+    <a href="#mesh">Mesh</a>
+    <a href="#nodal">Nodal</a>
+    <a href="#star-delta">Star–Delta</a>
+    <a href="#superposition">Superposition</a>
+    <a href="#thevenin">Thevenin</a>
+    <a href="#norton">Norton</a>
+    <a href="#mpt">Max power</a>
+    <a href="#practice">Practice</a>
+    <a href="#answer-key">Answers</a>
+  </nav>
+
+  <h2 id="prereq">Prerequisites — from charge to power</h2>
+  <p>DC circuit analysis is only six ideas repeated: charge, current, voltage, resistance, power and the two ways of connecting resistors. If one of these is shaky, every later method will feel like a trick. This section builds them in order and ends with one complete series–parallel example.</p>
+
+  <h3>1 · Charge and current</h3>
+  <p>Electric charge is measured in coulombs (C). The symbol is <span class="v">Q</span>. Current is the rate at which charge passes a point:</p>
+  <div class="eq"><span class="v">I</span> = <span class="v">Q</span> / <span class="v">t</span> &nbsp;&nbsp;and&nbsp;&nbsp; 1 A = 1 C/s</div>
+  <p>If 12 C pass a point in 3 s, the current is 4 A. Conventional current is drawn from the positive terminal of a source, through the external circuit, to the negative terminal. Electrons drift the other way. All the arrow rules in this module use <strong>conventional current</strong>.</p>
+  <p><strong>Direct current (DC)</strong> means the current does not reverse. Its value may still change with time, but in this module the sources are constant, so every current and voltage settles to a fixed value.</p>
+
+  <h3>2 · Voltage is a difference</h3>
+  <p>Voltage, or potential difference, is the work done per unit charge in moving charge between two points:</p>
+  <div class="eq"><span class="v">V</span> = <span class="v">W</span> / <span class="v">Q</span> &nbsp;&nbsp;and&nbsp;&nbsp; 1 V = 1 J/C</div>
+  <p>A voltage does not exist “at a point” by itself. It exists <em>between two points</em>. When we say “the voltage at node A is 6 V,” we always mean “6 V at A relative to the reference node.” The reference node is usually drawn at the bottom of the circuit and called <strong>ground</strong> (0 V). Choosing a different reference shifts every node voltage by the same amount; every <em>difference</em>, and therefore every current, stays the same.</p>
+  <p>The plus and minus signs on a voltage tell you which point is at the higher potential. <span class="v">V</span><sub>AB</sub> = <span class="v">V</span><sub>A</sub> − <span class="v">V</span><sub>B</sub> is positive when A is higher than B. Reversing the order reverses the sign.</p>
+
+  <h3>3 · Resistance and Ohm’s law</h3>
+  <p>Resistance is opposition to current, measured in ohms (Ω). For a resistor at constant temperature:</p>
+  <div class="eq"><span class="v">V</span> = <span class="v">I R</span> &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">I</span> = <span class="v">V</span> / <span class="v">R</span> &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">R</span> = <span class="v">V</span> / <span class="v">I</span></div>
+  <p>Conductance is the reciprocal, <span class="v">G</span> = 1/<span class="v">R</span>, measured in siemens (S). Nodal analysis becomes faster if you think in conductances, because a resistor <span class="v">R</span> between two nodes contributes <span class="v">G</span> = 1/<span class="v">R</span> to the equations.</p>
+  <p>An <strong>ideal wire</strong> has zero resistance: all points on it are at the same potential. An <strong>open circuit</strong> has infinite resistance: no current flows. A <strong>short circuit</strong> has zero resistance: the voltage across it is zero, and the current is limited only by the rest of the circuit.</p>
+
+  <h3>4 · Series and parallel</h3>
+  <p><strong>Series:</strong> the same current passes through every element. The voltages add.</p>
+  <div class="eq"><span class="v">R</span><sub>series</sub> = <span class="v">R</span><sub>1</sub> + <span class="v">R</span><sub>2</sub> + ⋯ + <span class="v">R</span><sub>n</sub></div>
+  <p><strong>Parallel:</strong> the same voltage appears across every element. The currents add.</p>
+  <div class="eq">1 / <span class="v">R</span><sub>parallel</sub> = 1/<span class="v">R</span><sub>1</sub> + 1/<span class="v">R</span><sub>2</sub> + ⋯ + 1/<span class="v">R</span><sub>n</sub> &nbsp;&nbsp;·&nbsp;&nbsp; two resistors: <span class="v">R</span><sub>p</sub> = <span class="v">R</span><sub>1</sub><span class="v">R</span><sub>2</sub> / (<span class="v">R</span><sub>1</sub> + <span class="v">R</span><sub>2</sub>)</div>
+  <p class="eq-note">For two resistors, “product over sum” is faster than the reciprocal formula. The parallel equivalent is always smaller than the smallest branch.</p>
+
+  <figure>
+    <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="figSeriesTitle">
+      <title id="figSeriesTitle">A 12 volt source feeding a 6 ohm resistor in series with a parallel pair of 3 ohm and 6 ohm resistors</title>
+      <g fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M45 70 H110"/>
+        <path d="M110 70 L120 70 L126 61 L136 79 L146 61 L156 79 L166 61 L170 70 L180 70 H235"/>
+        <path d="M235 70 V105"/>
+        <path d="M235 105 L235 111 L226 117 L244 127 L226 137 L244 147 L235 153 L235 165 V200"/>
+        <path d="M235 70 H315 V105"/>
+        <path d="M315 105 L315 111 L306 117 L324 127 L306 137 L324 147 L315 153 V165 V200"/>
+        <path d="M45 70 V130 M45 138 V200 H315"/>
+        <path d="M31 130 H59 M37 138 H53"/>
+      </g>
+      <circle cx="235" cy="70" r="4" fill="var(--ink)"/>
+      <text x="145" y="52" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">6 Ω</text>
+      <text x="252" y="140" font-size="13" font-weight="700" fill="var(--ink)">3 Ω</text>
+      <text x="332" y="140" font-size="13" font-weight="700" fill="var(--ink)">6 Ω</text>
+      <text x="18" y="140" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">12 V</text>
+      <text x="58" y="64" font-size="15" font-weight="700" fill="var(--ink)">+</text>
+      <text x="58" y="214" font-size="15" font-weight="700" fill="var(--ink)">−</text>
+      <text x="235" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="var(--accent)">A</text>
+      <text x="190" y="235" text-anchor="middle" font-size="11" fill="var(--muted)">Series 6 Ω, then 3 Ω ∥ 6 Ω</text>
+    </svg>
+    <p class="figcap">Figure 1. The 3 Ω and 6 Ω resistors are in parallel because they share nodes A and the bottom rail. Their equivalent is in series with the 6 Ω resistor and the 12 V source.</p>
+  </figure>
+
+  <div class="example">
+    <div class="example-title">Worked example — reduce, then work backwards</div>
+    <p><strong>Given.</strong> A 12 V ideal source feeds 6 Ω in series with the parallel combination of 3 Ω and 6 Ω (Figure 1).</p>
+    <p><strong>Required.</strong> Total current, the voltage at A, and the current in each parallel branch.</p>
+    <p><strong>Step 1 — parallel pair.</strong></p>
+    <div class="eq"><span class="v">R</span><sub>p</sub> = (3 × 6)/(3 + 6) = 18/9 = 2 Ω</div>
+    <p><strong>Step 2 — total resistance.</strong></p>
+    <div class="eq"><span class="v">R</span><sub>total</sub> = 6 + 2 = 8 Ω</div>
+    <p><strong>Step 3 — source current.</strong></p>
+    <div class="eq"><span class="v">I</span> = 12/8 = 1.5 A</div>
+    <p><strong>Step 4 — voltage at A.</strong> The 6 Ω series resistor drops <span class="v">V</span> = 1.5 × 6 = 9 V, so <span class="v">V</span><sub>A</sub> = 12 − 9 = 3 V. Equivalently, <span class="v">V</span><sub>A</sub> = 1.5 × 2 = 3 V.</p>
+    <p><strong>Step 5 — branch currents.</strong></p>
+    <div class="eq"><span class="v">I</span><sub>3Ω</sub> = 3/3 = 1 A &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">I</span><sub>6Ω</sub> = 3/6 = 0.5 A</div>
+    <p><strong>Check.</strong> 1 + 0.5 = 1.5 A, which is the source current. Power: source supplies 12 × 1.5 = 18 W; resistors dissipate 1.5²×6 + 1²×3 + 0.5²×6 = 13.5 + 3 + 1.5 = 18 W. Balances.</p>
+  </div>
+
+  <h3>5 · Power and energy</h3>
+  <div class="eq"><span class="v">P</span> = <span class="v">V I</span> = <span class="v">I</span>²<span class="v">R</span> = <span class="v">V</span>²/<span class="v">R</span> &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">E</span> = <span class="v">P t</span></div>
+  <p>Power is in watts (W), energy in joules (J). A 100 W lamp running for 10 h uses 1 kWh, commonly called one “unit” of electricity. In circuit problems, power is the best check: the power delivered by sources must equal the power absorbed by resistors (and by any source that is being charged).</p>
+  <p><strong>Passive sign convention.</strong> If current enters the <strong>+</strong> terminal of an element, that element <em>absorbs</em> power: <span class="v">P</span> = <span class="v">V I</span> is positive. If current leaves the + terminal, the element <em>delivers</em> power. A resistor always absorbs; a source may deliver or absorb.</p>
+
+  <h3>6 · Algebra and units you will actually use</h3>
+  <ul>
+    <li><strong>Simultaneous equations.</strong> Mesh and nodal analysis produce two or three linear equations. Solve by substitution or elimination; keep the units on every term.</li>
+    <li><strong>Fractions are normal.</strong> Answers such as 41/48 A are exact. Convert to decimals only at the end, and state the unit.</li>
+    <li><strong>Prefixes.</strong> k = 10³, m = 10⁻³, μ = 10⁻⁶. Convert every value to base units before calculating.</li>
+    <li><strong>Signs carry meaning.</strong> A negative current means the actual current is opposite to your assumed arrow. Do not throw the minus sign away.</li>
+  </ul>
+
+  <h3>7 · What “source” means here</h3>
+  <p>An independent source sets a voltage or current to a fixed value regardless of the rest of the circuit. A <strong>dependent</strong> source’s value depends on another voltage or current in the circuit. The syllabus says “only independent sources,” so every source in this module is independent. You will meet dependent sources in a later module; do not use dependent-source techniques here.</p>
+  <div class="method-note">
+    <p><strong>About the official prerequisite block.</strong> The syllabus page also lists resistance, inductance, capacitance, series/parallel resistance, voltage/current/power/energy, and magnetic circuits (MMF, field strength, reluctance). Inductance, capacitance and magnetic circuits are not used in Module I’s DC-resistive analysis. They become essential in later modules. If your teacher has already covered them, treat them as background; if not, you can safely postpone them until the module that uses them.</p>
+  </div>
+
+  <h2 id="conventions">Circuit language, polarity and sign conventions</h2>
+  <p>Most lost marks in this module are not caused by bad algebra. They are caused by a sign that was chosen carelessly and never checked. Fix the vocabulary first.</p>
+
+  <h3>Nodes, branches, loops and meshes</h3>
+  <table>
+    <tr><th>Word</th><th>Meaning</th><th>Example</th></tr>
+    <tr><td><strong>Node</strong></td><td>A point where two or more circuit elements meet. The whole of an ideal wire is one node.</td><td>The top rail in Figure 1 is one node.</td></tr>
+    <tr><td><strong>Branch</strong></td><td>A single element (or a series combination with no junction) between two nodes.</td><td>The 3 Ω resistor is a branch.</td></tr>
+    <tr><td><strong>Loop</strong></td><td>Any closed path through the circuit.</td><td>Source → 6 Ω → 3 Ω → source.</td></tr>
+    <tr><td><strong>Mesh</strong></td><td>A loop that contains no other loop inside it. A “window” of a planar circuit.</td><td>The left and right windows of a two-mesh circuit.</td></tr>
+  </table>
+
+  <h3>Reference node and node voltage</h3>
+  <p>Pick one node and call it 0 V. Every other node voltage is then measured with respect to it. The choice is free, but choosing the bottom rail or the negative terminal of the main source usually makes the equations shortest. A node voltage is always a <em>rise</em> from the reference to that node.</p>
+
+  <h3>Assumed directions</h3>
+  <p>You do not need to know the true direction before solving. Draw an arrow, solve, and interpret the sign:</p>
+  <ul>
+    <li>Positive answer → the current really flows in the direction of your arrow.</li>
+    <li>Negative answer → the current flows opposite to your arrow; the magnitude is the absolute value.</li>
+  </ul>
+  <p>The same applies to voltage polarity. Mark + and − before writing equations, and keep them consistent to the end.</p>
+
+  <h3>Source symbols</h3>
+  <table>
+    <tr><th>Symbol</th><th>Meaning</th><th>How to read it</th></tr>
+    <tr><td>Long line and short line</td><td>DC voltage source (battery)</td><td>The <strong>long line is the positive terminal</strong>. The emf arrow inside a circle points from − to +.</td></tr>
+    <tr><td>Circle with an arrow</td><td>Ideal current source</td><td>The arrow gives the direction in which the source drives current. The current leaves the source at the head of the arrow.</td></tr>
+    <tr><td>Circle with + and −</td><td>General voltage source</td><td>The + terminal is at the higher potential when the source delivers power.</td></tr>
+  </table>
+
+  <h3>KVL sign rules — the table to memorise</h3>
+  <table>
+    <tr><th>While moving around the loop…</th><th>Sign in the KVL sum</th></tr>
+    <tr><td>Across a resistor <em>in the direction</em> of the current</td><td><strong>−</strong> <span class="v">I R</span> (potential drop)</td></tr>
+    <tr><td>Across a resistor <em>opposite</em> to the current</td><td><strong>+</strong> <span class="v">I R</span> (potential rise)</td></tr>
+    <tr><td>Through a voltage source from − to +</td><td><strong>+</strong> <span class="v">V</span> (rise)</td></tr>
+    <tr><td>Through a voltage source from + to −</td><td><strong>−</strong> <span class="v">V</span> (drop)</td></tr>
+  </table>
+  <p>Then set the algebraic sum to zero. The equation is a statement of energy conservation: the rises equal the drops around a closed path.</p>
+
+  <h3>Two assumptions that are always in force</h3>
+  <ul>
+    <li><strong>Ideal wires.</strong> Connecting wires have zero resistance unless a value is printed. All points on a wire are at one potential.</li>
+    <li><strong>Lumped elements.</strong> Each resistor, source and meter is treated as a single element at a point. There are no stray capacitances or inductances in this module.</li>
+  </ul>
+
+  <h2 id="sources">Ideal and practical sources</h2>
+  <p>A source is a two-terminal device that maintains a voltage or a current. “Ideal” and “practical” are models, not moral judgements: the ideal model is simpler, the practical model is more accurate.</p>
+
+  <div class="quote">
+    <p>“An ideal battery is an emf source that maintains a constant terminal voltage, independent of the current between the two terminals. An ideal battery has no internal resistance…”</p>
+    <span class="attrib">Samuel J. Ling, William Moebs and Jeff Sanny, <em>University Physics Volume 2</em>, OpenStax, §10.1 “Electromotive Force”. <a href="https://openstax.org/books/university-physics-volume-2/pages/10-1-electromotive-force">Section link</a>. CC BY-NC-SA 4.0.</span>
+  </div>
+
+  <p><strong>Paraphrase.</strong> An ideal voltage source holds its terminal voltage at <span class="v">V</span><sub>s</sub> whatever current the rest of the circuit draws. Its V–I graph is a vertical line at <span class="v">V</span> = <span class="v">V</span><sub>s</sub>. An ideal current source holds its current at <span class="v">I</span><sub>s</sub> whatever voltage appears across it; its V–I graph is a horizontal line at <span class="v">I</span> = <span class="v">I</span><sub>s</sub>. Neither can be built exactly, but they are excellent approximations when the internal resistance is very small (voltage source) or very large (current source).</p>
+
+  <p>A real battery has internal resistance. OpenStax models it as an ideal emf in series with a resistance:</p>
+  <div class="quote">
+    <p>“A simple model for a battery consists of an idealized emf source ε and an internal resistance r.”</p>
+    <p>“The terminal voltage of the battery is <span class="v">V</span><sub>terminal</sub> = ε − <span class="v">I r</span>.”</p>
+    <span class="attrib">OpenStax, <em>University Physics Volume 2</em>, §10.1, Figure 10.6 and Equation 10.1. <a href="https://openstax.org/books/university-physics-volume-2/pages/10-1-electromotive-force">Section link</a>.</span>
+  </div>
+
+  <figure>
+    <svg viewBox="0 0 520 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="figSourceTitle">
+      <title id="figSourceTitle">Four source models: ideal voltage source, practical voltage source, ideal current source and practical current source</title>
+      <g fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <!-- (a) ideal voltage -->
+        <path d="M130 55 V80 M130 128 V175"/>
+        <circle cx="130" cy="104" r="24"/>
+        <path d="M122 104 H138 M130 96 V112"/>
+        <!-- (b) practical voltage -->
+        <path d="M390 55 V70 M390 96 V104 M390 128 V175"/>
+        <path d="M390 70 L390 76 L381 82 L399 92 L381 102 L399 112 L390 118 L390 124"/>
+        <circle cx="390" cy="150" r="0"/>
+        <circle cx="390" cy="150" r="24"/>
+        <path d="M382 150 H398 M390 142 V158"/>
+        <!-- (c) ideal current -->
+        <path d="M130 240 V275 M130 323 V355"/>
+        <circle cx="130" cy="299" r="24"/>
+        <path d="M130 310 V288 M124 296 L130 288 L136 296"/>
+        <!-- (d) practical current -->
+        <path d="M330 240 H430 V275 M430 323 V355 H330 V240"/>
+        <circle cx="350" cy="299" r="24"/>
+        <path d="M350 310 V288 M344 296 L350 288 L356 296"/>
+        <path d="M430 275 V281 L421 287 L439 297 L421 307 L439 317 L430 323"/>
+      </g>
+      <text x="130" y="30" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">(a) Ideal voltage source</text>
+      <text x="390" y="30" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">(b) Practical voltage source</text>
+      <text x="130" y="220" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">(c) Ideal current source</text>
+      <text x="390" y="220" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">(d) Practical current source</text>
+      <text x="150" y="70" font-size="14" font-weight="700" fill="var(--ink)">+</text>
+      <text x="150" y="155" font-size="14" font-weight="700" fill="var(--ink)">−</text>
+      <text x="405" y="66" font-size="14" font-weight="700" fill="var(--ink)">+</text>
+      <text x="405" y="170" font-size="14" font-weight="700" fill="var(--ink)">−</text>
+      <text x="404" y="118" font-size="12" font-weight="700" fill="var(--ink)">r</text>
+      <text x="130" y="108" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)">V</text>
+      <text x="390" y="154" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)">ε</text>
+      <text x="158" y="304" font-size="13" font-weight="700" fill="var(--ink)">I</text>
+      <text x="378" y="304" font-size="13" font-weight="700" fill="var(--ink)">I</text>
+      <text x="446" y="304" font-size="12" font-weight="700" fill="var(--ink)">r</text>
+      <text x="48" y="350" text-anchor="middle" font-size="11" fill="var(--muted)">holds V fixed</text>
+      <text x="308" y="380" text-anchor="middle" font-size="11" fill="var(--muted)">holds I fixed; r is in parallel</text>
+    </svg>
+    <p class="figcap">Figure 2. The four source models. A practical voltage source is an ideal emf ε in series with r; a practical current source is an ideal current source in parallel with r. The two practical models can be made exactly equivalent by source transformation.</p>
+  </figure>
+
+  <div class="example">
+    <div class="example-title">Worked example — terminal voltage of a real battery</div>
+    <p><strong>Given.</strong> ε = 12 V, internal resistance <span class="v">r</span> = 0.5 Ω, load current <span class="v">I</span> = 4 A.</p>
+    <p><strong>Required.</strong> Terminal voltage and the power lost inside the battery.</p>
+    <p><strong>Equation.</strong></p>
+    <div class="eq"><span class="v">V</span><sub>terminal</sub> = ε − <span class="v">I r</span> = 12 − (4)(0.5)</div>
+    <p><strong>Solve.</strong> <span class="v">V</span><sub>terminal</sub> = 12 − 2 = <strong>10 V</strong>. Internal loss = <span class="v">I</span>²<span class="v">r</span> = 16 × 0.5 = <strong>8 W</strong>.</p>
+    <p><strong>Check.</strong> The load receives 10 × 4 = 40 W; the battery chemically supplies 40 + 8 = 48 W = 12 × 4. Balances.</p>
+  </div>
+
+  <p><strong>When to use the practical model.</strong> Use it whenever a problem gives an internal resistance, asks for terminal voltage under load, or asks why a battery’s voltage falls when a heavy load is connected. Use the ideal model when no internal resistance is given and the source is drawn as an ideal symbol.</p>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes — sources</h3>
+    <ul>
+      <li>Treating an ideal voltage source as if it had a fixed current. Its current is set by the external circuit.</li>
+      <li>Forgetting that an ideal current source has a voltage set by the external circuit, not by the source alone.</li>
+      <li>Putting the internal resistance in parallel with a voltage source. It is in <strong>series</strong>.</li>
+      <li>Putting the internal resistance in series with a current source. It is in <strong>parallel</strong>.</li>
+      <li>Using <span class="v">V</span><sub>terminal</sub> = ε + <span class="v">I r</span> while the battery is discharging. The sign is minus when current leaves the positive terminal.</li>
+    </ul>
+  </div>
+
+  <h2 id="source-transformation">Source transformation</h2>
+  <p>Source transformation replaces a voltage source in series with a resistance by a current source in parallel with the same resistance, or the reverse. It is not a new law; it is a way of redrawing the same two-terminal behaviour.</p>
+
+  <div class="eq"><span class="v">V</span><sub>s</sub> = <span class="v">I</span><sub>s</sub> <span class="v">R</span><sub>p</sub> &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">I</span><sub>s</sub> = <span class="v">V</span><sub>s</sub> / <span class="v">R</span><sub>s</sub> &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">R</span><sub>p</sub> = <span class="v">R</span><sub>s</sub></div>
+  <p class="eq-note">The resistance value does not change; it moves from series to parallel. The source value changes so that the short-circuit current and open-circuit voltage stay the same.</p>
+
+  <h3>Why it works</h3>
+  <p>Look at the two models from the terminals. For the voltage model, the short-circuit current is <span class="v">V</span><sub>s</sub>/<span class="v">R</span><sub>s</sub> and the open-circuit voltage is <span class="v">V</span><sub>s</sub>. For the current model, the short-circuit current is <span class="v">I</span><sub>s</sub> and the open-circuit voltage is <span class="v">I</span><sub>s</sub><span class="v">R</span><sub>p</sub>. If <span class="v">I</span><sub>s</sub> = <span class="v">V</span><sub>s</sub>/<span class="v">R</span><sub>s</sub> and <span class="v">R</span><sub>p</sub> = <span class="v">R</span><sub>s</sub>, the two terminal behaviours are identical for every external load. That is the definition of equivalence.</p>
+
+  <figure>
+    <svg viewBox="0 0 620 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="figSTTitle">
+      <title id="figSTTitle">A 18 volt source in series with 6 ohms is equivalent to a 3 ampere source in parallel with 6 ohms</title>
+      <g fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M90 60 V120 M90 136 V180 M90 60 H130"/>
+        <path d="M130 60 L140 60 L146 51 L156 69 L166 51 L176 69 L186 51 L190 60 H250"/>
+        <path d="M90 180 H250"/>
+        <path d="M76 120 H104 M82 128 H98"/>
+        <path d="M340 60 V100 M340 144 V180 M340 60 H405 M340 180 H490"/>
+        <circle cx="340" cy="122" r="22"/>
+        <path d="M340 134 V110 M334 118 L340 110 L346 118"/>
+        <path d="M450 60 V100 M450 100 L450 106 L441 112 L459 122 L441 132 L459 142 L450 148 L450 180"/>
+        <path d="M340 60 H490 M340 180 H490 M490 60 V180"/>
+      </g>
+      <text x="160" y="40" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">18 V</text>
+      <text x="170" y="93" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">6 Ω</text>
+      <text x="58" y="132" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">+</text>
+      <text x="58" y="168" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">−</text>
+      <text x="250" y="52" font-size="12" font-weight="700" fill="var(--accent)">A</text>
+      <text x="250" y="195" font-size="12" font-weight="700" fill="var(--accent)">B</text>
+      <text x="300" y="132" text-anchor="middle" font-size="18" font-weight="700" fill="var(--ink)">≡</text>
+      <text x="370" y="126" font-size="12" font-weight="700" fill="var(--ink)">3 A</text>
+      <text x="440" y="93" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">6 Ω</text>
+      <text x="490" y="52" font-size="12" font-weight="700" fill="var(--accent)">A</text>
+      <text x="490" y="195" font-size="12" font-weight="700" fill="var(--accent)">B</text>
+      <text x="310" y="225" text-anchor="middle" font-size="11" fill="var(--muted)">V_s = 18 V, R_s = 6 Ω &nbsp;→&nbsp; I_s = 18/6 = 3 A, R_p = 6 Ω</text>
+    </svg>
+    <p class="figcap">Figure 3. The voltage source and the current source are equivalent at terminals A–B. The arrow points from the − terminal to the + terminal inside the source, so the current leaves the + terminal into the external circuit.</p>
+  </figure>
+
+  <div class="example">
+    <div class="example-title">Worked example — transform, combine, then find the current</div>
+    <p><strong>Given.</strong> An 18 V source in series with 6 Ω feeds a 3 Ω resistor connected across the output.</p>
+    <p><strong>Required.</strong> The current in the 3 Ω resistor.</p>
+    <p><strong>Step 1 — transform the source.</strong> 18 V in series with 6 Ω becomes 3 A in parallel with 6 Ω.</p>
+    <p><strong>Step 2 — combine the parallel resistors.</strong> The 6 Ω and 3 Ω are now in parallel:</p>
+    <div class="eq"><span class="v">R</span><sub>p</sub> = (6 × 3)/(6 + 3) = 2 Ω</div>
+    <p><strong>Step 3 — one current source, one resistor.</strong> 3 A flows into 2 Ω, so</p>
+    <div class="eq"><span class="v">V</span> = 3 × 2 = 6 V</div>
+    <p><strong>Step 4 — go back to the original branch.</strong> The 3 Ω resistor has 6 V across it:</p>
+    <div class="eq"><span class="v">I</span><sub>3Ω</sub> = 6/3 = 2 A</div>
+    <p><strong>Check.</strong> Original circuit: total resistance 6 + 3 = 9 Ω, source current 18/9 = 2 A; that current all passes through the 3 Ω resistor. Matches.</p>
+  </div>
+
+  <h3>Rules and limits</h3>
+  <ul>
+    <li>The resistance keeps the same numerical value; only its position changes.</li>
+    <li>Keep the terminal polarity consistent. The current source arrow points to the terminal that was the + terminal of the voltage source.</li>
+    <li>Transform only the part of the circuit you are allowed to change. The load is not part of the source model.</li>
+    <li>An ideal voltage source with <span class="v">R</span><sub>s</sub> = 0 cannot be transformed (it would need an infinite current source). An ideal current source with <span class="v">R</span><sub>p</sub> = ∞ cannot be transformed.</li>
+    <li>Source transformation works for independent sources. Dependent sources would need extra care and are outside this syllabus.</li>
+  </ul>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes — source transformation</h3>
+    <ul>
+      <li>Putting the resistance in parallel after converting to a voltage source (or in series after converting to a current source). The position reverses.</li>
+      <li>Reversing the arrow. The arrow head must point to the + terminal of the equivalent voltage source.</li>
+      <li>Changing the resistance value as well as the source value. <span class="v">R</span> stays the same.</li>
+      <li>Transforming a source that is in series with another source without first combining them.</li>
+      <li>Using the transformed circuit to find power in the original internal resistance. The transformation preserves terminal behaviour, not the internal power distribution.</li>
+    </ul>
+  </div>
+
+  <h2 id="kcl-kvl">Kirchhoff’s laws (KCL and KVL)</h2>
+  <p>Kirchhoff’s two laws turn a circuit into a set of equations. KCL is charge conservation at a junction; KVL is energy conservation around a loop. Every method in the rest of this module is a shortcut built on these two laws.</p>
+
+  <div class="quote">
+    <p>“The sum of all currents entering a junction must equal the sum of all currents leaving the junction.”</p>
+    <span class="attrib">OpenStax, <em>University Physics Volume 2</em>, §10.3 “Kirchhoff’s Rules”, Kirchhoff’s first rule (the junction rule). <a href="https://openstax.org/books/university-physics-volume-2/pages/10-3-kirchhoffs-rules">Section link</a>.</span>
+  </div>
+  <div class="quote">
+    <p>“The algebraic sum of changes in potential around any closed circuit path (loop) must be zero.”</p>
+    <span class="attrib">OpenStax, <em>University Physics Volume 2</em>, §10.3, Kirchhoff’s second rule (the loop rule). <a href="https://openstax.org/books/university-physics-volume-2/pages/10-3-kirchhoffs-rules">Section link</a>.</span>
+  </div>
+
+  <p><strong>Paraphrase.</strong> KCL says that charge cannot pile up at a node in a steady-state circuit: whatever enters must leave. KVL says that if you walk around any closed loop and add every potential rise and drop with its sign, you return to the same potential, so the sum is zero.</p>
+
+  <h3>KCL — the junction rule</h3>
+  <p>At a node, write either “sum of currents in = sum of currents out” or “sum of currents leaving = 0.” The second form is usually better for nodal analysis because every term can be written as (node voltage − neighbour voltage)/resistance.</p>
+  <div class="eq">Σ <span class="v">I</span><sub>in</sub> = Σ <span class="v">I</span><sub>out</sub> &nbsp;&nbsp;or&nbsp;&nbsp; Σ <span class="v">I</span><sub>leaving</sub> = 0</div>
+  <p>A node with only two connections does not need a KCL equation: the same current flows in and out. KCL becomes useful at a junction of three or more branches.</p>
+
+  <h3>KVL — the loop rule</h3>
+  <p>Choose a direction around the loop (clockwise is conventional). Walk the loop and add each element voltage using the sign table in the conventions section. The sum is zero.</p>
+  <div class="eq">Σ <span class="v">V</span><sub>rises</sub> = Σ <span class="v">V</span><sub>drops</sub> &nbsp;&nbsp;or&nbsp;&nbsp; Σ Δ<span class="v">V</span> = 0</div>
+  <p>A resistor always drops potential in the direction of its current. A source rises potential when you go from − to + and drops when you go from + to −.</p>
+
+  <figure>
+    <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="figKCLTitle">
+      <title id="figKCLTitle">A 10 volt source with a 2 ohm series resistor feeding a node that has 2 ohm and 4 ohm resistors to ground</title>
+      <g fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M45 70 V120 M45 128 V200"/>
+        <path d="M31 120 H59 M37 128 H53"/>
+        <path d="M45 70 H100"/>
+        <path d="M100 70 L110 70 L116 61 L126 79 L136 61 L146 79 L156 61 L160 70 H220"/>
+        <path d="M220 70 V105 M220 105 L220 111 L211 117 L229 127 L211 137 L229 147 L220 153 L220 165 V200"/>
+        <path d="M220 70 H300 V105 M300 105 L300 111 L291 117 L309 127 L291 137 L309 147 L300 153 L300 165 V200"/>
+        <path d="M45 200 H300"/>
+      </g>
+      <circle cx="220" cy="70" r="4" fill="var(--ink)"/>
+      <text x="130" y="52" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">2 Ω</text>
+      <text x="238" y="140" font-size="13" font-weight="700" fill="var(--ink)">2 Ω</text>
+      <text x="318" y="140" font-size="13" font-weight="700" fill="var(--ink)">4 Ω</text>
+      <text x="18" y="140" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">10 V</text>
+      <text x="58" y="64" font-size="15" font-weight="700" fill="var(--ink)">+</text>
+      <text x="58" y="214" font-size="15" font-weight="700" fill="var(--ink)">−</text>
+      <text x="220" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="var(--accent)">A</text>
+      <text x="190" y="232" text-anchor="middle" font-size="11" fill="var(--muted)">Find V_A by KCL; check both meshes by KVL</text>
+    </svg>
+    <p class="figcap">Figure 4. The two right-hand resistors are in parallel between node A and ground. KCL at A and KVL around the two meshes must give the same answer.</p>
+  </figure>
+
+  <div class="example">
+    <div class="example-title">Worked example — the same circuit by KCL and by KVL</div>
+    <p><strong>Given.</strong> 10 V ideal source, 2 Ω series resistor, node A, then 2 Ω and 4 Ω in parallel to the bottom rail (Figure 4).</p>
+    <p><strong>Required.</strong> <span class="v">V</span><sub>A</sub>, the current in each resistor, and a power check.</p>
+    <p><strong>Assumed directions.</strong> Current leaves the + terminal of the 10 V source, flows right through the 2 Ω series resistor into A, then down through the 2 Ω and 4 Ω resistors.</p>
+    <p><strong>KCL at A.</strong> Take the bottom rail as 0 V. Current entering A from the source is (10 − <span class="v">V</span><sub>A</sub>)/2. Currents leaving are <span class="v">V</span><sub>A</sub>/2 and <span class="v">V</span><sub>A</sub>/4.</p>
+    <div class="eq">(10 − <span class="v">V</span><sub>A</sub>)/2 = <span class="v">V</span><sub>A</sub>/2 + <span class="v">V</span><sub>A</sub>/4</div>
+    <p><strong>Solve.</strong> Multiply by 4:</p>
+    <div class="eq">20 − 2<span class="v">V</span><sub>A</sub> = 2<span class="v">V</span><sub>A</sub> + <span class="v">V</span><sub>A</sub> &nbsp;→&nbsp; 20 = 5<span class="v">V</span><sub>A</sub> &nbsp;→&nbsp; <span class="v">V</span><sub>A</sub> = 4 V</div>
+    <p><strong>Branch currents.</strong> Source branch: (10 − 4)/2 = 3 A. 2 Ω branch: 4/2 = 2 A. 4 Ω branch: 4/4 = 1 A.</p>
+    <p><strong>KVL check, left mesh.</strong> Start at the bottom-left corner, go clockwise: +10 − 2(3) − 2(2) = 10 − 6 − 4 = 0. ✓</p>
+    <p><strong>KVL check, right mesh.</strong> +2(2) − 4(1) = 4 − 4 = 0. ✓</p>
+    <p><strong>Power check.</strong> Source supplies 10 × 3 = 30 W. Resistors absorb 3²×2 + 2²×2 + 1²×4 = 18 + 8 + 4 = 30 W. ✓</p>
+    <p><strong>Answer.</strong> <span class="v">V</span><sub>A</sub> = 4 V; 3 A from the source, 2 A down the 2 Ω branch, 1 A down the 4 Ω branch.</p>
+  </div>
+
+  <h3>When a source fixes a quantity</h3>
+  <ul>
+    <li><strong>Voltage source between a node and the reference:</strong> that node voltage is known immediately. Do not write a KCL equation for it; use KCL at the other nodes and find the source current last.</li>
+    <li><strong>Current source in a branch:</strong> that branch current is known. Use it as a term in KCL and find the voltage across the source last.</li>
+  </ul>
+  <p>If a voltage source sits between two non-reference nodes, the strict method needs a supernode. That is explicitly outside this syllabus. Choose the reference at one end of the source, or use source transformation, so the problem stays within scope.</p>
+
+  <h3>Exam procedure — KCL/KVL</h3>
+  <ol class="steps">
+    <li>Redraw the circuit and mark every node. Choose the bottom rail (or the negative terminal of the main source) as 0 V.</li>
+    <li>Mark assumed current directions and label them <span class="v">I</span><sub>1</sub>, <span class="v">I</span><sub>2</sub>, ….</li>
+    <li>Write KCL at the nodes that have three or more connections. Do not write redundant equations for every node.</li>
+    <li>Write KVL for enough independent loops to cover every unknown. Two unknowns need two independent equations.</li>
+    <li>Solve the simultaneous equations. Keep fractions exact until the final decimal.</li>
+    <li>Check one loop and the power balance. State the direction of every current, not just its magnitude.</li>
+  </ol>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes — KCL/KVL</h3>
+    <ul>
+      <li>Using the wrong sign for a resistor: a drop is negative when you travel with the current.</li>
+      <li>Forgetting a branch at a node, especially a source branch. Every wire connected to the node counts.</li>
+      <li>Writing KCL at the reference node and at every other node, then wondering why one equation is redundant. One node equation is always dependent.</li>
+      <li>Treating a mesh current as if it were the current in every branch of that mesh. Shared branches carry the difference of two mesh currents.</li>
+      <li>Dropping the units and adding volts to amperes.</li>
+      <li>Reporting a negative answer as “wrong.” The negative sign is the direction.</li>
+    </ul>
+  </div>
+
+  <h2 id="mesh">Mesh analysis</h2>
+  <p>Mesh analysis assigns a circulating current to each window of a planar circuit and writes KVL around each window. It is the systematic version of “write loop equations,” and it usually gives fewer equations than branch-current KCL/KVL.</p>
+
+  <div class="theory">
+    <span class="source">Definition and intuition</span>
+    <p>A <strong>mesh</strong> is a loop that contains no other loop. In a planar circuit drawn on paper, the meshes are the visible windows. Give each window its own current, all circulating clockwise (the choice is arbitrary, but be consistent). The mesh current is a mathematical current, not necessarily a physical branch current.</p>
+    <p>Why it works: each mesh current automatically satisfies KCL at every node inside the mesh, because whatever flows in along one side flows out along another. Only KVL remains to be imposed. Shared resistors carry the <em>difference</em> of the two adjacent mesh currents, which is where the coupling terms come from.</p>
+  </div>
+
+  <h3>Rules</h3>
+  <ul>
+    <li>Use mesh analysis only on a <strong>planar</strong> circuit (one that can be drawn without crossing wires).</li>
+    <li>Assign a clockwise current to every mesh: <span class="v">I</span><sub>1</sub>, <span class="v">I</span><sub>2</sub>, ….</li>
+    <li>For mesh 1, write KVL in the direction of <span class="v">I</span><sub>1</sub>. A resistor shared with mesh 2 has current (<span class="v">I</span><sub>1</sub> − <span class="v">I</span><sub>2</sub>) in the direction of <span class="v">I</span><sub>1</sub>.</li>
+    <li>Put voltage rises on one side and <span class="v">I R</span> drops on the other, or set the whole sum to zero. Do not mix conventions halfway through.</li>
+    <li>A current source on an <strong>outer</strong> branch fixes that mesh current directly. A current source shared by two meshes would need a supermesh; that is excluded, so transform the source first.</li>
+  </ul>
+
+  <div class="eq">Mesh 1: <span class="v">R</span><sub>11</sub><span class="v">I</span><sub>1</sub> − <span class="v">R</span><sub>12</sub><span class="v">I</span><sub>2</sub> = Σ<span class="v">V</span><sub>1</sub> &nbsp;&nbsp;·&nbsp;&nbsp; Mesh 2: −<span class="v">R</span><sub>21</sub><span class="v">I</span><sub>1</sub> + <span class="v">R</span><sub>22</sub><span class="v">I</span><sub>2</sub> = Σ<span class="v">V</span><sub>2</sub></div>
+  <p class="eq-note"><span class="v">R</span><sub>11</sub> is the sum of all resistors in mesh 1; <span class="v">R</span><sub>12</sub> is the resistor shared by meshes 1 and 2 (positive in this form). The right side is the net voltage rise in the direction of that mesh current.</p>
+
+  <figure>
+    <svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="figMeshTitle">
+      <title id="figMeshTitle">Two-mesh circuit with a 12 volt source, 2 ohm, shared 4 ohm, 2 ohm and 6 volt source</title>
+      <g fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M50 70 V120 M50 128 V200"/>
+        <path d="M36 120 H64 M42 128 H58"/>
+        <path d="M50 70 H80"/>
+        <path d="M80 70 L90 70 L96 61 L106 79 L116 61 L126 79 L136 61 L140 70 H220"/>
+        <path d="M220 70 V105 M220 105 L220 111 L211 117 L229 127 L211 137 L229 147 L220 153 L220 165 V200"/>
+        <path d="M220 70 H240"/>
+        <path d="M240 70 L250 70 L256 61 L266 79 L276 61 L286 79 L296 61 L300 70 H340"/>
+        <path d="M340 70 V120 M340 128 V200"/>
+        <path d="M326 120 H354 M332 128 H348"/>
+        <path d="M50 200 H340"/>
+      </g>
+      <circle cx="220" cy="70" r="4" fill="var(--ink)"/>
+      <text x="110" y="52" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">2 Ω</text>
+      <text x="238" y="140" font-size="13" font-weight="700" fill="var(--ink)">4 Ω</text>
+      <text x="270" y="52" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">2 Ω</text>
+      <text x="20" y="140" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">12 V</text>
+      <text x="360" y="140" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">6 V</text>
+      <text x="63" y="64" font-size="15" font-weight="700" fill="var(--ink)">+</text>
+      <text x="63" y="214" font-size="15" font-weight="700" fill="var(--ink)">−</text>
+      <text x="353" y="64" font-size="15" font-weight="700" fill="var(--ink)">+</text>
+      <text x="353" y="214" font-size="15" font-weight="700" fill="var(--ink)">−</text>
+      <text x="100" y="90" font-size="12" font-weight="700" fill="var(--accent)">I₁ →</text>
+      <text x="258" y="90" font-size="12" font-weight="700" fill="var(--accent)">I₂ →</text>
+      <text x="220" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="var(--accent)">A</text>
+      <text x="215" y="235" text-anchor="middle" font-size="11" fill="var(--muted)">Both mesh currents are clockwise</text>
+    </svg>
+    <p class="figcap">Figure 5. Mesh 1 is the left window, mesh 2 the right. The 4 Ω resistor is shared; the current downwards through it is <span class="v">I</span><sub>1</sub> − <span class="v">I</span><sub>2</sub>.</p>
+  </figure>
+
+  <div class="example">
+    <div class="example-title">Worked example — two meshes, two sources</div>
+    <p><strong>Given.</strong> Left mesh: 12 V source, 2 Ω top resistor, 4 Ω shared resistor. Right mesh: 4 Ω shared, 2 Ω top resistor, 6 V source (Figure 5). Both mesh currents clockwise.</p>
+    <p><strong>Required.</strong> <span class="v">I</span><sub>1</sub>, <span class="v">I</span><sub>2</sub> and the current through the 4 Ω resistor.</p>
+    <p><strong>KVL, mesh 1 (clockwise).</strong> Rise 12 V, drop 2<span class="v">I</span><sub>1</sub>, drop 4(<span class="v">I</span><sub>1</sub> − <span class="v">I</span><sub>2</sub>):</p>
+    <div class="eq">12 − 2<span class="v">I</span><sub>1</sub> − 4(<span class="v">I</span><sub>1</sub> − <span class="v">I</span><sub>2</sub>) = 0 &nbsp;→&nbsp; 3<span class="v">I</span><sub>1</sub> − 2<span class="v">I</span><sub>2</sub> = 6</div>
+    <p><strong>KVL, mesh 2 (clockwise).</strong> Drop 4(<span class="v">I</span><sub>2</sub> − <span class="v">I</span><sub>1</sub>), drop 2<span class="v">I</span><sub>2</sub>, then the 6 V source is crossed from + to −, which is a drop:</p>
+    <div class="eq">−4(<span class="v">I</span><sub>2</sub> − <span class="v">I</span><sub>1</sub>) − 2<span class="v">I</span><sub>2</sub> − 6 = 0 &nbsp;→&nbsp; 2<span class="v">I</span><sub>1</sub> − 3<span class="v">I</span><sub>2</sub> = 3</div>
+    <p><strong>Solve.</strong> From the first equation, <span class="v">I</span><sub>2</sub> = (3<span class="v">I</span><sub>1</sub> − 6)/2. Substitute into the second:</p>
+    <div class="eq">2<span class="v">I</span><sub>1</sub> − 3(3<span class="v">I</span><sub>1</sub> − 6)/2 = 3 &nbsp;→&nbsp; 4<span class="v">I</span><sub>1</sub> − 9<span class="v">I</span><sub>1</sub> + 18 = 6 &nbsp;→&nbsp; −5<span class="v">I</span><sub>1</sub> = −12</div>
+    <div class="eq"><span class="v">I</span><sub>1</sub> = 2.4 A &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">I</span><sub>2</sub> = 0.6 A</div>
+    <p><strong>Shared branch.</strong> Downwards through the 4 Ω: <span class="v">I</span><sub>1</sub> − <span class="v">I</span><sub>2</sub> = 1.8 A.</p>
+    <p><strong>Check.</strong> Voltage at the top of the shared resistor: 12 − 2(2.4) = 7.2 V; from the right, 6 + 2(0.6) = 7.2 V. The shared current is 7.2/4 = 1.8 A, which equals 2.4 − 0.6. ✓</p>
+    <p><strong>Power check.</strong> 12 V source delivers 12 × 2.4 = 28.8 W. The 6 V source absorbs 6 × 0.6 = 3.6 W because current enters its + terminal. Resistors absorb 2(2.4²) + 4(1.8²) + 2(0.6²) = 11.52 + 12.96 + 0.72 = 25.2 W. 28.8 − 3.6 = 25.2. ✓</p>
+  </div>
+
+  <h3>Exam procedure — mesh</h3>
+  <ol class="steps">
+    <li>Check that the circuit is planar. Redraw it if wires cross unnecessarily.</li>
+    <li>Label each mesh and draw all mesh currents clockwise.</li>
+    <li>Write one KVL equation per mesh. For a shared resistor, use the difference of the two mesh currents.</li>
+    <li>Put the equations in standard form with the mesh currents on the left and source voltages on the right.</li>
+    <li>Solve. Then convert mesh currents to the branch currents the question actually asks for.</li>
+    <li>Check one shared-branch voltage from both sides, and check the power balance.</li>
+  </ol>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes — mesh</h3>
+    <ul>
+      <li>Writing the shared resistor as <span class="v">R I</span><sub>1</sub> instead of <span class="v">R</span>(<span class="v">I</span><sub>1</sub> − <span class="v">I</span><sub>2</sub>).</li>
+      <li>Choosing one mesh clockwise and another anticlockwise, then using a sign rule that assumes both are clockwise.</li>
+      <li>Forgetting that a source can be a drop rather than a rise, depending on the direction of traversal.</li>
+      <li>Putting a current source in the middle of two meshes and inventing a supermesh. That is outside the syllabus; transform the source first.</li>
+      <li>Reporting <span class="v">I</span><sub>1</sub> as the current in every branch of mesh 1. It is only the mesh current.</li>
+    </ul>
+  </div>
+
+  <h2 id="nodal">Nodal analysis</h2>
+  <p>Nodal analysis chooses one node as the reference and writes KCL at every other node. The unknowns are node voltages. It is often faster than mesh when the circuit has many parallel branches or when you need one particular node voltage.</p>
+
+  <div class="theory">
+    <span class="source">Definition and intuition</span>
+    <p>Every branch current can be written as (<span class="v">V</span><sub>node</sub> − <span class="v">V</span><sub>neighbour</sub>)/<span class="v">R</span>. If you sum those expressions at a node and set the sum to zero, you get one equation per unknown node voltage. The reference node is not an unknown; its voltage is 0 V.</p>
+    <p>The method works because KCL is automatically satisfied once every node equation is satisfied. The equations are linear, so two or three unknowns are solved by substitution or elimination.</p>
+  </div>
+
+  <h3>Rules</h3>
+  <ul>
+    <li>Choose the reference node first. The bottom rail is usually best.</li>
+    <li>Label every other node with a voltage <span class="v">V</span><sub>1</sub>, <span class="v">V</span><sub>2</sub>, … relative to the reference.</li>
+    <li>At each non-reference node, write “sum of currents leaving = 0.” For a resistor <span class="v">R</span> to a neighbour at <span class="v">V</span><sub>n</sub>, the leaving current is (<span class="v">V</span> − <span class="v">V</span><sub>n</sub>)/<span class="v">R</span>.</li>
+    <li>A current source leaving the node contributes +<span class="v">I</span><sub>s</sub> to the “leaving” side; entering contributes −<span class="v">I</span><sub>s</sub>.</li>
+    <li>A voltage source connected between a node and the reference fixes that node voltage. Do not write KCL there; find the source current last.</li>
+    <li>A voltage source between two non-reference nodes would need a supernode. That is excluded; choose the reference at one end, or transform the source first.</li>
+  </ul>
+
+  <div class="eq">At node 1: (<span class="v">V</span><sub>1</sub> − <span class="v">V</span><sub>2</sub>)/<span class="v">R</span><sub>12</sub> + (<span class="v">V</span><sub>1</sub> − <span class="v">V</span><sub>3</sub>)/<span class="v">R</span><sub>13</sub> + ⋯ = Σ<span class="v">I</span><sub>sources entering</sub></div>
+  <p class="eq-note">The left side is the net current leaving through resistors. The right side is the net current injected by sources. Rearranged, this is the same as “sum of leaving currents = 0.”</p>
+
+  <figure>
+    <svg viewBox="0 0 450 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="figNodalTitle">
+      <title id="figNodalTitle">Nodal circuit with a 12 volt source through 6 ohms, a 6 volt source through 3 ohms, and 2 ohms to ground</title>
+      <g fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M50 70 V120 M50 128 V200"/>
+        <path d="M36 120 H64 M42 128 H58"/>
+        <path d="M50 70 H90"/>
+        <path d="M90 70 L100 70 L106 61 L116 79 L126 61 L136 79 L146 61 L150 70 H230"/>
+        <path d="M230 70 V105 M230 105 L230 111 L221 117 L239 127 L221 137 L239 147 L230 153 L230 165 V200"/>
+        <path d="M230 70 H300"/>
+        <path d="M300 70 L310 70 L316 61 L326 79 L336 61 L346 79 L356 61 L360 70 H400"/>
+        <path d="M400 70 V120 M400 128 V200"/>
+        <path d="M386 120 H414 M392 128 H408"/>
+        <path d="M50 200 H400"/>
+      </g>
+      <circle cx="230" cy="70" r="4" fill="var(--ink)"/>
+      <text x="120" y="52" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">6 Ω</text>
+      <text x="248" y="140" font-size="13" font-weight="700" fill="var(--ink)">2 Ω</text>
+      <text x="330" y="52" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">3 Ω</text>
+      <text x="18" y="140" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">12 V</text>
+      <text x="422" y="140" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">6 V</text>
+      <text x="63" y="64" font-size="15" font-weight="700" fill="var(--ink)">+</text>
+      <text x="63" y="214" font-size="15" font-weight="700" fill="var(--ink)">−</text>
+      <text x="413" y="64" font-size="15" font-weight="700" fill="var(--ink)">+</text>
+      <text x="413" y="214" font-size="15" font-weight="700" fill="var(--ink)">−</text>
+      <text x="230" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="var(--accent)">A</text>
+      <text x="225" y="235" text-anchor="middle" font-size="11" fill="var(--muted)">One unknown node voltage V_A</text>
+    </svg>
+    <p class="figcap">Figure 6. Node A is the only unknown node. Both sources have one terminal at the reference, so each source fixes the voltage at its own end of the resistor.</p>
+  </figure>
+
+  <div class="example">
+    <div class="example-title">Worked example — one unknown node</div>
+    <p><strong>Given.</strong> Node A is connected to a 12 V source through 6 Ω, to a 6 V source through 3 Ω, and to ground through 2 Ω (Figure 6).</p>
+    <p><strong>Required.</strong> <span class="v">V</span><sub>A</sub> and the current in each branch.</p>
+    <p><strong>Assumed directions.</strong> All branch currents leave A.</p>
+    <p><strong>KCL at A.</strong></p>
+    <div class="eq">(<span class="v">V</span><sub>A</sub> − 12)/6 + (<span class="v">V</span><sub>A</sub> − 6)/3 + <span class="v">V</span><sub>A</sub>/2 = 0</div>
+    <p><strong>Substitute and solve.</strong> Multiply by 6:</p>
+    <div class="eq">(<span class="v">V</span><sub>A</sub> − 12) + 2(<span class="v">V</span><sub>A</sub> − 6) + 3<span class="v">V</span><sub>A</sub> = 0</div>
+    <div class="eq">6<span class="v">V</span><sub>A</sub> = 24 &nbsp;→&nbsp; <span class="v">V</span><sub>A</sub> = 4 V</div>
+    <p><strong>Branch currents.</strong> 6 Ω branch: (4 − 12)/6 = −1.333 A, so 1.333 A flows <em>into</em> A. 3 Ω branch: (4 − 6)/3 = −0.667 A, so 0.667 A flows into A. 2 Ω branch: 4/2 = 2 A leaves A.</p>
+    <p><strong>Check.</strong> 1.333 + 0.667 = 2 A into A; 2 A leaves. ✓</p>
+    <p><strong>Power check.</strong> 12 V source delivers 12 × 1.333 = 16 W. 6 V source delivers 6 × 0.667 = 4 W. Resistors absorb 1.333²×6 + 0.667²×3 + 2²×2 = 10.667 + 1.333 + 8 = 20 W. ✓</p>
+  </div>
+
+  <h3>Exam procedure — nodal</h3>
+  <ol class="steps">
+    <li>Mark the reference node (0 V). If a voltage source connects to it, that source fixes the adjacent node voltage.</li>
+    <li>Label every remaining node with an unknown voltage.</li>
+    <li>At each unknown node, write KCL with every current expressed as a voltage difference over a resistance.</li>
+    <li>Multiply through by the least common multiple to clear fractions. Group the voltage terms.</li>
+    <li>Solve the simultaneous equations. Then find branch currents from the node voltages.</li>
+    <li>Check KCL at one node and the power balance.</li>
+  </ol>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes — nodal</h3>
+    <ul>
+      <li>Using the wrong sign for a source: if the source is 12 V at the far end, the current leaving A is (<span class="v">V</span><sub>A</sub> − 12)/<span class="v">R</span>, not (<span class="v">V</span><sub>A</sub> + 12)/<span class="v">R</span>.</li>
+      <li>Writing a KCL equation at the reference node as well; it is not independent.</li>
+      <li>Treating a voltage source between two unknown nodes as a normal resistor. That needs a supernode, which is excluded; change the reference or transform the source.</li>
+      <li>Forgetting a branch, especially a current-source branch that does not look like a resistor.</li>
+      <li>Mixing node voltages with branch voltages in the final answer. A branch voltage is a difference of two node voltages.</li>
+    </ul>
+  </div>
+
+  <h2 id="star-delta">Star–delta and delta–star conversion</h2>
+  <p>Some networks are neither series nor parallel. A bridge is the standard example: no two resistors are in series, and no two are in parallel, so you cannot reduce it by the basic rules. A star–delta conversion replaces a three-terminal “Y” by an equivalent three-terminal “Δ” (or the reverse), after which the circuit usually collapses into series and parallel combinations.</p>
+
+  <div class="quote">
+    <p>“…equivalent Δ and Y networks behave identically.”</p>
+    <span class="attrib">Tony R. Kuphaldt, <em>Lessons In Electric Circuits, Volume I — DC</em>, Chapter 10, section “Δ-Y and Y-Δ Conversions”. <a href="https://www.ibiblio.org/kuphaldt/electricCircuits/DC/DC_10.html">Chapter link</a>. The work is released for free distribution by the author.</span>
+  </div>
+
+  <p><strong>Paraphrase.</strong> Two three-terminal networks are equivalent if the resistance measured between any pair of terminals is the same in both, with the third terminal open. Matching the three pairs gives three equations, and solving them gives the conversion formulas. The networks are not physically identical inside; they are identical only as seen from the three terminals.</p>
+
+  <figure>
+    <svg viewBox="0 0 500 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="figStarDeltaTitle">
+      <title id="figStarDeltaTitle">A star network with 2, 4 and 6 ohm legs and its equivalent delta network</title>
+      <g fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M130 60 L130 74 L122 76.6 L138 81.9 L122 87.1 L138 92.4 L122 97.6 L138 102.9 L122 108.1 L138 113.4 L130 116 L130 130"/>
+        <path d="M70 190 L79.9 180.1 L88.1 183.2 L81.8 166.9 L98.1 173.2 L91.8 156.9 L108.2 163.1 L101.9 146.8 L118.2 153.1 L111.9 136.8 L120.1 139.9 L130 130"/>
+        <path d="M190 190 L180.1 180.1 L183.2 171.9 L166.9 178.2 L173.2 161.9 L156.9 168.2 L163.1 151.8 L146.8 158.1 L153.1 141.8 L136.8 148.1 L139.9 139.9 L130 130"/>
+        <path d="M370 60 L364.1 72.7 L353.9 75.9 L362.3 95.7 L341.8 102 L350.3 121.8 L329.7 128.2 L338.2 148 L317.7 154.3 L326.1 174.1 L315.9 177.3 L310 190"/>
+        <path d="M310 190 L324 190 L329.8 198 L341.2 182 L352.8 198 L364.2 182 L375.8 198 L387.2 182 L398.8 198 L410.2 182 L416 190 L430 190"/>
+        <path d="M430 190 L424.1 177.3 L428.4 167.4 L407.8 161 L416.3 141.3 L395.8 134.9 L404.2 115.1 L383.7 108.7 L392.2 89 L371.6 82.6 L375.9 72.7 L370 60"/>
+      </g>
+      <circle cx="130" cy="60" r="4" fill="var(--ink)"/>
+      <circle cx="70" cy="190" r="4" fill="var(--ink)"/>
+      <circle cx="190" cy="190" r="4" fill="var(--ink)"/>
+      <circle cx="130" cy="130" r="4" fill="var(--ink)"/>
+      <circle cx="370" cy="60" r="4" fill="var(--ink)"/>
+      <circle cx="310" cy="190" r="4" fill="var(--ink)"/>
+      <circle cx="430" cy="190" r="4" fill="var(--ink)"/>
+      <text x="130" y="48" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">A</text>
+      <text x="55" y="205" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">B</text>
+      <text x="205" y="205" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">C</text>
+      <text x="370" y="48" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">A</text>
+      <text x="295" y="205" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">B</text>
+      <text x="445" y="205" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">C</text>
+      <text x="142" y="95" font-size="12" font-weight="700" fill="var(--ink)">2 Ω</text>
+      <text x="58" y="168" font-size="12" font-weight="700" fill="var(--ink)">4 Ω</text>
+      <text x="174" y="158" font-size="12" font-weight="700" fill="var(--ink)">6 Ω</text>
+      <text x="330" y="118" text-anchor="end" font-size="12" font-weight="700" fill="var(--ink)">22/3 Ω</text>
+      <text x="376" y="218" font-size="12" font-weight="700" fill="var(--ink)">22 Ω</text>
+      <text x="414" y="118" font-size="12" font-weight="700" fill="var(--ink)">11 Ω</text>
+      <text x="130" y="240" text-anchor="middle" font-size="11" fill="var(--muted)">Star (Y)</text>
+      <text x="370" y="240" text-anchor="middle" font-size="11" fill="var(--muted)">Delta (Δ), equivalent</text>
+    </svg>
+    <p class="figcap">Figure 7. The star 2 Ω / 4 Ω / 6 Ω and the delta R<sub>AB</sub> = 22/3 Ω, R<sub>BC</sub> = 22 Ω, R<sub>CA</sub> = 11 Ω are equivalent at terminals A, B and C. These are the numbers from the June 2025 NEP paper, Q1(a).</p>
+  </figure>
+
+  <h3>Delta → star (Δ → Y)</h3>
+  <p>Label the delta resistors <span class="v">R</span><sub>AB</sub>, <span class="v">R</span><sub>BC</sub>, <span class="v">R</span><sub>CA</sub> and the star legs <span class="v">R</span><sub>A</sub>, <span class="v">R</span><sub>B</sub>, <span class="v">R</span><sub>C</sub> (the leg connected to the corresponding terminal). Let <span class="v">S</span> = <span class="v">R</span><sub>AB</sub> + <span class="v">R</span><sub>BC</sub> + <span class="v">R</span><sub>CA</sub>.</p>
+  <div class="eq"><span class="v">R</span><sub>A</sub> = <span class="v">R</span><sub>AB</sub><span class="v">R</span><sub>CA</sub> / <span class="v">S</span> &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">R</span><sub>B</sub> = <span class="v">R</span><sub>AB</sub><span class="v">R</span><sub>BC</sub> / <span class="v">S</span> &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">R</span><sub>C</sub> = <span class="v">R</span><sub>BC</sub><span class="v">R</span><sub>CA</sub> / <span class="v">S</span></div>
+  <p class="eq-note">Each star leg is the product of the two delta resistors touching that terminal, divided by the sum of all three.</p>
+
+  <h3>Star → delta (Y → Δ)</h3>
+  <p>Now let <span class="v">P</span> = <span class="v">R</span><sub>A</sub><span class="v">R</span><sub>B</sub> + <span class="v">R</span><sub>B</sub><span class="v">R</span><sub>C</sub> + <span class="v">R</span><sub>C</sub><span class="v">R</span><sub>A</sub>.</p>
+  <div class="eq"><span class="v">R</span><sub>AB</sub> = <span class="v">P</span> / <span class="v">R</span><sub>C</sub> &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">R</span><sub>BC</sub> = <span class="v">P</span> / <span class="v">R</span><sub>A</sub> &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">R</span><sub>CA</sub> = <span class="v">P</span> / <span class="v">R</span><sub>B</sub></div>
+  <p class="eq-note">Each delta resistor is the sum of the pairwise products, divided by the star leg opposite that delta side.</p>
+
+  <p><strong>Balanced shortcut.</strong> If all three star legs equal <span class="v">R</span><sub>Y</sub>, the equivalent delta is <span class="v">R</span><sub>Δ</sub> = 3<span class="v">R</span><sub>Y</sub>. If all three delta resistors equal <span class="v">R</span><sub>Δ</sub>, the equivalent star is <span class="v">R</span><sub>Y</sub> = <span class="v">R</span><sub>Δ</sub>/3.</p>
+
+  <h3>Why the formulas work</h3>
+  <p>Measure the resistance between A and B with C open. In the star, the path is <span class="v">R</span><sub>A</sub> + <span class="v">R</span><sub>B</sub>. In the delta, the path is <span class="v">R</span><sub>AB</sub> in parallel with (<span class="v">R</span><sub>CA</sub> + <span class="v">R</span><sub>BC</sub>):</p>
+  <div class="eq"><span class="v">R</span><sub>A</sub> + <span class="v">R</span><sub>B</sub> = <span class="v">R</span><sub>AB</sub>(<span class="v">R</span><sub>CA</sub> + <span class="v">R</span><sub>BC</sub>) / (<span class="v">R</span><sub>AB</sub> + <span class="v">R</span><sub>BC</sub> + <span class="v">R</span><sub>CA</sub>)</div>
+  <p>Write the corresponding equations for B–C and C–A, then solve the three equations for the star legs. The result is the Δ → Y formula above. Reversing the algebra gives Y → Δ. You do not need to reproduce the derivation unless the question asks for it, but you should know that it comes from terminal equivalence.</p>
+
+  <figure>
+    <svg viewBox="0 0 540 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="figBridgeTitle">
+      <title id="figBridgeTitle">Bridge circuit reduced by converting the delta C-D-B into a star with centre S</title>
+      <g fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M150 50 L141.5 58.5 L131.3 58.8 L130.7 79.2 L110.3 79.8 L109.7 100.2 L89.3 100.8 L88.7 121.2 L78.5 121.5 L70 130"/>
+        <path d="M150 50 L158.5 58.5 L158.8 68.7 L179.2 69.3 L179.8 89.7 L200.2 90.3 L200.8 110.7 L221.2 111.3 L221.5 121.5 L230 130"/>
+        <path d="M70 130 L78.5 138.5 L78.8 148.7 L99.2 149.3 L99.8 169.7 L120.2 170.3 L120.8 190.7 L141.2 191.3 L141.5 201.5 L150 210"/>
+        <path d="M230 130 L221.5 138.5 L211.3 138.8 L210.7 159.2 L190.3 159.8 L189.7 180.2 L169.3 180.8 L168.7 201.2 L158.5 201.5 L150 210"/>
+        <path d="M70 130 L82 130 L93.3 137 L116 123 L138.7 137 L161.3 123 L184 137 L206.7 123 L218 130 L230 130"/>
+        <path d="M400 50 L392.1 59 L382.3 59.6 L383.8 79.1 L364.2 80.2 L365.8 99.8 L346.2 100.9 L347.7 120.4 L337.9 121 L330 130"/>
+        <path d="M400 50 L407.9 59 L407.2 68.8 L426.7 69.9 L425.2 89.4 L444.8 90.6 L443.3 110.1 L462.8 111.2 L462.1 121 L470 130"/>
+        <path d="M330 130 L342 130 L345.8 137 L353.5 123 L361.2 137 L368.8 123 L376.5 137 L384.2 123 L388 130 L400 130"/>
+        <path d="M470 130 L458 130 L454.2 123 L446.5 137 L438.8 123 L431.2 137 L423.5 123 L415.8 137 L412 130 L400 130"/>
+        <path d="M400 130 L400 142 L393 146.7 L407 156 L393 165.3 L407 174.7 L393 184 L407 193.3 L400 198 L400 210"/>
+      </g>
+      <circle cx="150" cy="50" r="4" fill="var(--ink)"/><circle cx="70" cy="130" r="4" fill="var(--ink)"/><circle cx="230" cy="130" r="4" fill="var(--ink)"/><circle cx="150" cy="210" r="4" fill="var(--ink)"/>
+      <circle cx="400" cy="50" r="4" fill="var(--ink)"/><circle cx="330" cy="130" r="4" fill="var(--ink)"/><circle cx="470" cy="130" r="4" fill="var(--ink)"/><circle cx="400" cy="210" r="4" fill="var(--ink)"/><circle cx="400" cy="130" r="4" fill="var(--ink)"/>
+      <text x="150" y="38" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">A</text>
+      <text x="55" y="125" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">C</text>
+      <text x="245" y="125" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">D</text>
+      <text x="150" y="230" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">B</text>
+      <text x="82" y="78" font-size="11" font-weight="700" fill="var(--ink)">4 Ω</text>
+      <text x="202" y="78" font-size="11" font-weight="700" fill="var(--ink)">6 Ω</text>
+      <text x="58" y="184" font-size="11" font-weight="700" fill="var(--ink)">10 Ω</text>
+      <text x="202" y="192" font-size="11" font-weight="700" fill="var(--ink)">30 Ω</text>
+      <text x="146" y="150" font-size="11" font-weight="700" fill="var(--ink)">10 Ω</text>
+      <text x="400" y="38" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">A</text>
+      <text x="315" y="125" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">C</text>
+      <text x="485" y="125" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">D</text>
+      <text x="400" y="230" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">B</text>
+      <text x="342" y="78" font-size="11" font-weight="700" fill="var(--ink)">4 Ω</text>
+      <text x="452" y="78" font-size="11" font-weight="700" fill="var(--ink)">6 Ω</text>
+      <text x="340" y="154" font-size="11" font-weight="700" fill="var(--ink)">2 Ω</text>
+      <text x="432" y="154" font-size="11" font-weight="700" fill="var(--ink)">6 Ω</text>
+      <text x="410" y="190" font-size="11" font-weight="700" fill="var(--ink)">6 Ω</text>
+      <text x="388" y="126" text-anchor="end" font-size="11" font-weight="700" fill="var(--accent)">S</text>
+      <text x="150" y="248" text-anchor="middle" font-size="10" fill="var(--muted)">Original bridge</text>
+      <text x="400" y="248" text-anchor="middle" font-size="10" fill="var(--muted)">After Δ C-D-B → Y</text>
+    </svg>
+    <p class="figcap">Figure 8. Converting the delta C–D–B (10 Ω, 30 Ω, 10 Ω) to a star with centre S gives legs C–S = 2 Ω, D–S = 6 Ω, B–S = 6 Ω. The bridge then reduces to (4 + 2) ∥ (6 + 6) + 6 = 10 Ω.</p>
+  </figure>
+
+  <div class="example">
+    <div class="example-title">Worked example — reduce a bridge with Δ → Y</div>
+    <p><strong>Given.</strong> Terminals A and B. A–C = 4 Ω, A–D = 6 Ω, C–B = 10 Ω, D–B = 30 Ω, C–D = 10 Ω (left panel of Figure 8).</p>
+    <p><strong>Required.</strong> <span class="v">R</span><sub>AB</sub>.</p>
+    <p><strong>Choose the delta.</strong> The resistors C–D, D–B and B–C form a delta with terminals C, D, B. Convert this delta to a star with centre S.</p>
+    <p><strong>Step 1 — sum.</strong></p>
+    <div class="eq"><span class="v">S</span> = 10 + 30 + 10 = 50 Ω</div>
+    <p><strong>Step 2 — star legs.</strong></p>
+    <div class="eq"><span class="v">R</span><sub>C</sub> = (10 × 10)/50 = 2 Ω &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">R</span><sub>D</sub> = (10 × 30)/50 = 6 Ω &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">R</span><sub>B</sub> = (30 × 10)/50 = 6 Ω</div>
+    <p><strong>Step 3 — redraw.</strong> A–C (4 Ω) is in series with C–S (2 Ω), giving 6 Ω. A–D (6 Ω) is in series with D–S (6 Ω), giving 12 Ω. These two branches are in parallel between A and S. S–B is 6 Ω.</p>
+    <p><strong>Step 4 — series and parallel.</strong></p>
+    <div class="eq"><span class="v">R</span><sub>AS</sub> = (6 × 12)/(6 + 12) = 72/18 = 4 Ω</div>
+    <div class="eq"><span class="v">R</span><sub>AB</sub> = 4 + 6 = <strong>10 Ω</strong></div>
+    <p><strong>Check.</strong> Inject 1 A from A to B and solve the original bridge by nodal analysis: <span class="v">V</span><sub>A</sub> − <span class="v">V</span><sub>B</sub> = 10 V, so <span class="v">R</span><sub>AB</sub> = 10 Ω. The conversion and the original circuit agree.</p>
+  </div>
+
+  <h3>Exam procedure — star–delta</h3>
+  <ol class="steps">
+    <li>Identify a three-terminal star or delta that is not already in series or parallel.</li>
+    <li>Label its terminals consistently in both the original and the converted drawing. Most errors are label errors, not arithmetic errors.</li>
+    <li>Choose the direction that makes the remaining circuit simpler. Converting a delta at the “bottom” of a bridge usually works well.</li>
+    <li>Write the formula with the labels visible. Substitute only after the formula is complete.</li>
+    <li>Redraw the reduced circuit and finish with series/parallel rules.</li>
+    <li>Check the equivalent resistance is plausible: it must be smaller than the sum of all resistors and larger than the smallest parallel path.</li>
+  </ol>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes — star–delta</h3>
+    <ul>
+      <li>Using the delta formula when the network is a star (or vice versa).</li>
+      <li>Dividing by the wrong sum. For Δ → Y the denominator is the sum of all three delta resistors; for Y → Δ it is the <em>opposite</em> star leg.</li>
+      <li>Mixing the terminal labels after redrawing. Mark A, B, C on both diagrams before substituting.</li>
+      <li>Forgetting that a balanced star of 6 Ω becomes a delta of 18 Ω, not 2 Ω. The factor is 3 in the Y → Δ direction.</li>
+      <li>Applying a conversion to a network that already has a simple series or parallel reduction.</li>
+    </ul>
+  </div>
+
+  <h2 id="superposition">Superposition theorem</h2>
+  <p>Superposition replaces a multi-source problem by several single-source problems. It is the most reliable way to see what each source contributes, and it is often the fastest method when a circuit has one voltage source and one current source.</p>
+
+  <div class="quote">
+    <p>“The strategy used in the Superposition Theorem is to eliminate all but one source of power within a network at a time…”</p>
+    <p>“…all other voltage sources are replaced by wires (shorts), and all current sources with open circuits (breaks).”</p>
+    <span class="attrib">Tony R. Kuphaldt, <em>Lessons In Electric Circuits, Volume I — DC</em>, Chapter 10, section “Superposition Theorem”. <a href="https://www.ibiblio.org/kuphaldt/electricCircuits/DC/DC_10.html">Chapter link</a>.</span>
+  </div>
+  <div class="quote">
+    <p>“Superposition Theorem is only applicable for determining voltage and current, not power!!!”</p>
+    <span class="attrib">Kuphaldt, <em>Lessons In Electric Circuits, Volume I — DC</em>, Chapter 10, section “Superposition Theorem”. The emphasis is the author’s.</span>
+  </div>
+
+  <p><strong>Definition.</strong> In a linear circuit with several independent sources, the voltage across (or current through) any element is the algebraic sum of the voltages (or currents) produced by each source acting alone, with every other independent source set to zero.</p>
+  <p><strong>Why it works.</strong> The circuit equations are linear. If <span class="v">x</span><sub>1</sub> solves the equations with source 1 on and the others off, and <span class="v">x</span><sub>2</sub> solves with source 2 on and the others off, then <span class="v">x</span><sub>1</sub> + <span class="v">x</span><sub>2</sub> solves the equations with both on. Linearity is the whole proof.</p>
+
+  <figure>
+    <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="figSupTitle">
+      <title id="figSupTitle">Superposition circuit with a 12 volt source through 2 ohms, a 4 ohm shunt and a 6 ampere source injecting the node</title>
+      <g fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M45 70 V120 M45 128 V200"/>
+        <path d="M31 120 H59 M37 128 H53"/>
+        <path d="M45 70 H90"/>
+        <path d="M90 70 L100 70 L106 61 L116 79 L126 61 L136 79 L146 61 L150 70 H220"/>
+        <path d="M220 70 V105 M220 105 L220 111 L211 117 L229 127 L211 137 L229 147 L220 153 L220 165 V200"/>
+        <path d="M220 70 H340 V103 M340 147 V200"/>
+        <path d="M45 200 H340"/>
+        <circle cx="340" cy="125" r="22"/>
+        <path d="M340 137 V113 M334 121 L340 113 L346 121"/>
+      </g>
+      <circle cx="220" cy="70" r="4" fill="var(--ink)"/>
+      <text x="120" y="52" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">2 Ω</text>
+      <text x="238" y="140" font-size="13" font-weight="700" fill="var(--ink)">4 Ω</text>
+      <text x="18" y="140" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">12 V</text>
+      <text x="58" y="64" font-size="15" font-weight="700" fill="var(--ink)">+</text>
+      <text x="58" y="214" font-size="15" font-weight="700" fill="var(--ink)">−</text>
+      <text x="365" y="130" font-size="12" font-weight="700" fill="var(--ink)">6 A</text>
+      <text x="220" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="var(--accent)">A</text>
+      <text x="200" y="235" text-anchor="middle" font-size="11" fill="var(--muted)">6 A source injects current into node A</text>
+    </svg>
+    <p class="figcap">Figure 9. The 12 V source and the 6 A source both feed node A. Superposition finds <span class="v">V</span><sub>A</sub> by switching them on one at a time.</p>
+  </figure>
+
+  <div class="example">
+    <div class="example-title">Worked example — two sources, two contributions</div>
+    <p><strong>Given.</strong> 12 V source through 2 Ω to node A; 4 Ω from A to ground; 6 A source from ground into A (Figure 9).</p>
+    <p><strong>Required.</strong> <span class="v">V</span><sub>A</sub> by superposition, and a comment on power.</p>
+    <p><strong>Contribution 1 — 12 V source alone.</strong> Replace the 6 A source by an open circuit. The 2 Ω and 4 Ω are in series across 12 V. By voltage division:</p>
+    <div class="eq"><span class="v">V</span><sub>A</sub>′ = 12 × 4/(2 + 4) = <strong>8 V</strong></div>
+    <p><strong>Contribution 2 — 6 A source alone.</strong> Replace the 12 V source by a short circuit. The 2 Ω and 4 Ω are now in parallel from A to ground:</p>
+    <div class="eq"><span class="v">R</span><sub>p</sub> = (2 × 4)/(2 + 4) = 8/6 = 4/3 Ω</div>
+    <div class="eq"><span class="v">V</span><sub>A</sub>″ = 6 × 4/3 = <strong>8 V</strong></div>
+    <p><strong>Add.</strong> Both contributions have the same polarity at A (both make A positive), so</p>
+    <div class="eq"><span class="v">V</span><sub>A</sub> = 8 + 8 = <strong>16 V</strong></div>
+    <p><strong>Check with KCL.</strong> At 16 V, the current through 2 Ω is (16 − 12)/2 = 2 A, flowing from A toward the 12 V source. The current through 4 Ω is 16/4 = 4 A downward. The 6 A source injects 6 A into A. 2 + 4 = 6. ✓</p>
+    <p><strong>Power warning.</strong> Actual power in the 4 Ω resistor is 16²/4 = 64 W. The separate contributions would give 8²/4 = 16 W and 8²/4 = 16 W, whose sum is only 32 W. Superposition does <em>not</em> apply to power, because power is proportional to the square of voltage or current, not to the first power.</p>
+  </div>
+
+  <h3>Rules</h3>
+  <ul>
+    <li>Turn on one independent source at a time. Replace every other <strong>voltage</strong> source by a short (0 V) and every other <strong>current</strong> source by an open (0 A).</li>
+    <li>Solve the reduced circuit for the required voltage or current. Keep the assumed direction or polarity fixed for every contribution.</li>
+    <li>Add the contributions algebraically. A contribution opposite to the chosen reference direction enters with a minus sign.</li>
+    <li>Do not use superposition on power. Find the total voltage or current first, then calculate power once.</li>
+    <li>Superposition requires a linear circuit. Resistors, independent sources and linear dependent sources qualify; diodes and other non-linear elements do not.</li>
+  </ul>
+
+  <h3>Exam procedure — superposition</h3>
+  <ol class="steps">
+    <li>Label the required voltage or current with a definite polarity or direction. Keep that reference fixed.</li>
+    <li>Redraw the circuit once per source. Mark clearly which source is active.</li>
+    <li>In each reduced circuit, use series/parallel, voltage division, current division or a single KCL equation.</li>
+    <li>Record each contribution with its sign relative to the chosen reference.</li>
+    <li>Add. Then check the final result in the original circuit with KCL or KVL.</li>
+    <li>If the question asks for power, calculate it from the total voltage or current, not from the sum of contributions.</li>
+  </ol>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes — superposition</h3>
+    <ul>
+      <li>Replacing a voltage source by an open circuit or a current source by a short. It is the other way round: voltage → short, current → open.</li>
+      <li>Forgetting to switch off <em>all</em> other sources, not just the obvious one.</li>
+      <li>Adding contributions with inconsistent polarities. Fix the reference before you start.</li>
+      <li>Superposing power. This is the most common conceptual error in the whole module.</li>
+      <li>Using superposition with a dependent source as if it were independent. Dependent sources are outside this syllabus and need a different treatment.</li>
+    </ul>
+  </div>
+
+  <h2 id="thevenin">Thevenin’s theorem</h2>
+  <p>Thevenin’s theorem replaces any linear two-terminal network by one voltage source and one series resistance. It is the standard tool for “find the current in this one load” questions, and it is the foundation of the maximum power transfer theorem.</p>
+
+  <div class="quote">
+    <p>“Thevenin's Theorem states that it is possible to simplify any linear circuit, no matter how complex, to an equivalent circuit with just a single voltage source and series resistance connected to a load.”</p>
+    <span class="attrib">Tony R. Kuphaldt, <em>Lessons In Electric Circuits, Volume I — DC</em>, Chapter 10, section “Thevenin’s Theorem”. <a href="https://www.ibiblio.org/kuphaldt/electricCircuits/DC/DC_10.html">Chapter link</a>.</span>
+  </div>
+
+  <p><strong>Definition.</strong> Look into the two terminals of a linear network with the load removed. The network behaves, from those terminals, exactly like a source <span class="v">V</span><sub>th</sub> in series with a resistance <span class="v">R</span><sub>th</sub>.</p>
+  <ul>
+    <li><span class="v">V</span><sub>th</sub> is the <strong>open-circuit voltage</strong> at the terminals with the load removed.</li>
+    <li><span class="v">R</span><sub>th</sub> is the resistance seen looking into the terminals with every independent source killed (voltage sources shorted, current sources opened).</li>
+    <li>Equivalently, <span class="v">R</span><sub>th</sub> = <span class="v">V</span><sub>oc</sub> / <span class="v">I</span><sub>sc</sub>, where <span class="v">I</span><sub>sc</sub> is the short-circuit current.</li>
+  </ul>
+
+  <figure>
+    <svg viewBox="0 0 800 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="figThevTitle">
+      <title id="figThevTitle">Original circuit, its Thevenin equivalent and its Norton equivalent</title>
+      <g fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <!-- original -->
+        <path d="M50 60 V110 M50 118 V190"/>
+        <path d="M36 110 H64 M42 118 H58"/>
+        <path d="M50 60 H80"/>
+        <path d="M80 60 L90 60 L96 51 L106 69 L116 51 L126 69 L136 51 L140 60 H220"/>
+        <path d="M220 60 V95 M220 95 L220 101 L211 107 L229 117 L211 127 L229 137 L220 143 L220 155 V190"/>
+        <path d="M220 60 H290 V95 M290 95 V190"/>
+        <path d="M220 60 H350 V95 M350 95 L350 101 L341 107 L359 117 L341 127 L359 137 L350 143 L350 155 V190"/>
+        <path d="M50 190 H350"/>
+        <circle cx="290" cy="125" r="22"/>
+        <path d="M290 137 V113 M284 121 L290 113 L296 121"/>
+        <!-- thevenin -->
+        <path d="M450 60 V110 M450 118 V190"/>
+        <path d="M436 110 H464 M442 118 H458"/>
+        <path d="M450 60 H480"/>
+        <path d="M480 60 L490 60 L496 51 L506 69 L516 51 L526 69 L536 51 L540 60 H590"/>
+        <path d="M590 60 V95 M590 95 L590 101 L581 107 L599 117 L581 127 L599 137 L590 143 L590 155 V190"/>
+        <path d="M450 190 H590"/>
+        <!-- norton -->
+        <path d="M650 60 V95 M650 95 V190"/>
+        <path d="M650 60 H710 V95 M710 95 L710 101 L701 107 L719 117 L701 127 L719 137 L710 143 L710 155 V190"/>
+        <path d="M650 60 H770 V95 M770 95 L770 101 L761 107 L779 117 L761 127 L779 137 L770 143 L770 155 V190"/>
+        <path d="M650 190 H770"/>
+        <circle cx="650" cy="125" r="22"/>
+        <path d="M650 137 V113 M644 121 L650 113 L656 121"/>
+      </g>
+      <circle cx="220" cy="60" r="4" fill="var(--ink)"/>
+      <circle cx="290" cy="60" r="4" fill="var(--ink)"/>
+      <circle cx="350" cy="60" r="4" fill="var(--ink)"/>
+      <circle cx="590" cy="60" r="4" fill="var(--ink)"/>
+      <circle cx="710" cy="60" r="4" fill="var(--ink)"/>
+      <circle cx="770" cy="60" r="4" fill="var(--ink)"/>
+      <text x="50" y="48" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">A</text>
+      <text x="350" y="48" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">A</text>
+      <text x="590" y="48" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">A</text>
+      <text x="770" y="48" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">A</text>
+      <text x="50" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">B</text>
+      <text x="350" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">B</text>
+      <text x="590" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">B</text>
+      <text x="770" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">B</text>
+      <text x="110" y="44" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">3 Ω</text>
+      <text x="238" y="130" font-size="11" font-weight="700" fill="var(--ink)">6 Ω</text>
+      <text x="310" y="130" font-size="11" font-weight="700" fill="var(--ink)">6 A</text>
+      <text x="368" y="130" font-size="11" font-weight="700" fill="var(--ink)">2 Ω</text>
+      <text x="18" y="130" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">12 V</text>
+      <text x="60" y="56" font-size="13" font-weight="700" fill="var(--ink)">+</text>
+      <text x="60" y="204" font-size="13" font-weight="700" fill="var(--ink)">−</text>
+      <text x="510" y="44" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">2 Ω</text>
+      <text x="608" y="130" font-size="11" font-weight="700" fill="var(--ink)">2 Ω</text>
+      <text x="422" y="130" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">20 V</text>
+      <text x="460" y="56" font-size="13" font-weight="700" fill="var(--ink)">+</text>
+      <text x="460" y="204" font-size="13" font-weight="700" fill="var(--ink)">−</text>
+      <text x="690" y="44" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">2 Ω</text>
+      <text x="675" y="130" font-size="11" font-weight="700" fill="var(--ink)">10 A</text>
+      <text x="790" y="130" font-size="11" font-weight="700" fill="var(--ink)">2 Ω</text>
+      <text x="200" y="245" text-anchor="middle" font-size="10" fill="var(--muted)">(a) Original network with load</text>
+      <text x="520" y="245" text-anchor="middle" font-size="10" fill="var(--muted)">(b) Thevenin equivalent</text>
+      <text x="710" y="245" text-anchor="middle" font-size="10" fill="var(--muted)">(c) Norton equivalent</text>
+    </svg>
+    <p class="figcap">Figure 10. The same network in three forms. The load is the 2 Ω resistor on the right. In (b), <span class="v">V</span><sub>th</sub> = 20 V and <span class="v">R</span><sub>th</sub> = 2 Ω. In (c), <span class="v">I</span><sub>N</sub> = 10 A and <span class="v">R</span><sub>N</sub> = 2 Ω. All three give 5 A through the load.</p>
+  </figure>
+
+  <div class="example">
+    <div class="example-title">Worked example — Thevenin with a current source</div>
+    <p><strong>Given.</strong> 12 V source in series with 3 Ω to node A; 6 Ω from A to ground; 6 A source from ground into A; load 2 Ω from A to ground (Figure 10a).</p>
+    <p><strong>Required.</strong> <span class="v">V</span><sub>th</sub>, <span class="v">R</span><sub>th</sub>, and the load current.</p>
+    <p><strong>Step 1 — remove the load.</strong> The 2 Ω branch is open. The 12 V source, 3 Ω, 6 Ω and 6 A source remain.</p>
+    <p><strong>Step 2 — find <span class="v">V</span><sub>th</sub>.</strong> Let <span class="v">V</span><sub>A</sub> be the open-circuit voltage. KCL at A, with the 6 A source entering:</p>
+    <div class="eq">(<span class="v">V</span><sub>A</sub> − 12)/3 + <span class="v">V</span><sub>A</sub>/6 = 6</div>
+    <p>Multiply by 6:</p>
+    <div class="eq">2(<span class="v">V</span><sub>A</sub> − 12) + <span class="v">V</span><sub>A</sub> = 36 &nbsp;→&nbsp; 3<span class="v">V</span><sub>A</sub> = 60 &nbsp;→&nbsp; <span class="v">V</span><sub>th</sub> = 20 V</div>
+    <p><strong>Step 3 — find <span class="v">R</span><sub>th</sub>.</strong> Kill the sources: short the 12 V source, open the 6 A source. Looking into A–B, the 3 Ω and 6 Ω are in parallel:</p>
+    <div class="eq"><span class="v">R</span><sub>th</sub> = (3 × 6)/(3 + 6) = 18/9 = 2 Ω</div>
+    <p><strong>Step 4 — reconnect the load.</strong></p>
+    <div class="eq"><span class="v">I</span><sub>L</sub> = <span class="v">V</span><sub>th</sub>/(<span class="v">R</span><sub>th</sub> + <span class="v">R</span><sub>L</sub>) = 20/(2 + 2) = <strong>5 A</strong></div>
+    <div class="eq"><span class="v">V</span><sub>L</sub> = 5 × 2 = 10 V &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">P</span><sub>L</sub> = 5² × 2 = 50 W</div>
+    <p><strong>Check by solving the original circuit with the load connected.</strong> KCL at A:</p>
+    <div class="eq">(<span class="v">V</span> − 12)/3 + <span class="v">V</span>/6 + <span class="v">V</span>/2 = 6</div>
+    <div class="eq">2(<span class="v">V</span> − 12) + <span class="v">V</span> + 3<span class="v">V</span> = 36 &nbsp;→&nbsp; 6<span class="v">V</span> = 60 &nbsp;→&nbsp; <span class="v">V</span> = 10 V</div>
+    <p>Then <span class="v">I</span><sub>L</sub> = 10/2 = 5 A. ✓</p>
+  </div>
+
+  <h3>When to use Thevenin</h3>
+  <ul>
+    <li>The question asks for the current or voltage in <strong>one</strong> load, and the rest of the network is complicated.</li>
+    <li>The load is changed several times. Find <span class="v">V</span><sub>th</sub> and <span class="v">R</span><sub>th</sub> once, then reconnect each load.</li>
+    <li>You need a two-terminal model for a larger system (a sensor, a source, a sub-circuit).</li>
+    <li>You need <span class="v">R</span><sub>th</sub> for maximum power transfer.</li>
+  </ul>
+
+  <h3>Exam procedure — Thevenin</h3>
+  <ol class="steps">
+    <li>Identify and remove the load. Mark the two terminals A and B.</li>
+    <li>Find <span class="v">V</span><sub>th</sub> = <span class="v">V</span><sub>AB</sub> with the load removed. Use KCL, KVL, superposition or source transformation.</li>
+    <li>Kill every independent source: voltage sources become shorts, current sources become opens. Find <span class="v">R</span><sub>th</sub> looking into A–B.</li>
+    <li>Draw the Thevenin equivalent and reconnect the load.</li>
+    <li>Calculate the load current or voltage.</li>
+    <li>Check by solving the original circuit with the load connected, or by the power balance.</li>
+  </ol>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes — Thevenin</h3>
+    <ul>
+      <li>Leaving the load in the circuit while finding <span class="v">R</span><sub>th</sub>. Remove it first.</li>
+      <li>Killing a voltage source by opening it, or a current source by shorting it. Reverse that.</li>
+      <li>Finding <span class="v">V</span><sub>th</sub> with the load still connected. That gives the loaded voltage, not the open-circuit voltage.</li>
+      <li>Reversing the polarity of <span class="v">V</span><sub>th</sub>. Mark A and B and keep them fixed.</li>
+      <li>Using Thevenin for power inside the network. The equivalent preserves terminal behaviour, not the internal power distribution.</li>
+      <li>Applying Thevenin to a non-linear network, or to a network with dependent sources without the extra method. Dependent sources are outside this syllabus.</li>
+    </ul>
+  </div>
+
+  <h2 id="norton">Norton’s theorem</h2>
+  <p>Norton’s theorem is the current-source twin of Thevenin’s theorem. The same linear network becomes a current source in parallel with a resistance.</p>
+
+  <div class="quote">
+    <p>“Norton's Theorem states that it is possible to simplify any linear circuit, no matter how complex, to an equivalent circuit with just a single current source and parallel resistance connected to a load.”</p>
+    <span class="attrib">Tony R. Kuphaldt, <em>Lessons In Electric Circuits, Volume I — DC</em>, Chapter 10, section “Norton’s Theorem”. <a href="https://www.ibiblio.org/kuphaldt/electricCircuits/DC/DC_10.html">Chapter link</a>.</span>
+  </div>
+
+  <p><strong>Definition.</strong> <span class="v">I</span><sub>N</sub> is the <strong>short-circuit current</strong> that flows from A to B when the load is replaced by a wire. <span class="v">R</span><sub>N</sub> is the resistance looking into the terminals with all independent sources killed; it is the same as <span class="v">R</span><sub>th</sub>.</p>
+  <div class="eq"><span class="v">I</span><sub>N</sub> = <span class="v">I</span><sub>sc</sub> &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">R</span><sub>N</sub> = <span class="v">R</span><sub>th</sub> &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">V</span><sub>th</sub> = <span class="v">I</span><sub>N</sub><span class="v">R</span><sub>N</sub></div>
+
+  <div class="example">
+    <div class="example-title">Worked example — Norton by the short-circuit current</div>
+    <p><strong>Given.</strong> The same network as the Thevenin example: 12 V through 3 Ω to A, 6 Ω from A to ground, 6 A into A; load 2 Ω (Figure 10a).</p>
+    <p><strong>Required.</strong> <span class="v">I</span><sub>N</sub>, <span class="v">R</span><sub>N</sub> and the load current.</p>
+    <p><strong>Step 1 — short A to B.</strong> With A shorted to ground, the 6 Ω is bypassed and carries no current. The 3 Ω branch has the full 12 V across it, so it carries 12/3 = 4 A from the source to A. The 6 A source also drives current into A. Both currents leave through the short from A to B:</p>
+    <div class="eq"><span class="v">I</span><sub>N</sub> = 4 + 6 = <strong>10 A</strong></div>
+    <p><strong>Step 2 — <span class="v">R</span><sub>N</sub>.</strong> Kill the sources exactly as for Thevenin: 3 Ω ∥ 6 Ω = <strong>2 Ω</strong>.</p>
+    <p><strong>Step 3 — reconnect the load.</strong> The Norton source and <span class="v">R</span><sub>N</sub> are in parallel, and the load is also in parallel. Use the current divider:</p>
+    <div class="eq"><span class="v">I</span><sub>L</sub> = <span class="v">I</span><sub>N</sub> × <span class="v">R</span><sub>N</sub>/(<span class="v">R</span><sub>N</sub> + <span class="v">R</span><sub>L</sub>) = 10 × 2/(2 + 2) = <strong>5 A</strong></div>
+    <p><strong>Check.</strong> <span class="v">V</span><sub>th</sub> = <span class="v">I</span><sub>N</sub><span class="v">R</span><sub>N</sub> = 10 × 2 = 20 V, which matches the Thevenin calculation. The load current 5 A matches. ✓</p>
+  </div>
+
+  <p><strong>Direction convention.</strong> <span class="v">I</span><sub>N</sub> is defined as the short-circuit current from A to B. In the equivalent circuit, the current source arrow points from B to A (toward the positive terminal A), so that it drives current out of A into the external load. If your arrow is drawn the other way, use a negative value; do not silently change the sign.</p>
+
+  <h3>When to use Norton</h3>
+  <ul>
+    <li>The circuit has several parallel branches and a current-source model is more natural.</li>
+    <li>You want to use source transformation or a current divider.</li>
+    <li>The question explicitly says “using Norton’s theorem.”</li>
+    <li>You need a two-terminal current-source model for a sub-circuit.</li>
+  </ul>
+
+  <h3>Exam procedure — Norton</h3>
+  <ol class="steps">
+    <li>Remove the load and mark A and B.</li>
+    <li>Short A to B. Find the current through the short, from A to B. That is <span class="v">I</span><sub>N</sub>.</li>
+    <li>Kill all independent sources and find the resistance looking into A–B. That is <span class="v">R</span><sub>N</sub> = <span class="v">R</span><sub>th</sub>.</li>
+    <li>Draw <span class="v">I</span><sub>N</sub> in parallel with <span class="v">R</span><sub>N</sub>, with the arrow pointing toward A.</li>
+    <li>Reconnect the load and use a current divider, or convert to Thevenin and use the voltage divider.</li>
+    <li>Check <span class="v">V</span><sub>th</sub> = <span class="v">I</span><sub>N</sub><span class="v">R</span><sub>N</sub> against an independent calculation.</li>
+  </ol>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes — Norton</h3>
+    <ul>
+      <li>Using the open-circuit voltage as <span class="v">I</span><sub>N</sub>. <span class="v">I</span><sub>N</sub> is the <em>short-circuit current</em>.</li>
+      <li>Putting <span class="v">R</span><sub>N</sub> in series with the current source. It is in parallel.</li>
+      <li>Reversing the arrow and then reporting the load current with the wrong sign.</li>
+      <li>Forgetting that the 6 Ω branch is bypassed by the short, so it contributes no current to <span class="v">I</span><sub>N</sub>.</li>
+      <li>Finding <span class="v">R</span><sub>N</sub> with the load still connected.</li>
+    </ul>
+  </div>
+
+  <h2 id="mpt">Maximum power transfer theorem</h2>
+  <p>Maximum power transfer answers a specific question: for a fixed source network, what load resistance receives the most power? It is not the same as the load that makes the system most efficient.</p>
+
+  <div class="quote">
+    <p>“…the maximum amount of power will be dissipated by a load resistance when that load resistance is equal to the Thevenin/Norton resistance of the network supplying the power.”</p>
+    <p>“Maximum power transfer does not coincide with maximum efficiency.”</p>
+    <span class="attrib">Tony R. Kuphaldt, <em>Lessons In Electric Circuits, Volume I — DC</em>, Chapter 10, section “Maximum Power Transfer Theorem”. <a href="https://www.ibiblio.org/kuphaldt/electricCircuits/DC/DC_10.html">Chapter link</a>.</span>
+  </div>
+
+  <p><strong>Statement.</strong> A load receives maximum power from a linear network when <span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub> (equivalently <span class="v">R</span><sub>N</sub>). The maximum power is</p>
+  <div class="eq"><span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub>² / (4<span class="v">R</span><sub>th</sub>) = <span class="v">I</span><sub>N</sub>²<span class="v">R</span><sub>N</sub> / 4</div>
+  <p class="eq-note">Both forms are the same statement, because <span class="v">V</span><sub>th</sub> = <span class="v">I</span><sub>N</sub><span class="v">R</span><sub>N</sub>.</p>
+
+  <h3>Derivation</h3>
+  <p>Replace the network by its Thevenin equivalent. The load current is</p>
+  <div class="eq"><span class="v">I</span><sub>L</sub> = <span class="v">V</span><sub>th</sub> / (<span class="v">R</span><sub>th</sub> + <span class="v">R</span><sub>L</sub>)</div>
+  <p>So the load power is</p>
+  <div class="eq"><span class="v">P</span><sub>L</sub> = <span class="v">I</span><sub>L</sub>²<span class="v">R</span><sub>L</sub> = <span class="v">V</span><sub>th</sub>²<span class="v">R</span><sub>L</sub> / (<span class="v">R</span><sub>th</sub> + <span class="v">R</span><sub>L</sub>)²</div>
+  <p>Differentiate with respect to <span class="v">R</span><sub>L</sub> and set the derivative to zero:</p>
+  <div class="eq">d<span class="v">P</span><sub>L</sub>/d<span class="v">R</span><sub>L</sub> = <span class="v">V</span><sub>th</sub>²(<span class="v">R</span><sub>th</sub> − <span class="v">R</span><sub>L</sub>) / (<span class="v">R</span><sub>th</sub> + <span class="v">R</span><sub>L</sub>)³ = 0</div>
+  <p>The only positive solution is <span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub>. Substituting back:</p>
+  <div class="eq"><span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub>²<span class="v">R</span><sub>th</sub> / (2<span class="v">R</span><sub>th</sub>)² = <span class="v">V</span><sub>th</sub>² / (4<span class="v">R</span><sub>th</sub>)</div>
+
+  <figure>
+    <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="figMPTTitle">
+      <title id="figMPTTitle">Load power versus load resistance, peaking when the load resistance equals the Thevenin resistance</title>
+      <g fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M50 190 H350 M50 190 V40"/>
+        <path d="M50 190 L40 190 M50 190 L50 200"/>
+      </g>
+      <path d="M50 190 L57 150.3 L67.5 113.2 L85 83.3 L102.5 72.4 L120 70 L155 74.8 L190 83.3 L260 100 L330 113.2" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
+      <path d="M120 190 V70 M50 70 H120" fill="none" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="4 4"/>
+      <text x="120" y="215" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">R_th</text>
+      <text x="42" y="70" text-anchor="end" font-size="11" font-weight="700" fill="var(--ink)">P_max</text>
+      <text x="350" y="215" text-anchor="end" font-size="11" fill="var(--muted)">R_L →</text>
+      <text x="30" y="40" text-anchor="middle" font-size="11" fill="var(--muted)">P_L ↑</text>
+      <circle cx="120" cy="70" r="4" fill="var(--accent)"/>
+      <text x="200" y="45" text-anchor="middle" font-size="11" fill="var(--muted)">P_L = V_th² R_L / (R_th + R_L)²</text>
+    </svg>
+    <p class="figcap">Figure 11. Load power rises, peaks at <span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub>, then falls. At the peak, half the source power is lost in <span class="v">R</span><sub>th</sub>.</p>
+  </figure>
+
+  <div class="example">
+    <div class="example-title">Worked example — maximum power for the Thevenin network</div>
+    <p><strong>Given.</strong> <span class="v">V</span><sub>th</sub> = 20 V, <span class="v">R</span><sub>th</sub> = 2 Ω.</p>
+    <p><strong>Required.</strong> <span class="v">R</span><sub>L</sub> for maximum power, <span class="v">P</span><sub>max</sub>, and the efficiency at that point.</p>
+    <p><strong>Step 1 — matching condition.</strong></p>
+    <div class="eq"><span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub> = <strong>2 Ω</strong></div>
+    <p><strong>Step 2 — maximum power.</strong></p>
+    <div class="eq"><span class="v">P</span><sub>max</sub> = 20²/(4 × 2) = 400/8 = <strong>50 W</strong></div>
+    <p><strong>Step 3 — check at the terminals.</strong> With <span class="v">R</span><sub>L</sub> = 2 Ω, <span class="v">I</span><sub>L</sub> = 20/4 = 5 A, <span class="v">V</span><sub>L</sub> = 10 V, <span class="v">P</span><sub>L</sub> = 5² × 2 = 50 W. ✓</p>
+    <p><strong>Step 4 — efficiency.</strong> The source delivers 20 × 5 = 100 W. The load receives 50 W. Efficiency = 50/100 = 50%. The other 50 W is lost in <span class="v">R</span><sub>th</sub>.</p>
+    <p><strong>Interpretation.</strong> Maximum power is not maximum efficiency. If efficiency matters (power systems), a much larger <span class="v">R</span><sub>L</sub> is used; if the goal is to deliver the most signal power (communications, audio), matching is used.</p>
+  </div>
+
+  <h3>Exam procedure — maximum power</h3>
+  <ol class="steps">
+    <li>Remove the load and find the Thevenin equivalent of the network facing it.</li>
+    <li>Set <span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub>.</li>
+    <li>Calculate <span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub>²/(4<span class="v">R</span><sub>th</sub>).</li>
+    <li>If the question asks for the load voltage or current at maximum power, use <span class="v">V</span><sub>L</sub> = <span class="v">V</span><sub>th</sub>/2 and <span class="v">I</span><sub>L</sub> = <span class="v">V</span><sub>th</sub>/(2<span class="v">R</span><sub>th</sub>).</li>
+    <li>State the efficiency if it is relevant; it is 50% at maximum power.</li>
+    <li>Check the units: volts squared divided by ohms gives watts.</li>
+  </ol>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes — maximum power</h3>
+    <ul>
+      <li>Setting <span class="v">R</span><sub>L</sub> equal to the load in the original circuit instead of <span class="v">R</span><sub>th</sub>.</li>
+      <li>Using <span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub>²/<span class="v">R</span><sub>th</sub> and forgetting the factor 4.</li>
+      <li>Confusing maximum power with maximum efficiency. At maximum power, half the power is lost in the source resistance.</li>
+      <li>Forgetting to remove the load before finding <span class="v">V</span><sub>th</sub> and <span class="v">R</span><sub>th</sub>.</li>
+      <li>Applying the theorem to a network whose source resistance cannot be modelled as a constant (non-linear source).</li>
+    </ul>
+  </div>
+
+  <h2 id="choose">Choosing a method under exam pressure</h2>
+  <p>There is no single “best” method. The circuit shape and the question decide. Use this table as a decision aid, not as a set of laws.</p>
+
+  <table>
+    <tr><th>If the question…</th><th>Start with</th><th>Why</th></tr>
+    <tr><td>asks for a current in a simple chain</td><td>Series/parallel reduction, Ohm’s law</td><td>Fastest; no simultaneous equations.</td></tr>
+    <tr><td>has one unknown node and many parallel branches</td><td>Nodal analysis</td><td>One KCL equation may be enough.</td></tr>
+    <tr><td>is planar with two or three windows</td><td>Mesh analysis</td><td>One KVL equation per window; branch currents follow.</td></tr>
+    <tr><td>is a bridge with no series/parallel pair</td><td>Star–delta conversion</td><td>Creates a series/parallel reduction.</td></tr>
+    <tr><td>has several sources and asks for one voltage/current</td><td>Superposition</td><td>Each source can be handled separately.</td></tr>
+    <tr><td>asks for one load current/voltage in a large network</td><td>Thevenin or Norton</td><td>Reduces the network to two elements.</td></tr>
+    <tr><td>asks for the load for maximum power</td><td>Thevenin + MPT</td><td><span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub>; <span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub>²/(4<span class="v">R</span><sub>th</sub>).</td></tr>
+    <tr><td>has a current source in an awkward place</td><td>Source transformation first</td><td>Turns it into a voltage source that mesh analysis can handle.</td></tr>
+  </table>
+
+  <h3>A 15-mark answer template</h3>
+  <ol class="steps">
+    <li><strong>Read and restate.</strong> Write “Given”, “Required”, and the assumed current directions or voltage polarities. Draw a clean labelled diagram.</li>
+    <li><strong>Choose and justify.</strong> One sentence: “Using nodal analysis because there is one unknown node and three parallel branches.”</li>
+    <li><strong>Write the laws before substituting.</strong> A symbolic equation earns method marks even if the arithmetic slips.</li>
+    <li><strong>Substitute with units.</strong> Keep the numbers and units visible. Do not skip the intermediate step that shows the equation is correctly formed.</li>
+    <li><strong>Solve and state.</strong> Give the exact fraction and the decimal, with the unit and the direction.</li>
+    <li><strong>Check.</strong> One KVL loop, one KCL node, or a power balance. State that the check passes.</li>
+  </ol>
+
+  <div class="method-note">
+    <p><strong>What not to do.</strong> Do not use a supernode or a supermesh; they are outside the prescribed syllabus. Do not introduce dependent sources. Do not use a theorem that the question did not ask for if a simpler method is available, unless you are using it as a check.</p>
+  </div>
+
+  <h2 id="assignments">Course assignments (Dr. Nirmala K.)</h2>
+  <div class="callout">
+    <p><span class="tag c">Course</span> These are the <strong>Assignment 1</strong> and <strong>Assignment 2</strong> questions set for FE CSE (AI &amp; ML), AY 2025-26, by <strong>Dr. Nirmala K.</strong> They are <em>not</em> university question papers.</p>
+    <p class="small">Several circuits are scanned handouts with small symbols. Where the scan does not fix a polarity or a connection, the answer below states the assumption explicitly. An answer that depends on an unstated assumption is worse than no answer, because it teaches the wrong habit.</p>
+  </div>
+
+  <h3>Assignment 1 — Unit 1: DC circuits</h3>
+
+  <div class="exam-q">
+    <div class="exam-q-title">A1-Q1 · Superposition</div>
+    <div class="exam-source">Assignment 1, Q1 · Dr. Nirmala K. · AY 2025-26</div>
+    <p>“Using SPT, find voltage across 4 Ω resistor.” The circuit has a 10 A source feeding the left node, a 4 Ω resistor from that node to the bottom rail, a 1 Ω resistor from that node to a second node, a 25 V source from the second node to the bottom rail, and a 15 V source in series with 3 Ω from the second node to the bottom rail.</p>
+    <p><strong>Answer:</strong> <span class="v">V</span><sub>4Ω</sub> = <strong>28 V</strong>, positive at the top.</p>
+    <p><strong>Working sketch.</strong> With only the 10 A source: it sees 4 Ω in parallel with 1 Ω (the 25 V source is shorted), so <span class="v">V</span> = 10 × 0.8 = 8 V. With only the 25 V source: the 10 A source is open; the 1 Ω and 4 Ω form a divider, so <span class="v">V</span> = 25 × 4/5 = 20 V. With only the 15 V source: the 25 V source short ties the second node to ground, so the 4 Ω is shorted by the 1 Ω path and <span class="v">V</span> = 0 V. Total 8 + 20 + 0 = 28 V.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">A1-Q2 · Maximum power transfer</div>
+    <div class="exam-source">Assignment 1, Q2 · Dr. Nirmala K. · AY 2025-26</div>
+    <p>“State and prove the maximum power transfer theorem. Derive the formula of maximum power delivered to the load <span class="v">R</span><sub>L</sub>.”</p>
+    <p><strong>Answer:</strong> see the <a href="#mpt">Maximum power transfer</a> section for the statement, the derivation, the condition <span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub>, and <span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub>²/(4<span class="v">R</span><sub>th</sub>). The proof is the derivative <span class="v">dP</span><sub>L</sub>/<span class="v">dR</span><sub>L</sub> = 0.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">A1-Q3 · Norton</div>
+    <div class="exam-source">Assignment 1, Q3 · Dr. Nirmala K. · AY 2025-26. The same circuit appears as June 2025 NEP paper Q2(a).</div>
+    <p>“Using Norton’s theorem calculate the current through 3 Ω resistor across the terminals A and B in the given circuit.” The network has a 15 V source and 2 Ω on the left, 8 Ω across the top, a 16 Ω diagonal, a 5 V source with 10 Ω in the centre, 2 Ω on the right and 2 Ω along the bottom; A and B are the top-right and bottom-right terminals.</p>
+    <p><strong>Answer:</strong> <span class="v">I</span><sub>3Ω</sub> = <strong>41/48 A ≈ 0.854 A</strong>, from A to B, using the printed polarities: 15 V source positive at the top-left node, 5 V source positive at its top node, and the 3 Ω resistor as the load between A and B.</p>
+    <p><strong>Working sketch.</strong> Remove the 3 Ω load. Nodal analysis gives <span class="v">V</span><sub>th</sub> = 205/26 V. With the 15 V and 5 V sources shorted, the resistance looking into A–B is <span class="v">R</span><sub>th</sub> = 81/13 Ω. Then <span class="v">I</span> = (205/26)/(81/13 + 3) = 41/48 A. If the 15 V or 5 V polarity in your copy is reversed, the sign or magnitude changes; mark the polarity on your redrawn diagram.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">A1-Q4 · KVL and an unknown resistance</div>
+    <div class="exam-source">Assignment 1, Q4 · Dr. Nirmala K. · AY 2025-26</div>
+    <p>“Define KVL. Find value of <span class="v">R</span><sub>3</sub> in the figure given below by applying Kirchhoff’s laws.” The figure has a 10 A source entering a top junction, a 5 Ω branch with a 20 V source, a 20 Ω branch with a 40 V source, and <span class="v">R</span><sub>3</sub> in the top branch labelled 60 V.</p>
+    <p><strong>Definition:</strong> the algebraic sum of potential changes around any closed loop is zero. See <a href="#kcl-kvl">KCL and KVL</a>.</p>
+    <p><strong>Answer status:</strong> the printed diagram is <strong>underdetermined</strong>. The right-hand end of <span class="v">R</span><sub>3</sub> is cut off, so there is no closed loop through it. If you assume the right end returns to the common bottom rail, the KCL equation at the top junction gives a negative resistance, which is physically impossible. The missing connection must be supplied by your teacher. Do not memorise a numerical answer for this one.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">A1-Q5 · Current in a 10 Ω resistor</div>
+    <div class="exam-source">Assignment 1, Q5 · Dr. Nirmala K. · AY 2025-26</div>
+    <p>“Find current in 10 Ω resistor.” The circuit has an 80 V source, a 50 Ω resistor to a top node, a 2 A source feeding a right node, 20 Ω and 10 Ω in the middle, a 50 Ω vertical resistor, and a 20 V source on the right.</p>
+    <p><strong>Answer:</strong> <span class="v">I</span><sub>10Ω</sub> = <strong>34/47 A ≈ 0.723 A</strong>, flowing from the 20 V source node toward the 20 Ω/10 Ω junction, assuming the 20 V source is positive at its top terminal and the 2 A source arrow points to the right.</p>
+    <p><strong>Working sketch.</strong> With the bottom rail at 0 V and the 20 V source fixing the right node at 20 V, KCL at the two unknown nodes gives <span class="v">V</span><sub>1</sub> = 160/47 V and <span class="v">V</span><sub>3</sub> = 600/47 V. Then (600/47 − 20)/10 = −34/47 A; the negative sign means the current flows from the 20 V node to the junction.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">A1-Q6 · Equivalent resistance</div>
+    <div class="exam-source">Assignment 1, Q6 · Dr. Nirmala K. · AY 2025-26</div>
+    <p>“Find resistance across x and y.” Between x and y: a 10 Ω resistor from x to a middle node, a 45 Ω resistor from that node to the right node, a 20 Ω resistor from the middle node to the right node (bottom path), a 10 Ω resistor from x to the right node (top path), and a 20 Ω resistor from the right node to y.</p>
+    <p><strong>Answer:</strong> <span class="v">R</span><sub>xy</sub> = <strong>595/22 Ω ≈ 27.05 Ω</strong>.</p>
+    <p><strong>Working sketch.</strong> The 45 Ω and 20 Ω are in parallel: 45 ∥ 20 = 180/13 Ω. That is in series with the 10 Ω from x, giving 310/13 Ω. This path is in parallel with the top 10 Ω: (10 × 310/13)/(10 + 310/13) = 155/22 Ω. Add the final 20 Ω: 155/22 + 20 = 595/22 Ω.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">A1-Q7 · Thevenin</div>
+    <div class="exam-source">Assignment 1, Q7 · Dr. Nirmala K. · AY 2025-26</div>
+    <p>“Find current through 1 Ω by Thevenin’s theorem.” The network has a 1 A source on the left, 3 Ω from the top-left node to the bottom-left node, 2 Ω across the top, 2 Ω down the right, 2 Ω along the bottom, a 1 V source on the diagonal from the bottom-left node to the top-right node, and the 1 Ω load from the top-left node to the bottom-right node.</p>
+    <p><strong>Answer:</strong> <span class="v">I</span><sub>1Ω</sub> = <strong>11/32 A ≈ 0.344 A</strong>, from the top-left node to the bottom-right node, assuming the 1 V source is positive at the bottom-left node.</p>
+    <p><strong>Working sketch.</strong> Remove the 1 Ω load. Nodal analysis gives <span class="v">V</span><sub>th</sub> = 1.1 V. With the 1 A source open and the 1 V source shorted, the resistance looking into the load terminals is <span class="v">R</span><sub>th</sub> = 2.2 Ω. Then <span class="v">I</span> = 1.1/(2.2 + 1) = 11/32 A. Reversing the 1 V source gives 13/32 A ≈ 0.406 A; the polarity must be stated.</p>
+  </div>
+
+  <h3>Assignment 2 — Thevenin, Norton, maximum power and nodal</h3>
+
+  <div class="exam-q">
+    <div class="exam-q-title">A2-Q1 · Thevenin through a 30 Ω resistor</div>
+    <div class="exam-source">Assignment 2, Q1 · Dr. Nirmala K. · AY 2025-26</div>
+    <p>“Find the value of current flowing through the 30-ohm resistor using Thevenin’s theorem.” The circuit has a 150 V source and 15 Ω on the left, a 13 A source at the first node, 60 Ω to the second node, 40 Ω to the bottom rail, 30 Ω to the right node, and a 50 V source from the right node to the bottom rail.</p>
+    <p><strong>Answer status:</strong> the scan does not clearly fix the 13 A arrow or the 50 V polarity, and the 50 V source is in series with the 30 Ω branch. Under the reading “13 A downward, 50 V positive at the top,” the current is <strong>7/3 A ≈ 2.33 A</strong> through the 30 Ω. Under the opposite 13 A arrow the answer is different. State your assumed arrows before solving; do not copy a single number without them.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">A2-Q2 · Norton through a 10 Ω resistor</div>
+    <div class="exam-source">Assignment 2, Q2 · Dr. Nirmala K. · AY 2025-26</div>
+    <p>“Find the value of current flowing through the 10 ohm resistor using Norton’s theorem.” The circuit has a 10 V source and 6 Ω, a 1 Ω shunt, 2 Ω to the next node, a 3 Ω shunt, the 10 Ω branch, and a 20 V source in series with that branch.</p>
+    <p><strong>Answer status:</strong> the 20 V source is in series with the 10 Ω branch, so the “load” is the whole branch, not the resistor alone. With 10 V and 20 V both positive at the top, nodal analysis gives <span class="v">I</span><sub>10Ω</sub> = <strong>−79/47 A ≈ −1.68 A</strong> (1.68 A from the 20 V end toward the 3 Ω node). The magnitude is not clean because the printed values are not designed for a clean answer. Show the assumed polarity.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">A2-Q3 · Maximum power in a bridge</div>
+    <div class="exam-source">Assignment 2, Q3 · Dr. Nirmala K. · AY 2025-26</div>
+    <p>“Find the value of resistance <span class="v">R</span><sub>L</sub> for maximum power transfer and calculate the maximum power.” A 100 V source feeds a bridge: 10 Ω and 20 Ω on the top arms, 30 Ω and 40 Ω on the bottom arms, and <span class="v">R</span><sub>L</sub> between the midpoints.</p>
+    <p><strong>Answer:</strong> <span class="v">R</span><sub>L</sub> = <strong>125/6 Ω ≈ 20.83 Ω</strong>; <span class="v">P</span><sub>max</sub> = <strong>5/6 W ≈ 0.833 W</strong>.</p>
+    <p><strong>Working sketch.</strong> Remove <span class="v">R</span><sub>L</sub>. The left divider gives 100 × 30/40 = 75 V; the right divider gives 100 × 40/60 = 66.667 V. So <span class="v">V</span><sub>th</sub> = 75 − 66.667 = 25/3 V. <span class="v">R</span><sub>th</sub> = (10 ∥ 30) + (20 ∥ 40) = 7.5 + 13.333 = 125/6 Ω. Then <span class="v">P</span><sub>max</sub> = (25/3)²/(4 × 125/6) = 5/6 W.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">A2-Q4 · Maximum power with a source in the load branch</div>
+    <div class="exam-source">Assignment 2, Q4 · Dr. Nirmala K. · AY 2025-26</div>
+    <p>“Determine the value of <span class="v">R</span> for maximum power transfer. Also find the magnitude of maximum power transferred.” A 100 V source feeds a 40 Ω/60 Ω divider on the left and a 50 Ω/50 Ω divider on the right; <span class="v">R</span> and a 2 V source sit between the midpoints.</p>
+    <p><strong>Answer:</strong> <span class="v">R</span> = <strong>49 Ω</strong>; <span class="v">P</span><sub>max</sub> = <strong>16/49 W ≈ 0.327 W</strong>, assuming the 2 V source is positive on its left terminal.</p>
+    <p><strong>Working sketch.</strong> Left midpoint = 100 × 60/100 = 60 V; right midpoint = 100 × 50/100 = 50 V. With the 2 V source positive on the left, the open-circuit voltage across the <span class="v">R</span> terminals is 60 − (50 + 2) = 8 V. <span class="v">R</span><sub>th</sub> = (40 ∥ 60) + (50 ∥ 50) = 24 + 25 = 49 Ω. Then <span class="v">P</span><sub>max</sub> = 8²/(4 × 49) = 16/49 W. If the 2 V polarity is reversed, <span class="v">V</span><sub>th</sub> = 12 V and <span class="v">P</span><sub>max</sub> = 36/49 W.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">A2-Q5 · Nodal analysis</div>
+    <div class="exam-source">Assignment 2, Q5 · Dr. Nirmala K. · AY 2025-26</div>
+    <p>“Find current through 1 ohm resistor using nodal analysis.” The circuit has a 4 V source on the left, 2 Ω to node A, 1 Ω from A to the bottom rail, 3 Ω from A to node B, a 1 A source from the left node to B, and a 3 A source from the bottom rail to B.</p>
+    <p><strong>Answer:</strong> <span class="v">I</span><sub>1Ω</sub> = <strong>4 A downward</strong>.</p>
+    <p><strong>Working sketch.</strong> Take the bottom rail as 0 V; the 4 V source makes the left node 4 V. KCL at B with the 1 A and 3 A sources entering gives (<span class="v">V</span><sub>B</sub> − <span class="v">V</span><sub>A</sub>)/3 = 4, so <span class="v">V</span><sub>B</sub> − <span class="v">V</span><sub>A</sub> = 12 V. KCL at A then gives (<span class="v">V</span><sub>A</sub> − 4)/2 + <span class="v">V</span><sub>A</sub>/1 + 4 = 0, so <span class="v">V</span><sub>A</sub> = 4 V. The current through 1 Ω is 4/1 = 4 A downward.</p>
+  </div>
+
+  <h2 id="qb">Teacher’s Unit 1 practice question bank</h2>
+  <div class="callout">
+    <p><span class="tag c">Course</span> These are selected questions from the 15-question <strong>“Practice questions unit 1”</strong> bank for FE CSE (AI &amp; ML), AY 2025-26, Dr. Nirmala K. The full bank was reviewed; the questions below are the ones with unambiguous diagrams and useful method practice. Questions whose scans are ambiguous are deliberately not given a fake numerical answer.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">QB-2 · Nodal analysis: current in 5 Ω</div>
+    <div class="exam-source">Practice question bank, Q2 · Dr. Nirmala K.</div>
+    <p>“Find current in 5 Ω by nodal analysis.” A 24 V source and 5 Ω feed node A; a 2 A source in parallel with 20 Ω also feeds A; 20 Ω connects A to the right node, which has a 36 V source to the bottom rail.</p>
+    <p><strong>Answer:</strong> <span class="v">I</span><sub>5Ω</sub> = <strong>14/15 A ≈ 0.933 A</strong>, from the 24 V source toward node A.</p>
+    <p><strong>Working sketch.</strong> KCL at A: (<span class="v">V</span> − 24)/5 + (<span class="v">V</span> − 36)/20 + <span class="v">V</span>/20 − 2 = 0. Multiply by 20: 4(<span class="v">V</span> − 24) + (<span class="v">V</span> − 36) + <span class="v">V</span> − 40 = 0, so 6<span class="v">V</span> = 172 and <span class="v">V</span> = 86/3 V. Then (86/3 − 24)/5 = 14/15 A.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">QB-4 · Star to delta</div>
+    <div class="exam-source">Practice question bank, Q4 · Dr. Nirmala K.</div>
+    <p>“Draw the equivalent delta network. Mention the formula used for the conversion.” The star has 2 Ω, 4 Ω and 6 Ω legs.</p>
+    <p><strong>Answer:</strong> Taking the 2 Ω, 4 Ω and 6 Ω legs at A, B and C, <span class="v">R</span><sub>AB</sub> = <strong>22/3 Ω</strong>, <span class="v">R</span><sub>BC</sub> = <strong>22 Ω</strong>, <span class="v">R</span><sub>CA</sub> = <strong>11 Ω</strong>. Formula: <span class="v">R</span><sub>AB</sub> = (Σ pairwise products)/<span class="v">R</span><sub>C</sub>, with the opposite leg in the denominator.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">QB-7 · Nodal analysis: current in 15 Ω</div>
+    <div class="exam-source">Practice question bank, Q7 · Dr. Nirmala K.</div>
+    <p>“Find the current through 15 ohm through nodal analysis.” A 100 V source and 20 Ω feed node A; 10 Ω from A to ground; 15 Ω from A to B; 10 Ω from B to ground; 10 Ω from B to an 80 V source.</p>
+    <p><strong>Answer:</strong> <span class="v">I</span><sub>15Ω</sub> = <strong>0.25 A</strong>, from B to A.</p>
+    <p><strong>Working sketch.</strong> KCL at A and B gives <span class="v">V</span><sub>A</sub> = 35 V and <span class="v">V</span><sub>B</sub> = 155/4 V. Then (<span class="v">V</span><sub>A</sub> − <span class="v">V</span><sub>B</sub>)/15 = −0.25 A; the negative sign means B to A.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">QB-8 · Source transformation</div>
+    <div class="exam-source">Practice question bank, Q8 · Dr. Nirmala K.</div>
+    <p>“Using source transformation, find <span class="v">I</span> in the circuit shown.” A 10 V source and 2 Ω feed node A; 6 Ω from A to ground; 4 Ω from A to the bottom rail with current <span class="v">I</span> downward; a 6 A source from the bottom rail to A.</p>
+    <p><strong>Answer:</strong> <span class="v">I</span> = <strong>3 A downward</strong>.</p>
+    <p><strong>Working sketch.</strong> KCL at A: (<span class="v">V</span> − 10)/2 + <span class="v">V</span>/6 + <span class="v">V</span>/4 − 6 = 0. Multiply by 12: 6(<span class="v">V</span> − 10) + 2<span class="v">V</span> + 3<span class="v">V</span> − 72 = 0, so 11<span class="v">V</span> = 132 and <span class="v">V</span> = 12 V. Then <span class="v">I</span> = 12/4 = 3 A.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">QB-11 · Find R from a branch current</div>
+    <div class="exam-source">Practice question bank, Q11 · Dr. Nirmala K.</div>
+    <p>“Find the value of <span class="v">R</span> in the following circuit.” A 100 V source and 10 Ω feed node A; 4 Ω from A to ground; <span class="v">R</span> from A to ground carries 3 A downward.</p>
+    <p><strong>Answer:</strong> <span class="v">R</span> = <strong>20/3 Ω ≈ 6.67 Ω</strong>.</p>
+    <p><strong>Working sketch.</strong> KCL at A: (<span class="v">V</span><sub>A</sub> − 100)/10 + <span class="v">V</span><sub>A</sub>/4 + 3 = 0. Multiply by 20: 2<span class="v">V</span><sub>A</sub> − 200 + 5<span class="v">V</span><sub>A</sub> + 60 = 0, so 7<span class="v">V</span><sub>A</sub> = 140 and <span class="v">V</span><sub>A</sub> = 20 V. Then <span class="v">R</span> = 20/3 Ω.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">QB-13 and QB-14 · Source conversion</div>
+    <div class="exam-source">Practice question bank, Q13 and Q14 · Dr. Nirmala K.</div>
+    <p>“Convert the given voltage source to current source. Give the steps of conversion.” A 20 V source in series with 5 Ω.</p>
+    <p><strong>Answer:</strong> <span class="v">I</span><sub>s</sub> = 20/5 = <strong>4 A</strong> in parallel with <strong>5 Ω</strong>. The arrow points to the + terminal. Reversing the conversion gives 20 V in series with 5 Ω.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">QB-15 · Nodal analysis: find V_A</div>
+    <div class="exam-source">Practice question bank, Q15 · Dr. Nirmala K.</div>
+    <p>“Give the steps to find current in a branch using Nodal analysis. Calculate voltage <span class="v">V</span><sub>A</sub> using Nodal analysis.” A 3 V source through 2 Ω and a 2 V source through 4 Ω both meet at A; 1 Ω connects A to ground.</p>
+    <p><strong>Answer:</strong> <span class="v">V</span><sub>A</sub> = <strong>8/7 V ≈ 1.143 V</strong>.</p>
+    <p><strong>Working sketch.</strong> (<span class="v">V</span><sub>A</sub> − 3)/2 + (<span class="v">V</span><sub>A</sub> − 2)/4 + <span class="v">V</span><sub>A</sub>/1 = 0. Multiply by 4: 2<span class="v">V</span><sub>A</sub> − 6 + <span class="v">V</span><sub>A</sub> − 2 + 4<span class="v">V</span><sub>A</sub> = 0, so 7<span class="v">V</span><sub>A</sub> = 8.</p>
+  </div>
+
+  <h2 id="papers">University paper questions</h2>
+
+  <div class="callout">
+    <p><span class="tag q">Paper</span> The only supplied paper for <strong>this course and scheme</strong> is the <strong>June 2025 NEP 2020 paper, subject code N10415</strong>, dated 13/06/2025, FE All Branches, Semester I, maximum 60 marks, 2 hours. Question 1 is compulsory; attempt any <strong>three</strong> of the remaining five. The paper contains questions from every module, so only its Module I parts are reproduced here.</p>
+    <p class="small">The December 2024, Summer 2025 and undated DocScanner papers are subject <strong>58654</strong>, a different course and scheme. They are not evidence for ESC102 and are not reproduced as “university questions” for this module. See the note at the end of this section.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">June 2025 · Q1(a) · Star to delta · 3 marks</div>
+    <div class="exam-source">University of Mumbai, NEP 2020, BEEE (N10415), 13 June 2025, Q1(a). Compulsory question.</div>
+    <p><strong>Question as printed.</strong> “Convert the star circuit into its equivalent delta circuit.” The star has <span class="v">R</span><sub>A</sub> = 2 Ω from A to the star point N, <span class="v">R</span><sub>B</sub> = 4 Ω from B to N, and <span class="v">R</span><sub>C</sub> = 6 Ω from C to N.</p>
+    <p><strong>Answer.</strong> <span class="v">R</span><sub>AB</sub> = <strong>22/3 Ω</strong>, <span class="v">R</span><sub>BC</sub> = <strong>22 Ω</strong>, <span class="v">R</span><sub>CA</sub> = <strong>11 Ω</strong>.</p>
+    <p><strong>Working.</strong> The sum of the pairwise products is</p>
+    <div class="eq"><span class="v">P</span> = (2 × 4) + (4 × 6) + (6 × 2) = 8 + 24 + 12 = 44 Ω²</div>
+    <p>Each delta side is <span class="v">P</span> divided by the star leg opposite that side:</p>
+    <div class="eq"><span class="v">R</span><sub>AB</sub> = 44/6 = 22/3 Ω &nbsp;·&nbsp; <span class="v">R</span><sub>BC</sub> = 44/2 = 22 Ω &nbsp;·&nbsp; <span class="v">R</span><sub>CA</sub> = 44/4 = 11 Ω</div>
+    <p><strong>Check.</strong> The resistance between A and B with C open must be the same in both networks. Star: 2 + 4 = 6 Ω. Delta: 22/3 in parallel with (22 + 11) = (22/3 × 33)/(22/3 + 33) = 242/(121/3) = 6 Ω. Good. Do the same check for B–C and C–A if time allows.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">June 2025 · Q2(a) · Norton through 3 Ω · 10 marks</div>
+    <div class="exam-source">University of Mumbai, NEP 2020, BEEE (N10415), 13 June 2025, Q2(a). This is the same circuit as Assignment 1, Q3.</div>
+    <p><strong>Question as printed.</strong> “Using Norton’s theorem, calculate the current through 3 Ω resistor across the terminals A and B in the given circuit.” The network has a 15 V source with 2 Ω on the left, 8 Ω across the top, a 16 Ω diagonal, a 5 V source with 10 Ω in the centre, 2 Ω on the right and 2 Ω along the bottom; the 3 Ω load is between A (top right) and B (bottom right).</p>
+    <p><strong>Answer.</strong> <span class="v">I</span><sub>3Ω</sub> = <strong>41/48 A ≈ 0.854 A</strong> from A to B, taking the 15 V source positive at the top-left node, the 5 V source positive at its top node, and the 3 Ω load between A and B.</p>
+    <p><strong>Working.</strong> Remove the 3 Ω load and solve the remaining network by nodal analysis. The open-circuit voltage is</p>
+    <div class="eq"><span class="v">V</span><sub>th</sub> = 205/26 V ≈ 7.885 V</div>
+    <p>With the 15 V and 5 V sources replaced by short circuits, the resistance looking into A–B is</p>
+    <div class="eq"><span class="v">R</span><sub>th</sub> = 81/13 Ω ≈ 6.231 Ω</div>
+    <p>The Norton current is <span class="v">I</span><sub>N</sub> = <span class="v">V</span><sub>th</sub>/<span class="v">R</span><sub>th</sub> = (205/26)/(81/13) = 205/162 A ≈ 1.265 A, and <span class="v">R</span><sub>N</sub> = 81/13 Ω. Reconnect the 3 Ω load:</p>
+    <div class="eq"><span class="v">I</span><sub>3Ω</sub> = <span class="v">V</span><sub>th</sub>/(<span class="v">R</span><sub>th</sub> + 3) = (205/26)/(120/13) = <strong>41/48 A</strong></div>
+    <p><strong>Check.</strong> 41/48 = 0.8542 A. The load voltage is 0.8542 × 3 = 2.5625 V, and 2.5625/0.8542 = 3 Ω. The current is less than the short-circuit current 1.265 A, as it must be.</p>
+    <p class="small"><strong>Polarity warning.</strong> The scan is faint around the 15 V and 5 V sources. If either polarity is reversed in your copy, the magnitude and sign of <span class="v">V</span><sub>th</sub> change. Mark the long line of every source on your redrawn circuit before writing the nodal equations. Do not memorise “41/48” without the polarity assumptions.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">June 2025 · Q4(a) · Nodal analysis through 4 Ω · 5 marks</div>
+    <div class="exam-source">University of Mumbai, NEP 2020, BEEE (N10415), 13 June 2025, Q4(a).</div>
+    <p><strong>Question as printed.</strong> “Find the current through 4 Ω resistance using Nodal analysis.” The circuit has a 6 V source (positive terminal at the top) in series with 3 Ω from the bottom rail to node A; 6 Ω from A to the bottom rail; 4 Ω from A to B; 2 Ω from B to the bottom rail; and a 5 A source from the bottom rail to B. The arrow on the 5 A source points <strong>upward</strong> in the scanned paper.</p>
+    <p><strong>Answer.</strong> With the 5 A arrow upward, <span class="v">I</span><sub>4Ω</sub> = <strong>0.75 A from B to A</strong>. If your copy shows the 5 A arrow downward, the answer becomes <strong>1.75 A from A to B</strong>. State the arrow direction with the answer.</p>
+    <p><strong>Working (5 A upward).</strong> Take the bottom rail as 0 V. The 6 V source and 3 Ω put the left branch in series, so KCL at A and B gives</p>
+    <div class="eq">(<span class="v">V</span><sub>A</sub> − 6)/3 + <span class="v">V</span><sub>A</sub>/6 + (<span class="v">V</span><sub>A</sub> − <span class="v">V</span><sub>B</sub>)/4 = 0</div>
+    <div class="eq">(<span class="v">V</span><sub>B</sub> − <span class="v">V</span><sub>A</sub>)/4 + <span class="v">V</span><sub>B</sub>/2 − 5 = 0</div>
+    <p>Multiply the first by 12 and the second by 4:</p>
+    <div class="eq">9<span class="v">V</span><sub>A</sub> − 3<span class="v">V</span><sub>B</sub> = 24 &nbsp;·&nbsp; −<span class="v">V</span><sub>A</sub> + 3<span class="v">V</span><sub>B</sub> = 20</div>
+    <div class="eq"><span class="v">V</span><sub>A</sub> = 5.5 V &nbsp;·&nbsp; <span class="v">V</span><sub>B</sub> = 8.5 V</div>
+    <p>The current from A to B is (5.5 − 8.5)/4 = −0.75 A, so the magnitude is 0.75 A and the direction is B to A. Check at B: (8.5 − 5.5)/4 + 8.5/2 − 5 = 0.75 + 4.25 − 5 = 0.</p>
+    <p><strong>If the 5 A arrow is downward:</strong> the second equation becomes (<span class="v">V</span><sub>B</sub> − <span class="v">V</span><sub>A</sub>)/4 + <span class="v">V</span><sub>B</sub>/2 + 5 = 0, giving <span class="v">V</span><sub>A</sub> = 0.5 V, <span class="v">V</span><sub>B</sub> = −6.5 V, and <span class="v">I</span><sub>4Ω</sub> = (0.5 + 6.5)/4 = 1.75 A from A to B. The two readings differ only in the source arrow, which is exactly why the arrow must be copied onto your answer sheet.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">June 2025 · Q6(a) · Source transformation through 8 Ω · 6 marks</div>
+    <div class="exam-source">University of Mumbai, NEP 2020, BEEE (N10415), 13 June 2025, Q6(a).</div>
+    <p><strong>Question as printed.</strong> “Using source transformation find the current flowing the 8 Ω resistance.” The circuit has an 18 V source in series with 6 Ω feeding node C; 6 Ω from C to the bottom rail; 6 Ω from C to node D; a 2 A source from the bottom rail to D (arrow upward); 1 Ω from D to X; and the 8 Ω load from X to Y, with Y on the bottom rail.</p>
+    <p><strong>Answer.</strong> <span class="v">I</span><sub>8Ω</sub> = <strong>1.5 A downward</strong> (from X to Y).</p>
+    <p><strong>Working by source transformation.</strong></p>
+    <ol class="steps">
+      <li>18 V in series with 6 Ω becomes 3 A in parallel with 6 Ω; the arrow points from the bottom rail to C.</li>
+      <li>At C, this 6 Ω is in parallel with the vertical 6 Ω, giving 3 Ω. The 3 A source remains. Transform again: 3 A in parallel with 3 Ω becomes 9 V in series with 3 Ω.</li>
+      <li>Add the 6 Ω between C and D in series: 9 Ω. The branch from D to the bottom rail is therefore 9 V in series with 9 Ω. Transform it to 1 A in parallel with 9 Ω, arrow from the bottom rail to D.</li>
+      <li>The 2 A source also points from the bottom rail to D. Add the two parallel current sources: 1 + 2 = 3 A, still in parallel with 9 Ω.</li>
+      <li>The load path from D to the bottom rail is 1 Ω + 8 Ω = 9 Ω. So the 3 A source feeds 9 Ω in parallel with 9 Ω, equivalent to 4.5 Ω. The voltage at D is 3 × 4.5 = 13.5 V.</li>
+      <li>The current through the 8 Ω branch is 13.5/(1 + 8) = <strong>1.5 A</strong>, from X to Y.</li>
+    </ol>
+    <p><strong>Check by nodal analysis.</strong> With the bottom rail at 0 V, the equations at C and D give <span class="v">V</span><sub>C</sub> = 10.5 V and <span class="v">V</span><sub>D</sub> = 13.5 V; then <span class="v">V</span><sub>X</sub> = 12 V and (13.5 − 12)/1 = 1.5 A. Both methods agree.</p>
+  </div>
+
+  <div class="method-note">
+    <p><strong>Other June 2025 questions are not Module I.</strong> Q1(b) is three-phase relations, Q1(c) is back emf in a DC motor, Q1(d) is transformer losses, Q1(e) is LED construction, Q2(b) is the three-phase induction motor, Q3 is an inductive-coil power problem, Q4(b) is a BJT switch, Q4(c) is series resonance, Q5 is a transformer/DC motor/three-phase load, Q6(b) is an RL coil and Q6(c) is BJT versus FET. They belong to other modules and are outside this guide’s scope.</p>
+    <p><strong>C-scheme papers.</strong> Subject 58654 (December 2024, Summer 2025 and the undated DocScanner paper) is a different course and scheme. Its questions can be useful extra practice, but its paper pattern, marks and syllabus wording must not be used to predict ESC102. None of its questions is labelled as a university question for this module.</p>
+  </div>
+
+  <h2 id="practice">Practice — Basic / Exam-level / Challenging</h2>
+
+  <div class="callout">
+    <p><span class="tag">Guide</span> These questions were written for this page to give you graded practice. They are <strong>not</strong> teacher assignments and <strong>not</strong> university questions. The answer key is in the next section; cover it while you work.</p>
+    <p class="small">Work to the same standard as the worked examples: draw the circuit, mark the assumed current directions and source polarities, write the equation before substituting, keep units, and finish with a check. A correct number with no visible method earns little in a 15-mark question.</p>
+  </div>
+
+  <h3>Basic — build the habits</h3>
+
+  <div class="exam-q">
+    <div class="exam-q-title">B1 · Definitions and source behaviour (theory)</div>
+    <div class="exam-source">Guide practice · Basic · not a university question</div>
+    <p>(a) State Kirchhoff’s current law and Kirchhoff’s voltage law in words. (b) Define an ideal voltage source and an ideal current source. (c) Why does a practical voltage source have internal resistance, and what happens to its terminal voltage as the load current increases? (d) In one sentence, state the maximum power transfer condition.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">B2 · Ohm’s law and power</div>
+    <div class="exam-source">Guide practice · Basic · not a university question</div>
+    <p>A 24 V ideal source is connected directly across a 6 Ω resistor. Find the current and the power dissipated in the resistor.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">B3 · Series resistance and a parallel pair</div>
+    <div class="exam-source">Guide practice · Basic · not a university question</div>
+    <p>A 16 V source is connected to an unknown resistor <span class="v">R</span> in series with a parallel combination of 6 Ω and 3 Ω. The current through <span class="v">R</span> is 2 A. Find <span class="v">R</span>, the voltage across the parallel combination, and the current in each parallel resistor.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">B4 · Series–parallel reduction</div>
+    <div class="exam-source">Guide practice · Basic · not a university question</div>
+    <p>A 12 V source feeds a 2 Ω resistor in series with a parallel combination of 6 Ω and 3 Ω. Find the total current, the voltage across the parallel combination, and the current in the 6 Ω resistor.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">B5 · KVL in a series circuit</div>
+    <div class="exam-source">Guide practice · Basic · not a university question</div>
+    <p>A 20 V source is connected across 3 Ω, 5 Ω and 2 Ω in series. Find the current and the voltage across each resistor. Verify KVL around the loop.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">B6 · Voltage divider and power</div>
+    <div class="exam-source">Guide practice · Basic · not a university question</div>
+    <p>A 15 V source feeds a 7.5 Ω resistor in series with a 7.5 Ω load. Find the voltage across the load and the power it dissipates.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">B7 · Source transformation in both directions</div>
+    <div class="exam-source">Guide practice · Basic · not a university question</div>
+    <p>(a) Convert a 30 V source in series with 10 Ω into a current source in parallel with a resistor. (b) Convert a 3 A source in parallel with 10 Ω back into a voltage source in series with a resistor. State the arrow direction and the polarity.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">B8 · Balanced star–delta</div>
+    <div class="exam-source">Guide practice · Basic · not a university question</div>
+    <p>(a) A star has three equal 9 Ω legs. Find the equivalent delta. (b) A delta has three equal 12 Ω sides. Find the equivalent star. (c) State the two shortcut factors.</p>
+  </div>
+
+  <h3>Exam-level — one method, full solution</h3>
+
+  <div class="exam-q">
+    <div class="exam-q-title">E1 · Mesh analysis with a shared branch</div>
+    <div class="exam-source">Guide practice · Exam-level · not a university question</div>
+    <p>Two adjacent meshes share a 2 Ω resistor. Mesh 1 (left) contains a 12 V source and a 2 Ω resistor; mesh 2 (right) contains a 4 Ω resistor and a 4 V source that opposes the clockwise mesh current. Assign clockwise mesh currents <span class="v">I</span><sub>1</sub> and <span class="v">I</span><sub>2</sub>. Write the two mesh equations, solve them, and find the current in the shared 2 Ω resistor, stating its direction.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">E2 · Nodal analysis with two shunts</div>
+    <div class="exam-source">Guide practice · Exam-level · not a university question</div>
+    <p>A 9 V source feeds node A through 3 Ω. From A, a 4 Ω resistor and a 12 Ω resistor both connect to the bottom rail. Find <span class="v">V</span><sub>A</sub> by nodal analysis, then check the result by reducing the parallel pair.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">E3 · Nodal analysis with two voltage sources</div>
+    <div class="exam-source">Guide practice · Exam-level · not a university question</div>
+    <p>Node A is connected to a 24 V source through 2 Ω, to a 6 V source through 3 Ω, and to the bottom rail through 6 Ω. Both sources have their positive terminals at the ends facing their resistors. Find <span class="v">V</span><sub>A</sub> and the current in the 6 Ω resistor.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">E4 · Thevenin and a resistive load</div>
+    <div class="exam-source">Guide practice · Exam-level · not a university question</div>
+    <p>An 18 V source feeds a 6 Ω series resistor and a 12 Ω shunt resistor. The load is connected across the 12 Ω resistor. Find <span class="v">V</span><sub>th</sub> and <span class="v">R</span><sub>th</sub>, then connect a 2 Ω load and find its current and power.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">E5 · Norton equivalent</div>
+    <div class="exam-source">Guide practice · Exam-level · not a university question</div>
+    <p>An 18 V source feeds a 3 Ω series resistor and a 6 Ω shunt resistor. Find the Norton equivalent across the 6 Ω resistor, then connect a 4 Ω load and find its current using the Norton equivalent.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">E6 · Maximum power transfer</div>
+    <div class="exam-source">Guide practice · Exam-level · not a university question</div>
+    <p>A 36 V source feeds a 6 Ω series resistor and a 3 Ω shunt resistor. Find the load resistance for maximum power transfer and the maximum power delivered to it.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">E7 · Equivalent resistance</div>
+    <div class="exam-source">Guide practice · Exam-level · not a university question</div>
+    <p>Between terminals A and B, a 4 Ω resistor connects A to node C. From C, a 2 Ω resistor and a 4 Ω resistor both connect to B. Find <span class="v">R</span><sub>AB</sub>.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">E8 · Current division</div>
+    <div class="exam-source">Guide practice · Exam-level · not a university question</div>
+    <p>A 6 A source feeds node A. From A, a 3 Ω resistor and a 6 Ω resistor both connect to the bottom rail. Find the current in the 6 Ω resistor two ways: by nodal analysis and by current division.</p>
+  </div>
+
+  <h3>Challenging — combine two ideas</h3>
+
+  <div class="exam-q">
+    <div class="exam-q-title">C1 · Two-stage ladder and Thevenin</div>
+    <div class="exam-source">Guide practice · Challenging · not a university question</div>
+    <p>A 60 V source feeds 6 Ω in series to node X; 6 Ω connects X to the bottom rail; 3 Ω connects X to node A; 6 Ω connects A to the bottom rail. A 3 Ω load is connected from A to the bottom rail. Find the Thevenin equivalent at A, then the load current and the power in the load. <em>Hint: reduce the left stage first.</em></p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">C2 · Thevenin with a current source, then maximum power</div>
+    <div class="exam-source">Guide practice · Challenging · not a university question</div>
+    <p>An 18 V source feeds node A through 6 Ω; a 3 Ω resistor connects A to the bottom rail; a 1 A source injects current into A from the bottom rail. Find the Thevenin equivalent at A, the load resistance for maximum power transfer, and the maximum power.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">C3 · Nodal analysis with three parallel paths</div>
+    <div class="exam-source">Guide practice · Challenging · not a university question</div>
+    <p>A 20 V source feeds node A through 2 Ω. From A, 3 Ω and 4 Ω both connect to the bottom rail. Find <span class="v">V</span><sub>A</sub>, the current supplied by the 20 V source, and the power dissipated in the 4 Ω resistor. Express the voltage as an exact fraction and as a decimal.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">C4 · Balanced bridge</div>
+    <div class="exam-source">Guide practice · Challenging · not a university question</div>
+    <p>A 15 V source is connected across a Wheatstone bridge. The top arms are 2 Ω (A–C) and 4 Ω (C–B); the bottom arms are 4 Ω (A–D) and 8 Ω (D–B); a 5 Ω resistor connects C and D. Find the total current supplied by the source and the current in the 5 Ω resistor. Justify both answers.</p>
+  </div>
+
+  <h2 id="answer-key">Full answer key</h2>
+
+  <div class="callout">
+    <p><span class="tag">Guide</span> These are the guide’s solutions, not official university solutions. For the assignments and the June 2025 paper, the full working is in the sections above; the tables below are a revision index. If a number disagrees with your own solution, check the polarity and the assumed current direction before changing your work.</p>
+  </div>
+
+  <h3>Basic</h3>
+  <table>
+    <tr><th>ID</th><th>Answer</th><th>Check / method</th></tr>
+    <tr><td>B1</td><td>KCL: currents into a node equal currents out (algebraic sum zero). KVL: algebraic sum of voltages around a closed loop is zero. Ideal voltage source: fixed <span class="v">V</span>, zero internal resistance, current set by the circuit. Ideal current source: fixed <span class="v">I</span>, infinite internal resistance, voltage set by the circuit. Practical voltage source: internal resistance causes <span class="v">V</span><sub>terminal</sub> = <span class="v">E</span> − <span class="v">Ir</span>. MPT: <span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub>.</td><td>Theory; no calculation</td></tr>
+    <tr><td>B2</td><td><span class="v">I</span> = 24/6 = <strong>4 A</strong>; <span class="v">P</span> = <span class="v">VI</span> = 24 × 4 = <strong>96 W</strong> (or <span class="v">I</span>²<span class="v">R</span> = 16 × 6 = 96 W).</td><td>P = V²/R = 576/6 = 96 W.</td></tr>
+    <tr><td>B3</td><td><span class="v">R</span> = <strong>6 Ω</strong>; <span class="v">V</span><sub>parallel</sub> = <strong>4 V</strong>; <span class="v">I</span><sub>6Ω</sub> = <strong>2/3 A</strong>; <span class="v">I</span><sub>3Ω</sub> = <strong>4/3 A</strong>.</td><td>6 ∥ 3 = 2 Ω; total 16/2 = 8 Ω, so <span class="v">R</span> = 8 − 2 = 6 Ω. Parallel voltage = 2 × 2 = 4 V.</td></tr>
+    <tr><td>B4</td><td><span class="v">I</span> = <strong>3 A</strong>; <span class="v">V</span><sub>parallel</sub> = <strong>6 V</strong>; <span class="v">I</span><sub>6Ω</sub> = <strong>1 A</strong>.</td><td>6 ∥ 3 = 2 Ω; total 4 Ω; 12/4 = 3 A; 3 × 2 = 6 V; 6/6 = 1 A.</td></tr>
+    <tr><td>B5</td><td><span class="v">I</span> = <strong>2 A</strong>; <span class="v">V</span><sub>3Ω</sub> = <strong>6 V</strong>, <span class="v">V</span><sub>5Ω</sub> = <strong>10 V</strong>, <span class="v">V</span><sub>2Ω</sub> = <strong>4 V</strong>.</td><td>Total 10 Ω; 20/10 = 2 A; 6 + 10 + 4 = 20 V.</td></tr>
+    <tr><td>B6</td><td><span class="v">V</span><sub>L</sub> = <strong>7.5 V</strong>; <span class="v">P</span><sub>L</sub> = <strong>7.5 W</strong>.</td><td>Total 15 Ω; <span class="v">I</span> = 1 A; divider gives half; 1² × 7.5 = 7.5 W.</td></tr>
+    <tr><td>B7</td><td>(a) <strong>3 A in parallel with 10 Ω</strong>, arrow from the − terminal to the + terminal through the source. (b) <strong>30 V in series with 10 Ω</strong>, positive terminal at the head of the arrow.</td><td><span class="v">I</span><sub>s</sub> = 30/10 = 3 A; <span class="v">V</span><sub>s</sub> = 3 × 10 = 30 V.</td></tr>
+    <tr><td>B8</td><td>(a) <strong>27 Ω</strong> each. (b) <strong>4 Ω</strong> each. (c) <span class="v">R</span><sub>Δ</sub> = 3<span class="v">R</span><sub>Y</sub>; <span class="v">R</span><sub>Y</sub> = <span class="v">R</span><sub>Δ</sub>/3.</td><td>9 × 3 = 27; 12/3 = 4.</td></tr>
+  </table>
+
+  <h3>Exam-level</h3>
+  <table>
+    <tr><th>ID</th><th>Answer</th><th>Key equation / check</th></tr>
+    <tr><td>E1</td><td><span class="v">I</span><sub>1</sub> = <strong>3.2 A</strong>; <span class="v">I</span><sub>2</sub> = <strong>0.4 A</strong>; shared current = <strong>2.8 A</strong>, in the direction of <span class="v">I</span><sub>1</sub>.</td><td>12 = 4<span class="v">I</span><sub>1</sub> − 2<span class="v">I</span><sub>2</sub>; −4 = −2<span class="v">I</span><sub>1</sub> + 6<span class="v">I</span><sub>2</sub>. Check: 4(3.2) − 2(0.4) = 12; −2(3.2) + 6(0.4) = −4.</td></tr>
+    <tr><td>E2</td><td><span class="v">V</span><sub>A</sub> = <strong>4.5 V</strong>.</td><td>(<span class="v">V</span> − 9)/3 + <span class="v">V</span>/4 + <span class="v">V</span>/12 = 0 → 8<span class="v">V</span> = 36. Check: 4 ∥ 12 = 3 Ω, divider 9 × 3/6 = 4.5 V.</td></tr>
+    <tr><td>E3</td><td><span class="v">V</span><sub>A</sub> = <strong>14 V</strong>; <span class="v">I</span><sub>6Ω</sub> = <strong>14/6 = 2.333 A</strong> downward.</td><td>(<span class="v">V</span> − 24)/2 + (<span class="v">V</span> − 6)/3 + <span class="v">V</span>/6 = 0 → 6<span class="v">V</span> = 84.</td></tr>
+    <tr><td>E4</td><td><span class="v">V</span><sub>th</sub> = <strong>12 V</strong>; <span class="v">R</span><sub>th</sub> = <strong>4 Ω</strong>; <span class="v">I</span><sub>L</sub> = <strong>2 A</strong>; <span class="v">P</span><sub>L</sub> = <strong>8 W</strong>.</td><td>18 × 12/18 = 12 V; 6 ∥ 12 = 4 Ω; 12/(4 + 2) = 2 A; 2² × 2 = 8 W.</td></tr>
+    <tr><td>E5</td><td><span class="v">I</span><sub>N</sub> = <strong>6 A</strong>; <span class="v">R</span><sub>N</sub> = <strong>2 Ω</strong>; <span class="v">I</span><sub>L</sub> = <strong>2 A</strong>.</td><td>18 × 6/9 = 12 V; 3 ∥ 6 = 2 Ω; 12/2 = 6 A; 6 × 2/(2 + 4) = 2 A.</td></tr>
+    <tr><td>E6</td><td><span class="v">R</span><sub>L</sub> = <strong>2 Ω</strong>; <span class="v">P</span><sub>max</sub> = <strong>18 W</strong>.</td><td>36 × 3/9 = 12 V; 6 ∥ 3 = 2 Ω; 12²/(4 × 2) = 18 W.</td></tr>
+    <tr><td>E7</td><td><span class="v">R</span><sub>AB</sub> = <strong>16/3 Ω ≈ 5.33 Ω</strong>.</td><td>2 ∥ 4 = 4/3; 4 + 4/3 = 16/3.</td></tr>
+    <tr><td>E8</td><td><span class="v">I</span><sub>6Ω</sub> = <strong>2 A</strong> downward.</td><td>3 ∥ 6 = 2 Ω; <span class="v">V</span><sub>A</sub> = 6 × 2 = 12 V; 12/6 = 2 A. Current division: 6 × 3/(3 + 6) = 2 A.</td></tr>
+  </table>
+
+  <h3>Challenging</h3>
+  <table>
+    <tr><th>ID</th><th>Answer</th><th>Key steps</th></tr>
+    <tr><td>C1</td><td><span class="v">V</span><sub>th</sub> = <strong>20 V</strong>; <span class="v">R</span><sub>th</sub> = <strong>2 Ω</strong>; <span class="v">I</span><sub>L</sub> = <strong>4 A</strong>; <span class="v">P</span><sub>L</sub> = <strong>48 W</strong>.</td><td>At X: 60 × 6/12 = 30 V, <span class="v">R</span> = 6 ∥ 6 = 3 Ω. At A: 30 × 6/9 = 20 V, <span class="v">R</span> = 3 ∥ 6 = 2 Ω. Load 3 Ω: 20/5 = 4 A; 4² × 3 = 48 W.</td></tr>
+    <tr><td>C2</td><td><span class="v">V</span><sub>th</sub> = <strong>8 V</strong>; <span class="v">R</span><sub>th</sub> = <strong>2 Ω</strong>; <span class="v">R</span><sub>L</sub> = <strong>2 Ω</strong>; <span class="v">P</span><sub>max</sub> = <strong>8 W</strong>.</td><td>Short-circuit current = 18/6 + 1 = 4 A; <span class="v">R</span><sub>th</sub> = 6 ∥ 3 = 2 Ω; <span class="v">V</span><sub>th</sub> = 4 × 2 = 8 V; 8²/(4 × 2) = 8 W.</td></tr>
+    <tr><td>C3</td><td><span class="v">V</span><sub>A</sub> = <strong>120/13 V ≈ 9.23 V</strong>; source current = <strong>70/13 A ≈ 5.38 A</strong>; <span class="v">P</span><sub>4Ω</sub> = <strong>3600/169 W ≈ 21.3 W</strong>.</td><td>(<span class="v">V</span> − 20)/2 + <span class="v">V</span>/3 + <span class="v">V</span>/4 = 0 ×12 → 6<span class="v">V</span> − 120 + 4<span class="v">V</span> + 3<span class="v">V</span> = 0; 13<span class="v">V</span> = 120. Source current = (20 − <span class="v">V</span>)/2. <span class="v">P</span><sub>4</sub> = <span class="v">V</span>²/4.</td></tr>
+    <tr><td>C4</td><td><span class="v">I</span><sub>source</sub> = <strong>3.75 A</strong>; <span class="v">I</span><sub>5Ω</sub> = <strong>0 A</strong>.</td><td>2/4 = 4/8, so the bridge is balanced; C and D are at the same potential. <span class="v">R</span><sub>eq</sub> = (2 + 4) ∥ (4 + 8) = 6 ∥ 12 = 4 Ω; 15/4 = 3.75 A.</td></tr>
+  </table>
+
+  <h3>Assignment 1 — answer index</h3>
+  <table>
+    <tr><th>Question</th><th>Answer</th><th>Note</th></tr>
+    <tr><td>A1-Q1</td><td><span class="v">V</span><sub>4Ω</sub> = <strong>28 V</strong>, positive at the top.</td><td>Superposition: 8 + 20 + 0 V.</td></tr>
+    <tr><td>A1-Q2</td><td><span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub>; <span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub>²/(4<span class="v">R</span><sub>th</sub>).</td><td>Proof by <span class="v">dP</span><sub>L</sub>/<span class="v">dR</span><sub>L</sub> = 0.</td></tr>
+    <tr><td>A1-Q3</td><td><span class="v">I</span><sub>3Ω</sub> = <strong>41/48 A ≈ 0.854 A</strong>, A to B.</td><td>Same as June 2025 Q2(a); polarity-dependent.</td></tr>
+    <tr><td>A1-Q4</td><td><strong>No defensible numerical answer.</strong></td><td>Right end of <span class="v">R</span><sub>3</sub> is cut off; under the common-bottom assumption the resistance is negative.</td></tr>
+    <tr><td>A1-Q5</td><td><span class="v">I</span><sub>10Ω</sub> = <strong>34/47 A ≈ 0.723 A</strong>.</td><td>Assumes 20 V positive at the top and 2 A arrow to the right; current flows from the 20 V node toward the junction.</td></tr>
+    <tr><td>A1-Q6</td><td><span class="v">R</span><sub>xy</sub> = <strong>595/22 Ω ≈ 27.05 Ω</strong>.</td><td>45 ∥ 20 = 180/13; series 10; parallel 10; series 20.</td></tr>
+    <tr><td>A1-Q7</td><td><span class="v">I</span><sub>1Ω</sub> = <strong>11/32 A ≈ 0.344 A</strong>.</td><td>Assumes 1 V positive at the bottom-left node. Reversed: 13/32 A.</td></tr>
+  </table>
+
+  <h3>Assignment 2 — answer index</h3>
+  <table>
+    <tr><th>Question</th><th>Answer</th><th>Note</th></tr>
+    <tr><td>A2-Q1</td><td><strong>7/3 A ≈ 2.33 A</strong> through the 30 Ω.</td><td>Conditional: 13 A downward and 50 V positive at the top. The scan is unclear; state the arrows.</td></tr>
+    <tr><td>A2-Q2</td><td><span class="v">I</span><sub>10Ω</sub> = <strong>−79/47 A ≈ −1.68 A</strong>.</td><td>Conditional: 10 V and 20 V positive at the top. The 20 V source is in series with the 10 Ω branch.</td></tr>
+    <tr><td>A2-Q3</td><td><span class="v">R</span><sub>L</sub> = <strong>125/6 Ω ≈ 20.83 Ω</strong>; <span class="v">P</span><sub>max</sub> = <strong>5/6 W ≈ 0.833 W</strong>.</td><td>Bridge: 75 V and 66.667 V; <span class="v">R</span><sub>th</sub> = 7.5 + 13.333 Ω.</td></tr>
+    <tr><td>A2-Q4</td><td><span class="v">R</span> = <strong>49 Ω</strong>; <span class="v">P</span><sub>max</sub> = <strong>16/49 W ≈ 0.327 W</strong>.</td><td>Assumes 2 V positive on the left; reversed gives 36/49 W.</td></tr>
+    <tr><td>A2-Q5</td><td><span class="v">I</span><sub>1Ω</sub> = <strong>4 A downward</strong>.</td><td>Nodal: <span class="v">V</span><sub>A</sub> = 4 V; <span class="v">V</span><sub>B</sub> − <span class="v">V</span><sub>A</sub> = 12 V.</td></tr>
+  </table>
+
+  <h3>Teacher’s question bank — answer index</h3>
+  <table>
+    <tr><th>Question</th><th>Answer</th><th>Note</th></tr>
+    <tr><td>QB-2</td><td><span class="v">I</span><sub>5Ω</sub> = <strong>14/15 A ≈ 0.933 A</strong>.</td><td>From the 24 V source toward node A; <span class="v">V</span><sub>A</sub> = 86/3 V.</td></tr>
+    <tr><td>QB-4</td><td><span class="v">R</span><sub>AB</sub> = <strong>22/3 Ω</strong>, <span class="v">R</span><sub>BC</sub> = <strong>22 Ω</strong>, <span class="v">R</span><sub>CA</sub> = <strong>11 Ω</strong>.</td><td>For star legs 2, 4, 6 at A, B, C respectively.</td></tr>
+    <tr><td>QB-7</td><td><span class="v">I</span><sub>15Ω</sub> = <strong>0.25 A</strong> from B to A.</td><td>Nodal solution; <span class="v">V</span><sub>A</sub> and <span class="v">V</span><sub>B</sub> differ by 3.75 V.</td></tr>
+    <tr><td>QB-8</td><td><span class="v">I</span> = <strong>3 A downward</strong>.</td><td>KCL at A gives <span class="v">V</span><sub>A</sub> = 12 V.</td></tr>
+    <tr><td>QB-11</td><td><span class="v">R</span> = <strong>20/3 Ω ≈ 6.67 Ω</strong>.</td><td><span class="v">V</span><sub>A</sub> = 20 V.</td></tr>
+    <tr><td>QB-13 / 14</td><td><span class="v">I</span><sub>s</sub> = <strong>4 A</strong> in parallel with <strong>5 Ω</strong>.</td><td>Arrow points to the + terminal; reverse gives 20 V in series with 5 Ω.</td></tr>
+    <tr><td>QB-15</td><td><span class="v">V</span><sub>A</sub> = <strong>8/7 V ≈ 1.143 V</strong>.</td><td>7<span class="v">V</span><sub>A</sub> = 8.</td></tr>
+  </table>
+
+  <h3>June 2025 NEP paper — Module I answers</h3>
+  <table>
+    <tr><th>Question</th><th>Answer</th><th>Note</th></tr>
+    <tr><td>Q1(a)</td><td><span class="v">R</span><sub>AB</sub> = <strong>22/3 Ω</strong>, <span class="v">R</span><sub>BC</sub> = <strong>22 Ω</strong>, <span class="v">R</span><sub>CA</sub> = <strong>11 Ω</strong>.</td><td>Star 2, 4, 6 Ω; 3 marks.</td></tr>
+    <tr><td>Q2(a)</td><td><span class="v">I</span><sub>3Ω</sub> = <strong>41/48 A ≈ 0.854 A</strong> from A to B.</td><td>Norton; polarity-dependent; 10 marks.</td></tr>
+    <tr><td>Q4(a)</td><td><strong>0.75 A from B to A</strong> with the 5 A arrow upward; <strong>1.75 A from A to B</strong> if the arrow is downward.</td><td>Nodal; 5 marks. Check the arrow in your copy.</td></tr>
+    <tr><td>Q6(a)</td><td><span class="v">I</span><sub>8Ω</sub> = <strong>1.5 A downward</strong>.</td><td>Source transformation; 6 marks.</td></tr>
+  </table>
+
+  <div class="method-note">
+    <p><strong>Why some answers are conditional.</strong> A numerical answer is only as good as the diagram it came from. Four items in the supplied scans are not fully determined: A1-Q4 (a connection is cut off), A1-Q5 and A2-Q1 (source arrows/polarities are unclear), and A2-Q2 (the 20 V source is in series with the load branch). The June 2025 Q4(a) arrow is faint as well. For each, the assumption is printed beside the answer. In an exam, redraw the circuit and mark the polarity yourself before solving; that is also the habit that earns method marks.</p>
+  </div>
+
+  <h2 id="revision">Last-minute revision sheet</h2>
+
+  <div class="revision-sheet">
+    <h3>Formula sheet</h3>
+    <table>
+      <tr><th>Idea</th><th>Formula</th><th>Remember</th></tr>
+      <tr><td>Ohm’s law</td><td><span class="v">V</span> = <span class="v">IR</span></td><td><span class="v">V</span> across, <span class="v">I</span> through, <span class="v">R</span> opposes.</td></tr>
+      <tr><td>Power</td><td><span class="v">P</span> = <span class="v">VI</span> = <span class="v">I</span>²<span class="v">R</span> = <span class="v">V</span>²/<span class="v">R</span></td><td>Use the form that matches the known quantities.</td></tr>
+      <tr><td>Series</td><td><span class="v">R</span><sub>eq</sub> = <span class="v">R</span><sub>1</sub> + <span class="v">R</span><sub>2</sub> + …</td><td>Same current; voltages add.</td></tr>
+      <tr><td>Parallel</td><td>1/<span class="v">R</span><sub>eq</sub> = 1/<span class="v">R</span><sub>1</sub> + 1/<span class="v">R</span><sub>2</sub> + …</td><td>Same voltage; currents add. For two: product/sum.</td></tr>
+      <tr><td>Voltage divider</td><td><span class="v">V</span><sub>2</sub> = <span class="v">V</span><sub>total</sub> × <span class="v">R</span><sub>2</sub>/(<span class="v">R</span><sub>1</sub> + <span class="v">R</span><sub>2</sub>)</td><td>Only for a series pair.</td></tr>
+      <tr><td>Current divider</td><td><span class="v">I</span><sub>1</sub> = <span class="v">I</span><sub>total</sub> × <span class="v">R</span><sub>2</sub>/(<span class="v">R</span><sub>1</sub> + <span class="v">R</span><sub>2</sub>)</td><td>Only for a parallel pair; the other resistor is on top.</td></tr>
+      <tr><td>Source transformation</td><td><span class="v">V</span><sub>s</sub> = <span class="v">I</span><sub>s</sub><span class="v">R</span>; <span class="v">I</span><sub>s</sub> = <span class="v">V</span><sub>s</sub>/<span class="v">R</span></td><td>Series ↔ parallel; arrow points to the + terminal.</td></tr>
+      <tr><td>KCL</td><td>Σ<span class="v">I</span><sub>in</sub> = Σ<span class="v">I</span><sub>out</sub></td><td>At a node; be consistent with assumed directions.</td></tr>
+      <tr><td>KVL</td><td>Σ<span class="v">V</span><sub>rises</sub> = Σ<span class="v">V</span><sub>drops</sub></td><td>Around a closed loop; signs must be consistent.</td></tr>
+      <tr><td>Star → delta</td><td><span class="v">R</span><sub>AB</sub> = <span class="v">P</span>/<span class="v">R</span><sub>C</sub>, etc.</td><td><span class="v">P</span> = <span class="v">R</span><sub>A</sub><span class="v">R</span><sub>B</sub> + <span class="v">R</span><sub>B</sub><span class="v">R</span><sub>C</sub> + <span class="v">R</span><sub>C</sub><span class="v">R</span><sub>A</sub>.</td></tr>
+      <tr><td>Delta → star</td><td><span class="v">R</span><sub>A</sub> = <span class="v">R</span><sub>AB</sub><span class="v">R</span><sub>CA</sub>/<span class="v">S</span>, etc.</td><td><span class="v">S</span> = <span class="v">R</span><sub>AB</sub> + <span class="v">R</span><sub>BC</sub> + <span class="v">R</span><sub>CA</sub>.</td></tr>
+      <tr><td>Thevenin</td><td><span class="v">V</span><sub>th</sub> = open-circuit voltage; <span class="v">R</span><sub>th</sub> = resistance with sources dead</td><td>Voltage sources → short; current sources → open.</td></tr>
+      <tr><td>Norton</td><td><span class="v">I</span><sub>N</sub> = short-circuit current; <span class="v">R</span><sub>N</sub> = <span class="v">R</span><sub>th</sub></td><td><span class="v">V</span><sub>th</sub> = <span class="v">I</span><sub>N</sub><span class="v">R</span><sub>N</sub>.</td></tr>
+      <tr><td>Maximum power</td><td><span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub>; <span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub>²/(4<span class="v">R</span><sub>th</sub>)</td><td>Maximum power, not maximum efficiency.</td></tr>
+    </table>
+
+    <h3>Sign and unit discipline</h3>
+    <ul>
+      <li>Mark every source’s + and − before writing an equation. The long line of a battery symbol is positive.</li>
+      <li>Choose mesh currents all clockwise, or all anticlockwise, and keep the choice. A shared branch carries the difference of the two mesh currents.</li>
+      <li>For nodal analysis, mark the reference node with 0 V and write every current as “(node voltage − neighbour voltage)/resistance” for currents leaving the node.</li>
+      <li>A current source fixes the current in its branch, not the voltage across it. A voltage source fixes the voltage between its terminals, not the current through it.</li>
+      <li>Carry units through the arithmetic: Ω × A = V; V × A = W; V²/Ω = W.</li>
+      <li>A negative answer is information, not an error: it means the actual direction is opposite to the assumed arrow. Keep the magnitude and state the true direction.</li>
+      <li>Never add powers from superposition. Superposition applies to voltages and currents in linear circuits, not to power.</li>
+    </ul>
+
+    <h3>Method chooser</h3>
+    <table>
+      <tr><th>If the question says…</th><th>Use…</th><th>Because…</th></tr>
+      <tr><td>“Find current in one branch” and the network is complicated</td><td>Nodal analysis</td><td>One unknown node voltage gives the branch current directly.</td></tr>
+      <tr><td>“Find several branch currents” in a planar network</td><td>Mesh analysis</td><td>One unknown per window; shared-branch currents come from differences.</td></tr>
+      <tr><td>“Find current through a load” and the load can be removed</td><td>Thevenin or Norton</td><td>The network collapses to one source and one resistance.</td></tr>
+      <tr><td>“Find <span class="v">R</span><sub>L</sub> for maximum power”</td><td>Thevenin + MPT</td><td>Set <span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub>; use <span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub>²/(4<span class="v">R</span><sub>th</sub>).</td></tr>
+      <tr><td>“Use superposition” explicitly</td><td>One source at a time</td><td>Kill the others: voltage sources short, current sources open.</td></tr>
+      <tr><td>A bridge with no series/parallel pair</td><td>Star–delta conversion</td><td>Convert one three-terminal group, then reduce.</td></tr>
+      <tr><td>“Convert the source” explicitly</td><td>Source transformation</td><td><span class="v">V</span><sub>s</sub> in series with <span class="v">R</span> ↔ <span class="v">I</span><sub>s</sub> in parallel with <span class="v">R</span>.</td></tr>
+    </table>
+
+    <h3>Ten-minute checklist before the paper</h3>
+    <ol>
+      <li>Can you state KCL and KVL and write both with correct signs?</li>
+      <li>Can you draw the four source symbols and explain ideal versus practical behaviour?</li>
+      <li>Can you convert a source in both directions and place the arrow correctly?</li>
+      <li>Can you write a mesh equation with a shared branch without a sign error?</li>
+      <li>Can you write a nodal equation at a node with a voltage source behind a resistor?</li>
+      <li>Can you state both star–delta formulas and the balanced shortcuts?</li>
+      <li>Can you list the three steps of superposition and the power warning?</li>
+      <li>Can you find <span class="v">V</span><sub>th</sub>, <span class="v">R</span><sub>th</sub>, <span class="v">I</span><sub>N</sub> and <span class="v">R</span><sub>N</sub> for a two-source network?</li>
+      <li>Can you derive <span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub> and <span class="v">P</span><sub>max</sub>?</li>
+      <li>Can you check a final answer by substituting it back into one KCL or KVL equation?</li>
+    </ol>
+
+    <p class="small">If you have only one hour: read the formula sheet, redo one mesh example, one nodal example and one Thevenin example from this page with the solutions covered, then read the common-mistakes lists. Do not start a new topic in the last hour.</p>
+  </div>
+
+  <h2 id="references">References and attribution</h2>
+
+  <div class="references">
+    <h3>Primary sources</h3>
+    <ol>
+      <li>University of Mumbai, Faculty of Science &amp; Technology, <em>Syllabus for B.E. Computer Engineering (AI &amp; ML), NEP 2020</em>, ESC102 Basic Electrical and Electronics Engineering, Module I “DC Circuits”, 10 hours, CO1. <a href="https://mu.ac.in/old/wp-content/uploads/2025/02/6.14N-CSE-AIML.pdf">Official syllabus PDF</a>. Accessed and checked for this page.</li>
+      <li>Samuel J. Ling, Jeff Sanny and William Moebs, <em>University Physics Volume 2</em>, OpenStax, §10.1 “Electric Current” and §10.3 “Kirchhoff’s Rules”. <a href="https://openstax.org/books/university-physics-volume-2/pages/10-1-electric-current">§10.1</a> · <a href="https://openstax.org/books/university-physics-volume-2/pages/10-3-kirchhoffs-rules">§10.3</a>. OpenStax content is licensed for reuse under CC BY 4.0; quotations here are short and attributed.</li>
+      <li>Tony R. Kuphaldt, <em>Lessons In Electric Circuits, Volume I — DC</em>, Chapter 10 “DC Network Analysis”, sections on superposition, Thevenin’s theorem, Norton’s theorem, maximum power transfer and Δ–Y conversions. <a href="https://www.ibiblio.org/kuphaldt/electricCircuits/DC/DC_10.html">Chapter 10</a>. The work is released for free distribution by the author.</li>
+      <li>Dr. Nirmala K., <em>BEE Assignment on Unit 1 (AY 2025–26)</em>, FE CSE (AI &amp; ML), Assignment 1, Q1–Q7. Course document supplied with the class; not a university publication.</li>
+      <li>Dr. Nirmala K., <em>Assignment 2 BEEE — FE AIML (25–26)</em>, Thevenin, Norton, maximum power and nodal questions. Course document supplied with the class; not a university publication.</li>
+      <li>Dr. Nirmala K., <em>BEE Unit 1 Practice Questions, CSE AIML 2025–26</em>, 15-question bank. Course document supplied with the class; not a university publication.</li>
+      <li>University of Mumbai, <em>Basic Electrical &amp; Electronics Engineering</em>, NEP 2020, paper code N10415, 13 June 2025, FE All Branches, Semester I, 60 marks, 2 hours. Supplied scanned paper. Only the Module I questions are reproduced; the paper is not a complete Module I paper.</li>
+    </ol>
+
+    <h3>How quotations are used</h3>
+    <p>Quotations are kept short and are placed in a bordered block with the author, work, section and a link. The surrounding explanation is the guide’s own paraphrase or commentary, not the author’s words. No quotation is invented, and no source is cited for a claim it does not make. Where a numerical answer depends on a scanned diagram, the assumption is printed with the answer.</p>
+
+    <h3>What this page does not include</h3>
+    <p>This page covers <strong>Module I only</strong>. It does not teach dependent sources, supernodes or supermeshes, because the official syllabus explicitly excludes them (“Only independent sources”; “no super node and super mesh”). It does not reproduce the C-scheme 58654 papers as ESC102 questions, and it does not present teacher assignments or the practice bank as university papers. Modules 2–6 are not covered here.</p>
+
+    <p class="small">Compiled for study use. The page is not an official University of Mumbai publication and is not endorsed by the university or by Dr. Nirmala K. If your department issues a revised syllabus or paper pattern, follow the department’s version.</p>
+  </div>
+
+  <footer>
+    <p><strong>BEEE Module 1 — DC Circuits</strong> · ESC102 · B.E. CSE (AI &amp; ML) · Semester I · NEP 2020</p>
+    <p><a href="/beee">All BEEE modules</a> · <a href="/">Study Guides home</a> · <a href="#top">Back to top</a></p>
+    <p>Study guide with source excerpts, worked examples and a separate answer key. Not an official university publication.</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var b=document.getElementById('themeToggle'),r=document.documentElement;
+  function dark(){var t=r.getAttribute('data-theme');return t==='dark';}
+  function paint(){var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
+  b.addEventListener('click',function(){var n=dark()?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('sg-theme',n);}catch(e){}paint();});
+  paint();
+})();
+</script>
+</body>
+</html>
