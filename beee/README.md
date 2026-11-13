@@ -10,7 +10,7 @@ Complete source-based study guide for BEEE (ESC102) Module 1: DC Circuits — Ki
 
 ## Structure
 - `beee/index.html` — Landing card on global subject list
-- `beee/modules/module-1.html` — Complete module guide (189KB, 11 SVG figures)
+- `beee/modules/module-1.html` — Complete module guide (~223KB, 15 SVG figures, section progress rail)
 - `beee/AGENTS.md` — Agent skill configuration
 - `beee/README.md` — This file
 

@@ -42,6 +42,7 @@ Labs, the open elective, Full Stack Java, Entrepreneurship Development and Envir
 - **Light by default, dark on request.** A square toggle on each page switches themes. The choice is saved in the browser under the key `sg-theme`. The site does not follow the operating system's dark setting unless the reader chooses it.
 - **One visual language.** Black on white, Georgia headings, Helvetica body text, a single blue accent, hairline rules and no rounded corners. Colours are CSS variables, so the dark theme redefines the same names.
 - **Real diagrams.** Venn diagrams, a pigeonhole diagram and similar figures are inline SVG that follow the theme and scale to the screen.
+- **Section progress.** Long guides show where you are. On wide screens with a mouse, a collapsible rail in the left margin lists the sections and fills as you read. On phones and touch tablets, a thin blue line at the top shows progress through the current section, and a faint tab at the screen edge opens the section list. It is built from each page's `h2[id]` headings by a small inline script, so it needs no extra files. The rail's open or closed state is saved under `sg-rail`.
 - **Print styles.** Pages print in light mode with navigation hidden.
 - **No build step.** Plain HTML and CSS with a small amount of inline JavaScript. The Mathematics guide additionally loads MathJax and a Markdown renderer from a CDN, so it needs an internet connection to render formulas.
 
