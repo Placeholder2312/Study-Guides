@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BEEE Module 3 — Single Phase Transformer · Study Guide</title>
+<meta name="description" content="Complete source-based study guide for BEEE (ESC102) Module 3: Single Phase Transformer — working principle, types, transformation ratio, ideal and practical transformer, losses, efficiency and applications.">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --muted: #444444;
+    --bg: #ffffff;
+    --line: #cccccc;
+    --rule: #999999;
+    --accent: #1d4ed8;
+    --space: 1.5rem;
+    --radius: 0;
+    --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+    --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-mono: "Courier New", Courier, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    font-size: 17px;
+    font-weight: 500;
+    text-wrap: pretty;
+  }
+  .wrap { max-width: 64ch; margin: 0 auto; padding: 2.5rem 1rem 4rem; }
+  header { border-bottom: 2px solid var(--ink); margin-bottom: 2.5rem; padding-bottom: 1rem; }
+  h1 { font-family: var(--font-serif); font-size: 2.25rem; font-weight: 700; line-height: 1.25; margin: 0 0 0.5rem; letter-spacing: -0.01em; }
+  .subtitle { color: var(--muted); font-size: 1rem; font-weight: 400; margin: 0; }
+  .meta { font-size: 0.85rem; line-height: 1.5; font-weight: 500; color: var(--muted); margin-top: 1rem; }
+  h2 { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; line-height: 1.3; margin: 3rem 0 1rem; border-bottom: 1px solid var(--line); padding-bottom: 0.4rem; }
+  h2 > a { text-decoration: none; color: inherit; }
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h3 { font-size: 1.15rem; font-weight: 600; line-height: 1.3; margin: 2rem 0 0.5rem; }
+  h4 { font-size: 1rem; font-weight: 600; line-height: 1.3; margin: 1.5rem 0 0.5rem; }
+  p { margin: 0 0 1rem; line-height: 1.6; }
+  ul, ol, blockquote, pre, figure { line-height: 1.6; }
+  td { line-height: 1.5; }
+  .v { font-family: var(--font-serif); font-style: italic; }
+  .theory { border-left: 3px solid var(--ink); padding: 1rem 1.25rem; margin: 1.75rem 0; font-size: 0.98rem; }
+  .theory p:first-child { margin-top: 0; }
+  .theory p:last-child { margin-bottom: 0; }
+  .quote { border-left: 3px solid var(--accent); background: var(--surface); padding: 0.9rem 1.15rem; margin: 1.25rem 0; }
+  .quote p { font-family: var(--font-serif); font-size: 1.02rem; font-style: italic; margin: 0 0 0.5rem; }
+  .quote p:last-child { margin-bottom: 0; }
+  .attrib { display: block; font-family: var(--font-sans); font-style: normal; font-size: 0.78rem; line-height: 1.45; font-weight: 600; color: var(--muted); margin-top: 0.55rem; }
+  .source { display: block; font-size: 0.78rem; line-height: 1.4; font-weight: 600; color: var(--muted); letter-spacing: 0.04em; margin-bottom: 0.5rem; }
+  .eq { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 600; text-align: center; margin: 1.25rem 0; padding: 0.75rem 1rem; background: var(--surface-eq); border: 1px solid var(--line); color: var(--ink); overflow-x: auto; }
+  .eq-note { font-size: 0.85rem; line-height: 1.4; color: var(--muted); text-align: center; margin-top: -0.75rem; margin-bottom: 1.5rem; }
+  .example { border: 1px solid var(--line); padding: 1rem 1.25rem; margin: 1.5rem 0; font-size: 0.95rem; background: var(--surface); }
+  .example-title { font-weight: 700; line-height: 1.3; margin-bottom: 0.6rem; font-size: 0.8rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+  .example .eq { margin: 0.75rem 0; background: var(--bg); border: 1px solid var(--line); }
+  .example p { margin-bottom: 0.65rem; }
+  .steps { list-style: none; padding: 0; margin: 1.5rem 0; border: 1px solid var(--line); background: var(--surface); padding: 1rem 1.25rem; }
+  .steps li { margin-bottom: 0.75rem; font-size: 0.95rem; padding-left: 1.5rem; position: relative; }
+  .steps li::before { content: ""; position: absolute; left: 0; top: 0.35rem; width: 0.6rem; height: 0.6rem; background: var(--ink); border-radius: 50%; }
+  .steps li:last-child { margin-bottom: 0; }
+  table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.92rem; }
+  th, td { border: 1px solid var(--line); padding: 0.625rem 0.875rem; text-align: left; vertical-align: top; }
+  th { background: var(--surface-hi); font-weight: 700; font-size: 0.82rem; line-height: 1.4; letter-spacing: 0.04em; }
+  tr:nth-child(even) td { background: var(--surface-alt); }
+  .kbd { font-family: var(--font-mono); font-size: 0.875rem; line-height: 1.4; background: var(--surface-hi); border: 1px solid var(--line); border-radius: 3px; padding: 0.1rem 0.4rem; }
+  .toc { border: 1px solid var(--line); padding: 1rem 1.25rem; margin: 2rem 0; background: var(--surface); }
+  .toc ol { margin: 0; padding-left: 1.25rem; }
+  .toc li { margin-bottom: 0.35rem; font-size: 0.95rem; }
+  .toc a { color: var(--ink); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .nav { margin: 1.5rem 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .nav a { padding: 0.25rem 0.6rem; border: 1px solid var(--line); text-decoration: none; color: var(--ink); font-size: 0.85rem; border-radius: 3px; }
+  .nav a:hover { background: var(--surface-hi); }
+  .practice, .answer-key, .common-mistakes, .revision-sheet, .references, .exam-q, .callout { border: 1px solid var(--line); padding: 1rem 1.25rem; margin: 1.5rem 0; background: var(--surface); }
+  .practice > h3:first-of-type, .answer-key > h3:first-of-type, .common-mistakes > h3:first-of-type, .revision-sheet > h3:first-of-type, .references > h3:first-of-type { margin-top: 0; }
+  .self-learning { border-left: 3px solid var(--muted); padding: 1rem 1.25rem; margin: 1.75rem 0; font-size: 0.95rem; color: var(--muted); }
+  .self-learning p { margin-bottom: 0.75rem; }
+  .warning { color: var(--danger); font-weight: 700; }
+  .mu-badge { display: inline-block; background: var(--accent-soft); border: 1px solid var(--accent); color: var(--accent); font-size: 0.75rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 3px; letter-spacing: 0.04em; margin-left: 0.5rem; }
+  .tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid var(--line); padding: 0.12rem 0.4rem; margin-right: 0.3rem; color: var(--muted); vertical-align: 0.1em; }
+  .tag.q { border-color: var(--accent); color: var(--accent); }
+  .tag.c { border-color: var(--ink); color: var(--ink); }
+  .exam-q { border: 1px solid var(--line); padding: 1rem 1.25rem; margin: 1.25rem 0; background: var(--surface); }
+  .exam-q-title { font-weight: 700; line-height: 1.3; margin-bottom: 0.5rem; font-size: 0.9rem; letter-spacing: 0; color: var(--muted); }
+  .exam-source { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom: 0.5rem; }
+  figure { margin: 1.5rem 0; }
+  svg { width: 100%; max-width: 100%; height: auto; display: block; margin: 0 auto; padding: 0.5rem; background: var(--bg); border: 1px solid var(--line); }
+  svg text { paint-order: stroke; stroke: var(--bg); stroke-width: 2.5px; stroke-linejoin: round; }
+  .figcap { font-size: 0.8rem; line-height: 1.45; color: var(--muted); text-align: center; margin: 0.45rem 0 0; }
+  .two { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+  @media (min-width: 640px) { .two { grid-template-columns: 1fr 1fr; } }
+  .given-grid { display: grid; grid-template-columns: 1fr; gap: 0.25rem 1rem; margin: 0.75rem 0; font-size: 0.93rem; }
+  @media (min-width: 560px) { .given-grid { grid-template-columns: 8.5rem 1fr; } }
+  .given-grid dt { font-weight: 700; }
+  .given-grid dd { margin: 0; }
+  .method-note { border: 1px dashed var(--line); padding: 0.75rem 1rem; margin: 1rem 0; font-size: 0.95rem; }
+  .small { font-size: 0.88rem; color: var(--muted); }
+  footer { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; line-height: 1.5; text-align: center; }
+  .references p { margin: 0.5rem 0; }
+  .references ul { margin: 0.5rem 0; padding-left: 1.5rem; }
+  ::selection { background: var(--ink); color: var(--bg); }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    .wrap { padding: 1rem 0.75rem 3rem; }
+    h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.3rem; margin-top: 2.25rem; }
+    table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; font-size: 0.85rem; }
+    th, td { padding: 0.45rem 0.55rem; }
+    .theory, .example, .practice, .answer-key, .common-mistakes, .revision-sheet, .references, .exam-q, .steps, .toc, .self-learning, .quote, .callout { padding: 0.75rem; }
+    .eq { font-size: 1rem; padding: 0.6rem 0.5rem; text-align: left; }
+    .kbd { word-break: break-word; }
+    .nav a { padding: 0.4rem 0.7rem; }
+    svg { padding: 0.25rem; }
+  }
+  @media print {
+    body { font-size: 12pt; line-height: 1.4; color: #000; background: #fff; }
+    .wrap { max-width: 100%; padding: 0; }
+    header { border-bottom: 1px solid #000; margin-bottom: 1.5rem; padding-bottom: 0.75rem; }
+    h2 { margin: 2rem 0 0.75rem; border-bottom: 1px solid #000; padding-bottom: 0.3rem; }
+    h3 { margin: 1.5rem 0 0.4rem; }
+    .toc, .nav { display: none; }
+    .example, .practice, .answer-key, .revision-sheet, .steps, .theory, .common-mistakes, .references, .exam-q, .quote, .callout { border: 1px solid #999; background: #fff !important; page-break-inside: avoid; }
+    .eq { background: #fff; border: 1px solid #999; page-break-inside: avoid; }
+    .eq-note { display: none; }
+    a { text-decoration: none; color: #000; }
+    svg { border: 1px solid #000; }
+    footer { margin-top: 2rem; border-top: 1px solid #000; }
+  }
+</style>
+<script>(function(){try{var t=localStorage.getItem('sg-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<style id="theme">
+  :root { color-scheme: light; --ink:#0a0a0a;--muted:#444444;--bg:#ffffff;--line:#cccccc;--rule:#999999;--accent:#1d4ed8;--accent-soft:#eef2ff;--danger:#b00020;--surface:#fafafa;--surface-alt:#f9f9f9;--surface-eq:#f5f5f5;--surface-hi:#f0f0f0; }
+  :root[data-theme="dark"] { color-scheme: dark; --ink:#ececec;--muted:#a8a8ad;--bg:#0f0f11;--line:#34343a;--rule:#5a5a62;--accent:#8ab0ff;--accent-soft:#1b2540;--danger:#ff7b8f;--surface:#17171a;--surface-alt:#1b1b1f;--surface-eq:#1e1e23;--surface-hi:#26262c; }
+  :root[data-theme="dark"] svg text[fill="var(--muted)"] { fill: var(--ink); }
+  .topbar { display:flex; align-items:center; justify-content:space-between; gap:.5rem; margin:0 0 1rem; }
+  .topbar .back { display:inline-flex; align-items:center; min-height:44px; font-size:.85rem; font-weight:600; color:var(--ink); }
+  .theme-toggle { font:inherit; font-size:.85rem; font-weight:600; color:var(--ink); background:var(--bg); border:1px solid var(--ink); border-radius:0; padding:.4rem .8rem; min-height:44px; min-width:44px; cursor:pointer; margin-left:auto; }
+  .theme-toggle:hover { background:var(--surface-hi); }
+  .theme-toggle/* minimal flair: subtle transitions for polish */
+a, .card, .exam-q, .quote, .theory, .example, .practice, .answer-key, .common-mistakes, .revision-sheet, .references, .callout, .nav, .small, .warning, .mu-badge {
+  transition: color .15s ease, background-color .15s ease, border-color .15s ease;
+}
+a:hover, a:focus-visible {
+  background-color: var(--surface-hi);
+}
+.card:hover, .exam-q:hover {
+  border-color: var(--accent);
+}
+  @media print {
+    :root, :root[data-theme="dark"], :root:not([data-theme="light"]) { color-scheme: light; --ink:#0a0a0a;--muted:#444444;--bg:#ffffff;--line:#cccccc;--rule:#999999;--accent:#1d4ed8;--accent-soft:#eef2ff;--danger:#b00020;--surface:#fafafa;--surface-alt:#f9f9f9;--surface-eq:#f5f5f5;--surface-hi:#f0f0f0; }
+    .topbar { display:none; }
+  }
+</style>
+<style id="rail-style">
+  /* Section progress. Phone UI by default (top line + edge tab + bottom sheet);
+     margin rail on wide screens with a mouse. Colours come from the theme variables. */
+  .rail { display:none; }
+  .rm-bar { position:fixed; top:0; left:0; height:3px; width:var(--w,0%); background:var(--accent); z-index:30; pointer-events:none; }
+  .rm-tab { position:fixed; left:env(safe-area-inset-left,0px); bottom:calc(14px + env(safe-area-inset-bottom,0px)); z-index:30; display:flex; align-items:center; width:44px; height:44px; padding:0; border:0; background:transparent; font:inherit; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+  .rm-tab span { display:flex; align-items:center; justify-content:center; min-width:26px; height:28px; padding:0 .35rem; font:700 .66rem/1 var(--font-mono); letter-spacing:.04em; font-variant-numeric:tabular-nums; color:var(--ink); background:var(--bg); border:1px solid var(--rule); border-left:0; opacity:.5; transition:opacity .25s; }
+  body.rm-moving .rm-tab span { opacity:.15; }
+  .rm-tab:hover span, .rm-tab:focus-visible span, .rm-tab[aria-expanded="true"] span { opacity:1; }
+  .rm-tab:focus-visible { outline:2px solid var(--ink); outline-offset:-2px; }
+  .rm-back { position:fixed; inset:0; z-index:40; background:rgba(0,0,0,.4); opacity:0; pointer-events:none; transition:opacity .2s; }
+  .rm-sheet { position:fixed; left:0; right:0; bottom:0; z-index:50; max-height:68vh; overflow-y:auto; background:var(--bg); border-top:1px solid var(--ink); padding-bottom:env(safe-area-inset-bottom,0px); transform:translateY(102%); visibility:hidden; transition:transform .22s ease, visibility 0s .22s; }
+  body.rm-open .rm-back { opacity:1; pointer-events:auto; }
+  body.rm-open .rm-sheet { transform:none; visibility:visible; transition-delay:0s; }
+  .rm-head { position:sticky; top:0; z-index:2; display:flex; align-items:center; justify-content:space-between; padding:.7rem 1rem; background:var(--bg); border-bottom:1px solid var(--line); font:600 .65rem/1 var(--font-mono); letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  .rm-head b { color:var(--ink); }
+  .rm-sheet ol { list-style:none; margin:0; padding:.3rem 0 .6rem; }
+  .rm-sheet a { display:grid; grid-template-columns:1.9rem 1fr; align-items:center; min-height:44px; padding:0 1rem; color:var(--muted); text-decoration:none; font-size:.92rem; font-weight:600; border-left:3px solid transparent; }
+  .rm-sheet a .rm-k { font:600 .7rem/1 var(--font-mono); letter-spacing:.04em; }
+  .rm-sheet a.is-done { color:var(--ink); }
+  .rm-sheet a.is-done .rm-k { color:var(--muted); }
+  .rm-sheet a[aria-current="true"] { color:var(--ink); border-left-color:var(--accent); background:var(--accent-soft); font-family:var(--font-serif); font-weight:700; }
+  .rm-sheet a[aria-current="true"] .rm-k { color:var(--accent); }
+  .rm-sheet a:focus-visible { outline:2px solid var(--ink); outline-offset:-2px; }
+
+  .rail { position:fixed; left:14px; top:50%; transform:translateY(-50%); z-index:20; font-family:var(--font-sans); color:var(--muted); }
+  .rail-in { position:relative; padding:.5rem .6rem .6rem .5rem; border:1px solid transparent; background:transparent; transition:background .15s, border-color .15s; }
+  .rail:hover .rail-in, .rail:focus-within .rail-in { background:var(--bg); border-color:var(--line); }
+  .rail-top { display:flex; align-items:flex-end; gap:.5rem; margin:0 0 .7rem; min-height:2.1rem; }
+  .rail-sec { font-family:var(--font-serif); font-size:1.7rem; line-height:.9; color:var(--ink); font-variant-numeric:tabular-nums; letter-spacing:-.02em; }
+  .rail-meta { display:flex; flex-direction:column; gap:.1rem; font:600 .6rem/1.1 var(--font-mono); letter-spacing:.08em; text-transform:uppercase; padding-bottom:.1rem; }
+  .rail-meta b { font-weight:700; color:var(--ink); }
+  .rail-toggle { margin-left:auto; align-self:flex-start; font:inherit; font-size:.8rem; line-height:1; width:1.3rem; height:1.3rem; padding:0; color:var(--muted); background:var(--bg); border:1px solid var(--line); border-radius:0; cursor:pointer; opacity:.55; transition:opacity .15s; }
+  .rail:hover .rail-toggle, .rail-toggle:focus-visible { opacity:1; }
+  .rail-toggle:hover { color:var(--ink); border-color:var(--ink); }
+  .rail-toggle:focus-visible, .rail a:focus-visible { outline:2px solid var(--ink); outline-offset:2px; }
+  .rail-list { position:relative; list-style:none; margin:0; padding:0; max-height:calc(100vh - 11rem); overflow-y:auto; overflow-x:hidden; scrollbar-width:none; }
+  .rail-list::-webkit-scrollbar { display:none; }
+  .rail-list::before { content:""; position:absolute; left:4px; top:0; bottom:0; width:1px; background:var(--rule); opacity:.55; }
+  .rail-fill { position:absolute; left:3.5px; top:0; width:2px; height:var(--fill,0px); background:var(--accent); }
+  .rail a { position:relative; display:grid; grid-template-columns:9px 1.55rem auto; align-items:center; column-gap:.55rem; height:1.45rem; color:inherit; text-decoration:none; }
+  .rail .node { width:7px; height:7px; box-sizing:border-box; border:1px solid var(--rule); background:var(--bg); justify-self:center; }
+  .rail a.is-done .node { background:var(--muted); border-color:var(--muted); }
+  .rail .num { font:600 .62rem/1 var(--font-mono); letter-spacing:.04em; font-variant-numeric:tabular-nums; }
+  .rail .lbl { display:none; font-size:.74rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:14rem; }
+  .rail a:hover { color:var(--ink); }
+  .rail a:hover .node { border-color:var(--ink); }
+  .rail a[aria-current="true"] { color:var(--ink); }
+  .rail a[aria-current="true"] .node { width:9px; height:9px; border-color:var(--accent); background:linear-gradient(to top, var(--accent) calc(var(--p,0) * 100%), var(--bg) 0); box-shadow:0 0 0 3px var(--accent-soft); }
+  .rail a[aria-current="true"] .num { color:var(--accent); }
+  .rail a[aria-current="true"] .lbl { display:block; font-family:var(--font-serif); font-size:.82rem; font-weight:700; max-width:clamp(0px, calc(50vw - 25.5rem), 14rem); }
+  .rail:hover .lbl, .rail:focus-within .lbl, .rail:hover a[aria-current="true"] .lbl, .rail:focus-within a[aria-current="true"] .lbl { display:block; max-width:14rem; }
+  .rail.is-collapsed .rail-in { padding:.5rem .4rem; background:transparent !important; border-color:transparent !important; }
+  .rail.is-collapsed .rail-top { flex-direction:column; align-items:flex-start; gap:.4rem; margin-bottom:.5rem; min-height:0; }
+  .rail.is-collapsed .rail-sec, .rail.is-collapsed .rail-meta, .rail.is-collapsed .num, .rail.is-collapsed .lbl { display:none !important; }
+  .rail.is-collapsed .rail-toggle { margin:0 0 0 -.25rem; }
+  .rail.is-collapsed a { grid-template-columns:9px; height:1.15rem; }
+  .rail.is-collapsed .node { width:5px; height:5px; }
+  .rail.is-collapsed a[aria-current="true"] .node { width:7px; height:7px; box-shadow:0 0 0 2px var(--accent-soft); }
+  .rail.is-collapsed .rail-list { max-height:calc(100vh - 8rem); }
+
+  @media (min-width:900px) and (pointer:fine) {
+    .rm-bar, .rm-tab, .rm-back, .rm-sheet { display:none; }
+    .rail { display:block; }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    .rm-sheet, .rm-back, .rm-tab span, .rail-in { transition:none; }
+  }
+  @media print { .rail, .rm-bar, .rm-tab, .rm-back, .rm-sheet { display:none !important; } }
+</style>
+</head>
+<body id="top">
+
+<div class="wrap">
+  <div class="topbar"><a class="back" href="/beee">← All modules</a><button class="theme-toggle" type="button" id="themeToggle"></button></div>
+
+  <header>
+    <h1>BEEE Module 3 — Single Phase Transformer</h1>
+    <p class="subtitle">Working principle · Types · Transformation ratio · Ideal &amp; practical · Losses · Efficiency · Applications</p>
+    <div class="meta">B.E. CSE (AI &amp; ML) · Semester I · ESC102 · NEP 2020 · Module III · 4 teaching hours · CO3<br>Mumbai University · Conceptual study guide — the syllabus says numericals are not expected</div>
+  </header>
+
+  <div class="callout">
+    <p><strong>How this guide labels evidence.</strong> Every block is marked so you know what you are reading:</p>
+    <ul>
+      <li><span class="tag c">Course</span> <strong>Course material</strong> — <strong>Dr. Nirmala K.</strong>’s Unit 3 slide deck (<em>ESC 102 BEEE Unit 3 CSE AIML</em>). It is a class document, not a university publication.</li>
+      <li><span class="tag q">Paper</span> <strong>University paper</strong> — an actual Mumbai University examination. Only the June 2025 NEP paper (code N10415) is supplied for this course and scheme, and only two of its questions belong to this module.</li>
+      <li><span class="tag q">Quote</span> <strong>Quotation</strong> — the exact words of a named author, with work, section and link. Quotations are short.</li>
+      <li><span class="tag">Guide</span> <strong>Guide explanation</strong> — written for this page, in plain language, and clearly not a quotation. Anything labelled <em>supplementary</em> goes beyond the syllabus and is not required for the exam.</li>
+    </ul>
+    <p class="small">What was available: the Unit 3 slide deck, the official syllabus and the June 2025 paper. No Unit 3 assignment, tutorial sheet or practice bank was supplied. The slide deck presents many of its diagrams and tables as photographs of pages from a Mumbai University Semester I <em>Basic Electrical &amp; Electronics Engineering</em> textbook; the book’s title and author are not printed on the slides, so no book citation is invented here. Material taken from those photographed pages is attributed to the slide deck.</p>
+  </div>
+
+  <h2 id="overview">Module overview — scope, CO3 and objectives</h2>
+
+  <p>The official NEP 2020 syllabus for <strong>ESC102 Basic Electrical and Electronics Engineering</strong> places the single-phase transformer in Module III of Semester I, with <strong>4 teaching hours</strong> and course outcome <strong>CO3</strong>. The exact wording on page 37 is:</p>
+
+  <div class="quote">
+    <p>“Single Phase Transformer: (Numerical are not expected) Working principle of single-phase transformer, types of single-phase transformer, transformation ratio, actual (practical) and ideal transformer, Transformer losses, efficiency, applications of transformer.”</p>
+    <span class="attrib">University of Mumbai, Faculty of Science &amp; Technology, NEP 2020 syllabus for B.E. CSE (AI &amp; ML), Module III of ESC102. 4 hours, CO3. <a href="https://mu.ac.in/old/wp-content/uploads/2025/02/6.14N-CSE-AIML.pdf">Syllabus PDF</a>, p. 37.</span>
+  </div>
+
+  <table>
+    <tr><th>Prescribed topic</th><th>What you must be able to do</th><th>Section</th></tr>
+    <tr><td>Working principle</td><td>Explain, step by step, how a changing flux links two windings and transfers energy; state Faraday’s law and the EMF equation.</td><td><a href="#principle">Working principle</a></td></tr>
+    <tr><td>Types</td><td>Classify single-phase transformers; explain step-up, step-down, core type, shell type, isolation and autotransformer.</td><td><a href="#types">Types</a></td></tr>
+    <tr><td>Transformation ratio</td><td>Define <span class="v">K</span> with consistent symbols and relate turns, voltage and current.</td><td><a href="#ratio">Transformation ratio</a></td></tr>
+    <tr><td>Ideal transformer</td><td>List its assumptions and use <span class="v">V</span><sub>1</sub><span class="v">I</span><sub>1</sub> = <span class="v">V</span><sub>2</sub><span class="v">I</span><sub>2</sub>.</td><td><a href="#ideal-practical">Ideal vs practical</a></td></tr>
+    <tr><td>Actual (practical) transformer</td><td>Explain why a real transformer has resistance, leakage and core loss, and compare it with the ideal one.</td><td><a href="#ideal-practical">Ideal vs practical</a></td></tr>
+    <tr><td>Losses</td><td>Name copper loss, hysteresis loss and eddy-current loss; say whether each is constant or load-dependent and how it is reduced.</td><td><a href="#losses">Losses</a></td></tr>
+    <tr><td>Efficiency</td><td>Define efficiency, write it as output over input, and explain why it is very high and how it varies with load.</td><td><a href="#efficiency">Efficiency</a></td></tr>
+    <tr><td>Applications</td><td>Give practical uses in transmission, distribution, isolation, power supplies and industry.</td><td><a href="#applications">Applications</a></td></tr>
+  </table>
+
+  <div class="method-note">
+    <p><strong>Scope limit — read this first.</strong> The syllabus prints <em>“Numerical are not expected”</em>. This guide therefore explains every relationship <strong>symbolically</strong> and gives no worked numerical problems. The small illustrations in the margin of the text (“if <span class="v">N</span><sub>2</sub> is twice <span class="v">N</span><sub>1</sub>, then …”) exist only to show what a formula means; they are not exam-style numericals. Rated voltages, currents and powers are mentioned only when they explain a concept.</p>
+  </div>
+
+  <h3>What the paper has actually asked</h3>
+  <p>The supplied <strong>June 2025 NEP paper (N10415)</strong> contains exactly two questions from this module, and both are theory:</p>
+  <div class="exam-q">
+    <p class="exam-q-title">Q1 (d) · 3 marks · compulsory question</p>
+    <p>“What are the losses in a single-phase transformer?”</p>
+    <p class="exam-source"><span class="tag q">Paper</span> University of Mumbai, <em>Basic Electrical &amp; Electronics Engineering</em>, NEP 2020, paper code N10415, 13 June 2025, FE All Branches, Semester I. Verified on the supplied scanned paper.</p>
+  </div>
+  <div class="exam-q">
+    <p class="exam-q-title">Q5 (a) · 6 marks</p>
+    <p>“Explain the working principle of single phase transformer and derive the EMF equation.”</p>
+    <p class="exam-source"><span class="tag q">Paper</span> Same paper, Q5 (a). Verified on the supplied scanned paper.</p>
+  </div>
+  <p>Both are answered in this guide: losses in <a href="#losses">§7</a>, the working principle and EMF equation in <a href="#principle">§4</a>. Nothing here should be read as a prediction about future papers — the syllabus wording, not one paper, defines what is examinable.</p>
+
+  <h3>Learning objectives</h3>
+  <p>By the end of this page you should be able to:</p>
+  <ol>
+    <li>Say what a transformer does, what it cannot do, and why it needs alternating current.</li>
+    <li>Name the core and the two windings, explain why the core is laminated, and why the two windings are not electrically connected.</li>
+    <li>Describe energy transfer by mutual induction, starting from Faraday’s law.</li>
+    <li>State the EMF equation and explain what each symbol means.</li>
+    <li>Classify single-phase transformers and compare core type with shell type.</li>
+    <li>Define the transformation ratio consistently and use it to call a transformer step-up, step-down or isolation.</li>
+    <li>List the assumptions of an ideal transformer and the imperfections of a practical one.</li>
+    <li>Separate iron losses from copper losses, say which is constant, and explain efficiency and its load dependence.</li>
+    <li>Give at least six real applications, with the reason a transformer is used in each.</li>
+  </ol>
+
+  <div class="toc">
+    <ol>
+      <li><a href="#fundamentals">Fundamentals — what a transformer is and why we need one</a></li>
+      <li><a href="#construction">Construction — core, windings and insulation</a></li>
+      <li><a href="#principle">Working principle — mutual induction and the EMF equation</a></li>
+      <li><a href="#types">Types of single-phase transformers</a></li>
+      <li><a href="#ratio">Transformation ratio</a></li>
+      <li><a href="#ideal-practical">Ideal and practical transformers</a></li>
+      <li><a href="#losses">Transformer losses</a></li>
+      <li><a href="#efficiency">Efficiency</a></li>
+      <li><a href="#applications">Applications</a></li>
+      <li><a href="#revision">Quick revision sheet</a></li>
+      <li><a href="#practice">Practice questions</a></li>
+      <li><a href="#answer-key">Answer key</a></li>
+      <li><a href="#references">References and attribution</a></li>
+    </ol>
+  </div>
+
+  <nav class="nav">
+    <a href="#fundamentals">Fundamentals</a>
+    <a href="#construction">Construction</a>
+    <a href="#principle">Principle</a>
+    <a href="#types">Types</a>
+    <a href="#ratio">Ratio</a>
+    <a href="#ideal-practical">Ideal vs practical</a>
+    <a href="#losses">Losses</a>
+    <a href="#efficiency">Efficiency</a>
+    <a href="#applications">Applications</a>
+    <a href="#revision">Revision</a>
+    <a href="#practice">Practice</a>
+    <a href="#answer-key">Answers</a>
+  </nav>
+
+  <h2 id="fundamentals">Fundamentals — what a transformer is and why we need one</h2>
+
+  <h3>1 · The problem it solves</h3>
+  <p>Electrical power is generated at a few hundred volts, but it is used hundreds of kilometres away and at a safe voltage (230 V in India). Moving power along a wire always wastes some of it as heat, and that waste depends on the <strong>square</strong> of the current:</p>
+  <div class="eq"><span class="v">P</span><sub>loss</sub> = <span class="v">I</span><sup>2</sup><span class="v">R</span><sub>line</sub></div>
+  <p>For the same power, raising the voltage lowers the current (<span class="v">P</span> = <span class="v">VI</span>), and lowering the current cuts the line loss dramatically. So power is <strong>stepped up</strong> to a very high voltage for the journey, then <strong>stepped down</strong> again near homes and factories. A transformer is the device that does this, and it does it without any moving parts.</p>
+
+  <div class="quote">
+    <p>“Indeed, the transformer has made long-distance transmission of electric power a practical reality, as AC voltage can be ‘stepped up’ and current ‘stepped down’ for reduced wire resistance power losses along power lines connecting generating stations with loads.”</p>
+    <span class="attrib">Tony R. Kuphaldt, <em>Lessons In Electric Circuits, Volume II — AC</em>, Chapter 9 “Transformers”, section “Step-up and step-down transformers”. <a href="https://www.ibiblio.org/kuphaldt/electricCircuits/AC/AC_9.html">Chapter 9</a>.</span>
+  </div>
+
+  <p class="small"><span class="tag">Guide</span> Before efficient transformers existed, the same job was done by a motor driving a generator. That arrangement has moving parts, wears out, and loses more energy. A transformer has no rotating parts at all, which is why its efficiency is so high — the point Dr. Nirmala’s slides make in §8.</p>
+
+  <h3>2 · The definition to memorise</h3>
+  <div class="quote">
+    <p>“A single phase transformer is a <em>static device</em> that is used to change the voltage of alternating current from one value to another without changing the frequency. It transfers power from one circuit to other without change in frequency.”</p>
+    <span class="attrib">Dr. Nirmala K., <em>ESC 102 BEEE Unit 3 CSE AIML</em>, slide 3 (“Transformer/single phase transformer”). Course slide deck.</span>
+  </div>
+  <p>Four words in that definition carry the whole chapter:</p>
+  <table>
+    <tr><th>Word</th><th>What it rules out</th></tr>
+    <tr><td><strong>Static</strong></td><td>No rotating parts, no friction or windage loss — a major reason for 97–99% efficiency.</td></tr>
+    <tr><td><strong>Alternating</strong></td><td>It does not work on steady DC. It needs a <em>changing</em> flux, and only AC produces one.</td></tr>
+    <tr><td><strong>Voltage</strong></td><td>It changes voltage and current levels. It does <em>not</em> change frequency, and it cannot create power.</td></tr>
+    <tr><td><strong>Single phase</strong></td><td>One AC supply, one primary winding, one secondary winding. Three-phase transformers are a separate topic.</td></tr>
+  </table>
+
+  <h3>3 · The vocabulary you need before §4</h3>
+  <dl class="given-grid">
+    <dt>Primary winding</dt><dd>The coil connected to the AC source. It takes power <em>in</em>. Its turns are counted as <span class="v">N</span><sub>1</sub>.</dd>
+    <dt>Secondary winding</dt><dd>The coil connected to the load. It delivers power <em>out</em>. Its turns are counted as <span class="v">N</span><sub>2</sub>.</dd>
+    <dt>Magnetic core</dt><dd>The iron path that carries the flux from one winding to the other, so that almost all of it links both coils.</dd>
+    <dt>Magnetic flux (<span class="v">Φ</span>)</dt><dd>The magnetic “flow” in the core, in webers (Wb). It is produced by current in the primary.</dd>
+    <dt>Reluctance</dt><dd>Opposition of a magnetic path to flux — the magnetic analogue of resistance. Iron has low reluctance, air has high reluctance.</dd>
+    <dt>EMF</dt><dd>Electromotive force: the voltage <em>induced</em> in a winding by changing flux, in volts (V).</dd>
+    <dt>Turns (<span class="v">N</span>)</dt><dd>How many times the wire is wound around the core. Turns decide the voltage, not the wire thickness.</dd>
+    <dt>Frequency (<span class="v">f</span>)</dt><dd>How many cycles of AC per second, in hertz (Hz). In India, 50 Hz. A transformer does not alter it.</dd>
+  </dl>
+
+  <h3>4 · Why a transformer needs AC</h3>
+  <p>Induction depends on flux <em>changing</em>. An alternating current reverses direction 50 times a second, so the flux it creates in the core rises, collapses, reverses and rises again — continuously changing. A steady direct current produces a steady flux, and a steady flux induces no EMF at all.</p>
+  <div class="quote">
+    <p>“It operates only with alternating current (AC) because direct current (DC) does not create any electromagnetic induction.”</p>
+    <span class="attrib">Dr. Nirmala K., <em>ESC 102 BEEE Unit 3 CSE AIML</em>, slide 6 (“Construction of Single Phase Transformer”). Course slide deck.</span>
+  </div>
+  <p class="small"><span class="tag">Guide</span> This is also a safety point. If you connect a transformer’s primary to DC, there is no back-EMF to oppose the supply; the current is limited only by the very small winding resistance, so it can become large enough to burn the winding. A transformer is an AC device, not a DC device.</p>
+
+  <h2 id="construction">Construction — core, windings and insulation</h2>
+
+  <p>A single-phase transformer is two coils sharing one iron path. Everything else — tank, bushings, cooling — exists to protect and cool those three parts.</p>
+
+  <figure>
+    <svg viewBox="0 0 640 330" role="img" aria-labelledby="fig1t">
+      <title id="fig1t">Labelled construction of a single-phase transformer: laminated core, primary winding and secondary winding</title>
+      <g fill="none" stroke="var(--ink)" stroke-width="2">
+        <rect x="120" y="40" width="56" height="250" />
+        <rect x="464" y="40" width="56" height="250" />
+        <rect x="120" y="40" width="400" height="30" />
+        <rect x="120" y="260" width="400" height="30" />
+      </g>
+      <g fill="none" stroke="var(--muted)" stroke-width="1">
+        <path d="M120 50h400M120 60h400M120 270h400M120 280h400" />
+      </g>
+      <g fill="none" stroke="var(--ink)" stroke-width="2.5">
+        <path d="M120 95a28 9 0 0 1 56 0M120 113a28 9 0 0 1 56 0M120 131a28 9 0 0 1 56 0M120 149a28 9 0 0 1 56 0M120 167a28 9 0 0 1 56 0M120 185a28 9 0 0 1 56 0M120 203a28 9 0 0 1 56 0" />
+        <path d="M464 95a28 9 0 0 1 56 0M464 113a28 9 0 0 1 56 0M464 131a28 9 0 0 1 56 0M464 149a28 9 0 0 1 56 0M464 167a28 9 0 0 1 56 0M464 185a28 9 0 0 1 56 0M464 203a28 9 0 0 1 56 0M464 221a28 9 0 0 1 56 0" />
+      </g>
+      <g stroke="var(--muted)" stroke-width="1">
+        <path d="M120 120h-46" />
+        <path d="M520 120h46" />
+        <path d="M300 35v-22" />
+      </g>
+      <g font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="var(--muted)">
+        <text x="10" y="112">Primary</text>
+        <text x="10" y="126">N₁ turns</text>
+        <text x="10" y="140">AC in</text>
+        <text x="566" y="112">Secondary</text>
+        <text x="566" y="126">N₂ turns</text>
+        <text x="566" y="140">to load</text>
+        <text x="306" y="10">laminated core</text>
+        <text x="306" y="318">core = closed low-reluctance path for flux</text>
+      </g>
+    </svg>
+    <p class="figcap"><strong>Figure 1.</strong> Construction of a single-phase transformer. The core is a closed loop of thin, varnish-insulated silicon-steel sheets (laminations). Both windings are wound on the same core but are electrically separate — the only link between them is magnetic flux.</p>
+  </figure>
+
+  <h3>1 · The core</h3>
+  <p>The core is built from thin sheets of <strong>silicon steel</strong>, stacked and insulated from each other. It does two jobs: it gives the flux an easy (low-reluctance) path, and it couples the two windings so that the same flux links both. Laminations matter: a solid iron block would let induced currents — eddy currents — circulate inside it and waste energy as heat (see <a href="#losses">§7</a>).</p>
+  <div class="quote">
+    <p>“The core is made up of silicon steel laminations to reduce eddy current losses. The core provides a low reluctance path for the magnetic flux.”</p>
+    <span class="attrib">Dr. Nirmala K., <em>ESC 102 BEEE Unit 3 CSE AIML</em>, slide 6. Course slide deck.</span>
+  </div>
+
+  <h3>2 · The windings</h3>
+  <p>Two insulated copper coils are wound on the core. The primary is the input side, the secondary the output side. The number of turns is chosen for the required voltage; the wire thickness is chosen for the current the winding must carry.</p>
+  <div class="quote">
+    <p>“The number of turns in the primary winding is kept as minimum as possible to reduce copper losses. … The number of turns is adjusted to get the required output voltage value from the induced EMF.”</p>
+    <span class="attrib">Dr. Nirmala K., <em>ESC 102 BEEE Unit 3 CSE AIML</em>, slide 6. Course slide deck.</span>
+  </div>
+  <p class="small"><span class="tag">Guide</span> A step-down transformer’s secondary carries <em>more</em> current than its primary, so its wire must be thicker. The thick, short secondary winding and the thin, long primary winding are a quick visual clue to which side is which — the point Kuphaldt makes with a cut-open transformer photograph.</p>
+
+  <h3>3 · Insulation, mechanical parts and cooling</h3>
+  <p>The windings must be insulated from the core and from each other, otherwise the “no direct electrical connection” property is lost and the voltage difference between the windings can flash over. Larger transformers add a steel tank of insulating oil (which both cools the windings and improves insulation), a conservator, cooling tubes or radiators, and porcelain bushings that bring the leads out safely. <span class="small">This paragraph is background; the syllabus only requires the core, the two windings and their function.</span></p>
+
+  <h2 id="principle">Working principle — mutual induction and the EMF equation</h2>
+
+  <figure>
+    <svg viewBox="0 0 640 340" role="img" aria-labelledby="fig2t">
+      <title id="fig2t">Working principle: alternating current in the primary produces an alternating flux in the core, which induces an EMF in the secondary</title>
+      <g fill="none" stroke="var(--ink)" stroke-width="2">
+        <rect x="230" y="60" width="180" height="220" />
+      </g>
+      <g fill="none" stroke="var(--ink)" stroke-width="2.5">
+        <path d="M230 100a28 9 0 0 1 56 0M230 118a28 9 0 0 1 56 0M230 136a28 9 0 0 1 56 0M230 154a28 9 0 0 1 56 0M230 172a28 9 0 0 1 56 0" />
+        <path d="M354 100a28 9 0 0 1 56 0M354 118a28 9 0 0 1 56 0M354 136a28 9 0 0 1 56 0M354 154a28 9 0 0 1 56 0M354 172a28 9 0 0 1 56 0M354 190a28 9 0 0 1 56 0" />
+      </g>
+      <g fill="none" stroke="var(--accent)" stroke-width="1.6" marker-end="url(#arw)">
+        <path d="M320 96v138" />
+      </g>
+      <g fill="none" stroke="var(--ink)" stroke-width="1.6">
+        <path d="M230 100h-60v40h-40" />
+        <path d="M130 140v70" />
+        <path d="M410 100h60v40h40" />
+        <path d="M510 140v50" />
+      </g>
+      <circle cx="130" cy="235" r="24" fill="none" stroke="var(--ink)" stroke-width="1.6" />
+      <path d="M118 235c4-9 8-9 12 0s8 9 12 0" fill="none" stroke="var(--ink)" stroke-width="1.6" />
+      <g fill="none" stroke="var(--ink)" stroke-width="1.6">
+        <path d="M480 190h60v34h-60z" />
+        <path d="M510 224v40M480 264h60M480 224v40" />
+      </g>
+      <g font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="var(--muted)">
+        <text x="40" y="272">AC supply V₁</text>
+        <text x="176" y="88">primary</text>
+        <text x="392" y="88">secondary</text>
+        <text x="556" y="210">load</text>
+        <text x="300" y="48">changing flux Φ in the core</text>
+        <text x="330" y="200">Φ</text>
+        <text x="150" y="120">I₁</text>
+        <text x="470" y="120">I₂</text>
+      </g>
+      <defs>
+        <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0L10 5L0 10z" fill="var(--accent)" />
+        </marker>
+      </defs>
+    </svg>
+    <p class="figcap"><strong>Figure 2.</strong> Energy path: electrical → magnetic → electrical. The primary current sets up an alternating flux in the core; that flux links the secondary and induces an EMF there. There is no wire between the two circuits.</p>
+  </figure>
+
+  <h3>1 · The chain of events</h3>
+  <ol class="steps">
+    <li>An alternating voltage <span class="v">V</span><sub>1</sub> is applied to the primary winding.</li>
+    <li>An alternating current <span class="v">I</span><sub>1</sub> flows in the primary. Because the coil is wound on iron, a strong alternating magnetic flux <span class="v">Φ</span> is set up in the core.</li>
+    <li>That flux is confined to the core, so it links <em>both</em> windings — the secondary sees the same changing flux as the primary.</li>
+    <li>By Faraday’s law, a changing flux induces an EMF in every winding it links. So an EMF <span class="v">E</span><sub>2</sub> appears across the secondary, even though the secondary is not connected to the primary.</li>
+    <li>When a load is connected, <span class="v">E</span><sub>2</sub> drives a current <span class="v">I</span><sub>2</sub> through the load. Energy has been transferred — magnetically, not by conduction.</li>
+    <li>Taking more current from the secondary makes the primary draw more current from the source. The transformer is a load on the source and a source to the load.</li>
+  </ol>
+
+  <div class="quote">
+    <p>“The effect is called mutual inductance: the induction of a voltage in one coil in response to a change in current in the other coil.”</p>
+    <span class="attrib">Tony R. Kuphaldt, <em>Lessons In Electric Circuits, Volume II — AC</em>, Chapter 9, section “Mutual inductance and basic operation”. <a href="https://www.ibiblio.org/kuphaldt/electricCircuits/AC/AC_9.html">Chapter 9</a>.</span>
+  </div>
+
+  <p>The teacher’s slides state the principle in one line: <em>“The transformer works on the principle of mutual inductance between the two windings.”</em> <span class="small">(Dr. Nirmala K., Unit 3 slides, slide 7.)</span></p>
+
+  <h3>2 · Faraday’s law — the reason it works at all</h3>
+  <p>The induced EMF depends on how fast the flux through a winding changes and on how many turns the winding has:</p>
+  <div class="eq"><span class="v">e</span> = −<span class="v">N</span> <span class="v">dΦ</span>/<span class="v">dt</span></div>
+  <p class="eq-note">Faraday’s law of electromagnetic induction. The minus sign comes from Lenz’s law: the induced EMF opposes the change that caused it.</p>
+  <p>The teacher’s slides introduce the topic with the same law: <em>“Faraday’s law states that an electromotive force (EMF) is induced in any closed circuit when there is a change in the magnetic flux through the circuit.”</em> <span class="small">(slide 3)</span> Three consequences follow directly:</p>
+  <ul>
+    <li><strong>No change, no EMF.</strong> A steady flux (steady primary current) induces nothing. This is the whole reason transformers are AC devices.</li>
+    <li><strong>Faster change, larger EMF.</strong> Higher frequency means faster flux change, so the EMF rises with frequency.</li>
+    <li><strong>More turns, larger EMF.</strong> Two windings on the same core see the same <span class="v">dΦ</span>/<span class="v">dt</span>, so their EMFs are in proportion to their turns. That single sentence is the transformation ratio.</li>
+  </ul>
+
+  <h3>3 · The EMF equation</h3>
+  <p>For a sinusoidal supply of frequency <span class="v">f</span>, with a maximum flux <span class="v">Φ</span><sub>m</sub> in the core, the RMS EMF induced in a winding of <span class="v">N</span> turns is:</p>
+  <div class="eq"><span class="v">E</span> = 4.44 <span class="v">f</span> <span class="v">N</span> <span class="v">Φ</span><sub>m</sub></div>
+  <p class="eq-note"><span class="v">E</span> in volts, <span class="v">f</span> in hertz, <span class="v">N</span> dimensionless, <span class="v">Φ</span><sub>m</sub> in webers. The constant 4.44 = 2π/√2 comes from converting a sinusoidal peak value to an RMS value.</p>
+
+  <div class="example">
+    <p class="example-title">Where 4.44 comes from — derivation outline</p>
+    <p>Take the flux as sinusoidal: <span class="v">Φ</span> = <span class="v">Φ</span><sub>m</sub> sin <span class="v">ωt</span>, with <span class="v">ω</span> = 2π<span class="v">f</span>. Differentiate:</p>
+    <div class="eq"><span class="v">e</span> = −<span class="v">N</span> <span class="v">dΦ</span>/<span class="v">dt</span> = −<span class="v">N</span> <span class="v">Φ</span><sub>m</sub> <span class="v">ω</span> cos <span class="v">ωt</span></div>
+    <p>So the peak EMF is <span class="v">E</span><sub>max</sub> = <span class="v">N</span> <span class="v">Φ</span><sub>m</sub> <span class="v">ω</span> = 2π<span class="v">f</span><span class="v">N</span><span class="v">Φ</span><sub>m</sub>. For a sine wave the RMS value is the peak divided by √2:</p>
+    <div class="eq"><span class="v">E</span> = 2π<span class="v">f</span><span class="v">N</span><span class="v">Φ</span><sub>m</sub> / √2 = 4.44 <span class="v">f</span> <span class="v">N</span> <span class="v">Φ</span><sub>m</sub></div>
+    <p>The same derivation, with the same result, appears in the teacher’s slides (slides 7–9). The exam question of June 2025 asks for exactly this: state the principle, then derive the equation. Write the steps, not just the final line.</p>
+    <p class="small">Note on signs: the slides write <span class="v">E</span> = −<span class="v">N</span> <span class="v">dΦ</span>/<span class="v">dt</span> for the instantaneous EMF and drop the minus sign when converting to a magnitude. Either is acceptable in an answer as long as you say which one you are writing.</p>
+  </div>
+
+  <p>Applying the equation to both windings of the same core, with the same <span class="v">f</span> and the same <span class="v">Φ</span><sub>m</sub>:</p>
+  <div class="eq"><span class="v">E</span><sub>1</sub> / <span class="v">N</span><sub>1</sub> = <span class="v">E</span><sub>2</sub> / <span class="v">N</span><sub>2</sub> = 4.44 <span class="v">f</span> <span class="v">Φ</span><sub>m</sub></div>
+  <p class="eq-note">“Volts per turn” is the same in both windings. This is the seed of the transformation ratio in §5.</p>
+
+  <div class="example">
+    <p class="example-title">One illustration — what the equation means, not a numerical exercise</p>
+    <p>Suppose a transformer has 500 primary turns and 1 000 secondary turns on the same core, and the primary is connected to an AC supply. Since the secondary has twice as many turns, it gets twice the volts per turn, so the secondary voltage is twice the primary voltage — a step-up transformer. The current moves the other way: twice the voltage at the same power means half the current. Nothing here needs a calculator; the syllabus expects you to be able to say <em>why</em> the voltage doubles and the current halves.</p>
+  </div>
+
+  <h3>4 · Two details students often get wrong</h3>
+  <ul>
+    <li><strong>The secondary is not “powered by the primary’s current” in the obvious sense.</strong> It is powered by the <em>flux</em>. Even with the secondary open, the primary draws a small <em>magnetising current</em> to establish the flux; the moment a load draws current, the primary current rises to supply that energy.</li>
+    <li><strong>Flux, voltage and current have phase relationships.</strong> In a lossless inductor the flux lags the applied voltage by 90°, which is why the no-load primary current is mainly magnetising current. This is beyond what the syllabus asks, but it explains why the no-load current is not zero even when nothing is connected.</li>
+  </ul>
+
+  <h2 id="types">Types of single-phase transformers</h2>
+
+  <p>“Types” in this module means classification, not one single list. The same transformer can be described by its voltage function, by how its core is built, by how it is cooled, and by what it is used for. Learn one table and you can place any transformer in it.</p>
+
+  <table>
+    <tr><th>Basis of classification</th><th>Types</th><th>Key idea</th></tr>
+    <tr><td>Voltage level (function)</td><td>Step-up · Step-down · Isolation (1:1)</td><td>Secondary voltage greater than, less than, or equal to primary voltage.</td></tr>
+    <tr><td>Core construction</td><td>Core type · Shell type · Berry (toroidal)</td><td>Whether the windings surround the core, or the core surrounds the windings.</td></tr>
+    <tr><td>Cooling</td><td>Dry type (air) · Oil immersed</td><td>How the heat from <span class="v">I</span><sup>2</sup><span class="v">R</span> and core loss is removed.</td></tr>
+    <tr><td>Use</td><td>Distribution · Power · Instrument (PT, CT) · Autotransformer</td><td>Distribution units run all day near full load; power units run at generating stations and substations.</td></tr>
+    <tr><td>Winding arrangement</td><td>Two-winding · Autotransformer (single tapped winding)</td><td>An autotransformer saves copper but gives up electrical isolation.</td></tr>
+  </table>
+
+  <h3>1 · Step-up and step-down</h3>
+  <p>A <strong>step-up</strong> transformer has more secondary turns than primary turns, so it raises the voltage. A <strong>step-down</strong> transformer has fewer secondary turns, so it lowers the voltage. In both cases the current changes in the opposite direction, so the power is (almost) unchanged.</p>
+  <div class="quote">
+    <p>“A transformer that increases voltage from primary to secondary (more secondary winding turns than primary winding turns) is called a step-up transformer. Conversely, a transformer designed to do just the opposite is called a step-down transformer.”</p>
+    <span class="attrib">Tony R. Kuphaldt, <em>Lessons In Electric Circuits, Volume II — AC</em>, Chapter 9, section “Step-up and step-down transformers”. <a href="https://www.ibiblio.org/kuphaldt/electricCircuits/AC/AC_9.html">Chapter 9</a>.</span>
+  </div>
+
+  <figure>
+    <svg viewBox="0 0 640 300" role="img" aria-labelledby="fig3t">
+      <title id="fig3t">Comparison of a step-up transformer with a step-down transformer</title>
+      <g fill="none" stroke="var(--ink)" stroke-width="2">
+        <rect x="80" y="70" width="150" height="150" />
+        <rect x="410" y="70" width="150" height="150" />
+      </g>
+      <g fill="none" stroke="var(--ink)" stroke-width="2.2">
+        <path d="M80 95a24 8 0 0 1 48 0M80 111a24 8 0 0 1 48 0" />
+        <path d="M182 95a24 8 0 0 1 48 0M182 111a24 8 0 0 1 48 0M182 127a24 8 0 0 1 48 0M182 143a24 8 0 0 1 48 0M182 159a24 8 0 0 1 48 0M182 175a24 8 0 0 1 48 0" />
+        <path d="M410 95a24 8 0 0 1 48 0M410 111a24 8 0 0 1 48 0M410 127a24 8 0 0 1 48 0M410 143a24 8 0 0 1 48 0M410 159a24 8 0 0 1 48 0M410 175a24 8 0 0 1 48 0" />
+        <path d="M512 95a24 8 0 0 1 48 0M512 111a24 8 0 0 1 48 0" />
+      </g>
+      <g fill="none" stroke="var(--muted)" stroke-width="1.4">
+        <path d="M56 80v130M56 80h24M56 210h24" />
+        <path d="M296 80v130M272 80h24M272 210h24" />
+        <path d="M384 80v130M360 80h24M360 210h24" />
+        <path d="M624 80v130M600 80h24M600 210h24" />
+      </g>
+      <g font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="var(--ink)">
+        <text x="76" y="42">Step-up</text>
+        <text x="406" y="42">Step-down</text>
+      </g>
+      <g font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="var(--muted)">
+        <text x="24" y="66">V₁</text>
+        <text x="242" y="66">V₂ &gt; V₁</text>
+        <text x="352" y="66">V₁</text>
+        <text x="572" y="66">V₂ &lt; V₁</text>
+        <text x="66" y="252">fewer turns (N₁)</text>
+        <text x="180" y="252">more turns (N₂)</text>
+        <text x="398" y="252">more turns (N₁)</text>
+        <text x="512" y="252">fewer turns (N₂)</text>
+        <text x="76" y="278">K = N₂/N₁ &gt; 1</text>
+        <text x="406" y="278">K = N₂/N₁ &lt; 1</text>
+      </g>
+    </svg>
+    <p class="figcap"><strong>Figure 3.</strong> The only structural difference is which winding has more turns. In both cases the winding that carries the higher voltage carries the lower current and is wound with thinner wire.</p>
+  </figure>
+
+  <p class="small"><span class="tag">Guide</span> A transformer can physically be used backwards — a step-up unit can step down if you feed the secondary. But each winding is designed for a particular voltage and current, so using it outside those ratings is inefficient and can overheat it. Treat the label as the design direction.</p>
+
+  <h3>2 · Core type and shell type</h3>
+  <p>In a <strong>core-type</strong> transformer the windings surround the core limbs: the magnetic path is a closed rectangle and the coils sit on it (Figure 1). In a <strong>shell-type</strong> transformer the core surrounds the windings, giving the flux two parallel return paths; the core is effectively a shell around the coils. The teacher’s slides compare them with this table:</p>
+
+  <table>
+    <tr><th>Point</th><th>Core type</th><th>Shell type</th></tr>
+    <tr><td>Main use</td><td>Distribution of electrical energy</td><td>Supplying power</td></tr>
+    <tr><td>Duty</td><td>In service throughout the day</td><td>Used only when power is required</td></tr>
+    <tr><td>Efficiency</td><td>Lower, about 50% at part load in the slide’s wording</td><td>High, about 90% to 98%</td></tr>
+    <tr><td>Typical user</td><td>Electricity boards and large installations</td><td>Individual customers, e.g. welding shops and machine shops</td></tr>
+    <tr><td>Size and cost</td><td>Costly, bulky, not portable</td><td>Comparatively cheaper, compact, portable</td></tr>
+  </table>
+  <p class="small"><span class="tag c">Course</span> Comparison reproduced from the table photographed on Dr. Nirmala K.’s Unit 3 slide deck (core type vs shell type). The percentages are the slide’s figures and are descriptive, not values to calculate with. <span class="tag">Guide</span> In practice the efficiency of a well-designed distribution transformer is far above 50%; treat that cell as the slide’s shorthand for “core type is optimised for all-day light-load duty, shell type for high-output duty”.</p>
+
+  <h3>3 · Berry (toroidal) transformer</h3>
+  <div class="quote">
+    <p>“Berry transformer / toroidal transformer … has been widely used in home appliances and other electronic equipment with high technical requirements. Its main use is as a power transformer and an isolation transformer. Widely used in computers, medical equipment, telecommunications, instruments and lighting.”</p>
+    <span class="attrib">Dr. Nirmala K., <em>ESC 102 BEEE Unit 3 CSE AIML</em>, slide 15 (“Berry type transformer”). Course slide deck.</span>
+  </div>
+  <p>The toroidal shape keeps the flux path short and closed, so it is compact, has low leakage and produces little external magnetic field — useful in medical and audio equipment.</p>
+
+  <h3>4 · Isolation transformer</h3>
+  <p>An <strong>isolation transformer</strong> has a 1:1 turns ratio: the secondary voltage equals the primary voltage, but the two circuits are still separated by the core. Its purpose is safety and separation, not voltage change.</p>
+  <div class="quote">
+    <p>“Transformers designed to provide electrical isolation without stepping voltage and current either up or down are called isolation transformers.”</p>
+    <span class="attrib">Tony R. Kuphaldt, <em>Lessons In Electric Circuits, Volume II — AC</em>, Chapter 9, section “Electrical isolation”. <a href="https://www.ibiblio.org/kuphaldt/electricCircuits/AC/AC_9.html">Chapter 9</a>.</span>
+  </div>
+
+  <h3>5 · Autotransformer</h3>
+  <p>An <strong>autotransformer</strong> uses a single tapped winding: part of the winding is shared by the primary and secondary circuits. It needs less copper and is smaller and cheaper, but it gives <strong>no electrical isolation</strong> — a fault on one side can reach the other. Variacs (variable autotransformers) use a sliding contact and are common in laboratories.</p>
+
+  <h3>6 · Instrument transformers</h3>
+  <p>Voltage and current in power systems are far too large for meters to handle directly. A <strong>potential transformer</strong> steps voltage down to a few tens of volts for a voltmeter; a <strong>current transformer</strong> steps current down to about 5 A for an ammeter. Both are single-phase transformers used for measurement and protection, not for supplying power.</p>
+
+  <h2 id="ratio">Transformation ratio</h2>
+
+  <p>The transformation ratio is the single number that tells you what a transformer does to voltage and current. It comes straight from “same volts per turn”:</p>
+
+  <div class="eq"><span class="v">K</span> = <span class="v">N</span><sub>2</sub> / <span class="v">N</span><sub>1</sub> = <span class="v">V</span><sub>2</sub> / <span class="v">V</span><sub>1</sub> = <span class="v">E</span><sub>2</sub> / <span class="v">E</span><sub>1</sub> = <span class="v">I</span><sub>1</sub> / <span class="v">I</span><sub>2</sub></div>
+  <p class="eq-note">This guide uses <span class="v">K</span> = secondary ÷ primary, throughout, in every section and in the answer key. The teacher’s slides use the same convention: <span class="v">K</span> = <span class="v">N</span><sub>2</sub>/<span class="v">N</span><sub>1</sub>.</p>
+
+  <div class="method-note">
+    <p><strong>One convention, stated once.</strong> Many textbooks call <span class="v">N</span><sub>1</sub>/<span class="v">N</span><sub>2</sub> the ratio, or use the letter <span class="v">a</span>. Both conventions are correct; mixing them is not. If your answer sheet uses <span class="v">a</span> = <span class="v">N</span><sub>1</sub>/<span class="v">N</span><sub>2</sub>, everything is simply inverted, and step-up becomes <span class="v">a</span> &lt; 1. Write your definition at the top of the answer and stay with it.</p>
+  </div>
+
+  <h3>1 · Where each part of the ratio comes from</h3>
+  <ul>
+    <li><strong>Voltage and turns.</strong> Both windings see the same flux and frequency, so <span class="v">E</span> ∝ <span class="v">N</span>. Therefore <span class="v">E</span><sub>2</sub>/<span class="v">E</span><sub>1</sub> = <span class="v">N</span><sub>2</sub>/<span class="v">N</span><sub>1</sub>. Neglecting the small drop across the winding resistance, the terminal voltages <span class="v">V</span><sub>1</sub> and <span class="v">V</span><sub>2</sub> are practically equal to <span class="v">E</span><sub>1</sub> and <span class="v">E</span><sub>2</sub>, which is why the slides write <span class="v">V</span><sub>1</sub> ≈ <span class="v">E</span><sub>1</sub> and <span class="v">V</span><sub>2</sub> ≈ <span class="v">E</span><sub>2</sub>.</li>
+    <li><strong>Current and turns.</strong> For an ideal transformer the input power equals the output power, <span class="v">V</span><sub>1</sub><span class="v">I</span><sub>1</sub> = <span class="v">V</span><sub>2</sub><span class="v">I</span><sub>2</sub>. Rearranging gives <span class="v">I</span><sub>1</sub>/<span class="v">I</span><sub>2</sub> = <span class="v">V</span><sub>2</sub>/<span class="v">V</span><sub>1</sub> — the current ratio is the <em>inverse</em> of the voltage ratio.</li>
+    <li><strong>Why it cannot be otherwise.</strong> If the secondary delivered more power than the primary took in, energy would be created. A transformer only converts, never generates.</li>
+  </ul>
+
+  <table>
+    <tr><th>Value of <span class="v">K</span> = <span class="v">N</span><sub>2</sub>/<span class="v">N</span><sub>1</sub></th><th>Name</th><th>Voltage</th><th>Current</th><th>Typical use</th></tr>
+    <tr><td><span class="v">K</span> &gt; 1</td><td>Step-up</td><td><span class="v">V</span><sub>2</sub> &gt; <span class="v">V</span><sub>1</sub></td><td><span class="v">I</span><sub>2</sub> &lt; <span class="v">I</span><sub>1</sub></td><td>At the generating station, before transmission</td></tr>
+    <tr><td><span class="v">K</span> &lt; 1</td><td>Step-down</td><td><span class="v">V</span><sub>2</sub> &lt; <span class="v">V</span><sub>1</sub></td><td><span class="v">I</span><sub>2</sub> &gt; <span class="v">I</span><sub>1</sub></td><td>Substation and local distribution, chargers, adaptors</td></tr>
+    <tr><td><span class="v">K</span> = 1</td><td>Isolation (1:1)</td><td><span class="v">V</span><sub>2</sub> = <span class="v">V</span><sub>1</sub></td><td><span class="v">I</span><sub>2</sub> = <span class="v">I</span><sub>1</sub></td><td>Safety isolation, test benches, medical equipment</td></tr>
+  </table>
+
+  <p class="small"><span class="tag">Guide</span> A useful sanity check for any answer: multiply voltage by current on each side. The two products should be nearly equal in a real transformer and exactly equal in an ideal one. If your numbers show the secondary with both higher voltage <em>and</em> higher current, something is wrong.</p>
+
+  <h2 id="ideal-practical">Ideal and practical transformers</h2>
+
+  <p>An ideal transformer is a <em>model</em>: a set of simplifying assumptions that makes the arithmetic clean. A practical transformer is the real device, which breaks every one of those assumptions a little — and that is exactly where losses, heating and voltage drop come from.</p>
+
+  <h3>1 · The five assumptions of an ideal transformer</h3>
+  <ol class="steps">
+    <li><strong>No winding resistance.</strong> The copper coils have zero resistance, so no <span class="v">I</span><sup>2</sup><span class="v">R</span> heat and no voltage drop inside the windings.</li>
+    <li><strong>No leakage flux.</strong> Every line of flux set up by the primary links the secondary; none escapes into the air.</li>
+    <li><strong>No core loss.</strong> The core needs no energy to magnetise and reverse magnetisation, and no eddy currents circulate in it.</li>
+    <li><strong>Infinite permeability.</strong> A tiny magnetising current is enough to establish the flux, so the no-load current is effectively zero.</li>
+    <li><strong>Therefore no losses at all:</strong> input power equals output power, <span class="v">V</span><sub>1</sub><span class="v">I</span><sub>1</sub> = <span class="v">V</span><sub>2</sub><span class="v">I</span><sub>2</sub>, and efficiency is 100%.</li>
+  </ol>
+
+  <div class="quote">
+    <p>“An ideal transformer would have perfect coupling (no leakage inductance), perfect voltage regulation, perfectly sinusoidal exciting current, no hysteresis or eddy current losses, and wire thick enough to handle any amount of current. Unfortunately, the ideal transformer would have to be infinitely large and heavy to meet these design goals.”</p>
+    <span class="attrib">Tony R. Kuphaldt, <em>Lessons In Electric Circuits, Volume II — AC</em>, Chapter 9, section “Power capacity”. <a href="https://www.ibiblio.org/kuphaldt/electricCircuits/AC/AC_9.html">Chapter 9</a>.</span>
+  </div>
+
+  <h3>2 · What is different in a practical transformer</h3>
+  <ul>
+    <li><strong>Winding resistance.</strong> Copper is a good conductor, not a perfect one. Current through it causes <em>copper loss</em> and a small internal voltage drop, so the terminal voltage sags as load current rises.</li>
+    <li><strong>Leakage flux.</strong> Not quite all the flux links both windings; the part that links only one behaves like a small series inductance and worsens the voltage drop.</li>
+    <li><strong>Finite permeability.</strong> Some magnetising current is always needed, so even an unloaded transformer draws a small current from the supply.</li>
+    <li><strong>Core loss.</strong> Reversing the magnetisation each cycle (hysteresis) and induced currents inside the iron (eddy currents) both consume energy and heat the core.</li>
+    <li><strong>Result.</strong> Output power is always a little less than input power; the difference leaves as heat. Efficiency is high, but never 100%.</li>
+    <li><strong>Practical touches.</strong> Insulation has a limit, the core can saturate, and heat must be removed by air or oil. These are design limits rather than “losses”, but they are why real transformers are rated in kVA and must be operated within it.</li>
+  </ul>
+
+  <h3>3 · Side-by-side comparison</h3>
+  <table>
+    <tr><th>Feature</th><th>Ideal transformer</th><th>Practical transformer</th></tr>
+    <tr><td>Winding resistance</td><td>Zero</td><td>Small but finite; causes copper loss and voltage drop</td></tr>
+    <tr><td>Leakage flux</td><td>None — all flux links both windings</td><td>Some flux links only one winding</td></tr>
+    <tr><td>Core</td><td>Lossless, infinitely permeable</td><td>Hysteresis and eddy-current loss; finite permeability</td></tr>
+    <tr><td>No-load current</td><td>Zero</td><td>Small magnetising current plus a loss component</td></tr>
+    <tr><td>Voltage ratio</td><td>Exactly <span class="v">V</span><sub>2</sub>/<span class="v">V</span><sub>1</sub> = <span class="v">N</span><sub>2</sub>/<span class="v">N</span><sub>1</sub></td><td>Close to it; falls slightly as load current increases</td></tr>
+    <tr><td>Power balance</td><td><span class="v">P</span><sub>in</sub> = <span class="v">P</span><sub>out</sub></td><td><span class="v">P</span><sub>out</sub> = <span class="v">P</span><sub>in</sub> − losses</td></tr>
+    <tr><td>Efficiency</td><td>100%</td><td>Typically 97–99% for power transformers</td></tr>
+    <tr><td>Heating</td><td>None</td><td>Heats up; cooling is part of the design</td></tr>
+    <tr><td>Why we use the model</td><td>Makes the ratio easy to reason about and to teach</td><td>Needed for ratings, losses, efficiency and real behaviour</td></tr>
+  </table>
+
+  <p class="small"><span class="tag c">Course</span> The teacher’s slide (photographed page, §4.6 “Actual (Practical) and Ideal Transformers”) states the same contrast: an ideal transformer “has no losses, i.e. the windings do not possess any resistance … there is no voltage drop and power loss (copper loss) in the windings … no leakage of flux”, while a practical transformer has winding resistance, leakage flux, copper loss and core loss. The wording above is the guide’s own paraphrase of that slide.</p>
+
+  <h3>4 · Voltage regulation — a practical consequence</h3>
+  <p>Because of winding resistance and leakage, the secondary voltage of a real transformer drops as the load draws more current. <strong>Voltage regulation</strong> measures how well the transformer holds its secondary voltage between no load and full load; a small regulation figure is better. This is why a heavily loaded transformer’s output is a little below its rated voltage. <span class="small">Supplementary context — not a syllabus heading, but it explains the “practical” column above.</span></p>
+
+  <h2 id="losses">Transformer losses</h2>
+
+  <p>Losses are the energy that enters the primary but never reaches the load. They all end up as heat, and they are grouped into two families by one question: <em>does the loss depend on the load?</em></p>
+
+  <table>
+    <tr><th>Family</th><th>What causes it</th><th>Where</th><th>Depends on load?</th><th>Reduced by</th></tr>
+    <tr><td><strong>Iron loss</strong> (core loss) <span class="v">P</span><sub>i</sub></td><td>Hysteresis + eddy currents</td><td>Magnetic core</td><td><strong>No</strong> — practically constant at a given voltage and frequency</td><td>Silicon-steel alloy, thin insulated laminations, low flux density</td></tr>
+    <tr><td><strong>Copper loss</strong> <span class="v">P</span><sub>cu</sub></td><td><span class="v">I</span><sup>2</sup><span class="v">R</span> heating in the windings</td><td>Primary and secondary coils</td><td><strong>Yes</strong> — rises with the square of the load current</td><td>Thicker wire, fewer turns, good joints, adequate cooling</td></tr>
+  </table>
+
+  <p>So a transformer is never “lossless”, but the losses are small compared with the power handled, and they split neatly:</p>
+  <div class="eq"><span class="v">P</span><sub>loss</sub> = <span class="v">P</span><sub>i</sub> + <span class="v">P</span><sub>cu</sub> &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">P</span><sub>cu</sub> = <span class="v">I</span><sup>2</sup><span class="v">R</span></div>
+  <p class="eq-note"><span class="v">P</span><sub>i</sub> is also written <span class="v">W</span><sub>i</sub> and <span class="v">P</span><sub>cu</sub> as <span class="v">W</span><sub>cu</sub> in the teacher’s slides. Both notations are common.</p>
+
+  <h3>1 · Copper loss</h3>
+  <p>Every winding has resistance, so current through it dissipates <span class="v">I</span><sup>2</sup><span class="v">R</span> as heat. This is called copper loss (or <span class="v">I</span><sup>2</sup><span class="v">R</span> loss, or variable loss) because it changes with load: at half the load current it falls to one quarter. Because it is load-dependent, it is the loss you can influence by how hard you drive the transformer.</p>
+
+  <h3>2 · Eddy-current loss</h3>
+  <p>The core is itself a conductor sitting in an alternating magnetic field. By Faraday’s law, EMFs are induced inside the iron, and these drive small circulating currents — <strong>eddy currents</strong> — through the core’s own resistance, heating it. The teacher’s slide gives the relation you should be able to recognise:</p>
+  <div class="eq"><span class="v">W</span><sub>e</sub> = <span class="v">K</span><sub>e</sub> <span class="v">f</span><sup>2</sup> <span class="v">B</span><sub>m</sub><sup>2</sup> <span class="v">t</span><sup>2</sup> <span class="v">V</span></div>
+  <p class="eq-note"><span class="v">f</span> supply frequency, <span class="v">B</span><sub>m</sub> maximum flux density, <span class="v">t</span> lamination thickness, <span class="v">V</span> core volume, <span class="v">K</span><sub>e</sub> a material constant. <span class="tag c">Course</span> Dr. Nirmala K., Unit 3 slides, photographed page on eddy-current loss.</p>
+  <p>The <span class="v">t</span><sup>2</sup> dependence is why the core is laminated: halving the sheet thickness cuts eddy-current loss to about a quarter. Each lamination is coated with insulating varnish so the current cannot cross from sheet to sheet.</p>
+  <div class="quote">
+    <p>“Dividing the iron core into thin insulated laminations minimizes eddy current loss.”</p>
+    <span class="attrib">Tony R. Kuphaldt, <em>Lessons In Electric Circuits, Volume II — AC</em>, Chapter 9, section “Energy losses”. <a href="https://www.ibiblio.org/kuphaldt/electricCircuits/AC/AC_9.html">Chapter 9</a>.</span>
+  </div>
+
+  <h3>3 · Hysteresis loss</h3>
+  <p>Iron does not give up its magnetism instantly; it “lags” behind the magnetising force. Every time the AC reverses, energy must be spent dragging the core’s magnetisation around its hysteresis loop — twice per cycle. That energy is hysteresis loss. It is reduced by choosing a magnetic material with a narrow loop (silicon steel is used for exactly this reason) and by keeping the flux density low, which means a generous core area.</p>
+  <div class="eq"><span class="v">W</span><sub>h</sub> = <span class="v">k</span><sub>h</sub> <span class="v">f</span> <span class="v">B</span><sub>m</sub><sup>1.6</sup> <span class="v">V</span></div>
+  <p class="eq-note">Steinmetz form. The slides write the constant as <span class="v">η</span>; here it is <span class="v">k</span><sub>h</sub> to avoid confusion with efficiency. Note the loss rises with frequency, but not with the square of frequency as eddy loss does.</p>
+
+  <h3>4 · Why iron loss is called the constant loss</h3>
+  <p>Flux in the core is set by the applied voltage and frequency, not by the load. As long as the supply stays at its rated voltage and frequency, the core cycles through the same magnetisation pattern whether the secondary is open or fully loaded. So the iron loss stays essentially constant, while copper loss grows with load. This single fact is the backbone of efficiency calculations and of the <a href="#efficiency">load-dependence of efficiency</a>.</p>
+
+  <h3>5 · Finding the losses in practice — OC and SC tests</h3>
+  <p>You cannot easily separate the two losses by simply loading a transformer, because the input and output measurements include everything at once. Instead:</p>
+  <ul>
+    <li><strong>Open-circuit (no-load) test:</strong> the secondary is left open, so almost no current flows and copper loss is negligible. What the primary draws is essentially the <strong>iron loss</strong>.</li>
+    <li><strong>Short-circuit test:</strong> the secondary is shorted and a small primary voltage applied, so the core flux — and therefore the iron loss — is very small. What is measured is essentially the <strong>copper loss</strong> at that current.</li>
+  </ul>
+  <p class="small"><span class="tag c">Course</span> Dr. Nirmala K.’s slides note that efficiency is found in practice from these two tests rather than from direct loading, which “may give wrong results”. Full test procedure is outside this module’s syllabus.</p>
+
+  <div class="exam-q">
+    <p class="exam-q-title">The paper’s losses question</p>
+    <p>“What are the losses in a single-phase transformer?” — 3 marks, Q1 (d).</p>
+    <p>A complete short answer names both families, splits the iron loss into hysteresis and eddy current, states that iron loss is constant while copper loss varies with load, and mentions one reduction method. See <a href="#answer-key">Answer 1</a> for a model answer.</p>
+    <p class="exam-source"><span class="tag q">Paper</span> University of Mumbai, NEP 2020, paper code N10415, 13 June 2025, Q1 (d). Verified on the supplied scanned paper.</p>
+  </div>
+
+  <h2 id="efficiency">Efficiency</h2>
+
+  <p>Efficiency compares what you get out with what you put in. For a transformer it is high — the teacher’s slides give 97% to 99% — because there are no moving parts, so there is no friction or windage loss.</p>
+
+  <div class="quote">
+    <p>“The ratio of output power to input power is known as transformer efficiency. … Transformer efficiency is measured in terms of percentages, it ranges from 97% to 99%. The transformer has no moving parts so the losses due to friction and windage are absent therefore its efficiency is very high.”</p>
+    <span class="attrib">Dr. Nirmala K., <em>ESC 102 BEEE Unit 3 CSE AIML</em>, slide 21 (“Efficiency of transformer”). Course slide deck.</span>
+  </div>
+
+  <div class="eq"><span class="v">η</span> = (<span class="v">P</span><sub>out</sub> / <span class="v">P</span><sub>in</sub>) × 100%</div>
+  <p>Since the input must cover the output plus every loss, the same definition can be written entirely in terms of losses:</p>
+  <div class="eq"><span class="v">η</span> = <span class="v">P</span><sub>out</sub> / (<span class="v">P</span><sub>out</sub> + <span class="v">P</span><sub>i</sub> + <span class="v">P</span><sub>cu</sub>) × 100%</div>
+  <p class="eq-note">This form is the more useful one: it shows exactly where the missing power went.</p>
+
+  <h3>1 · Output power and power factor</h3>
+  <p>The output is AC, so the actual power delivered depends on the load’s power factor:</p>
+  <div class="eq"><span class="v">P</span><sub>out</sub> = <span class="v">V</span><sub>2</sub> <span class="v">I</span><sub>2</sub> cos <span class="v">φ</span></div>
+  <p>For a resistive load cos <span class="v">φ</span> = 1. For motors and other inductive loads it is less than 1, so the same voltage and current deliver less real power. <span class="small">This is why a transformer is rated in kVA rather than kW: kVA is the product of rated voltage and rated current, and it does not depend on what power factor the customer’s load happens to have.</span></p>
+
+  <h3>2 · How efficiency changes with load</h3>
+  <p>Let <span class="v">x</span> be the fraction of full load (so <span class="v">x</span> = 0.5 at half load). Copper loss scales with the square of current, while iron loss stays essentially constant:</p>
+  <div class="eq"><span class="v">P</span><sub>cu</sub> at load <span class="v">x</span> = <span class="v">x</span><sup>2</sup> × <span class="v">P</span><sub>cu,full load</sub> &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">P</span><sub>i</sub> = constant</div>
+  <p>Three consequences follow, and they are the ones examiners ask about:</p>
+  <ul>
+    <li><strong>At very light load</strong> the output is small but the iron loss is already being paid in full, so efficiency is low.</li>
+    <li><strong>As load increases</strong> the output grows faster than the losses, so efficiency rises.</li>
+    <li><strong>Beyond a certain point</strong> the copper loss (growing as the square of current) takes over and efficiency begins to fall again.</li>
+  </ul>
+  <p class="small"><span class="tag">Supplementary</span> The peak occurs where copper loss equals iron loss. Distribution transformers are deliberately designed so this peak falls near their normal daily load, which is why they run near their best efficiency most of the day.</p>
+
+  <h3>3 · Why we do not load a transformer to 100% continuously</h3>
+  <p>Efficiency is only part of the story: heat removal sets the real limit. A transformer rated 100 kVA can deliver 100 kVA, but the resulting copper loss must be carried away by its cooling. Continuous overload shortens insulation life. That is why ratings are conservative and why oil-filled units have radiators.</p>
+
+  <h3>4 · All-day efficiency</h3>
+  <p>A distribution transformer sits energised all day but is only heavily loaded for part of it. Its <strong>all-day (energy) efficiency</strong> is the energy delivered over 24 hours divided by the energy supplied over 24 hours. Because the iron loss runs for all 24 hours, a unit with low iron loss scores better on this measure than one chosen purely for peak-load efficiency.</p>
+
+  <h2 id="applications">Applications</h2>
+
+  <p>The teacher’s slides list eight applications. They are reproduced here, with the reason each one needs a transformer.</p>
+
+  <table>
+    <tr><th>#</th><th>Application</th><th>Transformer role</th><th>Why it matters</th></tr>
+    <tr><td>1</td><td>Transmission of power over long distances</td><td>Step-up at the generating station</td><td>Raises voltage and lowers current, so <span class="v">I</span><sup>2</sup><span class="v">R</span> line loss falls sharply.</td></tr>
+    <tr><td>2</td><td>Distribution of power</td><td>Step-down at substations and local transformers</td><td>Brings the voltage down to safe, usable levels (e.g. 230 V).</td></tr>
+    <tr><td>3</td><td>Current regulation</td><td>Step-up or step-down</td><td>Changes the current level in a circuit without changing frequency.</td></tr>
+    <tr><td>4</td><td>Circuit breakers</td><td>Small transformers inside the breaker</td><td>Supply the trip/control circuits and help break the flow of electricity safely.</td></tr>
+    <tr><td>5</td><td>Battery charging</td><td>Step-down</td><td>Reduces and controls the voltage entering the battery while it charges.</td></tr>
+    <tr><td>6</td><td>Steel manufacturing</td><td>High-current transformers</td><td>Regulate current and voltage for furnaces and heavy processes.</td></tr>
+    <tr><td>7</td><td>Electrical isolation</td><td>Isolation (1:1) transformer</td><td>Separates high-voltage and low-voltage circuits; no direct connection between them.</td></tr>
+    <tr><td>8</td><td>Battery chargers, adaptors and voltage-regulator circuits</td><td>Small step-down transformer</td><td>Provides a low AC voltage which is then rectified and regulated.</td></tr>
+  </table>
+  <p class="small"><span class="tag c">Course</span> Items 1–6 are from the applications page photographed on Dr. Nirmala K.’s Unit 3 slide deck; items 7–8 are from the text of slide 23. Wording is condensed, not quoted verbatim.</p>
+
+  <h3>Applications worth adding to the list</h3>
+  <ul>
+    <li><strong>Power supplies and rectifiers.</strong> A step-down transformer followed by a rectifier turns mains AC into the low DC that electronics need — the example on slide 24. The transformer also isolates the low-voltage side from the mains.</li>
+    <li><strong>Measurement and protection.</strong> Potential and current transformers scale high voltages and currents down to meter-safe values in substations.</li>
+    <li><strong>Welding.</strong> A step-down transformer supplies the very large currents welding needs at a low, safe open-circuit voltage.</li>
+    <li><strong>Audio, medical and instrumentation equipment.</strong> Toroidal (berry-type) transformers are used where low leakage and compact size matter.</li>
+    <li><strong>Laboratory work.</strong> Variacs (variable autotransformers) give a smoothly adjustable AC voltage for experiments.</li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>One limitation to remember.</strong> A transformer changes voltage and current, and it can isolate two circuits — but it cannot change frequency and it cannot convert AC to DC by itself. Rectification needs diodes; frequency conversion needs electronics. Saying this in an answer shows you understand what the device actually does.</p>
+  </div>
+
+  <h2 id="revision">Quick revision sheet</h2>
+
+  <div class="revision-sheet">
+    <h3>Definitions in one line each</h3>
+    <table>
+      <tr><th>Term</th><th>Definition</th></tr>
+      <tr><td>Transformer</td><td>A static AC device that changes voltage (and current) without changing frequency, transferring power magnetically between two windings.</td></tr>
+      <tr><td>Primary / secondary</td><td>The winding connected to the supply / the winding connected to the load.</td></tr>
+      <tr><td>Mutual induction</td><td>Induction of an EMF in one coil because of a changing current (and therefore flux) in another coil.</td></tr>
+      <tr><td>Transformation ratio <span class="v">K</span></td><td><span class="v">K</span> = <span class="v">N</span><sub>2</sub>/<span class="v">N</span><sub>1</sub> = <span class="v">V</span><sub>2</sub>/<span class="v">V</span><sub>1</sub> = <span class="v">I</span><sub>1</sub>/<span class="v">I</span><sub>2</sub>. Step-up: <span class="v">K</span> &gt; 1; step-down: <span class="v">K</span> &lt; 1; isolation: <span class="v">K</span> = 1.</td></tr>
+      <tr><td>Ideal transformer</td><td>A model with no winding resistance, no leakage, no core loss and infinite permeability, so <span class="v">P</span><sub>in</sub> = <span class="v">P</span><sub>out</sub>.</td></tr>
+      <tr><td>Iron (core) loss</td><td>Hysteresis + eddy-current loss in the core; practically constant at rated voltage and frequency.</td></tr>
+      <tr><td>Copper loss</td><td><span class="v">I</span><sup>2</sup><span class="v">R</span> loss in the windings; varies with the square of the load current.</td></tr>
+      <tr><td>Efficiency</td><td><span class="v">η</span> = (output power / input power) × 100%.</td></tr>
+      <tr><td>Isolation transformer</td><td>A 1:1 transformer used to separate two circuits electrically without changing voltage.</td></tr>
+    </table>
+
+    <h3>Relationships to be able to write</h3>
+    <table>
+      <tr><th>Idea</th><th>Expression</th><th>Remember</th></tr>
+      <tr><td>Faraday’s law</td><td><span class="v">e</span> = −<span class="v">N</span> <span class="v">dΦ</span>/<span class="v">dt</span></td><td>Needs <em>changing</em> flux; hence AC only.</td></tr>
+      <tr><td>EMF equation</td><td><span class="v">E</span> = 4.44 <span class="v">f</span> <span class="v">N</span> <span class="v">Φ</span><sub>m</sub></td><td>Same volts per turn in both windings.</td></tr>
+      <tr><td>Voltage ratio</td><td><span class="v">V</span><sub>2</sub>/<span class="v">V</span><sub>1</sub> = <span class="v">N</span><sub>2</sub>/<span class="v">N</span><sub>1</sub></td><td>Voltage follows turns.</td></tr>
+      <tr><td>Current ratio</td><td><span class="v">I</span><sub>1</sub>/<span class="v">I</span><sub>2</sub> = <span class="v">N</span><sub>2</sub>/<span class="v">N</span><sub>1</sub></td><td>Current goes the <em>opposite</em> way to voltage.</td></tr>
+      <tr><td>Ideal power balance</td><td><span class="v">V</span><sub>1</sub><span class="v">I</span><sub>1</sub> = <span class="v">V</span><sub>2</sub><span class="v">I</span><sub>2</sub></td><td>Transformers convert power; they cannot create it.</td></tr>
+      <tr><td>Losses</td><td><span class="v">P</span><sub>loss</sub> = <span class="v">P</span><sub>i</sub> + <span class="v">P</span><sub>cu</sub>, with <span class="v">P</span><sub>cu</sub> = <span class="v">I</span><sup>2</sup><span class="v">R</span></td><td>Iron = constant; copper = variable.</td></tr>
+      <tr><td>Efficiency</td><td><span class="v">η</span> = <span class="v">P</span><sub>out</sub>/(<span class="v">P</span><sub>out</sub> + <span class="v">P</span><sub>i</sub> + <span class="v">P</span><sub>cu</sub>) × 100%</td><td>Output over input, with losses shown explicitly.</td></tr>
+      <tr><td>Output power</td><td><span class="v">P</span><sub>out</sub> = <span class="v">V</span><sub>2</sub><span class="v">I</span><sub>2</sub> cos <span class="v">φ</span></td><td>Depends on the load’s power factor.</td></tr>
+    </table>
+
+    <h3>Comparisons in one glance</h3>
+    <table>
+      <tr><th>Step-up</th><th>Step-down</th></tr>
+      <tr><td><span class="v">N</span><sub>2</sub> &gt; <span class="v">N</span><sub>1</sub>, <span class="v">K</span> &gt; 1</td><td><span class="v">N</span><sub>2</sub> &lt; <span class="v">N</span><sub>1</sub>, <span class="v">K</span> &lt; 1</td></tr>
+      <tr><td><span class="v">V</span><sub>2</sub> &gt; <span class="v">V</span><sub>1</sub>; <span class="v">I</span><sub>2</sub> &lt; <span class="v">I</span><sub>1</sub></td><td><span class="v">V</span><sub>2</sub> &lt; <span class="v">V</span><sub>1</sub>; <span class="v">I</span><sub>2</sub> &gt; <span class="v">I</span><sub>1</sub></td></tr>
+      <tr><td>Used before transmission</td><td>Used in distribution and electronics</td></tr>
+    </table>
+
+    <h3>Common mistakes</h3>
+    <ul>
+      <li>Claiming a transformer changes frequency. It does not — only voltage and current.</li>
+      <li>Saying the secondary is “connected” to the primary. It is magnetically coupled, electrically isolated.</li>
+      <li>Writing <span class="v">I</span><sub>2</sub>/<span class="v">I</span><sub>1</sub> = <span class="v">N</span><sub>2</sub>/<span class="v">N</span><sub>1</sub>. The current ratio is the inverse of the voltage ratio.</li>
+      <li>Calling iron loss “variable” and copper loss “constant”. It is the other way round.</li>
+      <li>Saying efficiency is 100% in a practical transformer. It is high, not perfect.</li>
+      <li>Listing eddy-current loss as a copper loss. It occurs in the <em>core</em>, so it is an iron loss.</li>
+      <li>Forgetting that the core is laminated to reduce eddy currents, not to reduce hysteresis.</li>
+      <li>Claiming a transformer works on DC. It needs a changing flux.</li>
+    </ul>
+
+    <h3>Ten-minute checklist</h3>
+    <ol>
+      <li>Can you define a transformer in one sentence, including “static” and “same frequency”?</li>
+      <li>Can you name the three essential parts and say what each does?</li>
+      <li>Can you explain why the core is laminated?</li>
+      <li>Can you narrate the six steps from AC supply to load current?</li>
+      <li>Can you state Faraday’s law and derive <span class="v">E</span> = 4.44 <span class="v">f</span> <span class="v">N</span> <span class="v">Φ</span><sub>m</sub>?</li>
+      <li>Can you classify transformers by function, core construction and use?</li>
+      <li>Can you write <span class="v">K</span> in four forms and say which case is step-up?</li>
+      <li>Can you list five assumptions of the ideal transformer and the practical deviations?</li>
+      <li>Can you name the losses, classify each as constant or variable, and give one reduction method for each?</li>
+      <li>Can you define efficiency, explain its load dependence, and name six applications?</li>
+    </ol>
+  </div>
+
+  <h2 id="practice">Practice questions</h2>
+
+  <div class="practice">
+    <p class="small"><span class="tag">Guide</span> <strong>Supplementary practice — written for this page, not university questions.</strong> The syllabus says numericals are not expected, so these are conceptual. Answers are in the <a href="#answer-key">answer key</a>, kept separate so you can attempt the questions first.</p>
+
+    <h3>A · Basic recall</h3>
+    <ol>
+      <li>Define a single-phase transformer and state two things it does <em>not</em> change.</li>
+      <li>Name the three essential parts of a transformer and give the function of each.</li>
+      <li>Why must the core be laminated? Which loss does lamination reduce?</li>
+      <li>State Faraday’s law of electromagnetic induction and explain why it makes a transformer an AC-only device.</li>
+      <li>Write the EMF equation and explain each symbol.</li>
+    </ol>
+
+    <h3>B · Exam-style short answers</h3>
+    <ol start="6">
+      <li>Explain the working principle of a single-phase transformer with the help of a neat diagram.</li>
+      <li>Derive the EMF equation of a single-phase transformer.</li>
+      <li>What are the losses in a single-phase transformer? Classify them and state which is constant.</li>
+      <li>Differentiate between an ideal and a practical transformer (any four points).</li>
+      <li>Define transformation ratio. Show that it relates turns, voltage and current, and state its value for step-up, step-down and isolation transformers.</li>
+      <li>Compare core-type and shell-type single-phase transformers (any four points).</li>
+      <li>Define transformer efficiency and explain why it is very high. Why does it fall at very light load?</li>
+    </ol>
+
+    <h3>C · Conceptual and challenging</h3>
+    <ol start="13">
+      <li>A transformer is labelled 230 V / 12 V. Is it step-up or step-down? What can you say about the relative number of turns and the relative wire thickness of the two windings?</li>
+      <li>Explain why increasing the supply frequency increases both hysteresis and eddy-current loss, but affects them differently.</li>
+      <li>A student claims that because the secondary voltage of a step-up transformer is higher, the transformer “gives more power”. Identify and correct the error, using energy conservation.</li>
+      <li>Why is a transformer rated in kVA rather than in kW?</li>
+      <li>An unloaded transformer still draws a small current from the supply and becomes slightly warm. Explain both observations.</li>
+      <li>Explain why a distribution transformer is designed so that its maximum efficiency occurs below full load.</li>
+      <li>A transformer is used to charge a phone. Identify the type of transformer, state whether it provides isolation, and explain what happens to the AC after the transformer.</li>
+    </ol>
+  </div>
+
+  <h2 id="answer-key">Answer key</h2>
+
+  <div class="answer-key">
+    <p class="small">These are model answers written for this page, not official university solutions. Marks are not assigned because the questions are not from a paper.</p>
+
+    <h3>1 · Definition</h3>
+    <p>A single-phase transformer is a static device that transfers electrical energy between two magnetically coupled windings by mutual induction, changing the voltage of an alternating supply from one level to another. It does <strong>not</strong> change the frequency, and it does not change the power (apart from losses).</p>
+
+    <h3>2 · Three essential parts</h3>
+    <p><strong>Core</strong> — a laminated silicon-steel path that carries the flux and links the windings with low reluctance. <strong>Primary winding</strong> — connected to the AC supply, sets up the flux. <strong>Secondary winding</strong> — connected to the load, in which the EMF is induced.</p>
+
+    <h3>3 · Lamination</h3>
+    <p>The core is built from thin, varnish-insulated sheets so that eddy currents induced in the iron cannot circulate over a large area. Since eddy-current loss depends on the square of the lamination thickness, thin sheets cut the loss sharply. Lamination reduces <strong>eddy-current loss</strong>; hysteresis loss is reduced by material choice, not by laminating.</p>
+
+    <h3>4 · Faraday’s law and AC</h3>
+    <p><span class="v">e</span> = −<span class="v">N</span> <span class="v">dΦ</span>/<span class="v">dt</span>: an EMF is induced in a coil only while the flux linking it changes. An alternating supply produces a continuously changing flux, so an EMF is continuously induced. A steady DC produces a steady flux; <span class="v">dΦ</span>/<span class="v">dt</span> = 0, so no EMF appears in the secondary. Hence transformers work only on AC.</p>
+
+    <h3>5 · EMF equation</h3>
+    <p><span class="v">E</span> = 4.44 <span class="v">f</span> <span class="v">N</span> <span class="v">Φ</span><sub>m</sub>, where <span class="v">E</span> is the RMS induced EMF (V), <span class="v">f</span> the supply frequency (Hz), <span class="v">N</span> the number of turns in the winding, and <span class="v">Φ</span><sub>m</sub> the maximum flux in the core (Wb).</p>
+
+    <h3>6 · Working principle</h3>
+    <p>An alternating voltage applied to the primary drives an alternating primary current, which establishes an alternating flux in the laminated core. The core confines the flux so that it links both windings. By Faraday’s law, the changing flux induces an EMF in the secondary; with a load connected, that EMF drives a secondary current and energy is delivered to the load. The primary draws extra current in response. Energy therefore travels as electrical → magnetic → electrical, and the two windings need no electrical connection. The principle is <strong>mutual induction</strong>. (Draw Figure 2 and label the supply, primary, core, flux, secondary and load.)</p>
+
+    <h3>7 · Derivation of the EMF equation</h3>
+    <p>Let <span class="v">Φ</span> = <span class="v">Φ</span><sub>m</sub> sin <span class="v">ωt</span> with <span class="v">ω</span> = 2π<span class="v">f</span>. Then</p>
+    <div class="eq"><span class="v">e</span> = −<span class="v">N</span> <span class="v">dΦ</span>/<span class="v">dt</span> = −<span class="v">N</span><span class="v">Φ</span><sub>m</sub><span class="v">ω</span> cos <span class="v">ωt</span></div>
+    <p>so <span class="v">E</span><sub>max</sub> = <span class="v">N</span><span class="v">Φ</span><sub>m</sub><span class="v">ω</span> = 2π<span class="v">f</span><span class="v">N</span><span class="v">Φ</span><sub>m</sub>. For a sine wave, RMS = peak/√2:</p>
+    <div class="eq"><span class="v">E</span> = 2π<span class="v">f</span><span class="v">N</span><span class="v">Φ</span><sub>m</sub>/√2 = 4.44 <span class="v">f</span> <span class="v">N</span> <span class="v">Φ</span><sub>m</sub></div>
+    <p>Applying this to both windings gives <span class="v">E</span><sub>1</sub>/<span class="v">N</span><sub>1</sub> = <span class="v">E</span><sub>2</sub>/<span class="v">N</span><sub>2</sub>.</p>
+
+    <h3>8 · Losses</h3>
+    <p>Two families. <strong>Iron (core) loss:</strong> hysteresis loss, from repeatedly reversing the core’s magnetisation, plus eddy-current loss, from circulating currents induced in the iron. Both are practically constant at rated voltage and frequency, and both are reduced by using silicon steel and thin laminations with low flux density. <strong>Copper loss:</strong> <span class="v">I</span><sup>2</sup><span class="v">R</span> heating in the primary and secondary windings; it varies with the square of the load current and is reduced by using thicker conductors. Total loss = iron loss + copper loss.</p>
+
+    <h3>9 · Ideal versus practical</h3>
+    <p>(i) Winding resistance: zero in the ideal case, finite in practice, causing copper loss and voltage drop. (ii) Leakage: none ideally, some in practice, worsening regulation. (iii) Core: lossless and infinitely permeable ideally, with hysteresis and eddy losses in practice. (iv) No-load current: zero ideally, a small magnetising current in practice. (v) Efficiency: 100% ideally, typically 97–99% in practice. (Any four points, each with the consequence, earns full credit.)</p>
+
+    <h3>10 · Transformation ratio</h3>
+    <p>With <span class="v">K</span> = <span class="v">N</span><sub>2</sub>/<span class="v">N</span><sub>1</sub>: both windings see the same flux and frequency, so EMF is proportional to turns and <span class="v">V</span><sub>2</sub>/<span class="v">V</span><sub>1</sub> ≈ <span class="v">N</span><sub>2</sub>/<span class="v">N</span><sub>1</sub>. For an ideal transformer <span class="v">V</span><sub>1</sub><span class="v">I</span><sub>1</sub> = <span class="v">V</span><sub>2</sub><span class="v">I</span><sub>2</sub>, hence <span class="v">I</span><sub>1</sub>/<span class="v">I</span><sub>2</sub> = <span class="v">V</span><sub>2</sub>/<span class="v">V</span><sub>1</sub> = <span class="v">K</span>. So <span class="v">K</span> = <span class="v">N</span><sub>2</sub>/<span class="v">N</span><sub>1</sub> = <span class="v">V</span><sub>2</sub>/<span class="v">V</span><sub>1</sub> = <span class="v">I</span><sub>1</sub>/<span class="v">I</span><sub>2</sub>. Step-up: <span class="v">K</span> &gt; 1. Step-down: <span class="v">K</span> &lt; 1. Isolation: <span class="v">K</span> = 1. (State your convention explicitly: if you use <span class="v">a</span> = <span class="v">N</span><sub>1</sub>/<span class="v">N</span><sub>2</sub>, the inequalities invert.)</p>
+
+    <h3>11 · Core type versus shell type</h3>
+    <p>(i) In core type the windings surround the core limbs; in shell type the core surrounds the windings. (ii) Core type is used for distribution duty, shell type for supplying power when required. (iii) Core type is in service throughout the day; shell type is used when power is needed. (iv) The slide table gives lower efficiency for core type and 90–98% for shell type. (v) Core type is bulkier and costlier; shell type is compact, cheaper and portable. (vi) Core type is associated with electricity boards and large installations; shell type with individual customers such as welding shops.</p>
+
+    <h3>12 · Efficiency</h3>
+    <p><span class="v">η</span> = (<span class="v">P</span><sub>out</sub>/<span class="v">P</span><sub>in</sub>) × 100% = <span class="v">P</span><sub>out</sub>/(<span class="v">P</span><sub>out</sub> + <span class="v">P</span><sub>i</sub> + <span class="v">P</span><sub>cu</sub>) × 100%. It is very high (97–99%) because the device is static: there is no friction or windage loss, and copper and iron losses are small at rated design. At very light load the output is small while the iron loss is still being supplied in full, so the ratio of losses to output is large and efficiency is low. As load rises, copper loss grows as <span class="v">x</span><sup>2</sup> while output grows as <span class="v">x</span>, so efficiency rises to a maximum and then falls.</p>
+
+    <h3>13 · A 230 V / 12 V transformer</h3>
+    <p>It is a step-down transformer (<span class="v">K</span> = 12/230 ≈ 0.052 &lt; 1). The 12 V winding has far fewer turns. Because it supplies the higher current, it is wound with thicker wire; the 230 V primary, carrying less current, uses thinner wire.</p>
+
+    <h3>14 · Frequency and the two core losses</h3>
+    <p>Hysteresis loss is proportional to frequency because the core is taken around its hysteresis loop once per cycle, so more cycles per second means more energy per second (<span class="v">W</span><sub>h</sub> ∝ <span class="v">f</span>). Eddy-current loss rises with the <em>square</em> of frequency, because the induced EMF in the core rises with <span class="v">f</span> and the resulting current, multiplied by voltage again, gives an <span class="v">f</span><sup>2</sup> dependence. Hence high-frequency transformers need thinner laminations (or ferrite/powdered-iron cores).</p>
+
+    <h3>15 · The “more power” error</h3>
+    <p>The secondary has a higher voltage but a correspondingly lower current. In an ideal transformer <span class="v">V</span><sub>1</sub><span class="v">I</span><sub>1</sub> = <span class="v">V</span><sub>2</sub><span class="v">I</span><sub>2</sub>, so the power is unchanged; in a practical one the output is slightly <em>less</em> than the input. If a step-up transformer produced more power than it received, energy would be created, violating conservation of energy. A transformer converts voltage and current levels; it does not generate power.</p>
+
+    <h3>16 · kVA rating</h3>
+    <p>The heating of a transformer depends on its voltage (which sets the flux and hence iron loss) and its current (which sets copper loss). Neither depends on the phase angle of the customer’s load. Rating in kVA therefore states the voltage and current the insulation and cooling can tolerate, leaving the actual kW delivered to be determined by the load’s power factor.</p>
+
+    <h3>17 · Unloaded transformer</h3>
+    <p>A small current still flows because the primary must establish the alternating flux in the core — the magnetising current — and must supply hysteresis and eddy-current losses. So the primary behaves like an iron-cored inductor, not an open circuit. It becomes slightly warm because those core losses are dissipated as heat inside the iron even with the secondary open.</p>
+
+    <h3>18 · Maximum efficiency below full load</h3>
+    <p>Efficiency peaks where copper loss equals iron loss. Since copper loss at full load is deliberately made larger than the iron loss, the equality point falls at a fraction of full load (typically around 70–85%). A distribution transformer spends most of the day at part load, so putting the peak there maximises the energy it delivers for the energy it consumes.</p>
+
+    <h3>19 · Phone charger</h3>
+    <p>It is a small single-phase step-down transformer (in modern chargers, a high-frequency switched-mode transformer). It does provide isolation: the low-voltage side is not electrically connected to the mains. After the transformer the low AC is rectified to DC, smoothed by a capacitor and regulated to the required output — the transformer itself cannot produce DC.</p>
+  </div>
+
+  <h2 id="references">References and attribution</h2>
+
+  <div class="references">
+    <h3>Primary sources</h3>
+    <ol>
+      <li>University of Mumbai, Faculty of Science &amp; Technology, <em>Syllabus for B.E. Computer Engineering (AI &amp; ML), NEP 2020</em>, ESC102 Basic Electrical and Electronics Engineering, Module III “Single Phase Transformer”, 4 hours, CO3, p. 37. <a href="https://mu.ac.in/old/wp-content/uploads/2025/02/6.14N-CSE-AIML.pdf">Official syllabus PDF</a>. Syllabus wording quoted verbatim; teaching hours and course outcome taken from the same page.</li>
+      <li>Dr. Nirmala K., <em>ESC 102 BEEE Unit 3 CSE AIML</em>, course slide deck (FE CSE AI &amp; ML, 2025–26). Used for: definition of a transformer, construction and core material, Faraday’s-law framing, principle of mutual inductance, EMF equation and derivation, transformation ratio <span class="v">K</span> = <span class="v">N</span><sub>2</sub>/<span class="v">N</span><sub>1</sub>, ideal-versus-practical contrast, iron/copper loss classification, hysteresis and eddy-current loss expressions, efficiency figures (97–99%) and load dependence, core-type versus shell-type comparison, berry/toroidal transformer, transformer rating in kVA, and the eight applications. Course document supplied with the class; not a university publication, and not endorsed by the instructor.</li>
+      <li>Tony R. Kuphaldt, <em>Lessons In Electric Circuits, Volume II — AC</em>, Chapter 9 “Transformers”: sections “Mutual inductance and basic operation”, “Step-up and step-down transformers”, “Electrical isolation”, “Power capacity” and “Energy losses”. <a href="https://www.ibiblio.org/kuphaldt/electricCircuits/AC/AC_9.html">Chapter 9</a>. Released for free distribution by the author. Quoted for mutual inductance, the step-up/step-down definitions, the role of transformers in long-distance transmission, the isolation-transformer definition, the list of ideal-transformer assumptions, and the lamination/eddy-current explanation.</li>
+      <li>University of Mumbai, <em>Basic Electrical &amp; Electronics Engineering</em>, NEP 2020, paper code N10415, FE All Branches, Semester I, 13 June 2025, 60 marks, 2 hours. <em>Q1 (d)</em> “What are the losses in a single-phase transformer?” (3 marks) and <em>Q5 (a)</em> “Explain the working principle of single phase transformer and derive the EMF equation.” (6 marks). Verified against the supplied scanned paper. These are the only two transformer questions in that paper; they are reproduced exactly and are not used as a syllabus or a prediction.</li>
+    </ol>
+
+    <h3>How quotations and course material are used</h3>
+    <p>Quotations are short and appear in a bordered block with the author, work, section or slide number, and a link where one exists. The surrounding explanation is this page’s own paraphrase, not the author’s words. Course slides are cited as <span class="tag c">Course</span> and never as university publications. No quotation, paper question, mark or verification result has been invented.</p>
+    <p>The Unit 3 slide deck presents several tables and derivations as photographs of pages from a Mumbai University Semester I <em>Basic Electrical &amp; Electronics Engineering</em> textbook. The book’s title and author are not visible on the slides, so that material is attributed to the slide deck and no book citation is claimed.</p>
+
+    <h3>Limitations of the available material</h3>
+    <ul>
+      <li><strong>No Module 3 assignment, tutorial sheet or practice question bank was supplied.</strong> The only course-specific material is the slide deck. University questions for this module are limited to the two verified items from the June 2025 paper.</li>
+      <li><strong>The December 2024 and Summer 2025 C-scheme papers (subject code 58654) are a different course and scheme</strong> and are not used as sources for this module.</li>
+      <li><strong>Some slide pages carry handwritten mark allocations</strong> and question-bank references from other sources. Those annotations are not evidence of ESC102 questions and are not reproduced as such.</li>
+      <li><strong>Numericals are excluded by the syllabus.</strong> The relationships here are explained symbolically; no worked numerical problems are provided, and the small illustrations are conceptual only.</li>
+    </ul>
+
+    <h3>What this page does not include</h3>
+    <p>Three-phase transformers, parallel operation, phasor diagrams and equivalent circuits, transformer construction design calculations, and the full open-circuit and short-circuit test procedures. These belong to later courses or to material beyond Module III. Numerical problem-solving is excluded by the syllabus itself.</p>
+
+    <p class="small">Compiled for study use. This page is not an official University of Mumbai publication and is not endorsed by the university or by Dr. Nirmala K. If your department issues a revised syllabus or additional notes, follow those.</p>
+  </div>
+
+  <footer>
+    <p><strong>BEEE Module 3 — Single Phase Transformer</strong> · ESC102 · B.E. CSE (AI &amp; ML) · Semester I · NEP 2020</p>
+    <p><a href="/beee">All BEEE modules</a> · <a href="/">Study Guides home</a> · <a href="#top">Back to top</a></p>
+    <p>Conceptual study guide with source excerpts, comparisons and a separate answer key. Not an official university publication.</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var b=document.getElementById('themeToggle'),r=document.documentElement;
+  function dark(){var t=r.getAttribute('data-theme');return t==='dark';}
+  function paint(){var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
+  b.addEventListener('click',function(){var n=dark()?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('sg-theme',n);}catch(e){}paint();});
+  paint();
+})();
+</script>
+<script>
+(function(){
+  var hs=[].slice.call(document.querySelectorAll('.wrap h2[id]'));
+  if(!hs.length)return;
+  function pad(n){return (n<10?'0':'')+n;}
+  function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
+  var names=hs.map(function(h){return h.textContent.trim();});
+
+  /* wide screens: margin rail */
+  var nav=el('nav','rail');nav.setAttribute('aria-label','Section progress');
+  var inn=el('div','rail-in'),top=el('div','rail-top'),sec=el('span','rail-sec','01'),meta=el('span','rail-meta');
+  var pct=el('b',null,'0%');meta.appendChild(el('span',null,'of '+pad(hs.length)));meta.appendChild(pct);
+  var tg=el('button','rail-toggle');tg.type='button';tg.setAttribute('aria-controls','railList');
+  top.appendChild(sec);top.appendChild(meta);top.appendChild(tg);
+  var ol=el('ol','rail-list');ol.id='railList';
+  var fill=el('span','rail-fill');fill.setAttribute('aria-hidden','true');ol.appendChild(fill);
+  var items=hs.map(function(h,i){
+    var li=el('li'),a=el('a'),nd=el('span','node');
+    a.href='#'+h.id;a.title=names[i];nd.setAttribute('aria-hidden','true');
+    a.appendChild(nd);a.appendChild(el('span','num',pad(i+1)));a.appendChild(el('span','lbl',names[i]));
+    li.appendChild(a);ol.appendChild(li);return {a:a,nd:nd,p:-1,done:false};
+  });
+  inn.appendChild(top);inn.appendChild(ol);nav.appendChild(inn);document.body.appendChild(nav);
+
+  /* phones and tablets: current-section line, edge tab, bottom sheet */
+  var bar=el('div','rm-bar');bar.setAttribute('aria-hidden','true');
+  var tab=el('button','rm-tab');tab.type='button';tab.setAttribute('aria-haspopup','dialog');tab.setAttribute('aria-expanded','false');
+  var tn=el('span',null,'01');tab.appendChild(tn);
+  var back=el('div','rm-back'),sheet=el('div','rm-sheet');sheet.setAttribute('role','dialog');sheet.setAttribute('aria-label','Sections');
+  var sh=el('div','rm-head'),shp=el('b',null,'0%');sh.appendChild(el('span',null,'Sections'));sh.appendChild(shp);
+  var sol=el('ol');
+  var mitems=hs.map(function(h,i){
+    var li=el('li'),a=el('a');a.href='#'+h.id;a.appendChild(el('span','rm-k',pad(i+1)));a.appendChild(el('span',null,names[i]));
+    li.appendChild(a);sol.appendChild(li);a.addEventListener('click',function(){setSheet(false);});return a;
+  });
+  sheet.appendChild(sh);sheet.appendChild(sol);
+  [bar,tab,back,sheet].forEach(function(n){document.body.appendChild(n);});
+  var moveT;
+  function setSheet(o,refocus){
+    document.body.classList.toggle('rm-open',o);tab.setAttribute('aria-expanded',String(o));
+    if(o){var c=mitems[cur>=0?cur:0];sheet.scrollTop=Math.max(0,c.offsetTop-sheet.clientHeight/3);try{c.focus({preventScroll:true});}catch(e){}}
+    else if(refocus){tab.focus();}
+  }
+  tab.addEventListener('click',function(){setSheet(!document.body.classList.contains('rm-open'));});
+  back.addEventListener('click',function(){setSheet(false);});
+  addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('rm-open'))setSheet(false,true);});
+
+  var open;
+  try{var sv=localStorage.getItem('sg-rail');open=sv?sv==='o':innerWidth>=1100;}catch(e){open=innerWidth>=1100;}
+  function paintToggle(){
+    nav.classList.toggle('is-collapsed',!open);
+    tg.textContent=open?'\u2039':'\u203A';
+    tg.setAttribute('aria-expanded',String(open));
+    tg.setAttribute('aria-label',open?'Collapse section progress':'Expand section progress');
+    centers=null;req();
+  }
+  tg.addEventListener('click',function(){open=!open;try{localStorage.setItem('sg-rail',open?'o':'c');}catch(e){}paintToggle();});
+
+  var tops=[],end=0,cur=-2,tick=false,centers=null;
+  function measure(){
+    var y=scrollY;tops=hs.map(function(h){return h.getBoundingClientRect().top+y;});
+    end=document.querySelector('.wrap').getBoundingClientRect().bottom+y;
+  }
+  function measureCenters(){centers=items.map(function(it){var li=it.a.parentNode;return li.offsetTop+li.offsetHeight/2;});}
+  function update(){
+    tick=false;
+    if(!centers)measureCenters();
+    var y=scrollY+innerHeight*0.25,c=-1,max=document.documentElement.scrollHeight-innerHeight;
+    var pv=Math.round(Math.max(0,Math.min(1,max>0?scrollY/max:0))*100);pct.textContent=pv+'%';shp.textContent=pv+'%';
+    items.forEach(function(it,i){
+      var nx=i+1<tops.length?tops[i+1]:end,p=Math.max(0,Math.min(1,(y-tops[i])/Math.max(1,nx-tops[i])));
+      if(y>=tops[i])c=i;
+      p=Math.round(p*100)/100;
+      if(p!==it.p){it.p=p;it.nd.style.setProperty('--p',p);}
+      var d=y>=nx;if(d!==it.done){it.done=d;it.a.classList.toggle('is-done',d);mitems[i].classList.toggle('is-done',d);}
+    });
+    if(c<0)c=0;
+    bar.style.setProperty('--w',Math.round(items[c].p*100)+'%');
+    var f=centers[c]+(c+1<centers.length?(centers[c+1]-centers[c])*items[c].p:0);
+    if(y<tops[0])f=centers[0]*Math.max(0,Math.min(1,y/Math.max(1,tops[0])));
+    ol.style.setProperty('--fill',f.toFixed(1)+'px');
+    if(c!==cur){
+      if(cur>=0){items[cur].a.removeAttribute('aria-current');mitems[cur].removeAttribute('aria-current');}
+      cur=c;sec.textContent=pad(c+1);tn.textContent=pad(c+1);
+      tab.setAttribute('aria-label','Sections. Now reading '+pad(c+1)+', '+names[c]);
+      items[c].a.setAttribute('aria-current','true');mitems[c].setAttribute('aria-current','true');
+      var a=items[c].a,r=a.getBoundingClientRect(),lr=ol.getBoundingClientRect();
+      if(r.top<lr.top||r.bottom>lr.bottom)ol.scrollTop+=r.top-lr.top-lr.height/2;
+    }
+  }
+  function req(){if(!tick){tick=true;requestAnimationFrame(update);}}
+  addEventListener('scroll',function(){
+    document.body.classList.add('rm-moving');clearTimeout(moveT);moveT=setTimeout(function(){document.body.classList.remove('rm-moving');},700);req();
+  },{passive:true});
+  addEventListener('resize',function(){measure();centers=null;req();});
+  addEventListener('load',function(){measure();centers=null;req();});
+  paintToggle();measure();update();
+})();
+</script>
+</body>
+</html>
