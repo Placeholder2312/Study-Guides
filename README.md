@@ -119,9 +119,16 @@ Modules 4 (Counting) and 5 (Algebraic Structures) are self-contained guides buil
 ├── README.md
 ├── dsgt/
 │   ├── index.html              DSGT module list
-│   └── modules/
-│       ├── module-4.html       Counting
-│       └── module-5.html       Algebraic Structures
+│   ├── modules/
+│   │   ├── module-4.html       Counting
+│   │   └── module-5.html       Algebraic Structures
+│   ├── 00_University_Syllabus/ Syllabus extraction and papers
+│   ├── 01_Original_Notes/      Source material per module
+│   ├── 03_Transcriptions/      Module 5 transcriptions
+│   ├── 05_Study_Guides/        Guide sources and exports
+│   ├── 06_Revision/            IAT and prelim question banks
+│   ├── _work/                  Scratch artefacts
+│   └── AGENTS.md, README.md
 ├── maths/
 │   ├── index.html              Mathematics module list
 │   ├── modules/
