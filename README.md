@@ -133,7 +133,29 @@ Modules 4 (Counting) and 5 (Algebraic Structures) are self-contained guides buil
 │   ├── Tutorial_1_Transcription.md
 │   ├── Source_Index.md         Source-to-transcription map with hashes
 │   └── OCR_Review_Report.md    Tool tests, flagged readings, SymPy results
-├── aoa/index.html              Analysis of Algorithm (coming soon)
+├── beee/
+│   ├── index.html              BEEE module list
+│   ├── modules/
+│   │   └── module-1.html       DC Circuits
+│   ├── 00_University_Syllabus/ Syllabus, papers and coverage map
+│   ├── 01_Original_Notes/      Source material per module
+│   ├── 03_Transcriptions/      Module 1 transcription and source index
+│   ├── 04_OCR_Reports/         OCR review report
+│   ├── 05_Study_Guides/        Guide sources (Module 1)
+│   ├── _work/                  Scratch artefacts
+│   └── AGENTS.md, README.md, Source_Index.md, Syllabus_Coverage.md
+├── aoa/
+│   ├── index.html              Analysis of Algorithm (coming soon)
+│   ├── 00_University_Syllabus/ Syllabus and paper material
+│   ├── 01_Original_Notes/      Source material per module (local library)
+│   ├── 02_Tutorials/
+│   ├── 03_Transcriptions/
+│   ├── 04_OCR_Reports/
+│   ├── 05_Study_Guides/
+│   ├── 06_Revision/            IAT question banks
+│   ├── 07_Unidentified/        Unclassified reference material
+│   ├── _work/                  Scratch artefacts
+│   └── AGENTS.md, README.md
 └── coa/index.html              Computer Organization and Architecture (coming soon)
 ```
 
