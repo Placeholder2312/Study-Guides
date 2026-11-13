@@ -1,0 +1,11 @@
+/* Shared accessibility helpers, linked from every page. */
+.skip-link {
+  position: absolute; left: .5rem; top: -4rem; z-index: 1000;
+  padding: .6rem 1rem; background: var(--ink, #0a0a0a); color: var(--bg, #fff);
+  border: 2px solid var(--bg, #fff); text-decoration: none;
+  font: 600 .9rem/1.2 "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.skip-link:focus { top: .5rem; }
+main:focus { outline: none; }
+.theme-toggle[hidden] { display: none; }
+@media print { .skip-link { display: none; } }
