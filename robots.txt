@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://study-guides-placeholder.vercel.app/sitemap.xml

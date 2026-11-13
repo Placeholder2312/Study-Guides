@@ -4,69 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DSGT Study Guides</title>
-<style>
-  :root { --ink:#0a0a0a; --muted:#444; --bg:#fff; --line:#ccc; --accent:#1d4ed8; }
-  * { box-sizing: border-box; }
-  body { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; color:var(--ink); background:var(--bg); line-height:1.6; margin:0; font-size:17px; font-weight:500; }
-  .wrap { max-width:68ch; margin:0 auto; padding:2.5rem 1rem 4rem; }
-  header { border-bottom:2px solid var(--ink); margin-bottom:2rem; padding-bottom:1rem; }
-  h1 { font-family:Georgia,Cambria,"Times New Roman",serif; font-size:2.25rem; line-height:1.25; margin:0 0 .5rem; letter-spacing:-.01em; }
-  .subtitle { color:var(--muted); font-size:1rem; font-weight:400; margin:0; }
-  .meta { font-size:.85rem; color:var(--muted); margin-top:1rem; }
-  .grid { display:grid; grid-template-columns:1fr; gap:.75rem; }
-  .card { display:flex; flex-direction:column; gap:.2rem; border:1px solid var(--line); background:var(--surface); padding:1rem 1.25rem; text-decoration:none; color:var(--ink); min-height:44px; }
-  a.card { border-left:3px solid var(--ink); }
-  a.card:hover, a.card:focus-visible { background:var(--surface-hi); outline:2px solid var(--ink); outline-offset:2px; }
-  .num { font-size:.78rem; font-weight:700; letter-spacing:.04em; color:var(--muted); text-transform:uppercase; }
-  .name { font-family:Georgia,Cambria,serif; font-size:1.25rem; font-weight:700; line-height:1.3; }
-  .go { font-size:.9rem; color:var(--accent); font-weight:600; }
-  .soon { color:var(--muted); background:var(--bg); border-style:dashed; }
-  .soon .go { color:var(--muted); font-weight:500; }
-  footer { margin-top:3rem; padding-top:1.25rem; border-top:1px solid var(--line); color:var(--muted); font-size:.85rem; text-align:center; }
-  @media (min-width:640px) { .grid { grid-template-columns:1fr 1fr; } }
-  @media (max-width:600px) { .wrap { padding:1rem .75rem 3rem; } h1 { font-size:1.7rem; } body { font-size:16px; } }
-</style>
-<script>(function(){try{var t=localStorage.getItem('sg-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-<style id="theme">
-  :root { color-scheme: light; --ink:#0a0a0a;--muted:#444444;--bg:#ffffff;--line:#cccccc;--rule:#999999;--accent:#1d4ed8;--accent-soft:#eef2ff;--danger:#b00020;--surface:#fafafa;--surface-alt:#f9f9f9;--surface-eq:#f5f5f5;--surface-hi:#f0f0f0; }
-  :root[data-theme="dark"] { color-scheme: dark; --ink:#ececec;--muted:#a8a8ad;--bg:#0f0f11;--line:#34343a;--rule:#5a5a62;--accent:#8ab0ff;--accent-soft:#1b2540;--danger:#ff7b8f;--surface:#17171a;--surface-alt:#1b1b1f;--surface-eq:#1e1e23;--surface-hi:#26262c; }
-  .topbar { display:flex; align-items:center; justify-content:space-between; gap:.5rem; margin:0 0 1rem; }
-  .topbar .back { display:inline-flex; align-items:center; min-height:44px; font-size:.85rem; font-weight:600; color:var(--ink); }
-  .theme-toggle { font:inherit; font-size:.85rem; font-weight:600; color:var(--ink); background:var(--bg); border:1px solid var(--ink); border-radius:0; padding:.4rem .8rem; min-height:44px; min-width:44px; cursor:pointer; margin-left:auto; }
-  .theme-toggle:hover { background:var(--surface-hi); }
-  .theme-toggle:focus-visible { outline:2px solid var(--ink); outline-offset:2px; }
-  @media print {
-    :root, :root[data-theme="dark"], :root:not([data-theme="light"]) { color-scheme: light; --ink:#0a0a0a;--muted:#444444;--bg:#ffffff;--line:#cccccc;--rule:#999999;--accent:#1d4ed8;--accent-soft:#eef2ff;--danger:#b00020;--surface:#fafafa;--surface-alt:#f9f9f9;--surface-eq:#f5f5f5;--surface-hi:#f0f0f0; }
-    .topbar { display:none; }
-  }
-</style>
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/a11y.css">
+<script src="/assets/theme.js"></script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <div class="wrap">
-  <div class="topbar"><a class="back" href="/">← All subjects</a><button class="theme-toggle" type="button" id="themeToggle"></button></div>
+  <nav class="topbar" aria-label="Site"><a class="back" href="/">← All subjects</a><button class="theme-toggle" type="button" id="themeToggle" hidden></button></nav>
   <header>
     <h1>DSGT</h1>
     <p class="subtitle">Discrete Structures and Graph Theory</p>
     <div class="meta">Sem III · Mumbai University · 2 of 6 modules ready</div>
   </header>
-  <main class="grid">
-    <div class="card soon" aria-disabled="true"><span class="num">Module 1</span><span class="name">Crisp Set Theory and Logic</span><span class="go">Coming soon</span></div>
-    <div class="card soon" aria-disabled="true"><span class="num">Module 2</span><span class="name">Mathematical Relations</span><span class="go">Coming soon</span></div>
-    <div class="card soon" aria-disabled="true"><span class="num">Module 3</span><span class="name">Functions</span><span class="go">Coming soon</span></div>
+  <main class="grid" id="main" tabindex="-1">
+    <div class="card soon"><span class="num">Module 1</span><span class="name">Crisp Set Theory and Logic</span><span class="go">Coming soon</span></div>
+    <div class="card soon"><span class="num">Module 2</span><span class="name">Mathematical Relations</span><span class="go">Coming soon</span></div>
+    <div class="card soon"><span class="num">Module 3</span><span class="name">Functions</span><span class="go">Coming soon</span></div>
     <a class="card" href="/dsgt/modules/module-4"><span class="num">Module 4</span><span class="name">Counting</span><span class="go">Open guide →</span></a>
     <a class="card" href="/dsgt/modules/module-5"><span class="num">Module 5</span><span class="name">Algebraic Structures</span><span class="go">Open guide →</span></a>
-    <div class="card soon" aria-disabled="true"><span class="num">Module 6</span><span class="name">Graph Theory</span><span class="go">Coming soon</span></div>
+    <div class="card soon"><span class="num">Module 6</span><span class="name">Graph Theory</span><span class="go">Coming soon</span></div>
   </main>
   <footer>More modules will appear here as they are added.</footer>
 </div>
-<script>
-(function(){
-  var b=document.getElementById('themeToggle'),r=document.documentElement;
-  function dark(){var t=r.getAttribute('data-theme');return t==='dark';}
-  function paint(){var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
-  b.addEventListener('click',function(){var n=dark()?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('sg-theme',n);}catch(e){}paint();});
-  paint();
-})();
-</script>
 </body>
 </html>
