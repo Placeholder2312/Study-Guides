@@ -19,6 +19,7 @@
     --font-mono: "Courier New", Courier, monospace;
   }
   * { box-sizing: border-box; }
+  sub, sup { font-size: 0.75em; line-height: 0; }
   html { scroll-behavior: smooth; }
   body {
     font-family: var(--font-sans);
@@ -625,140 +626,140 @@
   <div class="theory">
     <span class="source">Source: Oscar Levin, “Discrete Mathematics: An Open Introduction,” Section 2.4</span>
     <p>A recurrence relation expresses each term of a sequence in terms of previous terms. Your teacher’s form: <span class="kbd">T(n) = T(n−1) + f(n)</span>. A recurrence relation is a recursive definition <em>without</em> initial conditions. With initial conditions, it defines the entire sequence.</p>
-    <p><strong>Important:</strong> a recurrence relation requires a sufficient set of initial conditions to uniquely determine the sequence. For a second-order recurrence (one involving aₙ₋₁ and aₙ₋₂), two initial values are normally required — typically a₀ and a₁.</p>
+    <p><strong>Important:</strong> a recurrence relation requires a sufficient set of initial conditions to uniquely determine the sequence. For a second-order recurrence (one involving a<sub>n−1</sub> and a<sub>n−2</sub>), two initial values are normally required — typically a<sub>0</sub> and a<sub>1</sub>.</p>
     <p>Recursive definitions are often easier to find than closed formulas. Solving a recurrence means finding a function of <span class="kbd">n</span>, a closed formula, that satisfies both the recurrence and the initial conditions. This is analogous to solving differential equations: finding the solution may be difficult, but verifying it is easy: just substitute it back in.</p>
   </div>
 
   <div class="theory">
     <span class="source">Source: Oscar Levin, Characteristic Root Technique (Section 2.4)</span>
-    <p>Consider <span class="kbd">aₙ = aₙ₋₁ + 6aₙ₋₂</span>, or <span class="kbd">aₙ − aₙ₋₁ − 6aₙ₋₂ = 0</span>. Iteration becomes unwieldy, so guess a geometric form <span class="kbd">rⁿ</span>. Substituting gives <span class="kbd">rⁿ − rⁿ⁻¹ − 6rⁿ⁻² = 0</span>. If <span class="kbd">r ≠ 0</span>, divide by the smallest power of <span class="kbd">r</span> to get <span class="kbd">r² − r − 6 = 0</span>, which factors to <span class="kbd">(r − 3)(r + 2) = 0</span>. Thus <span class="kbd">r = 3</span> or <span class="kbd">r = −2</span>. Both <span class="kbd">(−2)ⁿ</span> and <span class="kbd">3ⁿ</span> are solutions, as is any linear combination <span class="kbd">a(−2)ⁿ + b·3ⁿ</span>. The polynomial <span class="kbd">r² − r − 6</span> is the characteristic equation; its roots are the characteristic roots. If <span class="kbd">r = 0</span>, check it separately as a possible root.</p>
+    <p>Consider <span class="kbd">a<sub>n</sub> = a<sub>n−1</sub> + 6a<sub>n−2</sub></span>, or <span class="kbd">a<sub>n</sub> − a<sub>n−1</sub> − 6a<sub>n−2</sub> = 0</span>. Iteration becomes unwieldy, so guess a geometric form <span class="kbd">r<sup>n</sup></span>. Substituting gives <span class="kbd">r<sup>n</sup> − r<sup>n−1</sup> − 6r<sup>n−2</sup> = 0</span>. If <span class="kbd">r ≠ 0</span>, divide by the smallest power of <span class="kbd">r</span> to get <span class="kbd">r<sup>2</sup> − r − 6 = 0</span>, which factors to <span class="kbd">(r − 3)(r + 2) = 0</span>. Thus <span class="kbd">r = 3</span> or <span class="kbd">r = −2</span>. Both <span class="kbd">(−2)<sup>n</sup></span> and <span class="kbd">3<sup>n</sup></span> are solutions, as is any linear combination <span class="kbd">a(−2)<sup>n</sup> + b·3<sup>n</sup></span>. The polynomial <span class="kbd">r<sup>2</sup> − r − 6</span> is the characteristic equation; its roots are the characteristic roots. If <span class="kbd">r = 0</span>, check it separately as a possible root.</p>
   </div>
 
   <h3>How to Form and Solve the Characteristic Equation</h3>
   <ol class="steps">
-    <li>Write the recurrence in standard form: <span class="kbd">aₙ − c₁aₙ₋₁ − c₂aₙ₋₂ = 0</span>.</li>
-    <li>Assume a solution <span class="kbd">aₙ = rⁿ</span> and substitute.</li>
+    <li>Write the recurrence in standard form: <span class="kbd">a<sub>n</sub> − c<sub>1</sub>a<sub>n−1</sub> − c<sub>2</sub>a<sub>n−2</sub> = 0</span>.</li>
+    <li>Assume a solution <span class="kbd">a<sub>n</sub> = r<sup>n</sup></span> and substitute.</li>
     <li>If <span class="kbd">r ≠ 0</span>, divide by the smallest power of <span class="kbd">r</span> to get the characteristic equation (a polynomial in <span class="kbd">r</span>). Check <span class="kbd">r = 0</span> separately as a possible root.</li>
-    <li>Factorise the characteristic equation and find its roots <span class="kbd">r₁, r₂</span>.</li>
+    <li>Factorise the characteristic equation and find its roots <span class="kbd">r<sub>1</sub>, r<sub>2</sub></span>.</li>
     <li>Construct the general solution based on the roots (distinct or repeated).</li>
     <li>Use the initial conditions to solve for the constants.</li>
     <li>Verify by substituting back into the recurrence.</li>
   </ol>
 
   <h3>Case A: Two Distinct Real Roots</h3>
-  <p>If the characteristic equation has distinct roots <span class="kbd">r₁</span> and <span class="kbd">r₂</span>, the solution is:</p>
-  <div class="eq">aₙ = A(r₁ⁿ) + B(r₂ⁿ)</div>
+  <p>If the characteristic equation has distinct roots <span class="kbd">r<sub>1</sub></span> and <span class="kbd">r<sub>2</sub></span>, the solution is:</p>
+  <div class="eq">a<sub>n</sub> = A(r<sub>1</sub><sup>n</sup>) + B(r<sub>2</sub><sup>n</sup>)</div>
   <p class="eq-note"><span class="kbd">A</span> and <span class="kbd">B</span> are determined by initial conditions.</p>
 
   <div class="example">
     <div class="example-title">Teacher’s recurrence 1 — repeated roots</div>
-    <p><span class="kbd">aₙ = 6aₙ₋₁ − 9aₙ₋₂</span>, <span class="kbd">a₀ = 1</span>, <span class="kbd">a₁ = 4</span></p>
-    <p>Standard form: <span class="kbd">aₙ − 6aₙ₋₁ + 9aₙ₋₂ = 0</span></p>
-    <p>Characteristic: <span class="kbd">r² − 6r + 9 = 0</span> → <span class="kbd">(r − 3)² = 0</span> → root <strong>3</strong>, repeated</p>
-    <p>General: <span class="kbd">aₙ = A(3ⁿ) + Bn(3ⁿ)</span></p>
+    <p><span class="kbd">a<sub>n</sub> = 6a<sub>n−1</sub> − 9a<sub>n−2</sub></span>, <span class="kbd">a<sub>0</sub> = 1</span>, <span class="kbd">a<sub>1</sub> = 4</span></p>
+    <p>Standard form: <span class="kbd">a<sub>n</sub> − 6a<sub>n−1</sub> + 9a<sub>n−2</sub> = 0</span></p>
+    <p>Characteristic: <span class="kbd">r<sup>2</sup> − 6r + 9 = 0</span> → <span class="kbd">(r − 3)<sup>2</sup> = 0</span> → root <strong>3</strong>, repeated</p>
+    <p>General: <span class="kbd">a<sub>n</sub> = A(3<sup>n</sup>) + Bn(3<sup>n</sup>)</span></p>
     <ul>
       <li><span class="kbd">n=0:</span> A = 1</li>
       <li><span class="kbd">n=1:</span> 3A + 3B = 4 → 3 + 3B = 4 → B = 1/3</li>
     </ul>
-    <div class="eq"><strong>aₙ = 3ⁿ + (n/3)·3ⁿ</strong></div>
-    <p>Verify: a₂ = 6(4) − 9(1) = 24 − 9 = 15. Formula: 9 + (2/3)·9 = 9 + 6 = 15. ✓</p>
+    <div class="eq"><strong>a<sub>n</sub> = 3<sup>n</sup> + (n/3)·3<sup>n</sup></strong></div>
+    <p>Verify: a<sub>2</sub> = 6(4) − 9(1) = 24 − 9 = 15. Formula: 9 + (2/3)·9 = 9 + 6 = 15. ✓</p>
   </div>
 
   <div class="example">
     <div class="example-title">Teacher’s recurrence 2 — distinct roots</div>
-    <p><span class="kbd">aₙ = 5aₙ₋₁ + 14aₙ₋₂</span>, <span class="kbd">a₀ = 2</span>, <span class="kbd">a₁ = 5</span></p>
-    <p>Standard form: <span class="kbd">aₙ − 5aₙ₋₁ − 14aₙ₋₂ = 0</span></p>
-    <p>Characteristic: <span class="kbd">r² − 5r − 14 = 0</span> → <span class="kbd">(r − 7)(r + 2) = 0</span> → roots <strong>7, −2</strong></p>
-    <p>General: <span class="kbd">aₙ = A(7ⁿ) + B(−2)ⁿ</span></p>
+    <p><span class="kbd">a<sub>n</sub> = 5a<sub>n−1</sub> + 14a<sub>n−2</sub></span>, <span class="kbd">a<sub>0</sub> = 2</span>, <span class="kbd">a<sub>1</sub> = 5</span></p>
+    <p>Standard form: <span class="kbd">a<sub>n</sub> − 5a<sub>n−1</sub> − 14a<sub>n−2</sub> = 0</span></p>
+    <p>Characteristic: <span class="kbd">r<sup>2</sup> − 5r − 14 = 0</span> → <span class="kbd">(r − 7)(r + 2) = 0</span> → roots <strong>7, −2</strong></p>
+    <p>General: <span class="kbd">a<sub>n</sub> = A(7<sup>n</sup>) + B(−2)<sup>n</sup></span></p>
     <ul>
       <li><span class="kbd">n=0:</span> A + B = 2</li>
       <li><span class="kbd">n=1:</span> 7A − 2B = 5</li>
     </ul>
     <p>From A = 2 − B: 7(2 − B) − 2B = 5 → 14 − 7B − 2B = 5 → −9B = −9 → B = 1, A = 1.</p>
-    <div class="eq"><strong>aₙ = 7ⁿ + (−2)ⁿ</strong></div>
-    <p>Verify: a₂ = 5(5) + 14(2) = 25 + 28 = 53. Formula: 49 + 4 = 53. ✓</p>
+    <div class="eq"><strong>a<sub>n</sub> = 7<sup>n</sup> + (−2)<sup>n</sup></strong></div>
+    <p>Verify: a<sub>2</sub> = 5(5) + 14(2) = 25 + 28 = 53. Formula: 49 + 4 = 53. ✓</p>
   </div>
 
   <div class="example">
     <div class="example-title">Teacher’s recurrence 3 — distinct roots</div>
-    <p><span class="kbd">aₙ = 5aₙ₋₁ + 6aₙ₋₂</span>, <span class="kbd">a₀ = 3</span>, <span class="kbd">a₁ = 13</span></p>
-    <p>Standard form: <span class="kbd">aₙ − 5aₙ₋₁ − 6aₙ₋₂ = 0</span></p>
-    <p>Characteristic: <span class="kbd">r² − 5r − 6 = 0</span> → <span class="kbd">(r − 6)(r + 1) = 0</span> → roots <strong>6, −1</strong></p>
-    <p>General: <span class="kbd">aₙ = A(6ⁿ) + B(−1)ⁿ</span></p>
+    <p><span class="kbd">a<sub>n</sub> = 5a<sub>n−1</sub> + 6a<sub>n−2</sub></span>, <span class="kbd">a<sub>0</sub> = 3</span>, <span class="kbd">a<sub>1</sub> = 13</span></p>
+    <p>Standard form: <span class="kbd">a<sub>n</sub> − 5a<sub>n−1</sub> − 6a<sub>n−2</sub> = 0</span></p>
+    <p>Characteristic: <span class="kbd">r<sup>2</sup> − 5r − 6 = 0</span> → <span class="kbd">(r − 6)(r + 1) = 0</span> → roots <strong>6, −1</strong></p>
+    <p>General: <span class="kbd">a<sub>n</sub> = A(6<sup>n</sup>) + B(−1)<sup>n</sup></span></p>
     <ul>
       <li><span class="kbd">n=0:</span> A + B = 3</li>
       <li><span class="kbd">n=1:</span> 6A − B = 13</li>
     </ul>
     <p>Adding: 7A = 16 → <span class="kbd">A = 16/7</span>. Then B = 3 − 16/7 = 5/7.</p>
-    <div class="eq"><strong>aₙ = (16/7)·6ⁿ + (5/7)·(−1)ⁿ</strong></div>
-    <p>Verify: a₂ = 5(13) + 6(3) = 65 + 18 = 83. Formula: (16/7)·36 + (5/7)·1 = 576/7 + 5/7 = 581/7 = 83. ✓</p>
+    <div class="eq"><strong>a<sub>n</sub> = (16/7)·6<sup>n</sup> + (5/7)·(−1)<sup>n</sup></strong></div>
+    <p>Verify: a<sub>2</sub> = 5(13) + 6(3) = 65 + 18 = 83. Formula: (16/7)·36 + (5/7)·1 = 576/7 + 5/7 = 581/7 = 83. ✓</p>
   </div>
 
   <h3>Case B: Repeated Root</h3>
-  <p>If the characteristic polynomial has only one root <span class="kbd">r</span> (it factors as <span class="kbd">(x − r)²</span>), then <span class="kbd">rⁿ</span> is a solution, but <span class="kbd">aₙ = ar₁ⁿ + br₂ⁿ</span> cannot satisfy all initial conditions because <span class="kbd">r₁ⁿ</span> and <span class="kbd">r₂ⁿ</span> are indistinguishable. The solution is:</p>
-  <div class="eq">aₙ = arⁿ + bnrⁿ</div>
-  <p class="eq-note">The extra <span class="kbd">n</span> in <span class="kbd">bnrⁿ</span> allows solving for both constants.</p>
+  <p>If the characteristic polynomial has only one root <span class="kbd">r</span> (it factors as <span class="kbd">(x − r)<sup>2</sup></span>), then <span class="kbd">r<sup>n</sup></span> is a solution, but <span class="kbd">a<sub>n</sub> = ar<sub>1</sub><sup>n</sup> + br<sub>2</sub><sup>n</sup></span> cannot satisfy all initial conditions because <span class="kbd">r<sub>1</sub><sup>n</sup></span> and <span class="kbd">r<sub>2</sub><sup>n</sup></span> are indistinguishable. The solution is:</p>
+  <div class="eq">a<sub>n</sub> = ar<sup>n</sup> + bnr<sup>n</sup></div>
+  <p class="eq-note">The extra <span class="kbd">n</span> in <span class="kbd">bnr<sup>n</sup></span> allows solving for both constants.</p>
 
   <h3>Case C: Non-Homogeneous (Extra Term on the Right)</h3>
   <p><strong>Exam-relevant:</strong> Summer 2026 Q5(b) is non-homogeneous (solved in the Mumbai University section below). The particular-solution guessing method is added in this guide and is not from Levin’s Section 2.4.</p>
-  <p>When an extra term appears on the right: <span class="kbd">aₙ = c₁aₙ₋₁ + c₂aₙ₋₂ + f(n)</span>:</p>
+  <p>When an extra term appears on the right: <span class="kbd">a<sub>n</sub> = c<sub>1</sub>a<sub>n−1</sub> + c<sub>2</sub>a<sub>n−2</sub> + f(n)</span>:</p>
   <ol class="steps">
-    <li>Solve the homogeneous part (ignore <span class="kbd">f(n)</span>) → <span class="kbd">aₙ⁽ʰ⁾</span>.</li>
-    <li>Guess a particular solution <span class="kbd">aₙ⁽ᵖ⁾</span> based on the form of <span class="kbd">f(n)</span>.</li>
-    <li>General solution: <span class="kbd">aₙ = aₙ⁽ʰ⁾ + aₙ⁽ᵖ⁾</span>.</li>
+    <li>Solve the homogeneous part (ignore <span class="kbd">f(n)</span>) → <span class="kbd">a<sub>n</sub><sup>(</sup>ʰ<sup>)</sup></span>.</li>
+    <li>Guess a particular solution <span class="kbd">a<sub>n</sub><sup>(</sup>ᵖ<sup>)</sup></span> based on the form of <span class="kbd">f(n)</span>.</li>
+    <li>General solution: <span class="kbd">a<sub>n</sub> = a<sub>n</sub><sup>(</sup>ʰ<sup>)</sup> + a<sub>n</sub><sup>(</sup>ᵖ<sup>)</sup></span>.</li>
     <li>Apply initial conditions.</li>
   </ol>
 
   <table>
-    <tr><th>Form of <span class="kbd">f(n)</span></th><th>Guess for <span class="kbd">aₙ⁽ᵖ⁾</span></th></tr>
+    <tr><th>Form of <span class="kbd">f(n)</span></th><th>Guess for <span class="kbd">a<sub>n</sub><sup>(</sup>ᵖ<sup>)</sup></span></th></tr>
     <tr><td>Constant <span class="kbd">k</span></td><td><span class="kbd">C</span></td></tr>
     <tr><td>Linear <span class="kbd">an + b</span></td><td><span class="kbd">Cn + D</span></td></tr>
-    <tr><td><span class="kbd">kⁿ</span> (k is not a characteristic root)</td><td><span class="kbd">C · kⁿ</span></td></tr>
-    <tr><td><span class="kbd">kⁿ</span> (k is a characteristic root)</td><td><span class="kbd">C · n · kⁿ</span> (<span class="kbd">C · n² · kⁿ</span> if k is a double root)</td></tr>
+    <tr><td><span class="kbd">k<sup>n</sup></span> (k is not a characteristic root)</td><td><span class="kbd">C · k<sup>n</sup></span></td></tr>
+    <tr><td><span class="kbd">k<sup>n</sup></span> (k is a characteristic root)</td><td><span class="kbd">C · n · k<sup>n</sup></span> (<span class="kbd">C · n<sup>2</sup> · k<sup>n</sup></span> if k is a double root)</td></tr>
     <tr><td>Polynomial degree <span class="kbd">d</span></td><td>Polynomial degree <span class="kbd">d</span></td></tr>
   </table>
-  <p>If your guess matches the homogeneous solution, multiply by <span class="kbd">n</span> until it does not. Example: for <span class="kbd">f(n) = 7·5ⁿ</span> with roots 5 and −2, 5 is a root, so guess <span class="kbd">C·n·5ⁿ</span>.</p>
+  <p>If your guess matches the homogeneous solution, multiply by <span class="kbd">n</span> until it does not. Example: for <span class="kbd">f(n) = 7·5<sup>n</sup></span> with roots 5 and −2, 5 is a root, so guess <span class="kbd">C·n·5<sup>n</sup></span>.</p>
 
   <div class="example">
     <div class="example-title">Additional practice — non-homogeneous with constant right side</div>
-    <p><span class="kbd">aₙ₊₂ − 5aₙ₊₁ + 6aₙ = 2</span>, <span class="kbd">a₀ = 1</span>, <span class="kbd">a₁ = −1</span></p>
-    <p>Homogeneous: <span class="kbd">r² − 5r + 6 = 0</span> → roots <strong>2, 3</strong> → <span class="kbd">aₙ⁽ʰ⁾ = A(2ⁿ) + B(3ⁿ)</span></p>
+    <p><span class="kbd">a<sub>n+2</sub> − 5a<sub>n+1</sub> + 6a<sub>n</sub> = 2</span>, <span class="kbd">a<sub>0</sub> = 1</span>, <span class="kbd">a<sub>1</sub> = −1</span></p>
+    <p>Homogeneous: <span class="kbd">r<sup>2</sup> − 5r + 6 = 0</span> → roots <strong>2, 3</strong> → <span class="kbd">a<sub>n</sub><sup>(</sup>ʰ<sup>)</sup> = A(2<sup>n</sup>) + B(3<sup>n</sup>)</span></p>
     <p>Particular guess (constant): <span class="kbd">K − 5K + 6K = 2</span> → <span class="kbd">2K = 2</span> → <span class="kbd">K = 1</span></p>
-    <p>General: <span class="kbd">aₙ = A(2ⁿ) + B(3ⁿ) + 1</span></p>
+    <p>General: <span class="kbd">a<sub>n</sub> = A(2<sup>n</sup>) + B(3<sup>n</sup>) + 1</span></p>
     <ul>
       <li><span class="kbd">n=0:</span> A + B + 1 = 1 → A + B = 0</li>
       <li><span class="kbd">n=1:</span> 2A + 3B + 1 = −1 → 2A + 3B = −2</li>
     </ul>
     <p>From A = −B: −2B + 3B = −2 → B = −2, A = 2.</p>
-    <div class="eq"><strong>aₙ = 2·2ⁿ − 2·3ⁿ + 1</strong></div>
-    <p>Verify: a₂ = 5(−1) − 6(1) + 2 = −9. Formula: 8 − 18 + 1 = −9. ✓</p>
+    <div class="eq"><strong>a<sub>n</sub> = 2·2<sup>n</sup> − 2·3<sup>n</sup> + 1</strong></div>
+    <p>Verify: a<sub>2</sub> = 5(−1) − 6(1) + 2 = −9. Formula: 8 − 18 + 1 = −9. ✓</p>
   </div>
 
   <div class="example">
     <div class="example-title">Additional practice — distinct roots with negative answer</div>
-    <p><span class="kbd">aₙ − 9aₙ₋₁ + 20aₙ₋₂ = 0</span>, <span class="kbd">a₀ = −3</span>, <span class="kbd">a₁ = −10</span></p>
-    <p>Characteristic: <span class="kbd">r² − 9r + 20 = 0</span> → <span class="kbd">(r − 4)(r − 5) = 0</span> → roots <strong>4, 5</strong></p>
-    <p>General: <span class="kbd">aₙ = A(4ⁿ) + B(5ⁿ)</span></p>
+    <p><span class="kbd">a<sub>n</sub> − 9a<sub>n−1</sub> + 20a<sub>n−2</sub> = 0</span>, <span class="kbd">a<sub>0</sub> = −3</span>, <span class="kbd">a<sub>1</sub> = −10</span></p>
+    <p>Characteristic: <span class="kbd">r<sup>2</sup> − 9r + 20 = 0</span> → <span class="kbd">(r − 4)(r − 5) = 0</span> → roots <strong>4, 5</strong></p>
+    <p>General: <span class="kbd">a<sub>n</sub> = A(4<sup>n</sup>) + B(5<sup>n</sup>)</span></p>
     <ul>
       <li><span class="kbd">n=0:</span> A + B = −3</li>
       <li><span class="kbd">n=1:</span> 4A + 5B = −10</li>
     </ul>
     <p>From A = −3 − B: 4(−3 − B) + 5B = −10 → −12 − 4B + 5B = −10 → B = 2, A = −5.</p>
-    <div class="eq"><strong>aₙ = −5·4ⁿ + 2·5ⁿ</strong></div>
+    <div class="eq"><strong>a<sub>n</sub> = −5·4<sup>n</sup> + 2·5<sup>n</sup></strong></div>
   </div>
 
   <div class="example">
     <div class="example-title">Additional practice — third-order recurrence (not a confirmed teacher-provided exam pattern)</div>
-    <p><span class="kbd">cₙ = 6cₙ₋₁ − 11cₙ₋₂ + 6cₙ₋₃</span>, <span class="kbd">c₀ = 2</span>, <span class="kbd">c₁ = 5</span>, <span class="kbd">c₂ = 15</span></p>
-    <p>Characteristic: <span class="kbd">r³ − 6r² + 11r − 6 = 0</span>. Try r = 1: 1 − 6 + 11 − 6 = 0, so r = 1 is a root. Factor out (r − 1): <span class="kbd">(r − 1)(r² − 5r + 6) = 0</span> → roots <strong>1, 2, 3</strong></p>
-    <p>General: <span class="kbd">cₙ = A + B(2ⁿ) + C(3ⁿ)</span></p>
+    <p><span class="kbd">c<sub>n</sub> = 6c<sub>n−1</sub> − 11c<sub>n−2</sub> + 6c<sub>n−3</sub></span>, <span class="kbd">c<sub>0</sub> = 2</span>, <span class="kbd">c<sub>1</sub> = 5</span>, <span class="kbd">c<sub>2</sub> = 15</span></p>
+    <p>Characteristic: <span class="kbd">r<sup>3</sup> − 6r<sup>2</sup> + 11r − 6 = 0</span>. Try r = 1: 1 − 6 + 11 − 6 = 0, so r = 1 is a root. Factor out (r − 1): <span class="kbd">(r − 1)(r<sup>2</sup> − 5r + 6) = 0</span> → roots <strong>1, 2, 3</strong></p>
+    <p>General: <span class="kbd">c<sub>n</sub> = A + B(2<sup>n</sup>) + C(3<sup>n</sup>)</span></p>
     <ul>
       <li><span class="kbd">n=0:</span> A + B + C = 2</li>
       <li><span class="kbd">n=1:</span> A + 2B + 3C = 5</li>
       <li><span class="kbd">n=2:</span> A + 4B + 9C = 15</li>
     </ul>
     <p>Subtracting row 1 from row 2: B + 2C = 3. Subtracting row 2 from row 3: 2B + 6C = 10 → B + 3C = 5. Subtracting: C = 2, B = −1, A = 1.</p>
-    <div class="eq"><strong>cₙ = 1 − 2ⁿ + 2·3ⁿ</strong></div>
+    <div class="eq"><strong>c<sub>n</sub> = 1 − 2<sup>n</sup> + 2·3<sup>n</sup></strong></div>
   </div>
 
   <h2 id="mu-questions">Mumbai University Previous Examination Questions — Module 4</h2>
@@ -822,22 +823,22 @@
     <div class="exam-q">
       <div class="exam-q-title">Winter 2025 — Q5(b): Student Club Followers — Recurrence Relation (8 marks)</div>
       <div class="exam-source">Source: NEP DSGT Winter 2025 — Q5(b)</div>
-      <p>A student club records followers using recurrence: <span class="kbd">Fₙ = 4Fₙ₋₁ − 4Fₙ₋₂</span> with <span class="kbd">F₀ = 10</span> (core team) and <span class="kbd">F₁ = 30</span> (after first promotion).</p>
+      <p>A student club records followers using recurrence: <span class="kbd">F<sub>n</sub> = 4F<sub>n−1</sub> − 4F<sub>n−2</sub></span> with <span class="kbd">F<sub>0</sub> = 10</span> (core team) and <span class="kbd">F<sub>1</sub> = 30</span> (after first promotion).</p>
       <ol>
         <li>Solve the recurrence relation.</li>
         <li>Describe the growth pattern (linear/exponential).</li>
         <li>Comment whether such growth is realistic for a campus club in long term.</li>
       </ol>
       <p><strong>Solution:</strong></p>
-      <p>Standard form: <span class="kbd">aₙ − 4aₙ₋₁ + 4aₙ₋₂ = 0</span></p>
-      <p>Characteristic: <span class="kbd">r² − 4r + 4 = 0</span> → <span class="kbd">(r − 2)² = 0</span> → root <strong>2</strong>, repeated</p>
-      <p>General: <span class="kbd">aₙ = A(2ⁿ) + Bn(2ⁿ)</span></p>
+      <p>Standard form: <span class="kbd">a<sub>n</sub> − 4a<sub>n−1</sub> + 4a<sub>n−2</sub> = 0</span></p>
+      <p>Characteristic: <span class="kbd">r<sup>2</sup> − 4r + 4 = 0</span> → <span class="kbd">(r − 2)<sup>2</sup> = 0</span> → root <strong>2</strong>, repeated</p>
+      <p>General: <span class="kbd">a<sub>n</sub> = A(2<sup>n</sup>) + Bn(2<sup>n</sup>)</span></p>
       <ul>
         <li><span class="kbd">n=0:</span> A = 10</li>
         <li><span class="kbd">n=1:</span> 2A + 2B = 30 → 20 + 2B = 30 → B = 5</li>
       </ul>
-      <div class="eq"><strong>Fₙ = 10·2ⁿ + 5n·2ⁿ = (10 + 5n)·2ⁿ</strong></div>
-      <p><strong>Growth pattern:</strong> Exponential growth with a linear factor <span class="kbd">(10 + 5n)</span>. The dominant term is <span class="kbd">5n·2ⁿ</span>, which grows exponentially.</p>
+      <div class="eq"><strong>F<sub>n</sub> = 10·2<sup>n</sup> + 5n·2<sup>n</sup> = (10 + 5n)·2<sup>n</sup></strong></div>
+      <p><strong>Growth pattern:</strong> Exponential growth with a linear factor <span class="kbd">(10 + 5n)</span>. The dominant term is <span class="kbd">5n·2<sup>n</sup></span>, which grows exponentially.</p>
       <p><strong>Realistic?</strong> No. Exponential growth of followers is not realistic for a campus club in the long term because the total student population is finite. Eventually, the club will saturate the available student population and growth will slow down (logistic growth rather than exponential).</p>
     </div>
 
@@ -920,30 +921,30 @@
     <div class="exam-q">
       <div class="exam-q-title">Summer 2026 — Q5(b): Financial Portfolio — Non-Homogeneous Recurrence (7 marks)</div>
       <div class="exam-source">Source: NEP DSGT Summer 2026 — Q5(b)</div>
-      <p>A financial analytics company models the quarterly growth of a digital investment portfolio using: <span class="kbd">Fₙ = 3Fₙ₋₁ + 10Fₙ₋₂ + 7·5ⁿ</span> with <span class="kbd">F₀ = 4</span>, <span class="kbd">F₁ = −3</span>.</p>
+      <p>A financial analytics company models the quarterly growth of a digital investment portfolio using: <span class="kbd">F<sub>n</sub> = 3F<sub>n−1</sub> + 10F<sub>n−2</sub> + 7·5<sup>n</sup></span> with <span class="kbd">F<sub>0</sub> = 4</span>, <span class="kbd">F<sub>1</sub> = −3</span>.</p>
       <ol>
         <li>Solve the recurrence relation.</li>
-        <li>Determine the general expression for <span class="kbd">Fₙ</span>.</li>
-        <li>Analyze the effect of the exponential forcing term <span class="kbd">7·5ⁿ</span>.</li>
+        <li>Determine the general expression for <span class="kbd">F<sub>n</sub></span>.</li>
+        <li>Analyze the effect of the exponential forcing term <span class="kbd">7·5<sup>n</sup></span>.</li>
       </ol>
       <p><strong>Solution:</strong></p>
-      <p>Homogeneous part: <span class="kbd">r² − 3r − 10 = 0</span> → <span class="kbd">(r − 5)(r + 2) = 0</span> → roots <strong>5, −2</strong></p>
-      <p>Homogeneous solution: <span class="kbd">aₙ⁽ʰ⁾ = A(5ⁿ) + B(−2)ⁿ</span></p>
-      <p>Particular solution: forcing term is <span class="kbd">7·5ⁿ</span>. Since <span class="kbd">5</span> is a root of the characteristic equation, guess <span class="kbd">aₙ⁽ᵖ⁾ = Cn·5ⁿ</span>:</p>
-      <div class="eq">Cn·5ⁿ = 3·C(n−1)·5ⁿ⁻¹ + 10·C(n−2)·5ⁿ⁻² + 7·5ⁿ</div>
-      <div class="eq">Divide by 5ⁿ⁻²: 25Cn = 15C(n−1) + 10C(n−2) + 175</div>
+      <p>Homogeneous part: <span class="kbd">r<sup>2</sup> − 3r − 10 = 0</span> → <span class="kbd">(r − 5)(r + 2) = 0</span> → roots <strong>5, −2</strong></p>
+      <p>Homogeneous solution: <span class="kbd">a<sub>n</sub><sup>(</sup>ʰ<sup>)</sup> = A(5<sup>n</sup>) + B(−2)<sup>n</sup></span></p>
+      <p>Particular solution: forcing term is <span class="kbd">7·5<sup>n</sup></span>. Since <span class="kbd">5</span> is a root of the characteristic equation, guess <span class="kbd">a<sub>n</sub><sup>(</sup>ᵖ<sup>)</sup> = Cn·5<sup>n</sup></span>:</p>
+      <div class="eq">Cn·5<sup>n</sup> = 3·C(n−1)·5<sup>n−1</sup> + 10·C(n−2)·5<sup>n−2</sup> + 7·5<sup>n</sup></div>
+      <div class="eq">Divide by 5<sup>n−2</sup>: 25Cn = 15C(n−1) + 10C(n−2) + 175</div>
       <div class="eq">25Cn = 15Cn − 15C + 10Cn − 20C + 175</div>
       <div class="eq">25Cn = 25Cn − 35C + 175</div>
       <div class="eq">35C = 175 → C = 5</div>
-      <p>General solution: <span class="kbd">Fₙ = A(5ⁿ) + B(−2)ⁿ + 5n·5ⁿ</span></p>
+      <p>General solution: <span class="kbd">F<sub>n</sub> = A(5<sup>n</sup>) + B(−2)<sup>n</sup> + 5n·5<sup>n</sup></span></p>
       <ul>
         <li><span class="kbd">n=0:</span> A + B = 4</li>
         <li><span class="kbd">n=1:</span> 5A − 2B + 25 = −3 → 5A − 2B = −28</li>
       </ul>
       <p>From A = 4 − B: 5(4 − B) − 2B = −28 → 20 − 5B − 2B = −28 → −7B = −48 → B = 48/7</p>
       <p>A = 4 − 48/7 = (28 − 48)/7 = −20/7</p>
-      <div class="eq"><strong>Fₙ = (−20/7)·5ⁿ + (48/7)·(−2)ⁿ + 5n·5ⁿ</strong></div>
-      <p><strong>Analysis:</strong> The forcing term <span class="kbd">7·5ⁿ</span> introduces an exponential growth component <span class="kbd">5n·5ⁿ</span> which dominates as <span class="kbd">n</span> increases. Since <span class="kbd">5</span> is both a characteristic root and the base of the forcing term, the particular solution includes the extra factor <span class="kbd">n</span>.</p>
+      <div class="eq"><strong>F<sub>n</sub> = (−20/7)·5<sup>n</sup> + (48/7)·(−2)<sup>n</sup> + 5n·5<sup>n</sup></strong></div>
+      <p><strong>Analysis:</strong> The forcing term <span class="kbd">7·5<sup>n</sup></span> introduces an exponential growth component <span class="kbd">5n·5<sup>n</sup></span> which dominates as <span class="kbd">n</span> increases. Since <span class="kbd">5</span> is both a characteristic root and the base of the forcing term, the particular solution includes the extra factor <span class="kbd">n</span>.</p>
     </div>
 
   </div>
@@ -987,15 +988,15 @@
 
     <h4>Recurrence Relations</h4>
     <ol>
-      <li>Solve aₙ = 5aₙ₋₁ − 6aₙ₋₂ with a₀ = 1, a₁ = 4.</li>
-      <li>Solve aₙ = 6aₙ₋₁ − 9aₙ₋₂ with a₀ = 1, a₁ = 4.</li>
-      <li>Solve aₙ = 5aₙ₋₁ + 14aₙ₋₂ with a₀ = 2, a₁ = 5.</li>
-      <li>Solve aₙ = 5aₙ₋₁ + 6aₙ₋₂ with a₀ = 3, a₁ = 13.</li>
-      <li>Solve aₙ = 3aₙ₋₁ + 4 with a₀ = 2.</li>
-      <li>Solve aₙ₊₂ − 5aₙ₊₁ + 6aₙ = 2 with a₀ = 1, a₁ = −1.</li>
-      <li>Solve aₙ − 9aₙ₋₁ + 20aₙ₋₂ = 0 with a₀ = −3, a₁ = −10.</li>
-      <li>Solve aₙ = 4aₙ₋₁ − 4aₙ₋₂ with a₀ = 10, a₁ = 30.</li>
-      <li>Solve aₙ = 3aₙ₋₁ + 10aₙ₋₂ + 7·5ⁿ with a₀ = 4, a₁ = −3.</li>
+      <li>Solve a<sub>n</sub> = 5a<sub>n−1</sub> − 6a<sub>n−2</sub> with a<sub>0</sub> = 1, a<sub>1</sub> = 4.</li>
+      <li>Solve a<sub>n</sub> = 6a<sub>n−1</sub> − 9a<sub>n−2</sub> with a<sub>0</sub> = 1, a<sub>1</sub> = 4.</li>
+      <li>Solve a<sub>n</sub> = 5a<sub>n−1</sub> + 14a<sub>n−2</sub> with a<sub>0</sub> = 2, a<sub>1</sub> = 5.</li>
+      <li>Solve a<sub>n</sub> = 5a<sub>n−1</sub> + 6a<sub>n−2</sub> with a<sub>0</sub> = 3, a<sub>1</sub> = 13.</li>
+      <li>Solve a<sub>n</sub> = 3a<sub>n−1</sub> + 4 with a<sub>0</sub> = 2.</li>
+      <li>Solve a<sub>n+2</sub> − 5a<sub>n+1</sub> + 6a<sub>n</sub> = 2 with a<sub>0</sub> = 1, a<sub>1</sub> = −1.</li>
+      <li>Solve a<sub>n</sub> − 9a<sub>n−1</sub> + 20a<sub>n−2</sub> = 0 with a<sub>0</sub> = −3, a<sub>1</sub> = −10.</li>
+      <li>Solve a<sub>n</sub> = 4a<sub>n−1</sub> − 4a<sub>n−2</sub> with a<sub>0</sub> = 10, a<sub>1</sub> = 30.</li>
+      <li>Solve a<sub>n</sub> = 3a<sub>n−1</sub> + 10a<sub>n−2</sub> + 7·5<sup>n</sup> with a<sub>0</sub> = 4, a<sub>1</sub> = −3.</li>
     </ol>
   </div>
 
@@ -1027,15 +1028,15 @@
 
     <h4>Recurrence Relations</h4>
     <ol>
-      <li><strong>aₙ = −2ⁿ + 2·3ⁿ</strong></li>
-      <li><strong>aₙ = 3ⁿ + (n/3)·3ⁿ</strong></li>
-      <li><strong>aₙ = 7ⁿ + (−2)ⁿ</strong></li>
-      <li><strong>aₙ = (16/7)·6ⁿ + (5/7)·(−1)ⁿ</strong></li>
-      <li><strong>aₙ = 4·3ⁿ − 2</strong></li>
-      <li><strong>aₙ = 2·2ⁿ − 2·3ⁿ + 1</strong></li>
-      <li><strong>aₙ = −5·4ⁿ + 2·5ⁿ</strong></li>
-      <li><strong>aₙ = (10 + 5n)·2ⁿ</strong></li>
-      <li><strong>Fₙ = (−20/7)·5ⁿ + (48/7)·(−2)ⁿ + 5n·5ⁿ</strong></li>
+      <li><strong>a<sub>n</sub> = −2<sup>n</sup> + 2·3<sup>n</sup></strong></li>
+      <li><strong>a<sub>n</sub> = 3<sup>n</sup> + (n/3)·3<sup>n</sup></strong></li>
+      <li><strong>a<sub>n</sub> = 7<sup>n</sup> + (−2)<sup>n</sup></strong></li>
+      <li><strong>a<sub>n</sub> = (16/7)·6<sup>n</sup> + (5/7)·(−1)<sup>n</sup></strong></li>
+      <li><strong>a<sub>n</sub> = 4·3<sup>n</sup> − 2</strong></li>
+      <li><strong>a<sub>n</sub> = 2·2<sup>n</sup> − 2·3<sup>n</sup> + 1</strong></li>
+      <li><strong>a<sub>n</sub> = −5·4<sup>n</sup> + 2·5<sup>n</sup></strong></li>
+      <li><strong>a<sub>n</sub> = (10 + 5n)·2<sup>n</sup></strong></li>
+      <li><strong>F<sub>n</sub> = (−20/7)·5<sup>n</sup> + (48/7)·(−2)<sup>n</sup> + 5n·5<sup>n</sup></strong></li>
     </ol>
   </div>
 
@@ -1086,22 +1087,22 @@
     <h3>Recurrence Relations</h3>
     <table>
       <tr><th>Characteristic roots</th><th>General solution</th></tr>
-      <tr><td>Distinct r₁, r₂</td><td>aₙ = A·r₁ⁿ + B·r₂ⁿ</td></tr>
-      <tr><td>Repeated r</td><td>aₙ = (A + Bn)·rⁿ</td></tr>
-      <tr><td>Non-homogeneous</td><td>aₙ = homogeneous solution + particular solution</td></tr>
+      <tr><td>Distinct r<sub>1</sub>, r<sub>2</sub></td><td>a<sub>n</sub> = A·r<sub>1</sub><sup>n</sup> + B·r<sub>2</sub><sup>n</sup></td></tr>
+      <tr><td>Repeated r</td><td>a<sub>n</sub> = (A + Bn)·r<sup>n</sup></td></tr>
+      <tr><td>Non-homogeneous</td><td>a<sub>n</sub> = homogeneous solution + particular solution</td></tr>
     </table>
     <table>
       <tr><th>Right-hand side f(n)</th><th>Guess</th></tr>
       <tr><td>Constant</td><td>C</td></tr>
       <tr><td>Linear</td><td>Cn + D</td></tr>
-      <tr><td>kⁿ, k not a root</td><td>C·kⁿ</td></tr>
-      <tr><td>kⁿ, k a root</td><td>C·n·kⁿ</td></tr>
+      <tr><td>k<sup>n</sup>, k not a root</td><td>C·k<sup>n</sup></td></tr>
+      <tr><td>k<sup>n</sup>, k a root</td><td>C·n·k<sup>n</sup></td></tr>
     </table>
     <ol class="steps">
       <li>Write in standard form and form the characteristic equation.</li>
       <li>Find the roots and write the general solution.</li>
       <li>Use the initial conditions to find the constants.</li>
-      <li>Verify by computing a₂ both ways.</li>
+      <li>Verify by computing a<sub>2</sub> both ways.</li>
     </ol>
 
     <h3>Patterns from the Question Papers</h3>
