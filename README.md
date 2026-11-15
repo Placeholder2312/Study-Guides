@@ -28,7 +28,7 @@ Subjects and module names follow the official University of Mumbai Semester III 
 | Subject | Course | Ready | Modules |
 |---|---|---|---|
 | Discrete Structures and Graph Theory (DSGT) | 2023112 | 2 of 6 | 1 Crisp Set Theory and Logic (soon) · 2 Mathematical Relations (soon) · 3 Functions (soon) · **4 Counting** · **5 Algebraic Structures** · 6 Graph Theory (soon) |
-| Mathematics for Computer Engineering | 2023111 | 1 of 6 | **1 Linear Algebra: Theory of Matrices** · 2 Linear and Non-Linear Programming Problems (soon) · 3 Modular Arithmetic (soon) · 4 Fourier Series (soon) · 5 Statistical Techniques (soon) · 6 Probability (soon) |
+| Mathematics for Computer Engineering | 2023111 | 2 of 6 | **1 Linear Algebra: Theory of Matrices** · 2 Linear and Non-Linear Programming Problems (soon) · 3 Modular Arithmetic (soon) · **4 Fourier Series** · 5 Statistical Techniques (soon) · 6 Probability (soon) |
 | Analysis of Algorithm | 2023113 | 0 of 6 | Introduction · Divide and Conquer · Greedy Method · Dynamic Programming · Backtracking and Branch and Bound · String Matching (all soon) |
 | Computer Organization and Architecture | 2023114 | 0 of 6 | Computer Fundamentals · ALU Operations · Processor Organization and Control Unit Design · Memory Systems Organization · I/O Organization · Parallel Processing (all soon) |
 

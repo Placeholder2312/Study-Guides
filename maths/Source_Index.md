@@ -11,6 +11,11 @@ This index maps every transcription to its original source document, PDF page nu
 | SRC-01 | `Portion (6.21-N-B.E.-AI-ML-sem-III-IV).pdf` | `00_University_Syllabus/` | Official University of Mumbai programme/syllabus PDF (digital, text layer) | 72 PDF pages; Mathematics section on PDF pages 16–18 | `a89900f9984645a6888d71277051d990eadb50e12fc5684ffd8876501df0a7bd` |
 | SRC-02 | `CSE Module 1.pdf` | `01_Original_Notes/Module_1/` | Handwritten teacher notes, scanned (Adobe Scan for iOS) | 20 PDF pages | `b1241d8f896c64ba88d99c47af1d549ce75add84ae2be9878124a697d4a9f5bf` |
 | SRC-03 | `Tutorial 1.docx` | `02_Tutorials/` | Word tutorial sheet with 7 embedded Equation Editor 3.0 objects | 1 document page | `5a3fe20a32d275a76f7606119f0188904b7ea51628a5620263e85e507b5b0c73` |
+| SRC-04 | `Module 4 CSE.pdf` | `01_Original_Notes/Module_4/` | Handwritten teacher notes, scanned (no text layer) | 8 PDF pages | `4182e1077f880795261dba0e87db84b62371778061959ece3c513337c5b9b9af` |
+| SRC-05 | `Tutorial 4.docx` | `02_Tutorials/` | Word tutorial sheet with 10 embedded Equation Editor 3.0 objects (8 distinct WMF previews) | 1 document page | `e75d54d6c692426bd049916ddb580e70cd585795afb106fe13e0cc4c270690b8` |
+| SRC-06 | `musa-practice-paper-set1-w2025.pdf` | `_work/sources/` | MUSA practice paper, Winter Session 2025, scanned (no text layer) | 3 PDF pages | `17fb8559daa4f7dec2ac625dc2053c56ab691ef7894650707c048f3ee125d404` |
+| SRC-07 | `musa-question-bank-2026.pdf` | `_work/sources/` | MUSA question bank, Winter Session 2026, scanned (no text layer) | 9 PDF pages | `1c24161e4d16e5c3624f610e56ee2034a705475b604a2d39f16849eb921a89f2` |
+| SRC-08 | `maths-question-bank-solutions.pdf` | `_work/sources/` | Third-party worked-solution booklet (digital, text layer); Module 4 = pages 46–77 | 108 PDF pages | `523d42600fc54da00b87702edd6ea17dafd8469e286046a4e9ee0e7ffcc404c2` |
 
 No duplicate files were found. No original file was deleted, overwritten or modified.
 
@@ -77,6 +82,57 @@ Embedded object map:
 
 The unused media file `word/media/image8.jpg` is the college letterhead graphic, not mathematical content.
 
+### 2.4 Module 4 notes
+
+| Generated file | Source | Source pages | Coverage |
+|---|---|---|---|
+| `03_Transcriptions/Module_4_Transcription.md` | SRC-04 | PDF pages **1–8** (all) | Complete transcription: syllabus row, Dirichlet's conditions, the general interval formula and its four special cases, even/odd theory, and all seven worked expansions including the three numerical deductions |
+
+Page-level map:
+
+| PDF page | Content transcribed |
+|---:|---|
+| 1 | Module heading, syllabus row, Dirichlet's conditions, \(f(x)\) on \((c,c+2l)\), the special cases \((0,2l)\) and \((0,2\pi)\) |
+| 2 | \((-l,l)\), \((-\pi,\pi)\), even/odd definitions, symmetric-limit integral property, even/odd series, two exponential integrals (unused) |
+| 3 | Four standard trigonometric values; \(f(x)=x^2\) on \((0,2)\) — \(a_0,a_n,b_n\) and series; \(f(x)=x\) on \((0,2\pi)\) — \(a_0,a_n\) |
+| 4 | \(b_n\) for \(f(x)=x\); final sine series; \(f(x)=4-x^2\) on \((0,2\pi)\) complete |
+| 5 | \(f(x)=x\) on \((-\pi,\pi)\) (odd); \(f(x)=x^2\) on \((-\pi,\pi)\) (even) to \(a_n\) |
+| 6 | Same \(x^2\) example restated; deductions \(\pi^2/6\), \(\pi^2/12\), \(\pi^2/8\) |
+| 7 | \(f(x)=x^2\) on \((0,2\pi)\) complete; \(f(x)=\left(\frac{\pi-x}{2}\right)^2\) — \(a_0,a_n\) |
+| 8 | \(b_n=0\); final cosine series for \(\left(\frac{\pi-x}{2}\right)^2\) |
+
+### 2.5 Tutorial 4
+
+| Generated file | Source | Source location | Coverage |
+|---|---|---|---|
+| `03_Transcriptions/Tutorial_4_Transcription.md` | SRC-05 | Whole document (1 page) | Header and all five questions, including all ten embedded equations |
+
+Embedded object map:
+
+| Question | OLE objects | WMF previews | Content |
+|---|---|---|---|
+| 1 | `oleObject1.bin`, `oleObject2.bin` | `image1.wmf`, `image2.wmf` | \(f(x)=x^2\), \((0,2)\) |
+| 2 | `oleObject3.bin`, `oleObject4.bin` | `image1.wmf` (reused), `image3.wmf` | \(f(x)=x^2\), \((0,2\pi)\) |
+| 3 | `oleObject5.bin`, `oleObject6.bin` | `image4.wmf`, `image5.wmf` | \(f(x)=x\), \((-\pi,\pi)\) |
+| 4 | `oleObject7.bin`, `oleObject8.bin` | `image6.wmf`, `image7.wmf` | \(f(x)=x\), \((0,2\pi)\) |
+| 5 | `oleObject9.bin`, `oleObject10.bin` | `image8.wmf`, `image7.wmf` (reused) | \(f(x)=\left(\frac{\pi-x}{2}\right)^2\), \((0,2\pi)\) |
+
+`word/media/image9.jpg` is the college letterhead graphic.
+
+### 2.6 Module 4 examination sources
+
+| Generated file | Sources | Source pages | Coverage |
+|---|---|---|---|
+| `03_Transcriptions/Exam_Questions_Module_4.md` | SRC-06, SRC-07, SRC-08 | SRC-06 p. 2; SRC-07 pp. 4–5; SRC-08 pp. 46–77 | All 25 Module 4 questions with original wording, functions, intervals, marks and deductions; provenance and duplicate map |
+
+Module 4 material inside each source:
+
+| Source | Pages holding Module 4 content | Questions | Excluded |
+|---|---|---:|---|
+| SRC-06 | page 2 only (Q2 b, Q3 c, Q5 a) | 3 | Modules 1, 2, 3, 5, 6 on pages 1–3 |
+| SRC-07 | page 4 (bottom) and page 5 (top two-thirds) | 22 | Pages 1–4 (top) = Modules 1–2; pages 6–9 = Modules 5–6 |
+| SRC-08 | pages 46–77 | 22 (same set as SRC-07) | Pages 1–45 = Modules 1–2; pages 78–108 = later modules |
+
 ---
 
 ## 3. Not transcribed / excluded
@@ -87,6 +143,12 @@ The unused media file `word/media/image8.jpg` is the college letterhead graphic,
 | SRC-03 letterhead image | Decorative header, no mathematical content |
 | SRC-02 page 11 synthetic-division table | Auxiliary root-check table; values already recorded in the characteristic equation. Layout not transcribed. |
 | SRC-02 page 11 and 14 struck-out working | Reproduced in the transcription where meaningful; the crossed-out version is not treated as content |
+| SRC-04 page 2, two exponential integrals | Written on the page but never used in any worked example; recorded as a page note, not as taught content |
+| SRC-04 page 3 trigonometric table | Read and used, but reproduced as a four-row table rather than as the teacher's handwritten layout |
+| SRC-05 letterhead image (`word/media/image9.jpg`) | Decorative header, no mathematical content |
+| SRC-06 Modules 1, 2, 3, 5, 6 questions | Other modules; only the three Module 4 questions on page 2 were extracted |
+| SRC-07 Modules 1–2 (pages 1–4 top) and 5–6 (pages 6–9) | Other modules; only the Module 4 questions on pages 4–5 were extracted |
+| SRC-08 pages 1–45 and 78–108 | Other modules; only the Module 4 solutions on pages 46–77 were used, and then only to confirm readings |
 
 ---
 
@@ -94,8 +156,12 @@ The unused media file `word/media/image8.jpg` is the college letterhead graphic,
 
 | File | Purpose |
 |---|---|
-| `04_OCR_Reports/OCR_Review_Report.md` | OCR/tool investigation, page outcomes, uncertainties, possible errors, SymPy verification results and manual-verification list |
+| `04_OCR_Reports/OCR_Review_Report.md` | OCR/tool investigation, page outcomes, uncertainties, possible errors, SymPy verification results and manual-verification list (Module 1) |
+| `04_OCR_Reports/OCR_Review_Report_Module_4.md` | Same, for Module 4: DOCX equation recovery, page readings, source errata in the examination PDFs, and the SymPy verification summary |
 | `03_Transcriptions/Module_1_Transcription.md` | Page-referenced transcription with inline `[as written]` notes |
+| `03_Transcriptions/Module_4_Transcription.md` | Page-referenced transcription of SRC-04, with the page-3 coefficient slip flagged |
 | `03_Transcriptions/Tutorial_1_Transcription.md` | Question-by-question transcription with equation map |
+| `03_Transcriptions/Tutorial_4_Transcription.md` | Question-by-question transcription with OLE-object and WMF-preview map |
+| `03_Transcriptions/Exam_Questions_Module_4.md` | 25 Module 4 examination questions with provenance codes, original wording and duplicate map |
 
 Working files (rendered page images, OCR test outputs, verification scripts) are kept in `_work/` and are not part of the study library.
