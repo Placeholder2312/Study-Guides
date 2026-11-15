@@ -12,11 +12,14 @@ each transcription and every computed result was verified.
 | Guide | Modules covered |
 |---|---|
 | [`modules/module-1`](modules/module-1.html) | Module 1 — Linear Algebra: Theory of Matrices |
+| [`modules/module-1-kindle`](modules/module-1-kindle.html) | Module 1, Kindle edition — same content, static HTML, no JavaScript or MathJax |
 | [`modules/module-4`](modules/module-4.html) | Module 4 — Fourier Series |
 
-Both are single self-contained HTML pages: the guide text is embedded in the page and typeset in
-the browser with MathJax, so they need an internet connection for the formulas. The Module 4 text is
-also kept as portable Markdown in `Module_4_Study_Guide.md`.
+Each is a single self-contained HTML page: the guide text is embedded in the page and typeset in
+the browser with MathJax, so they need an internet connection for the formulas. The Module 1 Kindle
+edition is the exception — it ships the formulas already rendered as plain HTML, with no JavaScript,
+so it opens on an e-reader browser. The Module 4 text is also kept as portable Markdown in
+`Module_4_Study_Guide.md`.
 
 ## What's here
 
