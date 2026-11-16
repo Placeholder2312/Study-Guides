@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Endsem Questionbank for Mathematics for Computer Engineering (2023111), B.E. CSE (AI &amp; ML), Semester III, University of Mumbai: every supplied question bank question for Module I, beginner teaching, independently verified answers and a separate answer key.">
+<meta name="description" content="Maths Endsem Question Bank for Mathematics for Computer Engineering (2023111), B.E. CSE (AI &amp; ML), Semester III, University of Mumbai: every supplied question bank question for Module I, beginner teaching, independently verified answers and a separate answer key.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffffff'/%3E%3Ctext x='16' y='24' font-family='Georgia,serif' font-size='21' text-anchor='middle' fill='%230a0a0a'%3E%CE%A3%3C/text%3E%3C/svg%3E">
-<title>Endsem Questionbank — Mathematics for Computer Engineering (2023111)</title>
+<title>Maths Endsem Question Bank — Mathematics for Computer Engineering (2023111)</title>
 <style>
 :root{
   --ink:#0a0a0a;
@@ -268,6 +268,96 @@ footer{border-top:2px solid var(--ink);margin-top:1rem;background:var(--bg)}
   .nav a{font-size:.66rem;padding:.3rem .45rem}
 }
 
+
+/* ---------- v0.2: sections, progress, question banners ---------- */
+.path{margin-top:1.3rem;max-width:34rem}
+.path-top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;font-size:.8rem;color:var(--muted)}
+.path-top strong{color:var(--ink);font-size:.86rem}
+.linkbtn{background:none;border:0;padding:.3rem 0;font:inherit;font-size:.74rem;color:var(--muted);text-decoration:underline;cursor:pointer}
+.linkbtn:hover{color:var(--ink)}
+.path-bar{height:6px;border:1px solid var(--ink);margin-top:.35rem;background:#fff}
+.path-bar span{display:block;height:100%;width:0;background:var(--ink);transition:width .35s}
+.nav a.done::after,.toc .lvl1 > a.done::after{content:" ✓";font-weight:700;color:var(--ink)}
+
+.sec{padding-top:1rem;margin-top:3.4rem;border-top:2px solid var(--ink)}
+.sec:first-child{margin-top:0;border-top:0;padding-top:0}
+.sec > hr{display:none}
+#content .sec > h1{margin-top:1rem;border-bottom:0;padding-bottom:0}
+.sec-goal{margin:.6rem 0 0}
+.sec > p:first-of-type > strong:first-child{color:var(--ink)}
+.sec-done{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.2rem;margin:2.4rem 0 .4rem;padding:1rem 1.1rem;border:2px solid var(--ink)}
+.done-btn{font:700 .8rem/1 var(--font-sans);letter-spacing:.06em;text-transform:uppercase;min-height:44px;padding:.7rem 1.1rem;background:#fff;color:var(--ink);border:2px solid var(--ink);cursor:pointer}
+.done-btn:hover{background:#f4f4f4}
+.done-btn[aria-pressed="true"]{background:var(--ink);color:#fff}
+.sec-done .next{font-size:.9rem}
+
+/* each question starts clean, under a black bar */
+.question{margin:4.2rem 0 0;padding-bottom:1.6rem;border-bottom:1px solid var(--line)}
+#content .question > h2.q-head{
+  margin:0 0 1.3rem;padding:.8rem 1.1rem;background:var(--ink);color:#fff;
+  font-family:var(--font-sans);font-size:.86rem;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;line-height:1.35;
+}
+.q-end{margin:1.6rem 0 0;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:center}
+.q-end::before,.q-end::after{content:"";display:inline-block;width:2.2rem;height:1px;background:var(--line);vertical-align:middle;margin:0 .8rem}
+
+/* blockquote roles */
+#content blockquote.bq-q{border-left-width:6px;background:#fff;border:1px solid var(--ink);border-left:6px solid var(--ink);font-size:1.05rem}
+#content blockquote.bq-expect{background:#fff;border-left:3px dashed var(--rule);color:var(--muted)}
+#content blockquote.bq-plain{background:#f0f5ff;border-left:3px solid var(--accent)}
+#content blockquote.bq-note{background:#fafafa;border-left:3px solid var(--rule)}
+#content blockquote.bq-answer{background:#fff;border:2px solid var(--ink);border-left-width:2px;padding:0 1.1rem 1rem;margin:1.8rem 0 .6rem}
+#content blockquote.bq-answer > p:first-child{margin:0 -1.1rem .8rem;padding:.4rem 1.1rem;background:var(--ink);color:#fff;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}
+#content blockquote.bq-answer .table-wrap{margin:.6rem 0 0}
+#content blockquote.bq-answer table{font-size:.95rem}
+
+/* numbered steps inside solutions */
+#content h4.step{
+  margin:1.9rem 0 .5rem;padding:.15rem 0 .15rem .8rem;border-left:4px solid var(--ink);
+  font-family:var(--font-serif);font-size:1.04rem;font-weight:700;letter-spacing:0;text-transform:none;color:var(--ink);
+}
+
+/* reveal boxes */
+details.solution,details.check{margin:1.4rem 0;border:1px solid var(--ink);background:#fff}
+details.check{border-style:dashed}
+details.solution > summary,details.check > summary{
+  cursor:pointer;list-style:none;padding:.95rem 1.1rem;min-height:44px;font-weight:700;font-size:.95rem;
+  display:flex;gap:.7rem;align-items:center;
+}
+details.solution > summary::-webkit-details-marker,details.check > summary::-webkit-details-marker{display:none}
+details.solution > summary::before,details.check > summary::before{content:"+";font-family:var(--font-mono);font-size:1.2rem;width:1.1rem;flex:none}
+details[open].solution > summary::before,details[open].check > summary::before{content:"\2212"}
+details.solution[open] > summary,details.check[open] > summary{background:#f4f4f4;border-bottom:1px solid var(--line)}
+details.solution > :not(summary),details.check > :not(summary){margin-left:1.1rem;margin-right:1.1rem}
+details.solution > h4.step:first-of-type{margin-top:1.3rem}
+details.solution > :last-child,details.check > :last-child{margin-bottom:1.1rem}
+details:not([class]){margin:1.2rem 0;border:1px solid var(--line)}
+details:not([class]) > summary{cursor:pointer;padding:.8rem 1rem;font-weight:700;font-size:.9rem}
+details:not([class]) > :not(summary){margin-left:1rem;margin-right:1rem}
+
+/* figures */
+figure.fig{margin:1.6rem 0;padding:1rem;border:1px solid var(--line);background:#fff}
+.fig-row{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
+.fig svg{width:min(250px,100%);height:auto;flex:1 1 220px;max-width:280px}
+.fig svg text{font:11.5px var(--font-sans);fill:var(--muted)}
+.fig svg text.blue{fill:var(--accent);font-weight:700}
+.fig svg text.bold{fill:var(--ink);font-weight:700}
+figure.fig figcaption{margin-top:.7rem;font-size:.85rem;color:var(--muted);text-align:center}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;justify-content:center;gap:.4rem}
+.flow span{border:1px solid var(--ink);padding:.55rem .75rem;font-size:.88rem;background:#fafafa;display:flex;align-items:center;text-align:center}
+.flow i{font-style:normal;display:flex;align-items:center;color:var(--muted)}
+@media (max-width:600px){
+  .flow{flex-direction:column;align-items:stretch}.flow i{justify-content:center;transform:rotate(90deg);height:1.2rem}
+  .question{margin-top:3.2rem}
+  #content .question > h2.q-head{font-size:.78rem;padding:.7rem .85rem}
+  details.solution > :not(summary),details.check > :not(summary){margin-left:.8rem;margin-right:.8rem}
+}
+@media print{
+  .path,.sec-done{display:none !important}
+  .question{page-break-before:always}
+  #content .question > h2.q-head,#content blockquote.bq-answer > p:first-child,.path-bar span{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+
 /* print */
 @page{margin:14mm 12mm}
 @media print{
@@ -305,8 +395,8 @@ footer{border-top:2px solid var(--ink);margin-top:1rem;background:var(--bg)}
   <div class="header-inner">
     <p class="crumbs"><a href="/">All subjects</a> · <a href="/maths">Mathematics modules</a></p>
     <p class="eyebrow">University of Mumbai · Mathematics for Computer Engineering · 2023111 · Supplied question bank</p>
-    <h1>Endsem Questionbank <span class="h1-sub">Module I — Linear Algebra (Theory of Matrices)</span></h1>
-    <p class="subtitle">Every question from the supplied 2026 MUSA question bank for Module I, taught from first principles and worked out in full: characteristic equations checked, independently verified eigenvalues and eigenvectors, and a separate answer key. Being built one verified part at a time.</p>
+    <h1>Maths Endsem Question Bank <span class="h1-sub">Module I — Linear Algebra (Theory of Matrices)</span></h1>
+    <p class="subtitle">Module I, Part 1 taught from zero in seven short sections, then every eigenvalue question from the supplied 2026 MUSA bank worked out step by step, one question at a time. Study one section, tick it off, and carry on whenever you like.</p>
     <div class="meta">
       <span class="mu-badge">Mumbai University</span>
       <span class="meta-item">2026 MUSA bank + 2025 practice paper</span>
@@ -314,7 +404,11 @@ footer{border-top:2px solid var(--ink);margin-top:1rem;background:var(--bg)}
       <span class="meta-item">Part 1 of Module I published</span>
       <span class="meta-item">SymPy-verified</span>
     </div>
-    <p class="header-note">Version 0.1 · 16 November 2026 · Offline copy: <code>Module_1_Endsem_Questionbank.md</code> · <a href="#how-to-use-this-endsem-questionbank">Status and sources</a></p>
+    <p class="header-note">Version 0.2 · 17 November 2026 · Offline copy: <code>Module_1_Endsem_Questionbank.md</code> · <a href="#about-the-sources">Status and sources</a></p>
+    <div class="path" id="path" aria-live="polite">
+      <div class="path-top"><strong id="path-count">0 of 7 sections done</strong><button type="button" id="path-reset" class="linkbtn">Reset ticks</button></div>
+      <div class="path-bar" aria-hidden="true"><span id="path-fill"></span></div>
+    </div>
     <p class="header-note math-fallback" id="math-fallback" hidden><strong>Formulas not rendered.</strong> The MathJax library could not be loaded, so mathematics is shown as LaTeX source. Open <code>Module_1_Endsem_Questionbank.md</code> or reconnect to the internet to see it typeset.</p>
   </div>
   <nav class="nav" id="section-nav" aria-label="Guide sections"></nav>
@@ -338,8 +432,8 @@ footer{border-top:2px solid var(--ink);margin-top:1rem;background:var(--bg)}
 
 <footer>
   <div class="footer-inner">
-    <p><strong>Mathematics for Computer Engineering (2023111)</strong> — Endsem Questionbank, version 0.1, 16 November 2026. Questions are quoted from the supplied MUSA 2026 question bank and the MUSA Winter 2025 practice paper, which are local source files and are not part of this repository.</p>
-    <p>Every matrix was compared with the scanned page, and every eigenvalue, eigenvector and characteristic equation was recomputed exactly with SymPy 1.14. Answers that disagree with the supplied solutions booklet are recorded, not silently corrected. See <a href="#part-1-answer-key">the answer key</a> and <code>VERIFICATION_REPORT.md</code>.</p>
+    <p><strong>Mathematics for Computer Engineering (2023111)</strong> — Maths Endsem Question Bank, version 0.2, 17 November 2026. Questions are quoted from the supplied MUSA 2026 question bank and the MUSA Winter 2025 practice paper, which are local source files and are not part of this repository.</p>
+    <p>Every matrix was compared with the scanned page, and every eigenvalue, eigenvector and characteristic equation was recomputed exactly with SymPy 1.14. Answers that disagree with the supplied solutions booklet are recorded, not silently corrected. See <a href="#about-the-sources">the sources section</a> and <code>VERIFICATION_REPORT.md</code>.</p>
   </div>
 </footer>
 
@@ -513,6 +607,112 @@ window.MathJax = {
       h.id = id;
     });
 
+
+    /* ---------------------------------------------------------------
+       4b. Study structure: sections, black question banners, roles
+       --------------------------------------------------------------- */
+
+    var secEls = [];
+    (function () {
+      var cur = null;
+      Array.prototype.slice.call(content.children).forEach(function (el) {
+        if (el.tagName === 'H1') {
+          cur = document.createElement('section');
+          cur.className = 'sec';
+          content.insertBefore(cur, el);
+          secEls.push(cur);
+        }
+        if (cur) cur.appendChild(el);
+      });
+    })();
+
+    secEls.forEach(function (sec) {
+      var kids = Array.prototype.slice.call(sec.children);
+      var art = null;
+      kids.forEach(function (el) {
+        var isQ = el.tagName === 'H2' && /^Question \d+/.test(el.textContent.trim());
+        if (isQ) {
+          if (art) art.appendChild(endMark(art));
+          art = document.createElement('article');
+          art.className = 'question';
+          sec.insertBefore(art, el);
+          el.classList.add('q-head');
+        } else if (el.tagName === 'H1' || el.tagName === 'H2') {
+          if (art) art.appendChild(endMark(art));
+          art = null;
+        }
+        if (art) art.appendChild(el);
+      });
+      if (art) art.appendChild(endMark(art));
+    });
+
+    function endMark(art) {
+      var n = (art.querySelector('h2.q-head').textContent.match(/^Question (\d+)/) || [])[1];
+      var d = document.createElement('div');
+      d.className = 'q-end';
+      d.textContent = 'End of question ' + n;
+      return d;
+    }
+
+    Array.prototype.forEach.call(content.querySelectorAll('h4'), function (h) {
+      if (/^Step \d/.test(h.textContent.trim())) h.classList.add('step');
+    });
+
+    var ROLES = [
+      [/^Answer/, 'bq-answer'], [/^(Find|Question)/, 'bq-q'], [/^What to expect/, 'bq-expect'],
+      [/^In plain words/, 'bq-plain'],
+      [/^(Remember|Careful|Bonus|What this example|The rule|Numbering note|Source note|Definition|Characteristic equation)/, 'bq-note']
+    ];
+    Array.prototype.forEach.call(content.querySelectorAll('blockquote'), function (bq) {
+      var s = bq.querySelector('p > strong:first-child, strong');
+      if (!s) return;
+      var txt = s.textContent.trim();
+      for (var i = 0; i < ROLES.length; i += 1) {
+        if (ROLES[i][0].test(txt)) { bq.classList.add(ROLES[i][1]); break; }
+      }
+    });
+
+    /* "Goal of this section" line */
+    secEls.forEach(function (sec) {
+      var p = sec.querySelector(':scope > p');
+      if (p && /^Goal of this section/.test(p.textContent)) p.classList.add('sec-goal');
+    });
+
+    /* section completion bar */
+    var sections = [];
+    secEls.forEach(function (sec) {
+      var h = sec.querySelector(':scope > h1');
+      if (h && /^Section \d/.test(h.textContent.trim())) sections.push({ el: sec, h: h });
+    });
+    sections.forEach(function (s, i) {
+      var bar = document.createElement('div');
+      bar.className = 'sec-done';
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'done-btn';
+      btn.setAttribute('data-n', String(i + 1));
+      bar.appendChild(btn);
+      var nextH = i + 1 < sections.length ? sections[i + 1].h : null;
+      var next = document.createElement('a');
+      next.className = 'next';
+      if (nextH) {
+        next.href = '#' + (nextH.id || '');
+        next.setAttribute('data-next', String(i + 1));
+        next.textContent = 'Next: ' + nextH.textContent.trim() + ' →';
+      } else {
+        next.href = '#top';
+        next.textContent = 'Back to the top ↑';
+      }
+      bar.appendChild(next);
+      s.el.appendChild(bar);
+      s.btn = btn; s.next = next; s.nextH = nextH;
+    });
+
+    /* open every reveal box when printing */
+    window.addEventListener('beforeprint', function () {
+      Array.prototype.forEach.call(content.querySelectorAll('details'), function (d) { d.open = true; });
+    });
+
     /* ---------------------------------------------------------------
        5. Build the sidebar contents and the pill navigation
        --------------------------------------------------------------- */
@@ -613,6 +813,52 @@ window.MathJax = {
       ticking = true;
       window.requestAnimationFrame(update);
     }
+
+
+    /* ---------------------------------------------------------------
+       6b. Section progress (saved in this browser only)
+       --------------------------------------------------------------- */
+
+    var KEY = 'endsem-ev-sections-done-v2';
+    var done = [];
+    try {
+      done = JSON.parse(localStorage.getItem(KEY) || '[]');
+      if (!Array.isArray(done)) done = [];
+    } catch (e) { done = []; }
+
+    function saveDone() { try { localStorage.setItem(KEY, JSON.stringify(done)); } catch (e) {} }
+
+    function paintProgress() {
+      var total = sections.length;
+      var count = 0;
+      sections.forEach(function (s, i) {
+        var on = done.indexOf(i + 1) !== -1;
+        if (on) count += 1;
+        s.btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        s.btn.textContent = on ? '✓ Section done' : 'Mark section done';
+        (byId[s.h.id] || []).forEach(function (a) { a.classList.toggle('done', on); });
+      });
+      var c = document.getElementById('path-count');
+      var f = document.getElementById('path-fill');
+      if (c) c.textContent = count === total
+        ? 'All ' + total + ' sections done. Well done!'
+        : count + ' of ' + total + ' sections done' + (count ? ' · keep going' : '');
+      if (f) f.style.width = (total ? (count / total) * 100 : 0) + '%';
+    }
+
+    sections.forEach(function (s, i) {
+      s.btn.addEventListener('click', function () {
+        var n = i + 1;
+        var at = done.indexOf(n);
+        if (at === -1) done.push(n); else done.splice(at, 1);
+        saveDone();
+        paintProgress();
+      });
+    });
+
+    var resetBtn = document.getElementById('path-reset');
+    if (resetBtn) resetBtn.addEventListener('click', function () { done = []; saveDone(); paintProgress(); });
+    paintProgress();
 
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
