@@ -1,4 +1,4 @@
-# How to use this Endsem Questionbank
+# How to use this Maths Endsem Question Bank
 
 **Mathematics for Computer Engineering (2023111)** · University of Mumbai · B.E. Computer Science and Engineering (Artificial Intelligence and Machine Learning) · Semester III · NEP 2020
 
