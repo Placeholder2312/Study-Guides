@@ -5,7 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mathematics Study Guides</title>
 <link rel="stylesheet" href="/assets/site.css">
-<link rel="stylesheet" href="/assets/a11y.css">
+<link rel="stylesheet" href="/assets/a11y.css">\n<style>
+/* Featured supplementary resource: prominent through scale, not a new theme. */
+.endsem-card { grid-column: 1 / -1; flex-direction: row; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 112px; padding: 1.35rem 1.5rem; }
+.endsem-card .name { font-size: 1.55rem; }
+.endsem-card .endsem-action { flex: 0 0 auto; font-size: .95rem; font-weight: 700; color: var(--accent); white-space: nowrap; }
+@media (max-width: 639px) {
+  .endsem-card { flex-direction: column; align-items: flex-start; gap: .45rem; padding: 1.1rem 1.15rem; }
+  .endsem-card .name { font-size: 1.35rem; }
+  .endsem-card .endsem-action { white-space: normal; }
+}
+</style>
 <script src="/assets/theme.js"></script>
 </head>
 <body>
@@ -27,7 +37,7 @@
     <a class="card" href="/maths/modules/module-4"><span class="num">Module 4</span><span class="name">Fourier Series</span><span class="go">Open guide →</span></a>
     <div class="card soon"><span class="num">Module 5</span><span class="name">Statistical Techniques</span><span class="go">Coming soon</span></div>
     <div class="card soon"><span class="num">Module 6</span><span class="name">Probability</span><span class="go">Coming soon</span></div>
-    <a class="card" href="/maths/endsem-questionbank"><span class="num">Question bank · supplementary</span><span class="name">Endsem Questionbank</span><span class="go">Module I, Part 1 published →</span></a>
+    <a class="card endsem-card" href="/maths/endsem-questionbank"><span><span class="num">Question bank · supplementary</span><span class="name">Endsem Questionbank</span></span><span class="endsem-action">Module I, Part 1 published →</span></a>
   </main>
   <footer>More modules will appear here as they are added. The Endsem Questionbank is supplementary practice built from the supplied question bank; it is not one of the six official modules.</footer>
 </div>
