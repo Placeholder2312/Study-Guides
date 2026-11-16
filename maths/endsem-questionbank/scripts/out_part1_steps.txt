@@ -1,0 +1,38 @@
+--- M1-EV-Q1-i ---
+OK  lam=1: nullspace dim 1
+OK  lam=2: nullspace dim 1
+OK  lam=3: nullspace dim 1
+--- M1-EV-Q1-ii ---
+OK  lam=5: nullspace dim 1
+OK  lam=1: nullspace dim 2
+--- M1-EV-Q1-iii ---
+OK  lam=7: nullspace dim 1
+OK  lam=1: nullspace dim 2
+--- M1-EV-Q1-iv ---
+OK  lam=8: nullspace dim 1
+OK  lam=2: nullspace dim 2
+--- M1-EV-Q1-v ---
+OK  lam=15: nullspace dim 1
+OK  lam=3: nullspace dim 1
+OK  lam=0: nullspace dim 1
+--- M1-EV-Q1-vi ---
+OK  lam=1: nullspace dim 1
+OK  lam=2: nullspace dim 1
+OK  lam=4: nullspace dim 1
+--- M1-EV-Q1-vii ---
+OK  lam=5: nullspace dim 1
+OK  lam=-3: nullspace dim 2
+--- PP25-Q4-b ---
+OK  lam=2: nullspace dim 1
+OK  lam=3: nullspace dim 1
+OK  lam=6: nullspace dim 1
+--- teaching example B ---
+OK  lam=2 (unreduced): nullspace dim 1
+OK  lam=-1: nullspace dim 2
+--- claim: B is not diagonalisable ---
+B char poly: (lam - 5)*(lam - 3)**2
+B eigenvalues: {3: 2, 5: 1}
+rank(B-3I): 2 -> geometric multiplicity 1
+B diagonalisable: False
+
+ALL INTERMEDIATE-STEP CHECKS PASSED: True
