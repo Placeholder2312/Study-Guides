@@ -7,14 +7,35 @@
 <link rel="stylesheet" href="/assets/site.css">
 <link rel="stylesheet" href="/assets/a11y.css">
 <style>
-/* Featured supplementary resource: prominent through scale, not a new theme. */
-.endsem-card { grid-column: 1 / -1; flex-direction: row; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 112px; padding: 1.35rem 1.5rem; }
-.endsem-card .name { font-size: 1.55rem; }
-.endsem-card .endsem-action { flex: 0 0 auto; font-size: .95rem; font-weight: 700; color: var(--accent); white-space: nowrap; }
+/* Featured supplementary resource: an inverted ink block on the same black-and-white theme.
+   It uses --ink / --bg only, so it flips correctly in dark mode. */
+a.card.endsem-card { position:relative; overflow:hidden; grid-column:1 / -1; flex-direction:row; align-items:stretch; justify-content:space-between; gap:1.75rem;
+  margin-top:.75rem; padding:1.6rem 1.75rem; min-height:148px; background:var(--ink); color:var(--bg); border:1px solid var(--ink);
+  background-image:linear-gradient(rgba(128,128,128,.16) 1px,transparent 1px),linear-gradient(90deg,rgba(128,128,128,.16) 1px,transparent 1px); background-size:24px 24px; }
+a.card.endsem-card::after { content:"\03BB"; position:absolute; right:1rem; bottom:-2.6rem; font-family:Georgia,Cambria,serif; font-size:11rem; line-height:1; opacity:.09; pointer-events:none; }
+a.card.endsem-card:hover, a.card.endsem-card:focus-visible { background-color:var(--ink); outline:3px solid var(--accent); outline-offset:3px; }
+.endsem-card > span { position:relative; z-index:1; }
+.endsem-main { display:flex; flex-direction:column; gap:.35rem; max-width:34rem; }
+.endsem-card .num { color:inherit; opacity:.75; }
+.endsem-card .name { font-size:1.75rem; line-height:1.2; }
+.endsem-desc { font-size:.95rem; font-weight:400; line-height:1.5; opacity:.85; }
+.endsem-facts { display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.5rem; }
+.endsem-facts span { font-size:.72rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; border:1px solid currentColor; padding:.22rem .5rem; opacity:.9; }
+.endsem-side { display:flex; flex-direction:column; align-items:flex-end; justify-content:flex-end; gap:.55rem; flex:0 0 auto; }
+.endsem-parts { display:flex; gap:4px; }
+.endsem-parts i { display:block; width:2.1rem; height:6px; border:1px solid currentColor; opacity:.55; }
+.endsem-parts i.on { background:currentColor; opacity:1; }
+.endsem-partlabel { font-size:.74rem; font-weight:600; letter-spacing:.05em; text-transform:uppercase; opacity:.8; }
+.endsem-action { display:inline-flex; align-items:center; gap:.6rem; min-height:44px; padding:.55rem 1.1rem; background:var(--bg); color:var(--ink); font-size:.95rem; font-weight:700; white-space:nowrap; }
+.endsem-action b { font-weight:700; transition:transform .18s ease; }
+a.card.endsem-card:hover .endsem-action b, a.card.endsem-card:focus-visible .endsem-action b { transform:translateX(5px); }
+@media (prefers-reduced-motion: reduce) { .endsem-action b { transition:none; } a.card.endsem-card:hover .endsem-action b { transform:none; } }
 @media (max-width: 639px) {
-  .endsem-card { flex-direction: column; align-items: flex-start; gap: .45rem; padding: 1.1rem 1.15rem; }
-  .endsem-card .name { font-size: 1.35rem; }
-  .endsem-card .endsem-action { white-space: normal; }
+  a.card.endsem-card { flex-direction:column; gap:1.1rem; padding:1.25rem 1.15rem; min-height:0; }
+  a.card.endsem-card::after { font-size:8rem; bottom:-2rem; }
+  .endsem-card .name { font-size:1.45rem; }
+  .endsem-side { align-items:stretch; }
+  .endsem-action { justify-content:space-between; }
 }
 </style>
 <script src="/assets/theme.js"></script>
@@ -38,7 +59,19 @@
     <a class="card" href="/maths/modules/module-4"><span class="num">Module 4</span><span class="name">Fourier Series</span><span class="go">Open guide →</span></a>
     <div class="card soon"><span class="num">Module 5</span><span class="name">Statistical Techniques</span><span class="go">Coming soon</span></div>
     <div class="card soon"><span class="num">Module 6</span><span class="name">Probability</span><span class="go">Coming soon</span></div>
-    <a class="card endsem-card" href="/maths/endsem-questionbank"><span><span class="num">Question bank · supplementary</span><span class="name">Maths Endsem Question Bank</span></span><span class="endsem-action">Module I, Part 1 published →</span></a>
+    <a class="card endsem-card" href="/maths/endsem-questionbank">
+      <span class="endsem-main">
+        <span class="num">Question bank · supplementary</span>
+        <span class="name">Maths Endsem Question Bank</span>
+        <span class="endsem-desc">Eigenvalues and eigenvectors taught from zero, then every bank question solved step by step.</span>
+        <span class="endsem-facts"><span>7 study sections</span><span>8 solved questions</span><span>Tick-off progress</span></span>
+      </span>
+      <span class="endsem-side">
+        <span class="endsem-parts" role="img" aria-label="Module I, Part 1 of 4 published"><i class="on"></i><i></i><i></i><i></i></span>
+        <span class="endsem-partlabel">Module I · Part 1 of 4 live</span>
+        <span class="endsem-action">Start studying <b aria-hidden="true">→</b></span>
+      </span>
+    </a>
   </main>
   <footer>More modules will appear here as they are added. The Maths Endsem Question Bank is supplementary practice built from the supplied question bank; it is not one of the six official modules.</footer>
 </div>
