@@ -9,7 +9,7 @@ Short checkpoint for the selective Module I–III study material. Exam: 18 Novem
 |---|---|---|---|
 | I — Crisp Set Theory and Logic | `modules/module-1.html` | `Module_1_Exam_Essentials.md` | in progress |
 | II — Mathematical Relations | `modules/module-2.html` | `Module_2_Exam_Essentials.md` | first pass complete |
-| III — Functions | `modules/module-3.html` | `Module_3_Exam_Essentials.md` | in progress |
+| III — Functions | `modules/module-3.html` | `Module_3_Exam_Essentials.md` | first pass complete |
 
 ---
 
@@ -38,6 +38,33 @@ pairs); all 28 pairs of the divisibility poset checked for gcd/lcm membership in
 for disjointness and coverage.
 
 **Published route:** `/dsgt/modules/module-2`
+**Deployment status:** see final entry below.
+
+---
+
+## Module III — Functions (3 hours, CO3)
+
+**Covered:** definition, domain, codomain, range, image, preimage, relation vs function ·
+injective/surjective/bijective tests · composition and order · inverse by algebra and by reversing
+pairs · verification identities · Summer 2026 discount/tax application.
+
+**Skipped (deliberate):** neural networks, insurance, tax brackets, vending machines, advanced
+function theory, extra composition variations.
+
+**Worked examples completed:** ordered-pair function tests (teacher examples a–d); x² on Z (not
+injective, not surjective); x + 1 on Z (bijective); finite bijection; teacher composition 2x+3 and
+3x+2 with numerical check; Summer 2026 discount/tax (Rs. 918, checked two ways); inverse of
+2x + 3 with both identities; inverse of a finite set of pairs; non-invertible x² discussion.
+
+**Practice:** 9 questions, answer key with full working.
+
+**Sources:** Module 3 Functions PPT (teacher, 20 slides); Summer 2026 Q.2(b); IAT1 sample; syllabus.
+
+**Verification:** compositions checked numerically (f∘g = 67, g∘f = 71 at x = 10); discount/tax
+checked two ways; inverse identities verified symbolically; the "order does not change two
+percentage steps" fact stated honestly with a flat-discount counterexample.
+
+**Published route:** `/dsgt/modules/module-3`
 **Deployment status:** see final entry below.
 
 ---
