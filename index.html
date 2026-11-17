@@ -12,6 +12,25 @@
   .card { transition: color .15s ease, background-color .15s ease, border-color .15s ease; }
   a:hover, a:focus-visible { background-color: var(--surface-hi); }
   .card:hover { border-color: var(--accent); }
+  /* Finished exam: crossed off with caution tape, still a normal link. */
+  .card.done { position: relative; overflow: hidden; isolation: isolate; border-left-color: var(--accent); }
+  .card.done .num, .card.done .name, .card.done .go { opacity: .62; }
+  .card.done .name { text-decoration: line-through; text-decoration-thickness: 2px; text-decoration-color: var(--accent); }
+  .card.done::before, .card.done::after {
+    content: ""; position: absolute; left: -8%; width: 116%; top: 50%; height: 14px; margin-top: -7px;
+    background: repeating-linear-gradient(-45deg, var(--ink) 0 9px, var(--accent) 9px 18px);
+    border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink);
+    pointer-events: none; z-index: 1; opacity: .92;
+  }
+  .card.done::before { transform: rotate(-7deg); }
+  .card.done::after { transform: rotate(7deg); }
+  .card.done:hover, .card.done:focus-visible { background-color: var(--surface); }
+  .card.done:hover::before, .card.done:hover::after { opacity: .5; }
+  .tape-tag {
+    position: absolute; top: .55rem; right: .6rem; z-index: 2; padding: .1rem .5rem;
+    font-size: .68rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+    background: var(--accent); color: var(--surface); border: 1.5px solid var(--ink); transform: rotate(3deg);
+  }
 </style>
 <script src="/assets/theme.js"></script>
 </head>
@@ -28,23 +47,23 @@
     <section class="semester" aria-labelledby="semester-1-heading">
       <h2 class="semester-title" id="semester-1-heading">Semester I</h2>
       <div class="grid">
-        <a class="card" href="/applied-physics"><span class="num">Course 10412</span><span class="name">Applied Physics</span><span class="go">View modules →</span></a>
-        <a class="card" href="/engineering-mechanics"><span class="num">Course 10414</span><span class="name">Engineering Mechanics</span><span class="go">View modules →</span></a>
-        <a class="card" href="/beee"><span class="num">Course ESC102</span><span class="name">Basic Electrical and Electronics Engineering</span><span class="go">BEEE · 1 of 6 modules ready →</span></a>
+        <a class="card" href="/applied-physics"><span class="num">Course 10412</span><span class="name">Applied Physics</span><span class="go">0 of 6 modules ready →</span></a>
+        <a class="card" href="/engineering-mechanics"><span class="num">Course 10414</span><span class="name">Engineering Mechanics</span><span class="go">0 of 6 modules ready →</span></a>
+        <a class="card" href="/beee"><span class="num">Course ESC102</span><span class="name">Basic Electrical and Electronics Engineering</span><span class="go">2 of 6 modules ready →</span></a>
       </div>
     </section>
     <section class="semester" aria-labelledby="semester-2-heading">
       <h2 class="semester-title" id="semester-2-heading">Semester II</h2>
       <div class="grid">
-        <a class="card" href="/applied-mathematics-ii"><span class="num">Course 10521</span><span class="name">Applied Mathematics-II</span><span class="go">View modules →</span></a>
-        <a class="card" href="/semiconductor-physics"><span class="num">Course 10552 · Physics elective</span><span class="name">Physics</span><span class="go">View modules →</span></a>
+        <a class="card" href="/applied-mathematics-ii"><span class="num">Course 10521</span><span class="name">Applied Mathematics-II</span><span class="go">0 of 6 modules ready →</span></a>
+        <a class="card" href="/semiconductor-physics"><span class="num">Course 10552 · Physics elective</span><span class="name">Physics</span><span class="go">0 of 6 modules ready →</span></a>
       </div>
     </section>
     <section class="semester" aria-labelledby="semester-3-heading">
       <h2 class="semester-title" id="semester-3-heading">Semester III</h2>
       <div class="grid">
-        <a class="card" href="/dsgt"><span class="num">Course 2023112</span><span class="name">Discrete Structures and Graph Theory</span><span class="go">DSGT · 2 of 6 modules ready →</span></a>
-        <a class="card" href="/maths"><span class="num">Course 2023111</span><span class="name">Mathematics for Computer Engineering</span><span class="go">1 of 6 modules ready →</span></a>
+        <a class="card" href="/dsgt"><span class="num">Course 2023112</span><span class="name">Discrete Structures and Graph Theory</span><span class="go">5 of 6 modules ready →</span></a>
+        <a class="card done" href="/maths"><span class="tape-tag">Exam done</span><span class="num">Course 2023111</span><span class="name">Mathematics for Computer Engineering</span><span class="go">Exam done · 2 of 6 modules still open →</span></a>
         <a class="card" href="/aoa"><span class="num">Course 2023113</span><span class="name">Analysis of Algorithm</span><span class="go">0 of 6 modules ready →</span></a>
         <a class="card" href="/coa"><span class="num">Course 2023114</span><span class="name">Computer Organization and Architecture</span><span class="go">0 of 6 modules ready →</span></a>
       </div>
