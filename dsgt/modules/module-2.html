@@ -852,6 +852,32 @@
     <p>A = {a, b, c, d} and R = {(a,b), (b,a), (b,c), (c,d), (d,a)}. Find the transitive closure using Warshall's algorithm, showing each round. <em>(Answer Q4.)</em></p>
   </div>
 
+  
+  <figure class="dsgt-diagram wide" id="d7-warshall-network">
+    <svg viewBox="0 0 700 535" role="img" aria-labelledby="d7-warshall-title d7-warshall-desc">
+      <title id="d7-warshall-title">Airline network and transitive reachability</title>
+      <desc id="d7-warshall-desc">The direct network has a to b, b to d, d to a and d to c. Nodes a, b and d form a directed cycle. Additional derived reachability pairs are listed, followed by the final closure matrix in which rows a, b and d are all ones and row c is all zeros.</desc>
+      <defs><marker id="d7-direct-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6Z" fill="var(--accent)"/></marker></defs>
+      <text x="170" y="28" text-anchor="middle" font-size="17" font-weight="700" fill="var(--ink)">Direct airline routes</text>
+      <g fill="none" stroke="var(--accent)" stroke-width="2.6" marker-end="url(#d7-direct-arrow)"><path d="M112 142L197 88"/><path d="M220 99V201"/><path d="M197 224L112 170"/><path d="M244 230H310"/></g>
+      <g fill="var(--bg)" stroke="var(--accent)" stroke-width="2.2"><circle cx="95" cy="155" r="24"/><circle cx="220" cy="75" r="24"/><circle cx="220" cy="230" r="24"/><circle cx="335" cy="230" r="24"/></g>
+      <g fill="var(--ink)" font-size="19" font-weight="700" text-anchor="middle" dominant-baseline="middle"><text x="95" y="155">a</text><text x="220" y="75">b</text><text x="220" y="230">d</text><text x="335" y="230">c</text></g>
+      <g font-size="12" fill="var(--muted)" text-anchor="middle"><text x="157" y="102">a → b</text><text x="242" y="151">b → d</text><text x="150" y="218">d → a</text><text x="285" y="218">d → c</text></g>
+      <path d="M376 18V290" stroke="var(--line)" stroke-width="1.2"/>
+      <text x="402" y="28" font-size="17" font-weight="700" fill="var(--ink)">Additional reachability</text>
+      <path d="M405 52H454" stroke="var(--muted)" stroke-width="2.2" stroke-dasharray="6 4"/><path d="M449 47L456 52L449 57" fill="none" stroke="var(--muted)" stroke-width="1.5"/>
+      <text x="465" y="56" font-size="12" fill="var(--muted)">derived through paths</text>
+      <g font-size="14" fill="var(--ink)"><text x="405" y="93" font-weight="700">From a:</text><text x="475" y="93">(a,a), (a,d), (a,c)</text><text x="405" y="136" font-weight="700">From b:</text><text x="475" y="136">(b,a), (b,b), (b,c)</text><text x="405" y="179" font-weight="700">From d:</text><text x="475" y="179">(d,b), (d,d)</text></g>
+      <text x="405" y="226" font-size="12" fill="var(--muted)">Cycle a → b → d → a</text><text x="405" y="246" font-size="12" fill="var(--muted)">makes a, b and d mutually reachable.</text><text x="405" y="270" font-size="12" fill="var(--muted)">c has no outgoing route.</text>
+      <path d="M22 300H678" stroke="var(--line)" stroke-width="1.2"/>
+      <text x="350" y="330" text-anchor="middle" font-size="17" font-weight="700" fill="var(--ink)">Final transitive-closure matrix</text>
+      <g font-size="14" font-weight="700" fill="var(--ink)" text-anchor="middle"><text x="326" y="359">a</text><text x="370" y="359">b</text><text x="414" y="359">c</text><text x="458" y="359">d</text><text x="282" y="391">a</text><text x="282" y="423">b</text><text x="282" y="455">c</text><text x="282" y="487">d</text></g>
+      <g stroke="var(--line)" fill="none"><rect x="304" y="370" width="176" height="128"/><path d="M348 370V498M392 370V498M436 370V498M304 402H480M304 434H480M304 466H480"/></g>
+      <g fill="var(--accent-soft)" stroke="var(--accent)" stroke-width=".8"><rect x="304" y="370" width="44" height="32"/><rect x="348" y="370" width="44" height="32"/><rect x="392" y="370" width="44" height="32"/><rect x="436" y="370" width="44" height="32"/><rect x="304" y="402" width="44" height="32"/><rect x="348" y="402" width="44" height="32"/><rect x="392" y="402" width="44" height="32"/><rect x="436" y="402" width="44" height="32"/><rect x="304" y="466" width="44" height="32"/><rect x="348" y="466" width="44" height="32"/><rect x="392" y="466" width="44" height="32"/><rect x="436" y="466" width="44" height="32"/></g>
+      <g font-size="16" fill="var(--ink)" text-anchor="middle" dominant-baseline="middle"><text x="326" y="386">1</text><text x="370" y="386">1</text><text x="414" y="386">1</text><text x="458" y="386">1</text><text x="326" y="418">1</text><text x="370" y="418">1</text><text x="414" y="418">1</text><text x="458" y="418">1</text><text x="326" y="450">0</text><text x="370" y="450">0</text><text x="414" y="450">0</text><text x="458" y="450">0</text><text x="326" y="482">1</text><text x="370" y="482">1</text><text x="414" y="482">1</text><text x="458" y="482">1</text></g>
+    </svg>
+    <figcaption>Solid arrows are direct routes; dashed pairs are additional reachability found by following paths. The cycle among a, b and d gives each of those vertices a diagonal 1 (a non-empty path returns to itself). Since c has no outgoing edge, no vertex is reachable from c and its entire row is 0.</figcaption>
+  </figure>
   <h2 id="s5">5 · Partial orders, posets and lattices</h2>
 
   <div class="theory">
@@ -953,6 +979,22 @@
     <p>(a) Is A = {1, 2, 4, 8, 16} under divisibility a lattice? (b) Is S = {2, 3, 4, 6} under divisibility a lattice? Justify each with a meet and a join. <em>(Answer Q5.)</em></p>
   </div>
 
+  
+  <figure class="dsgt-diagram wide" id="d8-hasse-divisibility">
+    <svg viewBox="0 0 660 490" role="img" aria-labelledby="d8-hasse-title d8-hasse-desc">
+      <title id="d8-hasse-title">Hasse diagram of divisibility on the set</title>
+      <desc id="d8-hasse-desc">The divisibility poset has levels: 1; then 2 and 3; then 6; then 12; then 24 and 36; then 72. The only edges are the nine covering pairs specified for the poset.</desc>
+      <g stroke="var(--line)" stroke-width="2.2" fill="none">
+        <path d="M290 420L220 345M290 420L360 345M220 345L290 270M360 345L290 270M290 270L290 195M290 195L220 120M290 195L360 120M220 120L290 45M360 120L290 45"/>
+      </g>
+      <g fill="var(--bg)" stroke="var(--accent)" stroke-width="2.2"><circle cx="290" cy="420" r="22"/><circle cx="220" cy="345" r="22"/><circle cx="360" cy="345" r="22"/><circle cx="290" cy="270" r="22"/><circle cx="290" cy="195" r="22"/><circle cx="220" cy="120" r="22"/><circle cx="360" cy="120" r="22"/><circle cx="290" cy="45" r="22"/></g>
+      <g fill="var(--ink)" font-size="16" font-weight="700" text-anchor="middle" dominant-baseline="middle"><text x="290" y="420">1</text><text x="220" y="345">2</text><text x="360" y="345">3</text><text x="290" y="270">6</text><text x="290" y="195">12</text><text x="220" y="120">24</text><text x="360" y="120">36</text><text x="290" y="45">72</text></g>
+      <g fill="var(--muted)" font-size="12" text-anchor="end"><text x="90" y="424">Level 0</text><text x="90" y="349">Level 1</text><text x="90" y="274">Level 2</text><text x="90" y="199">Level 3</text><text x="90" y="124">Level 4</text><text x="90" y="49">Level 5</text></g>
+      <rect x="445" y="165" width="195" height="150" rx="7" fill="var(--surface)" stroke="var(--line)"/><text x="542" y="193" text-anchor="middle" font-size="15" font-weight="700" fill="var(--ink)">For 24 and 36</text><text x="542" y="236" text-anchor="middle" font-size="20" font-weight="700" fill="var(--accent)">24 ∧ 36 = 12</text><text x="542" y="277" text-anchor="middle" font-size="20" font-weight="700" fill="var(--accent)">24 ∨ 36 = 72</text>
+      <text x="542" y="298" text-anchor="middle" font-size="11" fill="var(--muted)">meet · join</text>
+    </svg>
+    <figcaption>Only covering pairs are connected; edges have no arrowheads. The meet (greatest lower bound) of 24 and 36 is 12, and their join (least upper bound) is 72.</figcaption>
+  </figure>
   <h2 id="practice">Practice questions</h2>
 
   <div class="practice">
