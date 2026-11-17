@@ -460,31 +460,47 @@
     <li><strong>Digraph:</strong> vertices are elements, arrows are pairs. (You should be able to read one; drawing one belongs to the diagram task.)</li>
   </ul>
 
-  <div class="example">
+  <div class="example qa">
     <div class="example-title">Worked example — relation, domain, range, inverse, matrix</div>
-    <p>Let A = {1, 2, 3} and B = {2, 4, 6}, and define R = {(a, b) : b = 2a}.</p>
-    <p><strong>Step 1 — build the pairs.</strong> Take each a in A and compute 2a:</p>
-    <div class="eq">R = {(1, 2), (2, 4), (3, 6)}</div>
-    <p><strong>Step 2 — domain and range.</strong> First coordinates: {1, 2, 3}. Second coordinates: {2, 4, 6}.</p>
-    <div class="eq">D<sub>R</sub>(R) = {1, 2, 3} &nbsp;&nbsp; R<sub>R</sub>(R) = {2, 4, 6}</div>
-    <p><strong>Step 3 — inverse.</strong> Reverse each pair.</p>
-    <div class="eq">R<sup>−1</sup> = {(2, 1), (4, 2), (6, 3)}</div>
-    <p><strong>Step 4 — matrix.</strong> Rows = 1, 2, 3; columns = 2, 4, 6. The pair (1, 2) puts a 1 in row 1, column 2; (2, 4) puts a 1 in row 2, column 4; (3, 6) puts a 1 in row 3, column 6.</p>
-    <table>
-      <tr><th>M<sub>R</sub></th><th>2</th><th>4</th><th>6</th></tr>
-      <tr><td><strong>1</strong></td><td>1</td><td>0</td><td>0</td></tr>
-      <tr><td><strong>2</strong></td><td>0</td><td>1</td><td>0</td></tr>
-      <tr><td><strong>3</strong></td><td>0</td><td>0</td><td>1</td></tr>
-    </table>
-    <p>Read the matrix the same way you read the roster: a 1 in row a, column b means (a, b) ∈ R.</p>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>Let A = {1, 2, 3} and B = {2, 4, 6}, and define R = {(a, b) : b = 2a}.</p>
+      <p><strong>Find:</strong> R, its domain, its range, its inverse, and its matrix.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Step 1 — build the pairs.</strong> Take each a in A and compute 2a:</p>
+      <div class="eq">R = {(1, 2), (2, 4), (3, 6)}</div>
+      <p><strong>Step 2 — domain and range.</strong> First coordinates: {1, 2, 3}. Second coordinates: {2, 4, 6}.</p>
+      <div class="eq">D<sub>R</sub>(R) = {1, 2, 3} &nbsp;&nbsp; R<sub>R</sub>(R) = {2, 4, 6}</div>
+      <p><strong>Step 3 — inverse.</strong> Reverse each pair.</p>
+      <div class="eq">R<sup>−1</sup> = {(2, 1), (4, 2), (6, 3)}</div>
+      <p><strong>Step 4 — matrix.</strong> Rows = 1, 2, 3; columns = 2, 4, 6. The pair (1, 2) puts a 1 in row 1, column 2; (2, 4) puts a 1 in row 2, column 4; (3, 6) puts a 1 in row 3, column 6.</p>
+      <table>
+        <tr><th>M<sub>R</sub></th><th>2</th><th>4</th><th>6</th></tr>
+        <tr><td><strong>1</strong></td><td>1</td><td>0</td><td>0</td></tr>
+        <tr><td><strong>2</strong></td><td>0</td><td>1</td><td>0</td></tr>
+        <tr><td><strong>3</strong></td><td>0</td><td>0</td><td>1</td></tr>
+      </table>
+      <p>Read the matrix the same way you read the roster: a 1 in row a, column b means (a, b) ∈ R.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">R = <strong>{(1, 2), (2, 4), (3, 6)}</strong>, domain <strong>{1, 2, 3}</strong>, range <strong>{2, 4, 6}</strong>, R<sup>−1</sup> = <strong>{(2, 1), (4, 2), (6, 3)}</strong>, and M<sub>R</sub> has 1s only on the main diagonal.</p>
+    </div>
   </div>
 
-  <div class="example">
+  <div class="example qa">
     <div class="example-title">Worked example — a relation on one set (teacher's Example 1.12)</div>
-    <p>Let A = {1, 2, 3, 4} and let R = {(a, b) : a divides b}. Find R.</p>
-    <p>Go through each a and keep the multiples that are in A:</p>
-    <div class="eq">R = {(1,1), (1,2), (1,3), (1,4), (2,2), (2,4), (3,3), (4,4)}</div>
-    <p>Notice that every element divides itself, so all four pairs (a, a) appear. This is the same relation used later in the poset section, and it is the standard example of a partial order.</p>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>Let A = {1, 2, 3, 4} and let R = {(a, b) : a divides b}.</p>
+      <p><strong>Find:</strong> R.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p>Go through each a and keep the multiples that are in A:</p>
+      <div class="eq">R = {(1,1), (1,2), (1,3), (1,4), (2,2), (2,4), (3,3), (4,4)}</div>
+      <p>Every element divides itself, so all four pairs (a, a) appear.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">R = <strong>{(1,1), (1,2), (1,3), (1,4), (2,2), (2,4), (3,3), (4,4)}</strong>. This is the same relation used later in the poset section, and it is the standard example of a partial order.</p>
+    </div>
   </div>
 
   <div class="common-mistakes">
@@ -542,26 +558,40 @@
     <li><strong>Conclude</strong> with exactly the properties that hold. Do not claim a property you did not test.</li>
   </ol>
 
-  <div class="example">
+  <div class="example qa">
     <div class="example-title">Worked example A — an equivalence relation</div>
-    <p>Let A = {1, 2, 3, 4} and R = {(1,1), (1,2), (2,1), (2,2), (3,3), (4,4)}.</p>
-    <p><strong>Reflexive.</strong> (1,1), (2,2), (3,3), (4,4) are all present. ✓</p>
-    <p><strong>Symmetric.</strong> The only non-diagonal pairs are (1,2) and (2,1), and each is the reverse of the other. ✓</p>
-    <p><strong>Antisymmetric.</strong> (1,2) and (2,1) are both present, and 1 ≠ 2. So the condition fails. ✗</p>
-    <p><strong>Transitive.</strong> Check the only possible chains: (1,2) followed by (2,1) needs (1,1) — present. (2,1) followed by (1,2) needs (2,2) — present. Chains through a diagonal pair only repeat the same pair. ✓</p>
-    <p><strong>Conclusion.</strong> R is reflexive, symmetric and transitive, so it is an equivalence relation. It is not antisymmetric.</p>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>Let A = {1, 2, 3, 4} and R = {(1,1), (1,2), (2,1), (2,2), (3,3), (4,4)}.</p>
+      <p><strong>Find:</strong> Test reflexivity, symmetry, antisymmetry and transitivity, and classify the relation.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Reflexive.</strong> (1,1), (2,2), (3,3), (4,4) are all present. ✓</p>
+      <p><strong>Symmetric.</strong> The only non-diagonal pairs are (1,2) and (2,1), and each is the reverse of the other. ✓</p>
+      <p><strong>Antisymmetric.</strong> (1,2) and (2,1) are both present, and 1 ≠ 2. So the condition fails. ✗</p>
+      <p><strong>Transitive.</strong> Check the only possible chains: (1,2) followed by (2,1) needs (1,1) — present. (2,1) followed by (1,2) needs (2,2) — present. Chains through a diagonal pair only repeat the same pair. ✓</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">R is reflexive, symmetric and transitive, so it is an <strong>equivalence relation</strong>. It is <strong>not antisymmetric</strong>.</p>
+    </div>
     <p><strong>Answer-sheet form.</strong> Write the definition, then "LHS check → present/absent", then a one-line conclusion for each property. Four short blocks, not an essay.</p>
   </div>
 
-  <div class="example">
+  <div class="example qa">
     <div class="example-title">Worked example B — a partial order</div>
-    <p>Let A = {1, 2, 3, 6} and let x R y mean x divides y.</p>
-    <div class="eq">R = {(1,1), (1,2), (1,3), (1,6), (2,2), (2,6), (3,3), (3,6), (6,6)}</div>
-    <p><strong>Reflexive.</strong> 1|1, 2|2, 3|3, 6|6, so all four diagonal pairs occur. ✓</p>
-    <p><strong>Symmetric.</strong> (1,2) ∈ R but (2,1) ∉ R. ✗</p>
-    <p><strong>Antisymmetric.</strong> If x|y and y|x for positive integers then x = y. There is no pair of distinct elements with both directions. ✓</p>
-    <p><strong>Transitive.</strong> If x|y and y|z then x|z. For example (1,2) and (2,6) give (1,6), which is present. ✓</p>
-    <p><strong>Conclusion.</strong> R is reflexive, antisymmetric and transitive — a partial order, not an equivalence relation.</p>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>Let A = {1, 2, 3, 6} and let x R y mean x divides y.</p>
+      <p><strong>Find:</strong> Test all four properties and classify the relation.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <div class="eq">R = {(1,1), (1,2), (1,3), (1,6), (2,2), (2,6), (3,3), (3,6), (6,6)}</div>
+      <p><strong>Reflexive.</strong> 1|1, 2|2, 3|3, 6|6, so all four diagonal pairs occur. ✓</p>
+      <p><strong>Symmetric.</strong> (1,2) ∈ R but (2,1) ∉ R. ✗</p>
+      <p><strong>Antisymmetric.</strong> If x|y and y|x for positive integers then x = y. There is no pair of distinct elements with both directions. ✓</p>
+      <p><strong>Transitive.</strong> If x|y and y|z then x|z. For example (1,2) and (2,6) give (1,6), which is present. ✓</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">R is reflexive, antisymmetric and transitive — a <strong>partial order</strong>, not an equivalence relation.</p>
+    </div>
   </div>
 
   <div class="common-mistakes">
@@ -596,17 +626,22 @@
     <p class="exam-source">A digital geometry learning platform groups polygons based on the number of sides. Let A be the set of all polygons and define R = {(P<sub>1</sub>, P<sub>2</sub>) : P<sub>1</sub> and P<sub>2</sub> have the same number of sides}. Analyse whether R is an equivalence relation, verify the three properties, and construct equivalence classes for triangles, quadrilaterals and pentagons.</p>
   </div>
 
-  <div class="example">
+  <div class="example qa">
     <div class="example-title">Full solution — polygon classification</div>
-    <p><strong>Step 1 — Reflexive.</strong> Take any polygon P ∈ A. P has the same number of sides as itself. So (P, P) ∈ R for every P. ✓</p>
-    <p><strong>Step 2 — Symmetric.</strong> Suppose (P<sub>1</sub>, P<sub>2</sub>) ∈ R. Then P<sub>1</sub> and P<sub>2</sub> have the same number of sides. The statement "P<sub>2</sub> and P<sub>1</sub> have the same number of sides" says exactly the same thing, so (P<sub>2</sub>, P<sub>1</sub>) ∈ R. ✓</p>
-    <p><strong>Step 3 — Transitive.</strong> Suppose (P<sub>1</sub>, P<sub>2</sub>) ∈ R and (P<sub>2</sub>, P<sub>3</sub>) ∈ R. Let the common counts be n. Then P<sub>1</sub> has n sides, P<sub>2</sub> has n sides and P<sub>3</sub> has n sides, so P<sub>1</sub> and P<sub>3</sub> have the same number of sides. Hence (P<sub>1</sub>, P<sub>3</sub>) ∈ R. ✓</p>
-    <p><strong>Step 4 — Conclusion.</strong> R is reflexive, symmetric and transitive, therefore R is an equivalence relation on A.</p>
-    <p><strong>Step 5 — Equivalence classes.</strong> Group by the number of sides:</p>
-    <div class="eq">[triangle] = {all polygons with 3 sides}</div>
-    <div class="eq">[quadrilateral] = {all polygons with 4 sides}</div>
-    <div class="eq">[pentagon] = {all polygons with 5 sides}</div>
-    <p>These classes are disjoint (a polygon cannot have two different side counts) and together they cover every polygon in A. A triangle is not in the quadrilateral class, so the classes do not overlap.</p>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Step 1 — Reflexive.</strong> Take any polygon P ∈ A. P has the same number of sides as itself. So (P, P) ∈ R for every P. ✓</p>
+      <p><strong>Step 2 — Symmetric.</strong> Suppose (P<sub>1</sub>, P<sub>2</sub>) ∈ R. Then P<sub>1</sub> and P<sub>2</sub> have the same number of sides. The statement "P<sub>2</sub> and P<sub>1</sub> have the same number of sides" says exactly the same thing, so (P<sub>2</sub>, P<sub>1</sub>) ∈ R. ✓</p>
+      <p><strong>Step 3 — Transitive.</strong> Suppose (P<sub>1</sub>, P<sub>2</sub>) ∈ R and (P<sub>2</sub>, P<sub>3</sub>) ∈ R. Let the common counts be n. Then P<sub>1</sub> has n sides, P<sub>2</sub> has n sides and P<sub>3</sub> has n sides, so P<sub>1</sub> and P<sub>3</sub> have the same number of sides. Hence (P<sub>1</sub>, P<sub>3</sub>) ∈ R. ✓</p>
+      <p><strong>Step 4 — Conclusion.</strong> R is reflexive, symmetric and transitive.</p>
+      <p><strong>Step 5 — Equivalence classes.</strong> Group by the number of sides:</p>
+      <div class="eq">[triangle] = {all polygons with 3 sides}</div>
+      <div class="eq">[quadrilateral] = {all polygons with 4 sides}</div>
+      <div class="eq">[pentagon] = {all polygons with 5 sides}</div>
+      <p>These classes are disjoint (a polygon cannot have two different side counts) and together they cover every polygon in A. A triangle is not in the quadrilateral class, so the classes do not overlap.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">R is an <strong>equivalence relation</strong> on A. Its classes are <strong>[triangle]</strong> (3 sides), <strong>[quadrilateral]</strong> (4 sides) and <strong>[pentagon]</strong> (5 sides); they are disjoint and cover A.</p>
+    </div>
     <p><strong>Step 6 — Interpretation (the last part carries marks).</strong> An equivalence relation turns a messy collection into labelled buckets. The platform can compute one number — the side count — and use it as a class label. Retrieval becomes "find the class, then search inside it", and no polygon is filed twice.</p>
     <p><strong>Answer-sheet form.</strong> Three labelled property blocks, a conclusion sentence, then one line per class, then two or three sentences of interpretation. That is a complete 5-mark answer.</p>
   </div>
@@ -620,15 +655,23 @@
     <li>Check: the classes must be disjoint, and their union must be A.</li>
   </ol>
 
-  <div class="example">
+  <div class="example qa">
     <div class="example-title">Worked example — classes from a finite relation (teacher's example)</div>
-    <p>A = {1, 2, 3, 4, 5, 6} and</p>
-    <p>R = {(1,1), (1,5), (2,2), (2,3), (2,6), (3,2), (3,3), (3,6), (4,4), (5,1), (5,5), (6,2), (6,3), (6,6)}.</p>
-    <p><strong>Start at 1.</strong> The pairs involving 1 are (1,1), (1,5), (5,1), (5,5). So [1] = {1, 5}.</p>
-    <p><strong>Next unplaced element: 2.</strong> Pairs: (2,2), (2,3), (2,6), (3,2), (3,3), (3,6), (6,2), (6,3), (6,6). So [2] = {2, 3, 6}, and therefore [3] and [6] are the same set.</p>
-    <p><strong>Next unplaced element: 4.</strong> Only (4,4), so [4] = {4}.</p>
-    <div class="eq">[1] = [5] = {1, 5} &nbsp;&nbsp; [2] = [3] = [6] = {2, 3, 6} &nbsp;&nbsp; [4] = {4}</div>
-    <p><strong>Check.</strong> {1,5}, {2,3,6}, {4} are disjoint and together contain 1,2,3,4,5,6. ✓</p>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>A = {1, 2, 3, 4, 5, 6} and</p>
+      <p>R = {(1,1), (1,5), (2,2), (2,3), (2,6), (3,2), (3,3), (3,6), (4,4), (5,1), (5,5), (6,2), (6,3), (6,6)}.</p>
+      <p><strong>Find:</strong> All equivalence classes.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Start at 1.</strong> The pairs involving 1 are (1,1), (1,5), (5,1), (5,5). So [1] = {1, 5}.</p>
+      <p><strong>Next unplaced element: 2.</strong> Pairs: (2,2), (2,3), (2,6), (3,2), (3,3), (3,6), (6,2), (6,3), (6,6). So [2] = {2, 3, 6}, and therefore [3] and [6] are the same set.</p>
+      <p><strong>Next unplaced element: 4.</strong> Only (4,4), so [4] = {4}.</p>
+      <div class="eq">[1] = [5] = {1, 5} &nbsp;&nbsp; [2] = [3] = [6] = {2, 3, 6} &nbsp;&nbsp; [4] = {4}</div>
+      <p><strong>Check.</strong> {1,5}, {2,3,6}, {4} are disjoint and together contain 1,2,3,4,5,6. ✓</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">The classes are <strong>{1, 5}</strong>, <strong>{2, 3, 6}</strong> and <strong>{4}</strong> — three classes, disjoint and covering A.</p>
+    </div>
     <p><strong>Note the wording.</strong> [2], [3] and [6] are three names for the <em>same</em> class. Writing "the classes are [2], [3] and [6]" as three separate classes is wrong; there are three classes, not six.</p>
   </div>
 
@@ -693,8 +736,9 @@
     <p class="exam-source">A domestic airline maintains a directed flight network among four cities V = {a, b, c, d}. The direct connections are R = {(a, b), (b, d), (d, c), (d, a)}. Find the transitive closure and represent the final connectivity relation.</p>
   </div>
 
-  <div class="example">
+  <div class="example qa">
     <div class="example-title">Full Warshall solution — airline network</div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
     <p><strong>Step 0 — initial matrix.</strong> Rows and columns in the order a, b, c, d. A 1 means a direct flight.</p>
     <table>
       <tr><th>W<sup>(0)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
@@ -744,9 +788,11 @@
     </table>
     <p class="eq-note">Added: (a, a), (a, c), (b, a), (b, b), (b, c).</p>
 
-    <p><strong>Final answer — read the pairs off the matrix.</strong></p>
-    <div class="eq">R<sup>+</sup> = {(a,a), (a,b), (a,c), (a,d), (b,a), (b,b), (b,c), (b,d), (d,a), (d,b), (d,c), (d,d)}</div>
-    <p>Twelve pairs. Row c is entirely zero, so c is related to nothing — not even to itself.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <div class="eq">R<sup>+</sup> = {(a,a), (a,b), (a,c), (a,d), (b,a), (b,b), (b,c), (b,d), (d,a), (d,b), (d,c), (d,d)}</div>
+      <p class="qa-final-text">Twelve pairs. Row c is entirely zero, so c is related to nothing — not even to itself.</p>
+    </div>
 
     <p><strong>Independent check by tracing paths.</strong> The cycle a → b → d → a lets a, b and d each return to themselves, which is why (a,a), (b,b) and (d,d) appear. From a: a → b → d → c reaches c. From b: b → d → a → … reaches a and c. From d: d → a → b reaches b and d → c reaches c. From c: no outgoing edge, so no pair starts at c. Every one of the twelve entries is accounted for.</p>
 
