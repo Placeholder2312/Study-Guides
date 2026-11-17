@@ -460,16 +460,24 @@
     <li>If both checks pass, it is a function. The range is the set of second coordinates that occur.</li>
   </ol>
 
-  <div class="example">
+  <div class="example qa">
     <div class="example-title">Worked example — is it a function? (teacher's examples)</div>
-    <p><strong>(a)</strong> A = {1, 2, 3}, B = {a, b, c}, f = {(1, a), (2, b), (3, c)}.</p>
-    <p>Every element 1, 2, 3 appears exactly once as a first coordinate, and each has one image. So f is a function. Domain = A = {1, 2, 3}. Range = {a, b, c} = B.</p>
-    <p><strong>(b)</strong> A = {1, 2, 3}, B = {a, b, c}, f = {(1, a), (2, b), (3, a)}.</p>
-    <p>All three inputs appear once. Inputs 1 and 3 share the image a, which is allowed. It is a function. Range = {a, b}, which is smaller than the codomain.</p>
-    <p><strong>(c)</strong> A = {1, 2, 3, 4}, B = {a, b, c}, f = {(1, a), (2, a), (3, b)}.</p>
-    <p>The first coordinates are {1, 2, 3}, but A = {1, 2, 3, 4}. Element 4 has no image. The rule "every element of A" fails, so <strong>f is not a function from A to B</strong>. This is the teacher's Example on slide 4.</p>
-    <p><strong>(d)</strong> A = {1, 2, 3}, f = {(1, a), (1, b), (2, c), (3, a)}.</p>
-    <p>Input 1 has two images, a and b. Each input must have exactly one image, so this is not a function.</p>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>Decide whether each relation is a function from A to B. For those that are, give the domain and range.</p>
+      <p><strong>(a)</strong> A = {1, 2, 3}, B = {a, b, c}, f = {(1, a), (2, b), (3, c)}.</p>
+      <p><strong>(b)</strong> A = {1, 2, 3}, B = {a, b, c}, f = {(1, a), (2, b), (3, a)}.</p>
+      <p><strong>(c)</strong> A = {1, 2, 3, 4}, B = {a, b, c}, f = {(1, a), (2, a), (3, b)}.</p>
+      <p><strong>(d)</strong> A = {1, 2, 3}, f = {(1, a), (1, b), (2, c), (3, a)}.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>(a)</strong> Every element 1, 2, 3 appears exactly once as a first coordinate, and each has one image. Domain = A = {1, 2, 3}. Range = {a, b, c} = B.</p>
+      <p><strong>(b)</strong> All three inputs appear once. Inputs 1 and 3 share the image a, which is allowed. Range = {a, b}, which is smaller than the codomain.</p>
+      <p><strong>(c)</strong> The first coordinates are {1, 2, 3}, but A = {1, 2, 3, 4}. Element 4 has no image, so the rule "every element of A" fails. This is the teacher's Example on slide 4.</p>
+      <p><strong>(d)</strong> Input 1 has two images, a and b. Each input must have exactly one image.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text"><strong>(a)</strong> and <strong>(b)</strong> are functions — ranges {a, b, c} and {a, b}. <strong>(c)</strong> and <strong>(d)</strong> are not functions: 4 has no image, and 1 has two images.</p>
+    </div>
   </div>
 
   <div class="common-mistakes">
@@ -507,26 +515,51 @@
 
   <p><strong>Quick size check for finite sets.</strong> If A and B are finite: injective needs |A| ≤ |B|; surjective needs |A| ≥ |B|; bijective needs |A| = |B|. These are necessary conditions, so a size mismatch is an instant disproof. They do not by themselves prove the property for a particular function.</p>
 
-  <div class="example">
+  <div class="example qa">
     <div class="example-title">Worked example 1 — f(x) = x² from Z to Z (teacher's example)</div>
-    <p><strong>Injective?</strong> Test two inputs. f(1) = 1 and f(−1) = 1. Two different inputs give the same output, so f is <strong>not injective</strong>. One counterexample is enough.</p>
-    <p><strong>Surjective?</strong> Is every integer a square? Take b = 2. There is no integer x with x² = 2, because 1² = 1 and 2² = 4. So 2 has no pre-image and f is <strong>not surjective</strong>.</p>
-    <p><strong>Bijective?</strong> No, because it fails both tests.</p>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>f : Z → Z, f(x) = x².</p>
+      <p><strong>Find:</strong> Is f injective, surjective, bijective? Justify each answer.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Injective?</strong> Test two inputs. f(1) = 1 and f(−1) = 1. Two different inputs give the same output, so f is <strong>not injective</strong>. One counterexample is enough.</p>
+      <p><strong>Surjective?</strong> Is every integer a square? Take b = 2. There is no integer x with x² = 2, because 1² = 1 and 2² = 4. So 2 has no pre-image and f is <strong>not surjective</strong>.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">f is neither injective nor surjective, so it is <strong>not bijective</strong>.</p>
+    </div>
     <p><strong>Answer-sheet form.</strong> "f(1) = f(−1) = 1 with 1 ≠ −1, hence not injective. 2 ∈ Z has no pre-image in Z, hence not surjective. Therefore not bijective."</p>
   </div>
 
-  <div class="example">
+  <div class="example qa">
     <div class="example-title">Worked example 2 — f(x) = x + 1 from Z to Z (teacher's example)</div>
-    <p><strong>Injective.</strong> Suppose f(x) = f(y). Then x + 1 = y + 1, so x = y. Hence f is injective.</p>
-    <p><strong>Surjective.</strong> Let b be any integer in the codomain. Choose x = b − 1. Since b is an integer, b − 1 is an integer and lies in the domain. Then f(b − 1) = (b − 1) + 1 = b. Every codomain element has a pre-image, so f is surjective.</p>
-    <p><strong>Bijective.</strong> Injective and surjective, so f is bijective.</p>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>f : Z → Z, f(x) = x + 1.</p>
+      <p><strong>Find:</strong> Prove whether f is injective, surjective and bijective.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Injective.</strong> Suppose f(x) = f(y). Then x + 1 = y + 1, so x = y. Hence f is injective.</p>
+      <p><strong>Surjective.</strong> Let b be any integer in the codomain. Choose x = b − 1. Since b is an integer, b − 1 is an integer and lies in the domain. Then f(b − 1) = (b − 1) + 1 = b. Every codomain element has a pre-image, so f is surjective.</p>
+      <p><strong>Bijective.</strong> Injective and surjective.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">f is <strong>bijective</strong>.</p>
+    </div>
     <p><strong>Why both proofs are needed.</strong> The injective proof compares two outputs. The surjective proof starts from an arbitrary codomain element and constructs an input. They are different arguments.</p>
   </div>
 
-  <div class="example">
+  <div class="example qa">
     <div class="example-title">Worked example 3 — finite sets and a bijection</div>
-    <p>A = {a, b, c, d}, B = {1, 2, 3, 4}, f = {(a, 4), (b, 2), (c, 1), (d, 3)}.</p>
-    <p>The four images are 4, 2, 1, 3 — all different, so f is injective. The range is {1, 2, 3, 4} = B, so f is surjective. Hence f is bijective. Equivalently: four inputs, four distinct outputs, so the outputs exhaust the four-element codomain.</p>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>A = {a, b, c, d}, B = {1, 2, 3, 4}, f = {(a, 4), (b, 2), (c, 1), (d, 3)}.</p>
+      <p><strong>Find:</strong> Is f bijective?</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p>The four images are 4, 2, 1, 3 — all different, so f is injective. The range is {1, 2, 3, 4} = B, so f is surjective.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">f is <strong>bijective</strong>. Equivalently: four inputs, four distinct outputs, so the outputs exhaust the four-element codomain.</p>
+    </div>
   </div>
 
   <div class="common-mistakes">
@@ -571,14 +604,22 @@
     <li>If asked for both orders, repeat with the roles swapped and compare. Different answers prove non-commutativity.</li>
   </ol>
 
-  <div class="example">
+  <div class="example qa">
     <div class="example-title">Worked example — the teacher's pair (slide 15)</div>
-    <p>f : Z → Z, f(x) = 2x + 3 and g : Z → Z, g(x) = 3x + 2.</p>
-    <p><strong>(f ∘ g)(x) = f(g(x)).</strong> g is inside. Replace x in f by the whole of g(x):</p>
-    <p>f(3x + 2) = 2(3x + 2) + 3 = 6x + 4 + 3 = <strong>6x + 7</strong>.</p>
-    <p><strong>(g ∘ f)(x) = g(f(x)).</strong> f is inside. Replace x in g by f(x):</p>
-    <p>g(2x + 3) = 3(2x + 3) + 2 = 6x + 9 + 2 = <strong>6x + 11</strong>.</p>
-    <p><strong>Compare.</strong> 6x + 7 ≠ 6x + 11, so f ∘ g ≠ g ∘ f. Composition is not commutative.</p>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>f : Z → Z, f(x) = 2x + 3 and g : Z → Z, g(x) = 3x + 2.</p>
+      <p><strong>Find:</strong> (f ∘ g)(x) and (g ∘ f)(x), and compare them.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>(f ∘ g)(x) = f(g(x)).</strong> g is inside. Replace x in f by the whole of g(x):</p>
+      <p>f(3x + 2) = 2(3x + 2) + 3 = 6x + 4 + 3 = <strong>6x + 7</strong>.</p>
+      <p><strong>(g ∘ f)(x) = g(f(x)).</strong> f is inside. Replace x in g by f(x):</p>
+      <p>g(2x + 3) = 3(2x + 3) + 2 = 6x + 9 + 2 = <strong>6x + 11</strong>.</p>
+      <p><strong>Compare.</strong> 6x + 7 ≠ 6x + 11, so f ∘ g ≠ g ∘ f.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">f ∘ g = <strong>6x + 7</strong> and g ∘ f = <strong>6x + 11</strong>; composition is not commutative.</p>
+    </div>
     <p><strong>Numerical check.</strong> At x = 10: g(10) = 32, then f(32) = 67, matching 6(10) + 7. And f(10) = 23, then g(23) = 71, matching 6(10) + 11. ✓</p>
   </div>
 
@@ -587,16 +628,21 @@
     <p class="exam-source">A shirt costs Rs. 1000. The store gives a 15% discount, then applies 8% sales tax to the discounted price. Develop functions for the discount and the tax, construct the composite function for the final cost, and compute the amount payable.</p>
   </div>
 
-  <div class="example">
+  <div class="example qa">
     <div class="example-title">Full solution — discount then tax</div>
-    <p><strong>Step 1 — define the functions.</strong> Let p be the marked price in rupees.</p>
-    <div class="eq">d(p) = p − 0.15p = 0.85p &nbsp;&nbsp;&nbsp; t(p) = p + 0.08p = 1.08p</div>
-    <p>d is the "apply 15% discount" function. t is the "add 8% tax" function. Both take a price and return a price.</p>
-    <p><strong>Step 2 — choose the order.</strong> The discount happens first, so the discounted price is the input to tax. Therefore the final cost is t applied to d(p):</p>
-    <div class="eq">(t ∘ d)(p) = t(d(p)) = t(0.85p) = 1.08(0.85p) = 0.918p</div>
-    <p><strong>Step 3 — compute.</strong></p>
-    <div class="eq">(t ∘ d)(1000) = 0.918 × 1000 = 918</div>
-    <p><strong>Step 4 — check by hand.</strong> Discount: 15% of 1000 = 150, so the discounted price is 850. Tax: 8% of 850 = 68. Final: 850 + 68 = 918. ✓</p>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Step 1 — define the functions.</strong> Let p be the marked price in rupees.</p>
+      <div class="eq">d(p) = p − 0.15p = 0.85p &nbsp;&nbsp;&nbsp; t(p) = p + 0.08p = 1.08p</div>
+      <p>d is the "apply 15% discount" function. t is the "add 8% tax" function. Both take a price and return a price.</p>
+      <p><strong>Step 2 — choose the order.</strong> The discount happens first, so the discounted price is the input to tax. Therefore the final cost is t applied to d(p):</p>
+      <div class="eq">(t ∘ d)(p) = t(d(p)) = t(0.85p) = 1.08(0.85p) = 0.918p</div>
+      <p><strong>Step 3 — compute.</strong></p>
+      <div class="eq">(t ∘ d)(1000) = 0.918 × 1000 = 918</div>
+      <p><strong>Step 4 — check by hand.</strong> Discount: 15% of 1000 = 150, so the discounted price is 850. Tax: 8% of 850 = 68. Final: 850 + 68 = 918. ✓</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">(t ∘ d)(p) = <strong>0.918p</strong>, so a Rs. 1000 shirt costs <strong>Rs. 918</strong>.</p>
+    </div>
     <p><strong>Step 5 — interpretation.</strong> The composite function collapses a two-step billing rule into one formula, 0.918p. The software can compute the final price in one call, the rule is reusable for any marked price, and the order of the steps is recorded in the composition itself.</p>
     <p><strong>Honest note about order.</strong> Here both steps are pure percentage multiplications, and 0.85 × 1.08 = 1.08 × 0.85, so reversing the order happens to give the same number. The order still matters in the definition — tax is legally computed on the discounted price — and it changes the answer as soon as a step involves a fixed amount. For example, with a flat Rs. 100 discount, t ∘ d gives 1.08(p − 100) = 972 at p = 1000, while d ∘ t gives 1.08p − 100 = 980. Do not claim the two orders always differ; check the actual functions.</p>
   </div>
@@ -638,32 +684,57 @@
     <li>Verify with both composition identities.</li>
   </ol>
 
-  <div class="example">
+  <div class="example qa">
     <div class="example-title">Worked example — f(x) = 2x + 3, f : R → R (IAT question)</div>
-    <p><strong>Step 1.</strong> y = 2x + 3.</p>
-    <p><strong>Step 2.</strong> y − 3 = 2x, so x = (y − 3)/2.</p>
-    <p><strong>Step 3.</strong> Swap names:</p>
-    <div class="eq">f<sup>−1</sup>(x) = (x − 3) / 2</div>
-    <p><strong>Step 4 — verify both identities.</strong></p>
-    <p>f(f<sup>−1</sup>(x)) = 2[(x − 3)/2] + 3 = (x − 3) + 3 = x. ✓</p>
-    <p>f<sup>−1</sup>(f(x)) = f<sup>−1</sup>(2x + 3) = [(2x + 3) − 3]/2 = 2x/2 = x. ✓</p>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>f : R → R, f(x) = 2x + 3.</p>
+      <p><strong>Find:</strong> f<sup>−1</sup>(x), and verify both composition identities.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Step 1.</strong> y = 2x + 3.</p>
+      <p><strong>Step 2.</strong> y − 3 = 2x, so x = (y − 3)/2.</p>
+      <p><strong>Step 3.</strong> Swap names:</p>
+      <div class="eq">f<sup>−1</sup>(x) = (x − 3) / 2</div>
+      <p><strong>Step 4 — verify both identities.</strong></p>
+      <p>f(f<sup>−1</sup>(x)) = 2[(x − 3)/2] + 3 = (x − 3) + 3 = x. ✓</p>
+      <p>f<sup>−1</sup>(f(x)) = f<sup>−1</sup>(2x + 3) = [(2x + 3) − 3]/2 = 2x/2 = x. ✓</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">f<sup>−1</sup>(x) = <strong>(x − 3)/2</strong>, and both composition identities hold.</p>
+    </div>
     <p><strong>Numerical check.</strong> f(5) = 13 and f<sup>−1</sup>(13) = (13 − 3)/2 = 5. ✓</p>
     <p><strong>Answer-sheet form.</strong> Write the four steps, then the two composition verifications under headings, then the boxed answer. The verification is usually worth marks.</p>
   </div>
 
-  <div class="example">
+  <div class="example qa">
     <div class="example-title">Worked example — inverse of a finite function (teacher's Example 2.19)</div>
-    <p>A = {a, b, c}, B = {1, 2, 3}, f = {(a, 1), (b, 3), (c, 2)}.</p>
-    <p>The images are 1, 3, 2 — all different, so f is injective. Every element of B appears, so f is surjective. Hence f is bijective and invertible.</p>
-    <p>Reverse each pair:</p>
-    <div class="eq">f<sup>−1</sup> = {(1, a), (3, b), (2, c)}</div>
-    <p>Written in the order of B: {(1, a), (2, c), (3, b)}. The domain of f<sup>−1</sup> is B and its range is A.</p>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>A = {a, b, c}, B = {1, 2, 3}, f = {(a, 1), (b, 3), (c, 2)}.</p>
+      <p><strong>Find:</strong> Is f invertible? If so, write f<sup>−1</sup>.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p>The images are 1, 3, 2 — all different, so f is injective. Every element of B appears, so f is surjective. Hence f is bijective and invertible.</p>
+      <p>Reverse each pair:</p>
+      <div class="eq">f<sup>−1</sup> = {(1, a), (3, b), (2, c)}</div>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">f<sup>−1</sup> = <strong>{(1, a), (2, c), (3, b)}</strong>. The domain of f<sup>−1</sup> is B and its range is A.</p>
+    </div>
   </div>
 
-  <div class="example">
+  <div class="example qa">
     <div class="example-title">Worked example — when there is no inverse</div>
-    <p>f : Z → Z, f(x) = x². From Worked example 1, f is neither injective nor surjective. So there is no function f<sup>−1</sup> : Z → Z.</p>
-    <p>If you restrict the domain to the non-negative integers and the codomain to perfect squares, the same formula becomes bijective and the inverse is the positive square root. The formula did not change; the domain and codomain did. Always state them.</p>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>f : Z → Z, f(x) = x².</p>
+      <p><strong>Find:</strong> Does f<sup>−1</sup> : Z → Z exist?</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p>From Worked example 1, f is neither injective nor surjective. So there is no function f<sup>−1</sup> : Z → Z.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">No inverse exists on Z. If you restrict the domain to the non-negative integers and the codomain to perfect squares, the same formula becomes bijective and the inverse is the positive square root.</p>
+    </div>
+    <p>The formula did not change; the domain and codomain did. Always state them.</p>
   </div>
 
   <div class="common-mistakes">
