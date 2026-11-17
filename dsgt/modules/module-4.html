@@ -925,11 +925,12 @@
 </div>
 </div>
 
-    <div class="exam-q">
-      <div class="exam-q-title">Winter 2025 — Q2(a): Campus Event App — Inclusion-Exclusion (8 marks)</div>
-      <div class="exam-source">Source: NEP DSGT Winter 2025 — Q2(a)</div>
-      <p>A campus event app records students who use three app sections:</p>
-      <table>
+    <div class="exam-q qa">
+<div class="exam-q-title">Winter 2025 — Q2(a): Campus Event App — Inclusion-Exclusion (8 marks)</div>
+<div class="exam-source">Source: NEP DSGT Winter 2025 — Q2(a)</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>A campus event app records students who use three app sections:</p>
+<table>
         <tr><th>Category</th><th>Count</th></tr>
         <tr><td>E (Event Announcements)</td><td>140</td></tr>
         <tr><td>C (Clubs &amp; Communities)</td><td>110</td></tr>
@@ -939,72 +940,87 @@
         <tr><td>C ∩ R</td><td>55</td></tr>
         <tr><td>Total Students</td><td>200</td></tr>
       </table>
-      <ol>
+<ol>
         <li>Using inclusion-exclusion, compute how many students use all three sections.</li>
         <li>Find students who use only one section.</li>
         <li>Explain how this analysis helps app developers target notifications and improve UI.</li>
       </ol>
-      <p><strong>Solution:</strong></p>
-      <p>Let <span class="kbd">|E ∪ C ∪ R| = 200</span> (every student uses at least one section).</p>
-      <p>Using inclusion-exclusion:</p>
-      <div class="eq">|E ∪ C ∪ R| = |E| + |C| + |R| − |E ∩ C| − |E ∩ R| − |C ∩ R| + |E ∩ C ∩ R|</div>
-      <div class="eq">200 = 140 + 110 + 120 − 65 − 70 − 55 + |E ∩ C ∩ R|</div>
-      <div class="eq">200 = 370 − 190 + |E ∩ C ∩ R|</div>
-      <div class="eq">200 = 180 + |E ∩ C ∩ R|<br>→ |E ∩ C ∩ R| = 20</div>
-      <p><strong>20 students</strong> use all three sections.</p>
-      <p><strong>Only one section:</strong></p>
-      <ul>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Let <span class="kbd">|E ∪ C ∪ R| = 200</span> (every student uses at least one section).</p>
+<p>Using inclusion-exclusion:</p>
+<div class="eq">|E ∪ C ∪ R| = |E| + |C| + |R| − |E ∩ C| − |E ∩ R| − |C ∩ R| + |E ∩ C ∩ R|</div>
+<div class="eq">200 = 140 + 110 + 120 − 65 − 70 − 55 + |E ∩ C ∩ R|</div>
+<div class="eq">200 = 370 − 190 + |E ∩ C ∩ R|</div>
+<div class="eq">200 = 180 + |E ∩ C ∩ R|<br>→ |E ∩ C ∩ R| = 20</div>
+<p><strong>Only one section:</strong></p>
+<ul>
         <li>Only E = 140 − 65 − 70 + 20<br>= 25</li>
         <li>Only C = 110 − 65 − 55 + 20<br>= 10</li>
         <li>Only R = 120 − 70 − 55 + 20<br>= 15</li>
         <li>Total only one = 25 + 10 + 15<br>= <strong>50 students</strong></li>
       </ul>
-      <p><strong>Application:</strong> App developers can target notifications to the 25 students who only use Event Announcements, 10 who only use Clubs & Communities, and 15 who only use Reels. UI improvements can prioritize the most-used section per user segment.</p>
-    </div>
+<p><strong>Application:</strong> App developers can target notifications to the 25 students who only use Event Announcements, 10 who only use Clubs & Communities, and 15 who only use Reels. UI improvements can prioritize the most-used section per user segment.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<ol class="qa-final-list"><li><strong>20 students</strong> use all three sections.</li><li><strong>50 students</strong> use exactly one section (25 + 10 + 15).</li><li>Target notifications and UI by segment — see the application note in the solution.</li></ol>
+</div>
+</div>
 
-    <div class="exam-q">
-      <div class="exam-q-title">Winter 2025 — Q5(b): Student Club Followers — Recurrence Relation (8 marks)</div>
-      <div class="exam-source">Source: NEP DSGT Winter 2025 — Q5(b)</div>
-      <p>A student club records followers using recurrence: <span class="kbd">F<sub>n</sub> = 4F<sub>n−1</sub> − 4F<sub>n−2</sub></span> with <span class="kbd">F<sub>0</sub> = 10</span> (core team) and <span class="kbd">F<sub>1</sub> = 30</span> (after first promotion).</p>
-      <ol>
+    <div class="exam-q qa">
+<div class="exam-q-title">Winter 2025 — Q5(b): Student Club Followers — Recurrence Relation (8 marks)</div>
+<div class="exam-source">Source: NEP DSGT Winter 2025 — Q5(b)</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>A student club records followers using recurrence: <span class="kbd">F<sub>n</sub> = 4F<sub>n−1</sub> − 4F<sub>n−2</sub></span> with <span class="kbd">F<sub>0</sub> = 10</span> (core team) and <span class="kbd">F<sub>1</sub> = 30</span> (after first promotion).</p>
+<ol>
         <li>Solve the recurrence relation.</li>
         <li>Describe the growth pattern (linear/exponential).</li>
         <li>Comment whether such growth is realistic for a campus club in long term.</li>
       </ol>
-      <p><strong>Solution:</strong></p>
-      <p>Standard form: <span class="kbd">a<sub>n</sub> − 4a<sub>n−1</sub> + 4a<sub>n−2</sub> = 0</span></p>
-      <p>Characteristic: <span class="kbd">r<sup>2</sup> − 4r + 4 = 0</span><br>→ <span class="kbd">(r − 2)<sup>2</sup> = 0</span><br>→ root <strong>2</strong>, repeated</p>
-      <p>General: <span class="kbd">a<sub>n</sub> = A(2<sup>n</sup>) + Bn(2<sup>n</sup>)</span></p>
-      <ul>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Standard form: <span class="kbd">a<sub>n</sub> − 4a<sub>n−1</sub> + 4a<sub>n−2</sub> = 0</span></p>
+<p>Characteristic: <span class="kbd">r<sup>2</sup> − 4r + 4 = 0</span><br>→ <span class="kbd">(r − 2)<sup>2</sup> = 0</span><br>→ root <strong>2</strong>, repeated</p>
+<p>General: <span class="kbd">a<sub>n</sub> = A(2<sup>n</sup>) + Bn(2<sup>n</sup>)</span></p>
+<ul>
         <li><span class="kbd">n=0:</span> A = 10</li>
         <li><span class="kbd">n=1:</span> 2A + 2B = 30<br>→ 20 + 2B = 30<br>→ B = 5</li>
       </ul>
-      <div class="eq"><strong>F<sub>n</sub> = 10·2<sup>n</sup> + 5n·2<sup>n</sup><br>= (10 + 5n)·2<sup>n</sup></strong></div>
-      <p><strong>Growth pattern:</strong> Exponential growth with a linear factor <span class="kbd">(10 + 5n)</span>. The dominant term is <span class="kbd">5n·2<sup>n</sup></span>, which grows exponentially.</p>
-      <p><strong>Realistic?</strong> No. Exponential growth of followers is not realistic for a campus club in the long term because the total student population is finite. Eventually, the club will saturate the available student population and growth will slow down (logistic growth rather than exponential).</p>
-    </div>
+<p><strong>Growth pattern:</strong> Exponential growth with a linear factor <span class="kbd">(10 + 5n)</span>. The dominant term is <span class="kbd">5n·2<sup>n</sup></span>, which grows exponentially.</p>
+<p><strong>Realistic?</strong> No. Exponential growth of followers is not realistic for a campus club in the long term because the total student population is finite. Eventually, the club will saturate the available student population and growth will slow down (logistic growth rather than exponential).</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<ol class="qa-final-list"><li><span class="kbd">F<sub>n</sub> = (10 + 5n)·2<sup>n</sup></span></li><li>Exponential growth with a linear factor.</li><li>Not realistic long term — the student population is finite.</li></ol>
+</div>
+</div>
 
-    <div class="exam-q">
-      <div class="exam-q-title">Summer 2026 — Q1(c): Socks Drawer — Pigeonhole Principle (5 marks)</div>
-      <div class="exam-source">Source: NEP DSGT Summer 2026 — Q1(c)</div>
-      <p>A quality control department stores 10 pairs of socks of different colors in a drawer for packaging verification.</p>
-      <ol>
+    <div class="exam-q qa">
+<div class="exam-q-title">Summer 2026 — Q1(c): Socks Drawer — Pigeonhole Principle (5 marks)</div>
+<div class="exam-source">Source: NEP DSGT Summer 2026 — Q1(c)</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>A quality control department stores 10 pairs of socks of different colors in a drawer for packaging verification.</p>
+<ol>
         <li>Using the Pigeonhole Principle, find the minimum number of socks that must be selected randomly to guarantee that at least one matching pair of the same color is obtained.</li>
         <li>Justify your answer with suitable reasoning.</li>
       </ol>
-      <p><strong>Solution:</strong></p>
-      <p>Pigeons = socks pulled out &nbsp;·&nbsp; Holes = 10 colors</p>
-      <p>To guarantee at least 2 socks of the same color (<span class="kbd">k = 2</span>):</p>
-      <div class="eq">n = m(k − 1) + 1<br>= 10(2 − 1) + 1<br>= 11</div>
-      <p><strong>11 socks</strong> must be pulled out to guarantee a matching pair.</p>
-      <p><strong>Reasoning:</strong> With 10 socks, you could pull exactly one sock of each color (10 different colors, no match). The 11th sock must match one of the previously pulled socks because there are only 10 colors available.</p>
-    </div>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Pigeons = socks pulled out &nbsp;·&nbsp; Holes = 10 colors</p>
+<p>To guarantee at least 2 socks of the same color (<span class="kbd">k = 2</span>):</p>
+<div class="eq">n = m(k − 1) + 1<br>= 10(2 − 1) + 1<br>= 11</div>
+<p><strong>Reasoning:</strong> With 10 socks, you could pull exactly one sock of each color (10 different colors, no match). The 11th sock must match one of the previously pulled socks because there are only 10 colors available.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text"><strong>11 socks</strong> must be pulled out to guarantee a matching pair.</p>
+</div>
+</div>
 
-    <div class="exam-q">
-      <div class="exam-q-title">Summer 2026 — Q2(a): Pharmaceutical Trial — Inclusion-Exclusion (8 marks)</div>
-      <div class="exam-source">Source: NEP DSGT Summer 2026 — Q2(a)</div>
-      <p>A pharmaceutical company conducts a drug trial on 1000 people:</p>
-      <table>
+    <div class="exam-q qa">
+<div class="exam-q-title">Summer 2026 — Q2(a): Pharmaceutical Trial — Inclusion-Exclusion (8 marks)</div>
+<div class="exam-source">Source: NEP DSGT Summer 2026 — Q2(a)</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>A pharmaceutical company conducts a drug trial on 1000 people:</p>
+<table>
         <tr><th>Symptom</th><th>Count</th></tr>
         <tr><td>A</td><td>122</td></tr>
         <tr><td>B</td><td>88</td></tr>
@@ -1014,25 +1030,25 @@
         <tr><td>B ∩ C</td><td>32</td></tr>
         <tr><td>A ∩ B ∩ C</td><td>10</td></tr>
       </table>
-      <ol>
+<ol>
         <li>How many people develop at least one symptom?</li>
         <li>Determine the number of people who show exactly one symptom.</li>
         <li>Construct a Venn diagram and fill all regions appropriately.</li>
       </ol>
-      <p><strong>Solution:</strong></p>
-      <div class="eq">|A ∪ B ∪ C| = |A| + |B| + |C| − |A ∩ B| − |A ∩ C| − |B ∩ C| + |A ∩ B ∩ C|</div>
-      <div class="eq">= 122 + 88 + 112 − 27 − 29 − 32 + 10</div>
-      <div class="eq">= 322 − 88 + 10<br>= 244</div>
-      <p><strong>244 people</strong> develop at least one symptom.</p>
-      <p><strong>Only one symptom:</strong></p>
-      <ul>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<div class="eq">|A ∪ B ∪ C| = |A| + |B| + |C| − |A ∩ B| − |A ∩ C| − |B ∩ C| + |A ∩ B ∩ C|</div>
+<div class="eq">= 122 + 88 + 112 − 27 − 29 − 32 + 10</div>
+<div class="eq">= 322 − 88 + 10<br>= 244</div>
+<p><strong>Only one symptom:</strong></p>
+<ul>
         <li>Only A = 122 − 27 − 29 + 10<br>= 76</li>
         <li>Only B = 88 − 27 − 32 + 10<br>= 39</li>
         <li>Only C = 112 − 29 − 32 + 10<br>= 61</li>
         <li>Total exactly one = 76 + 39 + 61<br>= <strong>176 patients</strong></li>
       </ul>
-      <p><strong>Venn diagram (all regions):</strong> pair-only regions are:<br>27 − 10 = 17<br>29 − 10 = 19<br>32 − 10 = 22<br>Outside all three: 1000 − 244 = 756.</p>
-      <svg viewBox="0 0 360 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="vennSummer">
+<p><strong>Venn diagram (all regions):</strong> pair-only regions are:<br>27 − 10 = 17<br>29 − 10 = 19<br>32 − 10 = 22<br>Outside all three: 1000 − 244 = 756.</p>
+<svg viewBox="0 0 360 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="vennSummer">
   <title id="vennSummer">Venn diagram for the drug trial with every region filled</title>
   <rect x="5" y="5" width="350" height="330" fill="none" stroke="var(--rule)" stroke-width="1.5"/>
   <circle cx="135" cy="120" r="85" fill="var(--accent)" fill-opacity="0.10" stroke="var(--ink)" stroke-width="2"/>
@@ -1058,7 +1074,11 @@
   <text x="14" y="22" text-anchor="start" font-size="12" font-weight="600" fill="var(--muted)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">U = 1000</text>
   <text x="14" y="326" text-anchor="start" font-size="12" font-weight="700" fill="var(--muted)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">Outside: 756</text>
   </svg>
-    </div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<ol class="qa-final-list"><li><strong>244 people</strong> develop at least one symptom.</li><li><strong>176 people</strong> show exactly one symptom.</li><li>All regions are filled in the Venn diagram in the solution.</li></ol>
+</div>
+</div>
 
     <div class="exam-q">
       <div class="exam-q-title">Summer 2026 — Q5(b): Financial Portfolio — Non-Homogeneous Recurrence (7 marks)</div>
