@@ -464,6 +464,7 @@
 <div class="example-title">Example 1: Birth month</div>
 <div class="qa-question"><div class="qa-label">Question</div>
 <p>Pigeons (<span class="kbd">n</span>) = 100 people &nbsp;·&nbsp; Holes (<span class="kbd">m</span>) = 12 months</p>
+<p><strong>Find:</strong> How many people are guaranteed to share a birth month?</p>
 </div>
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <div class="eq">⌈100 / 12⌉ = 9</div>
@@ -477,6 +478,7 @@
 <div class="example-title">Example 2: Dictionary pages</div>
 <div class="qa-question"><div class="qa-label">Question</div>
 <p>Pigeons (<span class="kbd">n</span>) = 40,325 pages &nbsp;·&nbsp; Holes (<span class="kbd">m</span>) = 25 dictionaries</p>
+<p><strong>Find:</strong> What is the minimum number of pages the fullest dictionary must have?</p>
 </div>
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <div class="eq">40,325 ÷ 25 = 1,613 exactly</div>
@@ -491,6 +493,7 @@
 <div class="example-title">Example 3: Weekday birthdays</div>
 <div class="qa-question"><div class="qa-label">Question</div>
 <p><span class="kbd">n = 30</span>, <span class="kbd">m = 7</span> days</p>
+<p><strong>Find:</strong> How many people are guaranteed to share a weekday birthday?</p>
 </div>
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <div class="eq">⌈30 / 7⌉ = 5</div>
@@ -504,6 +507,7 @@
 <div class="example-title">Example 4: Family money</div>
 <div class="qa-question"><div class="qa-label">Question</div>
 <p><span class="kbd">n = 2886</span> rupees &nbsp;·&nbsp; <span class="kbd">m = 7</span> members</p>
+<p><strong>Find:</strong> What is the least amount that some member must have?</p>
 </div>
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <div class="eq">⌈2886 / 7⌉ = 413</div>
@@ -514,21 +518,35 @@
 <p class="warning">Note: the teacher’s slide concludes Rs. 416 — that is a slide error. The correct guaranteed minimum is Rs. 413.</p>
 </div>
 
-  <div class="example">
-    <div class="example-title">Example 5: Books on shelves</div>
-    <p><span class="kbd">n = 9</span>, <span class="kbd">m = 4</span></p>
-    <div class="eq">⌈9 / 4⌉ = 3</div>
-    <p>One shelf has at least <strong>3 books</strong>.</p>
-    <svg viewBox="0 0 360 165" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="phpT"><title id="phpT">9 books spread over 4 shelves: the fullest shelf has 3</title><text x="180" y="18" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">9 books → 4 shelves</text><rect x="11" y="30" width="74" height="84" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.5"/><circle cx="27" cy="98" r="9" fill="var(--accent)"/><circle cx="48" cy="98" r="9" fill="var(--accent)"/><circle cx="69" cy="98" r="9" fill="var(--accent)"/><text x="48" y="134" text-anchor="middle" font-size="12" font-weight="400" fill="var(--muted)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">Shelf 1</text><text x="48" y="152" text-anchor="middle" font-size="13" font-weight="700" fill="var(--accent)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">3 books</text><rect x="99" y="30" width="74" height="84" fill="none" stroke="var(--ink)" stroke-width="1.5"/><circle cx="126" cy="98" r="9" fill="var(--ink)"/><circle cx="146" cy="98" r="9" fill="var(--ink)"/><text x="136" y="134" text-anchor="middle" font-size="12" font-weight="400" fill="var(--muted)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">Shelf 2</text><text x="136" y="152" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">2 books</text><rect x="187" y="30" width="74" height="84" fill="none" stroke="var(--ink)" stroke-width="1.5"/><circle cx="214" cy="98" r="9" fill="var(--ink)"/><circle cx="234" cy="98" r="9" fill="var(--ink)"/><text x="224" y="134" text-anchor="middle" font-size="12" font-weight="400" fill="var(--muted)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">Shelf 3</text><text x="224" y="152" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">2 books</text><rect x="275" y="30" width="74" height="84" fill="none" stroke="var(--ink)" stroke-width="1.5"/><circle cx="302" cy="98" r="9" fill="var(--ink)"/><circle cx="322" cy="98" r="9" fill="var(--ink)"/><text x="312" y="134" text-anchor="middle" font-size="12" font-weight="400" fill="var(--muted)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">Shelf 4</text><text x="312" y="152" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">2 books</text></svg>
-  </div>
+  <div class="example qa">
+<div class="example-title">Example 5: Books on shelves</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><span class="kbd">n = 9</span>, <span class="kbd">m = 4</span></p>
+<p><strong>Find:</strong> What is the least number of books on the fullest shelf?</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<div class="eq">⌈9 / 4⌉ = 3</div>
+<svg viewBox="0 0 360 165" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="phpT"><title id="phpT">9 books spread over 4 shelves: the fullest shelf has 3</title><text x="180" y="18" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">9 books → 4 shelves</text><rect x="11" y="30" width="74" height="84" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.5"/><circle cx="27" cy="98" r="9" fill="var(--accent)"/><circle cx="48" cy="98" r="9" fill="var(--accent)"/><circle cx="69" cy="98" r="9" fill="var(--accent)"/><text x="48" y="134" text-anchor="middle" font-size="12" font-weight="400" fill="var(--muted)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">Shelf 1</text><text x="48" y="152" text-anchor="middle" font-size="13" font-weight="700" fill="var(--accent)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">3 books</text><rect x="99" y="30" width="74" height="84" fill="none" stroke="var(--ink)" stroke-width="1.5"/><circle cx="126" cy="98" r="9" fill="var(--ink)"/><circle cx="146" cy="98" r="9" fill="var(--ink)"/><text x="136" y="134" text-anchor="middle" font-size="12" font-weight="400" fill="var(--muted)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">Shelf 2</text><text x="136" y="152" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">2 books</text><rect x="187" y="30" width="74" height="84" fill="none" stroke="var(--ink)" stroke-width="1.5"/><circle cx="214" cy="98" r="9" fill="var(--ink)"/><circle cx="234" cy="98" r="9" fill="var(--ink)"/><text x="224" y="134" text-anchor="middle" font-size="12" font-weight="400" fill="var(--muted)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">Shelf 3</text><text x="224" y="152" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">2 books</text><rect x="275" y="30" width="74" height="84" fill="none" stroke="var(--ink)" stroke-width="1.5"/><circle cx="302" cy="98" r="9" fill="var(--ink)"/><circle cx="322" cy="98" r="9" fill="var(--ink)"/><text x="312" y="134" text-anchor="middle" font-size="12" font-weight="400" fill="var(--muted)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">Shelf 4</text><text x="312" y="152" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">2 books</text></svg>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">One shelf has at least <strong>3 books</strong>.</p>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Example 6: Guarantee 9 share a weekday</div>
-    <p><span class="kbd">m = 7</span>, want <span class="kbd">k = 9</span> in one box</p>
-    <div class="eq">n = 7(9 − 1) + 1<br>= 7(8) + 1<br>= 57</div>
-    <p>You need <strong>57 people</strong> to guarantee that at least 9 share a weekday birthday.</p>
-    <p class="warning">Note: the teacher’s slide says “So n = 7” then “57 people.” The slide contains a typo — the answer is 57.</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Example 6: Guarantee 9 share a weekday</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><span class="kbd">m = 7</span>, want <span class="kbd">k = 9</span> in one box</p>
+<p><strong>Find:</strong> How many people are needed to guarantee that at least 9 share a weekday birthday?</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<div class="eq">n = 7(9 − 1) + 1<br>= 7(8) + 1<br>= 57</div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">You need <strong>57 people</strong> to guarantee that at least 9 share a weekday birthday.</p>
+</div>
+<p class="warning">Note: the teacher’s slide says “So n = 7” then “57 people.” The slide contains a typo — the answer is 57.</p>
+</div>
 
   <table>
     <tr><th>Exam pattern</th><th>Method</th></tr>
@@ -584,19 +602,33 @@
 
   <h3>Worked Examples</h3>
 
-  <div class="example">
-    <div class="example-title">Example 1: Students taking subjects</div>
-    <p><span class="warning">Slide wording note:</span> the teacher’s slide mentions “Maths, Physics, and English” in the text but the listed sets and calculation use Physics, English, and Biology. The worked solution below uses the sets shown in the calculation (Physics, English, Biology).</p>
-    <p>49 Physics, 37 English, 21 Biology. 9 study P&E, 5 study E&B, 4 study P&B, 3 study all three. Total students?</p>
-    <div class="eq">49 + 37 + 21 − 9 − 5 − 4 + 3 = <strong>92</strong></div>
-  </div>
+  <div class="example qa">
+<div class="example-title">Example 1: Students taking subjects</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><span class="warning">Slide wording note:</span> the teacher’s slide mentions “Maths, Physics, and English” in the text but the listed sets and calculation use Physics, English, and Biology. The worked solution below uses the sets shown in the calculation (Physics, English, Biology).</p>
+<p>49 Physics, 37 English, 21 Biology. 9 study P&E, 5 study E&B, 4 study P&B, 3 study all three. Total students?</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<div class="eq">49 + 37 + 21 − 9 − 5 − 4 + 3 = 92</div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text"><strong>92 students</strong> in total.</p>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Example 2: Hospital patients</div>
-    <p>29 typhoid, 32 malaria, 14 both. How many have typhoid or malaria or both?</p>
-    <div class="eq">|T ∪ M| = 29 + 32 − 14<br>= <strong>47</strong></div>
-    <svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="twoT"><title id="twoT">Two-set Venn diagram: only typhoid 15, both 14, only malaria 18</title><circle cx="132" cy="105" r="70" fill="var(--accent)" fill-opacity="0.10" stroke="var(--ink)" stroke-width="2"/><circle cx="228" cy="105" r="70" fill="var(--ink)" fill-opacity="0.08" stroke="var(--ink)" stroke-width="2"/><text x="110" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">T = 29</text><text x="250" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">M = 32</text><text x="108" y="106" text-anchor="middle" font-size="17" font-weight="700" fill="var(--ink)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">15</text><text x="108" y="122" text-anchor="middle" font-size="11" font-weight="400" fill="var(--muted)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">only T</text><text x="180" y="106" text-anchor="middle" font-size="17" font-weight="700" fill="var(--ink)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">14</text><text x="180" y="122" text-anchor="middle" font-size="11" font-weight="400" fill="var(--muted)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">both</text><text x="252" y="106" text-anchor="middle" font-size="17" font-weight="700" fill="var(--ink)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">18</text><text x="252" y="122" text-anchor="middle" font-size="11" font-weight="400" fill="var(--muted)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">only M</text><text x="180" y="206" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">T ∪ M = 15 + 14 + 18 = 47</text></svg>
-  </div>
+  <div class="example qa">
+<div class="example-title">Example 2: Hospital patients</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>29 typhoid, 32 malaria, 14 both. How many have typhoid or malaria or both?</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<div class="eq">|T ∪ M| = 29 + 32 − 14<br>= 47</div>
+<svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="twoT"><title id="twoT">Two-set Venn diagram: only typhoid 15, both 14, only malaria 18</title><circle cx="132" cy="105" r="70" fill="var(--accent)" fill-opacity="0.10" stroke="var(--ink)" stroke-width="2"/><circle cx="228" cy="105" r="70" fill="var(--ink)" fill-opacity="0.08" stroke="var(--ink)" stroke-width="2"/><text x="110" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">T = 29</text><text x="250" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">M = 32</text><text x="108" y="106" text-anchor="middle" font-size="17" font-weight="700" fill="var(--ink)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">15</text><text x="108" y="122" text-anchor="middle" font-size="11" font-weight="400" fill="var(--muted)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">only T</text><text x="180" y="106" text-anchor="middle" font-size="17" font-weight="700" fill="var(--ink)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">14</text><text x="180" y="122" text-anchor="middle" font-size="11" font-weight="400" fill="var(--muted)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">both</text><text x="252" y="106" text-anchor="middle" font-size="17" font-weight="700" fill="var(--ink)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">18</text><text x="252" y="122" text-anchor="middle" font-size="11" font-weight="400" fill="var(--muted)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">only M</text><text x="180" y="206" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">T ∪ M = 15 + 14 + 18 = 47</text></svg>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text"><strong>47 patients</strong> have typhoid, malaria or both.</p>
+</div>
+</div>
 
   <div class="example">
     <div class="example-title">Example 3: Survey of 100 students</div>
