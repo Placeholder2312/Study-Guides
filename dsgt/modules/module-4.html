@@ -775,9 +775,9 @@
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <p>Exactly two = (M&P only) + (M&C only) + (P&C only)</p>
 <ul>
-      <li>M&P only = 8 − 3<br>= 5</li>
-      <li>M&C only = 6 − 3<br>= 3</li>
-      <li>P&C only = 5 − 3<br>= 2</li>
+      <li>M&P only = 8 − 3 = 5</li>
+      <li>M&C only = 6 − 3 = 3</li>
+      <li>P&C only = 5 − 3 = 2</li>
     </ul>
 </div>
 <div class="qa-final"><div class="qa-label">Final Answer</div>
@@ -1111,16 +1111,16 @@
       </ol>
 </div>
 <div class="qa-solution"><div class="qa-label">Solution</div>
-<div class="eq">|A ∪ B ∪ C| = |A| + |B| + |C| − |A ∩ B| − |A ∩ C| − |B ∩ C| + |A ∩ B ∩ C|</div> 122 + 88 + 112 − 27 − 29 − 32 + 10</div>
-<div class="eq">= 322 − 88 + 10 = 244</div>
+<p>Using the inclusion-exclusion formula:</p>
+<div class="eq">|A ∪ B ∪ C| = 122 + 88 + 112 − 27 − 29 − 32 + 10<br>= 322 − 88 + 10<br>= 244</div>
 <p><strong>Only one symptom:</strong></p>
 <ul>
-        <li>Only A = 122 − 27 − 29 + 10<br>= 76</li>
-        <li>Only B = 88 − 27 − 32 + 10<br>= 39</li>
-        <li>Only C = 112 − 29 − 32 + 10<br>= 61</li>
-        <li>Total exactly one = 76 + 39 + 61<br>= <strong>176 patients</strong></li>
+        <li>Only A = 122 − 27 − 29 + 10 = 76</li>
+        <li>Only B = 88 − 27 − 32 + 10 = 39</li>
+        <li>Only C = 112 − 29 − 32 + 10 = 61</li>
+        <li>Total exactly one = 76 + 39 + 61 = <strong>176 patients</strong></li>
       </ul>
-<p><strong>Venn diagram (all regions):</strong> pair-only regions are:<br>27 − 10 = 17<br>29 − 10 = 19<br>32 − 10 = 22<br>Outside all three: 1000 − 244 = 756.</p>
+<p><strong>Venn diagram (all regions):</strong> Pair-only regions: A∩B only = 27 − 10 = 17; A∩C only = 29 − 10 = 19; B∩C only = 32 − 10 = 22. Outside all three = 1000 − 244 = 756.</p>
 <svg viewBox="0 0 360 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="vennSummer">
   <title id="vennSummer">Venn diagram for the drug trial with every region filled</title>
   <rect x="5" y="5" width="350" height="330" fill="none" stroke="var(--rule)" stroke-width="1.5"/>
