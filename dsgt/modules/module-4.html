@@ -122,6 +122,7 @@
     border: 1px solid var(--line);
     color: var(--ink);
     overflow-x: auto;
+    white-space: nowrap;
   }
   .eq-note {
     font-size: 0.85rem;
@@ -682,7 +683,7 @@
 <p>49 Physics, 37 English, 21 Biology. 9 study P&E, 5 study E&B, 4 study P&B, 3 study all three. Total students?</p>
 </div>
 <div class="qa-solution"><div class="qa-label">Solution</div>
-<div class="eq">49 + 37 + 21 − 9 − 5 − 4 + 3 = 92</div>
+<div class="eq">49 + 37 + 21 − 9 − 5 − 4 + 3<br>= 92</div>
 </div>
 <div class="qa-final"><div class="qa-label">Final Answer</div>
 <p class="qa-final-text"><strong>92 students</strong> in total.</p>
@@ -722,7 +723,7 @@
 <p>60 tourists, everyone speaks at least one language. 40 Spanish, 25 French. How many speak both?</p>
 </div>
 <div class="qa-solution"><div class="qa-label">Solution</div>
-<div class="eq">60 = 40 + 25 − |S ∩ F|<br>|S ∩ F| = 65 − 60<br>= 5</div>
+<div class="eq">|S ∩ F| = 40 + 25 − 60<br>= 65 − 60<br>= 5</div>
 </div>
 <div class="qa-final"><div class="qa-label">Final Answer</div>
 <p class="qa-final-text"><strong>5 tourists</strong> speak both Spanish and French.</p>
@@ -744,7 +745,7 @@
       <li>Divisible by 15: ⌊500/15⌋ = 33</li>
       <li>Divisible by 30: ⌊500/30⌋ = 16</li>
     </ul>
-<div class="eq">(250+166+100) − (83+50+33) + 16 = 516 − 166 + 16<br>= 366</div>
+<div class="eq">(250+166+100) − (83+50+33) + 16<br>= 516 − 166 + 16<br>= 366</div>
 </div>
 <div class="qa-final"><div class="qa-label">Final Answer</div>
 <p class="qa-final-text"><strong>366 integers</strong> from 1 to 500 are divisible by 2, 3 or 5.</p>
@@ -758,9 +759,9 @@
 </div>
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <p>First, at least one:</p>
-<div class="eq">(80+60+50) − (30+25+20) + 10 = 190 − 75 + 10<br>= 125</div>
+<div class="eq">(80+60+50) − (30+25+20) + 10<br>= 190 − 75 + 10<br>= 125</div>
 <p>Then none:</p>
-<div class="eq">200 − 125<br>= 75</div>
+<div class="eq">None = 200 − 125<br>= 75</div>
 </div>
 <div class="qa-final"><div class="qa-label">Final Answer</div>
 <p class="qa-final-text"><strong>75 students</strong> are in none of the groups.</p>
@@ -1026,7 +1027,7 @@
 <div class="eq">|E ∪ C ∪ R| = |E| + |C| + |R| − |E ∩ C| − |E ∩ R| − |C ∩ R| + |E ∩ C ∩ R|</div>
 <div class="eq">200 = 140 + 110 + 120 − 65 − 70 − 55 + |E ∩ C ∩ R|</div>
 <div class="eq">200 = 370 − 190 + |E ∩ C ∩ R|</div>
-<div class="eq">200 = 180 + |E ∩ C ∩ R|<br>→ |E ∩ C ∩ R|<br>= 20</div>
+<div class="eq">|E ∩ C ∩ R| = 200 − 180<br>= 20</div>
 <p><strong>Only one section:</strong></p>
 <ul>
         <li>Only E = 140 − 65 − 70 + 20<br>= 25</li>
