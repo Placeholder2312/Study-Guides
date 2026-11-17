@@ -112,15 +112,22 @@ percentage steps" fact stated honestly with a flat-discount counterexample.
 
 ## Remaining work / exact next action
 
-1. Commit and push the Module I guide; confirm the Vercel production build reaches READY.
-2. Verify `/dsgt`, `/dsgt/modules/module-1`, `/dsgt/modules/module-2` and `/dsgt/modules/module-3`
-   return 200 on production, and that the Module 1 card links instead of saying "Coming soon".
-3. Only then consider optional additions (more CNF/DNF drills, deducing the full laws of logic,
-   extra induction practice).
+Modules I, II and III are written, committed, pushed and verified live on production. Nothing is
+blocking the 18 November exam.
+
+Optional additions only (not required, and not to be done unless asked):
+
+1. More CNF/DNF drills, deducing the full laws of logic from the three listed ones.
+2. Extra induction practice beyond the worked example and quick practice.
+3. Module 6 is still "Coming soon" on the index; it is outside this pass.
 
 ## Deployment log
 
 - Module II: committed and pushed to `main`.
 - Module III: committed and pushed to `main`.
 - Module I: committed and pushed to `main` with the `/dsgt/modules/module-1` redirects removed from
-  `vercel.json`; production check recorded below.
+  `vercel.json`.
+- Production verified after the build reached READY (`dpl_Gp6QFXrUad4dUcxmpH4a41J5uUBV`, commit
+  `2fb2ad9`): `/dsgt/modules/module-1` returns **200** (111,117 bytes, title "DSGT Module 1 — Crisp
+  Set Theory and Logic"), `/dsgt/modules/module-2` and `/dsgt/modules/module-3` return 200, and
+  `/dsgt` lists Module 1 as a link instead of "Coming soon". All three modules are live.
