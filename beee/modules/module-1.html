@@ -220,7 +220,8 @@ a:hover, a:focus-visible {
   .rail.is-collapsed .rail-list { max-height:calc(100vh - 8rem); }
 
   @media (min-width:900px) and (pointer:fine) {
-    .rm-bar, .rm-tab, .rm-back, .rm-sheet { display:none; }
+    .rm-tab, .rm-back, .rm-sheet { display:none; }
+    .rm-bar { display:block; }
     .rail { display:block; }
   }
   @media (prefers-reduced-motion:reduce) {
