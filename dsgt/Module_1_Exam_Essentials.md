@@ -858,7 +858,7 @@ typesetting slip — but copy the correct expansion.
 - Factoring slips. Check with n = 3.
 - No concluding sentence.
 
-**Quick check 10.** (a) Prove 1 + 4 + 7 + … + (3n − 2) = n(3n − 1)/2.
+**Quick check 9.** (a) Prove 1 + 4 + 7 + … + (3n − 2) = n(3n − 1)/2.
 (b) Prove 2ⁿ > n for all n ≥ 1. *(Answer Q9.)*
 
 ---
@@ -935,7 +935,7 @@ One counterexample is a complete disproof of a "for all" statement. It proves no
 - Giving a counterexample where the claim happens to hold.
 - Ending a contradiction proof without saying what was contradicted.
 
-**Quick check 11.** (a) Prove directly that the product of two odd integers is odd.
+**Quick check 10.** (a) Prove directly that the product of two odd integers is odd.
 (b) Prove by contrapositive: if 3n + 2 is odd then n is odd.
 (c) Disprove by counterexample: every odd number is prime. *(Answer Q10.)*
 
@@ -961,7 +961,7 @@ is made of green cheese. (b) Translate: "You will get the scholarship if and onl
 above 75% or you have a sports quota." (c) Give the converse, inverse and contrapositive of "if a number
 is divisible by 4 then it is even".
 
-**Q6.** *(IAT sample Q11)* Prove with the laws of logic: (i) p → q ≡ ¬q → ¬p;
+**Q6.** *(IAT sample Q12)* Prove with the laws of logic: (i) p → q ≡ ¬q → ¬p;
 (ii) (p ∧ q) ∨ (p ∧ ¬q) ≡ p. Then show by one truth-table row that the converse of p → q is not
 equivalent to p → q.
 
@@ -971,6 +971,9 @@ equivalent to p → q.
 **Q8.** *(Prelim bank)* Domain: all people. S(x): student; F(x): friendly; H(x): speaks Hindi;
 B(x): born in India. Write in symbols: (i) everyone is friendly; (ii) someone speaks Hindi; (iii) some
 student was not born in India. Negate each and translate back.
+
+**Q9.** *(Summer 2026 Q4(b) style)* (a) Prove by induction: 1 + 4 + 7 + … + (3n − 2) = n(3n − 1)/2 for all n ≥ 1.
+(b) Prove by induction that 2ⁿ > n for all n ≥ 1.
 
 **Q10.** (a) Prove directly that the product of two odd integers is odd. (b) Prove by contrapositive: if
 3n + 2 is odd then n is odd. (c) Disprove by counterexample: every odd number is prime.

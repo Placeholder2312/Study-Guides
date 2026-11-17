@@ -41,7 +41,7 @@ CNF and DNF of [P → (Q ∧ R)] ∧ [¬P → (¬Q ∧ ¬R)] with truth table; t
 the GenAI and class-statement translations; the Summer 2026 induction in
 full; the arithmetic series; the four other proof methods.
 
-**Practice:** 12 questions with a separate answer key, full working, and a membership table in Q4.
+**Practice:** 11 questions with a separate answer key, full working, and a membership table in Q4.
 
 **Sources:** Module 1 Set and Logic PPT (teacher, 108 slides, slide ranges cited per section);
 Summer 2026 Q.1(b), Q.4(b); Winter 2025 Q.1(b) from scanned page 1; IAT1 sample Q7–Q13;
