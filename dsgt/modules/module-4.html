@@ -205,9 +205,16 @@
   }
   tr:nth-child(even) td { background: var(--surface-alt); }
   .kbd {
+    display: inline-block;
+    max-width: 100%;
     font-family: var(--font-mono);
     font-size: 0.875rem;
     line-height: 1.4;
+    white-space: nowrap;
+    word-break: normal;
+    overflow-wrap: normal;
+    overflow-x: auto;
+    vertical-align: baseline;
     background: var(--surface-hi);
     border: 1px solid var(--line);
     border-radius: 3px;
@@ -346,7 +353,7 @@
     th, td { padding: 0.45rem 0.55rem; }
     .theory, .example, .practice, .answer-key, .common-mistakes, .revision-sheet, .references, .exam-q, .steps, .toc, .self-learning { padding: 0.75rem; }
     .eq { font-size: 1rem; padding: 0.6rem 0.5rem; text-align: left; }
-    .kbd { word-break: break-word; }
+    /* Keep mathematical tokens intact on narrow screens; long chips scroll horizontally. */
     .nav a { padding: 0.4rem 0.7rem; }
     svg { max-width: 100%; padding: 0.25rem; }
   }
@@ -1256,15 +1263,15 @@
 
     <h4>Recurrence Relations</h4>
     <ol>
-      <li><strong>a<sub>n</sub><br>= −2<sup>n</sup> + 2·3<sup>n</sup></strong></li>
-      <li><strong>a<sub>n</sub><br>= 3<sup>n</sup> + (n/3)·3<sup>n</sup></strong></li>
-      <li><strong>a<sub>n</sub><br>= 7<sup>n</sup> + (−2)<sup>n</sup></strong></li>
-      <li><strong>a<sub>n</sub><br>= (16/7)·6<sup>n</sup> + (5/7)·(−1)<sup>n</sup></strong></li>
-      <li><strong>a<sub>n</sub><br>= 4·3<sup>n</sup> − 2</strong></li>
-      <li><strong>a<sub>n</sub><br>= 2·2<sup>n</sup> − 2·3<sup>n</sup> + 1</strong></li>
-      <li><strong>a<sub>n</sub><br>= −5·4<sup>n</sup> + 2·5<sup>n</sup></strong></li>
-      <li><strong>a<sub>n</sub><br>= (10 + 5n)·2<sup>n</sup></strong></li>
-      <li><strong>F<sub>n</sub><br>= (−20/7)·5<sup>n</sup> + (48/7)·(−2)<sup>n</sup> + 5n·5<sup>n</sup></strong></li>
+      <li><strong>a<sub>n</sub> = −2<sup>n</sup> + 2·3<sup>n</sup></strong></li>
+      <li><strong>a<sub>n</sub> = 3<sup>n</sup> + (n/3)·3<sup>n</sup></strong></li>
+      <li><strong>a<sub>n</sub> = 7<sup>n</sup> + (−2)<sup>n</sup></strong></li>
+      <li><strong>a<sub>n</sub> = (16/7)·6<sup>n</sup> + (5/7)·(−1)<sup>n</sup></strong></li>
+      <li><strong>a<sub>n</sub> = 4·3<sup>n</sup> − 2</strong></li>
+      <li><strong>a<sub>n</sub> = 2·2<sup>n</sup> − 2·3<sup>n</sup> + 1</strong></li>
+      <li><strong>a<sub>n</sub> = −5·4<sup>n</sup> + 2·5<sup>n</sup></strong></li>
+      <li><strong>a<sub>n</sub> = (10 + 5n)·2<sup>n</sup></strong></li>
+      <li><strong>F<sub>n</sub> = (−20/7)·5<sup>n</sup> + (48/7)·(−2)<sup>n</sup> + 5n·5<sup>n</sup></strong></li>
     </ol>
   </div>
 
