@@ -13,14 +13,18 @@ Short checkpoint for the selective Module I–III study material. Exam: 18 Novem
 
 ---
 
-## Module I — Crisp Set Theory and Logic (8 hours, CO1)
+## Official syllabus discrepancies — resolved 17 November 2026
+
+The official University of Mumbai syllabus PDF (6.21 (N), B.E. Artificial Intelligence and Machine Learning, Semesters III–IV; Academic Council approval 20 May 2025) resolves both earlier discrepancies. Its detailed-syllabus table on PDF page 19 assigns **7 teaching hours to Module I** and **5 teaching hours to Module IV**. It lists the **Inclusion–Exclusion Principle under Module IV — Counting**, not Module I. The canonical coverage extraction is `00_University_Syllabus/Syllabus_Coverage.md`. Module I now links to Module IV instead of duplicating the lesson; the transferred practice question and Diagram 4 are retained in Module IV.
+
+## Module I — Crisp Set Theory and Logic (7 hours, CO1)
 
 **Covered:** set vocabulary and notation · subsets, proper subsets and power sets · union, intersection,
 difference, complement, symmetric difference and the laws of sets · membership tables · Cartesian
 product · partitions · three methods for proving set identities · connectives and truth tables ·
 converse/inverse/contrapositive · logical equivalence with the Summer 2026 and Winter 2025 proofs ·
 tautology, contradiction, contingency · CNF and DNF · predicates, quantifiers, translation patterns and
-negation · inclusion–exclusion · mathematical induction with the full Summer 2026 question · the other
+negation · mathematical induction with the full Summer 2026 question · the other
 proof methods (direct, contrapositive, contradiction, cases, counterexample, exhaustion).
 
 **Skipped (deliberate):** Venn-diagram drawing, membership tables for four or more sets, PROLOG/LISP
@@ -34,18 +38,18 @@ difference for A = {1,3,5}, B = {2,3,8}; all five partitions of {1,2,3}; the cam
 a full eight-row truth table for (p ∨ q) → ¬r; the Summer 2026 equivalence in full with table; the
 Winter 2025 equivalence; ¬(p ∨ (¬p ∧ q)) ≡ ¬p ∧ ¬q; the IAT tautology check; the IAT contingency check;
 CNF and DNF of [P → (Q ∧ R)] ∧ [¬P → (¬Q ∧ ¬R)] with truth table; the Java sentence and its negation;
-the GenAI and class-statement translations; the Summer 2026 drug trial; the Summer 2026 induction in
+the GenAI and class-statement translations; the Summer 2026 induction in
 full; the arithmetic series; the four other proof methods.
 
 **Practice:** 12 questions with a separate answer key, full working, and a membership table in Q4.
 
 **Sources:** Module 1 Set and Logic PPT (teacher, 108 slides, slide ranges cited per section);
-Summer 2026 Q.1(b), Q.2(a), Q.4(b); Winter 2025 Q.1(b) from scanned page 1; IAT1 sample Q7–Q13;
+Summer 2026 Q.1(b), Q.4(b); Winter 2025 Q.1(b) from scanned page 1; IAT1 sample Q7–Q13;
 prelim question bank Module 1; official syllabus.
 
 **Verification:** every equivalence and classification checked by exhaustive truth table; the CNF
 verified row by row against the original expression; the induction closed form and step checked
-symbolically and at n = 1–4; all inclusion–exclusion regions cross-checked; power-set and Cartesian
+symbolically and at n = 1–4; inclusion–exclusion calculations are verified in Module IV; power-set and Cartesian
 counts enumerated programmatically. Two source-slide corrections recorded (slide 97 mislabels a
 contrapositive proof; slide 104 has a mis-expanded term).
 

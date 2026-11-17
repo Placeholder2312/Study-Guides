@@ -1,7 +1,7 @@
 # DSGT Module 1 — Crisp Set Theory and Logic (Selective Exam Essentials)
 
 **Course:** Discrete Structures and Graph Theory (2023112) · B.E. CSE (AI & ML) · Sem III · NEP 2020
-**Module I — 8 teaching hours · CO1**
+**Module I — 7 teaching hours · CO1**
 **Status:** selective coverage — not a complete module guide.
 
 Module 1 is the biggest module: set theory, propositional logic, predicate logic and proof technique.
@@ -10,7 +10,7 @@ This guide teaches the examinable core in revision order and says plainly what i
 **Covered:** set vocabulary and notation · subsets and power sets · set operations and laws ·
 Cartesian product · partitions · proving set identities · truth tables · logical equivalence with two
 full university proof questions · tautology, contradiction, contingency · CNF and DNF · predicates,
-quantifiers and their negations · inclusion–exclusion · mathematical induction with the whole
+quantifiers and their negations · mathematical induction with the whole
 Summer 2026 question · a one-page comparison of the other proof methods.
 
 **Deliberately skipped:** Venn-diagram drawing, membership tables for four or more sets, PROLOG/LISP
@@ -113,7 +113,7 @@ elements, the right has one. For A = {∅}, P({∅}) = {∅, {∅}} and |P({∅}
 - Confusing equivalent sets (same cardinality) with equal sets (same elements).
 - Writing {a, b, a} and calling the cardinality 3. Duplicates collapse.
 
-**Quick check 1.** (a) Write P({a,b,c,d}) and give |P(A)|. *(IAT sample Q11.)*
+**Quick check 1.** (a) Write P({a,b,c,d}) and give |P(A)|. *(IAT sample Q10.)*
 (b) True or false with a reason: (i) ∅ ∈ {∅}; (ii) ∅ ⊆ {∅}; (iii) {∅} ⊆ ∅; (iv) {1,2} ⊂ {1,2,3}.
 (c) Write the even integers between 1 and 11 in roster and set-builder form. *(Answer Q1.)*
 
@@ -522,7 +522,7 @@ Y = ¬P, Z = ¬Q, read right to left: (¬P ∨ R) ∧ (¬Q ∨ R) ≡ R ∨ (¬P
 **The dual worth knowing.** Swapping ∧ and ∨ gives (P ∧ Q) → R ≡ (P → R) ∨ (Q → R). "If either one
 happens, then R" splits into an AND of implications; "if both happen, then R" splits into an OR.
 
-### Worked example — a third equivalence (IAT sample Q12(i))
+### Worked example — a third equivalence (IAT sample Q11(i))
 
 Prove ¬(p ∨ (¬p ∧ q)) ≡ ¬p ∧ ¬q.
 
@@ -613,7 +613,7 @@ The names give the outer operator: **C**NF has the **c**onjunction outside; **D*
 4. CNF: distribute ∨ over ∧. DNF: distribute ∧ over ∨.
 5. Drop duplicate literals and clauses, and delete clauses containing q ∨ ¬q (they are T).
 
-### Worked example — CNF and DNF of [P → (Q ∧ R)] ∧ [¬P → (¬Q ∧ ¬R)] (IAT sample Q10(ii))
+### Worked example — CNF and DNF of [P → (Q ∧ R)] ∧ [¬P → (¬Q ∧ ¬R)] (IAT sample Q9(ii))
 
 Remove the arrows:
 
@@ -778,54 +778,9 @@ born in India. Negate each and translate the negation back. *(Answer Q8.)*
 
 ---
 
-## 9. Counting with sets: inclusion–exclusion
+## 9. Inclusion–Exclusion is covered in Module IV
 
-> |A ∪ B| = |A| + |B| − |A ∩ B|
-> |A ∪ B ∪ C| = |A| + |B| + |C| − |A ∩ B| − |A ∩ C| − |B ∩ C| + |A ∩ B ∩ C|
-
-Add the single sets, subtract the pairwise overlaps, add back the triple overlap, because elements in all
-three were counted three times and subtracted three times.
-
-"Exactly one" is derived per set:
-
-> |A only| = |A| − |A ∩ B| − |A ∩ C| + |A ∩ B ∩ C|
-
-"Exactly two" is the sum of |A ∩ B| − |A ∩ B ∩ C| over the three pairs.
-
-### Verified University question — Summer 2026 Q.2(a), 7 marks
-
-1000 people: 122 develop symptom A, 88 B, 112 C, 27 A and B, 29 A and C, 32 B and C, 10 all three.
-(The paper also asks for a filled Venn diagram; this guide does not do diagrams.)
-
-**At least one:**
-
-> 122 + 88 + 112 − 27 − 29 − 32 + 10 = 322 − 88 + 10 = **244**
-
-**Exactly one:**
-
-> A only = 122 − 27 − 29 + 10 = 76
-> B only = 88 − 27 − 32 + 10 = 39
-> C only = 112 − 29 − 32 + 10 = 61
-> total = **176**
-
-**Cross-check.** Exactly two = 17 + 19 + 22 = 58; then 176 + 58 + 10 = 244 ✓. No symptom = 756.
-
-**Interpretation.** 24.4% showed at least one symptom but only 17.6% showed exactly one, so symptoms
-overlap substantially. Counting reports separately would give 322, overstating the affected group by 78.
-
-**Exam presentation.** Formula, substitution, one line of arithmetic. Then the three region counts. The
-numbers that go into a diagram are 76, 39, 61, 17, 19, 22, 10.
-
-### Common mistakes
-
-- Forgetting to add the triple intersection back (234 instead of 244).
-- Subtracting the triple overlap the wrong number of times.
-- Computing "exactly one" as the sum of the singles minus the pairs.
-- Swapping "at least one" with "none".
-- Assuming everyone is in A ∪ B ∪ C.
-
-**Quick check 9.** 150 students: 60 Maths, 50 Physics, 40 Chemistry; 20 Maths and Physics, 15 Physics and
-Chemistry, 10 Maths and Chemistry; 5 all three. Find at least one, exactly one, none. *(Answer Q9.)*
+The University of Mumbai syllabus places the **Inclusion–Exclusion Principle in Module IV — Counting (5 hours, CO4)**, not Module I. The complete explanation, worked university question, Venn diagram, practice and answer key are in [Module IV, Section 2 — Inclusion–Exclusion](/dsgt/modules/module-4#iep). This guide therefore does not duplicate that topic.
 
 ---
 
@@ -904,7 +859,7 @@ typesetting slip — but copy the correct expansion.
 - No concluding sentence.
 
 **Quick check 10.** (a) Prove 1 + 4 + 7 + … + (3n − 2) = n(3n − 1)/2.
-(b) Prove 2ⁿ > n for all n ≥ 1. *(Answer Q10.)*
+(b) Prove 2ⁿ > n for all n ≥ 1. *(Answer Q9.)*
 
 ---
 
@@ -982,7 +937,7 @@ One counterexample is a complete disproof of a "for all" statement. It proves no
 
 **Quick check 11.** (a) Prove directly that the product of two odd integers is odd.
 (b) Prove by contrapositive: if 3n + 2 is odd then n is odd.
-(c) Disprove by counterexample: every odd number is prime. *(Answer Q11.)*
+(c) Disprove by counterexample: every odd number is prime. *(Answer Q10.)*
 
 ---
 
@@ -1006,7 +961,7 @@ is made of green cheese. (b) Translate: "You will get the scholarship if and onl
 above 75% or you have a sports quota." (c) Give the converse, inverse and contrapositive of "if a number
 is divisible by 4 then it is even".
 
-**Q6.** *(IAT sample Q12)* Prove with the laws of logic: (i) p → q ≡ ¬q → ¬p;
+**Q6.** *(IAT sample Q11)* Prove with the laws of logic: (i) p → q ≡ ¬q → ¬p;
 (ii) (p ∧ q) ∨ (p ∧ ¬q) ≡ p. Then show by one truth-table row that the converse of p → q is not
 equivalent to p → q.
 
@@ -1017,17 +972,10 @@ equivalent to p → q.
 B(x): born in India. Write in symbols: (i) everyone is friendly; (ii) someone speaks Hindi; (iii) some
 student was not born in India. Negate each and translate back.
 
-**Q9.** *(Summer 2026 Q2(a) style)* 150 students: 60 Maths, 50 Physics, 40 Chemistry; 20 Maths and
-Physics, 15 Physics and Chemistry, 10 Maths and Chemistry; 5 all three. Find at least one, exactly one,
-none. Explain in one sentence why the first answer is smaller than 150.
-
-**Q10.** *(Summer 2026 Q4(b) style)* (a) Prove 1 + 4 + 7 + … + (3n − 2) = n(3n − 1)/2 for n ≥ 1.
-(b) Prove 2ⁿ > n for n ≥ 1.
-
-**Q11.** (a) Prove directly that the product of two odd integers is odd. (b) Prove by contrapositive: if
+**Q10.** (a) Prove directly that the product of two odd integers is odd. (b) Prove by contrapositive: if
 3n + 2 is odd then n is odd. (c) Disprove by counterexample: every odd number is prime.
 
-**Q12.** *(Prelim bank Q1)* Define with a suitable example: disjoint set, proper subset, Cartesian
+**Q11.** *(Prelim bank Q1)* Define with a suitable example: disjoint set, proper subset, Cartesian
 product, partition of a set, power set, existential quantifier.
 
 ---
@@ -1116,14 +1064,6 @@ India, that is every student was born in India.
 
 ### Q9
 
-At least one: 60 + 50 + 40 − 20 − 15 − 10 + 5 = **110**.
-Exactly one: 35 + 20 + 20 = **75** (Maths only 35, Physics only 20, Chemistry only 20).
-None: 150 − 110 = **40**.
-Check: exactly two = 15 + 10 + 5 = 30, and 75 + 30 + 5 = 110 ✓.
-The first answer is under 150 because 40 students take none of the three.
-
-### Q10
-
 **(a)** Base n = 1: left 1, right 1·2/2 = 1 ✓. Assume P(k). Adding 3k + 1:
 
 > k(3k − 1)/2 + (3k + 1) = (3k² − k + 6k + 2)/2 = (3k² + 5k + 2)/2
@@ -1133,14 +1073,14 @@ which is P(k+1). ∎
 
 **(b)** Base n = 1: 2 > 1 ✓. Assume 2ᵏ > k. Then 2^(k+1) = 2·2ᵏ > 2k ≥ k + 1 for k ≥ 1. ∎
 
-### Q11
+### Q10
 
 **(a)** x = 2m + 1, y = 2n + 1, so xy = 4mn + 2m + 2n + 1 = 2(2mn + m + n) + 1, which is odd. ∎
 **(b)** Contrapositive: if n is even, n = 2k, then 3n + 2 = 6k + 2 = 2(3k + 1) is even. So the original
 holds. ∎
 **(c)** 9 is odd and 9 = 3 × 3, so it is not prime. (15, 21, 25 work too.)
 
-### Q12
+### Q11
 
 - **Disjoint sets:** A ∩ B = ∅. Example {1,2} and {3,4}.
 - **Proper subset:** A ⊂ B when A ⊆ B and B has an extra element. Example {1,2} ⊂ {1,2,3}.
@@ -1168,8 +1108,6 @@ AND of ORs · DNF: OR of ANDs · predicate: statement with variables · ∀ / �
 - ¬(p ∧ q) ≡ ¬p ∨ ¬q; ¬(p ∨ q) ≡ ¬p ∧ ¬q
 - p ↔ q ≡ (p → q) ∧ (q → p)
 - ¬∀x P(x) ≡ ∃x ¬P(x); ¬∃x P(x) ≡ ∀x ¬P(x)
-- |A ∪ B ∪ C| = Σ|A| − Σ|A ∩ B| + |A ∩ B ∩ C|
-- |A only| = |A| − |A ∩ B| − |A ∩ C| + |A ∩ B ∩ C|
 
 **Procedures.** Power set: count 2ⁿ, list by size · set equality: element argument, membership table, or
 named laws · truth table: 2ⁿ rows, one column per sub-expression · equivalence proof: start from the
@@ -1191,13 +1129,13 @@ equivalence 44–49; tautology, contradiction, contingency and the laws 55–68;
 quantifiers 76–90; mathematical proof and direct proof 94–98; contradiction 99–100; induction 101–105;
 proof by cases 107–108.
 
-**Official scope.** University of Mumbai DSGT (2023112), Module I — Crisp Set Theory and Logic, 8 hours,
+**Official scope.** University of Mumbai DSGT (2023112), Module I — Crisp Set Theory and Logic, 7 hours,
 CO1. Prescribed: sets, subsets, universal and empty sets, set operations, set representation, laws of set
 theory; propositional logic; predicate logic; universal and existential quantifiers; types of
 mathematical proof — direct, contradiction, deduction, cases, exhaustion, counterexample, mathematical
 induction. Self-learning: PROLOG/LISP expert systems, other types of logic and sets.
 
-**Questions.** Summer 2026 Q.1(b) (5 marks), Q.2(a) (7 marks), Q.4(b) (7 marks) — wording condensed,
+**Questions.** Summer 2026 Q.1(b) (5 marks), Q.4(b) (7 marks) — wording condensed,
 data, marks and numbers preserved. Winter 2025 Q.1(b), read from scanned page 1. IAT1 sample Q7–Q13.
 Prelim question bank Module 1. Practice questions without a badge were written for this guide and are not
 claimed to be university questions.
@@ -1213,7 +1151,7 @@ claimed to be university questions.
   reduced to P ↔ (Q ∧ R); the table disproved it and the corrected version is what appears above.
 - The induction identity Σ r(r+3) = n(n+1)(n+5)/3 was checked in closed form and at n = 1, 2, 3, 4, and
   the step algebra symbolically. The arithmetic series was checked the same way.
-- All inclusion–exclusion figures were recomputed and cross-checked region by region.
+- Inclusion–exclusion calculations and Venn regions are verified in the Module IV guide.
 - Power-set counts and the |A × B| − |B × A| count were enumerated programmatically.
 
 **Corrections to the source slides.** Slide 97 labels the n² even ⇒ n even argument a "direct proof"; it

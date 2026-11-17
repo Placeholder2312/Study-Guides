@@ -53,3 +53,6 @@ Question paper format :
 - Question Paper will comprise a total of six questions each carrying 15 marks Q.1 will be compulsory and should cover the maximum contents of the syllabus.
 - Remaining questions will be mixed in nature (part (a) and part (b) of each question must be from different modules. For example, if Q.2 has part (a) from Module 3 then part (b) must be from any other Module randomly selected from all the modules).
 - A total of four questions need to be answered.
+
+
+**Source verification (17 November 2026):** [University of Mumbai — 6.21 (N), B.E. Artificial Intelligence and Machine Learning, Semesters III–IV](https://mu.ac.in/old/wp-content/uploads/2025/06/6.21-N-B.E.-AI-ML-sem-III-IV.pdf), detailed-syllabus table, PDF page 19 (Academic Council approval: 20 May 2025; effective from AY 2025–26). The official table assigns Module I 7 hours and Module IV 5 hours, and lists Inclusion–Exclusion under Module IV — Counting.
