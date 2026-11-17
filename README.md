@@ -8,9 +8,9 @@ Choose a subject from the [homepage](https://study-guides-placeholder.vercel.app
 
 ## Subjects
 
-- **Semester I:** [Applied Physics](/applied-physics), [Engineering Mechanics](/engineering-mechanics), [Basic Electrical and Electronics Engineering](/beee)
-- **Semester II:** [Applied Mathematics-II](/applied-mathematics-ii), [Semiconductor Physics](/semiconductor-physics)
-- **Semester III:** [Discrete Structures and Graph Theory](/dsgt), [Mathematics for Computer Engineering](/maths), [Analysis of Algorithm](/aoa), [Computer Organization and Architecture](/coa)
+- **Semester I:** [Applied Physics](https://study-guides-placeholder.vercel.app/applied-physics), [Engineering Mechanics](https://study-guides-placeholder.vercel.app/engineering-mechanics), [Basic Electrical and Electronics Engineering](https://study-guides-placeholder.vercel.app/beee)
+- **Semester II:** [Applied Mathematics-II](https://study-guides-placeholder.vercel.app/applied-mathematics-ii), [Semiconductor Physics](https://study-guides-placeholder.vercel.app/semiconductor-physics)
+- **Semester III:** [Discrete Structures and Graph Theory](https://study-guides-placeholder.vercel.app/dsgt), [Mathematics for Computer Engineering](https://study-guides-placeholder.vercel.app/maths), [Analysis of Algorithm](https://study-guides-placeholder.vercel.app/aoa), [Computer Organization and Architecture](https://study-guides-placeholder.vercel.app/coa)
 
 The Semester III readiness snapshot is:
 
