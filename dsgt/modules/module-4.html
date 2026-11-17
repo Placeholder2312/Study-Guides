@@ -147,6 +147,17 @@
     color: var(--muted);
   }
   .example .eq { margin: 0.75rem 0; background: var(--bg); border: 1px solid var(--line); }
+  .qa-question, .qa-solution, .qa-final { margin: 0.9rem 0; padding: 0.75rem 1rem; }
+  .qa-question { border-left: 4px solid var(--ink); background: var(--bg); }
+  .qa-solution { border-left: 4px solid var(--line); }
+  .qa-final { border: 2px solid var(--accent); background: var(--accent-soft); }
+  .qa-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+  .qa-final .qa-label { color: var(--accent); }
+  .qa-question > :last-child, .qa-solution > :last-child, .qa-final > :last-child { margin-bottom: 0; }
+  .qa-question > p:first-of-type, .qa-final > p:first-of-type { margin-top: 0; }
+  .qa-final .eq { margin: 0.25rem 0 0; background: transparent; border: 0; padding: 0; text-align: left; }
+  .qa-final-list { margin: 0; padding-left: 1.25rem; }
+  .qa-final-text { margin: 0; font-weight: 600; }
   .steps {
     list-style: none;
     padding: 0;
@@ -449,35 +460,59 @@
 
   <h3>Worked Examples</h3>
 
-  <div class="example">
-    <div class="example-title">Example 1: Birth month</div>
-    <p>Pigeons (<span class="kbd">n</span>) = 100 people &nbsp;·&nbsp; Holes (<span class="kbd">m</span>) = 12 months</p>
-    <div class="eq">⌈100 / 12⌉ = 9</div>
-    <p>At least <strong>9</strong> people share a birth month.</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Example 1: Birth month</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Pigeons (<span class="kbd">n</span>) = 100 people &nbsp;·&nbsp; Holes (<span class="kbd">m</span>) = 12 months</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<div class="eq">⌈100 / 12⌉ = 9</div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">At least <strong>9</strong> people share a birth month.</p>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Example 2: Dictionary pages</div>
-    <p>Pigeons (<span class="kbd">n</span>) = 40,325 pages &nbsp;·&nbsp; Holes (<span class="kbd">m</span>) = 25 dictionaries</p>
-    <div class="eq">40,325 ÷ 25 = 1,613 exactly</div>
-    <p>One dictionary has at least <strong>1,613 pages</strong>.</p>
-    <p class="warning">Note: this guide corrects the answer from 1,614 to 1,613. The calculation is exact: 40,325 ÷ 25 = 1,613.</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Example 2: Dictionary pages</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Pigeons (<span class="kbd">n</span>) = 40,325 pages &nbsp;·&nbsp; Holes (<span class="kbd">m</span>) = 25 dictionaries</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<div class="eq">40,325 ÷ 25 = 1,613 exactly</div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">One dictionary has at least <strong>1,613 pages</strong>.</p>
+</div>
+<p class="warning">Note: this guide corrects the answer from 1,614 to 1,613. The calculation is exact: 40,325 ÷ 25 = 1,613.</p>
+</div>
 
-  <div class="example">
-    <div class="example-title">Example 3: Weekday birthdays</div>
-    <p><span class="kbd">n = 30</span>, <span class="kbd">m = 7</span> days</p>
-    <div class="eq">⌈30 / 7⌉ = 5</div>
-    <p>At least <strong>5</strong> people share a weekday birthday.</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Example 3: Weekday birthdays</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><span class="kbd">n = 30</span>, <span class="kbd">m = 7</span> days</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<div class="eq">⌈30 / 7⌉ = 5</div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">At least <strong>5</strong> people share a weekday birthday.</p>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Example 4: Family money</div>
-    <p><span class="kbd">n = 2886</span> rupees &nbsp;·&nbsp; <span class="kbd">m = 7</span> members</p>
-    <div class="eq">⌈2886 / 7⌉ = 413</div>
-    <p>One member has at least <strong>Rs. 413</strong>.</p>
-    <p class="warning">Note: the teacher’s slide concludes Rs. 416 — that is a slide error. The correct guaranteed minimum is Rs. 413.</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Example 4: Family money</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><span class="kbd">n = 2886</span> rupees &nbsp;·&nbsp; <span class="kbd">m = 7</span> members</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<div class="eq">⌈2886 / 7⌉ = 413</div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">One member has at least <strong>Rs. 413</strong>.</p>
+</div>
+<p class="warning">Note: the teacher’s slide concludes Rs. 416 — that is a slide error. The correct guaranteed minimum is Rs. 413.</p>
+</div>
 
   <div class="example">
     <div class="example-title">Example 5: Books on shelves</div>
