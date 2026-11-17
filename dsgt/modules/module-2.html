@@ -384,6 +384,7 @@
     .topbar { display:none; }
   }
 </style>
+<style id="dsgt-diagram-layout">.dsgt-diagram{margin:1.25rem 0;padding:.75rem;border:1px solid var(--line);background:var(--surface)}.dsgt-diagram svg{width:100%;max-width:700px;height:auto;display:block;margin:.35rem auto;padding:0;border:0;background:transparent}.dsgt-diagram figcaption{font-size:.85rem;color:var(--muted);line-height:1.45;margin-top:.6rem}.dsgt-diagram.wide svg{max-width:700px}.dsgt-diagram .diagram-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.dsgt-diagram .diagram-panel{min-width:0;border:1px solid var(--line);padding:.65rem;background:var(--bg)}.dsgt-diagram .diagram-panel h4{margin:.1rem 0 .35rem;text-align:center}@media(max-width:600px){.dsgt-diagram{padding:.55rem}.dsgt-diagram .diagram-pair{grid-template-columns:1fr}.dsgt-diagram .diagram-panel{padding:.5rem}}</style>
 </head><body>
 
 <div class="wrap">
@@ -518,6 +519,26 @@
     <p>Let A = {2, 3, 4} and B = {4, 6, 8}, with R = {(a, b) : b = 2a}. Write R in roster form, state its domain, range and inverse, and write its matrix. <em>(Answer Q1.)</em></p>
   </div>
 
+  
+  <figure class="dsgt-diagram wide" id="d5-relation-representation">
+    <svg viewBox="0 0 640 470" role="img" aria-labelledby="d5-relation-title d5-relation-desc">
+      <title id="d5-relation-title">Bipartite diagram, roster form and matrix of a relation</title>
+      <desc id="d5-relation-desc">Set A contains 1, 2 and 3 on the left. Set B contains 2, 4 and 6 on the right. Arrows connect 1 to 2, 2 to 4 and 3 to 6. Below are the roster and three by three identity matrix.</desc>
+      <defs><marker id="d5-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6Z" fill="var(--accent)"/></marker></defs>
+      <text x="150" y="35" text-anchor="middle" font-size="18" font-weight="700" fill="var(--ink)">A = {1, 2, 3}</text><text x="490" y="35" text-anchor="middle" font-size="18" font-weight="700" fill="var(--ink)">B = {2, 4, 6}</text>
+      <g fill="var(--bg)" stroke="var(--accent)" stroke-width="2"><circle cx="150" cy="95" r="24"/><circle cx="150" cy="185" r="24"/><circle cx="150" cy="275" r="24"/><circle cx="490" cy="95" r="24"/><circle cx="490" cy="185" r="24"/><circle cx="490" cy="275" r="24"/></g>
+      <g font-size="17" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="middle"><text x="150" y="95">1</text><text x="150" y="185">2</text><text x="150" y="275">3</text><text x="490" y="95">2</text><text x="490" y="185">4</text><text x="490" y="275">6</text></g>
+      <g stroke="var(--accent)" stroke-width="2.4" fill="none" marker-end="url(#d5-arrow)"><path d="M176 95H462"/><path d="M176 185H462"/><path d="M176 275H462"/></g>
+      <path d="M36 317H604" stroke="var(--line)"/>
+      <text x="46" y="350" font-size="16" font-weight="700" fill="var(--ink)">Roster form</text><text x="46" y="380" font-size="15" fill="var(--ink)">R = {(1, 2), (2, 4), (3, 6)}</text>
+      <text x="355" y="350" font-size="16" font-weight="700" fill="var(--ink)">Relation matrix M<tspan baseline-shift="sub" font-size="11">R</tspan></text>
+      <g font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle"><text x="426" y="375">2</text><text x="478" y="375">4</text><text x="530" y="375">6</text><text x="384" y="407">1</text><text x="384" y="437">2</text><text x="384" y="467">3</text></g>
+      <g stroke="var(--line)" stroke-width="1" fill="none"><rect x="400" y="382" width="156" height="90"/><path d="M452 382V472M504 382V472M400 412H556M400 442H556"/></g>
+      <g fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1"><rect x="400" y="382" width="52" height="30"/><rect x="452" y="412" width="52" height="30"/><rect x="504" y="442" width="52" height="30"/></g>
+      <g font-size="16" fill="var(--ink)" text-anchor="middle" dominant-baseline="middle"><text x="426" y="397" font-weight="700">1</text><text x="478" y="397">0</text><text x="530" y="397">0</text><text x="426" y="427">0</text><text x="478" y="427" font-weight="700">1</text><text x="530" y="427">0</text><text x="426" y="457">0</text><text x="478" y="457">0</text><text x="530" y="457" font-weight="700">1</text></g>
+    </svg>
+    <figcaption>Each arrow is one ordered pair in R. In the matrix, the same pair is represented by a 1 at its row (from A) and column (from B); all other entries are 0. The rows are ordered 1, 2, 3 and columns 2, 4, 6.</figcaption>
+  </figure>
   <h2 id="s2">2 · Properties of relations</h2>
 
   <p>From here on, R is a relation <strong>on a set A</strong>, meaning R ⊆ A × A. Four properties decide almost every Module 2 question. Learn the definition and the test together.</p>
@@ -690,6 +711,20 @@
     <p>A = {1, 2, 3, 4, 5, 6} and a R b means a ≡ b (mod 3), i.e. a and b leave the same remainder on division by 3. Show R is an equivalence relation and find all classes. <em>(Answer Q3.)</em></p>
   </div>
 
+  
+  <figure class="dsgt-diagram wide" id="d6-equivalence-partition">
+    <svg viewBox="0 0 640 300" role="img" aria-labelledby="d6-partition-title d6-partition-desc">
+      <title id="d6-partition-title">Equivalence classes partition set A</title>
+      <desc id="d6-partition-desc">Inside universal set A are three disjoint blocks. The first contains 1 and 5 and is class [1]=[5]. The second contains 2, 3 and 6 and is class [2]=[3]=[6]. The third contains 4 and is class [4].</desc>
+      <rect x="18" y="18" width="604" height="260" rx="8" fill="none" stroke="var(--line)" stroke-width="1.5"/><text x="35" y="43" font-size="17" font-weight="700" fill="var(--ink)">A = {1, 2, 3, 4, 5, 6}</text>
+      <g fill="var(--surface)" stroke="var(--accent)" stroke-width="2"><rect x="42" y="70" width="166" height="175" rx="9"/><rect x="237" y="70" width="166" height="175" rx="9"/><rect x="432" y="70" width="166" height="175" rx="9"/></g>
+      <g font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle"><text x="125" y="100">[1] = [5]</text><text x="320" y="100">[2] = [3] = [6]</text><text x="515" y="100">[4]</text></g>
+      <g fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.4"><circle cx="95" cy="165" r="27"/><circle cx="165" cy="165" r="27"/><circle cx="280" cy="165" r="25"/><circle cx="320" cy="165" r="25"/><circle cx="360" cy="165" r="25"/><circle cx="515" cy="165" r="27"/></g>
+      <g font-size="18" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="middle"><text x="95" y="165">1</text><text x="165" y="165">5</text><text x="280" y="165">2</text><text x="320" y="165">3</text><text x="360" y="165">6</text><text x="515" y="165">4</text></g>
+      <g font-size="12" fill="var(--muted)" text-anchor="middle"><text x="125" y="224">2 elements</text><text x="320" y="224">3 elements</text><text x="515" y="224">1 element</text></g>
+    </svg>
+    <figcaption>The blocks are pairwise disjoint: no element appears in two classes. Their union is all of A: {1, 5} ∪ {2, 3, 6} ∪ {4} = A. These two conditions are exactly what makes the classes a partition.</figcaption>
+  </figure>
   <h2 id="s4">4 · Transitive closure and Warshall's algorithm</h2>
 
   <div class="theory">
