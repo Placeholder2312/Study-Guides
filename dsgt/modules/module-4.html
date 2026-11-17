@@ -839,68 +839,91 @@
   </table>
   <p>If your guess matches the homogeneous solution, multiply by <span class="kbd">n</span> until it does not. Example: for <span class="kbd">f(n) = 7·5<sup>n</sup></span> with roots 5 and −2, 5 is a root, so guess <span class="kbd">C·n·5<sup>n</sup></span>.</p>
 
-  <div class="example">
-    <div class="example-title">Additional practice — non-homogeneous with constant right side</div>
-    <p><span class="kbd">a<sub>n+2</sub> − 5a<sub>n+1</sub> + 6a<sub>n</sub> = 2</span>, <span class="kbd">a<sub>0</sub> = 1</span>, <span class="kbd">a<sub>1</sub> = −1</span></p>
-    <p>Homogeneous: <span class="kbd">r<sup>2</sup> − 5r + 6 = 0</span><br>→ roots <strong>2, 3</strong><br>→ <span class="kbd">a<sub>n</sub><sup>(h)</sup> = A(2<sup>n</sup>) + B(3<sup>n</sup>)</span></p>
-    <p>Particular guess (constant): <span class="kbd">K − 5K + 6K = 2</span><br>→ <span class="kbd">2K = 2</span><br>→ <span class="kbd">K = 1</span></p>
-    <p>General: <span class="kbd">a<sub>n</sub> = A(2<sup>n</sup>) + B(3<sup>n</sup>) + 1</span></p>
-    <ul>
+  <div class="example qa">
+<div class="example-title">Additional practice — non-homogeneous with constant right side</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Solve: <span class="kbd">a<sub>n+2</sub> − 5a<sub>n+1</sub> + 6a<sub>n</sub> = 2</span>, <span class="kbd">a<sub>0</sub> = 1</span>, <span class="kbd">a<sub>1</sub> = −1</span></p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Homogeneous: <span class="kbd">r<sup>2</sup> − 5r + 6 = 0</span><br>→ roots <strong>2, 3</strong><br>→ <span class="kbd">a<sub>n</sub><sup>(h)</sup> = A(2<sup>n</sup>) + B(3<sup>n</sup>)</span></p>
+<p>Particular guess (constant): <span class="kbd">K − 5K + 6K = 2</span><br>→ <span class="kbd">2K = 2</span><br>→ <span class="kbd">K = 1</span></p>
+<p>General: <span class="kbd">a<sub>n</sub> = A(2<sup>n</sup>) + B(3<sup>n</sup>) + 1</span></p>
+<ul>
       <li><span class="kbd">n=0:</span> A + B + 1 = 1<br>→ A + B = 0</li>
       <li><span class="kbd">n=1:</span> 2A + 3B + 1 = −1<br>→ 2A + 3B = −2</li>
     </ul>
-    <p>From A = −B: −2B + 3B = −2<br>→ B = −2, A = 2.</p>
-    <div class="eq"><strong>a<sub>n</sub> = 2·2<sup>n</sup> − 2·3<sup>n</sup> + 1</strong></div>
-    <p>Verify: a<sub>2</sub> = 5(−1) − 6(1) + 2<br>= −9.<br>Formula: 8 − 18 + 1 = −9. ✓</p>
-  </div>
+<p>From A = −B: −2B + 3B = −2<br>→ B = −2, A = 2.</p>
+<p>Verify: a<sub>2</sub> = 5(−1) − 6(1) + 2<br>= −9.<br>Formula: 8 − 18 + 1 = −9. ✓</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<div class="eq"><strong>a<sub>n</sub> = 2·2<sup>n</sup> − 2·3<sup>n</sup> + 1</strong></div>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Additional practice — distinct roots with negative answer</div>
-    <p><span class="kbd">a<sub>n</sub> − 9a<sub>n−1</sub> + 20a<sub>n−2</sub> = 0</span>, <span class="kbd">a<sub>0</sub> = −3</span>, <span class="kbd">a<sub>1</sub> = −10</span></p>
-    <p>Characteristic: <span class="kbd">r<sup>2</sup> − 9r + 20 = 0</span><br>→ <span class="kbd">(r − 4)(r − 5) = 0</span><br>→ roots <strong>4, 5</strong></p>
-    <p>General: <span class="kbd">a<sub>n</sub> = A(4<sup>n</sup>) + B(5<sup>n</sup>)</span></p>
-    <ul>
+  <div class="example qa">
+<div class="example-title">Additional practice — distinct roots with negative answer</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Solve: <span class="kbd">a<sub>n</sub> − 9a<sub>n−1</sub> + 20a<sub>n−2</sub> = 0</span>, <span class="kbd">a<sub>0</sub> = −3</span>, <span class="kbd">a<sub>1</sub> = −10</span></p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Characteristic: <span class="kbd">r<sup>2</sup> − 9r + 20 = 0</span><br>→ <span class="kbd">(r − 4)(r − 5) = 0</span><br>→ roots <strong>4, 5</strong></p>
+<p>General: <span class="kbd">a<sub>n</sub> = A(4<sup>n</sup>) + B(5<sup>n</sup>)</span></p>
+<ul>
       <li><span class="kbd">n=0:</span> A + B = −3</li>
       <li><span class="kbd">n=1:</span> 4A + 5B = −10</li>
     </ul>
-    <p>From A = −3 − B: 4(−3 − B) + 5B = −10<br>→ −12 − 4B + 5B = −10<br>→ B = 2, A = −5.</p>
-    <div class="eq"><strong>a<sub>n</sub> = −5·4<sup>n</sup> + 2·5<sup>n</sup></strong></div>
-  </div>
+<p>From A = −3 − B: 4(−3 − B) + 5B = −10<br>→ −12 − 4B + 5B = −10<br>→ B = 2, A = −5.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<div class="eq"><strong>a<sub>n</sub> = −5·4<sup>n</sup> + 2·5<sup>n</sup></strong></div>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Additional practice — third-order recurrence (not a confirmed teacher-provided exam pattern)</div>
-    <p><span class="kbd">c<sub>n</sub> = 6c<sub>n−1</sub> − 11c<sub>n−2</sub> + 6c<sub>n−3</sub></span>, <span class="kbd">c<sub>0</sub> = 2</span>, <span class="kbd">c<sub>1</sub> = 5</span>, <span class="kbd">c<sub>2</sub> = 15</span></p>
-    <p>Characteristic: <span class="kbd">r<sup>3</sup> − 6r<sup>2</sup> + 11r − 6 = 0</span>.<br>Try r = 1: 1 − 6 + 11 − 6 = 0, so r = 1 is a root.<br>Factor out (r − 1): <span class="kbd">(r − 1)(r<sup>2</sup> − 5r + 6) = 0</span><br>→ roots <strong>1, 2, 3</strong></p>
-    <p>General: <span class="kbd">c<sub>n</sub> = A + B(2<sup>n</sup>) + C(3<sup>n</sup>)</span></p>
-    <ul>
+  <div class="example qa">
+<div class="example-title">Additional practice — third-order recurrence (not a confirmed teacher-provided exam pattern)</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Solve: <span class="kbd">c<sub>n</sub> = 6c<sub>n−1</sub> − 11c<sub>n−2</sub> + 6c<sub>n−3</sub></span>, <span class="kbd">c<sub>0</sub> = 2</span>, <span class="kbd">c<sub>1</sub> = 5</span>, <span class="kbd">c<sub>2</sub> = 15</span></p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Characteristic: <span class="kbd">r<sup>3</sup> − 6r<sup>2</sup> + 11r − 6 = 0</span>.<br>Try r = 1: 1 − 6 + 11 − 6 = 0, so r = 1 is a root.<br>Factor out (r − 1): <span class="kbd">(r − 1)(r<sup>2</sup> − 5r + 6) = 0</span><br>→ roots <strong>1, 2, 3</strong></p>
+<p>General: <span class="kbd">c<sub>n</sub> = A + B(2<sup>n</sup>) + C(3<sup>n</sup>)</span></p>
+<ul>
       <li><span class="kbd">n=0:</span> A + B + C = 2</li>
       <li><span class="kbd">n=1:</span> A + 2B + 3C = 5</li>
       <li><span class="kbd">n=2:</span> A + 4B + 9C = 15</li>
     </ul>
-    <p>Subtracting row 1 from row 2: B + 2C = 3.<br>Subtracting row 2 from row 3: 2B + 6C = 10<br>→ B + 3C = 5.<br>Subtracting: C = 2, B = −1, A = 1.</p>
-    <div class="eq"><strong>c<sub>n</sub> = 1 − 2<sup>n</sup> + 2·3<sup>n</sup></strong></div>
-  </div>
+<p>Subtracting row 1 from row 2: B + 2C = 3.<br>Subtracting row 2 from row 3: 2B + 6C = 10<br>→ B + 3C = 5.<br>Subtracting: C = 2, B = −1, A = 1.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<div class="eq"><strong>c<sub>n</sub> = 1 − 2<sup>n</sup> + 2·3<sup>n</sup></strong></div>
+</div>
+</div>
 
   <h2 id="mu-questions">Mumbai University Previous Examination Questions — Module 4</h2>
   <div class="practice">
     <h3>Verified Mumbai University Previous End-Semester Questions</h3>
     <p>The following questions appeared in Mumbai University end-semester examinations. They are marked with a badge for easy identification.</p>
 
-    <div class="exam-q">
-      <div class="exam-q-title">Winter 2025 — Q1(c): Programming Contest — Pigeonhole Principle (5 marks)</div>
-      <div class="exam-source">Source: NEP DSGT Winter 2025 — Q1(c)</div>
-      <p>A programming contest has 240 participants and 12 judging terminals.</p>
-      <ol>
+    <div class="exam-q qa">
+<div class="exam-q-title">Winter 2025 — Q1(c): Programming Contest — Pigeonhole Principle (5 marks)</div>
+<div class="exam-source">Source: NEP DSGT Winter 2025 — Q1(c)</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>A programming contest has 240 participants and 12 judging terminals.</p>
+<ol>
         <li>Using Pigeonhole Principle, find the minimum number of contestants who must end up using the same terminal.</li>
         <li>Explain how this insight helps in contest scheduling, load balancing, and avoiding terminal bottlenecks.</li>
       </ol>
-      <p><strong>Solution:</strong></p>
-      <p>Pigeons (<span class="kbd">n</span>) = 240 participants &nbsp;·&nbsp; Holes (<span class="kbd">m</span>) = 12 judging terminals</p>
-      <div class="eq">⌈240 / 12⌉ = ⌈20⌉<br>= 20</div>
-      <p>At least <strong>20 participants</strong> must end up using the same terminal.</p>
-      <p><strong>Reasoning:</strong> If we try to distribute 240 participants evenly across 12 terminals, each terminal gets exactly 20 participants. If every terminal had at most 19 participants, the total would be at most 19 × 12 = 228, which is less than 240. So at least one terminal has 20 or more participants.</p>
-      <p><strong>Application:</strong> This insight helps in contest scheduling by ensuring that at least one terminal will have a full load of 20 participants, allowing organizers to plan for worst-case load balancing and avoid terminal bottlenecks by provisioning adequate resources at the busiest terminal.</p>
-    </div>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Pigeons (<span class="kbd">n</span>) = 240 participants &nbsp;·&nbsp; Holes (<span class="kbd">m</span>) = 12 judging terminals</p>
+<div class="eq">⌈240 / 12⌉ = ⌈20⌉<br>= 20</div>
+<p><strong>Reasoning:</strong> If we try to distribute 240 participants evenly across 12 terminals, each terminal gets exactly 20 participants. If every terminal had at most 19 participants, the total would be at most 19 × 12 = 228, which is less than 240. So at least one terminal has 20 or more participants.</p>
+<p><strong>Application:</strong> This insight helps in contest scheduling by ensuring that at least one terminal will have a full load of 20 participants, allowing organizers to plan for worst-case load balancing and avoid terminal bottlenecks by provisioning adequate resources at the busiest terminal.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text"><strong>20 participants</strong> must use the same terminal (⌈240 / 12⌉ = 20). This tells organizers to plan for at least one terminal carrying a full load of 20.</p>
+</div>
+</div>
 
     <div class="exam-q">
       <div class="exam-q-title">Winter 2025 — Q2(a): Campus Event App — Inclusion-Exclusion (8 marks)</div>
