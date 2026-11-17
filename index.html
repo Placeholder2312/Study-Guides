@@ -13,23 +13,24 @@
   a:hover, a:focus-visible { background-color: var(--surface-hi); }
   .card:hover { border-color: var(--accent); }
   /* Finished exam: crossed off with caution tape, still a normal link. */
-  .card.done { position: relative; overflow: hidden; isolation: isolate; border-left-color: var(--accent); }
+  .card.done { position: relative; overflow: hidden; isolation: isolate; border-left-color: var(--ink); }
   .card.done .num, .card.done .name, .card.done .go { opacity: .62; }
-  .card.done .name { text-decoration: line-through; text-decoration-thickness: 2px; text-decoration-color: var(--accent); }
+  .card.done .go { color: var(--muted); }
+  .card.done .name { text-decoration: line-through; text-decoration-thickness: 2px; text-decoration-color: var(--ink); }
   .card.done::before, .card.done::after {
     content: ""; position: absolute; left: -2%; width: 130%; top: 52%; height: 12px; margin-top: -6px;
-    background: repeating-linear-gradient(-45deg, var(--ink) 0 9px, var(--accent) 9px 18px);
+    background: repeating-linear-gradient(-45deg, var(--ink) 0 9px, var(--bg) 9px 18px);
     border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink);
     pointer-events: none; z-index: 1; opacity: .92;
   }
   .card.done::before { transform: rotate(-12deg); }
   .card.done::after { transform: rotate(12deg); }
-  .card.done:hover, .card.done:focus-visible { background-color: var(--surface); }
+  .card.done:hover, .card.done:focus-visible { background-color: var(--surface); border-color: var(--ink); }
   .card.done:hover::before, .card.done:hover::after { opacity: .5; }
   .tape-tag {
     position: absolute; top: .55rem; right: .6rem; z-index: 2; padding: .1rem .5rem;
     font-size: .68rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
-    background: var(--accent); color: var(--surface); border: 1.5px solid var(--ink); transform: rotate(3deg);
+    background: var(--ink); color: var(--bg); border: 1.5px solid var(--ink); transform: rotate(3deg);
   }
 </style>
 <script src="/assets/theme.js"></script>
