@@ -1,0 +1,1699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSGT Module 1 — Crisp Set Theory and Logic (Exam Essentials)</title>
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --muted: #444444;
+    --bg: #ffffff;
+    --line: #cccccc;
+    --rule: #999999;
+    --accent: #1d4ed8;
+    --space: 1.5rem;
+    --radius: 0;
+    --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+    --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-mono: "Courier New", Courier, monospace;
+  }
+  * { box-sizing: border-box; }
+  sub, sup { font-size: 0.75em; line-height: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    font-size: 17px;
+    font-weight: 500;
+    text-wrap: pretty;
+  }
+  .wrap {
+    max-width: 62ch;
+    margin: 0 auto;
+    padding: 2.5rem 1rem 4rem;
+  }
+  header {
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+  }
+  h1 {
+    font-family: var(--font-serif);
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0;
+  }
+  .meta {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    font-weight: 500;
+    color: var(--muted);
+    margin-top: 1rem;
+  }
+  h2 {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 3rem 0 1rem;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.4rem;
+  }
+  h2 > a { text-decoration: none; color: inherit; }
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 2rem 0 0.5rem;
+  }
+  h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 1.5rem 0 0.5rem;
+  }
+  p {
+    margin: 0 0 1rem;
+    line-height: 1.6;
+  }
+  .wrap > div { line-height: 1.6; }
+  ul, ol, blockquote, pre, figure { line-height: 1.6; }
+  td { line-height: 1.5; }
+  strong, em, span, b, i { line-height: 1.6; }
+  .theory {
+    border-left: 3px solid var(--ink);
+    padding: 1rem 1.25rem;
+    margin: 1.75rem 0;
+    font-size: 0.98rem;
+  }
+  .theory p:first-child { margin-top: 0; }
+  .theory p:last-child { margin-bottom: 0; }
+  .source {
+    display: block;
+    font-size: 0.78rem;
+    line-height: 1.4;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+  }
+  .eq {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 1.25rem 0;
+    padding: 0.75rem 1rem;
+    background: var(--surface-eq);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    overflow-x: auto;
+  }
+  .eq-note {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--muted);
+    text-align: center;
+    margin-top: -0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .example {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+    font-size: 0.95rem;
+    background: var(--surface);
+  }
+  .example-title {
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0;
+    color: var(--muted);
+  }
+  .example .eq { margin: 0.75rem 0; background: var(--bg); border: 1px solid var(--line); }
+  .qa-question, .qa-solution, .qa-final { margin: 0.9rem 0; padding: 0.75rem 1rem; }
+  .qa-question { border-left: 4px solid var(--ink); background: var(--bg); }
+  .qa-solution { border-left: 4px solid var(--line); }
+  .qa-final { border: 2px solid var(--accent); background: var(--accent-soft); }
+  .qa-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+  .qa-final .qa-label { color: var(--accent); }
+  .qa-question > :last-child, .qa-solution > :last-child, .qa-final > :last-child { margin-bottom: 0; }
+  .qa-question > p:first-of-type, .qa-final > p:first-of-type { margin-top: 0; }
+  .qa-final .eq { margin: 0.25rem 0 0; background: transparent; border: 0; padding: 0; text-align: left; }
+  .qa-final-list { margin: 0; padding-left: 1.25rem; }
+  .qa-final-text { margin: 0; font-weight: 600; }
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    padding: 1rem 1.25rem;
+  }
+  .steps li {
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+  .steps li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.1rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    background: var(--ink);
+    border-radius: 50%;
+  }
+  .steps li:last-child { margin-bottom: 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.75rem 0;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 0.625rem 0.875rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--surface-hi);
+    font-weight: 700;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+  }
+  tr:nth-child(even) td { background: var(--surface-alt); }
+  .kbd {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    background: var(--surface-hi);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 0.1rem 0.4rem;
+  }
+  .toc {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 2rem 0;
+    background: var(--surface);
+  }
+  .toc ol { margin: 0; padding-left: 1.25rem; }
+  .toc li { margin-bottom: 0.35rem; font-size: 0.95rem; }
+  .toc a { color: var(--ink); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .nav {
+    margin: 1.5rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .nav a {
+    padding: 0.25rem 0.6rem;
+    border: 1px solid var(--line);
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.85rem;
+    border-radius: 3px;
+  }
+  .nav a:hover { background: var(--surface-hi); }
+  .practice {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: var(--surface);
+  }
+  .practice > h3:first-of-type { margin-top: 0; }
+  .answer-key {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: var(--surface);
+  }
+  .answer-key > h3:first-of-type { margin-top: 0; }
+  .common-mistakes {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: var(--surface);
+  }
+  .common-mistakes > h3:first-of-type { margin-top: 0; }
+  .self-learning {
+    border-left: 3px solid var(--muted);
+    padding: 1rem 1.25rem;
+    margin: 1.75rem 0;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+  .self-learning p { margin-bottom: 0.75rem; }
+  .revision-sheet {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: var(--surface);
+  }
+  .revision-sheet > h3:first-of-type { margin-top: 0; }
+  .warning {
+    color: var(--danger);
+    font-weight: 700;
+  }
+  .mu-badge {
+    display: inline-block;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+    margin-left: 0.5rem;
+  }
+  .exam-q {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+    background: var(--surface);
+  }
+  .exam-q-title {
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    letter-spacing: 0;
+    color: var(--muted);
+  }
+  .exam-source {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  svg { width: 100%; max-width: 440px; height: auto; display: block; margin: 1rem auto; padding: 0.5rem; background: var(--bg); border: 1px solid var(--line); }
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+  .references {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 2rem 0;
+    background: var(--surface);
+  }
+  .references > h3:first-of-type { margin-top: 0; }
+  .references p { margin: 0.5rem 0; }
+  .references ul { margin: 0.5rem 0; padding-left: 1.5rem; }
+  ::selection { background: var(--ink); color: var(--bg); }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  @media (max-width: 600px) {
+    .wrap { padding: 1.5rem 1rem 3rem; }
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.4rem; }
+    .eq { font-size: 1.15rem; }
+  }
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    .wrap { padding: 1rem 0.75rem 3rem; }
+    h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.3rem; margin-top: 2.25rem; }
+    table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; font-size: 0.85rem; }
+    th, td { padding: 0.45rem 0.55rem; }
+    .theory, .example, .practice, .answer-key, .common-mistakes, .revision-sheet, .references, .exam-q, .steps, .toc, .self-learning { padding: 0.75rem; }
+    .eq { font-size: 1rem; padding: 0.6rem 0.5rem; text-align: left; }
+    .kbd { word-break: break-word; }
+    .nav a { padding: 0.4rem 0.7rem; }
+    svg { max-width: 100%; padding: 0.25rem; }
+  }
+  @media print {
+    body { font-size: 12pt; line-height: 1.4; color: #000; background: #fff; }
+    .wrap { max-width: 100%; padding: 0; }
+    header { border-bottom: 1px solid #000; margin-bottom: 1.5rem; padding-bottom: 0.75rem; }
+    h2 { margin: 2rem 0 0.75rem; border-bottom: 1px solid #000; padding-bottom: 0.3rem; }
+    h3 { margin: 1.5rem 0 0.4rem; }
+    .toc, .nav { display: none; }
+    .example, .practice, .answer-key, .revision-sheet, .steps, .theory, .common-mistakes, .references, .exam-q {
+      border: 1px solid #999;
+      background: #fff !important;
+      page-break-inside: avoid;
+    }
+    .eq { background: #fff; border: 1px solid #999; page-break-inside: avoid; }
+    .eq-note { display: none; }
+    a { text-decoration: none; color: #000; }
+    svg { border: 1px solid #000; }
+    footer { margin-top: 2rem; border-top: 1px solid #000; }
+  }
+</style>
+<script>(function(){try{var t=localStorage.getItem('sg-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<style id="theme">
+  :root { color-scheme: light; --ink:#0a0a0a;--muted:#444444;--bg:#ffffff;--line:#cccccc;--rule:#999999;--accent:#1d4ed8;--accent-soft:#eef2ff;--danger:#b00020;--surface:#fafafa;--surface-alt:#f9f9f9;--surface-eq:#f5f5f5;--surface-hi:#f0f0f0; }
+  :root[data-theme="dark"] { color-scheme: dark; --ink:#ececec;--muted:#a8a8ad;--bg:#0f0f11;--line:#34343a;--rule:#5a5a62;--accent:#8ab0ff;--accent-soft:#1b2540;--danger:#ff7b8f;--surface:#17171a;--surface-alt:#1b1b1f;--surface-eq:#1e1e23;--surface-hi:#26262c; }
+  :root[data-theme="dark"] svg circle[fill-opacity] { fill-opacity: .3; }
+  :root[data-theme="dark"] svg text[fill="var(--muted)"] { fill: var(--ink); }
+  .topbar { display:flex; align-items:center; justify-content:space-between; gap:.5rem; margin:0 0 1rem; }
+  .topbar .back { display:inline-flex; align-items:center; min-height:44px; font-size:.85rem; font-weight:600; color:var(--ink); }
+  .theme-toggle { font:inherit; font-size:.85rem; font-weight:600; color:var(--ink); background:var(--bg); border:1px solid var(--ink); border-radius:0; padding:.4rem .8rem; min-height:44px; min-width:44px; cursor:pointer; margin-left:auto; }
+  .theme-toggle:hover { background:var(--surface-hi); }
+  .theme-toggle:focus-visible { outline:2px solid var(--ink); outline-offset:2px; }
+  @media print {
+    :root, :root[data-theme="dark"], :root:not([data-theme="light"]) { color-scheme: light; --ink:#0a0a0a;--muted:#444444;--bg:#ffffff;--line:#cccccc;--rule:#999999;--accent:#1d4ed8;--accent-soft:#eef2ff;--danger:#b00020;--surface:#fafafa;--surface-alt:#f9f9f9;--surface-eq:#f5f5f5;--surface-hi:#f0f0f0; }
+    .topbar { display:none; }
+  }
+</style>
+</head><body>
+
+<div class="wrap">
+  <div class="topbar"><a class="back" href="/dsgt">← All modules</a><button class="theme-toggle" type="button" id="themeToggle"></button></div>
+
+  <header>
+    <h1>DSGT Module 1</h1>
+    <p class="subtitle">Crisp Set Theory and Logic — selective exam essentials</p>
+    <div class="meta">CSE AIML · Sem III · 8 teaching hours · CO1 · Source: Mrs. Shamal Bagal's Module 1 PPT (108 slides), the official DSGT syllabus, the Summer 2026 and Winter 2025 papers, and the IAT and prelim question banks</div>
+  </header>
+
+  <div class="theory">
+    <span class="source">READ THIS FIRST — SELECTIVE COVERAGE</span>
+    <p>Module 1 is the biggest module: eight teaching hours covering set theory, propositional logic, predicate logic and proof technique. This guide is selective. It teaches the examinable core in the order you should revise it, and it says plainly what it leaves out.</p>
+    <p><strong>Covered:</strong> set vocabulary and notation · subsets and power sets · set operations and laws · Cartesian product · partitions · proving set identities · truth tables · logical equivalence with two full university proof questions · tautology, contradiction, contingency · CNF and DNF · predicates, quantifiers and their negations · inclusion–exclusion · mathematical induction with the whole Summer 2026 question · a one-page comparison of the other proof methods.</p>
+    <p><strong>Skipped on purpose:</strong> Venn-diagram drawing, membership tables for four or more sets, PROLOG/LISP expert systems, non-classical logics, cardinality of infinite sets, and long "proof by exhaustion" case lists. Those are self-learning or extension material.</p>
+    <p>Every method below gets a worked example, a note on how to lay it out in the answer sheet, the mistake that costs the most marks, and a short practice question. Answers are separate, at the end.</p>
+  </div>
+
+  <div class="toc">
+    <ol>
+      <li><a href="#s1">Sets: the vocabulary you must have</a></li>
+      <li><a href="#s2">Set operations and the laws of sets</a></li>
+      <li><a href="#s3">Cartesian product and partitions</a></li>
+      <li><a href="#s4">Proving set identities</a></li>
+      <li><a href="#s5">Propositional logic and truth tables</a></li>
+      <li><a href="#s6">Logical equivalence</a></li>
+      <li><a href="#s7">Tautology, contradiction, contingency — and CNF/DNF</a></li>
+      <li><a href="#s8">Predicates and quantifiers</a></li>
+      <li><a href="#s9">Counting with sets: inclusion–exclusion</a></li>
+      <li><a href="#s10">Mathematical induction</a></li>
+      <li><a href="#s11">The other proof methods in one page</a></li>
+      <li><a href="#practice">Practice questions</a></li>
+      <li><a href="#answers">Answer key</a></li>
+      <li><a href="#revision">Last-minute revision sheet</a></li>
+      <li><a href="#sources">Sources, verification and coverage</a></li>
+    </ol>
+  </div>
+
+  <nav class="nav">
+    <a href="#s1">Sets</a>
+    <a href="#s2">Operations</a>
+    <a href="#s3">Products</a>
+    <a href="#s4">Identities</a>
+    <a href="#s5">Logic</a>
+    <a href="#s6">Equivalence</a>
+    <a href="#s7">Tautology</a>
+    <a href="#s8">Quantifiers</a>
+    <a href="#s10">Induction</a>
+    <a href="#practice">Practice</a>
+    <a href="#revision">Revision</a>
+  </nav>
+
+  <h2 id="s1">1 — Sets: the vocabulary you must have</h2>
+
+  <div class="theory">
+    <span class="source">Teacher's definitions — Module 1 PPT, slides 4–15</span>
+    <p>A <strong>set</strong> is a well-defined collection of distinct objects, written with the members separated by commas and the whole group inside curly brackets { }. The objects in it are its <strong>elements</strong> or members, and we use lowercase letters for them.</p>
+    <p>If A = {a, b} then a <strong>belongs to</strong> A, written a ∈ A, and an element c that is not in A satisfies c ∉ A. The number of elements in a set is its <strong>cardinality</strong>, written n(A) or |A|. For A = {1, 2, 3, 4}, |A| = 4.</p>
+    <p>The three dots <strong>…</strong> are an ellipsis and mean "continue in the same pattern". C = {a, b, c, …, z} has 26 elements.</p>
+  </div>
+
+  <p><strong>Simple meaning.</strong> A set is a bag with no order and no duplicates. {2, 4, 6} and {6, 2, 4} and {2, 4, 4, 6} are all the same set. The order of writing carries no information, and repeating an element changes nothing.</p>
+
+  <h3>The three ways to write a set</h3>
+
+  <table>
+    <tr><th>Form</th><th>What it is</th><th>Example (whole numbers below 8)</th></tr>
+    <tr><td><strong>Statement / semantic</strong></td><td>A sentence describing the members</td><td>{the set of whole numbers less than 8}</td></tr>
+    <tr><td><strong>Roster</strong></td><td>The members listed inside { }</td><td>{0, 1, 2, 3, 4, 5, 6, 7}</td></tr>
+    <tr><td><strong>Set-builder</strong></td><td>A rule that every member satisfies</td><td>{x | x is a whole number and x &lt; 8}</td></tr>
+  </table>
+
+  <p>The vertical bar in set-builder form is read "such that". Everything before it is the element being described; everything after it is the condition. Many textbooks write a colon instead of the bar: {x : x is even}.</p>
+
+  <table>
+    <tr><th>Symbol</th><th>Read as</th><th>Meaning</th></tr>
+    <tr><td>∈ / ∉</td><td>belongs to / does not belong</td><td>a ∈ A: a is an element of A</td></tr>
+    <tr><td>|A| or n(A)</td><td>cardinality of A</td><td>the number of distinct elements</td></tr>
+    <tr><td>∅</td><td>empty set</td><td>the set with no elements, ∅ = { }</td></tr>
+    <tr><td>U</td><td>universal set</td><td>the set of everything under discussion</td></tr>
+    <tr><td>A ⊆ B</td><td>A is a subset of B</td><td>every element of A is in B</td></tr>
+    <tr><td>A ⊂ B</td><td>A is a proper subset of B</td><td>A ⊆ B and A ≠ B</td></tr>
+    <tr><td>A′</td><td>complement of A</td><td>U − A</td></tr>
+  </table>
+
+  <div class="theory">
+    <span class="source">Formal definition — subset</span>
+    <p>A is a <strong>subset</strong> of B, written A ⊆ B, when every element of A is also an element of B. In symbols:</p>
+    <div class="eq">A ⊆ B ⟺ ∀x (x ∈ A → x ∈ B)</div>
+    <p>A is a <strong>proper subset</strong> of B, written A ⊂ B, when A ⊆ B and there is at least one element of B that is not in A. Two sets are <strong>equal</strong> when A ⊆ B and B ⊆ A.</p>
+  </div>
+
+  <p>That single line does most of the work in this module. "Subset" is a quantified implication, so it is proved like one and negated like one. To show A ⊄ B you must produce one element that is in A and not in B.</p>
+
+  <p><strong>Facts worth memorising.</strong> They are asked as fill-in-the-blank and used silently in proofs.</p>
+  <ol class="steps">
+    <li>∅ ⊆ A for <em>every</em> set A, including A = ∅. The empty set is a subset of everything.</li>
+    <li>A ⊆ A for every set A. Every set is a subset of itself.</li>
+    <li>If A ⊆ B and B ⊆ C then A ⊆ C. Subset is transitive.</li>
+    <li>∅ is a member of {∅}, but ∅ is not a member of ∅. The empty set contains nothing at all.</li>
+    <li>If |A| = n then A has 2<sup>n</sup> subsets. This is the power-set count.</li>
+  </ol>
+
+  <h3>Power set</h3>
+
+  <div class="theory">
+    <span class="source">Definition — asked verbatim in the IAT sample and the prelim bank</span>
+    <p>The <strong>power set</strong> of A, written P(A), is the set of all subsets of A:</p>
+    <div class="eq">P(A) = { X | X ⊆ A }</div>
+    <p>Every element of P(A) is itself a set. If |A| = n then |P(A)| = 2<sup>n</sup>.</p>
+  </div>
+
+  <p><strong>How to recognise the question.</strong> "Write the power set of A", "find P(A) and its cardinality", "how many subsets does A have". They are the same task. The trap is always the two sets people forget: ∅ and A itself.</p>
+
+  <div class="example">
+    <div class="example-title">Worked example — the power set of a three-element set</div>
+    <p>A = {a, b, c}, so |A| = 3 and P(A) must have 2<sup>3</sup> = 8 members. Build them by size, which guarantees nothing is missed or repeated:</p>
+    <p><strong>0 elements:</strong> ∅</p>
+    <p><strong>1 element:</strong> {a}, {b}, {c}</p>
+    <p><strong>2 elements:</strong> {a, b}, {a, c}, {b, c}</p>
+    <p><strong>3 elements:</strong> {a, b, c}</p>
+    <div class="eq">P(A) = { ∅, {a}, {b}, {c}, {a,b}, {a,c}, {b,c}, {a,b,c} }</div>
+    <p>Each of the eight is a subset of A, and each is written as a set inside the outer brackets. Count: 1 + 3 + 3 + 1 = 8. ✓</p>
+    <p><strong>Exam presentation.</strong> Write the count 2<sup>3</sup> = 8 first, group the subsets by size, then present the final set. The grouping is what shows the examiner you checked.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Worked example — the two edge cases that get asked</div>
+    <p>For A = ∅: the only subset of ∅ is ∅ itself, so P(∅) = {∅} and |P(∅)| = 2<sup>0</sup> = 1. Note that ∅ ≠ {∅}: the left has no elements, the right has one.</p>
+    <p>For A = {∅}: its subsets are ∅ and {∅}, so P({∅}) = {∅, {∅}} and |P({∅})| = 2. The pattern continues: |P(P(∅))| = 2<sup>1</sup> = 2, and so on.</p>
+  </div>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes</h3>
+    <ul>
+      <li>Writing a ∈ A when you mean {a} ⊆ A. A single element and a one-element set are different objects.</li>
+      <li>Using ⊂ when the sets are equal. {1,2} ⊂ {1,2} is false; {1,2} ⊆ {1,2} is true.</li>
+      <li>Leaving ∅ out of the power set, or leaving out A itself. That gives 2<sup>n</sup> − 2 subsets instead of 2<sup>n</sup>.</li>
+      <li>Saying |∅| = 1. The empty set has zero elements; {∅} has one.</li>
+      <li>Confusing "equivalent sets" (same cardinality, different elements allowed) with "equal sets" (identical elements). {1,2} and {p,q} are equivalent but not equal.</li>
+      <li>Writing a set as {a, b, a} and calling its cardinality 3. Duplicates collapse, so the answer is 2.</li>
+    </ul>
+  </div>
+
+  <div class="practice">
+    <h3>Quick check 1</h3>
+    <p>(a) Write P({a, b, c, d}) and give its cardinality. <em>(IAT sample Q11.)</em><br>
+    (b) True or false, with one line of reason each: (i) ∅ ∈ {∅}; (ii) ∅ ⊆ {∅}; (iii) {∅} ⊆ ∅; (iv) {1, 2} ⊂ {1, 2, 3}.<br>
+    (c) Write the set of even integers between 1 and 11 in roster form and in set-builder form. <em>(Answer Q1.)</em></p>
+  </div>
+
+  <h2 id="s2">2 — Set operations and the laws of sets</h2>
+
+  <div class="theory">
+    <span class="source">Teacher's definitions — Module 1 PPT, slides 18–19</span>
+    <p><strong>Union</strong> A ∪ B lists every element that is in A, in B, or in both. <strong>Intersection</strong> A ∩ B lists the common elements. <strong>Difference</strong> A − B lists the elements of A that are not in B. <strong>Complement</strong> A′ lists the elements of the universal set that are not in A. <strong>Symmetric difference</strong> A △ B lists the elements that are in exactly one of A and B:</p>
+    <div class="eq">A △ B = (A ∪ B) − (A ∩ B) = (A − B) ∪ (B − A)</div>
+  </div>
+
+  <table>
+    <tr><th>Operation</th><th>Set-builder definition</th><th>A = {1,2,3,4}, B = {3,4,5,6}</th></tr>
+    <tr><td>A ∪ B</td><td>{x | x ∈ A or x ∈ B}</td><td>{1, 2, 3, 4, 5, 6}</td></tr>
+    <tr><td>A ∩ B</td><td>{x | x ∈ A and x ∈ B}</td><td>{3, 4}</td></tr>
+    <tr><td>A − B</td><td>{x | x ∈ A and x ∉ B}</td><td>{1, 2}</td></tr>
+    <tr><td>B − A</td><td>{x | x ∈ B and x ∉ A}</td><td>{5, 6}</td></tr>
+    <tr><td>A △ B</td><td>{x | x is in exactly one of A, B}</td><td>{1, 2, 5, 6}</td></tr>
+    <tr><td>A′</td><td>{x ∈ U | x ∉ A}</td><td>depends on U</td></tr>
+  </table>
+
+  <p>With U = {1, 2, …, 10} and A = {2, 3, 4, 5, 6} the complement is A′ = {1, 7, 8, 9, 10}. The complement is the one operation that cannot be computed without knowing U, so copy U down before you start.</p>
+
+  <p><strong>Two words the question bank uses.</strong> A and B are <strong>disjoint</strong> when A ∩ B = ∅ — they share nothing. They are <strong>overlapping</strong> when A ∩ B ≠ ∅. Disjointness is a statement about the intersection, not about the elements individually.</p>
+
+  <h3>The laws of set theory</h3>
+
+  <p>These are the identities you are allowed to quote. Learn them as pairs; each law has a union version and a dual intersection version obtained by swapping ∪ with ∩ and ∅ with U.</p>
+
+  <table>
+    <tr><th>Law</th><th>Union form</th><th>Intersection form</th></tr>
+    <tr><td>Idempotent</td><td>A ∪ A = A</td><td>A ∩ A = A</td></tr>
+    <tr><td>Commutative</td><td>A ∪ B = B ∪ A</td><td>A ∩ B = B ∩ A</td></tr>
+    <tr><td>Associative</td><td>(A ∪ B) ∪ C = A ∪ (B ∪ C)</td><td>(A ∩ B) ∩ C = A ∩ (B ∩ C)</td></tr>
+    <tr><td>Distributive</td><td>A ∪ (B ∩ C) = (A ∪ B) ∩ (A ∪ C)</td><td>A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)</td></tr>
+    <tr><td>Identity</td><td>A ∪ ∅ = A</td><td>A ∩ U = A</td></tr>
+    <tr><td>Domination</td><td>A ∪ U = U</td><td>A ∩ ∅ = ∅</td></tr>
+    <tr><td>Complementation</td><td>A ∪ A′ = U</td><td>A ∩ A′ = ∅</td></tr>
+    <tr><td>Double complement</td><td colspan="2">(A′)′ = A</td></tr>
+    <tr><td>De Morgan</td><td>(A ∪ B)′ = A′ ∩ B′</td><td>(A ∩ B)′ = A′ ∪ B′</td></tr>
+    <tr><td>Absorption</td><td>A ∪ (A ∩ B) = A</td><td>A ∩ (A ∪ B) = A</td></tr>
+  </table>
+
+  <p>The distributivity row is the one students most often write backwards. Union distributes over intersection <em>and</em> intersection distributes over union — both are true, and both are used in proofs.</p>
+
+  <h3>Checking a law: membership tables</h3>
+
+  <p>A membership table is the set-theory version of a truth table. It records, for each possible combination of "x is in A", "x is in B", whether x is in each expression. Write 1 for "in" and 0 for "not in". Two expressions are equal exactly when their columns match in every row.</p>
+
+  <div class="example">
+    <div class="example-title">Worked example — proving De Morgan's law with a membership table</div>
+    <p>Claim: (A ∪ B)′ = A′ ∩ B′ for all sets A, B inside a universal set U. An arbitrary element x either lies in A or not, and either lies in B or not, so there are four cases.</p>
+    <table>
+      <tr><th>A</th><th>B</th><th>A ∪ B</th><th>(A ∪ B)′</th><th>A′</th><th>B′</th><th>A′ ∩ B′</th></tr>
+      <tr><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+      <tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+      <tr><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+    </table>
+    <p>The fourth column and the last column are identical in all four rows, so (A ∪ B)′ and A′ ∩ B′ are the same set. That is the proof.</p>
+    <p><strong>Exam presentation.</strong> Label the columns with the expressions, not with A and B only. Then write one sentence: "Columns 4 and 7 agree in every row, hence the sets are equal." Without that sentence the table proves nothing.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Worked example — the same law checked numerically</div>
+    <p>U = {1, 2, …, 10}, A = {2, 3, 4, 5, 6}, B = {5, 6, 7}.</p>
+    <p>A ∪ B = {2, 3, 4, 5, 6, 7}, so (A ∪ B)′ = {1, 8, 9, 10}.</p>
+    <p>A′ = {1, 7, 8, 9, 10} and B′ = {1, 2, 3, 4, 8, 9, 10}, so A′ ∩ B′ = {1, 8, 9, 10}.</p>
+    <p>Same set. A single numerical check never proves a law, but it catches almost every algebra slip, and it is a cheap way to earn the last mark on a "verify" question.</p>
+  </div>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes</h3>
+    <ul>
+      <li>Treating A − B and B − A as the same. {1,2} − {3,4,5,6} and {3,4,5,6} − {1,2} are different sets, and one of them may be empty.</li>
+      <li>Writing A − B as A′ − B or as A ∩ B. The correct identity is A − B = A ∩ B′.</li>
+      <li>Computing a complement with no universal set stated. If U is not given, say what you are assuming.</li>
+      <li>Reading A △ B as "everything except B". It is the elements in exactly one of the two sets, so the common elements are removed.</li>
+      <li>Quoting distributivity in the wrong direction and then "simplifying" into a longer expression.</li>
+      <li>Forgetting that ∪ and ∩ are commutative but − is not.</li>
+    </ul>
+  </div>
+
+  <div class="practice">
+    <h3>Quick check 2</h3>
+    <p>U = {1, 2, 3, …, 12}, A = {1, 2, 3, 4, 6}, B = {2, 4, 6, 8, 10}, C = {3, 6, 9, 12}.<br>
+    Find (a) A ∪ B, (b) A ∩ B ∩ C, (c) A − C, (d) A △ B, (e) (B ∪ C)′. <em>(Answer Q2.)</em></p>
+  </div>
+
+  <h2 id="s3">3 — Cartesian product and partitions</h2>
+
+  <div class="theory">
+    <span class="source">Definition — ordered pair and Cartesian product</span>
+    <p>An <strong>ordered pair</strong> (a, b) is determined by its two coordinates in order: (a, b) = (c, d) exactly when a = c and b = d. The <strong>Cartesian product</strong> of A and B is the set of all ordered pairs with first coordinate from A and second from B:</p>
+    <div class="eq">A × B = { (a, b) | a ∈ A and b ∈ B }</div>
+    <p>If |A| = m and |B| = n then |A × B| = mn.</p>
+  </div>
+
+  <p><strong>Simple meaning.</strong> Pick one item from the first set, pair it with one item from the second, and do that for every combination. The pair is written with round brackets because order matters inside it.</p>
+
+  <p><strong>Properties that get examined.</strong></p>
+  <ol class="steps">
+    <li>A × B and B × A have the same number of elements but are not the same set, unless A = B. (1, 3) is in {1,3,5} × {2,3,8} but (3, 1) is in the other product.</li>
+    <li>A × ∅ = ∅ for every A, because there is no second coordinate to choose.</li>
+    <li>The product distributes over union and intersection: A × (B ∪ C) = (A × B) ∪ (A × C), and the same with ∩.</li>
+    <li>A relation from A to B is by definition a subset of A × B, so |A × B| is the number of possible ordered pairs a relation could contain.</li>
+    <li>|P(A × B)| = 2<sup>|A||B|</sup>, the number of relations from A to B.</li>
+  </ol>
+
+  <div class="example">
+    <div class="example-title">Worked example — A × B, B × A, and their difference (IAT sample Q13)</div>
+    <p>A = {1, 3, 5}, B = {2, 3, 8}. Each product has 3 × 3 = 9 pairs.</p>
+    <p><strong>A × B</strong> — fix the first coordinate and run through B:</p>
+    <div class="eq">{(1,2), (1,3), (1,8), (3,2), (3,3), (3,8), (5,2), (5,3), (5,8)}</div>
+    <p><strong>B × A</strong> — the same work with the roles swapped:</p>
+    <div class="eq">{(2,1), (2,3), (2,5), (3,1), (3,3), (3,5), (8,1), (8,3), (8,5)}</div>
+    <p><strong>(A × B) − (B × A)</strong> — remove from the first list every pair that also appears in the second. A pair (x, y) is in both only if x and y are each in both A and B, and here A ∩ B = {3}. So the only common pair is (3, 3), which leaves 9 − 1 = 8 pairs:</p>
+    <div class="eq">{(1,2), (1,3), (1,8), (3,2), (3,8), (5,2), (5,3), (5,8)}</div>
+    <p><strong>Exam presentation.</strong> Write the products as two neat blocks of nine, then cross out the shared pairs visibly. The crossing-out is the reasoning, and it is worth marks.</p>
+  </div>
+
+  <h3>Partitions</h3>
+
+  <div class="theory">
+    <span class="source">Definition — partition of a set</span>
+    <p>A <strong>partition</strong> of a non-empty set A is a collection of non-empty subsets of A, called blocks, such that</p>
+    <p>(i) the blocks are pairwise disjoint: no element belongs to two of them; and<br>
+    (ii) their union is all of A.</p>
+    <p>In symbols, if the blocks are B<sub>1</sub>, …, B<sub>k</sub> then B<sub>i</sub> ∩ B<sub>j</sub> = ∅ for i ≠ j, and B<sub>1</sub> ∪ … ∪ B<sub>k</sub> = A.</p>
+  </div>
+
+  <p>Two conditions, both required. Missing blocks leave elements unaccounted for; overlapping blocks put an element in two places. Either failure means it is not a partition.</p>
+
+  <div class="example">
+    <div class="example-title">Worked example — every partition of {1, 2, 3}</div>
+    <p>A three-element set has five partitions. List them by the number of blocks:</p>
+    <p><strong>One block:</strong> { {1, 2, 3} }</p>
+    <p><strong>Two blocks:</strong> { {1, 2}, {3} }, { {1, 3}, {2} }, { {2, 3}, {1} }</p>
+    <p><strong>Three blocks:</strong> { {1}, {2}, {3} }</p>
+    <p>Check one of them: { {1, 3}, {2} } uses non-empty blocks, the blocks share nothing, and together they cover {1, 2, 3}. So it is a partition.</p>
+    <p><strong>Not a partition:</strong> { {1, 2}, {2, 3} }. Element 2 sits in both blocks, so the blocks are not disjoint. Also { {1}, {2} } is not a partition of {1,2,3}, because 3 is missing.</p>
+  </div>
+
+  <p><strong>Why partitions matter.</strong> The equivalence classes of an equivalence relation always form a partition of the set, and every partition comes from exactly one equivalence relation. If Module 2 asks you to "find the equivalence classes and verify they partition A", this is the definition you are checking against.</p>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes</h3>
+    <ul>
+      <li>Writing |A × B| = |A| + |B|. It is a product: three choices times three choices gives nine pairs.</li>
+      <li>Using curly brackets for an ordered pair, as in {1, 2} ∈ A × B. Curly brackets destroy the order, so (1, 2) and (2, 1) collapse into one object.</li>
+      <li>Assuming A × B = B × A. They are equal only when A = B, or when one of them is empty.</li>
+      <li>Forgetting that ∅ is never a block of a partition, because blocks must be non-empty.</li>
+      <li>Listing the subsets of A and calling them a partition. The collection must cover A without overlaps, not merely consist of subsets.</li>
+    </ul>
+  </div>
+
+  <div class="practice">
+    <h3>Quick check 3</h3>
+    <p>(a) A = {p, q}, B = {1, 2, 3}. Write A × B and state |A × B|.<br>
+    (b) Is { {1, 4}, {2}, {3, 5} } a partition of {1, 2, 3, 4, 5}? Justify in one line.<br>
+    (c) Write one partition of {a, b, c, d} into two blocks. How many blocks does the partition { {a}, {b}, {c, d} } have? <em>(Answer Q3.)</em></p>
+  </div>
+
+  <h2 id="s4">4 — Proving set identities</h2>
+
+  <p>Three methods prove a claimed identity A = B. Use whichever the question hints at; if it does not hint, the element argument is always acceptable and the algebraic one is fastest.</p>
+
+  <table>
+    <tr><th>Method</th><th>What you do</th><th>Best when</th></tr>
+    <tr><td><strong>Element argument</strong></td><td>Take an arbitrary x, show x ∈ A ⟺ x ∈ B. Often split into A ⊆ B and B ⊆ A.</td><td>The question says "prove", or the identity is not in the law table</td></tr>
+    <tr><td><strong>Membership table</strong></td><td>List all 2<sup>n</sup> cases for n sets and compare columns</td><td>Two or three sets, and the question says "verify" or "using a table"</td></tr>
+    <tr><td><strong>Algebraic proof</strong></td><td>Rewrite one side using the laws in section 2, one law per line</td><td>The result is a standard law, or time is short</td></tr>
+  </table>
+
+  <div class="example">
+    <div class="example-title">Worked example — element argument for A − B = A ∩ B′</div>
+    <p>Let x be an arbitrary element of U. Then</p>
+    <p>x ∈ A − B<br>
+    ⟺ x ∈ A and x ∉ B &nbsp;&nbsp; (definition of set difference)<br>
+    ⟺ x ∈ A and x ∈ B′ &nbsp;&nbsp; (definition of complement)<br>
+    ⟺ x ∈ A ∩ B′ &nbsp;&nbsp; (definition of intersection)</p>
+    <p>Each step is an equivalence, so the two sets contain exactly the same elements and are equal. ∎</p>
+    <p><strong>Exam presentation.</strong> Start with "Let x be arbitrary", chain the equivalences with ⟺ (not →), and finish with "since x was arbitrary, A − B = A ∩ B′". The last sentence is part of the proof.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Worked example — membership table for distributivity</div>
+    <p>Claim: A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C). Three sets give 2<sup>3</sup> = 8 rows.</p>
+    <table>
+      <tr><th>A</th><th>B</th><th>C</th><th>B ∪ C</th><th>A ∩ (B ∪ C)</th><th>A ∩ B</th><th>A ∩ C</th><th>(A ∩ B) ∪ (A ∩ C)</th></tr>
+      <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+      <tr><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+      <tr><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+      <tr><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+    </table>
+    <p>Columns 5 and 8 agree in all eight rows, so the sets are equal. Notice how the table also shows <em>why</em>: A ∩ (B ∪ C) is 1 exactly when A is 1 and at least one of B, C is 1, which is the same condition as "in A and B, or in A and C".</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Worked example — algebraic proof</div>
+    <p>Simplify (A ∪ B) ∩ (A ∪ B′).</p>
+    <p>(A ∪ B) ∩ (A ∪ B′)<br>
+    = A ∪ (B ∩ B′) &nbsp;&nbsp; (distributive law, union over intersection)<br>
+    = A ∪ ∅ &nbsp;&nbsp; (complementation: B ∩ B′ = ∅)<br>
+    = A &nbsp;&nbsp; (identity law)</p>
+    <p>Three lines, three named laws. That is a complete proof of the identity, and it is worth full marks if the laws are named.</p>
+  </div>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes</h3>
+    <ul>
+      <li>Proving only A ⊆ B and stopping. Equality needs both inclusions, or a chain of ⟺.</li>
+      <li>Using ⟹ in a chain of equivalences. If you only have one direction, you have only proved a subset relation.</li>
+      <li>Starting from the statement you are asked to prove and manipulating both sides at once without saying so. Work down from one side.</li>
+      <li>Naming no laws in an algebraic proof. Unnamed steps are assertions, and examiners deduct for them.</li>
+      <li>Building the membership table with the wrong number of rows. n sets need 2<sup>n</sup> rows, so three sets need eight.</li>
+      <li>Reading a Venn diagram and calling it a proof. A picture illustrates; it does not prove.</li>
+    </ul>
+  </div>
+
+  <div class="practice">
+    <h3>Quick check 4</h3>
+    <p>(a) Prove by an element argument that A ∪ (A ∩ B) = A.<br>
+    (b) Use a membership table to check (A ∩ B)′ = A′ ∪ B′.<br>
+    (c) Simplify (A ∩ B) ∪ (A ∩ B′) using the laws, naming each one. <em>(Answer Q4.)</em></p>
+  </div>
+
+  <h2 id="s5">5 — Propositional logic and truth tables</h2>
+
+  <div class="theory">
+    <span class="source">Teacher's definitions — Module 1 PPT, slides 29–39</span>
+    <p>A <strong>proposition</strong> is a declarative sentence that is either true or false, but not both. "Delhi is the capital of India" is a proposition. "Sit down!" is not, because a command has no truth value. "x + 1 = 2" is not, because it is true or false only after x is fixed.</p>
+    <p>A <strong>compound proposition</strong> is built from simpler ones using the logical connectives: negation ¬, conjunction ∧, disjunction ∨, implication → and biconditional ↔. The simple statements inside it are <strong>atomic propositions</strong>, written with variables p, q, r, …</p>
+  </div>
+
+  <p><strong>Simple meaning.</strong> Logic is arithmetic on truth values. Two values, T and F; five operations; and a fixed rule for each combination. Everything else in this module is bookkeeping over those rules.</p>
+
+  <table>
+    <tr><th>p</th><th>q</th><th>¬p</th><th>p ∧ q</th><th>p ∨ q</th><th>p ⊕ q</th><th>p → q</th><th>p ↔ q</th></tr>
+    <tr><td>T</td><td>T</td><td>F</td><td>T</td><td>T</td><td>F</td><td>T</td><td>T</td></tr>
+    <tr><td>T</td><td>F</td><td>F</td><td>F</td><td>T</td><td>T</td><td>F</td><td>F</td></tr>
+    <tr><td>F</td><td>T</td><td>T</td><td>F</td><td>T</td><td>T</td><td>T</td><td>F</td></tr>
+    <tr><td>F</td><td>F</td><td>T</td><td>F</td><td>F</td><td>F</td><td>T</td><td>T</td></tr>
+  </table>
+
+  <p>Four rows, because two variables give 2<sup>2</sup> = 4 combinations. With three variables it is 8 rows, and with n variables 2<sup>n</sup>. Always use the same row order — TT, TF, FT, FF downwards — so the marker can compare your table with the expected one.</p>
+
+  <p><strong>The five connectives, in words.</strong></p>
+  <ol class="steps">
+    <li><strong>¬p</strong> flips the value. It is the only unary connective.</li>
+    <li><strong>p ∧ q</strong> is true only when both are true. Read "and".</li>
+    <li><strong>p ∨ q</strong> is true when at least one is true. This is the inclusive or, which is what mathematics always means by "or".</li>
+    <li><strong>p ⊕ q</strong> is exclusive or: true when exactly one is true. "One or the other but not both."</li>
+    <li><strong>p → q</strong> is false in exactly one case: p true and q false. Every other row is true.</li>
+  </ol>
+
+  <p><strong>Implication is the one that trips everyone up.</strong> From a false hypothesis, anything follows. "If 1 + 1 = 3, then your grandmother wears combat boots" is a true implication, because the hypothesis is false. The connective records only the truth-value relationship; it does not claim that p causes q, and it does not require the two statements to be about the same subject.</p>
+
+  <table>
+    <tr><th>English sentence</th><th>Symbolic form</th><th>Why</th></tr>
+    <tr><td>if p, then q</td><td>p → q</td><td>the standard reading</td></tr>
+    <tr><td>q if p</td><td>p → q</td><td>"if" introduces the hypothesis</td></tr>
+    <tr><td>p only if q</td><td>p → q</td><td>"only if" marks the conclusion, not the hypothesis</td></tr>
+    <tr><td>p is sufficient for q</td><td>p → q</td><td>p being true is enough to force q</td></tr>
+    <tr><td>q is necessary for p</td><td>p → q</td><td>no q means no p</td></tr>
+    <tr><td>q unless ¬p</td><td>p → q</td><td>"unless" hides a negation</td></tr>
+    <tr><td>p if and only if q</td><td>p ↔ q</td><td>both implications at once</td></tr>
+  </table>
+
+  <p>"p only if q" is the classic trap: it translates to p → q, not q → p. Test it with a sentence. "You will pass only if you write the exam" means passing forces writing; it does not mean writing forces passing.</p>
+
+  <h3>Converse, inverse, contrapositive</h3>
+
+  <p>From p → q you can build three related statements. Only one of them is equivalent to the original.</p>
+
+  <table>
+    <tr><th>Name</th><th>Form</th><th>Equivalent to p → q?</th></tr>
+    <tr><td>Converse</td><td>q → p</td><td>No</td></tr>
+    <tr><td>Inverse</td><td>¬p → ¬q</td><td>No</td></tr>
+    <tr><td>Contrapositive</td><td>¬q → ¬p</td><td><strong>Yes</strong></td></tr>
+  </table>
+
+  <p>The converse and the inverse are equivalent to each other, and both fail to be equivalent to the original. You will prove this in section 6 with a truth table, which is a standard exam question.</p>
+
+  <p><strong>Precedence.</strong> When brackets are missing, ¬ binds tightest, then ∧, then ∨, then →, then ↔. So p ∨ q → ¬r means (p ∨ q) → ¬r. Do not rely on this in your answers: bracket everything you write.</p>
+
+  <div class="example">
+    <div class="example-title">Worked example — translating an English sentence (teacher's slide 53)</div>
+    <p>"You can access the Internet from campus only if you are a computer science major or you are not a freshman."</p>
+    <p><strong>Step 1 — name the atoms.</strong> p: you can access the Internet from campus. q: you are a computer science major. r: you are a freshman.</p>
+    <p><strong>Step 2 — find the main connective.</strong> "only if" attaches the whole first clause to the whole second clause, so p is the hypothesis and everything after "only if" is the conclusion.</p>
+    <p><strong>Step 3 — build the conclusion.</strong> "a computer science major or not a freshman" is q ∨ ¬r.</p>
+    <div class="eq">p → (q ∨ ¬r)</div>
+    <p><strong>Check with a row.</strong> Suppose you are not a CS major and you are a freshman, so q = F and r = T. Then q ∨ ¬r = F, so the implication is false when p is true: you cannot access the system. That matches the English.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Worked example — a full truth table for (p ∨ q) → ¬r</div>
+    <p>Three atoms, so eight rows. Build the columns left to right, one connective at a time.</p>
+    <table>
+      <tr><th>p</th><th>q</th><th>r</th><th>p ∨ q</th><th>¬r</th><th>(p ∨ q) → ¬r</th></tr>
+      <tr><td>T</td><td>T</td><td>T</td><td>T</td><td>F</td><td>F</td></tr>
+      <tr><td>T</td><td>T</td><td>F</td><td>T</td><td>T</td><td>T</td></tr>
+      <tr><td>T</td><td>F</td><td>T</td><td>T</td><td>F</td><td>F</td></tr>
+      <tr><td>T</td><td>F</td><td>F</td><td>T</td><td>T</td><td>T</td></tr>
+      <tr><td>F</td><td>T</td><td>T</td><td>T</td><td>F</td><td>F</td></tr>
+      <tr><td>F</td><td>T</td><td>F</td><td>T</td><td>T</td><td>T</td></tr>
+      <tr><td>F</td><td>F</td><td>T</td><td>F</td><td>F</td><td>T</td></tr>
+      <tr><td>F</td><td>F</td><td>F</td><td>F</td><td>T</td><td>T</td></tr>
+    </table>
+    <p>Read the last two rows carefully. When p ∨ q is false, the hypothesis is false, so the implication is true whatever ¬r is — even in row 7 where ¬r is also false. That row is the one people mark wrong.</p>
+    <p><strong>Exam presentation.</strong> Name every column with the exact sub-expression it holds, and finish with a sentence describing the result: "the proposition is false in rows 1, 3 and 5, and true otherwise".</p>
+  </div>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes</h3>
+    <ul>
+      <li>Making p → q false when p is false. A false hypothesis makes the implication true.</li>
+      <li>Translating "p only if q" as q → p. It is p → q.</li>
+      <li>Reading ∨ as exclusive or. p ∨ q is true when both are true; ⊕ is the exclusive version.</li>
+      <li>Writing too few rows. Three atoms need eight rows, not six and not four.</li>
+      <li>Treating the converse as equivalent to the original. "All dogs are animals" is true; "all animals are dogs" is its converse and false.</li>
+      <li>Putting the negation in the wrong place in the sub-column, for example writing ¬(p ∨ q) where the expression says (¬p) ∨ q.</li>
+    </ul>
+  </div>
+
+  <div class="practice">
+    <h3>Quick check 5</h3>
+    <p>(a) Which of these are propositions? (i) 7 + 5 = 12. (ii) Close the door. (iii) n is a prime number. (iv) The moon is made of green cheese.<br>
+    (b) Translate: "You will get the scholarship if and only if your attendance is above 75% or you have a sports quota."<br>
+    (c) Write the converse, inverse and contrapositive of "If a number is divisible by 4, then it is even." <em>(Answer Q5.)</em></p>
+  </div>
+
+  <h2 id="s6">6 — Logical equivalence</h2>
+
+  <div class="theory">
+    <span class="source">Teacher's definition — Module 1 PPT, slides 46–47</span>
+    <p>Two propositions are <strong>logically equivalent</strong>, written A ≡ B, when they always have the same truth value. Equivalently, A ≡ B exactly when the biconditional A ↔ B is a tautology. An identity that is true for every assignment of truth values is called a <strong>law of logic</strong>.</p>
+  </div>
+
+  <p><strong>Two ways to prove it, and how to choose.</strong> A truth table proves equivalence by exhaustion: fill in every row and show the two columns match. A chain of laws proves it by derivation: rewrite one side until it looks like the other. Use the table when the expression has at most three atoms and the question says "using truth tables"; use the laws when the question says "using logical equivalences", which the university papers usually do. The derivation is faster and shorter, but every step must be justified.</p>
+
+  <table>
+    <tr><th>Law</th><th>Form</th></tr>
+    <tr><td>Identity</td><td>p ∧ T ≡ p &nbsp;&nbsp; p ∨ F ≡ p</td></tr>
+    <tr><td>Domination</td><td>p ∨ T ≡ T &nbsp;&nbsp; p ∧ F ≡ F</td></tr>
+    <tr><td>Idempotent</td><td>p ∨ p ≡ p &nbsp;&nbsp; p ∧ p ≡ p</td></tr>
+    <tr><td>Double negation</td><td>¬(¬p) ≡ p</td></tr>
+    <tr><td>Commutative</td><td>p ∨ q ≡ q ∨ p &nbsp;&nbsp; p ∧ q ≡ q ∧ p</td></tr>
+    <tr><td>Associative</td><td>(p ∨ q) ∨ r ≡ p ∨ (q ∨ r) &nbsp;&nbsp; same with ∧</td></tr>
+    <tr><td>Distributive</td><td>p ∧ (q ∨ r) ≡ (p ∧ q) ∨ (p ∧ r) &nbsp;&nbsp; p ∨ (q ∧ r) ≡ (p ∨ q) ∧ (p ∨ r)</td></tr>
+    <tr><td>De Morgan</td><td>¬(p ∧ q) ≡ ¬p ∨ ¬q &nbsp;&nbsp; ¬(p ∨ q) ≡ ¬p ∧ ¬q</td></tr>
+    <tr><td>Absorption</td><td>p ∨ (p ∧ q) ≡ p &nbsp;&nbsp; p ∧ (p ∨ q) ≡ p</td></tr>
+    <tr><td>Implication</td><td>p → q ≡ ¬p ∨ q</td></tr>
+    <tr><td>Negation of implication</td><td>¬(p → q) ≡ p ∧ ¬q</td></tr>
+    <tr><td>Contrapositive</td><td>p → q ≡ ¬q → ¬p</td></tr>
+    <tr><td>Biconditional</td><td>p ↔ q ≡ (p → q) ∧ (q → p)</td></tr>
+  </table>
+
+  <p>Almost every equivalence question in this module starts with the implication law. Whenever you see → and the target has no →, convert every arrow with p → q ≡ ¬p ∨ q as the first move.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Exam question</div>
+    <div class="exam-source">Summer 2026, Q.1(b), 5 marks</div>
+    <p>Using a series of logical equivalences, prove that ((p → q) → r) and (p ∧ ¬q) ∨ r are logically equivalent. Interpret how logical equivalence helps simplify decision rules in software systems.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Worked example — the Summer 2026 proof</div>
+    <p>Work downwards from the left-hand expression, one law per line.</p>
+    <p>(p → q) → r<br>
+    ≡ ¬(p → q) ∨ r &nbsp;&nbsp; (implication law applied to the outer arrow)<br>
+    ≡ ¬(¬p ∨ q) ∨ r &nbsp;&nbsp; (implication law applied to p → q)<br>
+    ≡ (p ∧ ¬q) ∨ r &nbsp;&nbsp; (De Morgan, then double negation)</p>
+    <p>That is the right-hand expression, so the two are logically equivalent. ∎</p>
+    <p><strong>Truth-table confirmation.</strong> The derivation is the answer, but the table below shows the claim really holds in every row — useful if you have time to add a check.</p>
+    <table>
+      <tr><th>p</th><th>q</th><th>r</th><th>p → q</th><th>(p → q) → r</th><th>p ∧ ¬q</th><th>(p ∧ ¬q) ∨ r</th></tr>
+      <tr><td>T</td><td>T</td><td>T</td><td>T</td><td>T</td><td>F</td><td>T</td></tr>
+      <tr><td>T</td><td>T</td><td>F</td><td>T</td><td>F</td><td>F</td><td>F</td></tr>
+      <tr><td>T</td><td>F</td><td>T</td><td>F</td><td>T</td><td>T</td><td>T</td></tr>
+      <tr><td>T</td><td>F</td><td>F</td><td>F</td><td>T</td><td>T</td><td>T</td></tr>
+      <tr><td>F</td><td>T</td><td>T</td><td>T</td><td>T</td><td>F</td><td>T</td></tr>
+      <tr><td>F</td><td>T</td><td>F</td><td>T</td><td>F</td><td>F</td><td>F</td></tr>
+      <tr><td>F</td><td>F</td><td>T</td><td>T</td><td>T</td><td>F</td><td>T</td></tr>
+      <tr><td>F</td><td>F</td><td>F</td><td>T</td><td>F</td><td>F</td><td>F</td></tr>
+    </table>
+    <p>Columns 5 and 7 match in all eight rows.</p>
+    <p><strong>The interpretation part.</strong> The two forms describe the same decision rule, but the right-hand one contains no implication. In a program, (p ∧ ¬q) ∨ r is three basic tests joined by AND, NOT and OR — a direct branch — whereas nested implications are harder to read and harder to test. Equivalence lets a designer replace a convoluted rule with a simpler one without changing any outcome, which is what makes automated rules engines and access-control checks auditable.</p>
+    <p><strong>Exam presentation.</strong> One expression per line, law named at the right, final line matching the target exactly. Then a two- or three-sentence interpretation. The marks are split roughly three for the derivation and two for the interpretation.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Exam question</div>
+    <div class="exam-source">Winter 2025, Q.1(b)</div>
+    <p>Prove that (P ∨ Q) → R ≡ (P → R) ∧ (Q → R).</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Worked example — the Winter 2025 proof</div>
+    <p>Reduce both sides separately until they meet in the middle. This is easier than pushing one side all the way, because each side needs only two steps.</p>
+    <p><strong>Left-hand side.</strong></p>
+    <p>(P ∨ Q) → R<br>
+    ≡ ¬(P ∨ Q) ∨ R &nbsp;&nbsp; (implication law)<br>
+    ≡ (¬P ∧ ¬Q) ∨ R &nbsp;&nbsp; (De Morgan)</p>
+    <p><strong>Right-hand side.</strong></p>
+    <p>(P → R) ∧ (Q → R)<br>
+    ≡ (¬P ∨ R) ∧ (¬Q ∨ R) &nbsp;&nbsp; (implication law, twice)<br>
+    ≡ (¬P ∧ ¬Q) ∨ R &nbsp;&nbsp; (distributive law, read right to left)</p>
+    <p>Both sides equal (¬P ∧ ¬Q) ∨ R, so they are equivalent. ∎</p>
+    <p><strong>Why the last step is legitimate.</strong> Distributivity says X ∨ (Y ∧ Z) ≡ (X ∨ Y) ∧ (X ∨ Z). Put X = R, Y = ¬P, Z = ¬Q and read it from right to left: (¬P ∨ R) ∧ (¬Q ∨ R) ≡ R ∨ (¬P ∧ ¬Q). The ∧ terms are swapped by the commutative law for good measure, and that is the left-hand result.</p>
+    <p><strong>The dual worth knowing.</strong> The same argument with ∧ and ∨ exchanged gives (P ∧ Q) → R ≡ (P → R) ∨ (Q → R). Both identities are true, and mixing them up is a common error. "If either one happens, then R" splits into an AND of implications; "if both happen, then R" splits into an OR.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Worked example — a third equivalence (IAT sample Q12(i))</div>
+    <p>Prove that ¬(p ∨ (¬p ∧ q)) ≡ ¬p ∧ ¬q.</p>
+    <p>¬(p ∨ (¬p ∧ q))<br>
+    ≡ ¬p ∧ ¬(¬p ∧ q) &nbsp;&nbsp; (De Morgan)<br>
+    ≡ ¬p ∧ (p ∨ ¬q) &nbsp;&nbsp; (De Morgan again, then double negation)<br>
+    ≡ (¬p ∧ p) ∨ (¬p ∧ ¬q) &nbsp;&nbsp; (distributive law)<br>
+    ≡ F ∨ (¬p ∧ ¬q) &nbsp;&nbsp; (complementation: ¬p ∧ p ≡ F)<br>
+    ≡ ¬p ∧ ¬q &nbsp;&nbsp; (identity law)</p>
+    <p>Five steps, five laws. If the question allows only a truth table, this same expression takes four rows; either is accepted, but the derivation is what the phrase "using logical equivalences" asks for.</p>
+  </div>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes</h3>
+    <ul>
+      <li>Applying De Morgan to an implication: writing ¬(p → q) as ¬p → ¬q. It is p ∧ ¬q.</li>
+      <li>Dropping a negation in the middle of a chain, especially after two De Morgan steps.</li>
+      <li>Claiming equivalence because the two expressions agree in most rows. They must agree in all 2<sup>n</sup> rows.</li>
+      <li>Using ⇔ or ⟺ between expressions without saying that is what you are proving. In a derivation chain use ≡, which means "equivalent to".</li>
+      <li>Changing both sides at once and losing track of which statement you have actually established.</li>
+      <li>Naming a law that does not apply — "by De Morgan" on a step that needs distributivity.</li>
+      <li>Answering only the derivation in a question that also says "interpret". That second part carries marks.</li>
+    </ul>
+  </div>
+
+  <div class="practice">
+    <h3>Quick check 6</h3>
+    <p>(a) Prove p → q ≡ ¬q → ¬p using the laws of logic.<br>
+    (b) Prove ¬(p ∧ q) ∨ p ≡ p ∨ ¬q.<br>
+    (c) Show that the converse of p → q is <em>not</em> equivalent to p → q, by giving one row of a truth table where they differ. <em>(Answer Q6.)</em></p>
+  </div>
+
+  <h2 id="s7">7 — Tautology, contradiction, contingency — and CNF/DNF</h2>
+
+  <div class="theory">
+    <span class="source">Teacher's definitions — Module 1 PPT, slides 55–56</span>
+    <p>A <strong>tautology</strong> is a compound proposition that is true for every assignment of truth values — for example p ∨ ¬p. A <strong>contradiction</strong> is false for every assignment — for example p ∧ ¬p. A <strong>contingency</strong> is neither: true in some rows and false in others, such as ¬p.</p>
+  </div>
+
+  <table>
+    <tr><th>Type</th><th>Final column of the truth table</th><th>How to answer "classify this"</th></tr>
+    <tr><td>Tautology</td><td>All T</td><td>Say "tautology" and show the column is all T</td></tr>
+    <tr><td>Contradiction</td><td>All F</td><td>Say "contradiction" and show the column is all F</td></tr>
+    <tr><td>Contingency</td><td>Mixed</td><td>Say "contingency" and give one T row and one F row</td></tr>
+  </table>
+
+  <p>Two routes to the answer. The truth table always works and is what most questions intend. Simplification with the laws is faster and shows more understanding, and it is the only practical route once there are four or more atoms. Do the table if the expression has at most three atoms; simplify if it has more, or if you can already see the shape.</p>
+
+  <div class="example">
+    <div class="example-title">Worked example — is [(p → r) ∧ (¬q → p) ∧ ¬r] → q a tautology? (IAT sample Q9(i))</div>
+    <p>Simplify the antecedent first, because it contains a fact that kills one of its own parts.</p>
+    <p><strong>The antecedent.</strong></p>
+    <p>(p → r) ∧ ¬r<br>
+    ≡ (¬p ∨ r) ∧ ¬r &nbsp;&nbsp; (implication law)<br>
+    ≡ (¬p ∧ ¬r) ∨ (r ∧ ¬r) &nbsp;&nbsp; (distributive law)<br>
+    ≡ (¬p ∧ ¬r) ∨ F &nbsp;&nbsp; (complementation)<br>
+    ≡ ¬p ∧ ¬r &nbsp;&nbsp; (identity law)</p>
+    <p>So the antecedent gives us both ¬p and ¬r. Now the middle conjunct:</p>
+    <p>(¬q → p) ≡ q ∨ p &nbsp;&nbsp; (implication law, with the double negation simplified)</p>
+    <p><strong>Combine.</strong> The whole antecedent is (¬p ∧ ¬r) ∧ (q ∨ p). Since ¬p holds, p is false, so q ∨ p reduces to q:</p>
+    <p>(¬p ∧ ¬r) ∧ (q ∨ p) ≡ (¬p ∧ ¬r) ∧ q &nbsp;&nbsp; (p is false, so q ∨ p ≡ q)</p>
+    <p><strong>The implication.</strong> Let A = ¬p ∧ ¬r ∧ q. We must classify A → q:</p>
+    <p>A → q ≡ ¬A ∨ q ≡ ¬(¬p ∧ ¬r ∧ q) ∨ q</p>
+    <p>But A already contains q as a conjunct, so whenever A is true, q is true. Formally:</p>
+    <p>(¬p ∧ ¬r ∧ q) → q ≡ ¬(¬p ∧ ¬r ∧ q) ∨ q ≡ (p ∨ r ∨ ¬q) ∨ q ≡ p ∨ r ∨ (¬q ∨ q) ≡ p ∨ r ∨ T ≡ T</p>
+    <p>Every assignment makes it true, so it is a <strong>tautology</strong>.</p>
+    <p><strong>Faster reading.</strong> The antecedent asserts ¬r and also that p → r. If p were true, r would be true, contradicting ¬r. So p is false. With p false, ¬q → p forces ¬q to be false, that is q is true. So the antecedent can only be true when q is true, which is exactly what the implication claims. That argument is the same simplification in words, and it is what you should write if the question says "justify".</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Worked example — is (p → q) ∧ ¬q a tautology? (IAT sample Q9(ii))</div>
+    <p>(p → q) ∧ ¬q<br>
+    ≡ (¬p ∨ q) ∧ ¬q &nbsp;&nbsp; (implication law)<br>
+    ≡ (¬p ∧ ¬q) ∨ (q ∧ ¬q) &nbsp;&nbsp; (distributive law)<br>
+    ≡ (¬p ∧ ¬q) ∨ F &nbsp;&nbsp; (complementation)<br>
+    ≡ ¬p ∧ ¬q &nbsp;&nbsp; (identity law)</p>
+    <p>This is true when p and q are both false, and false otherwise. It is a <strong>contingency</strong>, not a tautology.</p>
+    <p>Notice what the expression means: "p implies q, and q is false". The only way that can hold is p false as well. It is the first half of modus tollens — the step that concludes ¬p. The implication (p → q) ∧ ¬q → ¬p <em>is</em> a tautology, and that is the inference rule; strip the conclusion and you get a contingency.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Worked example — (p → q) ↔ (¬q → ¬p) is a tautology</div>
+    <p>By the contrapositive law, p → q ≡ ¬q → ¬p. So the two sides of the biconditional are the same proposition, and X ↔ X ≡ T. That is a one-line proof if the law is allowed.</p>
+    <p>By truth table: columns for p → q and ¬q → ¬p are both F, T, T, T, so the biconditional column is T, T, T, T. Both routes give the same verdict, and the table is what to write if the question says "using truth tables".</p>
+  </div>
+
+  <h3>CNF and DNF</h3>
+
+  <p>Both university question banks ask for CNF or DNF, so learn the vocabulary precisely. It is easy marks once the names are straight.</p>
+
+  <table>
+    <tr><th>Term</th><th>Meaning</th><th>Example</th></tr>
+    <tr><td>Literal</td><td>A variable or its negation</td><td>p, ¬q</td></tr>
+    <tr><td>Clause</td><td>Literals joined by ∨</td><td>p ∨ ¬q ∨ r</td></tr>
+    <tr><td>Term (minterm)</td><td>Literals joined by ∧, one per variable</td><td>p ∧ ¬q ∧ r</td></tr>
+    <tr><td><strong>CNF</strong></td><td>Conjunction of clauses — AND of ORs</td><td>(p ∨ q) ∧ (¬p ∨ r)</td></tr>
+    <tr><td><strong>DNF</strong></td><td>Disjunction of terms — OR of ANDs</td><td>(p ∧ q) ∨ (¬p ∧ r)</td></tr>
+  </table>
+
+  <p>The names tell you the outer operator: <strong>C</strong>NF has the <strong>c</strong>onjunction outside; <strong>D</strong>NF has the <strong>d</strong>isjunction outside. If you remember only that, you will not swap them.</p>
+
+  <ol class="steps">
+    <li>Remove every ↔ using p ↔ q ≡ (p → q) ∧ (q → p).</li>
+    <li>Remove every → using p → q ≡ ¬p ∨ q.</li>
+    <li>Push negations inwards with De Morgan and double negation until ¬ sits only on single variables.</li>
+    <li>For CNF, distribute ∨ over ∧ until the expression is an AND of ORs. For DNF, distribute ∧ over ∨ until it is an OR of ANDs.</li>
+    <li>Drop duplicate literals and duplicate clauses, and delete clauses containing q ∨ ¬q (they are T, so they vanish from a conjunction).</li>
+  </ol>
+
+  <div class="example">
+    <div class="example-title">Worked example — CNF and DNF of [P → (Q ∧ R)] ∧ [¬P → (¬Q ∧ ¬R)] (IAT sample Q10(ii))</div>
+    <p><strong>Step 2 — remove the arrows.</strong></p>
+    <p>P → (Q ∧ R) ≡ ¬P ∨ (Q ∧ R)</p>
+    <p>¬P → (¬Q ∧ ¬R) ≡ ¬(¬P) ∨ (¬Q ∧ ¬R) ≡ P ∨ (¬Q ∧ ¬R)</p>
+    <p><strong>Step 3 — negations are already on single variables.</strong> Nothing to do.</p>
+    <p><strong>Step 4 — distribute for CNF.</strong></p>
+    <p>¬P ∨ (Q ∧ R) ≡ (¬P ∨ Q) ∧ (¬P ∨ R)</p>
+    <p>P ∨ (¬Q ∧ ¬R) ≡ (P ∨ ¬Q) ∧ (P ∨ ¬R)</p>
+    <div class="eq">CNF: (¬P ∨ Q) ∧ (¬P ∨ R) ∧ (P ∨ ¬Q) ∧ (P ∨ ¬R)</div>
+    <p>Four clauses, each a disjunction, joined by ∧.</p>
+    <p><strong>For the DNF, use the truth table.</strong> Distributing the four clauses into an OR of ANDs is long and error-prone; reading the true rows is reliable.</p>
+    <table>
+      <tr><th>P</th><th>Q</th><th>R</th><th>P → (Q ∧ R)</th><th>¬P → (¬Q ∧ ¬R)</th><th>Whole</th></tr>
+      <tr><td>T</td><td>T</td><td>T</td><td>T</td><td>T</td><td>1</td></tr>
+      <tr><td>T</td><td>T</td><td>F</td><td>F</td><td>T</td><td>0</td></tr>
+      <tr><td>T</td><td>F</td><td>T</td><td>F</td><td>T</td><td>0</td></tr>
+      <tr><td>T</td><td>F</td><td>F</td><td>F</td><td>T</td><td>0</td></tr>
+      <tr><td>F</td><td>T</td><td>T</td><td>T</td><td>F</td><td>0</td></tr>
+      <tr><td>F</td><td>T</td><td>F</td><td>T</td><td>F</td><td>0</td></tr>
+      <tr><td>F</td><td>F</td><td>T</td><td>T</td><td>F</td><td>0</td></tr>
+      <tr><td>F</td><td>F</td><td>F</td><td>T</td><td>T</td><td>1</td></tr>
+    </table>
+    <p>Only rows 1 and 8 are true, so the DNF has exactly two terms — one matching each true row, with a letter negated where that row has F:</p>
+    <div class="eq">DNF: (P ∧ Q ∧ R) ∨ (¬P ∧ ¬Q ∧ ¬R)</div>
+    <p>Sanity check on the CNF: set P = F, Q = F, R = F. Clause 1 is ¬F ∨ F = T; clause 2 is ¬F ∨ F = T; clause 3 is F ∨ ¬F = T; clause 4 is F ∨ ¬F = T. All four true, so the conjunction is true — and row 8 of the table is indeed 1. Now set P = F, Q = T, R = F: clause 1 is T, clause 2 is T, clause 3 is F ∨ F = F. The conjunction is false, matching row 6. The CNF is right.</p>
+    <p><strong>Exam presentation.</strong> State which one you are producing, show the arrow-removal steps, then the distribution. Write the final answer on its own line, with the outer operator obvious. If you use the truth table for the DNF, say so — "reading the true rows" is a legitimate method and examiners accept it.</p>
+  </div>
+
+  <div class="theory">
+    <span class="source">A note on one bank question</span>
+    <p>The banks also print "Convert into CNF and DNF: (A → B) → (B → C) → (A → C)". As printed the brackets are ambiguous. Under either sensible reading — [(A → B) ∧ (B → C)] → (A → C), or (A → B) → ((B → C) → (A → C)) — the statement is a tautology (it is hypothetical syllogism), so its CNF is simply <strong>true</strong> and its DNF is the disjunction of all eight minterms. That is a legitimate answer but a strange exam question, so state your reading, prove the tautology in two lines, and add the two forms. If your teacher intended a different grouping, the method above still applies; only the arithmetic changes.</p>
+  </div>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes</h3>
+    <ul>
+      <li>Swapping CNF and DNF. Check which operator is on the outside.</li>
+      <li>Stopping the distribution halfway, leaving a ∧ inside a clause or a ∨ inside a term.</li>
+      <li>Leaving a negation over a bracket, as in ¬(P ∨ Q), instead of pushing it in with De Morgan.</li>
+      <li>Converting → to ∧. The implication law uses ∨: p → q ≡ ¬p ∨ q.</li>
+      <li>Calling a contingency a tautology because most rows are true. One false row is enough to disqualify it.</li>
+      <li>Writing the final column of the truth table from the wrong sub-column, usually by reading ¬r as ¬q.</li>
+      <li>Forgetting to drop repeated clauses, so the answer has (¬P ∨ Q) twice.</li>
+    </ul>
+  </div>
+
+  <div class="practice">
+    <h3>Quick check 7</h3>
+    <p>(a) Classify each as tautology, contradiction or contingency: (i) (p ∧ q) → p; (ii) p ↔ ¬p; (iii) (p ∨ q) ∧ ¬p.<br>
+    (b) Convert (p → q) ∧ (q → r) into CNF.<br>
+    (c) Give the DNF of p ⊕ q. <em>(Answer Q7.)</em></p>
+  </div>
+
+  <h2 id="s8">8 — Predicates and quantifiers</h2>
+
+  <div class="theory">
+    <span class="source">Teacher's definitions — Module 1 PPT, slides 70–82</span>
+    <p>A <strong>predicate</strong> (or propositional function) is a statement containing one or more variables, whose truth depends on the values those variables take. "x is greater than 3" is a predicate; we write it P(x). P is the predicate symbol and x is its argument.</p>
+    <p>A predicate becomes a proposition — something with a truth value — in exactly two ways: replace every variable by a value from the domain, or bind every variable with a quantifier. The set of allowed values is the <strong>domain</strong> or <strong>universe of discourse</strong>, usually written U.</p>
+  </div>
+
+  <table>
+    <tr><th>Predicate</th><th>Read as</th><th>Name</th></tr>
+    <tr><td>Father(x)</td><td>x is a father</td><td>unary (one argument)</td></tr>
+    <tr><td>Brother(x, y)</td><td>x is a brother of y</td><td>binary</td></tr>
+    <tr><td>Sum(x, y, z)</td><td>x + y = z</td><td>ternary</td></tr>
+    <tr><td>P(x<sub>1</sub>, …, x<sub>n</sub>)</td><td>an n-place property</td><td>n-ary</td></tr>
+  </table>
+
+  <p>With P(x) meaning "x &gt; 5" and U the integers, P(8) is true and P(5) is false. With P(x, y, z) meaning x + y = z, P(−4, 6, 2) is true and P(5, 2, 10) is false. But P(5, x, 7) is still a predicate, not a proposition, because x is free.</p>
+
+  <table>
+    <tr><th>Quantifier</th><th>Symbol</th><th>Read as</th><th>True when</th></tr>
+    <tr><td>Universal</td><td>∀x P(x)</td><td>for all x, P(x)</td><td>every element of U satisfies P</td></tr>
+    <tr><td>Existential</td><td>∃x P(x)</td><td>there exists x such that P(x)</td><td>at least one element of U satisfies P</td></tr>
+  </table>
+
+  <p><strong>The domain decides the truth value, not just the predicate.</strong> Let P(x) be "x &gt; 0". With U = the integers, ∀x P(x) is false. With U = the positive integers, ∀x P(x) is true. Nothing about P changed; only the universe did. So every answer must state the domain.</p>
+
+  <p><strong>Finite domains turn quantifiers into connectives.</strong> If U = {1, 2, 3} then</p>
+  <div class="eq">∀x P(x) ≡ P(1) ∧ P(2) ∧ P(3) &nbsp;&nbsp;&nbsp; ∃x P(x) ≡ P(1) ∨ P(2) ∨ P(3)</div>
+  <p>That is why the translation rules below use ∧ with ∃ and → with ∀.</p>
+
+  <h3>Translating English into quantifiers</h3>
+
+  <table>
+    <tr><th>English shape</th><th>Symbolic form</th><th>Note</th></tr>
+    <tr><td>All S are P</td><td>∀x (S(x) → P(x))</td><td>implication, never ∧</td></tr>
+    <tr><td>Some S are P</td><td>∃x (S(x) ∧ P(x))</td><td>conjunction, never →</td></tr>
+    <tr><td>No S are P</td><td>∀x (S(x) → ¬P(x))</td><td>same as "all S are not P"</td></tr>
+    <tr><td>Some S are not P</td><td>∃x (S(x) ∧ ¬P(x))</td><td>the negation of "all S are P"</td></tr>
+  </table>
+
+  <p>Getting ∧ and → the wrong way round is the single most common error in this topic, and it is easy to see why it is wrong. "All students are friendly" as ∀x(S(x) ∧ F(x)) claims that <em>everything in the universe</em> is a student and friendly — including the examiner's dog. The implication version says: if it is a student, then it is friendly, which is what the English means.</p>
+
+  <h3>Negating a quantified statement</h3>
+
+  <div class="theory">
+    <span class="source">The two negation rules</span>
+    <div class="eq">¬∀x P(x) ≡ ∃x ¬P(x) &nbsp;&nbsp;&nbsp;&nbsp; ¬∃x P(x) ≡ ∀x ¬P(x)</div>
+    <p>To negate a quantifier, flip it and negate the inside. "Not all" becomes "some not"; "none" becomes "all not".</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Worked example — the Java sentence and its negation (teacher's slide 86)</div>
+    <p>"Every student in this class has taken a course in Java." Domain: all people.</p>
+    <p>Predicates: Student(x) — x is a student in this class; Taken(x, y) — x has taken course y; Java is a constant naming the Java course.</p>
+    <div class="eq">∀x (Student(x) → Taken(x, Java))</div>
+    <p><strong>Negation.</strong> Flip the quantifier swap to ∃, then negate the implication:</p>
+    <p>¬∀x (Student(x) → Taken(x, Java))<br>
+    ≡ ∃x ¬(Student(x) → Taken(x, Java)) &nbsp;&nbsp; (negation rule)<br>
+    ≡ ∃x (Student(x) ∧ ¬Taken(x, Java)) &nbsp;&nbsp; (negation of implication)</p>
+    <p>In words: there is at least one student in this class who has not taken Java. That is exactly the English negation. Note that the ∧ appears here for a reason — the ¬ before the implication is what turns → into ∧.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Worked example — two sentences from the prelim bank</div>
+    <p>Domain: all people. S(x): x is a student. G(x): x took GenAI. P(x): x passes GenAI.</p>
+    <p><strong>(i) Some students took GenAI.</strong> The word "some" needs ∃ and the two conditions are both asserted, so they join with ∧:</p>
+    <div class="eq">∃x (S(x) ∧ G(x))</div>
+    <p><strong>(ii) Every student who takes GenAI passes it.</strong> "Every … who" makes the student-and-GenAI part a hypothesis, so it becomes the left side of an implication:</p>
+    <div class="eq">∀x ((S(x) ∧ G(x)) → P(x))</div>
+    <p>The ∧ sits <em>inside</em> the hypothesis because "student who takes GenAI" is one combined condition; the → separates it from the conclusion.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Worked example — three class statements (teacher's slide 87)</div>
+    <p>S(x): x is a student. M(x): x has taken a course in mathematics. G(x): x is a girl student. C(x): x is in the class. P(x): x is a sports person. I(x): x is intelligent. H(x): x is hardworking.</p>
+    <p><strong>(i) All students have taken a course in mathematics.</strong></p>
+    <div class="eq">∀x (S(x) → M(x))</div>
+    <p><strong>(ii) There is a girl student in a class who is also a sports person.</strong> Three conditions must hold of the same person, so all three join with ∧:</p>
+    <div class="eq">∃x (G(x) ∧ C(x) ∧ P(x))</div>
+    <p><strong>(iii) Some students are intelligent, but not hardworking.</strong> "But" means "and".</p>
+    <div class="eq">∃x (S(x) ∧ I(x) ∧ ¬H(x))</div>
+  </div>
+
+  <h3>Two quantifiers in one statement</h3>
+
+  <p>When quantifiers are nested, order matters. Compare, over the real numbers:</p>
+  <p>∀x ∃y (x + y = 0) — for every x there is some y, namely y = −x. <strong>True.</strong></p>
+  <p>∃y ∀x (x + y = 0) — there is one fixed y that works for every x. <strong>False.</strong></p>
+  <p>Read left to right: the first quantifier chooses first, and later ones may depend on it. A y chosen after x can depend on x; a y chosen before x cannot.</p>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes</h3>
+    <ul>
+      <li>Writing ∀x (S(x) ∧ P(x)) for "all S are P". Use →.</li>
+      <li>Writing ∃x (S(x) → P(x)) for "some S is P". Use ∧.</li>
+      <li>Negating ∀x P(x) as ∀x ¬P(x). That is the negation of ∃x P(x).</li>
+      <li>Negating a quantified implication without turning the → into ∧. ¬(A → B) is A ∧ ¬B.</li>
+      <li>Leaving the domain unstated, then arguing about the truth value.</li>
+      <li>Swapping nested quantifiers and expecting the same meaning.</li>
+      <li>Treating a predicate with a free variable as a proposition.</li>
+    </ul>
+  </div>
+
+  <div class="practice">
+    <h3>Quick check 8</h3>
+    <p>Domain: all people. S(x): x is a student. F(x): x is friendly. H(x): x speaks Hindi. B(x): x was born in India.<br>
+    (a) Write in symbols: (i) everyone is friendly; (ii) someone speaks Hindi; (iii) some student was not born in India.<br>
+    (b) Negate each of your three answers and translate the negation back into English. <em>(Answer Q8.)</em></p>
+  </div>
+
+  <h2 id="s9">9 — Counting with sets: inclusion–exclusion</h2>
+
+  <p>Set operations tell you which elements are shared; inclusion–exclusion turns that into a count. It is the standard tool for "how many people have at least one of these properties" questions, and the Summer 2026 paper asks exactly that.</p>
+
+  <div class="theory">
+    <span class="source">The two formulas</span>
+    <div class="eq">|A ∪ B| = |A| + |B| − |A ∩ B|</div>
+    <div class="eq">|A ∪ B ∪ C| = |A| + |B| + |C| − |A ∩ B| − |A ∩ C| − |B ∩ C| + |A ∩ B ∩ C|</div>
+    <p>Add the single sets, subtract the pairwise overlaps, add back the triple overlap. The last term is added because the elements in all three sets were counted three times and subtracted three times.</p>
+  </div>
+
+  <p>The "exactly one" count is not given directly by the formula, so derive it per set. The elements in A and in nothing else are</p>
+  <div class="eq">|A only| = |A| − |A ∩ B| − |A ∩ C| + |A ∩ B ∩ C|</div>
+  <p>and similarly for B only and C only. Add the three to get "exactly one". "Exactly two" is the sum of the three pairwise-only counts, each computed as |A ∩ B| − |A ∩ B ∩ C|.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Exam question</div>
+    <div class="exam-source">Summer 2026, Q.2(a), 7 marks</div>
+    <p>A drug trial on 1000 people records: 122 develop symptom A, 88 develop B, 112 develop C, 27 develop A and B, 29 develop A and C, 32 develop B and C, and 10 develop all three. Find how many develop at least one symptom, and how many show exactly one. (The paper also asks for a Venn diagram filled in; that part is not reproduced here — this guide does not do diagrams.)</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Worked example — the Summer 2026 drug trial</div>
+    <p>|A| = 122, |B| = 88, |C| = 112, |A ∩ B| = 27, |A ∩ C| = 29, |B ∩ C| = 32, |A ∩ B ∩ C| = 10, |U| = 1000.</p>
+    <p><strong>At least one symptom.</strong></p>
+    <p>|A ∪ B ∪ C| = 122 + 88 + 112 − 27 − 29 − 32 + 10<br>
+    = 322 − 88 + 10<br>
+    = <strong>244</strong></p>
+    <p><strong>Exactly one symptom.</strong> Compute each region separately.</p>
+    <p>A only = 122 − 27 − 29 + 10 = 76<br>
+    B only = 88 − 27 − 32 + 10 = 39<br>
+    C only = 112 − 29 − 32 + 10 = 61</p>
+    <p>Exactly one = 76 + 39 + 61 = <strong>176</strong></p>
+    <p><strong>Cross-check.</strong> Exactly two = (27 − 10) + (29 − 10) + (32 − 10) = 17 + 19 + 22 = 58. Then 176 + 58 + 10 = 244, which matches the union. ✓ And the number with no symptom is 1000 − 244 = 756.</p>
+    <p><strong>Interpretation.</strong> 244 of 1000 people (24.4%) showed at least one symptom, but only 176 (17.6%) showed exactly one, so a substantial part of the affected group showed overlapping symptoms. For a trial report this matters: counting symptom reports separately, 322 reports would overstate the number of affected people by 78.</p>
+    <p><strong>Exam presentation.</strong> Write the formula, substitute, and compute in one line. Then give the three region counts with their derivation. If the question asks for a diagram, the five numbers 76, 39, 61, 17, 19, 22, 10 are what goes into it — but the arithmetic carries the marks.</p>
+  </div>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes</h3>
+    <ul>
+      <li>Forgetting to add the triple intersection back. Dropping the +10 gives 234, which is wrong.</li>
+      <li>Subtracting |A ∩ B ∩ C| from the pairwise totals the wrong number of times.</li>
+      <li>Computing "exactly one" as |A| + |B| + |C| minus the pairs, which mixes two different questions.</li>
+      <li>Reporting "at least one" as the number with no symptom, or the reverse.</li>
+      <li>Assuming the 1000 people are all in A ∪ B ∪ C. They are not, unless the question says so.</li>
+    </ul>
+  </div>
+
+  <div class="practice">
+    <h3>Quick check 9</h3>
+    <p>150 students: 60 take Mathematics, 50 Physics, 40 Chemistry, 20 take Maths and Physics, 15 Physics and Chemistry, 10 Maths and Chemistry, 5 take all three. Find the number taking at least one subject, the number taking exactly one, and the number taking none. <em>(Answer Q9.)</em></p>
+  </div>
+
+  <h2 id="s10">10 — Mathematical induction</h2>
+
+  <div class="theory">
+    <span class="source">Teacher's definition — Module 1 PPT, slide 101; the exam question is Summer 2026 Q.4(b)</span>
+    <p><strong>Principle of mathematical induction.</strong> Let P(n) be a statement about the natural numbers. If</p>
+    <p>(i) P(1) is true — the base case, and<br>
+    (ii) for every k ≥ 1, P(k) true implies P(k+1) true — the inductive step,</p>
+    <p>then P(n) is true for every n ≥ 1.</p>
+  </div>
+
+  <p><strong>Why it works.</strong> The base case starts a chain. The inductive step says each true statement forces the next one. So P(1) forces P(2), P(2) forces P(3), and so on without end. Induction is not "assuming what you want to prove": you assume P(k) for one unspecified k and prove P(k+1) from it, which is a conditional statement.</p>
+
+  <ol class="steps">
+    <li><strong>State P(n) explicitly.</strong> Write the claim with n in both sides so the target is unambiguous.</li>
+    <li><strong>Base case.</strong> Substitute the starting value, compute both sides separately, and say they are equal.</li>
+    <li><strong>Inductive hypothesis.</strong> "Assume P(k) is true for some arbitrary k ≥ 1", and write that equation down. You will use it.</li>
+    <li><strong>Inductive step.</strong> Show P(k+1). Start from the left side at k+1, split off the new last term, replace the rest using the hypothesis, then algebraically reach the right side at k+1. Finish with "this is P(k+1)".</li>
+    <li><strong>Conclusion.</strong> "By the principle of mathematical induction, P(n) holds for all n ≥ 1."</li>
+  </ol>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Exam question</div>
+    <div class="exam-source">Summer 2026, Q.4(b), 7 marks</div>
+    <p>Using the principle of mathematical induction, prove that for every positive integer n,</p>
+    <div class="eq">Σ<sub>r=1</sub><sup>n</sup> r(r + 3) = <span style="white-space:nowrap">n(n + 1)(n + 5) / 3</span></div>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Worked example — the Summer 2026 induction: claim, base and hypothesis</div>
+    <p><strong>Claim.</strong> P(n): Σ<sub>r=1</sub><sup>n</sup> r(r + 3) = n(n + 1)(n + 5)/3 for all n ≥ 1.</p>
+    <p><strong>Base case, n = 1.</strong> The left side has one term, 1·(1 + 3) = 4. The right side is 1·2·6/3 = 4. Both are 4, so P(1) is true. ✓</p>
+    <p><strong>Inductive hypothesis.</strong> Assume P(k) is true for some arbitrary k ≥ 1:</p>
+    <div class="eq">Σ<sub>r=1</sub><sup>k</sup> r(r + 3) = k(k + 1)(k + 5) / 3</div>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Worked example — the Summer 2026 induction: the step and the conclusion</div>
+    <p><strong>Inductive step.</strong> We must prove P(k+1), that is Σ<sub>r=1</sub><sup>k+1</sup> r(r + 3) = (k+1)(k+2)(k+6)/3. Start from the left and split off the term r = k+1:</p>
+    <p>Σ<sub>r=1</sub><sup>k+1</sup> r(r + 3)<br>
+    = Σ<sub>r=1</sub><sup>k</sup> r(r + 3) + (k + 1)(k + 4)</p>
+    <p>Now use the hypothesis on the sum:</p>
+    <p>= k(k + 1)(k + 5)/3 + (k + 1)(k + 4)</p>
+    <p>Take out the common factor (k+1):</p>
+    <p>= (k + 1) [ k(k + 5)/3 + (k + 4) ]</p>
+    <p>Put the bracket over the single denominator 3, using (k + 4) = 3(k + 4)/3:</p>
+    <p>= (k + 1) [ (k² + 5k + 3k + 12) / 3 ]<br>
+    = (k + 1)(k² + 8k + 12)/3</p>
+    <p>Factor the quadratic: k² + 8k + 12 = (k + 2)(k + 6), since 2 + 6 = 8 and 2·6 = 12.</p>
+    <p>= (k + 1)(k + 2)(k + 6)/3</p>
+    <p>Now check this is the right side at k+1. Replacing k by k+1 in n(n+1)(n+5)/3 gives (k+1)(k+2)((k+1)+5)/3 = (k+1)(k+2)(k+6)/3. It matches. ∎</p>
+    <p><strong>Conclusion.</strong> P(1) is true and P(k) implies P(k+1) for arbitrary k ≥ 1. By the principle of mathematical induction, P(n) is true for all n ≥ 1.</p>
+    <p><strong>Numerical check.</strong> At n = 3 the left side is 1·4 + 2·5 + 3·6 = 4 + 10 + 18 = 32, and the right side is 3·4·8/3 = 32. ✓ At n = 4 the left side gains 4·7 = 28, giving 60, and the right side is 4·5·9/3 = 60. ✓ Checks against the closed form are a good way to catch a wrong factor at (k+2)(k+6).</p>
+    <p><strong>Exam presentation.</strong> Six labelled blocks: claim, base, hypothesis, step, "which is P(k+1)", conclusion. The marks are distributed across the blocks, so a correct algebra with no conclusion still loses a mark.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Worked example — the teacher's arithmetic series (slides 103–105)</div>
+    <p>Prove by induction that 1 + 5 + 9 + … + (4n − 3) = n(2n − 1) for all n ≥ 1.</p>
+    <p><strong>Base, n = 1.</strong> Left: the single term is 4(1) − 3 = 1. Right: 1·(2 − 1) = 1. ✓</p>
+    <p><strong>Hypothesis.</strong> Assume 1 + 5 + … + (4k − 3) = k(2k − 1).</p>
+    <p><strong>Step.</strong> Add the term for n = k+1, which is 4(k+1) − 3 = 4k + 1:</p>
+    <p>1 + 5 + … + (4k − 3) + (4k + 1)<br>
+    = k(2k − 1) + (4k + 1) &nbsp;&nbsp; (by the hypothesis)<br>
+    = 2k² − k + 4k + 1<br>
+    = 2k² + 3k + 1<br>
+    = (k + 1)(2k + 1) &nbsp;&nbsp; (factorising)<br>
+    = (k + 1)(2(k + 1) − 1) &nbsp;&nbsp; (which is P(k+1))</p>
+    <p>Hence true for all n ≥ 1 by induction. ∎</p>
+    <p><strong>A correction to the slide.</strong> Slide 104 writes the expansion of k(2k − 1) as "(2k)² − k + 4k + 1". That should be 2k² − k + 4k + 1; "(2k)²" means 4k² and gives the wrong polynomial. The final answer on the slide is correct, so this is a typesetting slip, but copy the correct expansion into your notes.</p>
+  </div>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes</h3>
+    <ul>
+      <li>Skipping the base case, or "checking" it with only one side computed.</li>
+      <li>Never using the inductive hypothesis. If P(k) appears nowhere in the algebra, you have not done an induction.</li>
+      <li>Proving P(k+1) directly from first principles instead of from P(k). That proves the statement for one value, not for all.</li>
+      <li>Assuming P(k) for all k, which is what you are trying to prove. Assume it for a single arbitrary k.</li>
+      <li>Forgetting to show the final expression equals the right-hand side with n replaced by k+1. State the comparison explicitly.</li>
+      <li>Algebra slips in factoring. Check with n = 3 as a numerical sanity test.</li>
+      <li>No concluding sentence. It is a mark, and it costs nothing.</li>
+    </ul>
+  </div>
+
+  <div class="practice">
+    <h3>Quick check 10</h3>
+    <p>(a) Prove by induction: 1 + 4 + 7 + … + (3n − 2) = n(3n − 1)/2 for all n ≥ 1.<br>
+    (b) Prove by induction: 2<sup>n</sup> &gt; n for all n ≥ 1. <em>(Answer Q10.)</em></p>
+  </div>
+
+  <h2 id="s11">11 — The other proof methods in one page</h2>
+
+  <p>The syllabus lists seven proof techniques. Induction got its own section; the rest are compared here, with one short worked example each. Expect a definition-plus-example question rather than a long proof, so the important thing is to know which method starts from what.</p>
+
+  <table>
+    <tr><th>Method</th><th>To prove</th><th>You assume</th><th>You must reach</th></tr>
+    <tr><td>Direct</td><td>P → Q</td><td>P</td><td>Q</td></tr>
+    <tr><td>Contrapositive</td><td>P → Q</td><td>¬Q</td><td>¬P</td></tr>
+    <tr><td>Contradiction</td><td>S</td><td>¬S</td><td>any contradiction</td></tr>
+    <tr><td>Cases</td><td>S</td><td>nothing extra</td><td>S in every exhaustive case</td></tr>
+    <tr><td>Counterexample</td><td>¬(∀x P(x))</td><td>nothing</td><td>one x with ¬P(x)</td></tr>
+    <tr><td>Exhaustion</td><td>S over a finite list</td><td>nothing</td><td>every case checked</td></tr>
+    <tr><td>Deduction</td><td>S</td><td>known facts</td><td>S by valid steps</td></tr>
+  </table>
+
+  <div class="example">
+    <div class="example-title">Direct proof — the sum of two even integers is even (teacher's slide 96)</div>
+    <p>Let x and y be even integers. By definition there are integers m and n with x = 2m and y = 2n. Then</p>
+    <p>x + y = 2m + 2n = 2(m + n).</p>
+    <p>Since m + n is an integer, x + y is twice an integer, hence even. ∎</p>
+    <p>The whole method in one line: take the definition apart, do the algebra, put the definition back together. A direct proof of "if n is odd then n² is odd" runs the same way: n = 2k + 1 gives n² = 4k² + 4k + 1 = 2(2k² + 2k) + 1, which is odd.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Contrapositive — if n² is even then n is even</div>
+    <p>The direct route starts from "n² is even", which is awkward: it tells you about a square, not about n. The contrapositive is easy, because it starts from "n is odd".</p>
+    <p><strong>Contrapositive statement.</strong> If n is odd, then n² is odd.</p>
+    <p><strong>Proof.</strong> Let n = 2k + 1 for some integer k. Then</p>
+    <p>n² = (2k + 1)² = 4k² + 4k + 1 = 2(2k² + 2k) + 1.</p>
+    <p>Since 2k² + 2k is an integer, n² is odd. ∎</p>
+    <p>Since P → Q ≡ ¬Q → ¬P, the contrapositive proves the original.</p>
+    <p><strong>A source correction worth knowing.</strong> The teacher's slide 97 presents this same argument under the heading "Direct Proof". It is not a direct proof — it begins by assuming the negation of the conclusion, which is the contrapositive (or, if you prefer, a contradiction). The mathematics on the slide is correct and the method is valid; only the label is wrong. In an exam, name it "proof by contrapositive" and you cannot be marked down for it.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Contradiction — √2 is irrational (teacher's slide 100)</div>
+    <p>Suppose, for contradiction, that √2 is rational. Then √2 = a/b for integers a, b with b ≠ 0, chosen so that a and b have no common factor.</p>
+    <p>Squaring gives 2 = a²/b², so a² = 2b². Hence a² is even, and by the contrapositive result above, a is even. Write a = 2k. Substituting:</p>
+    <p>2b² = (2k)² = 4k², so b² = 2k².</p>
+    <p>Hence b² is even, so b is even as well. But then a and b share the factor 2, contradicting the choice that they have no common factor. The assumption is false, so √2 is irrational. ∎</p>
+    <p>Notice the shape: the contradiction is not "1 = 0" but "the pair has no common factor, and also has common factor 2". Any contradiction with an earlier statement or a known fact closes the proof.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Proof by cases — |x| + |x + 1| ≥ 1 for every real x (teacher's slide 107)</div>
+    <p>The absolute value behaves differently on different intervals, so split at the points where a term changes sign, x = −1 and x = 0. Three cases cover every real number.</p>
+    <p><strong>Case 1, x ≤ −1.</strong> Then |x| = −x and |x + 1| = −(x + 1). So |x| + |x + 1| = −2x − 1. Since x ≤ −1 we have −2x ≥ 2, so −2x − 1 ≥ 1. ✓</p>
+    <p><strong>Case 2, −1 &lt; x &lt; 0.</strong> Then |x| = −x and |x + 1| = x + 1. So the sum is 1, which is ≥ 1. ✓</p>
+    <p><strong>Case 3, x ≥ 0.</strong> Then both are non-negative, so the sum is 2x + 1 ≥ 1. ✓</p>
+    <p>All cases give at least 1, and the cases cover all reals, so the inequality holds for every x. ∎</p>
+    <p>The two requirements are that the cases are <strong>exhaustive</strong> (no x is missed) and, ideally, <strong>mutually exclusive</strong> (no x is counted twice). Missing the boundary point x = −1 or x = 0 is the usual failure.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Counterexample — disproving a universal claim</div>
+    <p>Claim: "Every prime number is odd." A single counterexample kills it: 2 is prime and 2 is even. The claim is false, and no further work is needed.</p>
+    <p>Claim: "n² + n + 41 is prime for every positive integer n." True for n = 1, 2, …, 39, which is why it looks convincing. At n = 41 the value is 41² + 41 + 41 = 41(41 + 1 + 1) = 41 · 43, which is composite. Counterexample found.</p>
+    <p>One counterexample is a complete disproof of a "for all" statement. It is not a proof of anything else, so never use it to establish a universal claim.</p>
+  </div>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes</h3>
+    <ul>
+      <li>Calling a contrapositive proof a "direct proof". Different starting assumption, different name.</li>
+      <li>In a contradiction proof, assuming the negation of the hypothesis instead of the negation of the whole statement.</li>
+      <li>Proof by cases that misses a case or overlaps two cases at a boundary.</li>
+      <li>Using one example to "prove" a universal statement. Examples confirm; counterexamples refute.</li>
+      <li>In a counterexample, giving a value where the claim happens to hold. You need a value where it fails.</li>
+      <li>Ending a contradiction proof without saying which statement was contradicted.</li>
+    </ul>
+  </div>
+
+  <div class="practice">
+    <h3>Quick check 11</h3>
+    <p>(a) Prove directly that the product of two odd integers is odd.<br>
+    (b) Prove by contrapositive: if 3n + 2 is odd, then n is odd.<br>
+    (c) Disprove by counterexample: "every odd number is prime". <em>(Answer Q11.)</em></p>
+  </div>
+
+  <h2 id="practice">Practice questions</h2>
+
+  <div class="practice">
+    <h3>Set A — short checks</h3>
+    <p><strong>Q1.</strong> (a) Write P({a, b, c, d}) and state its cardinality. (b) True or false with a reason: (i) ∅ ∈ {∅}; (ii) ∅ ⊆ {∅}; (iii) {∅} ⊆ ∅; (iv) {1,2} ⊂ {1,2,3}. (c) Write the even integers from 2 to 10 in roster form and in set-builder form.</p>
+    <p><strong>Q2.</strong> U = {1, 2, …, 12}, A = {1,2,3,4,6}, B = {2,4,6,8,10}, C = {3,6,9,12}. Find (a) A ∪ B, (b) A ∩ B ∩ C, (c) A − C, (d) A △ B, (e) (B ∪ C)′.</p>
+    <p><strong>Q3.</strong> (a) A = {p, q}, B = {1,2,3}. Write A × B and state its cardinality. (b) Is { {1,4}, {2}, {3,5} } a partition of {1,2,3,4,5}? (c) Give one partition of {a,b,c,d} into two blocks.</p>
+    <p><strong>Q4.</strong> (a) Prove by an element argument that A ∪ (A ∩ B) = A. (b) Use a membership table to verify (A ∩ B)′ = A′ ∪ B′. (c) Simplify (A ∩ B) ∪ (A ∩ B′) naming each law.</p>
+    <p><strong>Q5.</strong> (a) Which are propositions: (i) 7 + 5 = 12; (ii) Close the door; (iii) n is prime; (iv) The moon is made of green cheese. (b) Translate: "You will get the scholarship if and only if your attendance is above 75% or you have a sports quota." (c) Give the converse, inverse and contrapositive of "if a number is divisible by 4 then it is even".</p>
+  </div>
+
+  <div class="practice">
+    <h3>Set B — exam-style</h3>
+    <p><strong>Q6.</strong> <span class="mu-badge">IAT sample · Q12</span> Prove using the laws of logic: (i) p → q ≡ ¬q → ¬p; (ii) (p ∧ q) ∨ (p ∧ ¬q) ≡ p. Then show by one truth-table row that the converse of p → q is not equivalent to p → q.</p>
+    <p><strong>Q7.</strong> <span class="mu-badge">IAT sample · Q9</span> Classify as tautology, contradiction or contingency: (i) (p ∧ q) → p; (ii) p ↔ ¬p; (iii) (p ∨ q) ∧ ¬p. Then convert (p → q) ∧ (q → r) into CNF, and give the DNF of p ⊕ q.</p>
+    <p><strong>Q8.</strong> <span class="mu-badge">Prelim bank · Module 1</span> Domain: all people. S(x): x is a student; F(x): x is friendly; H(x): x speaks Hindi; B(x): x was born in India. Write in symbols: (i) everyone is friendly; (ii) someone speaks Hindi; (iii) some student was not born in India. Negate each, and translate each negation back into English.</p>
+    <p><strong>Q9.</strong> <span class="mu-badge">Summer 2026 · Q2(a) style</span> 150 students: 60 take Mathematics, 50 Physics, 40 Chemistry; 20 take Maths and Physics, 15 Physics and Chemistry, 10 Maths and Chemistry; 5 take all three. Find the number taking at least one subject, exactly one, and none. Explain in one sentence why the answer to the first part is smaller than 150.</p>
+    <p><strong>Q10.</strong> <span class="mu-badge">Summer 2026 · Q4(b) style</span> (a) Prove by induction: 1 + 4 + 7 + … + (3n − 2) = n(3n − 1)/2 for all n ≥ 1. (b) Prove by induction that 2<sup>n</sup> &gt; n for all n ≥ 1.</p>
+    <p><strong>Q11.</strong> (a) Prove directly that the product of two odd integers is odd. (b) Prove by contrapositive: if 3n + 2 is odd, then n is odd. (c) Disprove by counterexample: every odd number is prime.</p>
+    <p><strong>Q12.</strong> <span class="mu-badge">Prelim bank · Q1</span> Define with a suitable example: disjoint set, proper subset, Cartesian product, partition of a set, power set, existential quantifier.</p>
+  </div>
+
+  <h2 id="answers">Answer key</h2>
+
+  <div class="answer-key">
+    <h3>Q1</h3>
+    <p><strong>(a)</strong> |A| = 4, so P(A) has 2<sup>4</sup> = 16 members. By size:</p>
+    <p>∅ (1) · {a}, {b}, {c}, {d} (4) · {a,b}, {a,c}, {a,d}, {b,c}, {b,d}, {c,d} (6) · {a,b,c}, {a,b,d}, {a,c,d}, {b,c,d} (4) · {a,b,c,d} (1).</p>
+    <p>Total 1 + 4 + 6 + 4 + 1 = 16. ✓</p>
+    <p><strong>(b)</strong> (i) True: the set {∅} has one element, namely ∅. (ii) True: the empty set is a subset of every set. (iii) False: {∅} has an element, so it cannot be a subset of the empty set. (iv) True: every element of {1,2} is in {1,2,3}, and 3 is extra.</p>
+    <p><strong>(c)</strong> Roster: {2, 4, 6, 8, 10}. Set-builder: {x | x = 2k for some integer k and 1 ≤ x ≤ 10}, or more simply {x ∈ {1,…,10} | x is even}.</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q2</h3>
+    <p><strong>(a)</strong> A ∪ B = {1, 2, 3, 4, 6, 8, 10}.</p>
+    <p><strong>(b)</strong> A ∩ B = {2, 4, 6}; intersecting with C = {3, 6, 9, 12} leaves {6}.</p>
+    <p><strong>(c)</strong> A − C = {1, 2, 4}.</p>
+    <p><strong>(d)</strong> A △ B = (A ∪ B) − (A ∩ B) = {1,2,3,4,6,8,10} − {2,4,6} = {1, 3, 8, 10}.</p>
+    <p><strong>(e)</strong> B ∪ C = {2, 3, 4, 6, 8, 9, 10, 12}, so (B ∪ C)′ = U − (B ∪ C) = {1, 5, 7, 11}.</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q3</h3>
+    <p><strong>(a)</strong> {(p,1), (p,2), (p,3), (q,1), (q,2), (q,3)}, and |A × B| = 2 × 3 = 6.</p>
+    <p><strong>(b)</strong> Yes. The blocks are non-empty; {1,4}, {2} and {3,5} share no elements; and their union is {1,2,3,4,5}. All three conditions of a partition hold.</p>
+    <p><strong>(c)</strong> {{a, b}, {c, d}} is one; {{a, c}, {b, d}} and {{a, d}, {b, c}} also work. The partition {{a}, {b}, {c, d}} has three blocks.</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q4</h3>
+    <p><strong>(a)</strong> Let x be arbitrary.<br>
+    x ∈ A ∪ (A ∩ B) ⟺ x ∈ A or (x ∈ A and x ∈ B).<br>
+    If x ∈ A, the disjunction holds. If the second disjunct holds, then x ∈ A ∩ B, so x ∈ A. In both cases x ∈ A. Conversely, if x ∈ A then x satisfies the first disjunct, so x is in the union. Hence the two sets have the same elements. ∎</p>
+    <p><strong>(b)</strong> Four rows:</p>
+    <table>
+      <tr><th>A</th><th>B</th><th>A ∩ B</th><th>(A ∩ B)′</th><th>A′</th><th>B′</th><th>A′ ∪ B′</th></tr>
+      <tr><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+      <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+      <tr><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+    </table>
+    <p>Columns 4 and 7 agree in all four rows, so the sets are equal.</p>
+    <p><strong>(c)</strong> (A ∩ B) ∪ (A ∩ B′) = A ∩ (B ∪ B′) by the distributive law = A ∩ U by complementation = A by the identity law.</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q5</h3>
+    <p><strong>(a)</strong> (i) Proposition, true. (ii) Not a proposition — a command. (iii) Not a proposition — the variable n is free. (iv) Proposition, false.</p>
+    <p><strong>(b)</strong> p: you get the scholarship; q: your attendance is above 75%; r: you have a sports quota. Then p ↔ (q ∨ r). The "or" is inclusive: having both does not disqualify you.</p>
+    <p><strong>(c)</strong> With p = "divisible by 4" and q = "even", the original is p → q.<br>
+    Converse, q → p: if a number is even, then it is divisible by 4. False — 6 is even and not divisible by 4.<br>
+    Inverse, ¬p → ¬q: if a number is not divisible by 4, then it is not even. False — again 6.<br>
+    Contrapositive, ¬q → ¬p: if a number is not even, then it is not divisible by 4. True, and equivalent to the original.</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q6</h3>
+    <p><strong>(i)</strong> p → q ≡ ¬p ∨ q (implication law) ≡ q ∨ ¬p (commutative) ≡ ¬(¬q) ∨ ¬p (double negation) ≡ ¬q → ¬p (implication law, right to left).</p>
+    <p><strong>(ii)</strong> (p ∧ q) ∨ (p ∧ ¬q) ≡ p ∧ (q ∨ ¬q) (distributive law, read right to left) ≡ p ∧ T (complementation) ≡ p (identity law).</p>
+    <p><strong>Not equivalent to the converse.</strong> Take p = F, q = T. Then p → q is T, but the converse q → p is F. Since they differ in at least one row, they are not equivalent. (The converse is equivalent to the inverse, which is why both are "the other pair".)</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q7</h3>
+    <p><strong>(i) Tautology.</strong> (p ∧ q) → p ≡ ¬(p ∧ q) ∨ p ≡ (¬p ∨ ¬q) ∨ p ≡ (¬p ∨ p) ∨ ¬q ≡ T ∨ ¬q ≡ T.</p>
+    <p><strong>(ii) Contradiction.</strong> p ↔ ¬p is true only if p and ¬p have the same value, which is impossible. Simplifying: (p → ¬p) ∧ (¬p → p) ≡ (¬p ∨ ¬p) ∧ (p ∨ p) ≡ ¬p ∧ p ≡ F.</p>
+    <p><strong>(iii) Contingency.</strong> (p ∨ q) ∧ ¬p ≡ (p ∧ ¬p) ∨ (q ∧ ¬p) ≡ F ∨ (q ∧ ¬p) ≡ q ∧ ¬p. True when q is true and p is false (row FT), false elsewhere.</p>
+    <p><strong>CNF of (p → q) ∧ (q → r):</strong> replace both arrows, giving (¬p ∨ q) ∧ (¬q ∨ r). Both parts are already clauses, so this is the CNF as it stands.</p>
+    <p><strong>DNF of p ⊕ q:</strong> the exclusive or is true in the rows (T, F) and (F, T), so the DNF is (p ∧ ¬q) ∨ (¬p ∧ q).</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q8</h3>
+    <p><strong>(i)</strong> ∀x F(x). Negation: ¬∀x F(x) ≡ ∃x ¬F(x) — someone is not friendly.</p>
+    <p><strong>(ii)</strong> ∃x H(x). Negation: ¬∃x H(x) ≡ ∀x ¬H(x) — nobody speaks Hindi (everyone does not speak Hindi).</p>
+    <p><strong>(iii)</strong> ∃x (S(x) ∧ ¬B(x)). Negation: ∀x ¬(S(x) ∧ ¬B(x)) ≡ ∀x (¬S(x) ∨ B(x)) — every person is either not a student or was born in India, that is, every student was born in India.</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q9</h3>
+    <p>At least one: 60 + 50 + 40 − 20 − 15 − 10 + 5 = 150 − 45 + 5 = <strong>110</strong>.</p>
+    <p>Exactly one: Maths only = 60 − 20 − 10 + 5 = 35; Physics only = 50 − 20 − 15 + 5 = 20; Chemistry only = 40 − 15 − 10 + 5 = 20. Total = <strong>75</strong>.</p>
+    <p>None: 150 − 110 = <strong>40</strong>.</p>
+    <p>Check: exactly two = (20 − 5) + (15 − 5) + (10 − 5) = 15 + 10 + 5 = 30, and 75 + 30 + 5 = 110 ✓.</p>
+    <p>The first answer is smaller than 150 because 40 students take none of the three subjects; the union counts only those with at least one.</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q10</h3>
+    <p><strong>(a)</strong> Claim: 1 + 4 + 7 + … + (3n − 2) = n(3n − 1)/2.</p>
+    <p>Base n = 1: left = 3(1) − 2 = 1; right = 1·2/2 = 1. ✓</p>
+    <p>Assume true for k: 1 + … + (3k − 2) = k(3k − 1)/2. The next term is 3(k+1) − 2 = 3k + 1, so</p>
+    <p>1 + … + (3k − 2) + (3k + 1) = k(3k − 1)/2 + (3k + 1)<br>
+    = (3k² − k + 6k + 2)/2<br>
+    = (3k² + 5k + 2)/2<br>
+    = (k + 1)(3k + 2)/2<br>
+    = (k + 1)(3(k + 1) − 1)/2,</p>
+    <p>which is P(k+1). Hence true for all n ≥ 1. ∎</p>
+    <p><strong>(b)</strong> Claim: 2<sup>n</sup> &gt; n for n ≥ 1. Base n = 1: 2 &gt; 1. ✓ Assume 2<sup>k</sup> &gt; k. Then 2<sup>k+1</sup> = 2·2<sup>k</sup> &gt; 2k. Since k ≥ 1, 2k ≥ k + 1, so 2<sup>k+1</sup> &gt; k + 1. Hence true for all n ≥ 1. ∎</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q11</h3>
+    <p><strong>(a)</strong> Let x = 2m + 1 and y = 2n + 1 for integers m, n. Then xy = 4mn + 2m + 2n + 1 = 2(2mn + m + n) + 1. Since 2mn + m + n is an integer, xy is odd. ∎</p>
+    <p><strong>(b)</strong> Prove the contrapositive: if n is even, then 3n + 2 is even. Let n = 2k. Then 3n + 2 = 6k + 2 = 2(3k + 1), which is even. The contrapositive is true, so the original statement is true. ∎</p>
+    <p><strong>(c)</strong> 9 is odd and 9 = 3 × 3, so it is not prime. One counterexample disproves the universal claim. (15, 21 and 25 work equally well.)</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q12</h3>
+    <p><strong>Disjoint sets:</strong> two sets with no element in common, that is A ∩ B = ∅. Example: {1, 2} and {3, 4}.</p>
+    <p><strong>Proper subset:</strong> A ⊂ B when every element of A is in B and B has at least one extra element. Example: {1, 2} ⊂ {1, 2, 3}.</p>
+    <p><strong>Cartesian product:</strong> A × B = {(a, b) | a ∈ A, b ∈ B}, the set of all ordered pairs. Example: {1, 2} × {x} = {(1, x), (2, x)}.</p>
+    <p><strong>Partition of a set:</strong> a collection of non-empty, pairwise disjoint subsets whose union is the whole set. Example: { {1, 2}, {3} } partitions {1, 2, 3}.</p>
+    <p><strong>Power set:</strong> P(A) = {X | X ⊆ A}, the set of all subsets of A; if |A| = n then |P(A)| = 2<sup>n</sup>. Example: P({1, 2}) = {∅, {1}, {2}, {1, 2}}.</p>
+    <p><strong>Existential quantifier:</strong> ∃x P(x) asserts that P(x) is true for at least one x in the domain. Example: over the integers, ∃x (x² = 4) is true because x = 2 works.</p>
+  </div>
+
+  <h2 id="revision">Last-minute revision sheet</h2>
+
+  <div class="revision-sheet">
+    <h3>Definitions in one line each</h3>
+    <ul>
+      <li><strong>Subset:</strong> A ⊆ B when every element of A is in B, that is ∀x(x ∈ A → x ∈ B).</li>
+      <li><strong>Proper subset:</strong> A ⊆ B with A ≠ B.</li>
+      <li><strong>Power set:</strong> P(A) = all subsets of A; |P(A)| = 2<sup>|A|</sup>.</li>
+      <li><strong>Cartesian product:</strong> A × B = all ordered pairs (a, b); |A × B| = |A||B|.</li>
+      <li><strong>Partition:</strong> non-empty, pairwise disjoint blocks whose union is the set.</li>
+      <li><strong>Proposition:</strong> a declarative sentence that is true or false, not both.</li>
+      <li><strong>Tautology / contradiction / contingency:</strong> always true / always false / mixed.</li>
+      <li><strong>Logical equivalence:</strong> A ≡ B when they share a truth value in every row.</li>
+      <li><strong>CNF / DNF:</strong> AND of ORs / OR of ANDs.</li>
+      <li><strong>Predicate:</strong> a statement with variables, true or false only once they are fixed.</li>
+      <li><strong>∀ / ∃:</strong> true for every element / true for at least one element.</li>
+      <li><strong>Induction:</strong> prove P(1), prove P(k) → P(k+1), conclude for all n ≥ 1.</li>
+    </ul>
+
+    <h3>Formulas to have at hand</h3>
+    <ul>
+      <li>p → q ≡ ¬p ∨ q &nbsp;&nbsp; ¬(p → q) ≡ p ∧ ¬q &nbsp;&nbsp; p → q ≡ ¬q → ¬p</li>
+      <li>¬(p ∧ q) ≡ ¬p ∨ ¬q &nbsp;&nbsp; ¬(p ∨ q) ≡ ¬p ∧ ¬q</li>
+      <li>p ↔ q ≡ (p → q) ∧ (q → p)</li>
+      <li>¬∀x P(x) ≡ ∃x ¬P(x) &nbsp;&nbsp; ¬∃x P(x) ≡ ∀x ¬P(x)</li>
+      <li>|A ∪ B ∪ C| = Σ|A| − Σ|A ∩ B| + |A ∩ B ∩ C|</li>
+      <li>|A only| = |A| − |A ∩ B| − |A ∩ C| + |A ∩ B ∩ C|</li>
+    </ul>
+
+    <h3>Procedures</h3>
+    <ul>
+      <li><strong>Power set:</strong> count 2<sup>n</sup>, then list by size from ∅ up to the whole set.</li>
+      <li><strong>Set equality:</strong> element argument (⟺ chain), membership table (2<sup>n</sup> rows), or laws with names.</li>
+      <li><strong>Truth table:</strong> 2<sup>n</sup> rows, one column per sub-expression, compare the final columns.</li>
+      <li><strong>Equivalence proof:</strong> start from the messier side, one law per line, name every law.</li>
+      <li><strong>Tautology test:</strong> the final column all T; if mixed, it is a contingency.</li>
+      <li><strong>CNF:</strong> kill ↔, kill →, push ¬ in, distribute ∨ over ∧.</li>
+      <li><strong>DNF:</strong> kill ↔, kill →, push ¬ in, distribute ∧ over ∨ — or read the true rows of the table.</li>
+      <li><strong>English to quantifiers:</strong> "all S are P" → ∀(S → P); "some S are P" → ∃(S ∧ P).</li>
+      <li><strong>Induction:</strong> claim → base → hypothesis → step → "this is P(k+1)" → conclusion.</li>
+    </ul>
+
+    <h3>Sanity checks before you hand in</h3>
+    <ul>
+      <li>Did you state U, or the domain of discourse, wherever it was needed?</li>
+      <li>Does every power set contain ∅ and the whole set?</li>
+      <li>Is the number of truth-table rows exactly 2<sup>n</sup>?</li>
+      <li>Did you name a law on every line of a derivation?</li>
+      <li>In an induction, does the hypothesis actually appear in the algebra?</li>
+      <li>Do the left and right side agree numerically at n = 3?</li>
+      <li>For a "not equivalent" claim, did you exhibit the row where they differ?</li>
+    </ul>
+  </div>
+
+  <h2 id="sources">Sources, verification and coverage</h2>
+
+  <div class="references">
+    <h3>Teacher material</h3>
+    <p>Mrs. Shamal Bagal, <em>Module 1: Crisp Set Theory and Logic</em> (PowerPoint, 108 slides). Sets and notation, slides 4–15; set operations, slides 18–19; propositional logic and connectives, slides 29–41; truth tables and equivalence, slides 44–49; tautology, contradiction, contingency and the laws, slides 55–68; predicates, slides 70–75; quantifiers, slides 76–90; mathematical proof and direct proof, slides 94–98; contradiction, slide 99–100; induction, slides 101–105; proof by cases, slides 107–108.</p>
+
+    <h3>Official scope</h3>
+    <p>University of Mumbai DSGT (2023112), Module I — Crisp Set Theory and Logic, 8 hours, CO1. Prescribed: sets, subsets, universal and empty sets, set operations, set representation, laws of set theory; propositional logic; predicate logic; universal and existential quantifiers; types of mathematical proof — direct, contradiction, deduction, cases, exhaustion, counterexample, mathematical induction. Self-learning: PROLOG/LISP expert systems using propositional and predicate logic, and other types of logic and sets.</p>
+
+    <h3>Questions</h3>
+    <ul>
+      <li><strong>Summer 2026</strong> — Q.1(b) logical equivalence, 5 marks (worked in full in section 6); Q.2(a) inclusion–exclusion, 7 marks (section 9); Q.4(b) induction, 7 marks (section 10). Wording is condensed but the data, marks and question numbers are preserved.</li>
+      <li><strong>Winter 2025</strong> — Q.1(b) (P ∨ Q) → R ≡ (P → R) ∧ (Q → R), read from scanned page 1 and reproduced in section 6.</li>
+      <li><strong>IAT1 sample</strong> — Q7 definitions, Q8 quantifiers, Q9 tautology checks, Q10 CNF/DNF, Q11 power sets, Q12 equivalences, Q13 Cartesian products. These are labelled in the practice set with the badge.</li>
+      <li><strong>Prelim question bank</strong> — Module 1 definitions and the quantifier-translation questions.</li>
+      <li>Practice questions not carrying a badge were written for this guide. They are not claimed to be university questions.</li>
+    </ul>
+
+    <h3>Verification performed</h3>
+    <ul>
+      <li>Every equivalence in section 6 and every classification in section 7 was checked by exhaustive truth table over all assignments, not by inspection.</li>
+      <li>The Summer 2026 derivation ((p → q) → r) ≡ (p ∧ ¬q) ∨ r and the Winter 2025 derivation were each checked twice: symbolically by the laws, and by an eight-row truth table.</li>
+      <li>The CNF (¬P ∨ Q) ∧ (¬P ∨ R) ∧ (P ∨ ¬Q) ∧ (P ∨ ¬R) was checked against the original expression in all eight rows, and the DNF was read from the verified table. An earlier draft of this guide wrongly assumed the expression reduced to P ↔ (Q ∧ R); the table disproved it, and the corrected version is what appears above.</li>
+      <li>The induction identity Σ r(r+3) = n(n+1)(n+5)/3 was checked in closed form and at n = 1, 2, 3, 4; the step algebra was verified symbolically. The arithmetic series was checked the same way.</li>
+      <li>All inclusion–exclusion figures were recomputed and cross-checked region by region; both examples satisfy exactly-one + exactly-two + all-three = union.</li>
+      <li>Power-set counts and the |A × B| − |B × A| count were enumerated programmatically.</li>
+    </ul>
+
+    <h3>Corrections to the source slides</h3>
+    <ul>
+      <li>Slide 97 labels the n² even ⇒ n even argument a "direct proof". It is a proof by contrapositive (equivalently, a contradiction). The mathematics is correct; only the label is wrong. Discussed in section 11.</li>
+      <li>Slide 104 writes "(2k)² − k + 4k + 1" where the expansion of k(2k − 1) is 2k² − k. Typographical, but it changes the polynomial. Noted in section 10.</li>
+    </ul>
+
+    <h3>Not covered</h3>
+    <p>PROLOG and LISP expert systems, non-classical logics (modal, fuzzy, intuitionistic), cardinality of infinite sets, Cantor's theorem, Venn diagrams and set-operation diagrams, Karnaugh maps, and proof by exhaustion beyond the definition. These are self-learning or extension topics. Deliberate omissions, not oversights.</p>
+  </div>
+
+  <footer>
+    DSGT Module 1 — Selective Exam Essentials · Built from Mrs. Shamal Bagal's Module 1 PPT, the official DSGT syllabus,<br>
+    the Summer 2026 and Winter 2025 papers, and the IAT and prelim question banks. Not a complete module guide.
+  </footer>
+
+</div>
+
+<div class="topbar" style="display:none"></div>
+<script>
+(function(){
+  var b=document.getElementById('themeToggle'),r=document.documentElement;
+  function dark(){var t=r.getAttribute('data-theme');return t==='dark';}
+  function paint(){var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
+  b.addEventListener('click',function(){var n=dark()?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('sg-theme',n);}catch(e){}paint();});
+  paint();
+})();
+</script>
+</body>
+</html>

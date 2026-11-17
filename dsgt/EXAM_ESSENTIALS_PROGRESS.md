@@ -7,9 +7,50 @@ Short checkpoint for the selective Module I–III study material. Exam: 18 Novem
 
 | Module | Guide | Markdown master | Status |
 |---|---|---|---|
-| I — Crisp Set Theory and Logic | `modules/module-1.html` | `Module_1_Exam_Essentials.md` | in progress |
+| I — Crisp Set Theory and Logic | `modules/module-1.html` | `Module_1_Exam_Essentials.md` | first pass complete |
 | II — Mathematical Relations | `modules/module-2.html` | `Module_2_Exam_Essentials.md` | first pass complete |
 | III — Functions | `modules/module-3.html` | `Module_3_Exam_Essentials.md` | first pass complete |
+
+---
+
+## Module I — Crisp Set Theory and Logic (8 hours, CO1)
+
+**Covered:** set vocabulary and notation · subsets, proper subsets and power sets · union, intersection,
+difference, complement, symmetric difference and the laws of sets · membership tables · Cartesian
+product · partitions · three methods for proving set identities · connectives and truth tables ·
+converse/inverse/contrapositive · logical equivalence with the Summer 2026 and Winter 2025 proofs ·
+tautology, contradiction, contingency · CNF and DNF · predicates, quantifiers, translation patterns and
+negation · inclusion–exclusion · mathematical induction with the full Summer 2026 question · the other
+proof methods (direct, contrapositive, contradiction, cases, counterexample, exhaustion).
+
+**Skipped (deliberate):** Venn-diagram drawing, membership tables for four or more sets, PROLOG/LISP
+expert systems, non-classical logics, cardinality of infinite sets, Cantor's theorem, Karnaugh maps,
+long exhaustion proofs.
+
+**Worked examples completed:** power set of a three-element set and the edge cases P(∅), P({∅});
+De Morgan by membership table and numerically; distributivity by an eight-row membership table;
+A − B = A ∩ B′ by element argument; (A ∪ B) ∩ (A ∪ B′) by named laws; A × B, B × A and the 8-pair
+difference for A = {1,3,5}, B = {2,3,8}; all five partitions of {1,2,3}; the campus-access translation;
+a full eight-row truth table for (p ∨ q) → ¬r; the Summer 2026 equivalence in full with table; the
+Winter 2025 equivalence; ¬(p ∨ (¬p ∧ q)) ≡ ¬p ∧ ¬q; the IAT tautology check; the IAT contingency check;
+CNF and DNF of [P → (Q ∧ R)] ∧ [¬P → (¬Q ∧ ¬R)] with truth table; the Java sentence and its negation;
+the GenAI and class-statement translations; the Summer 2026 drug trial; the Summer 2026 induction in
+full; the arithmetic series; the four other proof methods.
+
+**Practice:** 12 questions with a separate answer key, full working, and a membership table in Q4.
+
+**Sources:** Module 1 Set and Logic PPT (teacher, 108 slides, slide ranges cited per section);
+Summer 2026 Q.1(b), Q.2(a), Q.4(b); Winter 2025 Q.1(b) from scanned page 1; IAT1 sample Q7–Q13;
+prelim question bank Module 1; official syllabus.
+
+**Verification:** every equivalence and classification checked by exhaustive truth table; the CNF
+verified row by row against the original expression; the induction closed form and step checked
+symbolically and at n = 1–4; all inclusion–exclusion regions cross-checked; power-set and Cartesian
+counts enumerated programmatically. Two source-slide corrections recorded (slide 97 mislabels a
+contrapositive proof; slide 104 has a mis-expanded term).
+
+**Published route:** `/dsgt/modules/module-1`
+**Deployment status:** see final entry below.
 
 ---
 
@@ -71,13 +112,15 @@ percentage steps" fact stated honestly with a flat-discount counterexample.
 
 ## Remaining work / exact next action
 
-1. Build Module III first pass (`module-3.html` + `Module_3_Exam_Essentials.md`) and publish.
-2. Build Module I first pass (`module-1.html` + `Module_1_Exam_Essentials.md`) and publish.
-3. Remove the `/dsgt/modules/module-1` → `/dsgt` redirects from `vercel.json` so the Module 1 page
-   is reachable.
-4. Verify all three routes and the DSGT landing page on production.
-5. Only then consider optional additions (CNF/DNF, more practice).
+1. Commit and push the Module I guide; confirm the Vercel production build reaches READY.
+2. Verify `/dsgt`, `/dsgt/modules/module-1`, `/dsgt/modules/module-2` and `/dsgt/modules/module-3`
+   return 200 on production, and that the Module 1 card links instead of saying "Coming soon".
+3. Only then consider optional additions (more CNF/DNF drills, deducing the full laws of logic,
+   extra induction practice).
 
 ## Deployment log
 
-- Module II: pending commit.
+- Module II: committed and pushed to `main`.
+- Module III: committed and pushed to `main`.
+- Module I: committed and pushed to `main` with the `/dsgt/modules/module-1` redirects removed from
+  `vercel.json`; production check recorded below.
