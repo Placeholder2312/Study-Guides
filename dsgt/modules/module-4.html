@@ -438,6 +438,16 @@
   .rail a.is-done .node { background:var(--muted); border-color:var(--muted); }
   .rail .num { font:600 .62rem/1 var(--font-mono); letter-spacing:.04em; font-variant-numeric:tabular-nums; }
   .rail .lbl { display:none; font-size:.74rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:14rem; }
+  .rail-sublist { list-style:none; margin:0 0 .3rem 1.65rem; padding:0 0 0 .55rem; border-left:1px solid var(--line); }
+  .rail-sublist a { grid-template-columns:1rem minmax(0,1fr); column-gap:.3rem; height:1.2rem; padding-left:.1rem; }
+  .rail-sublist .sub-lbl { display:block; font-size:.68rem; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .rail-sublist .sub-num { font:600 .62rem/1 var(--font-mono); color:var(--accent); }
+  .rail-sublist a[aria-current="location"] { color:var(--accent); font-weight:700; }
+  .rail.is-collapsed .rail-sublist { display:none; }
+  .rm-sublist { margin:0 0 .35rem 2.65rem !important; padding:.15rem 0 .25rem .65rem !important; border-left:1px solid var(--line); }
+  .rm-sublist a { grid-template-columns:1.1rem minmax(0,1fr); min-height:34px; padding:.25rem .5rem; border-left:0; font-size:.84rem; }
+  .rm-sublist a[aria-current="location"] { color:var(--accent); background:var(--accent-soft); }
+
   .rail a:hover { color:var(--ink); }
   .rail a:hover .node { border-color:var(--ink); }
   .rail a[aria-current="true"] { color:var(--ink); }
@@ -830,7 +840,7 @@
     <li>Verify by substituting back into the recurrence.</li>
   </ol>
 
-  <h3>Case A: Two Distinct Real Roots</h3>
+  <h3 id="recurrence-case-a" data-rail-subsection>Case A: Two Distinct Real Roots</h3>
   <p>If the characteristic equation has distinct roots <span class="kbd">r<sub>1</sub></span> and <span class="kbd">r<sub>2</sub></span>, the solution is:</p>
   <div class="eq">a<sub>n</sub> = A(r<sub>1</sub><sup>n</sup>) + B(r<sub>2</sub><sup>n</sup>)</div>
   <p class="eq-note"><span class="kbd">A</span> and <span class="kbd">B</span> are determined by initial conditions.</p>
@@ -897,12 +907,12 @@
 </div>
 </div>
 
-  <h3>Case B: Repeated Root</h3>
+  <h3 id="recurrence-case-b" data-rail-subsection>Case B: Repeated Root</h3>
   <p>If the characteristic polynomial has only one root <span class="kbd">r</span> (it factors as <span class="kbd">(x − r)<sup>2</sup></span>), then <span class="kbd">r<sup>n</sup></span> is a solution, but <span class="kbd">a<sub>n</sub> = ar<sub>1</sub><sup>n</sup> + br<sub>2</sub><sup>n</sup></span> cannot satisfy all initial conditions because <span class="kbd">r<sub>1</sub><sup>n</sup></span> and <span class="kbd">r<sub>2</sub><sup>n</sup></span> are indistinguishable. The solution is:</p>
   <div class="eq">a<sub>n</sub> = ar<sup>n</sup> + bnr<sup>n</sup></div>
   <p class="eq-note">The extra <span class="kbd">n</span> in <span class="kbd">bnr<sup>n</sup></span> allows solving for both constants.</p>
 
-  <h3>Case C: Non-Homogeneous (Extra Term on the Right)</h3>
+  <h3 id="recurrence-case-c" data-rail-subsection>Case C: Non-Homogeneous (Extra Term on the Right)</h3>
   <p><strong>Exam-relevant:</strong> Summer 2026 Q5(b) is non-homogeneous (solved in the Mumbai University section below). The particular-solution guessing method is added in this guide and is not from Levin’s Section 2.4.</p>
   <p>When an extra term appears on the right: <span class="kbd">a<sub>n</sub> = c<sub>1</sub>a<sub>n−1</sub> + c<sub>2</sub>a<sub>n−2</sub> + f(n)</span>:</p>
   <ol class="steps">
@@ -1390,15 +1400,31 @@
 </script>
 
 <script>
-
 (function(){
   var hs=[].slice.call(document.querySelectorAll('.wrap h2[id]'));
+  var subHeads=[].slice.call(document.querySelectorAll('.wrap h3[data-rail-subsection][id]'));
   if(!hs.length)return;
   function pad(n){return (n<10?'0':'')+n;}
   function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
   var names=hs.map(function(h){return h.textContent.trim();});
+  var subNames=subHeads.map(function(h){return h.textContent.trim();});
+  var subOwner=hs.indexOf(document.getElementById('recurrence'));
 
-  /* wide screens: margin rail */
+  function makeSublist(parentLi,mobile){
+    if(subOwner<0||!subHeads.length)return [];
+    var list=el('ol',mobile?'rm-sublist':'rail-sublist');
+    var children=subHeads.map(function(h,i){
+      var li=el('li'),a=el('a',mobile?'rm-sub-link':'rail-sub-link');
+      a.href='#'+h.id;a.title=subNames[i];
+      a.appendChild(el('span',mobile?'rm-k':'sub-num',String.fromCharCode(65+i)));
+      a.appendChild(el('span',mobile?'rm-sub-label':'sub-lbl',subNames[i]));
+      li.appendChild(a);list.appendChild(li);
+      return {a:a,heading:h,done:false,mobile:null};
+    });
+    parentLi.appendChild(list);return children;
+  }
+
+  /* Wide screens: margin rail with the three recurrence cases nested below Section 3. */
   var nav=el('nav','rail');nav.setAttribute('aria-label','Section progress');
   var inn=el('div','rail-in'),top=el('div','rail-top'),sec=el('span','rail-sec','01'),meta=el('span','rail-meta');
   var pct=el('b',null,'0%');meta.appendChild(el('span',null,'of '+pad(hs.length)));meta.appendChild(pct);
@@ -1410,11 +1436,12 @@
     var li=el('li'),a=el('a'),nd=el('span','node');
     a.href='#'+h.id;a.title=names[i];nd.setAttribute('aria-hidden','true');
     a.appendChild(nd);a.appendChild(el('span','num',pad(i+1)));a.appendChild(el('span','lbl',names[i]));
-    li.appendChild(a);ol.appendChild(li);return {a:a,nd:nd,p:-1,done:false};
+    li.appendChild(a);var children=i===subOwner?makeSublist(li,false):[];
+    ol.appendChild(li);return {a:a,nd:nd,p:-1,done:false,subs:children};
   });
   inn.appendChild(top);inn.appendChild(ol);nav.appendChild(inn);document.body.appendChild(nav);
 
-  /* phones and tablets: current-section line, edge tab, bottom sheet */
+  /* Phones and tablets: keep the same parent/child tree in the section sheet. */
   var bar=el('div','rm-bar');bar.setAttribute('aria-hidden','true');
   var tab=el('button','rm-tab');tab.type='button';tab.setAttribute('aria-haspopup','dialog');tab.setAttribute('aria-expanded','false');
   var tn=el('span',null,'01');tab.appendChild(tn);
@@ -1423,15 +1450,22 @@
   var sol=el('ol');
   var mitems=hs.map(function(h,i){
     var li=el('li'),a=el('a');a.href='#'+h.id;a.appendChild(el('span','rm-k',pad(i+1)));a.appendChild(el('span',null,names[i]));
-    li.appendChild(a);sol.appendChild(li);a.addEventListener('click',function(){setSheet(false);});return a;
+    li.appendChild(a);var children=i===subOwner?makeSublist(li,true):[];
+    sol.appendChild(li);a.addEventListener('click',function(){setSheet(false);});
+    children.forEach(function(child){child.mobile=child.a;child.a.addEventListener('click',function(){setSheet(false);});});
+    return {a:a,subs:children};
   });
   sheet.appendChild(sh);sheet.appendChild(sol);
   [bar,tab,back,sheet].forEach(function(n){document.body.appendChild(n);});
-  var moveT;
+  var moveT,cur=-2,currentSubItem=null,tick=false,centers=null,tops=[],subTops=[],end=0;
+
   function setSheet(o,refocus){
     document.body.classList.toggle('rm-open',o);tab.setAttribute('aria-expanded',String(o));
-    if(o){var c=mitems[cur>=0?cur:0];sheet.scrollTop=Math.max(0,c.offsetTop-sheet.clientHeight/3);try{c.focus({preventScroll:true});}catch(e){}}
-    else if(refocus){tab.focus();}
+    if(o){
+      var target=currentSubItem?currentSubItem.mobile:mitems[cur>=0?cur:0].a;
+      sheet.scrollTop+=target.getBoundingClientRect().top-sheet.getBoundingClientRect().top-sheet.clientHeight/3;
+      try{target.focus({preventScroll:true});}catch(e){}
+    }else if(refocus){tab.focus();}
   }
   tab.addEventListener('click',function(){setSheet(!document.body.classList.contains('rm-open'));});
   back.addEventListener('click',function(){setSheet(false);});
@@ -1448,23 +1482,24 @@
   }
   tg.addEventListener('click',function(){open=!open;try{localStorage.setItem('sg-rail',open?'o':'c');}catch(e){}paintToggle();});
 
-  var tops=[],end=0,cur=-2,tick=false,centers=null;
   function measure(){
-    var y=scrollY;tops=hs.map(function(h){return h.getBoundingClientRect().top+y;});
+    var y=scrollY;
+    tops=hs.map(function(h){return h.getBoundingClientRect().top+y;});
+    subTops=subHeads.map(function(h){return h.getBoundingClientRect().top+y;});
     end=document.querySelector('.wrap').getBoundingClientRect().bottom+y;
   }
-  function measureCenters(){centers=items.map(function(it){var li=it.a.parentNode;return li.offsetTop+li.offsetHeight/2;});}
+  function measureCenters(){centers=items.map(function(it){return it.a.offsetTop+it.a.offsetHeight/2;});}
   function update(){
     tick=false;
     if(!centers)measureCenters();
-    var y=scrollY+innerHeight*0.25,c=-1,max=document.documentElement.scrollHeight-innerHeight;
+    var y=scrollY+innerHeight*.25,c=-1,max=document.documentElement.scrollHeight-innerHeight;
     var pv=Math.round(Math.max(0,Math.min(1,max>0?scrollY/max:0))*100);pct.textContent=pv+'%';shp.textContent=pv+'%';
     items.forEach(function(it,i){
       var nx=i+1<tops.length?tops[i+1]:end,p=Math.max(0,Math.min(1,(y-tops[i])/Math.max(1,nx-tops[i])));
       if(y>=tops[i])c=i;
       p=Math.round(p*100)/100;
       if(p!==it.p){it.p=p;it.nd.style.setProperty('--p',p);}
-      var d=y>=nx;if(d!==it.done){it.done=d;it.a.classList.toggle('is-done',d);mitems[i].classList.toggle('is-done',d);}
+      var d=y>=nx;if(d!==it.done){it.done=d;it.a.classList.toggle('is-done',d);mitems[i].a.classList.toggle('is-done',d);}
     });
     if(c<0)c=0;
     bar.style.setProperty('--w',Math.round(items[c].p*100)+'%');
@@ -1472,10 +1507,30 @@
     if(y<tops[0])f=centers[0]*Math.max(0,Math.min(1,y/Math.max(1,tops[0])));
     ol.style.setProperty('--fill',f.toFixed(1)+'px');
     if(c!==cur){
-      if(cur>=0){items[cur].a.removeAttribute('aria-current');mitems[cur].removeAttribute('aria-current');}
+      if(cur>=0){items[cur].a.removeAttribute('aria-current');mitems[cur].a.removeAttribute('aria-current');}
       cur=c;sec.textContent=pad(c+1);tn.textContent=pad(c+1);
       tab.setAttribute('aria-label','Sections. Now reading '+pad(c+1)+', '+names[c]);
-      items[c].a.setAttribute('aria-current','true');mitems[c].setAttribute('aria-current','true');
+      items[c].a.setAttribute('aria-current','true');mitems[c].a.setAttribute('aria-current','true');
+    }
+
+    var activeSub=-1;
+    items[c].subs.forEach(function(child,j){
+      var nx=j+1<subTops.length?subTops[j+1]:(c+1<tops.length?tops[c+1]:end);
+      var done=y>=nx,active=y>=subTops[j]&&y<nx;
+      if(done!==child.done){child.done=done;child.a.classList.toggle('is-done',done);child.mobile.classList.toggle('is-done',done);}
+      if(active)activeSub=j;
+      if(active){child.a.setAttribute('aria-current','location');child.mobile.setAttribute('aria-current','location');}
+      else{child.a.removeAttribute('aria-current');child.mobile.removeAttribute('aria-current');}
+    });
+    var nextSubItem=activeSub>=0?items[c].subs[activeSub]:null;
+    if(nextSubItem!==currentSubItem){
+      currentSubItem=nextSubItem;
+      if(currentSubItem){
+        var childRect=currentSubItem.a.getBoundingClientRect(),listRect=ol.getBoundingClientRect();
+        if(childRect.top<listRect.top||childRect.bottom>listRect.bottom)ol.scrollTop+=childRect.top-listRect.top-listRect.height/2;
+      }
+    }
+    if(c!==-2){
       var a=items[c].a,r=a.getBoundingClientRect(),lr=ol.getBoundingClientRect();
       if(r.top<lr.top||r.bottom>lr.bottom)ol.scrollTop+=r.top-lr.top-lr.height/2;
     }
@@ -1488,7 +1543,6 @@
   addEventListener('load',function(){measure();centers=null;req();});
   paintToggle();measure();update();
 })();
-
 </script>
 </body>
 </html>
