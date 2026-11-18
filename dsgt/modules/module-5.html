@@ -421,6 +421,21 @@
   .rail a.is-done .node { background:var(--muted); border-color:var(--muted); }
   .rail .num { font:600 .62rem/1 var(--font-mono); letter-spacing:.04em; font-variant-numeric:tabular-nums; }
   .rail .lbl { display:none; font-size:.74rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:14rem; }
+  .rail-sublist { list-style:none; margin:0 0 .3rem 1.65rem; padding:0 0 0 .55rem; border-left:1px solid var(--line); }
+  .rail-sublist a { grid-template-columns:1rem minmax(0,1fr); column-gap:.3rem; height:1.2rem; padding-left:.1rem; }
+  .rail-sublist .sub-lbl { display:block; font-size:.68rem; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .rail-sublist .sub-num { font:600 .62rem/1 var(--font-mono); color:var(--accent); }
+  .rail-sublist a[aria-current="location"] { color:var(--accent); font-weight:700; }
+  .rail.is-collapsed .rail-sublist { display:none; }
+  .rm-sublist { margin:0 0 .35rem 2.65rem !important; padding:.15rem 0 .25rem .65rem !important; border-left:1px solid var(--line); }
+  .rm-sublist a { grid-template-columns:1.1rem minmax(0,1fr); min-height:34px; padding:.25rem .5rem; border-left:0; font-size:.84rem; }
+  .rm-sublist a[aria-current="location"] { color:var(--accent); background:var(--accent-soft); }
+  .rail-list > li > .rail-sublist { display:none; }
+  .rail-list > li > a[aria-current="true"] ~ .rail-sublist { display:block; }
+  .rail.is-collapsed .rail-list > li > .rail-sublist { display:none; }
+  .rm-sheet > ol > li > .rm-sublist { display:none; }
+  .rm-sheet > ol > li > a[aria-current="true"] ~ .rm-sublist { display:block; }
+
   .rail a:hover { color:var(--ink); }
   .rail a:hover .node { border-color:var(--ink); }
   .rail a[aria-current="true"] { color:var(--ink); }
@@ -518,7 +533,7 @@
     <p>Example: Addition on real numbers is a binary operation: <span class="kbd">+: R × S → R</span> given by <span class="kbd">(a, b) → a + b</span>.</p>
   </div>
 
-  <h3>The Five Core Properties</h3>
+  <h3 id="m5-core-properties" data-rail-subsection>The Five Core Properties</h3>
 
   <div class="theory">
     <span class="source">Teacher’s framing: Properties of Algebraic System</span>
@@ -1025,7 +1040,7 @@
     <figcaption>Addition is a full abelian group. Multiplication only needs to be associative. Distributivity connects the two.</figcaption>
   </figure>
 
-  <h3>Related Concepts</h3>
+  <h3 id="m5-ring-related" data-rail-subsection>Related Concepts</h3>
 
   <div class="theory">
     <span class="source">Teacher’s framing: Commutative rings</span>
@@ -1324,21 +1339,21 @@
   <div class="answer-key">
     <h3>Answers</h3>
 
-    <h4>Binary Operations and Properties</h4>
+    <h4 id="m5-answer-binary" data-rail-subsection>Binary Operations and Properties</h4>
     <ol>
       <li>Addition on N: For any a, b ∈ N, a + b ∈ N. Subtraction on N: Not closed because 3 − 5 = −2 ∉ N.</li>
       <li>No. Division by zero is undefined.</li>
       <li>Closure: a * b ∈ S for all a, b ∈ S. Example: addition on N. Associativity: (a * b) * c = a * (b * c). Example: multiplication on Z. Commutativity: a * b = b * a. Example: addition on N. Identity: a * e = e * a = a. Example: multiplication on R*, identity = 1. Inverse: a * b = b * a = e. Example: multiplication on R*, inverse of a is 1/a.</li>
     </ol>
 
-    <h4>Semigroup and Monoid</h4>
+    <h4 id="m5-answer-semigroup" data-rail-subsection>Semigroup and Monoid</h4>
     <ol>
       <li>Semigroup: Closed (max of two integers is integer), associative. Not monoid: No identity element.</li>
       <li>Monoid: Closed (concatenation of strings is string), associative, identity = null string. Not group: Non-empty strings have no inverse.</li>
       <li>Monoid: Closed (composition of functions is function), associative, identity = identity function. Not necessarily group: Non-bijective functions have no inverse.</li>
     </ol>
 
-    <h4>Groups</h4>
+    <h4 id="m5-answer-groups" data-rail-subsection>Groups</h4>
     <ol>
       <li>Abelian group: Closed, associative, identity = 1, inverse = 1/a, commutative.</li>
       <li>Not a group: 0 ∈ R has no multiplicative inverse.</li>
@@ -1348,27 +1363,27 @@
       <li>Inverse unique: If b and c are both inverses of a, then a*b = a*c = e, so b = c by cancellation.</li>
     </ol>
 
-    <h4>Subgroups and Abelian Groups</h4>
+    <h4 id="m5-answer-subgroups" data-rail-subsection>Subgroups and Abelian Groups</h4>
     <ol>
       <li>Subgroup: Even integers under addition: closed, associative, identity = 0, inverse = −a. All elements of 2Z are in Z, so 2Z is a subgroup of Z.</li>
       <li>Abelian: Non-zero real numbers under multiplication. Non-abelian: Non-singular matrices under multiplication.</li>
       <li>Difference: An abelian group additionally requires commutativity (a * b = b * a).</li>
     </ol>
 
-    <h4>Cyclic Groups</h4>
+    <h4 id="m5-answer-cyclic" data-rail-subsection>Cyclic Groups</h4>
     <ol>
       <li>Cyclic: Multiples of 1 mod 6 generate all elements {0,1,2,3,4,5}. Generators are 1 and 5.</li>
       <li>Cyclic: Powers of 3 mod 7 generate all elements {1,2,3,4,5,6}. Generators are 3 and 5.</li>
       <li>No. Example: Z₂ × Z₂ is abelian but not cyclic.</li>
     </ol>
 
-    <h4>Modular Arithmetic</h4>
+    <h4 id="m5-answer-modular" data-rail-subsection>Modular Arithmetic</h4>
     <ol>
       <li>Group: Addition mod 4 on {0,1,2,3}: closed, associative, identity = 0, inverses = 0→0, 1→3, 2→2, 3→1, commutative. Abelian group.</li>
       <li>Inverses in Z₇*: 1→1, 2→4, 3→5, 4→2, 5→3, 6→6.</li>
     </ol>
 
-    <h4>Rings</h4>
+    <h4 id="m5-answer-rings" data-rail-subsection>Rings</h4>
     <ol>
       <li>Ring: (A,+₁₀) abelian group, (A,·₁₀) semigroup, distributive laws hold.</li>
       <li>Ring: (B,+₁₂) abelian group, (B,·₁₂) semigroup, distributive laws hold.</li>
@@ -1485,15 +1500,33 @@
 })();
 </script>
 <script>
-
 (function(){
   var hs=[].slice.call(document.querySelectorAll('.wrap h2[id]'));
+  var subHeads=[].slice.call(document.querySelectorAll('.wrap [data-rail-subsection][id]'));
   if(!hs.length)return;
   function pad(n){return (n<10?'0':'')+n;}
   function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
   var names=hs.map(function(h){return h.textContent.trim();});
-
-  /* wide screens: margin rail */
+  var subGroups=hs.map(function(){return [];});
+  var sectionIndex=-1;
+  Array.prototype.forEach.call(document.querySelectorAll('.wrap h2[id], .wrap [data-rail-subsection][id]'),function(h){
+    if(h.tagName==='H2'){sectionIndex=hs.indexOf(h);}
+    else if(sectionIndex>=0)subGroups[sectionIndex].push(h);
+  });
+  function makeSublist(parentLi,mobile,headings){
+    if(!headings.length)return [];
+    var list=el('ol',mobile?'rm-sublist':'rail-sublist');
+    var children=headings.map(function(h,i){
+      var li=el('li'),a=el('a',mobile?'rm-sub-link':'rail-sub-link');
+      var label=h.getAttribute('data-rail-label')||h.textContent.trim();
+      a.href='#'+h.id;a.title=label;
+      a.appendChild(el('span',mobile?'rm-k':'sub-num',String.fromCharCode(65+i)));
+      a.appendChild(el('span',mobile?'rm-sub-label':'sub-lbl',label));
+      li.appendChild(a);list.appendChild(li);
+      return {a:a,heading:h,done:false,top:0,mobile:null};
+    });
+    parentLi.appendChild(list);return children;
+  }
   var nav=el('nav','rail');nav.setAttribute('aria-label','Section progress');
   var inn=el('div','rail-in'),top=el('div','rail-top'),sec=el('span','rail-sec','01'),meta=el('span','rail-meta');
   var pct=el('b',null,'0%');meta.appendChild(el('span',null,'of '+pad(hs.length)));meta.appendChild(pct);
@@ -1505,11 +1538,10 @@
     var li=el('li'),a=el('a'),nd=el('span','node');
     a.href='#'+h.id;a.title=names[i];nd.setAttribute('aria-hidden','true');
     a.appendChild(nd);a.appendChild(el('span','num',pad(i+1)));a.appendChild(el('span','lbl',names[i]));
-    li.appendChild(a);ol.appendChild(li);return {a:a,nd:nd,p:-1,done:false};
+    li.appendChild(a);var children=makeSublist(li,false,subGroups[i]);
+    ol.appendChild(li);return {a:a,nd:nd,p:-1,done:false,subs:children};
   });
   inn.appendChild(top);inn.appendChild(ol);nav.appendChild(inn);document.body.appendChild(nav);
-
-  /* phones and tablets: current-section line, edge tab, bottom sheet */
   var bar=el('div','rm-bar');bar.setAttribute('aria-hidden','true');
   var tab=el('button','rm-tab');tab.type='button';tab.setAttribute('aria-haspopup','dialog');tab.setAttribute('aria-expanded','false');
   var tn=el('span',null,'01');tab.appendChild(tn);
@@ -1518,20 +1550,26 @@
   var sol=el('ol');
   var mitems=hs.map(function(h,i){
     var li=el('li'),a=el('a');a.href='#'+h.id;a.appendChild(el('span','rm-k',pad(i+1)));a.appendChild(el('span',null,names[i]));
-    li.appendChild(a);sol.appendChild(li);a.addEventListener('click',function(){setSheet(false);});return a;
+    li.appendChild(a);var children=makeSublist(li,true,subGroups[i]);
+    sol.appendChild(li);a.addEventListener('click',function(){setSheet(false);});
+    children.forEach(function(child){child.mobile=child.a;child.a.addEventListener('click',function(){setSheet(false);});});
+    return {a:a,subs:children};
   });
+  items.forEach(function(item,i){item.subs.forEach(function(child,j){child.mobile=mitems[i].subs[j].a;});});
   sheet.appendChild(sh);sheet.appendChild(sol);
   [bar,tab,back,sheet].forEach(function(n){document.body.appendChild(n);});
-  var moveT;
+  var moveT,cur=-2,currentSubItem=null,tick=false,centers=null,tops=[],end=0;
   function setSheet(o,refocus){
     document.body.classList.toggle('rm-open',o);tab.setAttribute('aria-expanded',String(o));
-    if(o){var c=mitems[cur>=0?cur:0];sheet.scrollTop=Math.max(0,c.offsetTop-sheet.clientHeight/3);try{c.focus({preventScroll:true});}catch(e){}}
-    else if(refocus){tab.focus();}
+    if(o){
+      var target=currentSubItem?currentSubItem.mobile:mitems[cur>=0?cur:0].a;
+      sheet.scrollTop+=target.getBoundingClientRect().top-sheet.getBoundingClientRect().top-sheet.clientHeight/3;
+      try{target.focus({preventScroll:true});}catch(e){}
+    }else if(refocus){tab.focus();}
   }
   tab.addEventListener('click',function(){setSheet(!document.body.classList.contains('rm-open'));});
   back.addEventListener('click',function(){setSheet(false);});
   addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('rm-open'))setSheet(false,true);});
-
   var open;
   try{var sv=localStorage.getItem('sg-rail');open=sv?sv==='o':innerWidth>=1100;}catch(e){open=innerWidth>=1100;}
   function paintToggle(){
@@ -1542,48 +1580,59 @@
     centers=null;req();
   }
   tg.addEventListener('click',function(){open=!open;try{localStorage.setItem('sg-rail',open?'o':'c');}catch(e){}paintToggle();});
-
-  var tops=[],end=0,cur=-2,tick=false,centers=null;
   function measure(){
     var y=scrollY;tops=hs.map(function(h){return h.getBoundingClientRect().top+y;});
+    items.forEach(function(item){item.subs.forEach(function(child){child.top=child.heading.getBoundingClientRect().top+y;});});
     end=document.querySelector('.wrap').getBoundingClientRect().bottom+y;
   }
-  function measureCenters(){centers=items.map(function(it){var li=it.a.parentNode;return li.offsetTop+li.offsetHeight/2;});}
+  function measureCenters(){centers=items.map(function(it){return it.a.offsetTop+it.a.offsetHeight/2;});}
   function update(){
-    tick=false;
-    if(!centers)measureCenters();
-    var y=scrollY+innerHeight*0.25,c=-1,max=document.documentElement.scrollHeight-innerHeight;
+    tick=false;if(!centers)measureCenters();
+    var y=scrollY+innerHeight*.25,c=-1,max=document.documentElement.scrollHeight-innerHeight;
     var pv=Math.round(Math.max(0,Math.min(1,max>0?scrollY/max:0))*100);pct.textContent=pv+'%';shp.textContent=pv+'%';
     items.forEach(function(it,i){
       var nx=i+1<tops.length?tops[i+1]:end,p=Math.max(0,Math.min(1,(y-tops[i])/Math.max(1,nx-tops[i])));
-      if(y>=tops[i])c=i;
-      p=Math.round(p*100)/100;
-      if(p!==it.p){it.p=p;it.nd.style.setProperty('--p',p);}
-      var d=y>=nx;if(d!==it.done){it.done=d;it.a.classList.toggle('is-done',d);mitems[i].classList.toggle('is-done',d);}
+      if(y>=tops[i])c=i;p=Math.round(p*100)/100;if(p!==it.p){it.p=p;it.nd.style.setProperty('--p',p);}
+      var d=y>=nx;if(d!==it.done){it.done=d;it.a.classList.toggle('is-done',d);mitems[i].a.classList.toggle('is-done',d);}
     });
-    if(c<0)c=0;
-    bar.style.setProperty('--w',Math.round(items[c].p*100)+'%');
-    var f=centers[c]+(c+1<centers.length?(centers[c+1]-centers[c])*items[c].p:0);
-    if(y<tops[0])f=centers[0]*Math.max(0,Math.min(1,y/Math.max(1,tops[0])));
-    ol.style.setProperty('--fill',f.toFixed(1)+'px');
-    if(c!==cur){
-      if(cur>=0){items[cur].a.removeAttribute('aria-current');mitems[cur].removeAttribute('aria-current');}
+    if(c<0)c=0;bar.style.setProperty('--w',Math.round(items[c].p*100)+'%');
+    var fillPosition=centers[c]+(c+1<centers.length?(centers[c+1]-centers[c])*items[c].p:0);
+    if(y<tops[0])fillPosition=centers[0]*Math.max(0,Math.min(1,y/Math.max(1,tops[0])));
+    ol.style.setProperty('--fill',fillPosition.toFixed(1)+'px');
+    var sectionChanged=c!==cur;
+    if(sectionChanged){
+      if(cur>=0){items[cur].a.removeAttribute('aria-current');mitems[cur].a.removeAttribute('aria-current');}
       cur=c;sec.textContent=pad(c+1);tn.textContent=pad(c+1);
       tab.setAttribute('aria-label','Sections. Now reading '+pad(c+1)+', '+names[c]);
-      items[c].a.setAttribute('aria-current','true');mitems[c].setAttribute('aria-current','true');
+      items[c].a.setAttribute('aria-current','true');mitems[c].a.setAttribute('aria-current','true');
+    }
+    var activeSub=null;
+    items[c].subs.forEach(function(child,j){
+      var nx=j+1<items[c].subs.length?items[c].subs[j+1].top:(c+1<tops.length?tops[c+1]:end);
+      var done=y>=nx,active=y>=child.top&&y<nx;
+      if(done!==child.done){child.done=done;child.a.classList.toggle('is-done',done);child.mobile.classList.toggle('is-done',done);}
+      if(active)activeSub=child;
+    });
+    if(activeSub!==currentSubItem){
+      if(currentSubItem){currentSubItem.a.removeAttribute('aria-current');currentSubItem.mobile.removeAttribute('aria-current');}
+      currentSubItem=activeSub;
+      if(currentSubItem){
+        currentSubItem.a.setAttribute('aria-current','location');currentSubItem.mobile.setAttribute('aria-current','location');
+        var childRect=currentSubItem.a.getBoundingClientRect(),listRect=ol.getBoundingClientRect();
+        if(childRect.top<listRect.top||childRect.bottom>listRect.bottom)ol.scrollTop+=childRect.top-listRect.top-listRect.height/2;
+      }
+    }
+    if(sectionChanged&&!activeSub){
       var a=items[c].a,r=a.getBoundingClientRect(),lr=ol.getBoundingClientRect();
       if(r.top<lr.top||r.bottom>lr.bottom)ol.scrollTop+=r.top-lr.top-lr.height/2;
     }
   }
   function req(){if(!tick){tick=true;requestAnimationFrame(update);}}
-  addEventListener('scroll',function(){
-    document.body.classList.add('rm-moving');clearTimeout(moveT);moveT=setTimeout(function(){document.body.classList.remove('rm-moving');},700);req();
-  },{passive:true});
+  addEventListener('scroll',function(){document.body.classList.add('rm-moving');clearTimeout(moveT);moveT=setTimeout(function(){document.body.classList.remove('rm-moving');},700);req();},{passive:true});
   addEventListener('resize',function(){measure();centers=null;req();});
   addEventListener('load',function(){measure();centers=null;req();});
   paintToggle();measure();update();
 })();
-
 </script>
 </body>
 </html>
