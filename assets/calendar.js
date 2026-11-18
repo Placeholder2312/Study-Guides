@@ -40,7 +40,7 @@
     return y + '-' + (m < 9 ? '0' : '') + (m + 1) + '-' + (d < 10 ? '0' : '') + d;
   }
 
-  function buildMonth(year, month, now) {
+  function buildMonth(year, month, todayKey) {
     var box = el('div', 'cal-month');
     var table = el('table', 'cal-grid');
     table.appendChild(el('caption', null, MONTHS[month] + ' ' + year));
@@ -73,9 +73,11 @@
       var dateKey = iso(year, month, day);
       var cell = el('td', 'day', day);
       cell.setAttribute('data-date', dateKey);
-      if (year === now.getFullYear() && month === now.getMonth() && day === now.getDate()) {
+      if (dateKey === todayKey) {
         cell.className += ' today';
         cell.setAttribute('aria-current', 'date');
+      } else if (dateKey < todayKey) {
+        cell.className += ' past';
       }
       var exams = byDate[dateKey];
       if (exams) {
@@ -101,7 +103,7 @@
   }
 
   // Legend (what each highlight means) and the list of exams in the months shown.
-  function buildKey(key, months) {
+  function buildKey(key, months, todayKey) {
     var shown = months.map(function (d) {
       return iso(d.getFullYear(), d.getMonth(), 1).slice(0, 7);
     });
@@ -126,7 +128,7 @@
       var p = e.date.split('-');
       var d = new Date(+p[0], +p[1] - 1, +p[2]);
       var when = DAYS[(d.getDay() + 6) % 7][0] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()].slice(0, 3);
-      var li = el('li');
+      var li = el('li', e.date < todayKey ? 'past' : null);
       li.appendChild(el('span', 'sw sem-' + e.sem, d.getDate()));
       var txt = el('span');
       txt.appendChild(el('span', 'ex-name', e.name));
@@ -137,13 +139,32 @@
     key.appendChild(ul);
   }
 
-  var now = new Date();
-  var months = [];
-  for (var m = 0; m < 2; m++) {
-    var first = new Date(now.getFullYear(), now.getMonth() + m, 1);
-    months.push(first);
-    host.appendChild(buildMonth(first.getFullYear(), first.getMonth(), now));
-  }
   var keyHost = document.getElementById('calendar-key');
-  if (keyHost) buildKey(keyHost, months);
+  var renderedFor = '';
+
+  function todayKey() {
+    var n = new Date();
+    return iso(n.getFullYear(), n.getMonth(), n.getDate());
+  }
+
+  function render() {
+    var now = new Date();
+    renderedFor = todayKey();
+    host.textContent = '';
+    if (keyHost) keyHost.textContent = '';
+    var months = [];
+    for (var m = 0; m < 2; m++) {
+      var first = new Date(now.getFullYear(), now.getMonth() + m, 1);
+      months.push(first);
+      host.appendChild(buildMonth(first.getFullYear(), first.getMonth(), renderedFor));
+    }
+    if (keyHost) buildKey(keyHost, months, renderedFor);
+  }
+
+  render();
+
+  // A tab left open overnight (common on phones) redraws when it comes back into view.
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden && todayKey() !== renderedFor) render();
+  });
 })();

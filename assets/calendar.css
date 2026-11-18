@@ -19,6 +19,19 @@
 
 .cal-grid td.today, .sw.today { background: var(--ink); color: var(--bg); font-weight: 800; border-color: var(--ink); }
 
+/* Days already gone are dimmed. */
+.cal-grid td.past { opacity: .5; }
+.cal-exams li.past { opacity: .55; }
+
+/* An exam on today's date keeps today's fill; the semester style is drawn on top in
+   the background colour (single ring, dashed ring or double ring). */
+.cal-grid td.today.sem-1 { box-shadow: inset 0 0 0 3px var(--ink), inset 0 0 0 5px var(--bg); }
+.cal-grid td.today.sem-2 { outline-color: var(--bg); }
+.cal-grid td.today.sem-3 { box-shadow: inset 0 0 0 2px var(--ink), inset 0 0 0 3px var(--bg), inset 0 0 0 5px var(--ink), inset 0 0 0 6px var(--bg); }
+
+/* Let the highlights survive printing. */
+.cal-grid td, .sw { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
 /* Key: legend plus the list of exams in the months shown. */
@@ -38,4 +51,6 @@
 @media (max-width: 600px) {
   .cal-month { padding: .65rem .55rem .85rem .75rem; }
   .cal-grid td { height: 2.6rem; font-size: .9rem; }
+  .cal-key { padding: .7rem .75rem; }
+  .cal-legend { gap: .4rem .9rem; }
 }
