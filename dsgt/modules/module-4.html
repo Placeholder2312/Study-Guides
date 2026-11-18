@@ -1455,6 +1455,7 @@
     children.forEach(function(child){child.mobile=child.a;child.a.addEventListener('click',function(){setSheet(false);});});
     return {a:a,subs:children};
   });
+  if(subOwner>=0)items[subOwner].subs.forEach(function(child,i){child.mobile=mitems[subOwner].subs[i].a;});
   sheet.appendChild(sh);sheet.appendChild(sol);
   [bar,tab,back,sheet].forEach(function(n){document.body.appendChild(n);});
   var moveT,cur=-2,currentSubItem=null,tick=false,centers=null,tops=[],subTops=[],end=0;
@@ -1506,7 +1507,8 @@
     var f=centers[c]+(c+1<centers.length?(centers[c+1]-centers[c])*items[c].p:0);
     if(y<tops[0])f=centers[0]*Math.max(0,Math.min(1,y/Math.max(1,tops[0])));
     ol.style.setProperty('--fill',f.toFixed(1)+'px');
-    if(c!==cur){
+    var sectionChanged=c!==cur;
+    if(sectionChanged){
       if(cur>=0){items[cur].a.removeAttribute('aria-current');mitems[cur].a.removeAttribute('aria-current');}
       cur=c;sec.textContent=pad(c+1);tn.textContent=pad(c+1);
       tab.setAttribute('aria-label','Sections. Now reading '+pad(c+1)+', '+names[c]);
@@ -1524,13 +1526,15 @@
     });
     var nextSubItem=activeSub>=0?items[c].subs[activeSub]:null;
     if(nextSubItem!==currentSubItem){
+      if(currentSubItem){currentSubItem.a.removeAttribute('aria-current');currentSubItem.mobile.removeAttribute('aria-current');}
       currentSubItem=nextSubItem;
       if(currentSubItem){
+        currentSubItem.a.setAttribute('aria-current','location');currentSubItem.mobile.setAttribute('aria-current','location');
         var childRect=currentSubItem.a.getBoundingClientRect(),listRect=ol.getBoundingClientRect();
         if(childRect.top<listRect.top||childRect.bottom>listRect.bottom)ol.scrollTop+=childRect.top-listRect.top-listRect.height/2;
       }
     }
-    if(c!==-2){
+    if(sectionChanged&&activeSub<0){
       var a=items[c].a,r=a.getBoundingClientRect(),lr=ol.getBoundingClientRect();
       if(r.top<lr.top||r.bottom>lr.bottom)ol.scrollTop+=r.top-lr.top-lr.height/2;
     }
