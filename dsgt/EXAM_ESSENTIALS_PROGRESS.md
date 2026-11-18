@@ -140,6 +140,6 @@ Optional additions only (not required, and not to be done unless asked):
 ## Module V — Question / Solution / Final Answer formatting
 
 - Latest audited checkpoint: 17 existing worked examples and 4 previous end-semester questions (21 formatting units). No questions have been added or removed.
-- **Completed: 5/21 units.** Worked Examples 1–5 now use the exact Question / Solution / Final Answer markup and CSS from Module IV. Existing wording, workings and conclusions were preserved.
+- **Completed: 10/21 units.** Worked Examples 1–10 now use the exact Question / Solution / Final Answer markup and CSS from Module IV. Existing wording, workings and conclusions were preserved.
 - Module V's equation CSS now matches Module IV's no-wrap rule; long equations scroll horizontally on narrow screens. The mobile `overflow-wrap: anywhere` override was removed.
-- **Next checkpoint:** Worked Examples 6–10. Commit and verify after each five units.
+- **Next checkpoint:** Worked Examples 11–15. Commit and verify after each five units.
