@@ -836,22 +836,23 @@
   <div class="theory">
     <span class="source">Syllabus topic; not developed in the slide deck</span>
     <p>A graph <span class="kbd">H = (V′, E′)</span> is a <strong>subgraph</strong> of <span class="kbd">G = (V, E)</span> when <span class="kbd">V′ ⊆ V</span>, <span class="kbd">E′ ⊆ E</span>, and every edge in <span class="kbd">E′</span> has both endpoints in <span class="kbd">V′</span>. You obtain a subgraph by deleting vertices, deleting edges, or both.</p>
-    <p>If <span class="kbd">V′ = V</span>, the subgraph is <strong>spanning</strong>. If <span class="kbd">E′</span> contains <em>every</em> edge of <span class="kbd">G</span> whose endpoints lie in <span class="kbd">V′</span>, the subgraph is <strong>induced</strong> by <span class="kbd">V′</span> and is written <span class="kbd">G[V′]</span>. Deleting a vertex always forces you to delete its incident edges, but the result need not be an induced subgraph: you may delete even more edges.</p>
+    <p>If <span class="kbd">V′ = V</span>, the subgraph is <strong>spanning</strong>. If <span class="kbd">E′</span> contains <em>every</em> edge of <span class="kbd">G</span> whose endpoints lie in <span class="kbd">V′</span>, the subgraph is <strong>induced</strong> by <span class="kbd">V′</span> and is written <span class="kbd">G[V′]</span>. Deleting a vertex forces you to delete its incident edges, and deleting only those gives the induced subgraph on the remaining vertices. A subgraph on the same vertices that is missing some further edge is not induced.</p>
   </div>
 
   <div class="example qa">
-    <div class="example-title">Example 6: Deleting a vertex versus taking an induced subgraph</div>
+    <div class="example-title">Example 6: Deleting a vertex versus an induced subgraph</div>
     <div class="qa-question"><div class="qa-label">Question</div>
       <p>Let <span class="kbd">V = {1, 2, 3, 4, 5}</span> and <span class="kbd">E = {12, 23, 34, 45, 51, 13}</span>.</p>
-      <p>(a) Delete vertex 3 and all incident edges. (b) Take the subgraph induced by <span class="kbd">{1, 2, 4, 5}</span>. Compare the two results.</p>
+      <p>(a) Delete vertex 3 and all incident edges. (b) Take the subgraph induced by <span class="kbd">{1, 2, 4, 5}</span>. (c) Delete vertex 3 and also edge 12. Which results are induced subgraphs?</p>
     </div>
     <div class="qa-solution"><div class="qa-label">Solution</div>
-      <p>(a) Vertex 3 is incident with <span class="kbd">23</span>, <span class="kbd">34</span> and <span class="kbd">13</span>. Removing those leaves <span class="kbd">45</span> and <span class="kbd">51</span>. Vertex 2 loses both its edges and becomes isolated.</p>
-      <p>(b) The induced subgraph keeps every edge with both ends in <span class="kbd">{1, 2, 4, 5}</span>. That adds <span class="kbd">12</span>, which survives because neither endpoint was deleted. Its edges are <span class="kbd">{12, 45, 51}</span>.</p>
-      <div class="eq">(a) E′ = {45, 51} &nbsp;·&nbsp; (b) E′ = {12, 45, 51}</div>
+      <p>(a) Vertex 3 is incident with <span class="kbd">23</span>, <span class="kbd">34</span> and <span class="kbd">13</span>. Removing those leaves <span class="kbd">12</span>, <span class="kbd">45</span> and <span class="kbd">51</span>.</p>
+      <p>(b) The induced subgraph keeps every edge with both ends in <span class="kbd">{1, 2, 4, 5}</span>, which is again <span class="kbd">12</span>, <span class="kbd">45</span> and <span class="kbd">51</span>. So (a) and (b) are the same graph.</p>
+      <p>(c) Dropping <span class="kbd">12</span> as well leaves only <span class="kbd">45</span> and <span class="kbd">51</span>, and vertex 2 becomes isolated. Both ends of <span class="kbd">12</span> are still present, so an induced subgraph would have to keep it.</p>
+      <div class="eq">(a) E′ = {12, 45, 51} &nbsp;·&nbsp; (b) E′ = {12, 45, 51} &nbsp;·&nbsp; (c) E′ = {45, 51}</div>
     </div>
     <div class="qa-final"><div class="qa-label">Final Answer</div>
-      <p class="qa-final-text">Both have vertex set <span class="kbd">{1, 2, 4, 5}</span>, but only (b) is induced. The deletion in (a) also removed edge 12, which is why (a) is not <span class="kbd">G[{1,2,4,5}]</span>.</p>
+      <p class="qa-final-text">(a) and (b) are induced, and they are equal. (c) has the same vertices but is not induced, because it omits edge <span class="kbd">12</span>.</p>
     </div>
   </div>
 
