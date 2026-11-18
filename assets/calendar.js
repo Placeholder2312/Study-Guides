@@ -196,9 +196,12 @@
     });
     tapeEl = null;
     if (anyDone) {
-      tapeEl = el('div', 'cal-tape');
-      tapeEl.setAttribute('aria-hidden', 'true');
-      host.appendChild(tapeEl);
+      var tapeBox = el('div', 'cal-tape');
+      tapeBox.setAttribute('aria-hidden', 'true');
+      tapeEl = el('i', 'cal-tape-hang'); // the swinging strip
+      tapeBox.appendChild(tapeEl);
+      tapeBox.appendChild(el('i', 'cal-tape-stuck')); // the piece stuck over the card edge
+      host.appendChild(tapeBox);
       angle = 0;
       spin = 60; // a small swing when the page loads
       wake();
