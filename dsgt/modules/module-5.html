@@ -845,10 +845,18 @@
 </div>
 </div>
 
-  <div class="example">
-    <div class="example-title">Non-abelian group example: Non-singular matrices under multiplication</div>
-    <p>As shown earlier, <span class="kbd">M</span> (non-singular <span class="kbd">n × n</span> matrices) is a group but not abelian because matrix multiplication is not commutative.</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Non-abelian group example: Non-singular matrices under multiplication</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Explain why the group of non-singular matrices under multiplication is not abelian.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Matrix multiplication is not commutative.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">The group of non-singular matrices under multiplication is <strong>not abelian</strong>.</p>
+</div>
+</div>
 
   <h2 id="cyclic">Section 7 — Cyclic Groups</h2>
 
@@ -861,10 +869,14 @@
     <p>Finite cyclic groups: If <span class="kbd">g</span> has finite order <span class="kbd">m</span> (smallest positive integer such that <span class="kbd">gᵐ = e</span>), then <span class="kbd">G = {e, g, g², …, gᵐ⁻¹}</span> and <span class="kbd">|G| = m</span>.</p>
   </div>
 
-  <div class="example">
-    <div class="example-title">Example: Z₆ = {0, 1, 2, 3, 4, 5} under addition modulo 6</div>
-    <p>Is Z₆ cyclic? Yes. Consider the element 1:</p>
-    <ul>
+  <div class="example qa">
+<div class="example-title">Example: Z₆ = {0, 1, 2, 3, 4, 5} under addition modulo 6</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Is Z₆ = {0, 1, 2, 3, 4, 5} cyclic?</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Consider the element 1:</p>
+<ul>
       <li>1·1 = 1</li>
       <li>2·1 = 2</li>
       <li>3·1 = 3</li>
@@ -872,13 +884,20 @@
       <li>5·1 = 5</li>
       <li>6·1 = 0 (mod 6)</li>
     </ul>
-    <p>Since multiples of 1 generate all elements of Z₆, 1 is a generator. The element 5 is also a generator (5·1=5, 5·2=4, 5·3=3, 5·4=2, 5·5=1, 5·6=0).</p>
-  </div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">Since multiples of 1 generate all elements of Z₆, 1 is a generator. The element 5 is also a generator (5·1=5, 5·2=4, 5·3=3, 5·4=2, 5·5=1, 5·6=0).</p>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Example: Z₇* = {1, 2, 3, 4, 5, 6} under multiplication modulo 7</div>
-    <p>Is Z₇* cyclic? Yes. Consider powers of 3 mod 7:</p>
-    <ul>
+  <div class="example qa">
+<div class="example-title">Example: Z₇* = {1, 2, 3, 4, 5, 6} under multiplication modulo 7</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Is Z₇* = {1, 2, 3, 4, 5, 6} cyclic?</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Consider powers of 3 modulo 7:</p>
+<ul>
       <li>3¹ = 3</li>
       <li>3² = 9 ≡ 2</li>
       <li>3³ = 27 ≡ 6</li>
@@ -886,9 +905,12 @@
       <li>3⁵ = 243 ≡ 5</li>
       <li>3⁶ = 729 ≡ 1</li>
     </ul>
-    <p>All six elements appear, so 3 is a generator. The element 5 is also a generator.</p>
-    <p>The element 2 is not a generator: 2¹=2, 2²=4, 2³=1, and then it repeats — only {1, 2, 4} are generated.</p>
-  </div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">All six elements appear, so 3 is a generator. The element 5 is also a generator.</p>
+<p>The element 2 is not a generator: 2¹=2, 2²=4, 2³=1, and then it repeats — only {1, 2, 4} are generated.</p>
+</div>
+</div>
 
   <figure class="m5-fig" id="d6-cyclic-generators-fig">
     <svg id="d6-cyclic-generators" viewBox="0 0 420 504" role="img" aria-labelledby="d6-cyclic-generators-title d6-cyclic-generators-desc"><title id="d6-cyclic-generators-title">Cyclic groups and generators: Z6 under addition and Z7 star under multiplication</title><desc id="d6-cyclic-generators-desc">Two panels of orbit sequences. In Z6 under addition mod 6, multiples of 1 give 1, 2, 3, 4, 5, 0 and multiples of 5 give 5, 4, 3, 2, 1, 0, so both 1 and 5 generate every element. In the non-zero integers mod 7 under multiplication, powers of 3 give 3, 2, 6, 4, 5, 1 and powers of 5 give 5, 4, 6, 2, 3, 1, so both generate all six elements. Powers of 2 give 2, 4, 1 and then repeat, so 2 only generates the set 1, 2, 4 and is not a generator.</desc><defs><marker id="d6-arrow" markerWidth="8" markerHeight="8" refX="6.5" refY="3" orient="auto"><path d="M0 0L6.5 3L0 6Z" fill="var(--accent)"/></marker></defs><rect x="8" y="8" width="404" height="202" rx="0" fill="var(--bg)" stroke="var(--line)" stroke-width="1.5"/><text x="22" y="34" font-size="15" font-weight="700" fill="var(--ink)">A.  Z₆ under addition mod 6:  k · g</text><text x="22" y="53" font-size="12.5" font-weight="500" fill="var(--muted)">identity = 0.  List k · g for k = 1, 2, …, 6</text><text x="18" y="87" font-size="14.5" font-weight="700" fill="var(--ink)">g = 1</text><text x="18" y="105" font-size="12" font-weight="500" fill="var(--muted)">step +1</text><rect x="100.0" y="75.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="119.0" y="97.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><path d="M139 92L151 92" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="152.0" y="75.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="171.0" y="97.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">2</text><path d="M191 92L203 92" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="204.0" y="75.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="223.0" y="97.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">3</text><path d="M243 92L255 92" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="256.0" y="75.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="275.0" y="97.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">4</text><path d="M295 92L307 92" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="308.0" y="75.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="327.0" y="97.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">5</text><path d="M347 92L359 92" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="360.0" y="75.0" width="38" height="34" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.4"/><text x="379.0" y="97.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">0</text><path d="M103.6 123.0L106.6 126.4L112.6 119.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="124" y="128" font-size="12.5" font-weight="700" fill="var(--accent)">generates all 6 elements</text><text x="18" y="157" font-size="14.5" font-weight="700" fill="var(--ink)">g = 5</text><text x="18" y="175" font-size="12" font-weight="500" fill="var(--muted)">step +5</text><rect x="100.0" y="145.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="119.0" y="167.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">5</text><path d="M139 162L151 162" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="152.0" y="145.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="171.0" y="167.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">4</text><path d="M191 162L203 162" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="204.0" y="145.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="223.0" y="167.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">3</text><path d="M243 162L255 162" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="256.0" y="145.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="275.0" y="167.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">2</text><path d="M295 162L307 162" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="308.0" y="145.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="327.0" y="167.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><path d="M347 162L359 162" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="360.0" y="145.0" width="38" height="34" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.4"/><text x="379.0" y="167.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">0</text><path d="M103.6 193.0L106.6 196.4L112.6 189.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="124" y="198" font-size="12.5" font-weight="700" fill="var(--accent)">also generates all 6 elements</text><rect x="8" y="220" width="404" height="276" rx="0" fill="var(--bg)" stroke="var(--line)" stroke-width="1.5"/><text x="22" y="246" font-size="15" font-weight="700" fill="var(--ink)">B.  Z₇* under multiplication mod 7:  gᵏ</text><text x="22" y="265" font-size="12.5" font-weight="500" fill="var(--muted)">identity = 1.  List gᵏ for k = 1, 2, 3, …</text><text x="18" y="299" font-size="14.5" font-weight="700" fill="var(--ink)">g = 3</text><text x="18" y="317" font-size="12" font-weight="500" fill="var(--muted)">powers of 3</text><rect x="100.0" y="287.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="119.0" y="309.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">3</text><path d="M139 304L151 304" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="152.0" y="287.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="171.0" y="309.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">2</text><path d="M191 304L203 304" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="204.0" y="287.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="223.0" y="309.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">6</text><path d="M243 304L255 304" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="256.0" y="287.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="275.0" y="309.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">4</text><path d="M295 304L307 304" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="308.0" y="287.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="327.0" y="309.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">5</text><path d="M347 304L359 304" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="360.0" y="287.0" width="38" height="34" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.4"/><text x="379.0" y="309.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><path d="M103.6 335.0L106.6 338.4L112.6 331.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="124" y="340" font-size="12.5" font-weight="700" fill="var(--accent)">generates all 6 non-zero elements</text><text x="18" y="369" font-size="14.5" font-weight="700" fill="var(--ink)">g = 5</text><text x="18" y="387" font-size="12" font-weight="500" fill="var(--muted)">powers of 5</text><rect x="100.0" y="357.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="119.0" y="379.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">5</text><path d="M139 374L151 374" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="152.0" y="357.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="171.0" y="379.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">4</text><path d="M191 374L203 374" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="204.0" y="357.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="223.0" y="379.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">6</text><path d="M243 374L255 374" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="256.0" y="357.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="275.0" y="379.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">2</text><path d="M295 374L307 374" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="308.0" y="357.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="327.0" y="379.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">3</text><path d="M347 374L359 374" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="360.0" y="357.0" width="38" height="34" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.4"/><text x="379.0" y="379.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><path d="M103.6 405.0L106.6 408.4L112.6 401.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="124" y="410" font-size="12.5" font-weight="700" fill="var(--accent)">also generates all 6 non-zero elements</text><text x="18" y="439" font-size="14.5" font-weight="700" fill="var(--ink)">g = 2</text><text x="18" y="457" font-size="12" font-weight="500" fill="var(--muted)">powers of 2</text><rect x="100.0" y="427.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="119.0" y="449.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">2</text><path d="M139 444L151 444" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="152.0" y="427.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="171.0" y="449.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">4</text><path d="M191 444L203 444" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="204.0" y="427.0" width="38" height="34" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.4"/><text x="223.0" y="449.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><text x="250" y="449" font-size="12.5" font-weight="700" fill="var(--danger)">then repeats 2, 4, 1 …</text><path d="M104.3 471.3L111.7 478.7M111.7 471.3L104.3 478.7" stroke="var(--danger)" stroke-width="2.6" fill="none" stroke-linecap="round"/><text x="124" y="480" font-size="12.5" font-weight="700" fill="var(--danger)">only {1, 2, 4}: 2 is not a generator</text></svg>
@@ -914,10 +936,14 @@
     <div class="eq">a ×ₚ b = r &nbsp;&nbsp; if ab ≥ p, where r is the remainder when ab is divided by p</div>
   </div>
 
-  <div class="example">
-    <div class="example-title">Teacher’s Example: G = {0, 1, 2, 3, 4, 5} under addition modulo 6</div>
-    <p>Composition table for (G, +₆):</p>
-    <table>
+  <div class="example qa">
+<div class="example-title">Teacher’s Example: G = {0, 1, 2, 3, 4, 5} under addition modulo 6</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Show that G = {0, 1, 2, 3, 4, 5} is a group under addition modulo 6.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Composition table for (G, +₆):</p>
+<table>
       <tr><th>+₆</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
       <tr><td>0</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
       <tr><td>1</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>0</td></tr>
@@ -926,20 +952,27 @@
       <tr><td>4</td><td>4</td><td>5</td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
       <tr><td>5</td><td>5</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
     </table>
-    <ol>
+<ol>
       <li><strong>Closure:</strong> All entries are elements of G, so G is closed under +₆.</li>
       <li><strong>Associativity:</strong> Addition modulo 6 is associative. Example: (2 +₆ 3) +₆ 4 = 5 +₆ 4 = 3 and 2 +₆ (3 +₆ 4) = 2 +₆ 1 = 3.</li>
       <li><strong>Identity:</strong> The first row coincides with the header row, so 0 is the identity element.</li>
       <li><strong>Inverse:</strong> From the table, inverses are: 0→0, 1→5, 2→4, 3→3, 4→2, 5→1.</li>
       <li><strong>Commutativity:</strong> Rows and columns are identical, so +₆ is commutative.</li>
     </ol>
-    <p>Therefore, (G, +₆) is an abelian group.</p>
-  </div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">Therefore, (G, +₆) is an abelian group.</p>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Teacher’s Example: G = {1, 2, 3, 4, 5, 6} under multiplication modulo 7</div>
-    <p>Composition table for (G, ×₇):</p>
-    <table>
+  <div class="example qa">
+<div class="example-title">Teacher’s Example: G = {1, 2, 3, 4, 5, 6} under multiplication modulo 7</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Show that G = {1, 2, 3, 4, 5, 6} is a group under multiplication modulo 7.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Composition table for (G, ×₇):</p>
+<table>
       <tr><th>×₇</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr>
       <tr><td>1</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
       <tr><td>2</td><td>2</td><td>4</td><td>6</td><td>1</td><td>3</td><td>5</td></tr>
@@ -948,16 +981,19 @@
       <tr><td>5</td><td>5</td><td>3</td><td>1</td><td>6</td><td>4</td><td>2</td></tr>
       <tr><td>6</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td></tr>
     </table>
-    <ol>
+<ol>
       <li><strong>Closure:</strong> All entries are in G, so G is closed under ×₇.</li>
       <li><strong>Associativity:</strong> Multiplication modulo 7 is associative. Example: (2 ×₇ 3) ×₇ 4 = 6 ×₇ 4 = 3 and 2 ×₇ (3 ×₇ 4) = 2 ×₇ 5 = 3.</li>
       <li><strong>Identity:</strong> 1 is the identity element.</li>
       <li><strong>Inverse:</strong> From the table: 1→1, 2→4, 3→5, 4→2, 5→3, 6→6.</li>
       <li><strong>Commutativity:</strong> Rows and columns are identical, so ×₇ is commutative.</li>
     </ol>
-    <p>Therefore, (G, ×₇) is an abelian group.</p>
-    <p class="warning">Correction: The teacher’s PPT lists inverses as “1, 4, 5, 2, 5, 6” which is incorrect. The correct inverses are: 1→1, 2→4, 3→5, 4→2, 5→3, 6→6. Note that 5 ×₇ 3 = 15 ≡ 1 (mod 7), so the inverse of 5 is 3, not 5. And 5 ×₇ 5 = 25 ≡ 4 (mod 7), not 1.</p>
-  </div>
+<p>Therefore, (G, ×₇) is an abelian group.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="warning">Correction: The teacher’s PPT lists inverses as “1, 4, 5, 2, 5, 6” which is incorrect. The correct inverses are: 1→1, 2→4, 3→5, 4→2, 5→3, 6→6. Note that 5 ×₇ 3 = 15 ≡ 1 (mod 7), so the inverse of 5 is 3, not 5. And 5 ×₇ 5 = 25 ≡ 4 (mod 7), not 1.</p>
+</div>
+</div>
 
   <h2 id="rings">Section 9 — Rings</h2>
 
