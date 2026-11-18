@@ -143,7 +143,6 @@
 
   var keyHost = document.getElementById('calendar-key');
   var renderedFor = '';
-  var tapeEl = null;
 
   function todayKey() {
     var n = new Date();
@@ -187,67 +186,7 @@
     boxes.forEach(function (b) { host.appendChild(b); });
     show(0);
 
-    // Once an exam in these months is over, a strip of tape hangs off the card.
-    var shownMonths = months.map(function (d) {
-      return iso(d.getFullYear(), d.getMonth(), 1).slice(0, 7);
-    });
-    var anyDone = EXAMS.some(function (e) {
-      return e.date < renderedFor && shownMonths.indexOf(e.date.slice(0, 7)) !== -1;
-    });
-    tapeEl = null;
-    if (anyDone) {
-      var tapeBox = el('div', 'cal-tape');
-      tapeBox.setAttribute('aria-hidden', 'true');
-      tapeEl = el('i', 'cal-tape-hang'); // the swinging strip
-      tapeBox.appendChild(tapeEl);
-      tapeBox.appendChild(el('i', 'cal-tape-stuck')); // the piece stuck over the card edge
-      host.appendChild(tapeBox);
-      angle = 0;
-      spin = 60; // a small swing when the page loads
-      wake();
-    }
-
     if (keyHost) buildKey(keyHost, months, renderedFor);
-  }
-
-  // The hanging tape swings with scrolling: a damped spring pushed by scroll speed.
-  // Skipped for visitors who ask for reduced motion (the strip then just hangs still).
-  var animate = !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var angle = 0, spin = 0, flow = 0, lastY = 0, lastT = 0, lastScrollAt = 0, raf = 0;
-
-  function step(t) {
-    var dt = Math.min((t - lastT) / 1000, 0.032);
-    lastT = t;
-    if (dt > 0) {
-      var y = window.pageYOffset;
-      flow += ((y - lastY) / dt - flow) * Math.min(1, dt * 12); // smoothed scroll speed, px/s
-      lastY = y;
-      spin += (-0.75 * flow - 60 * angle - 5 * spin) * dt;
-      angle = Math.max(-40, Math.min(40, angle + spin * dt));
-    }
-    if (tapeEl) tapeEl.style.transform = 'rotate(' + angle.toFixed(2) + 'deg)';
-    var quiet = t - lastScrollAt > 120;
-    if (!quiet || Math.abs(angle) > 0.05 || Math.abs(spin) > 0.1 || Math.abs(flow) > 1) {
-      raf = requestAnimationFrame(step);
-    } else {
-      angle = spin = flow = 0;
-      raf = 0;
-      if (tapeEl) tapeEl.style.transform = '';
-    }
-  }
-
-  function wake() {
-    if (!animate || raf || !tapeEl) return;
-    lastT = performance.now();
-    lastY = window.pageYOffset;
-    raf = requestAnimationFrame(step);
-  }
-
-  if (animate) {
-    window.addEventListener('scroll', function () {
-      lastScrollAt = performance.now();
-      wake();
-    }, { passive: true });
   }
 
   render();
