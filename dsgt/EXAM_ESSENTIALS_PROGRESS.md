@@ -135,3 +135,11 @@ Optional additions only (not required, and not to be done unless asked):
   `2fb2ad9`): `/dsgt/modules/module-1` returns **200** (111,117 bytes, title "DSGT Module 1 — Crisp
   Set Theory and Logic"), `/dsgt/modules/module-2` and `/dsgt/modules/module-3` return 200, and
   `/dsgt` lists Module 1 as a link instead of "Coming soon". All three modules are live.
+
+
+## Module V — Question / Solution / Final Answer formatting
+
+- Latest audited checkpoint: 17 existing worked examples and 4 previous end-semester questions (21 formatting units). No questions have been added or removed.
+- **Completed: 5/21 units.** Worked Examples 1–5 now use the exact Question / Solution / Final Answer markup and CSS from Module IV. Existing wording, workings and conclusions were preserved.
+- Module V's equation CSS now matches Module IV's no-wrap rule; long equations scroll horizontally on narrow screens. The mobile `overflow-wrap: anywhere` override was removed.
+- **Next checkpoint:** Worked Examples 6–10. Commit and verify after each five units.
