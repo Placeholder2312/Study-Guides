@@ -477,6 +477,7 @@
   /* Diagrams follow the Module 1 figure pattern; the page keeps Module 4's nested svg reset. */
   .dsgt-diagram { margin: 1.25rem 0; padding: 0.75rem; border: 1px solid var(--line); background: var(--surface); }
   .dsgt-diagram svg { width: 100%; max-width: 440px; height: auto; display: block; margin: 0 auto; padding: 0; border: 0; background: transparent; }
+  .dsgt-diagram.wide svg { max-width: 100%; }
   .dsgt-diagram figcaption { font-size: 0.85rem; color: var(--muted); line-height: 1.45; margin-top: 0.6rem; }
   .kbd { white-space: nowrap; }
   .kbd.long { white-space: normal; }
@@ -674,7 +675,7 @@
     <tr><td><strong>Path <span class="kbd">Pₙ</span></strong></td><td><span class="kbd">n</span> vertices in a line; two ends of degree 1.</td><td><span class="kbd">P₄</span> in Practice 3.</td></tr>
   </table>
 
-  <figure class="dsgt-diagram">
+  <figure class="dsgt-diagram wide">
     <svg viewBox="0 0 660 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="d2Title d2Desc">
       <title id="d2Title">Complete graph K4 beside a bipartite cycle C6</title>
       <desc id="d2Desc">Left: K4 drawn as a square with both diagonals, so all six pairs are joined. Right: a six-cycle drawn as a hexagon with alternating colours, showing the two bipartition sets.</desc>
@@ -699,7 +700,7 @@
         <text x="50" y="185">4</text>
       </g>
       <text x="110" y="225" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">K₄</text>
-      <text x="110" y="245" text-anchor="middle" font-size="11" fill="var(--muted)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">4 vertices · 6 edges · 3-regular</text>
+      <text x="110" y="245" text-anchor="middle" font-size="13" fill="var(--muted)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">4 vertices · 6 edges · 3-regular</text>
 
       <g fill="none" stroke="var(--ink)" stroke-width="2">
         <line x1="480" y1="50" x2="545" y2="88"/>
@@ -732,7 +733,7 @@
         </g>
       </g>
       <text x="480" y="232" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">C₆ is bipartite</text>
-      <text x="480" y="251" text-anchor="middle" font-size="11" fill="var(--muted)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">U = {u₁,u₂,u₃} · V = {v₁,v₂,v₃}</text>
+      <text x="480" y="251" text-anchor="middle" font-size="13" fill="var(--muted)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">U = {u₁,u₂,u₃} · V = {v₁,v₂,v₃}</text>
     </svg>
     <figcaption>Figure 2. Left: <span class="kbd">K₄</span> with all six edges; the diagonals cross in this square drawing, but <span class="kbd">K₄</span> also has a crossing-free drawing (Figure 7). Right: <span class="kbd">C₆</span> with its vertices coloured by bipartition — every edge runs between the two parts. A graph is bipartite exactly when it contains no odd cycle.</figcaption>
   </figure>
@@ -903,7 +904,7 @@
 
   <p>A graph is <strong>connected</strong> if every pair of vertices is joined by a path. If not, it is <strong>disconnected</strong>. A <strong>component</strong> is a maximal connected subgraph: a connected piece that cannot be extended without leaving it. The number of components is written <span class="kbd">c(G)</span>. An isolated vertex is a component of size 1.</p>
 
-  <figure class="dsgt-diagram">
+  <figure class="dsgt-diagram wide">
     <svg viewBox="0 0 600 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="d3Title d3Desc">
       <title id="d3Title">A disconnected graph with three components</title>
       <desc id="d3Desc">Left: a triangle on vertices 1, 2, 3 with a pendant vertex 4 attached to vertex 2. Middle: a four-cycle on vertices 5, 6, 7, 8. Right: an isolated vertex 9.</desc>
@@ -939,7 +940,7 @@
         <text x="330" y="175">8</text>
         <text x="545" y="125">9</text>
       </g>
-      <g fill="var(--muted)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle">
+      <g fill="var(--muted)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle">
         <text x="130" y="215">component 1</text>
         <text x="385" y="215">component 2</text>
         <text x="545" y="215">component 3</text>
@@ -1033,7 +1034,7 @@
     </div>
   </div>
 
-  <figure class="dsgt-diagram">
+  <figure class="dsgt-diagram wide">
     <svg viewBox="0 0 620 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="d4Title d4Desc">
       <title id="d4Title">A house-shaped five-cycle and a pentagram-shaped five-cycle</title>
       <desc id="d4Desc">Left: vertices a to e drawn as a house, forming a five-cycle. Right: vertices 1 to 5 drawn as a pentagram, also forming a five-cycle. The relabelling a to 2, b to 4, c to 1, d to 3, e to 5 preserves every edge.</desc>
@@ -1073,9 +1074,9 @@
         <text x="428" y="206">4</text>
         <text x="396" y="108">5</text>
       </g>
-      <g fill="var(--muted)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle">
+      <g fill="var(--muted)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle">
         <text x="160" y="245">house drawing of C₅</text>
-        <text x="100" y="265">a→2 · b→4 · c→1 · d→3 · e→5</text>
+        <text x="160" y="265">a→2 · b→4 · c→1 · d→3 · e→5</text>
         <text x="480" y="245">pentagram drawing of C₅</text>
       </g>
     </svg>
@@ -1428,7 +1429,7 @@
     <p>A connected graph with at least three vertices and no cut vertex is called <strong>2-connected</strong> or <strong>biconnected</strong>. Such a graph has at least two internally vertex-disjoint paths between every pair of vertices — a necessary condition for a Hamiltonian cycle, though not a sufficient one.</p>
   </div>
 
-  <figure class="dsgt-diagram">
+  <figure class="dsgt-diagram wide">
     <svg viewBox="0 0 520 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="d8Title d8Desc">
       <title id="d8Title">Two triangles joined by a bridge, with cut vertices marked</title>
       <desc id="d8Desc">Triangle A B C on the left and triangle D E F on the right, joined only by edge C D. Vertices C and D are filled as cut vertices, and edge C D is drawn in the accent colour as the bridge.</desc>
@@ -1461,7 +1462,7 @@
         <text x="170" y="155">C</text>
         <text x="330" y="155">D</text>
       </g>
-      <text x="250" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">bridge</text>
+      <text x="250" y="138" text-anchor="middle" font-size="13" font-weight="700" fill="var(--accent)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">bridge</text>
     </svg>
     <figcaption>Figure 8. A bridge joins two triangles. Removing C or D splits the graph, so both are cut vertices. Removing edge CD disconnects it, so CD is a bridge and <span class="kbd">{CD}</span> is a cut set of size 1.</figcaption>
   </figure>
