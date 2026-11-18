@@ -22,6 +22,7 @@
 <meta name="twitter:image" content="https://study-guides-placeholder.vercel.app/assets/og-dsgt.png">
 <link rel="stylesheet" href="/assets/site.css">
 <link rel="stylesheet" href="/assets/a11y.css">
+<link rel="stylesheet" href="/assets/calendar.css">
 <style>
   /* Home-page hover flair (kept as it behaved before; a stray comment had been
      swallowing the toggle's hover/focus rules, those now live in site.css). */
@@ -50,6 +51,7 @@
   }
 </style>
 <script src="/assets/theme.js"></script>
+<script src="/assets/calendar.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -61,6 +63,11 @@
     <div class="meta">Sem I, II &amp; III · Mumbai University</div>
   </header>
   <main id="main" tabindex="-1">
+    <section class="calendar" aria-labelledby="calendar-heading">
+      <h2 class="semester-title" id="calendar-heading">Calendar</h2>
+      <div class="cal" id="calendar"></div>
+      <noscript><p class="meta">The calendar needs JavaScript to display.</p></noscript>
+    </section>
     <section class="semester" aria-labelledby="semester-1-heading">
       <h2 class="semester-title" id="semester-1-heading">Semester I</h2>
       <div class="grid">
