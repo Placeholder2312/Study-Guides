@@ -1119,11 +1119,36 @@
 
   <p>Almost every equivalence question in this module starts with the implication law. Whenever you see → and the target has no →, convert every arrow with p → q ≡ ¬p ∨ q as the first move.</p>
 
-  <div class="exam-q">
-    <div class="exam-q-title">Exam question</div>
-    <div class="exam-source">Summer 2026, Q.1(b), 5 marks</div>
-    <p>Using a series of logical equivalences, prove that ((p → q) → r) and (p ∧ ¬q) ∨ r are logically equivalent. Interpret how logical equivalence helps simplify decision rules in software systems.</p>
-  </div>
+  <div class="exam-q qa">
+<div class="exam-q-title">Exam question</div>
+<div class="exam-source">Summer 2026, Q.1(b), 5 marks</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Using a series of logical equivalences, prove that ((p → q) → r) and (p ∧ ¬q) ∨ r are logically equivalent. Interpret how logical equivalence helps simplify decision rules in software systems.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Work downwards from the left-hand expression, one law per line.</p>
+<div class="eq">(p → q) → r ≡ ¬(p → q) ∨ r &nbsp;&nbsp; (implication law applied to the outer arrow) ≡ ¬(¬p ∨ q) ∨ r &nbsp;&nbsp; (implication law applied to p → q) ≡ (p ∧ ¬q) ∨ r &nbsp;&nbsp; (De Morgan, then double negation)</div>
+<p>That is the right-hand expression, so the two are logically equivalent. ∎</p>
+<p><strong>Truth-table confirmation.</strong> The derivation is the answer, but the table below shows the claim really holds in every row — useful if you have time to add a check.</p>
+<table>
+      <tr><th>p</th><th>q</th><th>r</th><th>p → q</th><th>(p → q) → r</th><th>p ∧ ¬q</th><th>(p ∧ ¬q) ∨ r</th></tr>
+      <tr><td>T</td><td>T</td><td>T</td><td>T</td><td>T</td><td>F</td><td>T</td></tr>
+      <tr><td>T</td><td>T</td><td>F</td><td>T</td><td>F</td><td>F</td><td>F</td></tr>
+      <tr><td>T</td><td>F</td><td>T</td><td>F</td><td>T</td><td>T</td><td>T</td></tr>
+      <tr><td>T</td><td>F</td><td>F</td><td>F</td><td>T</td><td>T</td><td>T</td></tr>
+      <tr><td>F</td><td>T</td><td>T</td><td>T</td><td>T</td><td>F</td><td>T</td></tr>
+      <tr><td>F</td><td>T</td><td>F</td><td>T</td><td>F</td><td>F</td><td>F</td></tr>
+      <tr><td>F</td><td>F</td><td>T</td><td>T</td><td>T</td><td>F</td><td>T</td></tr>
+      <tr><td>F</td><td>F</td><td>F</td><td>T</td><td>F</td><td>F</td><td>F</td></tr>
+    </table>
+<p>Columns 5 and 7 match in all eight rows.</p>
+<p><strong>The interpretation part.</strong> The two forms describe the same decision rule, but the right-hand one contains no implication. In a program, (p ∧ ¬q) ∨ r is three basic tests joined by AND, NOT and OR — a direct branch — whereas nested implications are harder to read and harder to test. Equivalence lets a designer replace a convoluted rule with a simpler one without changing any outcome, which is what makes automated rules engines and access-control checks auditable.</p>
+<p><strong>Exam presentation.</strong> One expression per line, law named at the right, final line matching the target exactly. Then a two- or three-sentence interpretation. The marks are split roughly three for the derivation and two for the interpretation.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<div class="eq">(p → q) → r ≡ (p ∧ ¬q) ∨ r</div>
+</div>
+</div>
 
   <div class="example qa">
 <div class="example-title">Worked example — the Summer 2026 proof</div>
@@ -1155,11 +1180,25 @@
 </div>
 </div>
 
-  <div class="exam-q">
-    <div class="exam-q-title">Exam question</div>
-    <div class="exam-source">Winter 2025, Q.1(b)</div>
-    <p>Prove that (P ∨ Q) → R ≡ (P → R) ∧ (Q → R).</p>
-  </div>
+  <div class="exam-q qa">
+<div class="exam-q-title">Exam question</div>
+<div class="exam-source">Winter 2025, Q.1(b)</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Prove that (P ∨ Q) → R ≡ (P → R) ∧ (Q → R).</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Reduce both sides separately until they meet in the middle. This is easier than pushing one side all the way, because each side needs only two steps.</p>
+<p><strong>Left-hand side.</strong></p>
+<div class="eq">(P ∨ Q) → R ≡ ¬(P ∨ Q) ∨ R &nbsp;&nbsp; (implication law) ≡ (¬P ∧ ¬Q) ∨ R &nbsp;&nbsp; (De Morgan)</div>
+<p><strong>Right-hand side.</strong></p>
+<div class="eq">(P → R) ∧ (Q → R) ≡ (¬P ∨ R) ∧ (¬Q ∨ R) &nbsp;&nbsp; (implication law, twice) ≡ (¬P ∧ ¬Q) ∨ R &nbsp;&nbsp; (distributive law, read right to left)</div>
+<p><strong>Why the last step is legitimate.</strong> Distributivity says X ∨ (Y ∧ Z) ≡ (X ∨ Y) ∧ (X ∨ Z). Put X = R, Y = ¬P, Z = ¬Q and read it from right to left: (¬P ∨ R) ∧ (¬Q ∨ R) ≡ R ∨ (¬P ∧ ¬Q). The ∧ terms are swapped by the commutative law for good measure, and that is the left-hand result.</p>
+<p><strong>The dual worth knowing.</strong> The same argument with ∧ and ∨ exchanged gives (P ∧ Q) → R ≡ (P → R) ∨ (Q → R). Both identities are true, and mixing them up is a common error. "If either one happens, then R" splits into an AND of implications; "if both happen, then R" splits into an OR.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p>Both sides equal (¬P ∧ ¬Q) ∨ R, so they are equivalent. ∎</p>
+</div>
+</div>
 
   <div class="example qa">
 <div class="example-title">Worked example — the Winter 2025 proof</div>
@@ -1651,31 +1690,55 @@
 </div>
 </div>
 
-  <div class="example">
-    <div class="example-title">Contradiction — √2 is irrational (teacher's slide 100)</div>
-    <p>Suppose, for contradiction, that √2 is rational. Then √2 = a/b for integers a, b with b ≠ 0, chosen so that a and b have no common factor.</p>
-    <p>Squaring gives 2 = a²/b², so a² = 2b². Hence a² is even, and by the contrapositive result above, a is even. Write a = 2k. Substituting:</p>
-    <p>2b² = (2k)² = 4k², so b² = 2k².</p>
-    <p>Hence b² is even, so b is even as well. But then a and b share the factor 2, contradicting the choice that they have no common factor. The assumption is false, so √2 is irrational. ∎</p>
-    <p>Notice the shape: the contradiction is not "1 = 0" but "the pair has no common factor, and also has common factor 2". Any contradiction with an earlier statement or a known fact closes the proof.</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Contradiction — √2 is irrational (teacher's slide 100)</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Prove that √2 is irrational.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Suppose, for contradiction, that √2 is rational. Then √2 = a/b for integers a, b with b ≠ 0, chosen so that a and b have no common factor.</p>
+<div class="eq">Squaring gives 2 = a²/b², so a² = 2b². Hence a² is even, and by the contrapositive result above, a is even. Write a = 2k. Substituting:</div>
+<p>2b² = (2k)² = 4k², so b² = 2k².</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p>Hence b² is even, so b is even as well. But then a and b share the factor 2, contradicting the choice that they have no common factor. The assumption is false, so √2 is irrational. ∎</p>
+<p>Notice the shape: the contradiction is not "1 = 0" but "the pair has no common factor, and also has common factor 2". Any contradiction with an earlier statement or a known fact closes the proof.</p>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Proof by cases — |x| + |x + 1| ≥ 1 for every real x (teacher's slide 107)</div>
-    <p>The absolute value behaves differently on different intervals, so split at the points where a term changes sign, x = −1 and x = 0. Three cases cover every real number.</p>
-    <p><strong>Case 1, x ≤ −1.</strong> Then |x| = −x and |x + 1| = −(x + 1). So |x| + |x + 1| = −2x − 1. Since x ≤ −1 we have −2x ≥ 2, so −2x − 1 ≥ 1. ✓</p>
-    <p><strong>Case 2, −1 &lt; x &lt; 0.</strong> Then |x| = −x and |x + 1| = x + 1. So the sum is 1, which is ≥ 1. ✓</p>
-    <p><strong>Case 3, x ≥ 0.</strong> Then both are non-negative, so the sum is 2x + 1 ≥ 1. ✓</p>
-    <p>All cases give at least 1, and the cases cover all reals, so the inequality holds for every x. ∎</p>
-    <p>The two requirements are that the cases are <strong>exhaustive</strong> (no x is missed) and, ideally, <strong>mutually exclusive</strong> (no x is counted twice). Missing the boundary point x = −1 or x = 0 is the usual failure.</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Proof by cases — |x| + |x + 1| ≥ 1 for every real x (teacher's slide 107)</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Prove that |x| + |x + 1| ≥ 1 for every real number x.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>The absolute value behaves differently on different intervals, so split at the points where a term changes sign, x = −1 and x = 0. Three cases cover every real number.</p>
+<p><strong>Case 1, x ≤ −1.</strong> Then |x| = −x and |x + 1| = −(x + 1). So |x| + |x + 1| = −2x − 1. Since x ≤ −1 we have −2x ≥ 2, so −2x − 1 ≥ 1. ✓</p>
+<p><strong>Case 2, −1 &lt; x &lt; 0.</strong> Then |x| = −x and |x + 1| = x + 1. So the sum is 1, which is ≥ 1. ✓</p>
+<p><strong>Case 3, x ≥ 0.</strong> Then both are non-negative, so the sum is 2x + 1 ≥ 1. ✓</p>
+<p>The two requirements are that the cases are <strong>exhaustive</strong> (no x is missed) and, ideally, <strong>mutually exclusive</strong> (no x is counted twice). Missing the boundary point x = −1 or x = 0 is the usual failure.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p>All cases give at least 1, and the cases cover all reals, so the inequality holds for every x. ∎</p>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Counterexample — disproving a universal claim</div>
-    <p>Claim: "Every prime number is odd." A single counterexample kills it: 2 is prime and 2 is even. The claim is false, and no further work is needed.</p>
-    <p>Claim: "n² + n + 41 is prime for every positive integer n." True for n = 1, 2, …, 39, which is why it looks convincing. At n = 41 the value is 41² + 41 + 41 = 41(41 + 1 + 1) = 41 · 43, which is composite. Counterexample found.</p>
-    <p>One counterexample is a complete disproof of a "for all" statement. It is not a proof of anything else, so never use it to establish a universal claim.</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Counterexample — disproving a universal claim</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Determine whether each universal claim is true. If it is false, give a counterexample:</p>
+<p>(i) Every prime number is odd.</p>
+<p>(ii) n² + n + 41 is prime for every positive integer n.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Claim: "Every prime number is odd." A single counterexample kills it: 2 is prime and 2 is even. The claim is false, and no further work is needed.</p>
+<p>Claim: "n² + n + 41 is prime for every positive integer n." True for n = 1, 2, …, 39, which is why it looks convincing. At n = 41 the value is 41² + 41 + 41 = 41(41 + 1 + 1) = 41 · 43, which is composite. Counterexample found.</p>
+<p>One counterexample is a complete disproof of a "for all" statement. It is not a proof of anything else, so never use it to establish a universal claim.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">Both claims are false. For (i), 2 is prime and even. For (ii), n = 41 gives 41² + 41 + 41 = 41 × 43, which is composite.</p>
+</div>
+</div>
 
   <div class="common-mistakes">
     <h3>Common mistakes</h3>

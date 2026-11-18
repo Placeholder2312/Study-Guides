@@ -148,5 +148,5 @@ Optional additions only (not required, and not to be done unless asked):
 ## Module I — Question / Solution / Final Answer formatting
 
 - Repository audit found 29 source worked-example cards and 3 past-paper question containers. The split Summer 2026 induction pair (source cards 22–23) is treated as one complete question, giving 31 formatting units. This is a fresh repository count; the older “30 remaining” note was only a historical agent estimate.
-- **Completed: 25/31 units.** Worked Examples 1–5 now use Module IV's exact Question / Solution / Final Answer markup and CSS. All existing explanations, tables and results were retained.
+- **Completed: 30/31 units.** Worked Examples 1–5 now use Module IV's exact Question / Solution / Final Answer markup and CSS. All existing explanations, tables and results were retained.
 - **Next:** Worked Examples 27–29 and the three past-paper questions (six units remain). Commit and verify after each five units.
