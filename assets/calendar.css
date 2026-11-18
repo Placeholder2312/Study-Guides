@@ -1,5 +1,11 @@
 /* Home-page calendar. Uses the shared theme variables from site.css only,
    so light and dark both follow the toggle. */
+/* Semester colours: deep, slightly muted tones next to the site's ink and blue.
+   Light and dark values both keep the number (var(--bg)) readable on top. */
+:root { --sem-1: #1d4ed8; --sem-2: #0f766e; --sem-3: #c2410c; }
+:root[data-theme="dark"] { --sem-1: #8ab0ff; --sem-2: #5fd0c0; --sem-3: #f2a56b; }
+@media print { :root, :root[data-theme="dark"] { --sem-1: #1d4ed8; --sem-2: #0f766e; --sem-3: #c2410c; } }
+
 .calendar { margin-bottom: 3rem; }
 .cal { border: 1px solid var(--line); border-left: 3px solid var(--ink); background: var(--surface); padding: .6rem .8rem 1rem 1rem; }
 .cal:empty { display: none; }
@@ -22,16 +28,15 @@
 /* Today: an outlined square. */
 .cal-grid td.today, .sw.today { box-shadow: inset 0 0 0 2px var(--ink); font-weight: 800; }
 
-/* Exams: one filled square for every semester, with the same number colour.
-   Semester shows as dots underneath: one, two or three (I, II, III). */
-.cal-grid td.exam, .sw.sem-1, .sw.sem-2, .sw.sem-3 { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 800; }
-.cal-grid td.exam { padding-bottom: .35rem; }
-.cal-grid td.sem-1::after, .sw.sem-1::after { content: "\2022"; }
-.cal-grid td.sem-2::after, .sw.sem-2::after { content: "\2022\2022"; }
-.cal-grid td.sem-3::after, .sw.sem-3::after { content: "\2022\2022\2022"; }
-.cal-grid td.exam::after, .sw.exam::after, .sw.sem-1::after, .sw.sem-2::after, .sw.sem-3::after { position: absolute; left: 0; right: 0; bottom: .15rem; font-size: .7rem; line-height: 1; letter-spacing: .12em; padding-left: .12em; text-align: center; font-weight: 400; }
-/* Exam on today's date: keep the fill, add the today outline on top. */
-.cal-grid td.today.exam { box-shadow: inset 0 0 0 2px var(--bg), inset 0 0 0 4px var(--ink); }
+/* Exams: a filled, bordered square. The border and the number colour are shared by
+   every semester; only the fill colour changes (blue, teal, burnt orange). */
+.cal-grid td.exam, .sw.sem-1, .sw.sem-2, .sw.sem-3 { color: var(--bg); font-weight: 800; box-shadow: inset 0 0 0 2px var(--ink); }
+.sw.sem-1, .sw.sem-2, .sw.sem-3 { border-color: var(--ink); }
+.cal-grid td.sem-1, .sw.sem-1 { background: var(--sem-1); }
+.cal-grid td.sem-2, .sw.sem-2 { background: var(--sem-2); }
+.cal-grid td.sem-3, .sw.sem-3 { background: var(--sem-3); }
+/* Exam on today's date: the border doubles. */
+.cal-grid td.today.exam { box-shadow: inset 0 0 0 2px var(--ink), inset 0 0 0 4px var(--bg), inset 0 0 0 6px var(--ink); }
 
 /* Days already gone are dimmed. */
 .cal-grid td.past { opacity: .5; }
@@ -54,10 +59,8 @@
 .cal-legend { display: flex; flex-wrap: wrap; gap: .4rem 1.1rem; margin: .2rem 1rem .75rem; font-size: .85rem; color: var(--muted); }
 .cal-legend li { display: inline-flex; align-items: center; gap: .45rem; }
 .cal-legend .sw { width: 1.5rem; height: 1.5rem; }
-.cal-legend .sw::after { top: 50%; bottom: auto; transform: translateY(-50%); font-size: .6rem; }
 .sw { position: relative; display: inline-flex; align-items: center; justify-content: center; flex: none; width: 2.25rem; height: 2.25rem; border: 1px solid var(--line); font-size: .85rem; font-weight: 800; font-variant-numeric: tabular-nums; }
 .cal-exams { margin: 0 1rem .6rem; }
-.cal-exams .sw { padding-bottom: .3rem; }
 .cal-exams li { display: flex; align-items: center; gap: .75rem; padding: .45rem 0; }
 .cal-exams li + li { border-top: 1px solid var(--line); }
 .ex-name { display: block; font-family: Georgia, Cambria, "Times New Roman", serif; font-size: 1.05rem; font-weight: 700; line-height: 1.3; }
