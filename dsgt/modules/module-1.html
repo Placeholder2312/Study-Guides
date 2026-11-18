@@ -1046,10 +1046,14 @@
 </div>
 </div>
 
-  <div class="example">
-    <div class="example-title">Worked example — a full truth table for (p ∨ q) → ¬r</div>
-    <p>Three atoms, so eight rows. Build the columns left to right, one connective at a time.</p>
-    <table>
+  <div class="example qa">
+<div class="example-title">Worked example — a full truth table for (p ∨ q) → ¬r</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Construct the full truth table for (p ∨ q) → ¬r and state which rows make the proposition false.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Three atoms, so eight rows. Build the columns left to right, one connective at a time.</p>
+<table>
       <tr><th>p</th><th>q</th><th>r</th><th>p ∨ q</th><th>¬r</th><th>(p ∨ q) → ¬r</th></tr>
       <tr><td>T</td><td>T</td><td>T</td><td>T</td><td>F</td><td>F</td></tr>
       <tr><td>T</td><td>T</td><td>F</td><td>T</td><td>T</td><td>T</td></tr>
@@ -1060,9 +1064,13 @@
       <tr><td>F</td><td>F</td><td>T</td><td>F</td><td>F</td><td>T</td></tr>
       <tr><td>F</td><td>F</td><td>F</td><td>F</td><td>T</td><td>T</td></tr>
     </table>
-    <p>Read the last two rows carefully. When p ∨ q is false, the hypothesis is false, so the implication is true whatever ¬r is — even in row 7 where ¬r is also false. That row is the one people mark wrong.</p>
-    <p><strong>Exam presentation.</strong> Name every column with the exact sub-expression it holds, and finish with a sentence describing the result: "the proposition is false in rows 1, 3 and 5, and true otherwise".</p>
-  </div>
+<p>Read the last two rows carefully. When p ∨ q is false, the hypothesis is false, so the implication is true whatever ¬r is — even in row 7 where ¬r is also false. That row is the one people mark wrong.</p>
+<p><strong>Exam presentation.</strong> Name every column with the exact sub-expression it holds, and finish with a sentence describing the result: "the proposition is false in rows 1, 3 and 5, and true otherwise".</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">The proposition is false in rows 1, 3 and 5, and true in rows 2, 4, 6, 7 and 8.</p>
+</div>
+</div>
 
   <div class="common-mistakes">
     <h3>Common mistakes</h3>
@@ -1117,16 +1125,17 @@
     <p>Using a series of logical equivalences, prove that ((p → q) → r) and (p ∧ ¬q) ∨ r are logically equivalent. Interpret how logical equivalence helps simplify decision rules in software systems.</p>
   </div>
 
-  <div class="example">
-    <div class="example-title">Worked example — the Summer 2026 proof</div>
-    <p>Work downwards from the left-hand expression, one law per line.</p>
-    <p>(p → q) → r<br>
-    ≡ ¬(p → q) ∨ r &nbsp;&nbsp; (implication law applied to the outer arrow)<br>
-    ≡ ¬(¬p ∨ q) ∨ r &nbsp;&nbsp; (implication law applied to p → q)<br>
-    ≡ (p ∧ ¬q) ∨ r &nbsp;&nbsp; (De Morgan, then double negation)</p>
-    <p>That is the right-hand expression, so the two are logically equivalent. ∎</p>
-    <p><strong>Truth-table confirmation.</strong> The derivation is the answer, but the table below shows the claim really holds in every row — useful if you have time to add a check.</p>
-    <table>
+  <div class="example qa">
+<div class="example-title">Worked example — the Summer 2026 proof</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Using logical equivalences, prove that (p → q) → r and (p ∧ ¬q) ∨ r are logically equivalent. Explain how this can simplify a software decision rule.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Work downwards from the left-hand expression, one law per line.</p>
+<div class="eq">(p → q) → r ≡ ¬(p → q) ∨ r &nbsp;&nbsp; (implication law applied to the outer arrow) ≡ ¬(¬p ∨ q) ∨ r &nbsp;&nbsp; (implication law applied to p → q) ≡ (p ∧ ¬q) ∨ r &nbsp;&nbsp; (De Morgan, then double negation)</div>
+<p>That is the right-hand expression, so the two are logically equivalent. ∎</p>
+<p><strong>Truth-table confirmation.</strong> The derivation is the answer, but the table below shows the claim really holds in every row — useful if you have time to add a check.</p>
+<table>
       <tr><th>p</th><th>q</th><th>r</th><th>p → q</th><th>(p → q) → r</th><th>p ∧ ¬q</th><th>(p ∧ ¬q) ∨ r</th></tr>
       <tr><td>T</td><td>T</td><td>T</td><td>T</td><td>T</td><td>F</td><td>T</td></tr>
       <tr><td>T</td><td>T</td><td>F</td><td>T</td><td>F</td><td>F</td><td>F</td></tr>
@@ -1137,10 +1146,14 @@
       <tr><td>F</td><td>F</td><td>T</td><td>T</td><td>T</td><td>F</td><td>T</td></tr>
       <tr><td>F</td><td>F</td><td>F</td><td>T</td><td>F</td><td>F</td><td>F</td></tr>
     </table>
-    <p>Columns 5 and 7 match in all eight rows.</p>
-    <p><strong>The interpretation part.</strong> The two forms describe the same decision rule, but the right-hand one contains no implication. In a program, (p ∧ ¬q) ∨ r is three basic tests joined by AND, NOT and OR — a direct branch — whereas nested implications are harder to read and harder to test. Equivalence lets a designer replace a convoluted rule with a simpler one without changing any outcome, which is what makes automated rules engines and access-control checks auditable.</p>
-    <p><strong>Exam presentation.</strong> One expression per line, law named at the right, final line matching the target exactly. Then a two- or three-sentence interpretation. The marks are split roughly three for the derivation and two for the interpretation.</p>
-  </div>
+<p>Columns 5 and 7 match in all eight rows.</p>
+<p><strong>The interpretation part.</strong> The two forms describe the same decision rule, but the right-hand one contains no implication. In a program, (p ∧ ¬q) ∨ r is three basic tests joined by AND, NOT and OR — a direct branch — whereas nested implications are harder to read and harder to test. Equivalence lets a designer replace a convoluted rule with a simpler one without changing any outcome, which is what makes automated rules engines and access-control checks auditable.</p>
+<p><strong>Exam presentation.</strong> One expression per line, law named at the right, final line matching the target exactly. Then a two- or three-sentence interpretation. The marks are split roughly three for the derivation and two for the interpretation.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<div class="eq">(p → q) → r ≡ (p ∧ ¬q) ∨ r</div>
+</div>
+</div>
 
   <div class="exam-q">
     <div class="exam-q-title">Exam question</div>
@@ -1148,33 +1161,38 @@
     <p>Prove that (P ∨ Q) → R ≡ (P → R) ∧ (Q → R).</p>
   </div>
 
-  <div class="example">
-    <div class="example-title">Worked example — the Winter 2025 proof</div>
-    <p>Reduce both sides separately until they meet in the middle. This is easier than pushing one side all the way, because each side needs only two steps.</p>
-    <p><strong>Left-hand side.</strong></p>
-    <p>(P ∨ Q) → R<br>
-    ≡ ¬(P ∨ Q) ∨ R &nbsp;&nbsp; (implication law)<br>
-    ≡ (¬P ∧ ¬Q) ∨ R &nbsp;&nbsp; (De Morgan)</p>
-    <p><strong>Right-hand side.</strong></p>
-    <p>(P → R) ∧ (Q → R)<br>
-    ≡ (¬P ∨ R) ∧ (¬Q ∨ R) &nbsp;&nbsp; (implication law, twice)<br>
-    ≡ (¬P ∧ ¬Q) ∨ R &nbsp;&nbsp; (distributive law, read right to left)</p>
-    <p>Both sides equal (¬P ∧ ¬Q) ∨ R, so they are equivalent. ∎</p>
-    <p><strong>Why the last step is legitimate.</strong> Distributivity says X ∨ (Y ∧ Z) ≡ (X ∨ Y) ∧ (X ∨ Z). Put X = R, Y = ¬P, Z = ¬Q and read it from right to left: (¬P ∨ R) ∧ (¬Q ∨ R) ≡ R ∨ (¬P ∧ ¬Q). The ∧ terms are swapped by the commutative law for good measure, and that is the left-hand result.</p>
-    <p><strong>The dual worth knowing.</strong> The same argument with ∧ and ∨ exchanged gives (P ∧ Q) → R ≡ (P → R) ∨ (Q → R). Both identities are true, and mixing them up is a common error. "If either one happens, then R" splits into an AND of implications; "if both happen, then R" splits into an OR.</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Worked example — the Winter 2025 proof</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Prove that (P ∨ Q) → R ≡ (P → R) ∧ (Q → R).</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Reduce both sides separately until they meet in the middle. This is easier than pushing one side all the way, because each side needs only two steps.</p>
+<p><strong>Left-hand side.</strong></p>
+<div class="eq">(P ∨ Q) → R ≡ ¬(P ∨ Q) ∨ R &nbsp;&nbsp; (implication law) ≡ (¬P ∧ ¬Q) ∨ R &nbsp;&nbsp; (De Morgan)</div>
+<p><strong>Right-hand side.</strong></p>
+<div class="eq">(P → R) ∧ (Q → R) ≡ (¬P ∨ R) ∧ (¬Q ∨ R) &nbsp;&nbsp; (implication law, twice) ≡ (¬P ∧ ¬Q) ∨ R &nbsp;&nbsp; (distributive law, read right to left)</div>
+<p><strong>Why the last step is legitimate.</strong> Distributivity says X ∨ (Y ∧ Z) ≡ (X ∨ Y) ∧ (X ∨ Z). Put X = R, Y = ¬P, Z = ¬Q and read it from right to left: (¬P ∨ R) ∧ (¬Q ∨ R) ≡ R ∨ (¬P ∧ ¬Q). The ∧ terms are swapped by the commutative law for good measure, and that is the left-hand result.</p>
+<p><strong>The dual worth knowing.</strong> The same argument with ∧ and ∨ exchanged gives (P ∧ Q) → R ≡ (P → R) ∨ (Q → R). Both identities are true, and mixing them up is a common error. "If either one happens, then R" splits into an AND of implications; "if both happen, then R" splits into an OR.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p>Both sides equal (¬P ∧ ¬Q) ∨ R, so they are equivalent. ∎</p>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Worked example — a third equivalence (IAT sample Q11(i))</div>
-    <p>Prove that ¬(p ∨ (¬p ∧ q)) ≡ ¬p ∧ ¬q.</p>
-    <p>¬(p ∨ (¬p ∧ q))<br>
-    ≡ ¬p ∧ ¬(¬p ∧ q) &nbsp;&nbsp; (De Morgan)<br>
-    ≡ ¬p ∧ (p ∨ ¬q) &nbsp;&nbsp; (De Morgan again, then double negation)<br>
-    ≡ (¬p ∧ p) ∨ (¬p ∧ ¬q) &nbsp;&nbsp; (distributive law)<br>
-    ≡ F ∨ (¬p ∧ ¬q) &nbsp;&nbsp; (complementation: ¬p ∧ p ≡ F)<br>
-    ≡ ¬p ∧ ¬q &nbsp;&nbsp; (identity law)</p>
-    <p>Five steps, five laws. If the question allows only a truth table, this same expression takes four rows; either is accepted, but the derivation is what the phrase "using logical equivalences" asks for.</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Worked example — a third equivalence (IAT sample Q11(i))</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Prove that ¬(p ∨ (¬p ∧ q)) ≡ ¬p ∧ ¬q.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<div class="eq">¬(p ∨ (¬p ∧ q)) ≡ ¬p ∧ ¬(¬p ∧ q) &nbsp;&nbsp; (De Morgan) ≡ ¬p ∧ (p ∨ ¬q) &nbsp;&nbsp; (De Morgan again, then double negation) ≡ (¬p ∧ p) ∨ (¬p ∧ ¬q) &nbsp;&nbsp; (distributive law) ≡ F ∨ (¬p ∧ ¬q) &nbsp;&nbsp; (complementation: ¬p ∧ p ≡ F) ≡ ¬p ∧ ¬q &nbsp;&nbsp; (identity law)</div>
+<p>Five steps, five laws. If the question allows only a truth table, this same expression takes four rows; either is accepted, but the derivation is what the phrase "using logical equivalences" asks for.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<div class="eq">¬p ∧ ¬q</div>
+</div>
+</div>
 
   <div class="common-mistakes">
     <h3>Common mistakes</h3>
@@ -1212,26 +1230,28 @@
 
   <p>Two routes to the answer. The truth table always works and is what most questions intend. Simplification with the laws is faster and shows more understanding, and it is the only practical route once there are four or more atoms. Do the table if the expression has at most three atoms; simplify if it has more, or if you can already see the shape.</p>
 
-  <div class="example">
-    <div class="example-title">Worked example — is [(p → r) ∧ (¬q → p) ∧ ¬r] → q a tautology? (IAT sample Q9(i))</div>
-    <p>Simplify the antecedent first, because it contains a fact that kills one of its own parts.</p>
-    <p><strong>The antecedent.</strong></p>
-    <p>(p → r) ∧ ¬r<br>
-    ≡ (¬p ∨ r) ∧ ¬r &nbsp;&nbsp; (implication law)<br>
-    ≡ (¬p ∧ ¬r) ∨ (r ∧ ¬r) &nbsp;&nbsp; (distributive law)<br>
-    ≡ (¬p ∧ ¬r) ∨ F &nbsp;&nbsp; (complementation)<br>
-    ≡ ¬p ∧ ¬r &nbsp;&nbsp; (identity law)</p>
-    <p>So the antecedent gives us both ¬p and ¬r. Now the middle conjunct:</p>
-    <p>(¬q → p) ≡ q ∨ p &nbsp;&nbsp; (implication law, with the double negation simplified)</p>
-    <p><strong>Combine.</strong> The whole antecedent is (¬p ∧ ¬r) ∧ (q ∨ p). Since ¬p holds, p is false, so q ∨ p reduces to q:</p>
-    <p>(¬p ∧ ¬r) ∧ (q ∨ p) ≡ (¬p ∧ ¬r) ∧ q &nbsp;&nbsp; (p is false, so q ∨ p ≡ q)</p>
-    <p><strong>The implication.</strong> Let A = ¬p ∧ ¬r ∧ q. We must classify A → q:</p>
-    <p>A → q ≡ ¬A ∨ q ≡ ¬(¬p ∧ ¬r ∧ q) ∨ q</p>
-    <p>But A already contains q as a conjunct, so whenever A is true, q is true. Formally:</p>
-    <p>(¬p ∧ ¬r ∧ q) → q ≡ ¬(¬p ∧ ¬r ∧ q) ∨ q ≡ (p ∨ r ∨ ¬q) ∨ q ≡ p ∨ r ∨ (¬q ∨ q) ≡ p ∨ r ∨ T ≡ T</p>
-    <p>Every assignment makes it true, so it is a <strong>tautology</strong>.</p>
-    <p><strong>Faster reading.</strong> The antecedent asserts ¬r and also that p → r. If p were true, r would be true, contradicting ¬r. So p is false. With p false, ¬q → p forces ¬q to be false, that is q is true. So the antecedent can only be true when q is true, which is exactly what the implication claims. That argument is the same simplification in words, and it is what you should write if the question says "justify".</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Worked example — is [(p → r) ∧ (¬q → p) ∧ ¬r] → q a tautology? (IAT sample Q9(i))</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Determine whether [(p → r) ∧ (¬q → p) ∧ ¬r] → q is a tautology. Justify your answer.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Simplify the antecedent first, because it contains a fact that kills one of its own parts.</p>
+<p><strong>The antecedent.</strong></p>
+<div class="eq">(p → r) ∧ ¬r ≡ (¬p ∨ r) ∧ ¬r &nbsp;&nbsp; (implication law) ≡ (¬p ∧ ¬r) ∨ (r ∧ ¬r) &nbsp;&nbsp; (distributive law) ≡ (¬p ∧ ¬r) ∨ F &nbsp;&nbsp; (complementation) ≡ ¬p ∧ ¬r &nbsp;&nbsp; (identity law)</div>
+<p>So the antecedent gives us both ¬p and ¬r. Now the middle conjunct:</p>
+<p>(¬q → p) ≡ q ∨ p &nbsp;&nbsp; (implication law, with the double negation simplified)</p>
+<p><strong>Combine.</strong> The whole antecedent is (¬p ∧ ¬r) ∧ (q ∨ p). Since ¬p holds, p is false, so q ∨ p reduces to q:</p>
+<p>(¬p ∧ ¬r) ∧ (q ∨ p) ≡ (¬p ∧ ¬r) ∧ q &nbsp;&nbsp; (p is false, so q ∨ p ≡ q)</p>
+<p><strong>The implication.</strong> Let A = ¬p ∧ ¬r ∧ q. We must classify A → q:</p>
+<p>A → q ≡ ¬A ∨ q ≡ ¬(¬p ∧ ¬r ∧ q) ∨ q</p>
+<p>But A already contains q as a conjunct, so whenever A is true, q is true. Formally:</p>
+<p>Every assignment makes it true, so it is a <strong>tautology</strong>.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p>(¬p ∧ ¬r ∧ q) → q ≡ ¬(¬p ∧ ¬r ∧ q) ∨ q ≡ (p ∨ r ∨ ¬q) ∨ q ≡ p ∨ r ∨ (¬q ∨ q) ≡ p ∨ r ∨ T ≡ T</p>
+</div>
+</div>
 
   <div class="example">
     <div class="example-title">Worked example — is (p → q) ∧ ¬q a tautology? (IAT sample Q9(ii))</div>
