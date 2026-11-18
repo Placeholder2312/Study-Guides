@@ -1562,12 +1562,39 @@
     <li><strong>Conclusion.</strong> "By the principle of mathematical induction, P(n) holds for all n ≥ 1."</li>
   </ol>
 
-  <div class="exam-q">
-    <div class="exam-q-title">Exam question</div>
-    <div class="exam-source">Summer 2026, Q.4(b), 7 marks</div>
-    <p>Using the principle of mathematical induction, prove that for every positive integer n,</p>
-    <div class="eq">Σ<sub>r=1</sub><sup>n</sup> r(r + 3) = <span style="white-space:nowrap">n(n + 1)(n + 5) / 3</span></div>
-  </div>
+  <div class="exam-q qa">
+<div class="exam-q-title">Exam question</div>
+<div class="exam-source">Summer 2026, Q.4(b), 7 marks</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Using the principle of mathematical induction, prove that for every positive integer n,</p>
+<div class="eq">Σ<sub>r=1</sub><sup>n</sup> r(r + 3) = <span style="white-space:nowrap">n(n + 1)(n + 5) / 3</span></div>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p><strong>Claim.</strong> P(n): Σ<sub>r=1</sub><sup>n</sup> r(r + 3) = n(n + 1)(n + 5)/3 for all n ≥ 1.</p>
+<div class="eq"><strong>Base case, n = 1.</strong> The left side has one term, 1·(1 + 3) = 4. The right side is 1·2·6/3 = 4. Both are 4, so P(1) is true. ✓</div>
+<p><strong>Inductive hypothesis.</strong> Assume P(k) is true for some arbitrary k ≥ 1:</p>
+<div class="eq">Σ<sub>r=1</sub><sup>k</sup> r(r + 3) = k(k + 1)(k + 5) / 3</div>
+<p><strong>Worked example — the Summer 2026 induction: the step and the conclusion</strong></p>
+<p><strong>Inductive step.</strong> We must prove P(k+1), that is Σ<sub>r=1</sub><sup>k+1</sup> r(r + 3) = (k+1)(k+2)(k+6)/3. Start from the left and split off the term r = k+1:</p>
+<div class="eq">Σ<sub>r=1</sub><sup>k+1</sup> r(r + 3)<br>
+    = Σ<sub>r=1</sub><sup>k</sup> r(r + 3) + (k + 1)(k + 4)</div>
+<p>Now use the hypothesis on the sum:</p>
+<p>= k(k + 1)(k + 5)/3 + (k + 1)(k + 4)</p>
+<p>Take out the common factor (k+1):</p>
+<p>= (k + 1) [ k(k + 5)/3 + (k + 4) ]</p>
+<p>Put the bracket over the single denominator 3, using (k + 4) = 3(k + 4)/3:</p>
+<div class="eq">= (k + 1) [ (k² + 5k + 3k + 12) / 3 ]<br>
+    = (k + 1)(k² + 8k + 12)/3</div>
+<p>Factor the quadratic: k² + 8k + 12 = (k + 2)(k + 6), since 2 + 6 = 8 and 2·6 = 12.</p>
+<p>= (k + 1)(k + 2)(k + 6)/3</p>
+<p>Now check this is the right side at k+1. Replacing k by k+1 in n(n+1)(n+5)/3 gives (k+1)(k+2)((k+1)+5)/3 = (k+1)(k+2)(k+6)/3. It matches. ∎</p>
+<p><strong>Numerical check.</strong> At n = 3 the left side is 1·4 + 2·5 + 3·6 = 4 + 10 + 18 = 32, and the right side is 3·4·8/3 = 32. ✓ At n = 4 the left side gains 4·7 = 28, giving 60, and the right side is 4·5·9/3 = 60. ✓ Checks against the closed form are a good way to catch a wrong factor at (k+2)(k+6).</p>
+<p><strong>Exam presentation.</strong> Six labelled blocks: claim, base, hypothesis, step, "which is P(k+1)", conclusion. The marks are distributed across the blocks, so a correct algebra with no conclusion still loses a mark.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p><strong>Conclusion.</strong> P(1) is true and P(k) implies P(k+1) for arbitrary k ≥ 1. By the principle of mathematical induction, P(n) is true for all n ≥ 1.</p>
+</div>
+</div>
 
   <div class="example qa">
 <div class="example-title">Worked example — the Summer 2026 induction: claim, base and hypothesis</div>
