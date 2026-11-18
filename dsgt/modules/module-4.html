@@ -544,7 +544,7 @@
     <p>The basic form only tells you that one box has ≥ 2. The generalized form tells you the <em>minimum count</em> in the fullest box. If the question asks “at least how many,” use the generalized form.</p>
   </div>
 
-  <h3>Guarantee Questions — Formula</h3>
+  <h3 id="php-guarantee" data-rail-subsection>Guarantee Questions — Formula</h3>
   <p>To guarantee that at least <span class="kbd">k</span> objects are in one box, when there are <span class="kbd">m</span> boxes:</p>
   <div class="eq">n = m(k − 1) + 1</div>
   <p class="eq-note"><span class="kbd">m</span> = number of boxes / categories &nbsp;·&nbsp; <span class="kbd">k</span> = number of objects that must be guaranteed in at least one box &nbsp;·&nbsp; <span class="kbd">n</span> = minimum number of objects required.</p>
@@ -668,7 +668,7 @@
   <div class="eq">|A ∪ B ∪ C| = |A| + |B| + |C| − |A ∩ B| − |A ∩ C| − |B ∩ C| + |A ∩ B ∩ C|</div>
   <p class="eq-note">Three sets: add singles, subtract pairs, add triples.</p>
 
-  <h3>Three-Set Venn Diagram — All Seven Regions</h3>
+  <h3 id="iep-venn" data-rail-subsection>Three-Set Venn Diagram — All Seven Regions</h3>
   <svg viewBox="0 0 360 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="vennTitle">
   <title id="vennTitle">Three-set Venn diagram with all seven regions labeled</title>
   <rect x="5" y="5" width="350" height="330" fill="none" stroke="var(--rule)" stroke-width="1.5"/>
@@ -829,7 +829,7 @@
     <p>Consider <span class="kbd">a<sub>n</sub> = a<sub>n−1</sub> + 6a<sub>n−2</sub></span>, or <span class="kbd">a<sub>n</sub> − a<sub>n−1</sub> − 6a<sub>n−2</sub> = 0</span>. Iteration becomes unwieldy, so guess a geometric form <span class="kbd">r<sup>n</sup></span>. Substituting gives <span class="kbd">r<sup>n</sup> − r<sup>n−1</sup> − 6r<sup>n−2</sup> = 0</span>. If <span class="kbd">r ≠ 0</span>, divide by the smallest power of <span class="kbd">r</span> to get <span class="kbd">r<sup>2</sup> − r − 6 = 0</span>, which factors to <span class="kbd">(r − 3)(r + 2) = 0</span>. Thus <span class="kbd">r = 3</span> or <span class="kbd">r = −2</span>. Both <span class="kbd">(−2)<sup>n</sup></span> and <span class="kbd">3<sup>n</sup></span> are solutions, as is any linear combination <span class="kbd">a(−2)<sup>n</sup> + b·3<sup>n</sup></span>. The polynomial <span class="kbd">r<sup>2</sup> − r − 6</span> is the characteristic equation; its roots are the characteristic roots. If <span class="kbd">r = 0</span>, check it separately as a possible root.</p>
   </div>
 
-  <h3>How to Form and Solve the Characteristic Equation</h3>
+  <h3 id="recurrence-method" data-rail-subsection>How to Form and Solve the Characteristic Equation</h3>
   <ol class="steps">
     <li>Write the recurrence in standard form: <span class="kbd">a<sub>n</sub> − c<sub>1</sub>a<sub>n−1</sub> − c<sub>2</sub>a<sub>n−2</sub> = 0</span>.</li>
     <li>Assume a solution <span class="kbd">a<sub>n</sub> = r<sup>n</sup></span> and substitute.</li>
@@ -1212,7 +1212,7 @@
   <div class="practice">
     <h3>Practice Questions</h3>
 
-    <h4>Pigeonhole Principle</h4>
+    <h4 id="practice-php" data-rail-subsection data-rail-label="Pigeonhole Principle">Pigeonhole Principle</h4>
     <ol>
       <li>Show that among any 13 people, at least two were born in the same month.</li>
       <li>How many students must be in a class to guarantee that at least two were born on the same day of the week?</li>
@@ -1223,7 +1223,7 @@
       <li>10 pairs of socks of different colors — how many socks to guarantee a matching pair?</li>
     </ol>
 
-    <h4>Inclusion-Exclusion Principle</h4>
+    <h4 id="practice-iep" data-rail-subsection data-rail-label="Inclusion-Exclusion Principle">Inclusion-Exclusion Principle</h4>
     <ol>
       <li>In a class of 40 students, 25 play cricket, 20 play football, and 10 play both. How many play at least one sport? How many play neither?</li>
       <li>100 students take Mathematics, Physics, or Chemistry. 50 take Maths, 40 take Physics, 30 take Chemistry. 15 take M&P, 10 take M&C, 8 take P&C, and 5 take all three. How many take at least one subject?</li>
@@ -1235,7 +1235,7 @@
     
       <li>150 students: 60 take Mathematics, 50 Physics, 40 Chemistry; 20 take Maths and Physics, 15 Physics and Chemistry, 10 Maths and Chemistry, and 5 take all three. Find the number taking at least one subject, exactly one, and none.</li></ol>
 
-    <h4>Recurrence Relations</h4>
+    <h4 id="practice-recurrence" data-rail-subsection data-rail-label="Recurrence Relations">Recurrence Relations</h4>
     <ol>
       <li>Solve a<sub>n</sub> = 5a<sub>n−1</sub> − 6a<sub>n−2</sub> with a<sub>0</sub> = 1, a<sub>1</sub> = 4.</li>
       <li>Solve a<sub>n</sub> = 6a<sub>n−1</sub> − 9a<sub>n−2</sub> with a<sub>0</sub> = 1, a<sub>1</sub> = 4.</li>
@@ -1402,29 +1402,34 @@
 <script>
 (function(){
   var hs=[].slice.call(document.querySelectorAll('.wrap h2[id]'));
-  var subHeads=[].slice.call(document.querySelectorAll('.wrap h3[data-rail-subsection][id]'));
+  var subHeads=[].slice.call(document.querySelectorAll('.wrap [data-rail-subsection][id]'));
   if(!hs.length)return;
   function pad(n){return (n<10?'0':'')+n;}
   function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
   var names=hs.map(function(h){return h.textContent.trim();});
-  var subNames=subHeads.map(function(h){return h.textContent.trim();});
-  var subOwner=hs.indexOf(document.getElementById('recurrence'));
+  var subGroups=hs.map(function(){return [];});
+  var sectionIndex=-1;
+  Array.prototype.forEach.call(document.querySelectorAll('.wrap h2[id], .wrap [data-rail-subsection][id]'),function(h){
+    if(h.tagName==='H2'){sectionIndex=hs.indexOf(h);}
+    else if(sectionIndex>=0)subGroups[sectionIndex].push(h);
+  });
 
-  function makeSublist(parentLi,mobile){
-    if(subOwner<0||!subHeads.length)return [];
+  function makeSublist(parentLi,mobile,headings){
+    if(!headings.length)return [];
     var list=el('ol',mobile?'rm-sublist':'rail-sublist');
-    var children=subHeads.map(function(h,i){
+    var children=headings.map(function(h,i){
       var li=el('li'),a=el('a',mobile?'rm-sub-link':'rail-sub-link');
-      a.href='#'+h.id;a.title=subNames[i];
+      var label=h.getAttribute('data-rail-label')||h.textContent.trim();
+      a.href='#'+h.id;a.title=label;
       a.appendChild(el('span',mobile?'rm-k':'sub-num',String.fromCharCode(65+i)));
-      a.appendChild(el('span',mobile?'rm-sub-label':'sub-lbl',subNames[i]));
+      a.appendChild(el('span',mobile?'rm-sub-label':'sub-lbl',label));
       li.appendChild(a);list.appendChild(li);
-      return {a:a,heading:h,done:false,mobile:null};
+      return {a:a,heading:h,done:false,top:0,mobile:null};
     });
     parentLi.appendChild(list);return children;
   }
 
-  /* Wide screens: margin rail with the three recurrence cases nested below Section 3. */
+  /* Wide screens: nested subsection links below their parent sections. */
   var nav=el('nav','rail');nav.setAttribute('aria-label','Section progress');
   var inn=el('div','rail-in'),top=el('div','rail-top'),sec=el('span','rail-sec','01'),meta=el('span','rail-meta');
   var pct=el('b',null,'0%');meta.appendChild(el('span',null,'of '+pad(hs.length)));meta.appendChild(pct);
@@ -1436,12 +1441,12 @@
     var li=el('li'),a=el('a'),nd=el('span','node');
     a.href='#'+h.id;a.title=names[i];nd.setAttribute('aria-hidden','true');
     a.appendChild(nd);a.appendChild(el('span','num',pad(i+1)));a.appendChild(el('span','lbl',names[i]));
-    li.appendChild(a);var children=i===subOwner?makeSublist(li,false):[];
+    li.appendChild(a);var children=makeSublist(li,false,subGroups[i]);
     ol.appendChild(li);return {a:a,nd:nd,p:-1,done:false,subs:children};
   });
   inn.appendChild(top);inn.appendChild(ol);nav.appendChild(inn);document.body.appendChild(nav);
 
-  /* Phones and tablets: keep the same parent/child tree in the section sheet. */
+  /* Phones and tablets: keep the same nested tree in the section sheet. */
   var bar=el('div','rm-bar');bar.setAttribute('aria-hidden','true');
   var tab=el('button','rm-tab');tab.type='button';tab.setAttribute('aria-haspopup','dialog');tab.setAttribute('aria-expanded','false');
   var tn=el('span',null,'01');tab.appendChild(tn);
@@ -1450,15 +1455,15 @@
   var sol=el('ol');
   var mitems=hs.map(function(h,i){
     var li=el('li'),a=el('a');a.href='#'+h.id;a.appendChild(el('span','rm-k',pad(i+1)));a.appendChild(el('span',null,names[i]));
-    li.appendChild(a);var children=i===subOwner?makeSublist(li,true):[];
+    li.appendChild(a);var children=makeSublist(li,true,subGroups[i]);
     sol.appendChild(li);a.addEventListener('click',function(){setSheet(false);});
     children.forEach(function(child){child.mobile=child.a;child.a.addEventListener('click',function(){setSheet(false);});});
     return {a:a,subs:children};
   });
-  if(subOwner>=0)items[subOwner].subs.forEach(function(child,i){child.mobile=mitems[subOwner].subs[i].a;});
+  items.forEach(function(item,i){item.subs.forEach(function(child,j){child.mobile=mitems[i].subs[j].a;});});
   sheet.appendChild(sh);sheet.appendChild(sol);
   [bar,tab,back,sheet].forEach(function(n){document.body.appendChild(n);});
-  var moveT,cur=-2,currentSubItem=null,tick=false,centers=null,tops=[],subTops=[],end=0;
+  var moveT,cur=-2,currentSubItem=null,tick=false,centers=null,tops=[],end=0;
 
   function setSheet(o,refocus){
     document.body.classList.toggle('rm-open',o);tab.setAttribute('aria-expanded',String(o));
@@ -1486,7 +1491,7 @@
   function measure(){
     var y=scrollY;
     tops=hs.map(function(h){return h.getBoundingClientRect().top+y;});
-    subTops=subHeads.map(function(h){return h.getBoundingClientRect().top+y;});
+    items.forEach(function(item){item.subs.forEach(function(child){child.top=child.heading.getBoundingClientRect().top+y;});});
     end=document.querySelector('.wrap').getBoundingClientRect().bottom+y;
   }
   function measureCenters(){centers=items.map(function(it){return it.a.offsetTop+it.a.offsetHeight/2;});}
@@ -1504,9 +1509,9 @@
     });
     if(c<0)c=0;
     bar.style.setProperty('--w',Math.round(items[c].p*100)+'%');
-    var f=centers[c]+(c+1<centers.length?(centers[c+1]-centers[c])*items[c].p:0);
-    if(y<tops[0])f=centers[0]*Math.max(0,Math.min(1,y/Math.max(1,tops[0])));
-    ol.style.setProperty('--fill',f.toFixed(1)+'px');
+    var fillPosition=centers[c]+(c+1<centers.length?(centers[c+1]-centers[c])*items[c].p:0);
+    if(y<tops[0])fillPosition=centers[0]*Math.max(0,Math.min(1,y/Math.max(1,tops[0])));
+    ol.style.setProperty('--fill',fillPosition.toFixed(1)+'px');
     var sectionChanged=c!==cur;
     if(sectionChanged){
       if(cur>=0){items[cur].a.removeAttribute('aria-current');mitems[cur].a.removeAttribute('aria-current');}
@@ -1515,26 +1520,23 @@
       items[c].a.setAttribute('aria-current','true');mitems[c].a.setAttribute('aria-current','true');
     }
 
-    var activeSub=-1;
+    var activeSub=null;
     items[c].subs.forEach(function(child,j){
-      var nx=j+1<subTops.length?subTops[j+1]:(c+1<tops.length?tops[c+1]:end);
-      var done=y>=nx,active=y>=subTops[j]&&y<nx;
+      var nx=j+1<items[c].subs.length?items[c].subs[j+1].top:(c+1<tops.length?tops[c+1]:end);
+      var done=y>=nx,active=y>=child.top&&y<nx;
       if(done!==child.done){child.done=done;child.a.classList.toggle('is-done',done);child.mobile.classList.toggle('is-done',done);}
-      if(active)activeSub=j;
-      if(active){child.a.setAttribute('aria-current','location');child.mobile.setAttribute('aria-current','location');}
-      else{child.a.removeAttribute('aria-current');child.mobile.removeAttribute('aria-current');}
+      if(active)activeSub=child;
     });
-    var nextSubItem=activeSub>=0?items[c].subs[activeSub]:null;
-    if(nextSubItem!==currentSubItem){
+    if(activeSub!==currentSubItem){
       if(currentSubItem){currentSubItem.a.removeAttribute('aria-current');currentSubItem.mobile.removeAttribute('aria-current');}
-      currentSubItem=nextSubItem;
+      currentSubItem=activeSub;
       if(currentSubItem){
         currentSubItem.a.setAttribute('aria-current','location');currentSubItem.mobile.setAttribute('aria-current','location');
         var childRect=currentSubItem.a.getBoundingClientRect(),listRect=ol.getBoundingClientRect();
         if(childRect.top<listRect.top||childRect.bottom>listRect.bottom)ol.scrollTop+=childRect.top-listRect.top-listRect.height/2;
       }
     }
-    if(sectionChanged&&activeSub<0){
+    if(sectionChanged&&!activeSub){
       var a=items[c].a,r=a.getBoundingClientRect(),lr=ol.getBoundingClientRect();
       if(r.top<lr.top||r.bottom>lr.bottom)ol.scrollTop+=r.top-lr.top-lr.height/2;
     }
