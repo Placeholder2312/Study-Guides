@@ -150,3 +150,10 @@ Optional additions only (not required, and not to be done unless asked):
 - Repository audit found 29 source worked-example cards and 3 past-paper question containers. The split Summer 2026 induction pair (source cards 22–23) is treated as one complete question, giving 31 formatting units. This is a fresh repository count; the older “30 remaining” note was only a historical agent estimate.
 - **Completed: 31/31 units.** Worked Examples 1–5 now use Module IV's exact Question / Solution / Final Answer markup and CSS. All existing explanations, tables and results were retained.
 - **Next:** Worked Examples 27–29 and the three past-paper questions (six units remain). Commit and verify after each five units.
+
+
+## Module II — Question / Solution / Final Answer formatting
+
+- Repository audit found 11 source worked-example cards and 3 past-paper questions. The three divisibility-poset source cards (ordered pairs, Hasse diagram, lattice test) form one complete worked question, giving 9 worked-example units + 3 past-paper units = 12 total.
+- **Completed: 10/12 units.** All 9 worked-example units now have Question / Solution / Final Answer blocks; the first matching past-paper question (Summer 2026 Q1(a), polygon equivalence) also has its full solution. Warshall and divisibility solutions retain their tables and original notes.
+- **Next:** Format the two remaining past-paper questions (Summer 2026 Q3(a) and Q3(b)) using the matching completed worked solutions. Commit after the pair.

@@ -723,13 +723,12 @@
   <p><strong>How to recognise the question.</strong> Words like "same number of sides", "same remainder", "same city", "is similar to", "is congruent to", "same blood group" all signal an equivalence relation. The question usually asks you to verify the three properties and then list the classes.</p>
 
   <div class="exam-q">
-    <div class="exam-q-title">Verified University question <span class="mu-badge">Summer 2026 · Q.1(a) · 5 marks</span></div>
-    <p class="exam-source">A digital geometry learning platform groups polygons based on the number of sides. Let A be the set of all polygons and define R = {(P<sub>1</sub>, P<sub>2</sub>) : P<sub>1</sub> and P<sub>2</sub> have the same number of sides}. Analyse whether R is an equivalence relation, verify the three properties, and construct equivalence classes for triangles, quadrilaterals and pentagons.</p>
-  </div>
+<div class="exam-q-title">Verified University question <span class="mu-badge">Summer 2026 · Q.1(a) · 5 marks</span></div>
+<p class="exam-source">A digital geometry learning platform groups polygons based on the number of sides. Let A be the set of all polygons and define R = {(P<sub>1</sub>, P<sub>2</sub>) : P<sub>1</sub> and P<sub>2</sub> have the same number of sides}. Analyse whether R is an equivalence relation, verify the three properties, and construct equivalence classes for triangles, quadrilaterals and pentagons.</p>
+<div class="qa-question"><div class="qa-label">Question</div>
 
-  <div class="example qa">
-    <div class="example-title">Full solution — polygon classification</div>
-    <div class="qa-solution"><div class="qa-label">Solution</div>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
       <p><strong>Step 1 — Reflexive.</strong> Take any polygon P ∈ A. P has the same number of sides as itself. So (P, P) ∈ R for every P. ✓</p>
       <p><strong>Step 2 — Symmetric.</strong> Suppose (P<sub>1</sub>, P<sub>2</sub>) ∈ R. Then P<sub>1</sub> and P<sub>2</sub> have the same number of sides. The statement "P<sub>2</sub> and P<sub>1</sub> have the same number of sides" says exactly the same thing, so (P<sub>2</sub>, P<sub>1</sub>) ∈ R. ✓</p>
       <p><strong>Step 3 — Transitive.</strong> Suppose (P<sub>1</sub>, P<sub>2</sub>) ∈ R and (P<sub>2</sub>, P<sub>3</sub>) ∈ R. Let the common counts be n. Then P<sub>1</sub> has n sides, P<sub>2</sub> has n sides and P<sub>3</sub> has n sides, so P<sub>1</sub> and P<sub>3</sub> have the same number of sides. Hence (P<sub>1</sub>, P<sub>3</sub>) ∈ R. ✓</p>
@@ -739,13 +738,38 @@
       <div class="eq">[quadrilateral] = {all polygons with 4 sides}</div>
       <div class="eq">[pentagon] = {all polygons with 5 sides}</div>
       <p>These classes are disjoint (a polygon cannot have two different side counts) and together they cover every polygon in A. A triangle is not in the quadrilateral class, so the classes do not overlap.</p>
-    </div>
-    <div class="qa-final"><div class="qa-label">Final Answer</div>
+    
+<p><strong>Step 6 — Interpretation (the last part carries marks).</strong> An equivalence relation turns a messy collection into labelled buckets. The platform can compute one number — the side count — and use it as a class label. Retrieval becomes "find the class, then search inside it", and no polygon is filed twice.</p>
+<p><strong>Answer-sheet form.</strong> Three labelled property blocks, a conclusion sentence, then one line per class, then two or three sentences of interpretation. That is a complete 5-mark answer.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
       <p class="qa-final-text">R is an <strong>equivalence relation</strong> on A. Its classes are <strong>[triangle]</strong> (3 sides), <strong>[quadrilateral]</strong> (4 sides) and <strong>[pentagon]</strong> (5 sides); they are disjoint and cover A.</p>
     </div>
-    <p><strong>Step 6 — Interpretation (the last part carries marks).</strong> An equivalence relation turns a messy collection into labelled buckets. The platform can compute one number — the side count — and use it as a class label. Retrieval becomes "find the class, then search inside it", and no polygon is filed twice.</p>
-    <p><strong>Answer-sheet form.</strong> Three labelled property blocks, a conclusion sentence, then one line per class, then two or three sentences of interpretation. That is a complete 5-mark answer.</p>
-  </div>
+</div>
+
+  <div class="example qa">
+<div class="example-title">Full solution — polygon classification</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>A digital geometry learning platform groups polygons by their number of sides. Let A be the set of all polygons and define R = {(P₁, P₂) : P₁ and P₂ have the same number of sides}. Determine whether R is an equivalence relation, verify its three properties, and construct the equivalence classes for triangles, quadrilaterals and pentagons.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Step 1 — Reflexive.</strong> Take any polygon P ∈ A. P has the same number of sides as itself. So (P, P) ∈ R for every P. ✓</p>
+      <p><strong>Step 2 — Symmetric.</strong> Suppose (P<sub>1</sub>, P<sub>2</sub>) ∈ R. Then P<sub>1</sub> and P<sub>2</sub> have the same number of sides. The statement "P<sub>2</sub> and P<sub>1</sub> have the same number of sides" says exactly the same thing, so (P<sub>2</sub>, P<sub>1</sub>) ∈ R. ✓</p>
+      <p><strong>Step 3 — Transitive.</strong> Suppose (P<sub>1</sub>, P<sub>2</sub>) ∈ R and (P<sub>2</sub>, P<sub>3</sub>) ∈ R. Let the common counts be n. Then P<sub>1</sub> has n sides, P<sub>2</sub> has n sides and P<sub>3</sub> has n sides, so P<sub>1</sub> and P<sub>3</sub> have the same number of sides. Hence (P<sub>1</sub>, P<sub>3</sub>) ∈ R. ✓</p>
+      <p><strong>Step 4 — Conclusion.</strong> R is reflexive, symmetric and transitive.</p>
+      <p><strong>Step 5 — Equivalence classes.</strong> Group by the number of sides:</p>
+      <div class="eq">[triangle] = {all polygons with 3 sides}</div>
+      <div class="eq">[quadrilateral] = {all polygons with 4 sides}</div>
+      <div class="eq">[pentagon] = {all polygons with 5 sides}</div>
+      <p>These classes are disjoint (a polygon cannot have two different side counts) and together they cover every polygon in A. A triangle is not in the quadrilateral class, so the classes do not overlap.</p>
+    
+<p><strong>Step 6 — Interpretation (the last part carries marks).</strong> An equivalence relation turns a messy collection into labelled buckets. The platform can compute one number — the side count — and use it as a class label. Retrieval becomes "find the class, then search inside it", and no polygon is filed twice.</p>
+<p><strong>Answer-sheet form.</strong> Three labelled property blocks, a conclusion sentence, then one line per class, then two or three sentences of interpretation. That is a complete 5-mark answer.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">R is an <strong>equivalence relation</strong> on A. Its classes are <strong>[triangle]</strong> (3 sides), <strong>[quadrilateral]</strong> (4 sides) and <strong>[pentagon]</strong> (5 sides); they are disjoint and cover A.</p>
+    </div>
+</div>
 
   <h3>Finding equivalence classes from a roster</h3>
   <ol class="steps">
@@ -853,8 +877,11 @@
   </div>
 
   <div class="example qa">
-    <div class="example-title">Full Warshall solution — airline network</div>
-    <div class="qa-solution"><div class="qa-label">Solution</div>
+<div class="example-title">Full Warshall solution — airline network</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>A domestic airline has directed flight network V = {a, b, c, d} with direct connections R = {(a, b), (b, d), (d, c), (d, a)}. Find the transitive closure using Warshall’s algorithm and state the final connectivity relation.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
     <p><strong>Step 0 — initial matrix.</strong> Rows and columns in the order a, b, c, d. A 1 means a direct flight.</p>
     <table>
       <tr><th>W<sup>(0)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
@@ -904,18 +931,16 @@
     </table>
     <p class="eq-note">Added: (a, a), (a, c), (b, a), (b, b), (b, c).</p>
 
-    </div>
-    <div class="qa-final"><div class="qa-label">Final Answer</div>
+    
+<p><strong>Independent check by tracing paths.</strong> The cycle a → b → d → a lets a, b and d each return to themselves, which is why (a,a), (b,b) and (d,d) appear. From a: a → b → d → c reaches c. From b: b → d → a → … reaches a and c. From d: d → a → b reaches b and d → c reaches c. From c: no outgoing edge, so no pair starts at c. Every one of the twelve entries is accounted for.</p>
+<p><strong>Direct, layover and circular routes (the question's wording).</strong> Direct: (a,b), (b,d), (d,c), (d,a). Layover: (a,d), (a,c), (b,a), (b,c), (d,b), (b,? ) and so on — all the new pairs. Circular: (a,a), (b,b), (d,d).</p>
+<p><strong>Note on the diagonal.</strong> We used paths of length at least 1, which is the convention in your lecture slides. If your lecturer instead starts the matrix with 1s on the diagonal, then (c,c) is also added and every diagonal entry is 1. Say which convention you used in your answer; both are defensible, but do not mix them.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
       <div class="eq">R<sup>+</sup> = {(a,a), (a,b), (a,c), (a,d), (b,a), (b,b), (b,c), (b,d), (d,a), (d,b), (d,c), (d,d)}</div>
       <p class="qa-final-text">Twelve pairs. Row c is entirely zero, so c is related to nothing — not even to itself.</p>
     </div>
-
-    <p><strong>Independent check by tracing paths.</strong> The cycle a → b → d → a lets a, b and d each return to themselves, which is why (a,a), (b,b) and (d,d) appear. From a: a → b → d → c reaches c. From b: b → d → a → … reaches a and c. From d: d → a → b reaches b and d → c reaches c. From c: no outgoing edge, so no pair starts at c. Every one of the twelve entries is accounted for.</p>
-
-    <p><strong>Direct, layover and circular routes (the question's wording).</strong> Direct: (a,b), (b,d), (d,c), (d,a). Layover: (a,d), (a,c), (b,a), (b,c), (d,b), (b,? ) and so on — all the new pairs. Circular: (a,a), (b,b), (d,d).</p>
-
-    <p><strong>Note on the diagonal.</strong> We used paths of length at least 1, which is the convention in your lecture slides. If your lecturer instead starts the matrix with 1s on the diagonal, then (c,c) is also added and every diagonal entry is 1. Say which convention you used in your answer; both are defensible, but do not mix them.</p>
-  </div>
+</div>
 
   <div class="common-mistakes">
     <h3>Common mistakes</h3>
@@ -989,10 +1014,14 @@
     <p class="exam-source">A cloud access-control system organises permission levels A = {1, 2, 3, 6, 12, 24, 36, 72} by divisibility: (x, y) ∈ R if x | y. Write all ordered pairs, construct the Hasse diagram, and analyse whether the poset is a lattice, justifying with meet and join examples.</p>
   </div>
 
-  <div class="example">
-    <div class="example-title">Part 1 — all ordered pairs of R</div>
-    <p>For each element x, list the elements of A that x divides. Working systematically prevents omissions:</p>
-    <table>
+  <div class="example qa">
+<div class="example-title">Part 1 — all ordered pairs of R</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>A cloud access-control system organises permission levels A = {1, 2, 3, 6, 12, 24, 36, 72} by divisibility: (x, y) ∈ R if x | y. Write all ordered pairs, construct the Hasse diagram, and determine whether the poset is a lattice, justifying with meet and join examples.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>For each element x, list the elements of A that x divides. Working systematically prevents omissions:</p>
+<table>
       <tr><th>x</th><th>Elements of A divisible by x</th><th>Number</th></tr>
       <tr><td>1</td><td>1, 2, 3, 6, 12, 24, 36, 72</td><td>8</td></tr>
       <tr><td>2</td><td>2, 6, 12, 24, 36, 72</td><td>6</td></tr>
@@ -1003,23 +1032,17 @@
       <tr><td>36</td><td>36, 72</td><td>2</td></tr>
       <tr><td>72</td><td>72</td><td>1</td></tr>
     </table>
-    <p>So R contains 8 + 6 + 6 + 5 + 4 + 2 + 2 + 1 = 34 ordered pairs. In roster form:</p>
-    <p>R = {(1,1),(1,2),(1,3),(1,6),(1,12),(1,24),(1,36),(1,72), (2,2),(2,6),(2,12),(2,24),(2,36),(2,72), (3,3),(3,6),(3,12),(3,24),(3,36),(3,72), (6,6),(6,12),(6,24),(6,36),(6,72), (12,12),(12,24),(12,36),(12,72), (24,24),(24,72), (36,36),(36,72), (72,72)}.</p>
-    <p><strong>Check.</strong> Every element divides itself, so all eight diagonal pairs appear. The count is 34, not 8 × 8 = 64, because most pairs fail the divisibility test.</p>
-  </div>
-
-  <div class="example">
-    <div class="example-title">Part 2 — Hasse diagram: what it would show (no drawing here)</div>
-    <p>A Hasse diagram draws one dot per element, with y placed above x and joined by a line exactly when <strong>y covers x</strong>: x | y, x ≠ y, and there is no element z of A with x | z | y. The covering pairs for this set are:</p>
-    <div class="eq">1–2, 1–3, 2–6, 3–6, 6–12, 12–24, 12–36, 24–72, 36–72</div>
-    <p>Read the diagram bottom-up: 1 is at the bottom; 72 is at the top; 24 and 36 sit side by side on the level below 72. A line means "covers", not "divides" — 1 divides 72 but there is no direct line, because intermediate elements exist.</p>
-    <p>If you are asked to draw it, place: level 0 — 1; level 1 — 2, 3; level 2 — 6; level 3 — 12; level 4 — 24, 36; level 5 — 72.</p>
-  </div>
-
-  <div class="example">
-    <div class="example-title">Part 3 — is it a lattice? Meet and join for every kind of pair</div>
-    <p>The test is: for every pair, does gcd lie in A, and does lcm lie in A? Work through representative pairs, including the awkward ones.</p>
-    <table>
+<p>So R contains 8 + 6 + 6 + 5 + 4 + 2 + 2 + 1 = 34 ordered pairs. In roster form:</p>
+<p>R = {(1,1),(1,2),(1,3),(1,6),(1,12),(1,24),(1,36),(1,72), (2,2),(2,6),(2,12),(2,24),(2,36),(2,72), (3,3),(3,6),(3,12),(3,24),(3,36),(3,72), (6,6),(6,12),(6,24),(6,36),(6,72), (12,12),(12,24),(12,36),(12,72), (24,24),(24,72), (36,36),(36,72), (72,72)}.</p>
+<p><strong>Check.</strong> Every element divides itself, so all eight diagonal pairs appear. The count is 34, not 8 × 8 = 64, because most pairs fail the divisibility test.</p>
+<p><strong>Part 2 — Hasse diagram: what it would show (no drawing here)</strong></p>
+<p>A Hasse diagram draws one dot per element, with y placed above x and joined by a line exactly when <strong>y covers x</strong>: x | y, x ≠ y, and there is no element z of A with x | z | y. The covering pairs for this set are:</p>
+<div class="eq">1–2, 1–3, 2–6, 3–6, 6–12, 12–24, 12–36, 24–72, 36–72</div>
+<p>Read the diagram bottom-up: 1 is at the bottom; 72 is at the top; 24 and 36 sit side by side on the level below 72. A line means "covers", not "divides" — 1 divides 72 but there is no direct line, because intermediate elements exist.</p>
+<p>If you are asked to draw it, place: level 0 — 1; level 1 — 2, 3; level 2 — 6; level 3 — 12; level 4 — 24, 36; level 5 — 72.</p>
+<p><strong>Part 3 — is it a lattice? Meet and join for every kind of pair</strong></p>
+<p>The test is: for every pair, does gcd lie in A, and does lcm lie in A? Work through representative pairs, including the awkward ones.</p>
+<table>
       <tr><th>Pair (a, b)</th><th>gcd — meet</th><th>In A?</th><th>lcm — join</th><th>In A?</th></tr>
       <tr><td>(2, 3)</td><td>1</td><td>Yes</td><td>6</td><td>Yes</td></tr>
       <tr><td>(6, 12)</td><td>6</td><td>Yes</td><td>12</td><td>Yes</td></tr>
@@ -1030,17 +1053,27 @@
       <tr><td>(2, 72)</td><td>2</td><td>Yes</td><td>72</td><td>Yes</td></tr>
       <tr><td>(1, 72)</td><td>1</td><td>Yes</td><td>72</td><td>Yes</td></tr>
     </table>
-    <p>The critical pair is (24, 36): the meet is 12 (not 24 or 36) and the join is 72. Both are in A. Every other pair behaves the same way, because A was built from the divisors of 72 = 2³ · 3² and is closed under gcd and lcm for these elements.</p>
-    <p><strong>Conclusion.</strong> Every pair has a meet and a join in A, so (A, |) is a lattice. It is also a bounded lattice: 1 is the least element (the zero) and 72 is the greatest element (the one).</p>
-    <p><strong>Justification sentence for the answer sheet.</strong> "For the pair (24, 36), meet = gcd(24, 36) = 12 ∈ A and join = lcm(24, 36) = 72 ∈ A. Since gcd and lcm of every pair lie in A, the poset is a lattice."</p>
-  </div>
+<p>The critical pair is (24, 36): the meet is 12 (not 24 or 36) and the join is 72. Both are in A. Every other pair behaves the same way, because A was built from the divisors of 72 = 2³ · 3² and is closed under gcd and lcm for these elements.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p><strong>Conclusion.</strong> Every pair has a meet and a join in A, so (A, |) is a lattice. It is also a bounded lattice: 1 is the least element (the zero) and 72 is the greatest element (the one).</p>
+<p><strong>Justification sentence for the answer sheet.</strong> "For the pair (24, 36), meet = gcd(24, 36) = 12 ∈ A and join = lcm(24, 36) = 72 ∈ A. Since gcd and lcm of every pair lie in A, the poset is a lattice."</p>
+</div>
+</div>
 
   <div class="example">
-    <div class="example-title">When a poset is <em>not</em> a lattice — the counterexample you should memorise</div>
-    <p>Let S = {2, 3, 4, 6} under divisibility. Take the pair (3, 4).</p>
-    <p>gcd(3, 4) = 1, but 1 ∉ S. So no element of S is a lower bound of {3, 4} that is greatest — the meet does not exist inside S. Also lcm(3, 4) = 12 ∉ S. Either failure is enough.</p>
-    <p><strong>Conclusion.</strong> (S, |) is a poset but <em>not</em> a lattice. A set being a poset never automatically makes it a lattice.</p>
-  </div>
+<div class="example-title">When a poset is <em>not</em> a lattice — the counterexample you should memorise</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Let S = {2, 3, 4, 6} under divisibility. Show that (S, |) is not a lattice.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Let S = {2, 3, 4, 6} under divisibility. Take the pair (3, 4).</p>
+<p>gcd(3, 4) = 1, but 1 ∉ S. So no element of S is a lower bound of {3, 4} that is greatest — the meet does not exist inside S. Also lcm(3, 4) = 12 ∉ S. Either failure is enough.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p><strong>Conclusion.</strong> (S, |) is a poset but <em>not</em> a lattice. A set being a poset never automatically makes it a lattice.</p>
+</div>
+</div>
 
   <h3>Chain and antichain — one line each</h3>
   <p><strong>Chain:</strong> a subset in which every two elements are comparable. In the example, {1, 2, 6, 12, 24, 72} is a chain. <strong>Antichain:</strong> a subset in which no two distinct elements are comparable. In the example, {24, 36} and {2, 3} are antichains.</p>
