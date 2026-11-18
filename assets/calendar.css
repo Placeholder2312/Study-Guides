@@ -55,23 +55,6 @@
 .cal-exams li.past .ex-name { text-decoration: line-through; text-decoration-thickness: 2px; text-decoration-color: var(--ink); }
 .cal-exams li.past .ex-name, .cal-exams li.past .ex-meta { opacity: .62; }
 
-/* A strip of the same tape hangs off the bottom edge of the card and swings with scrolling. */
-/* Anchor sits on the card's bottom edge: a band stuck across the edge, and a torn
-   strip hanging from underneath it (the strip is the part that swings). */
-.cal-tape { position: absolute; right: 4.25rem; top: 100%; z-index: 3; width: 0; height: 0; pointer-events: none; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .3)); }
-.cal-tape-hang, .cal-tape-stuck { position: absolute; display: block; box-sizing: border-box; }
-.cal-tape-hang {
-  left: -10px; top: -4px; width: 20px; height: 60px; transform-origin: 50% 4px; will-change: transform;
-  background: repeating-linear-gradient(45deg, var(--ink) 0 8px, var(--bg) 8px 16px);
-  border-left: 1px solid var(--ink); border-right: 1px solid var(--ink);
-  clip-path: polygon(0 0, 100% 0, 100% 94%, 80% 100%, 60% 93%, 40% 100%, 20% 93%, 0 98%);
-}
-.cal-tape-stuck {
-  left: -28px; top: -6px; width: 56px; height: 12px; transform: rotate(-6deg);
-  background: repeating-linear-gradient(-45deg, var(--ink) 0 9px, var(--bg) 9px 18px);
-  border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); opacity: .96;
-}
-@media print { .cal-tape { display: none; } }
 
 /* Let the highlights survive printing. */
 .cal-grid td, .sw { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
