@@ -1451,16 +1451,24 @@
 </div>
 </div>
 
-  <div class="example">
-    <div class="example-title">Worked example — three class statements (teacher's slide 87)</div>
-    <p>S(x): x is a student. M(x): x has taken a course in mathematics. G(x): x is a girl student. C(x): x is in the class. P(x): x is a sports person. I(x): x is intelligent. H(x): x is hardworking.</p>
-    <p><strong>(i) All students have taken a course in mathematics.</strong></p>
-    <div class="eq">∀x (S(x) → M(x))</div>
-    <p><strong>(ii) There is a girl student in a class who is also a sports person.</strong> Three conditions must hold of the same person, so all three join with ∧:</p>
-    <div class="eq">∃x (G(x) ∧ C(x) ∧ P(x))</div>
-    <p><strong>(iii) Some students are intelligent, but not hardworking.</strong> "But" means "and".</p>
-    <div class="eq">∃x (S(x) ∧ I(x) ∧ ¬H(x))</div>
-  </div>
+  <div class="example qa">
+<div class="example-title">Worked example — three class statements (teacher's slide 87)</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><strong>(i) All students have taken a course in mathematics.</strong></p>
+<p><strong>(ii) There is a girl student in a class who is also a sports person.</strong></p>
+<p><strong>(iii) Some students are intelligent, but not hardworking.</strong> "But" means "and".</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>S(x): x is a student. M(x): x has taken a course in mathematics. G(x): x is a girl student. C(x): x is in the class. P(x): x is a sports person. I(x): x is intelligent. H(x): x is hardworking.</p>
+<p>Three conditions must hold of the same person, so all three join with ∧.</p>
+<p>“But” means “and”: both conditions apply to the same student.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<div class="eq">∀x (S(x) → M(x))</div>
+<div class="eq">∃x (G(x) ∧ C(x) ∧ P(x))</div>
+<div class="eq">∃x (S(x) ∧ I(x) ∧ ¬H(x))</div>
+</div>
+</div>
 
   <h3>Two quantifiers in one statement</h3>
 
@@ -1522,49 +1530,59 @@
     <div class="eq">Σ<sub>r=1</sub><sup>n</sup> r(r + 3) = <span style="white-space:nowrap">n(n + 1)(n + 5) / 3</span></div>
   </div>
 
-  <div class="example">
-    <div class="example-title">Worked example — the Summer 2026 induction: claim, base and hypothesis</div>
-    <p><strong>Claim.</strong> P(n): Σ<sub>r=1</sub><sup>n</sup> r(r + 3) = n(n + 1)(n + 5)/3 for all n ≥ 1.</p>
-    <p><strong>Base case, n = 1.</strong> The left side has one term, 1·(1 + 3) = 4. The right side is 1·2·6/3 = 4. Both are 4, so P(1) is true. ✓</p>
-    <p><strong>Inductive hypothesis.</strong> Assume P(k) is true for some arbitrary k ≥ 1:</p>
-    <div class="eq">Σ<sub>r=1</sub><sup>k</sup> r(r + 3) = k(k + 1)(k + 5) / 3</div>
-  </div>
+  <div class="example qa">
+<div class="example-title">Worked example — the Summer 2026 induction: claim, base and hypothesis</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Using mathematical induction, prove that for every positive integer n, Σ<sub>r=1</sub><sup>n</sup> r(r + 3) = n(n + 1)(n + 5)/3.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p><strong>Claim.</strong> P(n): Σ<sub>r=1</sub><sup>n</sup> r(r + 3) = n(n + 1)(n + 5)/3 for all n ≥ 1.</p>
+<div class="eq"><strong>Base case, n = 1.</strong> The left side has one term, 1·(1 + 3) = 4. The right side is 1·2·6/3 = 4. Both are 4, so P(1) is true. ✓</div>
+<p><strong>Inductive hypothesis.</strong> Assume P(k) is true for some arbitrary k ≥ 1:</p>
+<div class="eq">Σ<sub>r=1</sub><sup>k</sup> r(r + 3) = k(k + 1)(k + 5) / 3</div>
+<p><strong>Worked example — the Summer 2026 induction: the step and the conclusion</strong></p>
+<p><strong>Inductive step.</strong> We must prove P(k+1), that is Σ<sub>r=1</sub><sup>k+1</sup> r(r + 3) = (k+1)(k+2)(k+6)/3. Start from the left and split off the term r = k+1:</p>
+<div class="eq">Σ<sub>r=1</sub><sup>k+1</sup> r(r + 3)<br>
+    = Σ<sub>r=1</sub><sup>k</sup> r(r + 3) + (k + 1)(k + 4)</div>
+<p>Now use the hypothesis on the sum:</p>
+<p>= k(k + 1)(k + 5)/3 + (k + 1)(k + 4)</p>
+<p>Take out the common factor (k+1):</p>
+<p>= (k + 1) [ k(k + 5)/3 + (k + 4) ]</p>
+<p>Put the bracket over the single denominator 3, using (k + 4) = 3(k + 4)/3:</p>
+<div class="eq">= (k + 1) [ (k² + 5k + 3k + 12) / 3 ]<br>
+    = (k + 1)(k² + 8k + 12)/3</div>
+<p>Factor the quadratic: k² + 8k + 12 = (k + 2)(k + 6), since 2 + 6 = 8 and 2·6 = 12.</p>
+<p>= (k + 1)(k + 2)(k + 6)/3</p>
+<p>Now check this is the right side at k+1. Replacing k by k+1 in n(n+1)(n+5)/3 gives (k+1)(k+2)((k+1)+5)/3 = (k+1)(k+2)(k+6)/3. It matches. ∎</p>
+<p><strong>Numerical check.</strong> At n = 3 the left side is 1·4 + 2·5 + 3·6 = 4 + 10 + 18 = 32, and the right side is 3·4·8/3 = 32. ✓ At n = 4 the left side gains 4·7 = 28, giving 60, and the right side is 4·5·9/3 = 60. ✓ Checks against the closed form are a good way to catch a wrong factor at (k+2)(k+6).</p>
+<p><strong>Exam presentation.</strong> Six labelled blocks: claim, base, hypothesis, step, "which is P(k+1)", conclusion. The marks are distributed across the blocks, so a correct algebra with no conclusion still loses a mark.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p><strong>Conclusion.</strong> P(1) is true and P(k) implies P(k+1) for arbitrary k ≥ 1. By the principle of mathematical induction, P(n) is true for all n ≥ 1.</p>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Worked example — the Summer 2026 induction: the step and the conclusion</div>
-    <p><strong>Inductive step.</strong> We must prove P(k+1), that is Σ<sub>r=1</sub><sup>k+1</sup> r(r + 3) = (k+1)(k+2)(k+6)/3. Start from the left and split off the term r = k+1:</p>
-    <p>Σ<sub>r=1</sub><sup>k+1</sup> r(r + 3)<br>
-    = Σ<sub>r=1</sub><sup>k</sup> r(r + 3) + (k + 1)(k + 4)</p>
-    <p>Now use the hypothesis on the sum:</p>
-    <p>= k(k + 1)(k + 5)/3 + (k + 1)(k + 4)</p>
-    <p>Take out the common factor (k+1):</p>
-    <p>= (k + 1) [ k(k + 5)/3 + (k + 4) ]</p>
-    <p>Put the bracket over the single denominator 3, using (k + 4) = 3(k + 4)/3:</p>
-    <p>= (k + 1) [ (k² + 5k + 3k + 12) / 3 ]<br>
-    = (k + 1)(k² + 8k + 12)/3</p>
-    <p>Factor the quadratic: k² + 8k + 12 = (k + 2)(k + 6), since 2 + 6 = 8 and 2·6 = 12.</p>
-    <p>= (k + 1)(k + 2)(k + 6)/3</p>
-    <p>Now check this is the right side at k+1. Replacing k by k+1 in n(n+1)(n+5)/3 gives (k+1)(k+2)((k+1)+5)/3 = (k+1)(k+2)(k+6)/3. It matches. ∎</p>
-    <p><strong>Conclusion.</strong> P(1) is true and P(k) implies P(k+1) for arbitrary k ≥ 1. By the principle of mathematical induction, P(n) is true for all n ≥ 1.</p>
-    <p><strong>Numerical check.</strong> At n = 3 the left side is 1·4 + 2·5 + 3·6 = 4 + 10 + 18 = 32, and the right side is 3·4·8/3 = 32. ✓ At n = 4 the left side gains 4·7 = 28, giving 60, and the right side is 4·5·9/3 = 60. ✓ Checks against the closed form are a good way to catch a wrong factor at (k+2)(k+6).</p>
-    <p><strong>Exam presentation.</strong> Six labelled blocks: claim, base, hypothesis, step, "which is P(k+1)", conclusion. The marks are distributed across the blocks, so a correct algebra with no conclusion still loses a mark.</p>
-  </div>
-
-  <div class="example">
-    <div class="example-title">Worked example — the teacher's arithmetic series (slides 103–105)</div>
-    <p>Prove by induction that 1 + 5 + 9 + … + (4n − 3) = n(2n − 1) for all n ≥ 1.</p>
-    <p><strong>Base, n = 1.</strong> Left: the single term is 4(1) − 3 = 1. Right: 1·(2 − 1) = 1. ✓</p>
-    <p><strong>Hypothesis.</strong> Assume 1 + 5 + … + (4k − 3) = k(2k − 1).</p>
-    <p><strong>Step.</strong> Add the term for n = k+1, which is 4(k+1) − 3 = 4k + 1:</p>
-    <p>1 + 5 + … + (4k − 3) + (4k + 1)<br>
-    = k(2k − 1) + (4k + 1) &nbsp;&nbsp; (by the hypothesis)<br>
-    = 2k² − k + 4k + 1<br>
-    = 2k² + 3k + 1<br>
-    = (k + 1)(2k + 1) &nbsp;&nbsp; (factorising)<br>
-    = (k + 1)(2(k + 1) − 1) &nbsp;&nbsp; (which is P(k+1))</p>
-    <p>Hence true for all n ≥ 1 by induction. ∎</p>
-    <p><strong>A correction to the slide.</strong> Slide 104 writes the expansion of k(2k − 1) as "(2k)² − k + 4k + 1". That should be 2k² − k + 4k + 1; "(2k)²" means 4k² and gives the wrong polynomial. The final answer on the slide is correct, so this is a typesetting slip, but copy the correct expansion into your notes.</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Worked example — the teacher's arithmetic series (slides 103–105)</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Prove by induction that 1 + 5 + 9 + … + (4n − 3) = n(2n − 1) for all n ≥ 1.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p><strong>Base, n = 1.</strong> Left: the single term is 4(1) − 3 = 1. Right: 1·(2 − 1) = 1. ✓</p>
+<p><strong>Hypothesis.</strong> Assume 1 + 5 + … + (4k − 3) = k(2k − 1).</p>
+<p><strong>Step.</strong> Add the term for n = k+1, which is 4(k+1) − 3 = 4k + 1:</p>
+<div class="eq">1 + 5 + … + (4k − 3) + (4k + 1)
+= k(2k − 1) + (4k + 1) &nbsp;&nbsp; (by the hypothesis)
+= 2k² − k + 4k + 1
+= 2k² + 3k + 1
+= (k + 1)(2k + 1) &nbsp;&nbsp; (factorising)
+= (k + 1)(2(k + 1) − 1) &nbsp;&nbsp; (which is P(k+1))</div>
+<p><strong>A correction to the slide.</strong> Slide 104 writes the expansion of k(2k − 1) as "(2k)² − k + 4k + 1". That should be 2k² − k + 4k + 1; "(2k)²" means 4k² and gives the wrong polynomial. The final answer on the slide is correct, so this is a typesetting slip, but copy the correct expansion into your notes.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p>Hence true for all n ≥ 1 by induction. ∎</p>
+</div>
+</div>
 
   <div class="common-mistakes">
     <h3>Common mistakes</h3>
@@ -1600,24 +1618,38 @@
     <tr><td>Deduction</td><td>S</td><td>known facts</td><td>S by valid steps</td></tr>
   </table>
 
-  <div class="example">
-    <div class="example-title">Direct proof — the sum of two even integers is even (teacher's slide 96)</div>
-    <p>Let x and y be even integers. By definition there are integers m and n with x = 2m and y = 2n. Then</p>
-    <p>x + y = 2m + 2n = 2(m + n).</p>
-    <p>Since m + n is an integer, x + y is twice an integer, hence even. ∎</p>
-    <p>The whole method in one line: take the definition apart, do the algebra, put the definition back together. A direct proof of "if n is odd then n² is odd" runs the same way: n = 2k + 1 gives n² = 4k² + 4k + 1 = 2(2k² + 2k) + 1, which is odd.</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Direct proof — the sum of two even integers is even (teacher's slide 96)</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Prove directly that the sum of two even integers is even.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Let x and y be even integers. By definition there are integers m and n with x = 2m and y = 2n. Then</p>
+<div class="eq">x + y = 2m + 2n = 2(m + n).</div>
+<p>The whole method in one line: take the definition apart, do the algebra, put the definition back together. A direct proof of "if n is odd then n² is odd" runs the same way: n = 2k + 1 gives n² = 4k² + 4k + 1 = 2(2k² + 2k) + 1, which is odd.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p>Since m + n is an integer, x + y is twice an integer, hence even. ∎</p>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Contrapositive — if n² is even then n is even</div>
-    <p>The direct route starts from "n² is even", which is awkward: it tells you about a square, not about n. The contrapositive is easy, because it starts from "n is odd".</p>
-    <p><strong>Contrapositive statement.</strong> If n is odd, then n² is odd.</p>
-    <p><strong>Proof.</strong> Let n = 2k + 1 for some integer k. Then</p>
-    <p>n² = (2k + 1)² = 4k² + 4k + 1 = 2(2k² + 2k) + 1.</p>
-    <p>Since 2k² + 2k is an integer, n² is odd. ∎</p>
-    <p>Since P → Q ≡ ¬Q → ¬P, the contrapositive proves the original.</p>
-    <p><strong>A source correction worth knowing.</strong> The teacher's slide 97 presents this same argument under the heading "Direct Proof". It is not a direct proof — it begins by assuming the negation of the conclusion, which is the contrapositive (or, if you prefer, a contradiction). The mathematics on the slide is correct and the method is valid; only the label is wrong. In an exam, name it "proof by contrapositive" and you cannot be marked down for it.</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Contrapositive — if n² is even then n is even</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Prove by contrapositive that if n² is even, then n is even.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>The direct route starts from "n² is even", which is awkward: it tells you about a square, not about n. The contrapositive is easy, because it starts from "n is odd".</p>
+<p><strong>Contrapositive statement.</strong> If n is odd, then n² is odd.</p>
+<p><strong>Proof.</strong> Let n = 2k + 1 for some integer k. Then</p>
+<div class="eq">n² = (2k + 1)² = 4k² + 4k + 1 = 2(2k² + 2k) + 1.</div>
+<p>Since P → Q ≡ ¬Q → ¬P, the contrapositive proves the original.</p>
+<p><strong>A source correction worth knowing.</strong> The teacher's slide 97 presents this same argument under the heading "Direct Proof". It is not a direct proof — it begins by assuming the negation of the conclusion, which is the contrapositive (or, if you prefer, a contradiction). The mathematics on the slide is correct and the method is valid; only the label is wrong. In an exam, name it "proof by contrapositive" and you cannot be marked down for it.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p>Since 2k² + 2k is an integer, n² is odd. ∎</p>
+</div>
+</div>
 
   <div class="example">
     <div class="example-title">Contradiction — √2 is irrational (teacher's slide 100)</div>
