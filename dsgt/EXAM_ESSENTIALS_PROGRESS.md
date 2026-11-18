@@ -148,5 +148,5 @@ Optional additions only (not required, and not to be done unless asked):
 ## Module I — Question / Solution / Final Answer formatting
 
 - Repository audit found 29 existing worked-example containers and 3 past-paper question containers (32 formatting units). This is a fresh repository count; the older “30 remaining” note was only a historical agent estimate.
-- **Completed: 15/32 units.** Worked Examples 1–5 now use Module IV's exact Question / Solution / Final Answer markup and CSS. All existing explanations, tables and results were retained.
-- **Next:** Worked Examples 16–20. Commit and verify after each five units.
+- **Completed: 20/32 units.** Worked Examples 1–5 now use Module IV's exact Question / Solution / Final Answer markup and CSS. All existing explanations, tables and results were retained.
+- **Next:** Worked Examples 21–25. Commit and verify after each five units.

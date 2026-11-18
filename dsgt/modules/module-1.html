@@ -1253,22 +1253,34 @@
 </div>
 </div>
 
-  <div class="example">
-    <div class="example-title">Worked example — is (p → q) ∧ ¬q a tautology? (IAT sample Q9(ii))</div>
-    <p>(p → q) ∧ ¬q<br>
-    ≡ (¬p ∨ q) ∧ ¬q &nbsp;&nbsp; (implication law)<br>
-    ≡ (¬p ∧ ¬q) ∨ (q ∧ ¬q) &nbsp;&nbsp; (distributive law)<br>
-    ≡ (¬p ∧ ¬q) ∨ F &nbsp;&nbsp; (complementation)<br>
-    ≡ ¬p ∧ ¬q &nbsp;&nbsp; (identity law)</p>
-    <p>This is true when p and q are both false, and false otherwise. It is a <strong>contingency</strong>, not a tautology.</p>
-    <p>Notice what the expression means: "p implies q, and q is false". The only way that can hold is p false as well. It is the first half of modus tollens — the step that concludes ¬p. The implication (p → q) ∧ ¬q → ¬p <em>is</em> a tautology, and that is the inference rule; strip the conclusion and you get a contingency.</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Worked example — is (p → q) ∧ ¬q a tautology? (IAT sample Q9(ii))</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Determine whether (p → q) ∧ ¬q is a tautology.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<div class="eq">(p → q) ∧ ¬q ≡ (¬p ∨ q) ∧ ¬q &nbsp;&nbsp; (implication law) ≡ (¬p ∧ ¬q) ∨ (q ∧ ¬q) &nbsp;&nbsp; (distributive law) ≡ (¬p ∧ ¬q) ∨ F &nbsp;&nbsp; (complementation) ≡ ¬p ∧ ¬q &nbsp;&nbsp; (identity law)</div>
+<p>This is true when p and q are both false, and false otherwise. It is a <strong>contingency</strong>, not a tautology.</p>
+<p>Notice what the expression means: "p implies q, and q is false". The only way that can hold is p false as well. It is the first half of modus tollens — the step that concludes ¬p. The implication (p → q) ∧ ¬q → ¬p <em>is</em> a tautology, and that is the inference rule; strip the conclusion and you get a contingency.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">(p → q) ∧ ¬q is a contingency, not a tautology. However, ((p → q) ∧ ¬q) → ¬p is a tautology.</p>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Worked example — (p → q) ↔ (¬q → ¬p) is a tautology</div>
-    <p>By the contrapositive law, p → q ≡ ¬q → ¬p. So the two sides of the biconditional are the same proposition, and X ↔ X ≡ T. That is a one-line proof if the law is allowed.</p>
-    <p>By truth table: columns for p → q and ¬q → ¬p are both F, T, T, T, so the biconditional column is T, T, T, T. Both routes give the same verdict, and the table is what to write if the question says "using truth tables".</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Worked example — (p → q) ↔ (¬q → ¬p) is a tautology</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Show that (p → q) ↔ (¬q → ¬p) is a tautology.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>By the contrapositive law, p → q ≡ ¬q → ¬p. So the two sides of the biconditional are the same proposition, and X ↔ X ≡ T. That is a one-line proof if the law is allowed.</p>
+<p>By truth table: columns for p → q and ¬q → ¬p are both F, T, T, T, so the biconditional column is T, T, T, T. Both routes give the same verdict, and the table is what to write if the question says "using truth tables".</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">The implication and its contrapositive have the same truth value in every row. Therefore, the biconditional is true in all four rows and is a tautology.</p>
+</div>
+</div>
 
   <h3>CNF and DNF</h3>
 
@@ -1293,19 +1305,22 @@
     <li>Drop duplicate literals and duplicate clauses, and delete clauses containing q ∨ ¬q (they are T, so they vanish from a conjunction).</li>
   </ol>
 
-  <div class="example">
-    <div class="example-title">Worked example — CNF and DNF of [P → (Q ∧ R)] ∧ [¬P → (¬Q ∧ ¬R)] (IAT sample Q9(ii))</div>
-    <p><strong>Step 2 — remove the arrows.</strong></p>
-    <p>P → (Q ∧ R) ≡ ¬P ∨ (Q ∧ R)</p>
-    <p>¬P → (¬Q ∧ ¬R) ≡ ¬(¬P) ∨ (¬Q ∧ ¬R) ≡ P ∨ (¬Q ∧ ¬R)</p>
-    <p><strong>Step 3 — negations are already on single variables.</strong> Nothing to do.</p>
-    <p><strong>Step 4 — distribute for CNF.</strong></p>
-    <p>¬P ∨ (Q ∧ R) ≡ (¬P ∨ Q) ∧ (¬P ∨ R)</p>
-    <p>P ∨ (¬Q ∧ ¬R) ≡ (P ∨ ¬Q) ∧ (P ∨ ¬R)</p>
-    <div class="eq">CNF: (¬P ∨ Q) ∧ (¬P ∨ R) ∧ (P ∨ ¬Q) ∧ (P ∨ ¬R)</div>
-    <p>Four clauses, each a disjunction, joined by ∧.</p>
-    <p><strong>For the DNF, use the truth table.</strong> Distributing the four clauses into an OR of ANDs is long and error-prone; reading the true rows is reliable.</p>
-    <table>
+  <div class="example qa">
+<div class="example-title">Worked example — CNF and DNF of [P → (Q ∧ R)] ∧ [¬P → (¬Q ∧ ¬R)] (IAT sample Q9(ii))</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Find the conjunctive normal form (CNF) and disjunctive normal form (DNF) of [P → (Q ∧ R)] ∧ [¬P → (¬Q ∧ ¬R)].</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p><strong>Step 2 — remove the arrows.</strong></p>
+<p>P → (Q ∧ R) ≡ ¬P ∨ (Q ∧ R)</p>
+<p>¬P → (¬Q ∧ ¬R) ≡ ¬(¬P) ∨ (¬Q ∧ ¬R) ≡ P ∨ (¬Q ∧ ¬R)</p>
+<p><strong>Step 3 — negations are already on single variables.</strong> Nothing to do.</p>
+<p><strong>Step 4 — distribute for CNF.</strong></p>
+<p>¬P ∨ (Q ∧ R) ≡ (¬P ∨ Q) ∧ (¬P ∨ R)</p>
+<p>P ∨ (¬Q ∧ ¬R) ≡ (P ∨ ¬Q) ∧ (P ∨ ¬R)</p>
+<p>Four clauses, each a disjunction, joined by ∧.</p>
+<p><strong>For the DNF, use the truth table.</strong> Distributing the four clauses into an OR of ANDs is long and error-prone; reading the true rows is reliable.</p>
+<table>
       <tr><th>P</th><th>Q</th><th>R</th><th>P → (Q ∧ R)</th><th>¬P → (¬Q ∧ ¬R)</th><th>Whole</th></tr>
       <tr><td>T</td><td>T</td><td>T</td><td>T</td><td>T</td><td>1</td></tr>
       <tr><td>T</td><td>T</td><td>F</td><td>F</td><td>T</td><td>0</td></tr>
@@ -1316,11 +1331,15 @@
       <tr><td>F</td><td>F</td><td>T</td><td>T</td><td>F</td><td>0</td></tr>
       <tr><td>F</td><td>F</td><td>F</td><td>T</td><td>T</td><td>1</td></tr>
     </table>
-    <p>Only rows 1 and 8 are true, so the DNF has exactly two terms — one matching each true row, with a letter negated where that row has F:</p>
-    <div class="eq">DNF: (P ∧ Q ∧ R) ∨ (¬P ∧ ¬Q ∧ ¬R)</div>
-    <p>Sanity check on the CNF: set P = F, Q = F, R = F. Clause 1 is ¬F ∨ F = T; clause 2 is ¬F ∨ F = T; clause 3 is F ∨ ¬F = T; clause 4 is F ∨ ¬F = T. All four true, so the conjunction is true — and row 8 of the table is indeed 1. Now set P = F, Q = T, R = F: clause 1 is T, clause 2 is T, clause 3 is F ∨ F = F. The conjunction is false, matching row 6. The CNF is right.</p>
-    <p><strong>Exam presentation.</strong> State which one you are producing, show the arrow-removal steps, then the distribution. Write the final answer on its own line, with the outer operator obvious. If you use the truth table for the DNF, say so — "reading the true rows" is a legitimate method and examiners accept it.</p>
-  </div>
+<p>Only rows 1 and 8 are true, so the DNF has exactly two terms — one matching each true row, with a letter negated where that row has F:</p>
+<p>Sanity check on the CNF: set P = F, Q = F, R = F. Clause 1 is ¬F ∨ F = T; clause 2 is ¬F ∨ F = T; clause 3 is F ∨ ¬F = T; clause 4 is F ∨ ¬F = T. All four true, so the conjunction is true — and row 8 of the table is indeed 1. Now set P = F, Q = T, R = F: clause 1 is T, clause 2 is T, clause 3 is F ∨ F = F. The conjunction is false, matching row 6. The CNF is right.</p>
+<p><strong>Exam presentation.</strong> State which one you are producing, show the arrow-removal steps, then the distribution. Write the final answer on its own line, with the outer operator obvious. If you use the truth table for the DNF, say so — "reading the true rows" is a legitimate method and examiners accept it.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<div class="eq">CNF: (¬P ∨ Q) ∧ (¬P ∨ R) ∧ (P ∨ ¬Q) ∧ (P ∨ ¬R)</div>
+<div class="eq">DNF: (P ∧ Q ∧ R) ∨ (¬P ∧ ¬Q ∧ ¬R)</div>
+</div>
+</div>
 
   <div class="theory">
     <span class="source">A note on one bank question</span>
@@ -1397,27 +1416,40 @@
     <p>To negate a quantifier, flip it and negate the inside. "Not all" becomes "some not"; "none" becomes "all not".</p>
   </div>
 
-  <div class="example">
-    <div class="example-title">Worked example — the Java sentence and its negation (teacher's slide 86)</div>
-    <p>"Every student in this class has taken a course in Java." Domain: all people.</p>
-    <p>Predicates: Student(x) — x is a student in this class; Taken(x, y) — x has taken course y; Java is a constant naming the Java course.</p>
-    <div class="eq">∀x (Student(x) → Taken(x, Java))</div>
-    <p><strong>Negation.</strong> Flip the quantifier swap to ∃, then negate the implication:</p>
-    <p>¬∀x (Student(x) → Taken(x, Java))<br>
-    ≡ ∃x ¬(Student(x) → Taken(x, Java)) &nbsp;&nbsp; (negation rule)<br>
-    ≡ ∃x (Student(x) ∧ ¬Taken(x, Java)) &nbsp;&nbsp; (negation of implication)</p>
-    <p>In words: there is at least one student in this class who has not taken Java. That is exactly the English negation. Note that the ∧ appears here for a reason — the ¬ before the implication is what turns → into ∧.</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Worked example — the Java sentence and its negation (teacher's slide 86)</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>"Every student in this class has taken a course in Java." Domain: all people.</p>
+<p>Predicates: Student(x) — x is a student in this class; Taken(x, y) — x has taken course y; Java is a constant naming the Java course.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<div class="eq">∀x (Student(x) → Taken(x, Java))</div>
+<p><strong>Negation.</strong> Flip the quantifier swap to ∃, then negate the implication:</p>
+<div class="eq">¬∀x (Student(x) → Taken(x, Java)) ≡ ∃x ¬(Student(x) → Taken(x, Java)) &nbsp;&nbsp; (negation rule) ≡ ∃x (Student(x) ∧ ¬Taken(x, Java)) &nbsp;&nbsp; (negation of implication)</div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">The negation is ∃x (Student(x) ∧ ¬Taken(x, Java)): at least one student in the class has not taken Java.</p>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Worked example — two sentences from the prelim bank</div>
-    <p>Domain: all people. S(x): x is a student. G(x): x took GenAI. P(x): x passes GenAI.</p>
-    <p><strong>(i) Some students took GenAI.</strong> The word "some" needs ∃ and the two conditions are both asserted, so they join with ∧:</p>
-    <div class="eq">∃x (S(x) ∧ G(x))</div>
-    <p><strong>(ii) Every student who takes GenAI passes it.</strong> "Every … who" makes the student-and-GenAI part a hypothesis, so it becomes the left side of an implication:</p>
-    <div class="eq">∀x ((S(x) ∧ G(x)) → P(x))</div>
-    <p>The ∧ sits <em>inside</em> the hypothesis because "student who takes GenAI" is one combined condition; the → separates it from the conclusion.</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Worked example — two sentences from the prelim bank</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Translate both statements into predicate logic over the domain of all people:</p>
+<p>(i) Some students took GenAI.</p>
+<p>(ii) Every student who takes GenAI passes it.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Domain: all people. S(x): x is a student. G(x): x took GenAI. P(x): x passes GenAI.</p>
+<p>The word "some" needs ∃ and the two conditions are both asserted, so they join with ∧:</p>
+<p>"Every … who" makes the student-and-GenAI part a hypothesis, so it becomes the left side of an implication:</p>
+<p>The ∧ sits <em>inside</em> the hypothesis because "student who takes GenAI" is one combined condition; the → separates it from the conclusion.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<div class="eq">∃x (S(x) ∧ G(x))</div>
+<div class="eq">∀x ((S(x) ∧ G(x)) → P(x))</div>
+</div>
+</div>
 
   <div class="example">
     <div class="example-title">Worked example — three class statements (teacher's slide 87)</div>
