@@ -582,23 +582,38 @@
 
   <p><strong>How to recognise the question.</strong> "Write the power set of A", "find P(A) and its cardinality", "how many subsets does A have". They are the same task. The trap is always the two sets people forget: ∅ and A itself.</p>
 
-  <div class="example">
-    <div class="example-title">Worked example — the power set of a three-element set</div>
-    <p>A = {a, b, c}, so |A| = 3 and P(A) must have 2<sup>3</sup> = 8 members. Build them by size, which guarantees nothing is missed or repeated:</p>
-    <p><strong>0 elements:</strong> ∅</p>
-    <p><strong>1 element:</strong> {a}, {b}, {c}</p>
-    <p><strong>2 elements:</strong> {a, b}, {a, c}, {b, c}</p>
-    <p><strong>3 elements:</strong> {a, b, c}</p>
-    <div class="eq">P(A) = { ∅, {a}, {b}, {c}, {a,b}, {a,c}, {b,c}, {a,b,c} }</div>
-    <p>Each of the eight is a subset of A, and each is written as a set inside the outer brackets. Count: 1 + 3 + 3 + 1 = 8. ✓</p>
-    <p><strong>Exam presentation.</strong> Write the count 2<sup>3</sup> = 8 first, group the subsets by size, then present the final set. The grouping is what shows the examiner you checked.</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Worked example — the power set of a three-element set</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Find the power set P(A) and its cardinality for A = {a, b, c}.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>A = {a, b, c}, so |A| = 3 and P(A) must have 2<sup>3</sup> = 8 members. Build them by size, which guarantees nothing is missed or repeated:</p>
+<p><strong>0 elements:</strong> ∅</p>
+<p><strong>1 element:</strong> {a}, {b}, {c}</p>
+<p><strong>2 elements:</strong> {a, b}, {a, c}, {b, c}</p>
+<p><strong>3 elements:</strong> {a, b, c}</p>
+<p>Each of the eight is a subset of A, and each is written as a set inside the outer brackets. Count: 1 + 3 + 3 + 1 = 8. ✓</p>
+<p><strong>Exam presentation.</strong> Write the count 2<sup>3</sup> = 8 first, group the subsets by size, then present the final set. The grouping is what shows the examiner you checked.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<div class="eq">P(A) = { ∅, {a}, {b}, {c}, {a,b}, {a,c}, {b,c}, {a,b,c} }</div>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Worked example — the two edge cases that get asked</div>
-    <p>For A = ∅: the only subset of ∅ is ∅ itself, so P(∅) = {∅} and |P(∅)| = 2<sup>0</sup> = 1. Note that ∅ ≠ {∅}: the left has no elements, the right has one.</p>
-    <p>For A = {∅}: its subsets are ∅ and {∅}, so P({∅}) = {∅, {∅}} and |P({∅})| = 2. The pattern continues: |P(P(∅))| = 2<sup>1</sup> = 2, and so on.</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Worked example — the two edge cases that get asked</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Find the power sets and cardinalities of A = ∅ and A = {∅}. Explain the difference between ∅ and {∅}.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>For A = ∅: the only subset of ∅ is ∅ itself, so P(∅) = {∅} and |P(∅)| = 2<sup>0</sup> = 1. Note that ∅ ≠ {∅}: the left has no elements, the right has one.</p>
+<p>For A = {∅}: its subsets are ∅ and {∅}, so P({∅}) = {∅, {∅}} and |P({∅})| = 2. The pattern continues: |P(P(∅))| = 2<sup>1</sup> = 2, and so on.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">P(∅) = {∅} and |P(∅)| = 1. P({∅}) = {∅, {∅}} and |P({∅})| = 2.</p>
+</div>
+</div>
 
   <div class="common-mistakes">
     <h3>Common mistakes</h3>
@@ -682,27 +697,40 @@
 
   <p>A membership table is the set-theory version of a truth table. It records, for each possible combination of "x is in A", "x is in B", whether x is in each expression. Write 1 for "in" and 0 for "not in". Two expressions are equal exactly when their columns match in every row.</p>
 
-  <div class="example">
-    <div class="example-title">Worked example — proving De Morgan's law with a membership table</div>
-    <p>Claim: (A ∪ B)′ = A′ ∩ B′ for all sets A, B inside a universal set U. An arbitrary element x either lies in A or not, and either lies in B or not, so there are four cases.</p>
-    <table>
+  <div class="example qa">
+<div class="example-title">Worked example — proving De Morgan's law with a membership table</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Prove De Morgan’s law: (A ∪ B)′ = A′ ∩ B′, using a membership table.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<table>
       <tr><th>A</th><th>B</th><th>A ∪ B</th><th>(A ∪ B)′</th><th>A′</th><th>B′</th><th>A′ ∩ B′</th></tr>
       <tr><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
       <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
       <tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
       <tr><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
     </table>
-    <p>The fourth column and the last column are identical in all four rows, so (A ∪ B)′ and A′ ∩ B′ are the same set. That is the proof.</p>
-    <p><strong>Exam presentation.</strong> Label the columns with the expressions, not with A and B only. Then write one sentence: "Columns 4 and 7 agree in every row, hence the sets are equal." Without that sentence the table proves nothing.</p>
-  </div>
+<p><strong>Exam presentation.</strong> Label the columns with the expressions, not with A and B only. Then write one sentence: "Columns 4 and 7 agree in every row, hence the sets are equal." Without that sentence the table proves nothing.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p>The fourth column and the last column are identical in all four rows, so (A ∪ B)′ and A′ ∩ B′ are the same set. That is the proof.</p>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Worked example — the same law checked numerically</div>
-    <p>U = {1, 2, …, 10}, A = {2, 3, 4, 5, 6}, B = {5, 6, 7}.</p>
-    <p>A ∪ B = {2, 3, 4, 5, 6, 7}, so (A ∪ B)′ = {1, 8, 9, 10}.</p>
-    <p>A′ = {1, 7, 8, 9, 10} and B′ = {1, 2, 3, 4, 8, 9, 10}, so A′ ∩ B′ = {1, 8, 9, 10}.</p>
-    <p>Same set. A single numerical check never proves a law, but it catches almost every algebra slip, and it is a cheap way to earn the last mark on a "verify" question.</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Worked example — the same law checked numerically</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>For U = {1, 2, …, 10}, A = {2, 3, 4, 5, 6} and B = {5, 6, 7}, verify that (A ∪ B)′ = A′ ∩ B′.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>A ∪ B = {2, 3, 4, 5, 6, 7}, so (A ∪ B)′ = {1, 8, 9, 10}.</p>
+<p>A′ = {1, 7, 8, 9, 10} and B′ = {1, 2, 3, 4, 8, 9, 10}, so A′ ∩ B′ = {1, 8, 9, 10}.</p>
+<p>Same set. A single numerical check never proves a law, but it catches almost every algebra slip, and it is a cheap way to earn the last mark on a "verify" question.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">(A ∪ B)′ = A′ ∩ B′ = {1, 8, 9, 10}. This numerical example verifies the identity for these sets; it is not a general proof.</p>
+</div>
+</div>
 
   <figure class="dsgt-diagram">
 <svg id="dsgt-d2-de-morgan" viewBox="0 0 360 290" role="img" aria-labelledby="d2-t d2-d" font-family="inherit">
@@ -753,17 +781,24 @@
     <li>|P(A × B)| = 2<sup>|A||B|</sup>, the number of relations from A to B.</li>
   </ol>
 
-  <div class="example">
-    <div class="example-title">Worked example — A × B, B × A, and their difference (IAT sample Q13)</div>
-    <p>A = {1, 3, 5}, B = {2, 3, 8}. Each product has 3 × 3 = 9 pairs.</p>
-    <p><strong>A × B</strong> — fix the first coordinate and run through B:</p>
-    <div class="eq">{(1,2), (1,3), (1,8), (3,2), (3,3), (3,8), (5,2), (5,3), (5,8)}</div>
-    <p><strong>B × A</strong> — the same work with the roles swapped:</p>
-    <div class="eq">{(2,1), (2,3), (2,5), (3,1), (3,3), (3,5), (8,1), (8,3), (8,5)}</div>
-    <p><strong>(A × B) − (B × A)</strong> — remove from the first list every pair that also appears in the second. A pair (x, y) is in both only if x and y are each in both A and B, and here A ∩ B = {3}. So the only common pair is (3, 3), which leaves 9 − 1 = 8 pairs:</p>
-    <div class="eq">{(1,2), (1,3), (1,8), (3,2), (3,8), (5,2), (5,3), (5,8)}</div>
-    <p><strong>Exam presentation.</strong> Write the products as two neat blocks of nine, then cross out the shared pairs visibly. The crossing-out is the reasoning, and it is worth marks.</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Worked example — A × B, B × A, and their difference (IAT sample Q13)</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Given A = {1, 3, 5} and B = {2, 3, 8}, find A × B, B × A and (A × B) − (B × A).</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>A = {1, 3, 5}, B = {2, 3, 8}. Each product has 3 × 3 = 9 pairs.</p>
+<p><strong>A × B</strong> — fix the first coordinate and run through B:</p>
+<p><strong>B × A</strong> — the same work with the roles swapped:</p>
+<p><strong>(A × B) − (B × A)</strong> — remove from the first list every pair that also appears in the second. A pair (x, y) is in both only if x and y are each in both A and B, and here A ∩ B = {3}. So the only common pair is (3, 3), which leaves 9 − 1 = 8 pairs:</p>
+<p><strong>Exam presentation.</strong> Write the products as two neat blocks of nine, then cross out the shared pairs visibly. The crossing-out is the reasoning, and it is worth marks.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<div class="eq">{(1,2), (1,3), (1,8), (3,2), (3,3), (3,8), (5,2), (5,3), (5,8)}</div>
+<div class="eq">{(2,1), (2,3), (2,5), (3,1), (3,3), (3,5), (8,1), (8,3), (8,5)}</div>
+<div class="eq">{(1,2), (1,3), (1,8), (3,2), (3,8), (5,2), (5,3), (5,8)}</div>
+</div>
+</div>
 
   <h3>Partitions</h3>
 

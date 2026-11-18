@@ -143,3 +143,10 @@ Optional additions only (not required, and not to be done unless asked):
 - **Completed: 21/21 units.** All 17 worked examples and all 4 previous end-semester questions now use the exact Question / Solution / Final Answer markup and CSS from Module IV. Existing wording, workings and conclusions were preserved.
 - Module V's equation CSS now matches Module IV's no-wrap rule; long equations scroll horizontally on narrow screens. The mobile `overflow-wrap: anywhere` override was removed.
 - **Module V formatting pass complete:** all worked examples and previous end-semester questions use the Module IV Question / Solution / Final Answer structure. Continue with the next DSGT module only after fetching its latest state.
+
+
+## Module I — Question / Solution / Final Answer formatting
+
+- Repository audit found 29 existing worked-example containers and 3 past-paper question containers (32 formatting units). This is a fresh repository count; the older “30 remaining” note was only a historical agent estimate.
+- **Completed: 5/32 units.** Worked Examples 1–5 now use Module IV's exact Question / Solution / Final Answer markup and CSS. All existing explanations, tables and results were retained.
+- **Next:** Worked Examples 6–10. Commit and verify after each five units.
