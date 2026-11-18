@@ -430,6 +430,16 @@
   .rail a.is-done .node { background:var(--muted); border-color:var(--muted); }
   .rail .num { font:600 .62rem/1 var(--font-mono); letter-spacing:.04em; font-variant-numeric:tabular-nums; }
   .rail .lbl { display:none; font-size:.74rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:14rem; }
+  .rail-sublist { list-style:none; margin:0 0 .3rem 1.65rem; padding:0 0 0 .55rem; border-left:1px solid var(--line); }
+  .rail-sublist a { grid-template-columns:1rem minmax(0,1fr); column-gap:.3rem; height:1.2rem; padding-left:.1rem; }
+  .rail-sublist .sub-lbl { display:block; font-size:.68rem; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .rail-sublist .sub-num { font:600 .62rem/1 var(--font-mono); color:var(--accent); }
+  .rail-sublist a[aria-current="location"] { color:var(--accent); font-weight:700; }
+  .rail.is-collapsed .rail-sublist { display:none; }
+  .rm-sublist { margin:0 0 .35rem 2.65rem !important; padding:.15rem 0 .25rem .65rem !important; border-left:1px solid var(--line); }
+  .rm-sublist a { grid-template-columns:1.1rem minmax(0,1fr); min-height:34px; padding:.25rem .5rem; border-left:0; font-size:.84rem; }
+  .rm-sublist a[aria-current="location"] { color:var(--accent); background:var(--accent-soft); }
+
   .rail a:hover { color:var(--ink); }
   .rail a:hover .node { border-color:var(--ink); }
   .rail a[aria-current="true"] { color:var(--ink); }
@@ -454,6 +464,12 @@
   @media (prefers-reduced-motion:reduce) {
     .rm-sheet, .rm-back, .rm-tab span, .rail-in { transition:none; }
   }
+  /* Show children only for the section currently being read. */
+  .rail-list > li > .rail-sublist { display:none; }
+  .rail-list > li > a[aria-current="true"] ~ .rail-sublist { display:block; }
+  .rail.is-collapsed .rail-list > li > .rail-sublist { display:none; }
+  .rm-sheet > ol > li > .rm-sublist { display:none; }
+  .rm-sheet > ol > li > a[aria-current="true"] ~ .rm-sublist { display:block; }
   @media print { .rail, .rm-bar, .rm-tab, .rm-back, .rm-sheet { display:none !important; } }
 
 </style>
@@ -559,7 +575,7 @@
     <p>A <strong>loop</strong> is an edge from a vertex to itself. <strong>Multiple edges</strong> are two or more edges joining the same pair of vertices. A graph with neither is <strong>simple</strong>.</p>
   </div>
 
-  <h3>The Handshaking Lemma</h3>
+  <h3 id="handshaking" data-rail-subsection data-rail-label="Handshaking Lemma">The Handshaking Lemma</h3>
   <div class="eq">Σ deg(v) = 2|E|</div>
   <p class="eq-note">Each edge has two ends, so it adds 1 to the degree of each endpoint — two in total. A loop adds 2 to one vertex, which is still two ends.</p>
   <p>One consequence is used constantly in exams: the number of vertices with odd degree is always even. If a question hands you a degree list with an odd number of odd degrees, no such graph exists.</p>
@@ -642,7 +658,7 @@
     </div>
   </div>
 
-  <h3>Standard Graph Families</h3>
+  <h3 id="graph-families" data-rail-subsection data-rail-label="Standard Families">Standard Graph Families</h3>
   <table>
     <tr><th>Name</th><th>Definition</th><th>Example</th></tr>
     <tr><td><strong>Simple graph</strong></td><td>No loops and no multiple edges.</td><td>A triangle.</td></tr>
@@ -737,7 +753,7 @@
     <p>Throughout this section the example graph is <span class="kbd">G = (V, E)</span> with <span class="kbd">V = {1, 2, 3, 4}</span> and <span class="kbd">E = {12, 13, 24, 34}</span>. It is a 4-cycle drawn as <span class="kbd">1–2–4–3–1</span>, and every vertex has degree 2.</p>
   </div>
 
-  <h3>Adjacency List</h3>
+  <h3 id="adjacency-list" data-rail-subsection>Adjacency List</h3>
   <p>For each vertex, list its neighbours. The total length of all lists is <span class="kbd">2|E|</span> in an undirected graph, so the storage is proportional to the number of edges.</p>
   <table>
     <tr><th>Vertex</th><th>Neighbours</th><th>Degree</th></tr>
@@ -747,7 +763,7 @@
     <tr><td>4</td><td>2, 3</td><td>2</td></tr>
   </table>
 
-  <h3>Adjacency Matrix</h3>
+  <h3 id="adjacency-matrix" data-rail-subsection>Adjacency Matrix</h3>
   <p><span class="kbd">A</span> is a <span class="kbd">|V| × |V|</span> matrix. For a simple graph, <span class="kbd">aᵢⱼ = 1</span> when <span class="kbd">i</span> and <span class="kbd">j</span> are adjacent, and 0 otherwise. The row sum is the degree, and the matrix is symmetric about the main diagonal.</p>
   <table>
     <tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th></tr>
@@ -757,7 +773,7 @@
     <tr><td><strong>4</strong></td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
   </table>
 
-  <h3>Incidence Matrix</h3>
+  <h3 id="incidence-matrix" data-rail-subsection>Incidence Matrix</h3>
   <p><span class="kbd">B</span> is a <span class="kbd">|V| × |E|</span> matrix with one column per edge. For an undirected graph, put 1 in the two rows of the edge’s endpoints and 0 elsewhere. Every column therefore contains exactly two 1s.</p>
   <table>
     <tr><th></th><th>e₁ = 12</th><th>e₂ = 13</th><th>e₃ = 24</th><th>e₄ = 34</th></tr>
@@ -838,7 +854,7 @@
     </div>
   </div>
 
-  <h3>Operations on Graphs</h3>
+  <h3 id="graph-operations" data-rail-subsection>Operations on Graphs</h3>
   <table>
     <tr><th>Operation</th><th>Vertex set</th><th>Edge set</th></tr>
     <tr><td><strong>Union</strong> <span class="kbd">G₁ ∪ G₂</span></td><td><span class="kbd">V₁ ∪ V₂</span></td><td><span class="kbd">E₁ ∪ E₂</span></td></tr>
@@ -1118,7 +1134,7 @@
     <p>The two problems look similar and are tested completely differently. Euler has a clean degree test. Hamiltonian has no simple test that works for every graph.</p>
   </div>
 
-  <h3>Euler’s Theorem</h3>
+  <h3 id="euler-theorem" data-rail-subsection>Euler's Theorem</h3>
   <div class="theory">
     <p>Suppose all edges of <span class="kbd">G</span> lie in one connected component — isolated vertices are ignored. Then:</p>
     <ul>
@@ -1213,7 +1229,7 @@
     </div>
   </div>
 
-  <h3>Hamiltonian Graphs</h3>
+  <h3 id="hamiltonian-graphs" data-rail-subsection>Hamiltonian Graphs</h3>
   <div class="theory">
     <p>A Hamiltonian cycle uses every vertex exactly once and returns to the start. Unlike Euler’s problem, there is no degree condition that is both necessary and sufficient. You test by construction or by finding a structural obstruction.</p>
     <p><strong>Necessary conditions</strong> are useful for saying “no”:</p>
@@ -1297,7 +1313,7 @@
     <p>A <strong>plane graph</strong> is a planar graph together with a crossing-free drawing. The same planar graph can have different faces in different drawings, but the number of faces is fixed.</p>
   </div>
 
-  <h3>Euler’s Formula for Planar Graphs</h3>
+  <h3 id="planar-euler" data-rail-subsection data-rail-label="Euler's Formula">Euler's Formula for Planar Graphs</h3>
   <div class="eq">V − E + F = 2</div>
   <p class="eq-note">For a connected plane graph. <span class="kbd">V</span> = vertices, <span class="kbd">E</span> = edges, <span class="kbd">F</span> = faces including the outer face. If the graph has <span class="kbd">c</span> components, the formula becomes <span class="kbd">V − E + F = 1 + c</span>.</p>
   <p>The <strong>degree of a face</strong> is the number of edge-sides on its boundary; a bridge is counted twice because both sides border the same face. Summing over all faces counts every edge twice:</p>
@@ -1814,7 +1830,7 @@
       <tr><td>Cuts</td><td><span class="kbd">κ(G) ≤ λ(G) ≤ δ(G)</span>.</td></tr>
     </table>
 
-    <h3>Decision checklist</h3>
+    <h3 id="decision-checklist" data-rail-subsection>Decision checklist</h3>
     <ol class="steps">
       <li><strong>Euler?</strong> Count odd degrees. 0 → circuit; 2 → trail between them; 4 or more → neither.</li>
       <li><strong>Hamiltonian?</strong> Try to build a cycle. If you cannot, look for a cut vertex or an unbalanced bipartition.</li>
@@ -1874,15 +1890,36 @@
 </script>
 
 <script>
-
 (function(){
   var hs=[].slice.call(document.querySelectorAll('.wrap h2[id]'));
+  var subHeads=[].slice.call(document.querySelectorAll('.wrap [data-rail-subsection][id]'));
   if(!hs.length)return;
   function pad(n){return (n<10?'0':'')+n;}
   function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
   var names=hs.map(function(h){return h.textContent.trim();});
+  var subGroups=hs.map(function(){return [];});
+  var sectionIndex=-1;
+  Array.prototype.forEach.call(document.querySelectorAll('.wrap h2[id], .wrap [data-rail-subsection][id]'),function(h){
+    if(h.tagName==='H2'){sectionIndex=hs.indexOf(h);}
+    else if(sectionIndex>=0)subGroups[sectionIndex].push(h);
+  });
 
-  /* wide screens: margin rail */
+  function makeSublist(parentLi,mobile,headings){
+    if(!headings.length)return [];
+    var list=el('ol',mobile?'rm-sublist':'rail-sublist');
+    var children=headings.map(function(h,i){
+      var li=el('li'),a=el('a',mobile?'rm-sub-link':'rail-sub-link');
+      var label=h.getAttribute('data-rail-label')||h.textContent.trim();
+      a.href='#'+h.id;a.title=label;
+      a.appendChild(el('span',mobile?'rm-k':'sub-num',String.fromCharCode(65+i)));
+      a.appendChild(el('span',mobile?'rm-sub-label':'sub-lbl',label));
+      li.appendChild(a);list.appendChild(li);
+      return {a:a,heading:h,done:false,top:0,mobile:null};
+    });
+    parentLi.appendChild(list);return children;
+  }
+
+  /* Wide screens: nested subsection links below their parent sections. */
   var nav=el('nav','rail');nav.setAttribute('aria-label','Section progress');
   var inn=el('div','rail-in'),top=el('div','rail-top'),sec=el('span','rail-sec','01'),meta=el('span','rail-meta');
   var pct=el('b',null,'0%');meta.appendChild(el('span',null,'of '+pad(hs.length)));meta.appendChild(pct);
@@ -1894,11 +1931,12 @@
     var li=el('li'),a=el('a'),nd=el('span','node');
     a.href='#'+h.id;a.title=names[i];nd.setAttribute('aria-hidden','true');
     a.appendChild(nd);a.appendChild(el('span','num',pad(i+1)));a.appendChild(el('span','lbl',names[i]));
-    li.appendChild(a);ol.appendChild(li);return {a:a,nd:nd,p:-1,done:false};
+    li.appendChild(a);var children=makeSublist(li,false,subGroups[i]);
+    ol.appendChild(li);return {a:a,nd:nd,p:-1,done:false,subs:children};
   });
   inn.appendChild(top);inn.appendChild(ol);nav.appendChild(inn);document.body.appendChild(nav);
 
-  /* phones and tablets: current-section line, edge tab, bottom sheet */
+  /* Phones and tablets: keep the same nested tree in the section sheet. */
   var bar=el('div','rm-bar');bar.setAttribute('aria-hidden','true');
   var tab=el('button','rm-tab');tab.type='button';tab.setAttribute('aria-haspopup','dialog');tab.setAttribute('aria-expanded','false');
   var tn=el('span',null,'01');tab.appendChild(tn);
@@ -1907,15 +1945,23 @@
   var sol=el('ol');
   var mitems=hs.map(function(h,i){
     var li=el('li'),a=el('a');a.href='#'+h.id;a.appendChild(el('span','rm-k',pad(i+1)));a.appendChild(el('span',null,names[i]));
-    li.appendChild(a);sol.appendChild(li);a.addEventListener('click',function(){setSheet(false);});return a;
+    li.appendChild(a);var children=makeSublist(li,true,subGroups[i]);
+    sol.appendChild(li);a.addEventListener('click',function(){setSheet(false);});
+    children.forEach(function(child){child.mobile=child.a;child.a.addEventListener('click',function(){setSheet(false);});});
+    return {a:a,subs:children};
   });
+  items.forEach(function(item,i){item.subs.forEach(function(child,j){child.mobile=mitems[i].subs[j].a;});});
   sheet.appendChild(sh);sheet.appendChild(sol);
   [bar,tab,back,sheet].forEach(function(n){document.body.appendChild(n);});
-  var moveT;
+  var moveT,cur=-2,currentSubItem=null,tick=false,centers=null,tops=[],end=0;
+
   function setSheet(o,refocus){
     document.body.classList.toggle('rm-open',o);tab.setAttribute('aria-expanded',String(o));
-    if(o){var c=mitems[cur>=0?cur:0];sheet.scrollTop=Math.max(0,c.offsetTop-sheet.clientHeight/3);try{c.focus({preventScroll:true});}catch(e){}}
-    else if(refocus){tab.focus();}
+    if(o){
+      var target=currentSubItem?currentSubItem.mobile:mitems[cur>=0?cur:0].a;
+      sheet.scrollTop+=target.getBoundingClientRect().top-sheet.getBoundingClientRect().top-sheet.clientHeight/3;
+      try{target.focus({preventScroll:true});}catch(e){}
+    }else if(refocus){tab.focus();}
   }
   tab.addEventListener('click',function(){setSheet(!document.body.classList.contains('rm-open'));});
   back.addEventListener('click',function(){setSheet(false);});
@@ -1932,34 +1978,55 @@
   }
   tg.addEventListener('click',function(){open=!open;try{localStorage.setItem('sg-rail',open?'o':'c');}catch(e){}paintToggle();});
 
-  var tops=[],end=0,cur=-2,tick=false,centers=null;
   function measure(){
-    var y=scrollY;tops=hs.map(function(h){return h.getBoundingClientRect().top+y;});
+    var y=scrollY;
+    tops=hs.map(function(h){return h.getBoundingClientRect().top+y;});
+    items.forEach(function(item){item.subs.forEach(function(child){child.top=child.heading.getBoundingClientRect().top+y;});});
     end=document.querySelector('.wrap').getBoundingClientRect().bottom+y;
   }
-  function measureCenters(){centers=items.map(function(it){var li=it.a.parentNode;return li.offsetTop+li.offsetHeight/2;});}
+  function measureCenters(){centers=items.map(function(it){return it.a.offsetTop+it.a.offsetHeight/2;});}
   function update(){
     tick=false;
     if(!centers)measureCenters();
-    var y=scrollY+innerHeight*0.25,c=-1,max=document.documentElement.scrollHeight-innerHeight;
+    var y=scrollY+innerHeight*.25,c=-1,max=document.documentElement.scrollHeight-innerHeight;
     var pv=Math.round(Math.max(0,Math.min(1,max>0?scrollY/max:0))*100);pct.textContent=pv+'%';shp.textContent=pv+'%';
     items.forEach(function(it,i){
       var nx=i+1<tops.length?tops[i+1]:end,p=Math.max(0,Math.min(1,(y-tops[i])/Math.max(1,nx-tops[i])));
       if(y>=tops[i])c=i;
       p=Math.round(p*100)/100;
       if(p!==it.p){it.p=p;it.nd.style.setProperty('--p',p);}
-      var d=y>=nx;if(d!==it.done){it.done=d;it.a.classList.toggle('is-done',d);mitems[i].classList.toggle('is-done',d);}
+      var d=y>=nx;if(d!==it.done){it.done=d;it.a.classList.toggle('is-done',d);mitems[i].a.classList.toggle('is-done',d);}
     });
     if(c<0)c=0;
     bar.style.setProperty('--w',Math.round(items[c].p*100)+'%');
-    var f=centers[c]+(c+1<centers.length?(centers[c+1]-centers[c])*items[c].p:0);
-    if(y<tops[0])f=centers[0]*Math.max(0,Math.min(1,y/Math.max(1,tops[0])));
-    ol.style.setProperty('--fill',f.toFixed(1)+'px');
-    if(c!==cur){
-      if(cur>=0){items[cur].a.removeAttribute('aria-current');mitems[cur].removeAttribute('aria-current');}
+    var fillPosition=centers[c]+(c+1<centers.length?(centers[c+1]-centers[c])*items[c].p:0);
+    if(y<tops[0])fillPosition=centers[0]*Math.max(0,Math.min(1,y/Math.max(1,tops[0])));
+    ol.style.setProperty('--fill',fillPosition.toFixed(1)+'px');
+    var sectionChanged=c!==cur;
+    if(sectionChanged){
+      if(cur>=0){items[cur].a.removeAttribute('aria-current');mitems[cur].a.removeAttribute('aria-current');}
       cur=c;sec.textContent=pad(c+1);tn.textContent=pad(c+1);
       tab.setAttribute('aria-label','Sections. Now reading '+pad(c+1)+', '+names[c]);
-      items[c].a.setAttribute('aria-current','true');mitems[c].setAttribute('aria-current','true');
+      items[c].a.setAttribute('aria-current','true');mitems[c].a.setAttribute('aria-current','true');
+    }
+
+    var activeSub=null;
+    items[c].subs.forEach(function(child,j){
+      var nx=j+1<items[c].subs.length?items[c].subs[j+1].top:(c+1<tops.length?tops[c+1]:end);
+      var done=y>=nx,active=y>=child.top&&y<nx;
+      if(done!==child.done){child.done=done;child.a.classList.toggle('is-done',done);child.mobile.classList.toggle('is-done',done);}
+      if(active)activeSub=child;
+    });
+    if(activeSub!==currentSubItem){
+      if(currentSubItem){currentSubItem.a.removeAttribute('aria-current');currentSubItem.mobile.removeAttribute('aria-current');}
+      currentSubItem=activeSub;
+      if(currentSubItem){
+        currentSubItem.a.setAttribute('aria-current','location');currentSubItem.mobile.setAttribute('aria-current','location');
+        var childRect=currentSubItem.a.getBoundingClientRect(),listRect=ol.getBoundingClientRect();
+        if(childRect.top<listRect.top||childRect.bottom>listRect.bottom)ol.scrollTop+=childRect.top-listRect.top-listRect.height/2;
+      }
+    }
+    if(sectionChanged&&!activeSub){
       var a=items[c].a,r=a.getBoundingClientRect(),lr=ol.getBoundingClientRect();
       if(r.top<lr.top||r.bottom>lr.bottom)ol.scrollTop+=r.top-lr.top-lr.height/2;
     }
@@ -1972,7 +2039,6 @@
   addEventListener('load',function(){measure();centers=null;req();});
   paintToggle();measure();update();
 })();
-
 </script>
 </body>
 </html>
