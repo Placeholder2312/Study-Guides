@@ -140,6 +140,6 @@ Optional additions only (not required, and not to be done unless asked):
 ## Module V — Question / Solution / Final Answer formatting
 
 - Latest audited checkpoint: 17 existing worked examples and 4 previous end-semester questions (21 formatting units). No questions have been added or removed.
-- **Completed: 20/21 units.** Worked Examples 1–17 and previous-paper questions 1–3 now use the exact Question / Solution / Final Answer markup and CSS from Module IV. Existing wording, workings and conclusions were preserved.
+- **Completed: 21/21 units.** All 17 worked examples and all 4 previous end-semester questions now use the exact Question / Solution / Final Answer markup and CSS from Module IV. Existing wording, workings and conclusions were preserved.
 - Module V's equation CSS now matches Module IV's no-wrap rule; long equations scroll horizontally on narrow screens. The mobile `overflow-wrap: anywhere` override was removed.
-- **Next checkpoint:** Previous-paper question 4. Commit and verify after this final unit.
+- **Module V formatting pass complete:** all worked examples and previous end-semester questions use the Module IV Question / Solution / Final Answer structure. Continue with the next DSGT module only after fetching its latest state.
