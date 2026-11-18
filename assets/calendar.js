@@ -1,4 +1,4 @@
-/* Home-page calendar: this month and next, today highlighted.
+/* Home-page calendar: this month and next, today highlighted, exam dates marked.
    Built from the visitor's device date, so it never needs updating by hand. */
 (function () {
   var host = document.getElementById('calendar');
@@ -9,6 +9,25 @@
   // Weeks start on Monday.
   var DAYS = [['Mon', 'Monday'], ['Tue', 'Tuesday'], ['Wed', 'Wednesday'], ['Thu', 'Thursday'],
     ['Fri', 'Friday'], ['Sat', 'Saturday'], ['Sun', 'Sunday']];
+  var SEMESTERS = ['I', 'II', 'III'];
+
+  // Exam dates as YYYY-MM-DD. `sem` is the semester number (1, 2 or 3).
+  // Every subject in the same semester gets the same highlight style.
+  var EXAMS = [
+    { date: '2026-11-19', sem: 3, name: 'DSGT' },
+    { date: '2026-11-21', sem: 3, name: 'AOA' },
+    { date: '2026-11-25', sem: 3, name: 'COA' },
+    { date: '2026-11-27', sem: 3, name: 'OE' },
+    { date: '2026-12-04', sem: 2, name: 'Maths' },
+    { date: '2026-12-10', sem: 1, name: 'Physics' },
+    { date: '2026-12-11', sem: 2, name: 'Physics' },
+    { date: '2026-12-16', sem: 1, name: 'Mechanics' },
+    { date: '2026-12-18', sem: 1, name: 'BEEE' }
+  ];
+  var byDate = {};
+  EXAMS.forEach(function (e) {
+    (byDate[e.date] = byDate[e.date] || []).push(e);
+  });
 
   function el(tag, cls, text) {
     var n = document.createElement(tag);
@@ -51,11 +70,19 @@
         continue;
       }
       var day = i - lead + 1;
+      var dateKey = iso(year, month, day);
       var cell = el('td', 'day', day);
-      cell.setAttribute('data-date', iso(year, month, day));
+      cell.setAttribute('data-date', dateKey);
       if (year === now.getFullYear() && month === now.getMonth() && day === now.getDate()) {
         cell.className += ' today';
         cell.setAttribute('aria-current', 'date');
+      }
+      var exams = byDate[dateKey];
+      if (exams) {
+        cell.className += ' exam sem-' + exams[0].sem;
+        cell.appendChild(el('span', 'sr-only', ', ' + exams.map(function (e) {
+          return e.name + ' exam';
+        }).join(', ')));
       }
       row.appendChild(cell);
     }
@@ -66,9 +93,57 @@
     return box;
   }
 
+  function legendItem(cls, label) {
+    var li = el('li');
+    li.appendChild(el('span', 'sw ' + cls));
+    li.appendChild(document.createTextNode(label));
+    return li;
+  }
+
+  // Legend (what each highlight means) and the list of exams in the months shown.
+  function buildKey(key, months) {
+    var shown = months.map(function (d) {
+      return iso(d.getFullYear(), d.getMonth(), 1).slice(0, 7);
+    });
+    var list = EXAMS.filter(function (e) {
+      return shown.indexOf(e.date.slice(0, 7)) !== -1;
+    }).sort(function (a, b) {
+      return a.date < b.date ? -1 : a.date > b.date ? 1 : 0;
+    });
+
+    var legend = el('ul', 'cal-legend');
+    legend.appendChild(legendItem('today', 'Today'));
+    [1, 2, 3].forEach(function (s) {
+      var used = list.some(function (e) { return e.sem === s; });
+      if (used) legend.appendChild(legendItem('sem-' + s, 'Semester ' + SEMESTERS[s - 1]));
+    });
+    key.appendChild(legend);
+
+    if (!list.length) return;
+    key.appendChild(el('h3', 'num', 'Exams'));
+    var ul = el('ul', 'cal-exams');
+    list.forEach(function (e) {
+      var p = e.date.split('-');
+      var d = new Date(+p[0], +p[1] - 1, +p[2]);
+      var when = DAYS[(d.getDay() + 6) % 7][0] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()].slice(0, 3);
+      var li = el('li');
+      li.appendChild(el('span', 'sw sem-' + e.sem, d.getDate()));
+      var txt = el('span');
+      txt.appendChild(el('span', 'ex-name', e.name));
+      txt.appendChild(el('span', 'ex-meta', 'Semester ' + SEMESTERS[e.sem - 1] + ' · ' + when));
+      li.appendChild(txt);
+      ul.appendChild(li);
+    });
+    key.appendChild(ul);
+  }
+
   var now = new Date();
+  var months = [];
   for (var m = 0; m < 2; m++) {
     var first = new Date(now.getFullYear(), now.getMonth() + m, 1);
+    months.push(first);
     host.appendChild(buildMonth(first.getFullYear(), first.getMonth(), now));
   }
+  var keyHost = document.getElementById('calendar-key');
+  if (keyHost) buildKey(keyHost, months);
 })();
