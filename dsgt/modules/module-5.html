@@ -1068,10 +1068,14 @@
     <figcaption>Each ring of the diagram adds one condition. A field needs a multiplicative identity and an inverse for every non-zero element.</figcaption>
   </figure>
 
-  <div class="example">
-    <div class="example-title">Teacher’s Example A: A = {0, 2, 4, 6, 8} under addition and multiplication modulo 10</div>
-    <p>Addition table (+₁₀):</p>
-    <table>
+  <div class="example qa">
+<div class="example-title">Teacher’s Example A: A = {0, 2, 4, 6, 8} under addition and multiplication modulo 10</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Determine whether the algebraic system with A = {0, 2, 4, 6, 8}, under addition and multiplication modulo 10, is a ring.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Addition table (+₁₀):</p>
+<table>
       <tr><th>+₁₀</th><th>0</th><th>2</th><th>4</th><th>6</th><th>8</th></tr>
       <tr><td>0</td><td>0</td><td>2</td><td>4</td><td>6</td><td>8</td></tr>
       <tr><td>2</td><td>2</td><td>4</td><td>6</td><td>8</td><td>0</td></tr>
@@ -1079,8 +1083,8 @@
       <tr><td>6</td><td>6</td><td>8</td><td>0</td><td>2</td><td>4</td></tr>
       <tr><td>8</td><td>8</td><td>0</td><td>2</td><td>4</td><td>6</td></tr>
     </table>
-    <p>Multiplication table (·₁₀):</p>
-    <table>
+<p>Multiplication table (·₁₀):</p>
+<table>
       <tr><th>·₁₀</th><th>0</th><th>2</th><th>4</th><th>6</th><th>8</th></tr>
       <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
       <tr><td>2</td><td>0</td><td>4</td><td>8</td><td>2</td><td>6</td></tr>
@@ -1088,7 +1092,7 @@
       <tr><td>6</td><td>0</td><td>2</td><td>4</td><td>6</td><td>8</td></tr>
       <tr><td>8</td><td>0</td><td>6</td><td>2</td><td>8</td><td>4</td></tr>
     </table>
-    <ol>
+<ol>
       <li><strong>Condition 1 — (A, +₁₀) is an abelian group:</strong>
         <ul>
           <li><strong>Closure:</strong> All entries are in A.</li>
@@ -1106,29 +1110,36 @@
       </li>
       <li><strong>Condition 3 — Distributive laws:</strong> Holds (inherited from integers).</li>
     </ol>
-    <p><strong>Verdict:</strong> (A, +₁₀, ·₁₀) is a ring.</p>
-    <p><strong>Additional observations:</strong> The multiplication table is symmetric, so it is a commutative ring. Element 6 is the multiplicative unity (6 ·₁₀ x = x for all x ∈ A). Checking for zero divisors: no pair of non-zero elements multiplies to 0, so there are no zero divisors. Since it is a finite commutative ring with unity and no zero divisors, A is actually an integral domain (and being finite, also a field).</p>
-  </div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text"><strong>Verdict:</strong> (A, +₁₀, ·₁₀) is a ring.</p>
+<p><strong>Additional observations:</strong> The multiplication table is symmetric, so it is a commutative ring. Element 6 is the multiplicative unity (6 ·₁₀ x = x for all x ∈ A). Checking for zero divisors: no pair of non-zero elements multiplies to 0, so there are no zero divisors. Since it is a finite commutative ring with unity and no zero divisors, A is actually an integral domain (and being finite, also a field).</p>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Teacher’s Example B: B = {0, 3, 6, 9} under addition and multiplication modulo 12</div>
-    <p>Addition table (+₁₂):</p>
-    <table>
+  <div class="example qa">
+<div class="example-title">Teacher’s Example B: B = {0, 3, 6, 9} under addition and multiplication modulo 12</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Consider B = {0, 3, 6, 9} with addition and multiplication modulo 12. Determine whether (B, +₁₂, ·₁₂) is a ring.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Addition table (+₁₂):</p>
+<table>
       <tr><th>+₁₂</th><th>0</th><th>3</th><th>6</th><th>9</th></tr>
       <tr><td>0</td><td>0</td><td>3</td><td>6</td><td>9</td></tr>
       <tr><td>3</td><td>3</td><td>6</td><td>9</td><td>0</td></tr>
       <tr><td>6</td><td>6</td><td>9</td><td>0</td><td>3</td></tr>
       <tr><td>9</td><td>9</td><td>0</td><td>3</td><td>6</td></tr>
     </table>
-    <p>Multiplication table (·₁₂):</p>
-    <table>
+<p>Multiplication table (·₁₂):</p>
+<table>
       <tr><th>·₁₂</th><th>0</th><th>3</th><th>6</th><th>9</th></tr>
       <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
       <tr><td>3</td><td>0</td><td>9</td><td>6</td><td>3</td></tr>
       <tr><td>6</td><td>0</td><td>6</td><td>0</td><td>6</td></tr>
       <tr><td>9</td><td>0</td><td>3</td><td>6</td><td>9</td></tr>
     </table>
-    <ol>
+<ol>
       <li><strong>Condition 1 — (B, +₁₂) is an abelian group:</strong>
         <ul>
           <li><strong>Closure:</strong> All entries are in B.</li>
@@ -1146,9 +1157,12 @@
       </li>
       <li><strong>Condition 3 — Distributive laws:</strong> Holds (inherited from integers).</li>
     </ol>
-    <p><strong>Verdict:</strong> (B, +₁₂, ·₁₂) is a ring.</p>
-    <p><strong>Additional observations:</strong> Commutative ring. Multiplicative unity is 9 (9 ·₁₂ x = x for all x ∈ B). Zero divisors exist: 6 ·₁₂ 6 = 36 ≡ 0 (mod 12) but 6 ≠ 0. Since it has zero divisors, it is NOT an integral domain and NOT a field.</p>
-  </div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text"><strong>Verdict:</strong> (B, +₁₂, ·₁₂) is a ring.</p>
+<p><strong>Additional observations:</strong> Commutative ring. Multiplicative unity is 9 (9 ·₁₂ x = x for all x ∈ B). Zero divisors exist: 6 ·₁₂ 6 = 36 ≡ 0 (mod 12) but 6 ≠ 0. Since it has zero divisors, it is NOT an integral domain and NOT a field.</p>
+</div>
+</div>
 
   <h2 id="self-learning">Section 10 — Self-Learning: Error Correcting Codes</h2>
 
@@ -1168,21 +1182,23 @@
   <h2 id="previous-exams">Previous End-Semester Questions</h2>
   <div class="practice">
     <h3>Previous Examination Questions</h3>
-    <div class="exam-q">
-      <div class="exam-q-title">Winter 2025 — Q4(a): Multiplication Modulo 7 — QR-based Token System (8 marks)</div>
-      <div class="exam-source">Source: NEP DSGT Winter 2025 — Q4(a)</div>
-      <p>The transformation is T(a) = (a × k) mod 7, where a ∈ {1, 2, 3, 4, 5, 6}.</p>
-      <ol>
+    <div class="exam-q qa">
+<div class="exam-q-title">Winter 2025 — Q4(a): Multiplication Modulo 7 — QR-based Token System (8 marks)</div>
+<div class="exam-source">Source: NEP DSGT Winter 2025 — Q4(a)</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>The transformation is T(a) = (a × k) mod 7, where a ∈ {1, 2, 3, 4, 5, 6}.</p>
+<ol>
         <li><strong>Construct the multiplication table modulo 7.</strong></li>
         <li><strong>Find the inverses of 2, 3 and 5.</strong></li>
         <li><strong>Determine whether the set forms a group.</strong></li>
         <li><strong>Discuss reversibility, forgery prevention and predictable validation.</strong></li>
       </ol>
-      <p><strong>Solution:</strong></p>
-      <ol>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<ol>
         <li>Multiplication table modulo 7:</li>
       </ol>
-      <table>
+<table>
         <tr><th>×₇</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr>
         <tr><td>1</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
         <tr><td>2</td><td>2</td><td>4</td><td>6</td><td>1</td><td>3</td><td>5</td></tr>
@@ -1191,26 +1207,32 @@
         <tr><td>5</td><td>5</td><td>3</td><td>1</td><td>6</td><td>4</td><td>2</td></tr>
         <tr><td>6</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td></tr>
       </table>
-      <ol>
+<ol>
         <li>Inverses: 2⁻¹=4, 3⁻¹=5, 5⁻¹=3 (since 2×₇4=1, 3×₇5=1, 5×₇3=1).</li>
         <li><strong>Group:</strong> Closed (all entries in {1..6}), associative (inherited from integers), identity = 1, inverses exist for all elements, commutative. Therefore {1..6} under ×₇ is an abelian group.</li>
         <li><strong>Discussion:</strong> The transformation T(a) = (a × k) mod 7 is invertible when k ∈ {1..6} because every non-zero element mod 7 has a multiplicative inverse. This means the transformation can be reversed: T⁻¹(b) = (b × k⁻¹) mod 7. This provides predictability (anyone with k can validate) but does not by itself guarantee cryptographic security or prevent forgery — forgery resistance requires additional cryptographic properties beyond simple modular multiplication.</li>
       </ol>
-    </div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">The non-zero residues {1, 2, 3, 4, 5, 6} under multiplication modulo 7 form an abelian group. The required inverses are 2⁻¹ = 4, 3⁻¹ = 5 and 5⁻¹ = 3. The transformation is reversible when k is non-zero modulo 7, but simple modular multiplication alone does not guarantee cryptographic security or prevent forgery.</p>
+</div>
+</div>
 
-    <div class="exam-q">
-      <div class="exam-q-title">Winter 2025 — Q6(a): Ring Modulo 6 (8 marks)</div>
-      <div class="exam-source">Source: NEP DSGT Winter 2025 — Q6(a)</div>
-      <p>Consider Z₆ with addition and multiplication modulo 6.</p>
-      <ol>
+    <div class="exam-q qa">
+<div class="exam-q-title">Winter 2025 — Q6(a): Ring Modulo 6 (8 marks)</div>
+<div class="exam-source">Source: NEP DSGT Winter 2025 — Q6(a)</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Consider Z₆ with addition and multiplication modulo 6.</p>
+<ol>
         <li>Check whether addition forms an Abelian group.</li>
         <li>Check closure and associativity.</li>
         <li>Verify distributivity.</li>
         <li>Conclude whether Z₆ forms a ring.</li>
       </ol>
-      <p><strong>Solution:</strong></p>
-      <p><strong>Multiplication table (·₆):</strong></p>
-      <table>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p><strong>Multiplication table (·₆):</strong></p>
+<table>
         <tr><th>·₆</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
         <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
         <tr><td>1</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
@@ -1219,32 +1241,42 @@
         <tr><td>4</td><td>0</td><td>4</td><td>2</td><td>0</td><td>4</td><td>2</td></tr>
         <tr><td>5</td><td>0</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td></tr>
       </table>
-      <ol>
+<ol>
         <li><strong>Addition modulo 6 forms an abelian group:</strong> The +₆ table (Section 8) shows closure, associativity, identity = 0, inverses 0→0, 1→5, 2→4, 3→3, 4→2, 5→1, and commutativity.</li>
         <li><strong>Multiplication modulo 6 closure and associativity:</strong> All products of elements in Z₆ remain in Z₆ (closure). Multiplication modulo 6 is associative (inherited from integers).</li>
         <li><strong>Distributivity:</strong> Multiplication distributes over addition modulo 6 (inherited from integers).</li>
         <li><strong>Conclusion:</strong> Z₆ forms a ring under addition and multiplication modulo 6. It is commutative (the ·₆ table is symmetric) and has multiplicative identity 1. It has zero divisors (2·₆3 = 0 and 3·₆4 = 0), so it is NOT an integral domain, and it is not a field (2 has no inverse: no 1 in row 2).</li>
       </ol>
-    </div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">Z₆ forms a commutative ring with multiplicative identity 1. It has zero divisors, so it is not an integral domain and is not a field.</p>
+</div>
+</div>
 
-    <div class="exam-q">
-      <div class="exam-q-title">Summer 2026 — Q4(a): Multiplicative Group Modulo 7 (8 marks)</div>
-      <div class="exam-source">Source: NEP DSGT Summer 2026 — Q4(a)</div>
-      <p>Consider G = {1, 2, 3, 4, 5, 6} under multiplication modulo 7.</p>
-      <ol>
+    <div class="exam-q qa">
+<div class="exam-q-title">Summer 2026 — Q4(a): Multiplicative Group Modulo 7 (8 marks)</div>
+<div class="exam-source">Source: NEP DSGT Summer 2026 — Q4(a)</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Consider G = {1, 2, 3, 4, 5, 6} under multiplication modulo 7.</p>
+<ol>
         <li>Construct the multiplication table.</li>
         <li>Find the inverses of 2, 3, 5 and 6.</li>
         <li>Determine whether G is cyclic.</li>
         <li>Identify at least one generator and justify.</li>
       </ol>
-      <p><strong>Solution:</strong></p>
-      <ol>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<ol>
         <li>Multiplication table modulo 7 (shown above).</li>
         <li>Inverses: 2⁻¹=4, 3⁻¹=5, 5⁻¹=3, 6⁻¹=6.</li>
         <li><strong>Cyclic:</strong> Yes. Powers of 3 mod 7 generate all elements: 3¹=3, 3²=2, 3³=6, 3⁴=4, 3⁵=5, 3⁶=1. So 3 is a generator. Similarly, 5 is a generator.</li>
         <li>3 and 5 are generators of the group.</li>
       </ol>
-    </div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">G is cyclic under multiplication modulo 7. The generators identified are 3 and 5.</p>
+</div>
+</div>
 
     <div class="exam-q">
       <div class="exam-q-title">Summer 2026 — Q6(a): Ring Modulo 4 (8 marks)</div>
