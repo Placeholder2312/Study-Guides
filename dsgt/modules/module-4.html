@@ -472,6 +472,12 @@
   @media (prefers-reduced-motion:reduce) {
     .rm-sheet, .rm-back, .rm-tab span, .rail-in { transition:none; }
   }
+  /* Show children only for the section currently being read. */
+  .rail-list > li > .rail-sublist { display:none; }
+  .rail-list > li > a[aria-current="true"] ~ .rail-sublist { display:block; }
+  .rail.is-collapsed .rail-list > li > .rail-sublist { display:none; }
+  .rm-sheet > ol > li > .rm-sublist { display:none; }
+  .rm-sheet > ol > li > a[aria-current="true"] ~ .rm-sublist { display:block; }
   @media print { .rail, .rm-bar, .rm-tab, .rm-back, .rm-sheet { display:none !important; } }
 
 </style>
