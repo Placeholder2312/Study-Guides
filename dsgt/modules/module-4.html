@@ -1151,34 +1151,39 @@
 </div>
 </div>
 
-    <div class="exam-q">
-      <div class="exam-q-title">Summer 2026 — Q5(b): Financial Portfolio — Non-Homogeneous Recurrence (7 marks)</div>
-      <div class="exam-source">Source: NEP DSGT Summer 2026 — Q5(b)</div>
-      <p>A financial analytics company models the quarterly growth of a digital investment portfolio using: <span class="kbd">F<sub>n</sub> = 3F<sub>n−1</sub> + 10F<sub>n−2</sub> + 7·5<sup>n</sup></span> with <span class="kbd">F<sub>0</sub> = 4</span>, <span class="kbd">F<sub>1</sub> = −3</span>.</p>
-      <ol>
+    <div class="exam-q qa">
+<div class="exam-q-title">Summer 2026 — Q5(b): Financial Portfolio — Non-Homogeneous Recurrence (7 marks)</div>
+<div class="exam-source">Source: NEP DSGT Summer 2026 — Q5(b)</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>A financial analytics company models the quarterly growth of a digital investment portfolio using: <span class="kbd">F<sub>n</sub> = 3F<sub>n−1</sub> + 10F<sub>n−2</sub> + 7·5<sup>n</sup></span> with <span class="kbd">F<sub>0</sub> = 4</span>, <span class="kbd">F<sub>1</sub> = −3</span>.</p>
+<ol>
         <li>Solve the recurrence relation.</li>
         <li>Determine the general expression for <span class="kbd">F<sub>n</sub></span>.</li>
         <li>Analyze the effect of the exponential forcing term <span class="kbd">7·5<sup>n</sup></span>.</li>
       </ol>
-      <p><strong>Solution:</strong></p>
-      <p>Homogeneous part: <span class="kbd">r<sup>2</sup> − 3r − 10 = 0</span><br>→ <span class="kbd">(r − 5)(r + 2) = 0</span><br>→ roots <strong>5, −2</strong></p>
-      <p>Homogeneous solution: <span class="kbd">a<sub>n</sub><sup>(h)</sup> = A(5<sup>n</sup>) + B(−2)<sup>n</sup></span></p>
-      <p>Particular solution: forcing term is <span class="kbd">7·5<sup>n</sup></span>. Since <span class="kbd">5</span> is a root of the characteristic equation, guess <span class="kbd">a<sub>n</sub><sup>(p)</sup> = Cn·5<sup>n</sup></span>:</p>
-      <div class="eq">Cn·5<sup>n</sup> = 3·C(n−1)·5<sup>n−1</sup> + 10·C(n−2)·5<sup>n−2</sup> + 7·5<sup>n</sup></div>
-      <div class="eq">Divide by 5<sup>n−2</sup>: 25Cn = 15C(n−1) + 10C(n−2) + 175</div>
-      <div class="eq">25Cn = 15Cn − 15C + 10Cn − 20C + 175</div>
-      <div class="eq">25Cn = 25Cn − 35C + 175</div>
-      <div class="eq">C = 175 / 35<br>= 5</div>
-      <p>General solution: <span class="kbd">F<sub>n</sub> = A(5<sup>n</sup>) + B(−2)<sup>n</sup> + 5n·5<sup>n</sup></span></p>
-      <ul>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Homogeneous part: <span class="kbd">r<sup>2</sup> − 3r − 10 = 0</span><br>→ <span class="kbd">(r − 5)(r + 2) = 0</span><br>→ roots <strong>5, −2</strong></p>
+<p>Homogeneous solution: <span class="kbd">a<sub>n</sub><sup>(h)</sup> = A(5<sup>n</sup>) + B(−2)<sup>n</sup></span></p>
+<p>Particular solution: forcing term is <span class="kbd">7·5<sup>n</sup></span>. Since <span class="kbd">5</span> is a root of the characteristic equation, guess <span class="kbd">a<sub>n</sub><sup>(p)</sup> = Cn·5<sup>n</sup></span>:</p>
+<div class="eq">Cn·5<sup>n</sup> = 3·C(n−1)·5<sup>n−1</sup> + 10·C(n−2)·5<sup>n−2</sup> + 7·5<sup>n</sup></div>
+<div class="eq">Divide by 5<sup>n−2</sup>: 25Cn = 15C(n−1) + 10C(n−2) + 175</div>
+<div class="eq">25Cn = 15Cn − 15C + 10Cn − 20C + 175</div>
+<div class="eq">25Cn = 25Cn − 35C + 175</div>
+<div class="eq">C = 175 / 35<br>= 5</div>
+<p>General solution: <span class="kbd">F<sub>n</sub> = A(5<sup>n</sup>) + B(−2)<sup>n</sup> + 5n·5<sup>n</sup></span></p>
+<ul>
         <li><span class="kbd">n=0:</span> A + B = 4</li>
         <li><span class="kbd">n=1:</span> 5A − 2B + 25 = −3<br>→ 5A − 2B = −28</li>
       </ul>
-      <p>From A = 4 − B: 5(4 − B) − 2B = −28<br>→ 20 − 5B − 2B = −28<br>→ −7B = −48<br>→ B = 48/7</p>
-      <p>A = 4 − 48/7<br>= (28 − 48)/7<br>= −20/7</p>
-      <div class="eq"><strong>F<sub>n</sub> = (−20/7)·5<sup>n</sup> + (48/7)·(−2)<sup>n</sup> + 5n·5<sup>n</sup></strong></div>
-      <p><strong>Analysis:</strong> The forcing term <span class="kbd">7·5<sup>n</sup></span> introduces an exponential growth component <span class="kbd">5n·5<sup>n</sup></span> which dominates as <span class="kbd">n</span> increases. Since <span class="kbd">5</span> is both a characteristic root and the base of the forcing term, the particular solution includes the extra factor <span class="kbd">n</span>.</p>
-    </div>
+<p>From A = 4 − B: 5(4 − B) − 2B = −28<br>→ 20 − 5B − 2B = −28<br>→ −7B = −48<br>→ B = 48/7</p>
+<p>A = 4 − 48/7<br>= (28 − 48)/7<br>= −20/7</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<div class="eq"><strong>F<sub>n</sub> = (−20/7)·5<sup>n</sup> + (48/7)·(−2)<sup>n</sup> + 5n·5<sup>n</sup></strong></div>
+<p><strong>Analysis:</strong> The forcing term <span class="kbd">7·5<sup>n</sup></span> introduces an exponential growth component <span class="kbd">5n·5<sup>n</sup></span> which dominates as <span class="kbd">n</span> increases. Since <span class="kbd">5</span> is both a characteristic root and the base of the forcing term, the particular solution includes the extra factor <span class="kbd">n</span>.</p>
+</div>
+</div>
 
   </div>
 

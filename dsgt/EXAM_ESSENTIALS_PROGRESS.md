@@ -148,8 +148,8 @@ Optional additions only (not required, and not to be done unless asked):
 ## Module I — Question / Solution / Final Answer formatting
 
 - Repository audit found 29 source worked-example cards and 3 past-paper question containers. The split Summer 2026 induction pair (source cards 22–23) is treated as one complete question, giving 31 formatting units. This is a fresh repository count; the older “30 remaining” note was only a historical agent estimate.
-- **Completed: 31/31 units.** Worked Examples 1–5 now use Module IV's exact Question / Solution / Final Answer markup and CSS. All existing explanations, tables and results were retained.
-- **Next:** Worked Examples 27–29 and the three past-paper questions (six units remain). Commit and verify after each five units.
+- **Completed: 31/31 units.** All 28 worked-example units and all 3 past-paper questions use Module IV's exact Question / Solution / Final Answer markup and CSS. The Summer 2026 induction pair is one complete worked question and is reused in its past-paper block.
+- **Module I formatting pass complete.** All 31 question units are formatted and pushed.
 
 
 ## Module II — Question / Solution / Final Answer formatting
@@ -163,3 +163,11 @@ Optional additions only (not required, and not to be done unless asked):
 
 - **Completed: 10/10 units.** All 9 worked examples now have Question / Solution / Final Answer blocks, including the discount-then-tax example; the Summer 2026 Q2(b) past-paper question has the matching full solution and final answer. Existing wording, calculations and source label were preserved.
 - Module III formatting pass complete.
+
+
+## Module IV — Question / Solution / Final Answer and equation-line-break audit
+
+- **Completed: 25/25 units.** All 19 worked examples and all 6 past-paper questions now have separate Question, Solution and Final Answer blocks.
+- The final Summer 2026 Q5(b) non-homogeneous recurrence question is now split into the three blocks; the mark/source label and all original algebra are preserved.
+- Equation audit: the `.eq` rule uses Module IV's `white-space: nowrap` and horizontal overflow, with no mobile `overflow-wrap: anywhere` override. Every continuation inside `.eq` blocks begins with `=`. In the recurrence work, arrows are retained where they mark a genuine transformation (such as factoring or substitution); they were not blindly changed to equals signs.
+- **Module IV formatting and equation-line-break pass complete.**
