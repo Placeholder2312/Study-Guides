@@ -43,7 +43,7 @@
   function buildMonth(year, month, todayKey) {
     var box = el('div', 'cal-month');
     var table = el('table', 'cal-grid');
-    table.appendChild(el('caption', null, MONTHS[month] + ' ' + year));
+    table.appendChild(el('caption', 'sr-only', MONTHS[month] + ' ' + year));
 
     var thead = el('thead');
     var headRow = el('tr');
@@ -113,6 +113,7 @@
       return a.date < b.date ? -1 : a.date > b.date ? 1 : 0;
     });
 
+    key.appendChild(el('summary', null, 'Exams · ' + list.length));
     var legend = el('ul', 'cal-legend');
     legend.appendChild(legendItem('today', 'Today'));
     [1, 2, 3].forEach(function (s) {
@@ -122,7 +123,6 @@
     key.appendChild(legend);
 
     if (!list.length) return;
-    key.appendChild(el('h3', 'num', 'Exams'));
     var ul = el('ul', 'cal-exams');
     list.forEach(function (e) {
       var p = e.date.split('-');
@@ -153,11 +153,37 @@
     host.textContent = '';
     if (keyHost) keyHost.textContent = '';
     var months = [];
+    var boxes = [];
     for (var m = 0; m < 2; m++) {
       var first = new Date(now.getFullYear(), now.getMonth() + m, 1);
       months.push(first);
-      host.appendChild(buildMonth(first.getFullYear(), first.getMonth(), renderedFor));
+      boxes.push(buildMonth(first.getFullYear(), first.getMonth(), renderedFor));
     }
+
+    // One month at a time, with previous / next buttons.
+    var nav = el('div', 'cal-nav');
+    var prev = el('button', 'cal-btn', '‹');
+    var next = el('button', 'cal-btn', '›');
+    var title = el('div', 'cal-title');
+    prev.type = next.type = 'button';
+    prev.setAttribute('aria-label', 'Previous month');
+    next.setAttribute('aria-label', 'Next month');
+    title.setAttribute('aria-live', 'polite');
+    function show(i) {
+      boxes.forEach(function (b, j) { b.hidden = j !== i; });
+      title.textContent = MONTHS[months[i].getMonth()] + ' ' + months[i].getFullYear();
+      prev.disabled = i === 0;
+      next.disabled = i === boxes.length - 1;
+    }
+    prev.addEventListener('click', function () { show(0); next.focus(); });
+    next.addEventListener('click', function () { show(1); prev.focus(); });
+    nav.appendChild(prev);
+    nav.appendChild(title);
+    nav.appendChild(next);
+    host.appendChild(nav);
+    boxes.forEach(function (b) { host.appendChild(b); });
+    show(0);
+
     if (keyHost) buildKey(keyHost, months, renderedFor);
   }
 
