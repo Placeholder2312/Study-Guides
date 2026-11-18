@@ -7,7 +7,7 @@
 @media print { :root, :root[data-theme="dark"] { --sem-1: #1d4ed8; --sem-2: #0f766e; --sem-3: #c2410c; } }
 
 .calendar { margin-bottom: 3rem; }
-.cal { border: 1px solid var(--line); border-left: 3px solid var(--ink); background: var(--surface); padding: .6rem .8rem 1rem 1rem; }
+.cal { border: 1px solid var(--line); border-left: 3px solid var(--ink); background: var(--surface); padding: .6rem .8rem 1rem 1rem; position: relative; }
 .cal:empty { display: none; }
 
 /* Month switcher */
@@ -39,8 +39,31 @@
 .cal-grid td.today.exam { box-shadow: inset 0 0 0 2px var(--ink), inset 0 0 0 4px var(--bg), inset 0 0 0 6px var(--ink); }
 
 /* Days already gone are dimmed. */
-.cal-grid td.past { opacity: .5; }
-.cal-exams li.past { opacity: .55; }
+.cal-grid td.past:not(.exam) { opacity: .5; }
+
+/* Finished exams get the same caution tape as the "Exam done" subject card. */
+.cal-grid td.past.exam, .cal-exams li.past .sw { overflow: hidden; isolation: isolate; }
+.cal-grid td.past.exam::before, .cal-grid td.past.exam::after,
+.cal-exams li.past .sw::before, .cal-exams li.past .sw::after {
+  content: ""; position: absolute; box-sizing: border-box; left: -10%; width: 120%; top: 50%; height: 9px; margin-top: -4.5px;
+  background: repeating-linear-gradient(-45deg, var(--ink) 0 6px, var(--bg) 6px 12px);
+  border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink);
+  pointer-events: none; z-index: 1; opacity: .92;
+}
+.cal-grid td.past.exam::before, .cal-exams li.past .sw::before { transform: rotate(-12deg); }
+.cal-grid td.past.exam::after, .cal-exams li.past .sw::after { transform: rotate(12deg); }
+.cal-exams li.past .ex-name { text-decoration: line-through; text-decoration-thickness: 2px; text-decoration-color: var(--ink); }
+.cal-exams li.past .ex-name, .cal-exams li.past .ex-meta { opacity: .62; }
+
+/* A strip of the same tape hangs off the bottom edge of the card and swings with scrolling. */
+.cal-tape {
+  position: absolute; right: 3.75rem; top: calc(100% - 14px); z-index: 3; width: 26px; height: 66px;
+  transform-origin: 50% 14px; will-change: transform; pointer-events: none; opacity: .92;
+  background: repeating-linear-gradient(-45deg, var(--ink) 0 9px, var(--bg) 9px 18px);
+  border: 1px solid var(--ink); border-bottom: 0; box-sizing: border-box;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 75% 93%, 50% 100%, 25% 93%, 0 100%);
+}
+@media print { .cal-tape { display: none; } }
 
 /* Let the highlights survive printing. */
 .cal-grid td, .sw { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
