@@ -155,5 +155,5 @@ Optional additions only (not required, and not to be done unless asked):
 ## Module II — Question / Solution / Final Answer formatting
 
 - Repository audit found 11 source worked-example cards and 3 past-paper questions. The three divisibility-poset source cards (ordered pairs, Hasse diagram, lattice test) form one complete worked question, giving 9 worked-example units + 3 past-paper units = 12 total.
-- **Completed: 10/12 units.** All 9 worked-example units now have Question / Solution / Final Answer blocks; the first matching past-paper question (Summer 2026 Q1(a), polygon equivalence) also has its full solution. Warshall and divisibility solutions retain their tables and original notes.
-- **Next:** Format the two remaining past-paper questions (Summer 2026 Q3(a) and Q3(b)) using the matching completed worked solutions. Commit after the pair.
+- **Completed: 12/12 units.** All 9 worked-example units now have Question / Solution / Final Answer blocks; the first matching past-paper question (Summer 2026 Q1(a), polygon equivalence) also has its full solution. Warshall and divisibility solutions retain their tables and original notes.
+- **Module II formatting pass complete:** all 9 worked-example units and all 3 past-paper questions now have Question / Solution / Final Answer blocks. The two remaining exam questions reuse their matching full Warshall and divisibility-poset solutions.

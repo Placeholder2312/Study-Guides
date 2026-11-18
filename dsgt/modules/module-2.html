@@ -872,9 +872,71 @@
   </ol>
 
   <div class="exam-q">
-    <div class="exam-q-title">Verified University question <span class="mu-badge">Summer 2026 · Q.3(a) · 8 marks</span></div>
-    <p class="exam-source">A domestic airline maintains a directed flight network among four cities V = {a, b, c, d}. The direct connections are R = {(a, b), (b, d), (d, c), (d, a)}. Find the transitive closure and represent the final connectivity relation.</p>
-  </div>
+<div class="exam-q-title">Verified University question <span class="mu-badge">Summer 2026 · Q.3(a) · 8 marks</span></div>
+<p class="exam-source">A domestic airline maintains a directed flight network among four cities V = {a, b, c, d}. The direct connections are R = {(a, b), (b, d), (d, c), (d, a)}. Find the transitive closure and represent the final connectivity relation.</p>
+<div class="qa-question"><div class="qa-label">Question</div>
+
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+    <p><strong>Step 0 — initial matrix.</strong> Rows and columns in the order a, b, c, d. A 1 means a direct flight.</p>
+    <table>
+      <tr><th>W<sup>(0)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><td><strong>a</strong></td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+      <tr><td><strong>b</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+      <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td><strong>d</strong></td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+    </table>
+
+    <p><strong>Round k = a.</strong> Column a has a 1 in row d, so d reaches a. Row a has a 1 in column b, so a reaches b. Therefore d reaches b. Add (d, b).</p>
+    <table>
+      <tr><th>W<sup>(a)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><td><strong>a</strong></td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+      <tr><td><strong>b</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+      <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td><strong>d</strong></td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+    </table>
+    <p class="eq-note">Added: (d, b). This is the route d → a → b.</p>
+
+    <p><strong>Round k = b.</strong> Column b has 1s in rows a and d. Row b has a 1 in column d. Therefore a reaches d and d reaches d. Add (a, d) and (d, d).</p>
+    <table>
+      <tr><th>W<sup>(b)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><td><strong>a</strong></td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+      <tr><td><strong>b</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+      <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td><strong>d</strong></td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+    </table>
+    <p class="eq-note">Added: (a, d) from a → b → d, and (d, d) from d → a → b → d, a circular route.</p>
+
+    <p><strong>Round k = c.</strong> Column c has a 1 only in row d, and row c has no 1s at all. Nothing can be added.</p>
+    <table>
+      <tr><th>W<sup>(c)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><td><strong>a</strong></td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+      <tr><td><strong>b</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+      <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td><strong>d</strong></td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+    </table>
+    <p class="eq-note">No change. This already tells you c is a dead end: c has no outgoing flight and nothing returns to c.</p>
+
+    <p><strong>Round k = d.</strong> Column d has 1s in rows a, b and d. Row d has 1s in columns a, b, c and d. So rows a, b and d all become 1 in every column.</p>
+    <table>
+      <tr><th>W<sup>(d)</sup> = closure</th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><td><strong>a</strong></td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+      <tr><td><strong>b</strong></td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+      <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td><strong>d</strong></td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+    </table>
+    <p class="eq-note">Added: (a, a), (a, c), (b, a), (b, b), (b, c).</p>
+
+    
+<p><strong>Independent check by tracing paths.</strong> The cycle a → b → d → a lets a, b and d each return to themselves, which is why (a,a), (b,b) and (d,d) appear. From a: a → b → d → c reaches c. From b: b → d → a → … reaches a and c. From d: d → a → b reaches b and d → c reaches c. From c: no outgoing edge, so no pair starts at c. Every one of the twelve entries is accounted for.</p>
+<p><strong>Direct, layover and circular routes (the question's wording).</strong> Direct: (a,b), (b,d), (d,c), (d,a). Layover: (a,d), (a,c), (b,a), (b,c), (d,b), (b,? ) and so on — all the new pairs. Circular: (a,a), (b,b), (d,d).</p>
+<p><strong>Note on the diagonal.</strong> We used paths of length at least 1, which is the convention in your lecture slides. If your lecturer instead starts the matrix with 1s on the diagonal, then (c,c) is also added and every diagonal entry is 1. Say which convention you used in your answer; both are defensible, but do not mix them.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+      <div class="eq">R<sup>+</sup> = {(a,a), (a,b), (a,c), (a,d), (b,a), (b,b), (b,c), (b,d), (d,a), (d,b), (d,c), (d,d)}</div>
+      <p class="qa-final-text">Twelve pairs. Row c is entirely zero, so c is related to nothing — not even to itself.</p>
+    </div>
+</div>
 
   <div class="example qa">
 <div class="example-title">Full Warshall solution — airline network</div>
@@ -1010,9 +1072,52 @@
   <p>This is a shortcut, not a definition. The definition is "greatest lower bound" and "least upper bound" <em>within A</em>. If the gcd or lcm is not an element of A, then that meet or join does not exist in the poset, and the poset is not a lattice.</p>
 
   <div class="exam-q">
-    <div class="exam-q-title">Verified University question <span class="mu-badge">Summer 2026 · Q.3(b) · 7 marks</span></div>
-    <p class="exam-source">A cloud access-control system organises permission levels A = {1, 2, 3, 6, 12, 24, 36, 72} by divisibility: (x, y) ∈ R if x | y. Write all ordered pairs, construct the Hasse diagram, and analyse whether the poset is a lattice, justifying with meet and join examples.</p>
-  </div>
+<div class="exam-q-title">Verified University question <span class="mu-badge">Summer 2026 · Q.3(b) · 7 marks</span></div>
+<p class="exam-source">A cloud access-control system organises permission levels A = {1, 2, 3, 6, 12, 24, 36, 72} by divisibility: (x, y) ∈ R if x | y. Write all ordered pairs, construct the Hasse diagram, and analyse whether the poset is a lattice, justifying with meet and join examples.</p>
+<div class="qa-question"><div class="qa-label">Question</div>
+
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>For each element x, list the elements of A that x divides. Working systematically prevents omissions:</p>
+<table>
+      <tr><th>x</th><th>Elements of A divisible by x</th><th>Number</th></tr>
+      <tr><td>1</td><td>1, 2, 3, 6, 12, 24, 36, 72</td><td>8</td></tr>
+      <tr><td>2</td><td>2, 6, 12, 24, 36, 72</td><td>6</td></tr>
+      <tr><td>3</td><td>3, 6, 12, 24, 36, 72</td><td>6</td></tr>
+      <tr><td>6</td><td>6, 12, 24, 36, 72</td><td>5</td></tr>
+      <tr><td>12</td><td>12, 24, 36, 72</td><td>4</td></tr>
+      <tr><td>24</td><td>24, 72</td><td>2</td></tr>
+      <tr><td>36</td><td>36, 72</td><td>2</td></tr>
+      <tr><td>72</td><td>72</td><td>1</td></tr>
+    </table>
+<p>So R contains 8 + 6 + 6 + 5 + 4 + 2 + 2 + 1 = 34 ordered pairs. In roster form:</p>
+<p>R = {(1,1),(1,2),(1,3),(1,6),(1,12),(1,24),(1,36),(1,72), (2,2),(2,6),(2,12),(2,24),(2,36),(2,72), (3,3),(3,6),(3,12),(3,24),(3,36),(3,72), (6,6),(6,12),(6,24),(6,36),(6,72), (12,12),(12,24),(12,36),(12,72), (24,24),(24,72), (36,36),(36,72), (72,72)}.</p>
+<p><strong>Check.</strong> Every element divides itself, so all eight diagonal pairs appear. The count is 34, not 8 × 8 = 64, because most pairs fail the divisibility test.</p>
+<p><strong>Part 2 — Hasse diagram: what it would show (no drawing here)</strong></p>
+<p>A Hasse diagram draws one dot per element, with y placed above x and joined by a line exactly when <strong>y covers x</strong>: x | y, x ≠ y, and there is no element z of A with x | z | y. The covering pairs for this set are:</p>
+<div class="eq">1–2, 1–3, 2–6, 3–6, 6–12, 12–24, 12–36, 24–72, 36–72</div>
+<p>Read the diagram bottom-up: 1 is at the bottom; 72 is at the top; 24 and 36 sit side by side on the level below 72. A line means "covers", not "divides" — 1 divides 72 but there is no direct line, because intermediate elements exist.</p>
+<p>If you are asked to draw it, place: level 0 — 1; level 1 — 2, 3; level 2 — 6; level 3 — 12; level 4 — 24, 36; level 5 — 72.</p>
+<p><strong>Part 3 — is it a lattice? Meet and join for every kind of pair</strong></p>
+<p>The test is: for every pair, does gcd lie in A, and does lcm lie in A? Work through representative pairs, including the awkward ones.</p>
+<table>
+      <tr><th>Pair (a, b)</th><th>gcd — meet</th><th>In A?</th><th>lcm — join</th><th>In A?</th></tr>
+      <tr><td>(2, 3)</td><td>1</td><td>Yes</td><td>6</td><td>Yes</td></tr>
+      <tr><td>(6, 12)</td><td>6</td><td>Yes</td><td>12</td><td>Yes</td></tr>
+      <tr><td>(12, 24)</td><td>12</td><td>Yes</td><td>24</td><td>Yes</td></tr>
+      <tr><td>(12, 36)</td><td>12</td><td>Yes</td><td>36</td><td>Yes</td></tr>
+      <tr><td>(24, 36)</td><td>12</td><td>Yes</td><td>72</td><td>Yes</td></tr>
+      <tr><td>(24, 72)</td><td>24</td><td>Yes</td><td>72</td><td>Yes</td></tr>
+      <tr><td>(2, 72)</td><td>2</td><td>Yes</td><td>72</td><td>Yes</td></tr>
+      <tr><td>(1, 72)</td><td>1</td><td>Yes</td><td>72</td><td>Yes</td></tr>
+    </table>
+<p>The critical pair is (24, 36): the meet is 12 (not 24 or 36) and the join is 72. Both are in A. Every other pair behaves the same way, because A was built from the divisors of 72 = 2³ · 3² and is closed under gcd and lcm for these elements.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p><strong>Conclusion.</strong> Every pair has a meet and a join in A, so (A, |) is a lattice. It is also a bounded lattice: 1 is the least element (the zero) and 72 is the greatest element (the one).</p>
+<p><strong>Justification sentence for the answer sheet.</strong> "For the pair (24, 36), meet = gcd(24, 36) = 12 ∈ A and join = lcm(24, 36) = 72 ∈ A. Since gcd and lcm of every pair lie in A, the poset is a lattice."</p>
+</div>
+</div>
 
   <div class="example qa">
 <div class="example-title">Part 1 — all ordered pairs of R</div>
