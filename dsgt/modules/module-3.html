@@ -766,13 +766,12 @@
   </div>
 
   <div class="exam-q">
-    <div class="exam-q-title">Verified University question <span class="mu-badge">Summer 2026 · Q.2(b) · 7 marks</span></div>
-    <p class="exam-source">A shirt costs Rs. 1000. The store gives a 15% discount, then applies 8% sales tax to the discounted price. Develop functions for the discount and the tax, construct the composite function for the final cost, and compute the amount payable.</p>
-  </div>
+<div class="exam-q-title">Verified University question <span class="mu-badge">Summer 2026 · Q.2(b) · 7 marks</span></div>
+<p class="exam-source">A shirt costs Rs. 1000. The store gives a 15% discount, then applies 8% sales tax to the discounted price. Develop functions for the discount and the tax, construct the composite function for the final cost, and compute the amount payable.</p>
+<div class="qa-question"><div class="qa-label">Question</div>
 
-  <div class="example qa">
-    <div class="example-title">Full solution — discount then tax</div>
-    <div class="qa-solution"><div class="qa-label">Solution</div>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
       <p><strong>Step 1 — define the functions.</strong> Let p be the marked price in rupees.</p>
       <div class="eq">d(p) = p − 0.15p = 0.85p &nbsp;&nbsp;&nbsp; t(p) = p + 0.08p = 1.08p</div>
       <p>d is the "apply 15% discount" function. t is the "add 8% tax" function. Both take a price and return a price.</p>
@@ -781,13 +780,35 @@
       <p><strong>Step 3 — compute.</strong></p>
       <div class="eq">(t ∘ d)(1000) = 0.918 × 1000 = 918</div>
       <p><strong>Step 4 — check by hand.</strong> Discount: 15% of 1000 = 150, so the discounted price is 850. Tax: 8% of 850 = 68. Final: 850 + 68 = 918. ✓</p>
-    </div>
-    <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p><strong>Step 5 — interpretation.</strong> The composite function collapses a two-step billing rule into one formula, 0.918p. The software can compute the final price in one call, the rule is reusable for any marked price, and the order of the steps is recorded in the composition itself.</p>
+<p><strong>Honest note about order.</strong> Here both steps are pure percentage multiplications, and 0.85 × 1.08 = 1.08 × 0.85, so reversing the order happens to give the same number. The order still matters in the definition — tax is legally computed on the discounted price — and it changes the answer as soon as a step involves a fixed amount. For example, with a flat Rs. 100 discount, t ∘ d gives 1.08(p − 100) = 972 at p = 1000, while d ∘ t gives 1.08p − 100 = 980. Do not claim the two orders always differ; check the actual functions.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
       <p class="qa-final-text">(t ∘ d)(p) = <strong>0.918p</strong>, so a Rs. 1000 shirt costs <strong>Rs. 918</strong>.</p>
     </div>
+</div>
+
+  <div class="example qa">
+<div class="example-title">Full solution — discount then tax</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>A shirt costs Rs. 1000. The store gives a 15% discount, then applies 8% sales tax to the discounted price. Develop functions for the discount and tax, construct the composite function for the final cost, and compute the amount payable.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Step 1 — define the functions.</strong> Let p be the marked price in rupees.</p>
+      <div class="eq">d(p) = p − 0.15p = 0.85p &nbsp;&nbsp;&nbsp; t(p) = p + 0.08p = 1.08p</div>
+      <p>d is the "apply 15% discount" function. t is the "add 8% tax" function. Both take a price and return a price.</p>
+      <p><strong>Step 2 — choose the order.</strong> The discount happens first, so the discounted price is the input to tax. Therefore the final cost is t applied to d(p):</p>
+      <div class="eq">(t ∘ d)(p) = t(d(p)) = t(0.85p) = 1.08(0.85p) = 0.918p</div>
+      <p><strong>Step 3 — compute.</strong></p>
+      <div class="eq">(t ∘ d)(1000) = 0.918 × 1000 = 918</div>
+      <p><strong>Step 4 — check by hand.</strong> Discount: 15% of 1000 = 150, so the discounted price is 850. Tax: 8% of 850 = 68. Final: 850 + 68 = 918. ✓</p>
     <p><strong>Step 5 — interpretation.</strong> The composite function collapses a two-step billing rule into one formula, 0.918p. The software can compute the final price in one call, the rule is reusable for any marked price, and the order of the steps is recorded in the composition itself.</p>
-    <p><strong>Honest note about order.</strong> Here both steps are pure percentage multiplications, and 0.85 × 1.08 = 1.08 × 0.85, so reversing the order happens to give the same number. The order still matters in the definition — tax is legally computed on the discounted price — and it changes the answer as soon as a step involves a fixed amount. For example, with a flat Rs. 100 discount, t ∘ d gives 1.08(p − 100) = 972 at p = 1000, while d ∘ t gives 1.08p − 100 = 980. Do not claim the two orders always differ; check the actual functions.</p>
-  </div>
+<p><strong>Honest note about order.</strong> Here both steps are pure percentage multiplications, and 0.85 × 1.08 = 1.08 × 0.85, so reversing the order happens to give the same number. The order still matters in the definition — tax is legally computed on the discounted price — and it changes the answer as soon as a step involves a fixed amount. For example, with a flat Rs. 100 discount, t ∘ d gives 1.08(p − 100) = 972 at p = 1000, while d ∘ t gives 1.08p − 100 = 980. Do not claim the two orders always differ; check the actual functions.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">(t ∘ d)(p) = <strong>0.918p</strong>, so a Rs. 1000 shirt costs <strong>Rs. 918</strong>.</p>
+    </div>
+</div>
 
   <div class="common-mistakes">
     <h3>Common mistakes</h3>
