@@ -268,6 +268,7 @@
       <li><a href="#compare">Choosing and comparing</a></li>
       <li><a href="#self-learning">Self-learning topics</a></li>
       <li><a href="#practice">Practice questions with solutions</a></li>
+      <li><a href="#pyq">Previous-year questions</a></li>
       <li><a href="#mistakes">Common mistakes</a></li>
       <li><a href="#revision">Last-minute revision sheet</a></li>
       <li><a href="#references">References and attribution</a></li>
@@ -1387,7 +1388,130 @@ D     1    9    8    0</code></pre>
 </section>
 </div>
 
-<h2 id="mistakes">10 — Common mistakes across the module</h2>
+<h2 id="pyq">10 — Previous-year questions (University of Mumbai)</h2>
+<div class="practice">
+<p>Questions from University of Mumbai and Mumbai-University-affiliated college papers on this module, each with its source, a worked solution and a final answer. Only questions whose full data could be read are included; the multistage graph, travelling salesperson and Bellman–Ford questions in these papers depend on figures that were not available.</p>
+<section class="exam-q">
+<h3 id="pyq1-mu-2021-lcs">PYQ1 — LCS (5 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>University of Mumbai, SE Sem IV (Rev 2019), CSC402 Analysis of Algorithm, June 2021, Q2(E).</em> Find the longest common subsequence of <code>X = ABSDG</code> and <code>Y = GBSTR</code> using dynamic programming.</p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<p>Rows are prefixes of X, columns are prefixes of Y. Each cell is <code>c[i-1][j-1] + 1</code> on a match, otherwise <code>max(c[i-1][j], c[i][j-1])</code>.</p>
+<div class="table-scroll"><table>
+<thead><tr><th>c</th><th>—</th><th>G</th><th>B</th><th>S</th><th>T</th><th>R</th></tr></thead>
+<tbody>
+<tr><td><strong>—</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td><strong>A</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td><strong>B</strong></td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr><tr><td><strong>S</strong></td><td>0</td><td>0</td><td>1</td><td>2</td><td>2</td><td>2</td></tr><tr><td><strong>D</strong></td><td>0</td><td>0</td><td>1</td><td>2</td><td>2</td><td>2</td></tr><tr><td><strong>G</strong></td><td>0</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td></tr>
+</tbody></table></div>
+<p>Reconstruction with the rule "on a tie, move up":</p>
+<ul>
+<li>(5,5): G ≠ R, c[4][5] = 2, c[5][4] = 2 → up (tie) to (4,5).</li>
+<li>(4,5): D ≠ R, c[3][5] = 2, c[4][4] = 2 → up (tie) to (3,5).</li>
+<li>(3,5): S ≠ R, c[2][5] = 1, c[3][4] = 2 → left to (3,4).</li>
+<li>(3,4): S ≠ T, c[2][4] = 1, c[3][3] = 2 → left to (3,3).</li>
+<li>(3,3): S = S → output S, go to (2,2).</li>
+<li>(2,2): B = B → output B, go to (1,1).</li>
+<li>(1,1): A ≠ G, c[0][1] = 0, c[1][0] = 0 → up (tie) to (0,1).</li>
+</ul>
+<p>Output in reverse is S, B; forward is <code>BS</code>.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> LCS length <strong>2</strong>, one LCS is <code>BS</code>.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="pyq2-kjsit-aug25-lcs">PYQ2 — LCS (6 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>K. J. Somaiya Institute of Technology (autonomous, affiliated to University of Mumbai), SY Sem IV CEC402, Aug 2025, Q3(a)(ii).</em> Find the longest common subsequence of <code>X = ABACABB</code> and <code>Y = BABCAB</code> using dynamic programming.</p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<p>Rows are prefixes of X, columns are prefixes of Y. Each cell is <code>c[i-1][j-1] + 1</code> on a match, otherwise <code>max(c[i-1][j], c[i][j-1])</code>.</p>
+<div class="table-scroll"><table>
+<thead><tr><th>c</th><th>—</th><th>B</th><th>A</th><th>B</th><th>C</th><th>A</th><th>B</th></tr></thead>
+<tbody>
+<tr><td><strong>—</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td><strong>A</strong></td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr><tr><td><strong>B</strong></td><td>0</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td><td>2</td></tr><tr><td><strong>A</strong></td><td>0</td><td>1</td><td>2</td><td>2</td><td>2</td><td>3</td><td>3</td></tr><tr><td><strong>C</strong></td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td><td>3</td></tr><tr><td><strong>A</strong></td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td><td>4</td><td>4</td></tr><tr><td><strong>B</strong></td><td>0</td><td>1</td><td>2</td><td>3</td><td>3</td><td>4</td><td>5</td></tr><tr><td><strong>B</strong></td><td>0</td><td>1</td><td>2</td><td>3</td><td>3</td><td>4</td><td>5</td></tr>
+</tbody></table></div>
+<p>Reconstruction with the rule "on a tie, move up":</p>
+<ul>
+<li>(7,6): B = B → output B, go to (6,5).</li>
+<li>(6,5): B ≠ A, c[5][5] = 4, c[6][4] = 3 → up to (5,5).</li>
+<li>(5,5): A = A → output A, go to (4,4).</li>
+<li>(4,4): C = C → output C, go to (3,3).</li>
+<li>(3,3): A ≠ B, c[2][3] = 2, c[3][2] = 2 → up (tie) to (2,3).</li>
+<li>(2,3): B = B → output B, go to (1,2).</li>
+<li>(1,2): A = A → output A, go to (0,1).</li>
+</ul>
+<p>Output in reverse is B, A, C, B, A; forward is <code>ABCAB</code>.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> LCS length <strong>5</strong>, one LCS is <code>ABCAB</code>.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="pyq3-sies-2026-lcs">PYQ3 — LCS (5 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>SIES GST (affiliated to University of Mumbai), SE Sem IV CEC403 Analysis of Algorithm, End Semester Exam (R-24) FH 2026, Q1(D).</em> Find the longest common subsequence of <code>X = MLNOM</code> and <code>Y = MNOM</code> using dynamic programming.</p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<p>Rows are prefixes of X, columns are prefixes of Y. Each cell is <code>c[i-1][j-1] + 1</code> on a match, otherwise <code>max(c[i-1][j], c[i][j-1])</code>.</p>
+<div class="table-scroll"><table>
+<thead><tr><th>c</th><th>—</th><th>M</th><th>N</th><th>O</th><th>M</th></tr></thead>
+<tbody>
+<tr><td><strong>—</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td><strong>M</strong></td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr><tr><td><strong>L</strong></td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr><tr><td><strong>N</strong></td><td>0</td><td>1</td><td>2</td><td>2</td><td>2</td></tr><tr><td><strong>O</strong></td><td>0</td><td>1</td><td>2</td><td>3</td><td>3</td></tr><tr><td><strong>M</strong></td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+</tbody></table></div>
+<p>Reconstruction with the rule "on a tie, move up":</p>
+<ul>
+<li>(5,4): M = M → output M, go to (4,3).</li>
+<li>(4,3): O = O → output O, go to (3,2).</li>
+<li>(3,2): N = N → output N, go to (2,1).</li>
+<li>(2,1): L ≠ M, c[1][1] = 1, c[2][0] = 0 → up to (1,1).</li>
+<li>(1,1): M = M → output M, go to (0,0).</li>
+</ul>
+<p>Output in reverse is M, O, N, M; forward is <code>MNOM</code>.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> LCS length <strong>4</strong>, one LCS is <code>MNOM</code>.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="pyq4-kjsit-may26-lcs">PYQ4 — LCS (10 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>K. J. Somaiya Institute of Technology (autonomous, affiliated to University of Mumbai), SY Sem IV CEC402, May–June 2026, Q4(a). The paper also asks for the algorithm; the second string was read from a scan as ARMENIA.</em> Find the longest common subsequence of <code>X = AMERICA</code> and <code>Y = ARMENIA</code> using dynamic programming.</p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<p>Rows are prefixes of X, columns are prefixes of Y. Each cell is <code>c[i-1][j-1] + 1</code> on a match, otherwise <code>max(c[i-1][j], c[i][j-1])</code>.</p>
+<div class="table-scroll"><table>
+<thead><tr><th>c</th><th>—</th><th>A</th><th>R</th><th>M</th><th>E</th><th>N</th><th>I</th><th>A</th></tr></thead>
+<tbody>
+<tr><td><strong>—</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td><strong>A</strong></td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr><tr><td><strong>M</strong></td><td>0</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td></tr><tr><td><strong>E</strong></td><td>0</td><td>1</td><td>1</td><td>2</td><td>3</td><td>3</td><td>3</td><td>3</td></tr><tr><td><strong>R</strong></td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td><td>3</td><td>3</td></tr><tr><td><strong>I</strong></td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td><td>4</td><td>4</td></tr><tr><td><strong>C</strong></td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td><td>4</td><td>4</td></tr><tr><td><strong>A</strong></td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td><td>4</td><td>5</td></tr>
+</tbody></table></div>
+<p>Reconstruction with the rule "on a tie, move up":</p>
+<ul>
+<li>(7,7): A = A → output A, go to (6,6).</li>
+<li>(6,6): C ≠ I, c[5][6] = 4, c[6][5] = 3 → up to (5,6).</li>
+<li>(5,6): I = I → output I, go to (4,5).</li>
+<li>(4,5): R ≠ N, c[3][5] = 3, c[4][4] = 3 → up (tie) to (3,5).</li>
+<li>(3,5): E ≠ N, c[2][5] = 2, c[3][4] = 3 → left to (3,4).</li>
+<li>(3,4): E = E → output E, go to (2,3).</li>
+<li>(2,3): M = M → output M, go to (1,2).</li>
+<li>(1,2): A ≠ R, c[0][2] = 0, c[1][1] = 1 → left to (1,1).</li>
+<li>(1,1): A = A → output A, go to (0,0).</li>
+</ul>
+<p>Output in reverse is A, I, E, M, A; forward is <code>AMEIA</code>.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> LCS length <strong>5</strong>, one LCS is <code>AMEIA</code>.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="pyq5-kjsit-aug25-concept">PYQ5 — Properties for dynamic programming (4 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>K. J. Somaiya Institute of Technology (autonomous, affiliated to University of Mumbai), SY Sem IV CEC402, Aug 2025, Q3(a)(i).</em> What are the key properties a problem must have to be suitable for dynamic programming?</p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<ol>
+<li><strong>Optimal substructure.</strong> An optimal solution to the problem contains optimal solutions to its subproblems, so the answer can be built from them.</li>
+<li><strong>Overlapping subproblems.</strong> The same subproblems are needed many times, so storing each answer in a table (or memoising it) avoids recomputation. Fibonacci and LCS are standard examples.</li>
+</ol>
+<p>If the subproblems do not overlap, plain divide and conquer is enough. If a locally best choice is always safe, greedy is simpler and faster.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> optimal substructure and overlapping subproblems.</p></div>
+</section>
+</div>
+
+<h2 id="mistakes">11 — Common mistakes across the module</h2>
 <div class="common-mistakes">
 <div class="table-scroll"><table>
 <thead><tr><th>Trap</th><th>What the examiner expects</th></tr></thead>
@@ -1406,7 +1530,7 @@ D     1    9    8    0</code></pre>
 <tr><td>Quoting a number without its unit</td><td>"16 cost units", "7 profit", "length 2"</td></tr>
 </tbody></table></div>
 </div>
-<h2 id="revision">11 — Last-minute revision sheet</h2>
+<h2 id="revision">12 — Last-minute revision sheet</h2>
 <div class="revision-sheet">
 <p><strong>General.</strong> DP = optimal substructure + overlapping subproblems + table. State, recurrence, base, order, answer, reconstruction, complexity. Top-down = memoisation; bottom-up = tabulation.</p>
 <p><strong>Multistage graph.</strong> <code>cost(i,j) = min_{edge j→l} [c(j,l) + cost(i+1,l)]</code>, <code>cost(k,sink) = 0</code>. Class graph: <strong>cost 16</strong>, path <strong>1–2–7–10–12</strong>; also 1–3–6–10–12. Time Θ(V+E), space Θ(V).</p>
