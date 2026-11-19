@@ -337,7 +337,12 @@
   reconstruct choices by walking backwards from the final state
   return answer, choices</code></pre>
 <h3 id="1-6-worked-example-fibonacci">1.6 Worked example — Fibonacci</h3>
-<p><code>fib(n) = fib(n-1) + fib(n-2)</code>, with <code>fib(0) = 0</code> and <code>fib(1) = 1</code>.</p>
+<div class="example qa">
+<div class="example-title">Worked example — Fibonacci</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Compute <code>fib(5)</code> and show how dynamic programming avoids repeated work.</p>
+<p><code>fib(n) = fib(n-1) + fib(n-2)</code>, with <code>fib(0) = 0</code> and <code>fib(1) = 1</code>.</p></div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
 <pre><code>fib(5) = fib(4) + fib(3)
        = (fib(3)+fib(2)) + (fib(2)+fib(1))
        = ...</code></pre>
@@ -347,7 +352,11 @@
 <tbody>
 <tr><td>fib(n)</td><td>0</td><td>1</td><td>1</td><td>2</td><td>3</td><td>5</td></tr>
 </tbody></table></div>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
 <p>Time Θ(n), space Θ(n), or Θ(1) if only the last two values are kept.</p>
+</div>
+</div>
 <h3 id="1-7-top-down-and-bottom-up">1.7 Top-down and bottom-up</h3>
 <div class="table-scroll"><table>
 <thead><tr><th>Style</th><th>How it works</th><th>Use</th></tr></thead>
@@ -421,6 +430,10 @@ cost(i, j) = min over edges (j, l) with l in stage i+1 of [ c(j, l) + cost(i+1, 
       v = D[v]
   print n</code></pre>
 <h3 id="2-6-worked-example-twelve-vertices-five-stages">2.6 Worked example — twelve vertices, five stages</h3>
+<div class="example qa">
+<div class="example-title">Worked example — twelve vertices, five stages</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Find the minimum-cost path from vertex 1 to vertex 12.</p>
 <p>The class graph has 12 vertices in five stages:</p>
 <ul>
 <li><code>S₁ = {1}</code>, <code>S₂ = {2,3,4,5}</code>, <code>S₃ = {6,7,8}</code>, <code>S₄ = {9,10,11}</code>, <code>S₅ = {12}</code>.</li>
@@ -538,7 +551,8 @@ cost(i, j) = min over edges (j, l) with l in stage i+1 of [ c(j, l) + cost(i+1, 
 <g font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="10" fill="var(--muted)"><text x="70" y="26" text-anchor="middle">source</text><text x="650" y="26" text-anchor="middle">sink</text></g>
 </svg>
 <figcaption>Figure 1 — the twelve-vertex five-stage graph</figcaption>
-</figure>
+</figure></div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
 <p><strong>Stage 4.</strong> Every vertex in stage 4 has one edge to the sink:</p>
 <div class="table-scroll"><table>
 <thead><tr><th>j</th><th>edge</th><th>cost(4, j)</th><th>D[j]</th></tr></thead>
@@ -570,8 +584,12 @@ cost(i, j) = min over edges (j, l) with l in stage i+1 of [ c(j, l) + cost(i+1, 
 <tbody>
 <tr><td>1</td><td>1–2: 9+7 = 16; 1–3: 7+9 = 16; 1–4: 3+18 = 21; 1–5: 2+15 = 17</td><td><strong>16</strong></td><td>2</td></tr>
 </tbody></table></div>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
 <p>The minimum cost is <strong>16</strong>. Following <code>D</code>: 1 → 2 → 7 → 10 → 12, with cost 9 + 2 + 3 + 2 = 16.</p>
 <p><strong>Tie note.</strong> <code>1 → 3 → 6 → 10 → 12</code> also costs 7 + 2 + 5 + 2 = 16. The table records <code>D[1] = 2</code> only because the candidates are examined in increasing order and <code>&lt;</code> keeps the first minimum. In an examination, state the tie: <em>the optimal cost is 16, and one optimal path is 1–2–7–10–12; 1–3–6–10–12 is an equally optimal path.</em> A complete answer mentions both.</p>
+</div>
+</div>
 <h3 id="2-7-full-trace">2.7 Full trace</h3>
 <div class="table-scroll"><table>
 <thead><tr><th>Stage</th><th>Vertex</th><th>Computation</th><th>cost</th><th>D</th></tr></thead>
@@ -650,12 +668,17 @@ PRINT-PATH(i, j)
           i = next[i][j]
           print i</code></pre>
 <h3 id="3-6-worked-example-four-vertices">3.6 Worked example — four vertices</h3>
+<div class="example qa">
+<div class="example-title">Worked example — four vertices</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Find the shortest distance between every pair of vertices of this graph.</p>
 <p>Weight matrix (∞ means no direct edge):</p>
 <pre><code>       1    2    3    4
 1      0    8    ∞    1
 2      ∞    0    1    ∞
 3      4    ∞    0    ∞
-4      ∞    2    9    0</code></pre>
+4      ∞    2    9    0</code></pre></div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
 <p><strong>Initial matrix D⁰</strong></p>
 <div class="table-scroll"><table>
 <thead><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
@@ -711,6 +734,8 @@ PRINT-PATH(i, j)
 <li><code>D[1][3] = min(9, 1 + 3) = 4</code></li>
 <li><code>D[3][2] = min(12, 5 + 2) = 7</code></li>
 </ul>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
 <div class="table-scroll"><table>
 <thead><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
 <tbody>
@@ -721,6 +746,8 @@ PRINT-PATH(i, j)
 </tbody></table></div>
 <p>For example, <code>D[2][4] = 6</code> is realised by 2 → 3 → 1 → 4: 1 + 4 + 1 = 6. Check with the <code>next</code> matrix: <code>next[2][4] = 3</code> (set at pivot 3), <code>next[3][4] = 1</code> (set at pivot 1), <code>next[1][4] = 4</code>. Path: 2, 3, 1, 4. ✓</p>
 <p><code>D[4][1] = 7</code> is realised by 4 → 2 → 3 → 1: 2 + 1 + 4 = 7. ✓</p>
+</div>
+</div>
 <h3 id="3-7-full-trace">3.7 Full trace</h3>
 <div class="table-scroll"><table>
 <thead><tr><th>Pivot</th><th>Cells improved</th><th>D after the pivot (rows 1–4)</th></tr></thead>
@@ -790,8 +817,13 @@ m[i, w] = max( m[i-1, w],  pᵢ + m[i-1, w - wᵢ] )    if wᵢ ≤ w</code></pr
           x[i] = 0
   return m[n][M], x</code></pre>
 <h3 id="4-6-worked-example-four-items-capacity-5">4.6 Worked example — four items, capacity 5</h3>
+<div class="example qa">
+<div class="example-title">Worked example — four items, capacity 5</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Solve this 0/1 knapsack instance and say which items are taken.</p>
 <p><code>n = 4</code>, <code>M = 5</code>, weights <code>(2, 3, 4, 5)</code>, profits <code>(3, 4, 5, 6)</code>.</p>
-<p>Base: row 0 is all zeros, column 0 is all zeros.</p>
+<p>Base: row 0 is all zeros, column 0 is all zeros.</p></div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
 <p><strong>Row 1 (item 1: w = 2, p = 3).</strong> For <code>w &lt; 2</code>, copy row 0. For <code>w ≥ 2</code>, compare "leave" (0) with "take" (3 + 0 = 3).</p>
 <div class="table-scroll"><table>
 <thead><tr><th>i \ w</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
@@ -839,8 +871,12 @@ m[i, w] = max( m[i-1, w],  pᵢ + m[i-1, w - wᵢ] )    if wᵢ ≤ w</code></pr
 <tr><td>3</td><td>0</td><td>0</td><td>3</td><td>4</td><td>5</td><td>7</td></tr>
 <tr><td>4</td><td>0</td><td>0</td><td>3</td><td>4</td><td>5</td><td><strong>7</strong></td></tr>
 </tbody></table></div>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
 <p>The maximum profit is <strong>7</strong>.</p>
 <p><strong>Reconstruction.</strong> Start at <code>m[4][5] = 7</code>. <code>m[3][5] = 7</code>, so item 4 is not taken; move to <code>(3,5)</code>. <code>m[2][5] = 7</code>, so item 3 is not taken; move to <code>(2,5)</code>. <code>m[1][5] = 3 ≠ 7</code>, so item 2 is taken; <code>w = 5 − 3 = 2</code>, move to <code>(1,2)</code>. <code>m[0][2] = 0 ≠ 3</code>, so item 1 is taken; <code>w = 0</code>. Therefore <code>X = (1, 1, 0, 0)</code>, total weight 5, profit 7.</p>
+</div>
+</div>
 <h3 id="4-7-full-trace">4.7 Full trace</h3>
 <div class="table-scroll"><table>
 <thead><tr><th>Cell</th><th>Leave</th><th>Take</th><th>m[i][w]</th><th>Decision</th></tr></thead>
@@ -925,6 +961,10 @@ g(i, S) = min over j in S of [ c(i, j) + g(j, S − {j}) ]</code></pre>
           first = j
   return best, first, choice</code></pre>
 <h3 id="5-6-worked-example-four-cities">5.6 Worked example — four cities</h3>
+<div class="example qa">
+<div class="example-title">Worked example — four cities</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Find the minimum-cost tour that starts and ends at A.</p>
 <p>Cost matrix (the matrix used in Assignment 4 and in the IAT-2 question bank):</p>
 <div class="table-scroll"><table>
 <thead><tr><th>from \ to</th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead>
@@ -933,7 +973,8 @@ g(i, S) = min over j in S of [ c(i, j) + g(j, S − {j}) ]</code></pre>
 <tr><td><strong>B</strong></td><td>4</td><td>0</td><td>13</td><td>9</td></tr>
 <tr><td><strong>C</strong></td><td>2</td><td>13</td><td>0</td><td>8</td></tr>
 <tr><td><strong>D</strong></td><td>1</td><td>9</td><td>8</td><td>0</td></tr>
-</tbody></table></div>
+</tbody></table></div></div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
 <p>Write A = 1, B = 2, C = 3, D = 4, and start at A.</p>
 <p><strong>Base: <code>S = ∅</code>.</strong></p>
 <div class="table-scroll"><table>
@@ -970,12 +1011,16 @@ g(i, S) = min over j in S of [ c(i, j) + g(j, S − {j}) ]</code></pre>
 <tr><td>C</td><td>c(A,C) + g(C,{B,D}) = 2 + 21</td><td><strong>23</strong></td></tr>
 <tr><td>D</td><td>c(A,D) + g(D,{B,C}) = 1 + 24</td><td><strong>25</strong></td></tr>
 </tbody></table></div>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
 <p>The minimum tour cost is <strong>23</strong>. There are two optimal tours:</p>
 <ul>
 <li>via B: A → B → D → C → A, cost 4 + 9 + 8 + 2 = 23;</li>
 <li>via C: A → C → D → B → A, cost 2 + 8 + 9 + 4 = 23.</li>
 </ul>
 <p>The table stores the first minimum (<code>B</code>) because the loop examines B before C, but both must be reported.</p>
+</div>
+</div>
 <h3 id="5-7-full-trace">5.7 Full trace</h3>
 <div class="table-scroll"><table>
 <thead><tr><th>Subset size</th><th>States computed</th><th>Values</th></tr></thead>
@@ -1055,6 +1100,12 @@ PRINT-LCS(b, X, i, j)
       PRINT-LCS(b, X, i, j-1)</code></pre>
 <p>The reconstruction above prints the LCS in forward order because the recursive call happens before the <code>print</code>.</p>
 <h3 id="6-6-worked-example-x-acadb-y-cbda">6.6 Worked example — X = ACADB, Y = CBDA</h3>
+<div class="example qa">
+<div class="example-title">Worked example — X = ACADB, Y = CBDA</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Find a longest common subsequence of <code>X = ACADB</code> and <code>Y = CBDA</code>.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
 <p>Rows are prefixes of X, columns are prefixes of Y.</p>
 <div class="table-scroll"><table>
 <thead><tr><th>c</th><th>—</th><th>C</th><th>B</th><th>D</th><th>A</th></tr></thead>
@@ -1084,9 +1135,19 @@ PRINT-LCS(b, X, i, j)
 <li><code>(2,2)</code>: C ≠ B, <code>c[1][2] = 0</code>, <code>c[2][1] = 1</code> → left to <code>(2,1)</code>.</li>
 <li><code>(2,1)</code>: C = C → output <strong>C</strong>, go to <code>(1,0)</code>; stop.</li>
 </ul>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
 <p>Output in reverse is A, C; forward is <strong>CA</strong>.</p>
 <p>If ties are broken by moving left instead, the same table yields <strong>CB</strong>. Both are correct. State the tie-break rule you use.</p>
+</div>
+</div>
 <h3 id="6-7-worked-example-2-x-savant-y-advent">6.7 Worked example 2 — X = SAVANT, Y = ADVENT</h3>
+<div class="example qa">
+<div class="example-title">Worked example 2 — X = SAVANT, Y = ADVENT</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Find a longest common subsequence of <code>X = SAVANT</code> and <code>Y = ADVENT</code>.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
 <div class="table-scroll"><table>
 <thead><tr><th>c</th><th>—</th><th>A</th><th>D</th><th>V</th><th>E</th><th>N</th><th>T</th></tr></thead>
 <tbody>
@@ -1108,7 +1169,11 @@ PRINT-LCS(b, X, i, j)
 <li><code>(2,2)</code>: A ≠ D, tie at 0 → left; <code>(2,1)</code>.</li>
 <li><code>(2,1)</code>: A = A → <strong>A</strong>; <code>(1,0)</code>; stop.</li>
 </ul>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
 <p>Output <strong>AVNT</strong>, length 4.</p>
+</div>
+</div>
 <h3 id="6-8-complexity">6.8 Complexity</h3>
 <p>The table has <code>(m+1)(n+1)</code> cells, each filled in constant time: <strong>Θ(mn)</strong> time. Space is <strong>Θ(mn)</strong> for the table and arrows. If only the length is required, two rows (or two columns) suffice, giving <strong>Θ(min(m, n))</strong> space. Recovering the actual subsequence in linear space needs Hirschberg's divide-and-conquer variant; that is beyond the syllabus, but mentioning it is a bonus.</p>
 <h3 id="6-9-common-mistakes">6.9 Common mistakes</h3>
