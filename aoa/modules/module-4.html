@@ -92,11 +92,12 @@
   .qa-final-text { margin:0; font-weight:700; }
   .qa-list { margin:.3rem 0 0; padding-left:1.2rem; }
   .qa-list li { margin-bottom:.2rem; }
-  figure { margin:1.75rem 0; }
-  svg { width:100%; max-width:100%; height:auto; display:block; margin:0 auto; padding:.5rem; background:var(--bg); border:1px solid var(--line); }
+  figure { max-width:100%; margin:1rem auto; }
+  /* Match DSGT: keep diagrams comfortably inside the reading column. */
+  svg { width:100%; max-width:440px; height:auto; display:block; margin:1rem auto; padding:.5rem; background:var(--bg); border:1px solid var(--line); }
   figcaption { font-size:.82rem; color:var(--muted); margin-top:.5rem; line-height:1.45; }
-  .fig-wide { margin-left:calc(50% - 50vw + 1rem); margin-right:calc(50% - 50vw + 1rem); }
-  .fig-wide svg { max-width:100%; }
+  .fig-wide { max-width:100%; margin:1rem auto; }
+  .fig-wide svg { max-width:440px; }
   footer { margin-top:3.5rem; padding-top:1.25rem; border-top:1px solid var(--line); color:var(--muted);
            font-size:.83rem; line-height:1.5; text-align:center; }
   ::selection { background:var(--ink); color:var(--bg); }
