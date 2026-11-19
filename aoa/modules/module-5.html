@@ -147,9 +147,96 @@
     .topbar { display:none; }
   }
 </style>
+<style id="rail-style">
+  /* Section progress. Phone UI by default (top line + edge tab + bottom sheet);
+     margin rail on wide screens with a mouse. Colours come from the theme variables. */
+  .rail { display:none; }
+  .rm-bar { position:fixed; top:0; left:0; height:3px; width:var(--w,0%); background:var(--accent); z-index:30; pointer-events:none; }
+  .rm-tab { position:fixed; left:env(safe-area-inset-left,0px); bottom:calc(14px + env(safe-area-inset-bottom,0px)); z-index:30; display:flex; align-items:center; width:44px; height:44px; padding:0; border:0; background:transparent; font:inherit; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+  .rm-tab span { display:flex; align-items:center; justify-content:center; min-width:26px; height:28px; padding:0 .35rem; font:700 .66rem/1 var(--font-mono); letter-spacing:.04em; font-variant-numeric:tabular-nums; color:var(--ink); background:var(--bg); border:1px solid var(--rule); border-left:0; opacity:.5; transition:opacity .25s; }
+  body.rm-moving .rm-tab span { opacity:.15; }
+  .rm-tab:hover span, .rm-tab:focus-visible span, .rm-tab[aria-expanded="true"] span { opacity:1; }
+  .rm-tab:focus-visible { outline:2px solid var(--ink); outline-offset:-2px; }
+  .rm-back { position:fixed; inset:0; z-index:40; background:rgba(0,0,0,.4); opacity:0; pointer-events:none; transition:opacity .2s; }
+  .rm-sheet { position:fixed; left:0; right:0; bottom:0; z-index:50; max-height:68vh; overflow-y:auto; background:var(--bg); border-top:1px solid var(--ink); padding-bottom:env(safe-area-inset-bottom,0px); transform:translateY(102%); visibility:hidden; transition:transform .22s ease, visibility 0s .22s; }
+  body.rm-open .rm-back { opacity:1; pointer-events:auto; }
+  body.rm-open .rm-sheet { transform:none; visibility:visible; transition-delay:0s; }
+  .rm-head { position:sticky; top:0; z-index:2; display:flex; align-items:center; justify-content:space-between; padding:.7rem 1rem; background:var(--bg); border-bottom:1px solid var(--line); font:600 .65rem/1 var(--font-mono); letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  .rm-head b { color:var(--ink); }
+  .rm-sheet ol { list-style:none; margin:0; padding:.3rem 0 .6rem; }
+  .rm-sheet a { display:grid; grid-template-columns:1.9rem 1fr; align-items:center; min-height:44px; padding:0 1rem; color:var(--muted); text-decoration:none; font-size:.92rem; font-weight:600; border-left:3px solid transparent; }
+  .rm-sheet a .rm-k { font:600 .7rem/1 var(--font-mono); letter-spacing:.04em; }
+  .rm-sheet a.is-done { color:var(--ink); }
+  .rm-sheet a.is-done .rm-k { color:var(--muted); }
+  .rm-sheet a[aria-current="true"] { color:var(--ink); border-left-color:var(--accent); background:var(--accent-soft); font-family:var(--font-serif); font-weight:700; }
+  .rm-sheet a[aria-current="true"] .rm-k { color:var(--accent); }
+  .rm-sheet a:focus-visible { outline:2px solid var(--ink); outline-offset:-2px; }
+
+  .rail { position:fixed; left:14px; top:50%; transform:translateY(-50%); z-index:20; font-family:var(--font-sans); color:var(--muted); }
+  .rail-in { position:relative; padding:.5rem .6rem .6rem .5rem; border:1px solid transparent; background:transparent; transition:background .15s, border-color .15s; }
+  .rail:hover .rail-in, .rail:focus-within .rail-in { background:var(--bg); border-color:var(--line); }
+  .rail-top { display:flex; align-items:flex-end; gap:.5rem; margin:0 0 .7rem; min-height:2.1rem; }
+  .rail-sec { font-family:var(--font-serif); font-size:1.7rem; line-height:.9; color:var(--ink); font-variant-numeric:tabular-nums; letter-spacing:-.02em; }
+  .rail-meta { display:flex; flex-direction:column; gap:.1rem; font:600 .6rem/1.1 var(--font-mono); letter-spacing:.08em; text-transform:uppercase; padding-bottom:.1rem; }
+  .rail-meta b { font-weight:700; color:var(--ink); }
+  .rail-toggle { margin-left:auto; align-self:flex-start; font:inherit; font-size:.8rem; line-height:1; width:1.3rem; height:1.3rem; padding:0; color:var(--muted); background:var(--bg); border:1px solid var(--line); border-radius:0; cursor:pointer; opacity:.55; transition:opacity .15s; }
+  .rail:hover .rail-toggle, .rail-toggle:focus-visible { opacity:1; }
+  .rail-toggle:hover { color:var(--ink); border-color:var(--ink); }
+  .rail-toggle:focus-visible, .rail a:focus-visible { outline:2px solid var(--ink); outline-offset:2px; }
+  .rail-list { position:relative; list-style:none; margin:0; padding:0; max-height:calc(100vh - 11rem); overflow-y:auto; overflow-x:hidden; scrollbar-width:none; }
+  .rail-list::-webkit-scrollbar { display:none; }
+  .rail-list::before { content:""; position:absolute; left:4px; top:0; bottom:0; width:1px; background:var(--rule); opacity:.55; }
+  .rail-fill { position:absolute; left:3.5px; top:0; width:2px; height:var(--fill,0px); background:var(--accent); }
+  .rail a { position:relative; display:grid; grid-template-columns:9px 1.55rem auto; align-items:center; column-gap:.55rem; height:1.45rem; color:inherit; text-decoration:none; }
+  .rail .node { width:7px; height:7px; box-sizing:border-box; border:1px solid var(--rule); background:var(--bg); justify-self:center; }
+  .rail a.is-done .node { background:var(--muted); border-color:var(--muted); }
+  .rail .num { font:600 .62rem/1 var(--font-mono); letter-spacing:.04em; font-variant-numeric:tabular-nums; }
+  .rail .lbl { display:none; font-size:.74rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:14rem; }
+  .rail-sublist { list-style:none; margin:0 0 .3rem 1.65rem; padding:0 0 0 .55rem; border-left:1px solid var(--line); }
+  .rail-sublist a { grid-template-columns:1rem minmax(0,1fr); column-gap:.3rem; height:1.2rem; padding-left:.1rem; }
+  .rail-sublist .sub-lbl { display:block; font-size:.68rem; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .rail-sublist .sub-num { font:600 .62rem/1 var(--font-mono); color:var(--accent); }
+  .rail-sublist a[aria-current="location"] { color:var(--accent); font-weight:700; }
+  .rail.is-collapsed .rail-sublist { display:none; }
+  .rm-sublist { margin:0 0 .35rem 2.65rem !important; padding:.15rem 0 .25rem .65rem !important; border-left:1px solid var(--line); }
+  .rm-sublist a { grid-template-columns:1.1rem minmax(0,1fr); min-height:34px; padding:.25rem .5rem; border-left:0; font-size:.84rem; }
+  .rm-sublist a[aria-current="location"] { color:var(--accent); background:var(--accent-soft); }
+
+  .rail a:hover { color:var(--ink); }
+  .rail a:hover .node { border-color:var(--ink); }
+  .rail a[aria-current="true"] { color:var(--ink); }
+  .rail a[aria-current="true"] .node { width:9px; height:9px; border-color:var(--accent); background:linear-gradient(to top, var(--accent) calc(var(--p,0) * 100%), var(--bg) 0); box-shadow:0 0 0 3px var(--accent-soft); }
+  .rail a[aria-current="true"] .num { color:var(--accent); }
+  .rail a[aria-current="true"] .lbl { display:block; font-family:var(--font-serif); font-size:.82rem; font-weight:700; max-width:clamp(0px, calc(50vw - 25.5rem), 14rem); }
+  .rail:hover .lbl, .rail:focus-within .lbl, .rail:hover a[aria-current="true"] .lbl, .rail:focus-within a[aria-current="true"] .lbl { display:block; max-width:14rem; }
+  .rail.is-collapsed .rail-in { padding:.5rem .4rem; background:transparent !important; border-color:transparent !important; }
+  .rail.is-collapsed .rail-top { flex-direction:column; align-items:flex-start; gap:.4rem; margin-bottom:.5rem; min-height:0; }
+  .rail.is-collapsed .rail-sec, .rail.is-collapsed .rail-meta, .rail.is-collapsed .num, .rail.is-collapsed .lbl { display:none !important; }
+  .rail.is-collapsed .rail-toggle { margin:0 0 0 -.25rem; }
+  .rail.is-collapsed a { grid-template-columns:9px; height:1.15rem; }
+  .rail.is-collapsed .node { width:5px; height:5px; }
+  .rail.is-collapsed a[aria-current="true"] .node { width:7px; height:7px; box-shadow:0 0 0 2px var(--accent-soft); }
+  .rail.is-collapsed .rail-list { max-height:calc(100vh - 8rem); }
+
+  @media (min-width:900px) and (pointer:fine) {
+    .rm-tab, .rm-back, .rm-sheet { display:none; }
+    .rm-bar { display:block; }
+    .rail { display:block; }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    .rm-sheet, .rm-back, .rm-tab span, .rail-in { transition:none; }
+  }
+  /* Show children only for the section currently being read. */
+  .rail-list > li > .rail-sublist { display:none; }
+  .rail-list > li > a[aria-current="true"] ~ .rail-sublist { display:block; }
+  .rail.is-collapsed .rail-list > li > .rail-sublist { display:none; }
+  .rm-sheet > ol > li > .rm-sublist { display:none; }
+  .rm-sheet > ol > li > a[aria-current="true"] ~ .rm-sublist { display:block; }
+  @media print { .rail, .rm-bar, .rm-tab, .rm-back, .rm-sheet { display:none !important; } }
+
+</style>
 </head>
 <body>
-<div class="progress" id="bar" aria-hidden="true"></div>
 <div class="wrap">
   <div class="topbar"><a class="back" href="/aoa">&#8592; All modules</a><button class="theme-toggle" type="button" id="themeToggle"></button></div>
 
@@ -249,7 +336,17 @@
   // returning from the loop means no value worked: backtrack to level k-1</code></pre>
 <p>The iterative version keeps an explicit stack; the recursive version is what examiners expect because it shows the tree directly.</p>
 <h3 id="1-6-worked-example-a-tiny-state-space-tree">1.6 Worked example — a tiny state-space tree</h3>
-<p>Variables <code>x₁, x₂</code> with domain <code>{0, 1}</code> and the constraint <code>x₁ ≠ x₂</code>. The tree has a root, two level-1 nodes and four leaves. The branch <code>x₁ = 1, x₂ = 1</code> is non-promising and pruned; the other two leaves are solutions <code>(0,1)</code> and <code>(1,0)</code>. The search visits <code>(0,0)</code>, <code>(0,1)</code>, <code>(1,0)</code>, <code>(1,1)</code> in depth-first order and prunes only the last. For a small tree the saving is invisible; for N-queens it is enormous.</p>
+<div class="example qa">
+<div class="example-title">Worked example</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Draw the state-space tree for variables <code>x₁, x₂ ∈ {0, 1}</code> with the constraint <code>x₁ ≠ x₂</code>, and find all solutions.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Variables <code>x₁, x₂</code> with domain <code>{0, 1}</code> and the constraint <code>x₁ ≠ x₂</code>. The tree has a root, two level-1 nodes and four leaves. The leaves <code>(0,0)</code> and <code>(1,1)</code> violate <code>x₁ ≠ x₂</code> and are rejected; the other two leaves are solutions <code>(0,1)</code> and <code>(1,0)</code>. The search visits <code>(0,0)</code>, <code>(0,1)</code>, <code>(1,0)</code>, <code>(1,1)</code> in depth-first order. For a small tree the saving is invisible; for N-queens it is enormous.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> the solutions are <code>(0, 1)</code> and <code>(1, 0)</code>; the leaves <code>(0, 0)</code> and <code>(1, 1)</code> are rejected.</p></div>
+</div>
 <h3 id="1-7-complexity">1.7 Complexity</h3>
 <p>Worst case the tree has <code>b^d</code> nodes, where <code>b</code> is the branching factor and <code>d</code> the depth, so time is <strong>O(b^d)</strong>; pruning reduces the constant and often the exponent in practice, but does not change the worst-case bound. Space is <strong>O(d)</strong> for the recursion stack plus the solution array. This is why backtracking can handle <code>n = 8</code> queens but not <code>n = 30</code>.</p>
 <h3 id="1-8-common-mistakes">1.8 Common mistakes</h3>
@@ -301,32 +398,38 @@ PLACE(k, j)
   return true</code></pre>
 <p>For a single solution, replace the <code>print</code> with a global flag and stop the recursion once the flag is set.</p>
 <h3 id="2-6-worked-example-four-queens">2.6 Worked example — four queens</h3>
+<div class="example qa">
+<div class="example-title">Worked example</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Use backtracking to place four queens on a 4 × 4 board and find the first solution.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
 <p>Rows are 1–4, columns 1–4. The trace below is the actual depth-first search.</p>
 <div class="table-scroll"><table>
 <thead><tr><th>Step</th><th>Action</th><th>Reason</th><th>Result</th></tr></thead>
 <tbody>
 <tr><td>1</td><td>Q1 = 1</td><td>first column</td><td>promising</td></tr>
 <tr><td>2</td><td>Q2 = 1</td><td>same column as Q1</td><td>rejected</td></tr>
-<tr><td>3</td><td>Q2 = 2</td><td>diagonal with Q1 (</td><td>2−1</td></tr>
+<tr><td>3</td><td>Q2 = 2</td><td>diagonal with Q1 (|2−1| = 1 = row difference)</td><td>rejected</td></tr>
 <tr><td>4</td><td>Q2 = 3</td><td>column free, diagonals free</td><td>promising</td></tr>
 <tr><td>5</td><td>Q3 = 1</td><td>same column as Q1</td><td>rejected</td></tr>
-<tr><td>6</td><td>Q3 = 2</td><td>diagonal with Q2 (</td><td>2−3</td></tr>
+<tr><td>6</td><td>Q3 = 2</td><td>diagonal with Q2 (|2−3| = 1 = row difference)</td><td>rejected</td></tr>
 <tr><td>7</td><td>Q3 = 3</td><td>same column as Q2</td><td>rejected</td></tr>
-<tr><td>8</td><td>Q3 = 4</td><td>diagonal with Q2 (</td><td>4−3</td></tr>
+<tr><td>8</td><td>Q3 = 4</td><td>diagonal with Q2 (|4−3| = 1 = row difference)</td><td>rejected</td></tr>
 <tr><td>9</td><td>Q2 = 4</td><td>column free</td><td>promising</td></tr>
 <tr><td>10</td><td>Q3 = 1</td><td>same column as Q1</td><td>rejected</td></tr>
-<tr><td>11</td><td>Q3 = 2</td><td>column is free; diagonals with Q2 (</td><td>2−4</td></tr>
+<tr><td>11</td><td>Q3 = 2</td><td>column is free; diagonals with Q2 (|2−4| = 2 ≠ 1) and Q1 (|2−1| = 1 ≠ 2)</td><td>promising</td></tr>
 <tr><td>12</td><td>Q4 = 1</td><td>same column as Q1</td><td>rejected</td></tr>
 <tr><td>13</td><td>Q4 = 2</td><td>same column as Q3</td><td>rejected</td></tr>
-<tr><td>14</td><td>Q4 = 3</td><td>diagonal with Q3 (</td><td>3−2</td></tr>
+<tr><td>14</td><td>Q4 = 3</td><td>diagonal with Q3 (|3−2| = 1 = row difference)</td><td>rejected</td></tr>
 <tr><td>15</td><td>Q4 = 4</td><td>same column as Q2</td><td>rejected → backtrack to Q3</td></tr>
-<tr><td>16</td><td>Q3 = 3</td><td>diagonal with Q2 (</td><td>3−4</td></tr>
+<tr><td>16</td><td>Q3 = 3</td><td>diagonal with Q2 (|3−4| = 1 = row difference)</td><td>rejected</td></tr>
 <tr><td>17</td><td>Q3 = 4</td><td>same column as Q2</td><td>rejected → backtrack to Q2</td></tr>
 <tr><td>18</td><td>Q2 has no more columns</td><td>backtrack to Q1</td><td>—</td></tr>
 <tr><td>19</td><td>Q1 = 2</td><td>next column</td><td>promising</td></tr>
-<tr><td>20</td><td>Q2 = 1</td><td>diagonal with Q1 (</td><td>1−2</td></tr>
+<tr><td>20</td><td>Q2 = 1</td><td>diagonal with Q1 (|1−2| = 1 = row difference)</td><td>rejected</td></tr>
 <tr><td>21</td><td>Q2 = 2</td><td>same column as Q1</td><td>rejected</td></tr>
-<tr><td>22</td><td>Q2 = 3</td><td>diagonal with Q1 (</td><td>3−2</td></tr>
+<tr><td>22</td><td>Q2 = 3</td><td>diagonal with Q1 (|3−2| = 1 = row difference)</td><td>rejected</td></tr>
 <tr><td>23</td><td>Q2 = 4</td><td>column and diagonals free</td><td>promising</td></tr>
 <tr><td>24</td><td>Q3 = 1</td><td>free with Q1 and Q2</td><td>promising</td></tr>
 <tr><td>25</td><td>Q4 = 1</td><td>same column as Q3</td><td>rejected</td></tr>
@@ -375,6 +478,10 @@ PLACE(k, j)
 <figcaption>Figure 1 — the first 4-queens solution, (2, 4, 1, 3)</figcaption>
 </figure>
 <p>The first branch <code>Q1 = 1</code> is exhausted without a solution: step 8 kills <code>Q2 = 3</code>, and steps 14–17 kill <code>Q2 = 4</code>. That is 17 steps with no solution. Backtracking then tries <code>Q1 = 2</code>, and the solution appears at step 27. The ability to abandon a whole subtree at step 8 and again at step 17 is the point of the method.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> <code>(Q₁, Q₂, Q₃, Q₄) = (2, 4, 1, 3)</code>: row 1 column 2, row 2 column 4, row 3 column 1, row 4 column 3, found at step 27.</p></div>
+</div>
 <h3 id="2-7-the-8-queens-instance">2.7 The 8-queens instance</h3>
 <p>The same algorithm with <code>n = 8</code> has <strong>92 solutions</strong>. A naive enumeration would examine <code>8⁸ = 16,777,216</code> tuples; the column and diagonal tests prune almost all of them. The first solution found by the standard column order is <code>(1, 5, 8, 6, 3, 7, 2, 4)</code>. The counting variant is a common examination question; the answer 92 is worth memorising, and the method is more important than the number.</p>
 <h3 id="2-8-complexity">2.8 Complexity</h3>
@@ -432,6 +539,12 @@ s + r ≥ m             (the remaining weights can still reach m)</code></pre>
   SUBSET-SUM(i+1, s, r - w[i])</code></pre>
 <p>This version prints a solution as soon as <code>s = m</code> and does not explore its extensions; that is correct because all weights are positive, so extending an exact sum would overshoot.</p>
 <h3 id="3-6-worked-example-n-4-m-17-w-2-7-8-15">3.6 Worked example — n = 4, m = 17, w = (2, 7, 8, 15)</h3>
+<div class="example qa">
+<div class="example-title">Worked example</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Find all subsets of <code>(2, 7, 8, 15)</code> whose sum is <code>m = 17</code> using backtracking.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
 <p>Total <code>r = 32</code>. The trace below is the complete depth-first search.</p>
 <div class="table-scroll"><table>
 <thead><tr><th>Step</th><th>Level</th><th>Decision</th><th>s</th><th>r after</th><th>Test</th><th>Result</th></tr></thead>
@@ -464,6 +577,10 @@ s + r ≥ m             (the remaining weights can still reach m)</code></pre>
 <tr><td>26</td><td>3</td><td>exclude 8</td><td>0</td><td>15</td><td>0 + 15 &lt; 17</td><td>prune</td></tr>
 </tbody></table></div>
 <p><strong>Solutions:</strong> <code>{2, 7, 8}</code> and <code>{2, 15}</code>. Both sum to 17. The second is easy to miss if the search stops after the first solution; the question "find all subsets" requires continuing the traversal.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> the solutions are <code>{2, 7, 8}</code> and <code>{2, 15}</code>.</p></div>
+</div>
 <h3 id="3-7-complexity">3.7 Complexity</h3>
 <p>The tree has at most <code>2ⁿ</code> leaves and <code>2ⁿ⁺¹ − 1</code> nodes, so the worst case is <strong>O(2ⁿ)</strong> time and <strong>O(n)</strong> space for the recursion. The bounding tests do not change the worst case (if every subset is promising) but prune heavily in typical instances. The DP alternative is O(nm) time and O(nm) or O(m) space, which is better when <code>m</code> is small; backtracking is the prescribed method and is preferable when the question asks for all subsets or a search tree.</p>
 <h3 id="3-8-common-mistakes">3.8 Common mistakes</h3>
@@ -514,7 +631,12 @@ SAFE(k, c)
           return false
   return true</code></pre>
 <h3 id="4-6-worked-example-five-vertices-three-colours">4.6 Worked example — five vertices, three colours</h3>
-<p>Graph edges: 1–2, 1–3, 2–3, 2–4, 2–5, 3–5, 4–5. Colour with <code>m = 3</code>. The graph and the final colouring are shown in Figure 2.</p>
+<div class="example qa">
+<div class="example-title">Worked example</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Find a 3-colouring of this graph by backtracking and show the trace.</p>
+<p>Graph edges: 1–2, 1–3, 2–3, 2–4, 2–5, 3–5, 4–5. Colour with <code>m = 3</code>. The graph and the final colouring are shown in Figure 2.</p></div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
 <figure class="fig-wide">
 <svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="graph5-t graph5-d">
   <title id="graph5-t">Five vertex graph used for the graph colouring example</title>
@@ -556,7 +678,7 @@ SAFE(k, c)
 <tr><td>5</td><td>3</td><td>2</td><td>adjacent to 2 (colour 2)</td><td>reject</td></tr>
 <tr><td>6</td><td>3</td><td>3</td><td>none</td><td>x3 = 3, promising</td></tr>
 <tr><td>7</td><td>4</td><td>1</td><td>adjacent to 2 (colour 2) only</td><td>x4 = 1, promising</td></tr>
-<tr><td>8</td><td>5</td><td>1</td><td>adjacent to 1 (colour 1)</td><td>reject</td></tr>
+<tr><td>8</td><td>5</td><td>1</td><td>adjacent to 4 (colour 1)</td><td>reject</td></tr>
 <tr><td>9</td><td>5</td><td>2</td><td>adjacent to 2 (colour 2)</td><td>reject</td></tr>
 <tr><td>10</td><td>5</td><td>3</td><td>adjacent to 3 (colour 3)</td><td>reject → backtrack to 4</td></tr>
 <tr><td>11</td><td>4</td><td>1</td><td>undo</td><td>backtrack</td></tr>
@@ -566,6 +688,10 @@ SAFE(k, c)
 </tbody></table></div>
 <p><strong>Solution:</strong> <code>(1, 2, 3, 3, 1)</code>. Check every edge: 1–2 (1,2), 1–3 (1,3), 2–3 (2,3), 2–4 (2,3), 2–5 (2,1), 3–5 (3,1), 4–5 (3,1). All differ.</p>
 <p>The dead end at step 10 is the heart of the example: colouring vertex 4 with 1 looked locally fine, but it consumed the only colour that vertex 5 could use. Backtracking changes vertex 4 to 3 and succeeds.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> <code>(x₁, …, x₅) = (1, 2, 3, 3, 1)</code>, found after backtracking once at vertex 4.</p></div>
+</div>
 <h3 id="4-7-complexity">4.7 Complexity</h3>
 <p>The tree has at most <code>mⁿ</code> leaves, so the worst case is <strong>O(mⁿ)</strong> time and <strong>O(n)</strong> space. The <code>SAFE</code> test is O(n), so a naive bound is O(n·mⁿ); the pruning is what makes the search practical. Deciding whether a graph is <code>m</code>-colourable is NP-complete for <code>m ≥ 3</code>, so no polynomial algorithm is known.</p>
 <h3 id="4-8-common-mistakes">4.8 Common mistakes</h3>
@@ -718,6 +844,10 @@ TSP-BB(C, n)
               if child.bound &lt; incumbent: insert child into live
   return incumbent</code></pre>
 <h3 id="6-6-worked-example-four-cities">6.6 Worked example — four cities</h3>
+<div class="example qa">
+<div class="example-title">Worked example</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Solve this travelling salesperson problem by branch and bound using reduced cost matrices.</p>
 <p>Cost matrix:</p>
 <div class="table-scroll"><table>
 <thead><tr><th>from \ to</th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead>
@@ -726,7 +856,8 @@ TSP-BB(C, n)
 <tr><td><strong>B</strong></td><td>4</td><td>∞</td><td>13</td><td>9</td></tr>
 <tr><td><strong>C</strong></td><td>2</td><td>13</td><td>∞</td><td>8</td></tr>
 <tr><td><strong>D</strong></td><td>1</td><td>9</td><td>8</td><td>∞</td></tr>
-</tbody></table></div>
+</tbody></table></div></div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
 <p><strong>Root reduction.</strong> Row minima: A = 1, B = 4, C = 2, D = 1; subtract them, total 8. Column minima of the reduced matrix: column B has 3, column C has 1; subtract, total 4. Root bound = 8 + 4 = <strong>12</strong>. Reduced matrix:</p>
 <div class="table-scroll"><table>
 <thead><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead>
@@ -805,6 +936,10 @@ TSP-BB(C, n)
 <figcaption>Figure 3 — least-cost branch and bound tree for the four-city TSP</figcaption>
 </figure>
 <p><strong>A second optimal tour.</strong> A → C → D → B → A also costs 2 + 8 + 9 + 4 = 23. It is never generated because AC is pruned once the incumbent is 23. If the tie were broken the other way, AC would be expanded, ACD would complete at 23, and ABD would then be pruned. Either way the optimal cost is 23. State this in the answer.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> minimum tour cost <strong>23</strong>, by <code>A → B → D → C → A</code> (A → C → D → B → A also costs 23).</p></div>
+</div>
 <h3 id="6-7-full-trace">6.7 Full trace</h3>
 <div class="table-scroll"><table>
 <thead><tr><th>Step</th><th>Live node popped</th><th>Bound</th><th>Action</th><th>New live nodes</th></tr></thead>
@@ -873,6 +1008,10 @@ TSP-BB(C, n)
   return failure</code></pre>
 <p><code>MISPLACED(s)</code> counts tiles <code>t ≠ 0</code> with <code>s[r][c] ≠ goal[r][c]</code>; for a 4 × 4 board the maximum is 15, so the heuristic is bounded and cheap.</p>
 <h3 id="7-6-worked-example">7.6 Worked example</h3>
+<div class="example qa">
+<div class="example-title">Worked example</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Find a shortest move sequence for this 15-puzzle instance by branch and bound with <code>c(x) = f(x) + g(x)</code>.</p>
 <p>Start:</p>
 <pre><code>1  2  3  4
 5  6  7  8
@@ -882,7 +1021,8 @@ TSP-BB(C, n)
 <pre><code>1  2  3  4
 5  6  7  8
 9 10 11 12
-13 14 15  .</code></pre>
+13 14 15  .</code></pre></div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
 <p><strong>Start.</strong> Misplaced tiles: 12, 11, 15 → <code>g = 3</code>; <code>f = 0</code>; <code>c = 3</code>. The blank is at row 3, column 4. Legal moves: Left (swap 12), Up (swap 8), Down (swap 15).</p>
 <div class="table-scroll"><table>
 <thead><tr><th>Child</th><th>Move</th><th>Misplaced tiles</th><th>g</th><th>f</th><th>c</th></tr></thead>
@@ -1098,6 +1238,10 @@ TSP-BB(C, n)
 </figure>
 <p><strong>Why the sequence is optimal.</strong> The start has <code>g = 3</code>, so every solution needs at least 3 moves. The search found one in 3 moves, so it is optimal. This is the admissibility argument in one line, and it is worth writing in the examination.</p>
 <p><strong>A caution about the heuristic.</strong> If two tiles are swapped and both are misplaced, the misplaced-tile count is 2, but undoing a swap may take more moves; the estimate is still a lower bound, just weaker than Manhattan distance. The puzzle is solvable only when the permutation parity is even relative to the goal (for a 4 × 4 board); the search itself does not need this check, but a written answer may mention it.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> <code>Left, Down, Right</code>, three moves, which is optimal because the start has <code>g = 3</code>.</p></div>
+</div>
 <h3 id="7-7-full-trace">7.7 Full trace</h3>
 <div class="table-scroll"><table>
 <thead><tr><th>Step</th><th>Node popped</th><th>f</th><th>g</th><th>c</th><th>Action</th></tr></thead>
@@ -1334,12 +1478,6 @@ D     1    9    8    ∞</code></pre>
   function paint(){var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
   b.addEventListener('click',function(){var n=dark()?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('sg-theme',n);}catch(e){}paint();});
   paint();
-  var bar=document.getElementById('bar');
-  function onScroll(){
-    var h=document.documentElement.scrollHeight-innerHeight;
-    bar.style.width=(h>0?(scrollY/h)*100:0)+'%';
-  }
-  addEventListener('scroll',onScroll,{passive:true});onScroll();
   var links=[].slice.call(document.querySelectorAll('.nav a'));
   var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
   function mark(){
@@ -1348,6 +1486,157 @@ D     1    9    8    ∞</code></pre>
     links.forEach(function(a,i){if(i===c)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current');});
   }
   addEventListener('scroll',mark,{passive:true});mark();
+})();
+</script>
+<script>
+(function(){
+  var hs=[].slice.call(document.querySelectorAll('.wrap h2[id]'));
+  var subHeads=[].slice.call(document.querySelectorAll('.wrap [data-rail-subsection][id]'));
+  if(!hs.length)return;
+  function pad(n){return (n<10?'0':'')+n;}
+  function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
+  var names=hs.map(function(h){return h.textContent.trim();});
+  var subGroups=hs.map(function(){return [];});
+  var sectionIndex=-1;
+  Array.prototype.forEach.call(document.querySelectorAll('.wrap h2[id], .wrap [data-rail-subsection][id]'),function(h){
+    if(h.tagName==='H2'){sectionIndex=hs.indexOf(h);}
+    else if(sectionIndex>=0)subGroups[sectionIndex].push(h);
+  });
+
+  function makeSublist(parentLi,mobile,headings){
+    if(!headings.length)return [];
+    var list=el('ol',mobile?'rm-sublist':'rail-sublist');
+    var children=headings.map(function(h,i){
+      var li=el('li'),a=el('a',mobile?'rm-sub-link':'rail-sub-link');
+      var label=h.getAttribute('data-rail-label')||h.textContent.trim();
+      a.href='#'+h.id;a.title=label;
+      a.appendChild(el('span',mobile?'rm-k':'sub-num',String.fromCharCode(65+i)));
+      a.appendChild(el('span',mobile?'rm-sub-label':'sub-lbl',label));
+      li.appendChild(a);list.appendChild(li);
+      return {a:a,heading:h,done:false,top:0,mobile:null};
+    });
+    parentLi.appendChild(list);return children;
+  }
+
+  /* Wide screens: nested subsection links below their parent sections. */
+  var nav=el('nav','rail');nav.setAttribute('aria-label','Section progress');
+  var inn=el('div','rail-in'),top=el('div','rail-top'),sec=el('span','rail-sec','01'),meta=el('span','rail-meta');
+  var pct=el('b',null,'0%');meta.appendChild(el('span',null,'of '+pad(hs.length)));meta.appendChild(pct);
+  var tg=el('button','rail-toggle');tg.type='button';tg.setAttribute('aria-controls','railList');
+  top.appendChild(sec);top.appendChild(meta);top.appendChild(tg);
+  var ol=el('ol','rail-list');ol.id='railList';
+  var fill=el('span','rail-fill');fill.setAttribute('aria-hidden','true');ol.appendChild(fill);
+  var items=hs.map(function(h,i){
+    var li=el('li'),a=el('a'),nd=el('span','node');
+    a.href='#'+h.id;a.title=names[i];nd.setAttribute('aria-hidden','true');
+    a.appendChild(nd);a.appendChild(el('span','num',pad(i+1)));a.appendChild(el('span','lbl',names[i]));
+    li.appendChild(a);var children=makeSublist(li,false,subGroups[i]);
+    ol.appendChild(li);return {a:a,nd:nd,p:-1,done:false,subs:children};
+  });
+  inn.appendChild(top);inn.appendChild(ol);nav.appendChild(inn);document.body.appendChild(nav);
+
+  /* Phones and tablets: keep the same nested tree in the section sheet. */
+  var bar=el('div','rm-bar');bar.setAttribute('aria-hidden','true');
+  var tab=el('button','rm-tab');tab.type='button';tab.setAttribute('aria-haspopup','dialog');tab.setAttribute('aria-expanded','false');
+  var tn=el('span',null,'01');tab.appendChild(tn);
+  var back=el('div','rm-back'),sheet=el('div','rm-sheet');sheet.setAttribute('role','dialog');sheet.setAttribute('aria-label','Sections');
+  var sh=el('div','rm-head'),shp=el('b',null,'0%');sh.appendChild(el('span',null,'Sections'));sh.appendChild(shp);
+  var sol=el('ol');
+  var mitems=hs.map(function(h,i){
+    var li=el('li'),a=el('a');a.href='#'+h.id;a.appendChild(el('span','rm-k',pad(i+1)));a.appendChild(el('span',null,names[i]));
+    li.appendChild(a);var children=makeSublist(li,true,subGroups[i]);
+    sol.appendChild(li);a.addEventListener('click',function(){setSheet(false);});
+    children.forEach(function(child){child.mobile=child.a;child.a.addEventListener('click',function(){setSheet(false);});});
+    return {a:a,subs:children};
+  });
+  items.forEach(function(item,i){item.subs.forEach(function(child,j){child.mobile=mitems[i].subs[j].a;});});
+  sheet.appendChild(sh);sheet.appendChild(sol);
+  [bar,tab,back,sheet].forEach(function(n){document.body.appendChild(n);});
+  var moveT,cur=-2,currentSubItem=null,tick=false,centers=null,tops=[],end=0;
+
+  function setSheet(o,refocus){
+    document.body.classList.toggle('rm-open',o);tab.setAttribute('aria-expanded',String(o));
+    if(o){
+      var target=currentSubItem?currentSubItem.mobile:mitems[cur>=0?cur:0].a;
+      sheet.scrollTop+=target.getBoundingClientRect().top-sheet.getBoundingClientRect().top-sheet.clientHeight/3;
+      try{target.focus({preventScroll:true});}catch(e){}
+    }else if(refocus){tab.focus();}
+  }
+  tab.addEventListener('click',function(){setSheet(!document.body.classList.contains('rm-open'));});
+  back.addEventListener('click',function(){setSheet(false);});
+  addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('rm-open'))setSheet(false,true);});
+
+  var open;
+  try{var sv=localStorage.getItem('sg-rail');open=sv?sv==='o':innerWidth>=1100;}catch(e){open=innerWidth>=1100;}
+  function paintToggle(){
+    nav.classList.toggle('is-collapsed',!open);
+    tg.textContent=open?'\u2039':'\u203A';
+    tg.setAttribute('aria-expanded',String(open));
+    tg.setAttribute('aria-label',open?'Collapse section progress':'Expand section progress');
+    centers=null;req();
+  }
+  tg.addEventListener('click',function(){open=!open;try{localStorage.setItem('sg-rail',open?'o':'c');}catch(e){}paintToggle();});
+
+  function measure(){
+    var y=scrollY;
+    tops=hs.map(function(h){return h.getBoundingClientRect().top+y;});
+    items.forEach(function(item){item.subs.forEach(function(child){child.top=child.heading.getBoundingClientRect().top+y;});});
+    end=document.querySelector('.wrap').getBoundingClientRect().bottom+y;
+  }
+  function measureCenters(){centers=items.map(function(it){return it.a.offsetTop+it.a.offsetHeight/2;});}
+  function update(){
+    tick=false;
+    if(!centers)measureCenters();
+    var y=scrollY+innerHeight*.25,c=-1,max=document.documentElement.scrollHeight-innerHeight;
+    var pv=Math.round(Math.max(0,Math.min(1,max>0?scrollY/max:0))*100);pct.textContent=pv+'%';shp.textContent=pv+'%';
+    items.forEach(function(it,i){
+      var nx=i+1<tops.length?tops[i+1]:end,p=Math.max(0,Math.min(1,(y-tops[i])/Math.max(1,nx-tops[i])));
+      if(y>=tops[i])c=i;
+      p=Math.round(p*100)/100;
+      if(p!==it.p){it.p=p;it.nd.style.setProperty('--p',p);}
+      var d=y>=nx;if(d!==it.done){it.done=d;it.a.classList.toggle('is-done',d);mitems[i].a.classList.toggle('is-done',d);}
+    });
+    if(c<0)c=0;
+    bar.style.setProperty('--w',Math.round(items[c].p*100)+'%');
+    var fillPosition=centers[c]+(c+1<centers.length?(centers[c+1]-centers[c])*items[c].p:0);
+    if(y<tops[0])fillPosition=centers[0]*Math.max(0,Math.min(1,y/Math.max(1,tops[0])));
+    ol.style.setProperty('--fill',fillPosition.toFixed(1)+'px');
+    var sectionChanged=c!==cur;
+    if(sectionChanged){
+      if(cur>=0){items[cur].a.removeAttribute('aria-current');mitems[cur].a.removeAttribute('aria-current');}
+      cur=c;sec.textContent=pad(c+1);tn.textContent=pad(c+1);
+      tab.setAttribute('aria-label','Sections. Now reading '+pad(c+1)+', '+names[c]);
+      items[c].a.setAttribute('aria-current','true');mitems[c].a.setAttribute('aria-current','true');
+    }
+
+    var activeSub=null;
+    items[c].subs.forEach(function(child,j){
+      var nx=j+1<items[c].subs.length?items[c].subs[j+1].top:(c+1<tops.length?tops[c+1]:end);
+      var done=y>=nx,active=y>=child.top&&y<nx;
+      if(done!==child.done){child.done=done;child.a.classList.toggle('is-done',done);child.mobile.classList.toggle('is-done',done);}
+      if(active)activeSub=child;
+    });
+    if(activeSub!==currentSubItem){
+      if(currentSubItem){currentSubItem.a.removeAttribute('aria-current');currentSubItem.mobile.removeAttribute('aria-current');}
+      currentSubItem=activeSub;
+      if(currentSubItem){
+        currentSubItem.a.setAttribute('aria-current','location');currentSubItem.mobile.setAttribute('aria-current','location');
+        var childRect=currentSubItem.a.getBoundingClientRect(),listRect=ol.getBoundingClientRect();
+        if(childRect.top<listRect.top||childRect.bottom>listRect.bottom)ol.scrollTop+=childRect.top-listRect.top-listRect.height/2;
+      }
+    }
+    if(sectionChanged&&!activeSub){
+      var a=items[c].a,r=a.getBoundingClientRect(),lr=ol.getBoundingClientRect();
+      if(r.top<lr.top||r.bottom>lr.bottom)ol.scrollTop+=r.top-lr.top-lr.height/2;
+    }
+  }
+  function req(){if(!tick){tick=true;requestAnimationFrame(update);}}
+  addEventListener('scroll',function(){
+    document.body.classList.add('rm-moving');clearTimeout(moveT);moveT=setTimeout(function(){document.body.classList.remove('rm-moving');},700);req();
+  },{passive:true});
+  addEventListener('resize',function(){measure();centers=null;req();});
+  addEventListener('load',function(){measure();centers=null;req();});
+  paintToggle();measure();update();
 })();
 </script>
 </body>
