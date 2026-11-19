@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AOA Module 4 — Dynamic Programming Approach — Study Guide</title>
+<style>
+  :root {
+    --ink:#0a0a0a; --muted:#444444; --bg:#ffffff; --line:#cccccc; --rule:#999999;
+    --accent:#1d4ed8; --surface:#fafafa; --surface-alt:#f9f9f9; --surface-eq:#f5f5f5;
+    --surface-hi:#f0f0f0;
+    --font-serif:"Georgia","Cambria","Times New Roman",serif;
+    --font-sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    --font-mono:"Courier New",Courier,monospace;
+  }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; scroll-padding-top:1rem; }
+  body { font-family:var(--font-sans); color:var(--ink); background:var(--bg); line-height:1.6;
+         margin:0; padding:0; font-size:17px; font-weight:500; text-wrap:pretty; }
+  .wrap { max-width:68ch; margin:0 auto; padding:2.5rem 1rem 4rem; }
+  header { border-bottom:2px solid var(--ink); margin-bottom:2.5rem; padding-bottom:1rem; }
+  h1 { font-family:var(--font-serif); font-size:2.1rem; font-weight:700; line-height:1.25; margin:0 0 .4rem; letter-spacing:-.01em; }
+  .subtitle { color:var(--muted); font-size:1rem; font-weight:400; margin:0; }
+  .meta { font-size:.85rem; line-height:1.5; color:var(--muted); margin-top:.9rem; }
+  h2 { font-family:var(--font-serif); font-size:1.55rem; font-weight:700; line-height:1.3; margin:2.75rem 0 1rem;
+       border-bottom:1px solid var(--line); padding-bottom:.35rem; }
+  h3 { font-size:1.12rem; font-weight:700; line-height:1.35; margin:1.9rem 0 .45rem; }
+  h4 { font-size:1rem; font-weight:700; line-height:1.35; margin:1.4rem 0 .4rem; }
+  p { margin:0 0 1rem; }
+  ul, ol { margin:0 0 1rem; padding-left:1.35rem; }
+  li { margin-bottom:.3rem; }
+  strong { font-weight:700; }
+  code, .kbd { font-family:var(--font-mono); font-size:.88em; background:var(--surface-hi); border:1px solid var(--line); padding:.05rem .3rem; }
+  pre { font-family:var(--font-mono); font-size:.82rem; line-height:1.55; background:var(--surface);
+        border:1px solid var(--line); border-left:3px solid var(--ink); padding:.9rem 1rem;
+        overflow-x:auto; margin:1.25rem 0; white-space:pre; }
+  .theory { border-left:3px solid var(--ink); padding:1rem 1.25rem; margin:1.5rem 0; font-size:.97rem; }
+  .theory p:first-child { margin-top:0; }
+  .theory p:last-child { margin-bottom:0; }
+  .source { display:block; font-size:.74rem; line-height:1.4; font-weight:700; color:var(--muted);
+            letter-spacing:.05em; text-transform:uppercase; margin-bottom:.45rem; }
+  .eq { font-family:var(--font-serif); font-size:1.2rem; font-weight:600; text-align:center;
+        margin:1.1rem 0; padding:.7rem .9rem; background:var(--surface-eq); border:1px solid var(--line);
+        overflow-x:auto; }
+  .eq-note { font-size:.85rem; line-height:1.45; color:var(--muted); text-align:center; margin:-.6rem 0 1.4rem; }
+  .example { border:1px solid var(--line); padding:1rem 1.25rem; margin:1.25rem 0; font-size:.95rem; background:var(--surface); }
+  .example-title { font-weight:700; line-height:1.3; margin-bottom:.5rem; font-size:.78rem; letter-spacing:.04em;
+                   text-transform:uppercase; color:var(--muted); }
+  .example .eq { margin:.7rem 0; background:var(--bg); }
+  .steps { list-style:none; padding:1rem 1.25rem; margin:1.4rem 0; border:1px solid var(--line); background:var(--surface); }
+  .steps li { margin-bottom:.7rem; font-size:.95rem; padding-left:1.6rem; position:relative; }
+  .steps li::before { content:""; position:absolute; left:0; top:.45rem; width:.7rem; height:.7rem; background:var(--ink); border-radius:50%; }
+  .steps li:last-child { margin-bottom:0; }
+  .table-scroll { overflow-x:auto; margin:1.5rem 0; }
+  table { width:100%; border-collapse:collapse; font-size:.9rem; margin:1.4rem 0; }
+  th, td { border:1px solid var(--line); padding:.5rem .65rem; text-align:left; vertical-align:top; }
+  th { background:var(--surface-hi); font-weight:700; font-size:.78rem; letter-spacing:.04em; }
+  tr:nth-child(even) td { background:var(--surface-alt); }
+  .dp { width:auto; min-width:100%; font-family:var(--font-mono); font-size:.85rem; }
+  .dp td, .dp th { text-align:center; padding:.38rem .5rem; }
+  .dp th:first-child, .dp td:first-child { text-align:left; font-weight:700; background:var(--surface-hi); }
+  .dp .hit { background:var(--accent-soft); font-weight:700; color:var(--ink); }
+  .dp caption { caption-side:top; text-align:left; font-family:var(--font-sans); font-size:.8rem; font-weight:700;
+                color:var(--muted); padding-bottom:.4rem; }
+  .toc { border:1px solid var(--line); padding:1rem 1.25rem; margin:1.75rem 0; background:var(--surface); }
+  .toc ol { margin:0; padding-left:1.2rem; }
+  .toc li { margin-bottom:.3rem; font-size:.93rem; }
+  .toc a { color:var(--ink); text-decoration:none; }
+  .toc a:hover { text-decoration:underline; }
+  .nav { margin:1.25rem 0 2rem; display:flex; flex-wrap:wrap; gap:.45rem; }
+  .nav a { padding:.35rem .6rem; border:1px solid var(--line); text-decoration:none; color:var(--ink); font-size:.8rem; }
+  .nav a:hover { background:var(--surface-hi); }
+  .nav a[aria-current="true"] { border-color:var(--accent); color:var(--accent); background:var(--accent-soft); }
+  .practice, .answer-key, .common-mistakes, .revision-sheet, .references, .self-learning {
+    border:1px solid var(--line); padding:1rem 1.25rem; margin:1.5rem 0; background:var(--surface); }
+  .practice > h3:first-of-type, .answer-key > h3:first-of-type, .common-mistakes > h3:first-of-type,
+  .revision-sheet > h3:first-of-type, .references > h3:first-of-type { margin-top:0; }
+  .self-learning { border-left:3px solid var(--muted); color:var(--muted); font-size:.95rem; }
+  .warning { color:#b00020; font-weight:700; }
+  .exam-q { border:1px solid var(--line); padding:1rem 1.25rem; margin:1.25rem 0; background:var(--surface); }
+  .exam-q-title { font-weight:700; font-size:.78rem; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); margin-bottom:.35rem; }
+  .exam-source { font-size:.78rem; font-weight:700; color:var(--muted); margin-bottom:.5rem; }
+  .qa-question, .qa-solution, .qa-final { margin:.9rem 0; padding:.75rem 1rem; }
+  .qa-question { border-left:4px solid var(--ink); background:var(--bg); }
+  .qa-solution { border-left:4px solid var(--line); }
+  .qa-final { border:2px solid var(--accent); background:var(--accent-soft); }
+  .qa-label { font-size:.7rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-bottom:.4rem; }
+  .qa-final .qa-label { color:var(--accent); }
+  .qa-question > :last-child, .qa-solution > :last-child, .qa-final > :last-child { margin-bottom:0; }
+  .qa-question > p:first-of-type, .qa-final > p:first-of-type { margin-top:0; }
+  .qa-final .eq { margin:.25rem 0 0; background:transparent; border:0; padding:0; text-align:left; }
+  .qa-final-text { margin:0; font-weight:700; }
+  .qa-list { margin:.3rem 0 0; padding-left:1.2rem; }
+  .qa-list li { margin-bottom:.2rem; }
+  figure { margin:1.75rem 0; }
+  svg { width:100%; max-width:100%; height:auto; display:block; margin:0 auto; padding:.5rem; background:var(--bg); border:1px solid var(--line); }
+  figcaption { font-size:.82rem; color:var(--muted); margin-top:.5rem; line-height:1.45; }
+  .fig-wide { margin-left:calc(50% - 50vw + 1rem); margin-right:calc(50% - 50vw + 1rem); }
+  .fig-wide svg { max-width:100%; }
+  footer { margin-top:3.5rem; padding-top:1.25rem; border-top:1px solid var(--line); color:var(--muted);
+           font-size:.83rem; line-height:1.5; text-align:center; }
+  ::selection { background:var(--ink); color:var(--bg); }
+  :focus-visible { outline:2px solid var(--ink); outline-offset:2px; }
+  .progress { position:fixed; top:0; left:0; height:3px; width:0; background:var(--accent); z-index:50; }
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  @media (max-width:640px) {
+    body { font-size:16px; }
+    .wrap { padding:1.25rem .8rem 3rem; }
+    h1 { font-size:1.6rem; }
+    h2 { font-size:1.32rem; margin-top:2.1rem; }
+    table { display:block; overflow-x:auto; -webkit-overflow-scrolling:touch; font-size:.84rem; }
+    .dp { display:table; }
+    th, td { padding:.4rem .5rem; }
+    .theory, .example, .practice, .answer-key, .common-mistakes, .revision-sheet, .references, .exam-q, .steps, .toc { padding:.8rem; }
+    .eq { font-size:1rem; padding:.6rem .5rem; }
+    .fig-wide { margin-left:0; margin-right:0; }
+    pre { font-size:.74rem; }
+  }
+  @media print {
+    body { font-size:11pt; line-height:1.4; color:#000; background:#fff; }
+    .wrap { max-width:100%; padding:0; }
+    header { border-bottom:1px solid #000; margin-bottom:1.2rem; padding-bottom:.6rem; }
+    h2 { margin:1.6rem 0 .6rem; border-bottom:1px solid #000; padding-bottom:.25rem; }
+    .toc, .nav, .progress, .topbar { display:none; }
+    .example, .practice, .answer-key, .revision-sheet, .steps, .theory, .common-mistakes, .references, .exam-q, .qa-question, .qa-solution, .qa-final {
+      border:1px solid #999; background:#fff !important; page-break-inside:avoid; }
+    .eq { background:#fff; border:1px solid #999; page-break-inside:avoid; }
+    .eq-note { display:none; }
+    a { text-decoration:none; color:#000; }
+    svg { border:1px solid #000; page-break-inside:avoid; }
+    footer { margin-top:2rem; border-top:1px solid #000; }
+  }
+</style>
+<script>(function(){try{var t=localStorage.getItem('sg-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<style id="theme">
+  :root { color-scheme:light; --ink:#0a0a0a;--muted:#444444;--bg:#ffffff;--line:#cccccc;--rule:#999999;--accent:#1d4ed8;--accent-soft:#eef2ff;--surface:#fafafa;--surface-alt:#f9f9f9;--surface-eq:#f5f5f5;--surface-hi:#f0f0f0; }
+  :root[data-theme="dark"] { color-scheme:dark; --ink:#ececec;--muted:#a8a8ad;--bg:#0f0f11;--line:#34343a;--rule:#5a5a62;--accent:#8ab0ff;--accent-soft:#1b2540;--surface:#17171a;--surface-alt:#1b1b1f;--surface-eq:#1e1e23;--surface-hi:#26262c; }
+  :root[data-theme="dark"] svg circle[fill="var(--accent-soft)"] { fill:#1b2540; }
+  .topbar { display:flex; align-items:center; justify-content:space-between; gap:.5rem; margin:0 0 1rem; }
+  .topbar .back { display:inline-flex; align-items:center; min-height:44px; font-size:.85rem; font-weight:600; color:var(--ink); }
+  .theme-toggle { font:inherit; font-size:.85rem; font-weight:600; color:var(--ink); background:var(--bg); border:1px solid var(--ink); border-radius:0; padding:.4rem .8rem; min-height:44px; min-width:44px; cursor:pointer; margin-left:auto; }
+  .theme-toggle:hover { background:var(--surface-hi); }
+  .theme-toggle:focus-visible { outline:2px solid var(--ink); outline-offset:2px; }
+  @media print {
+    :root, :root[data-theme="dark"], :root:not([data-theme="light"]) { color-scheme:light; --ink:#0a0a0a;--muted:#444444;--bg:#ffffff;--line:#cccccc;--rule:#999999;--accent:#1d4ed8;--accent-soft:#eef2ff;--surface:#fafafa;--surface-alt:#f9f9f9;--surface-eq:#f5f5f5;--surface-hi:#f0f0f0; }
+    .topbar { display:none; }
+  }
+</style>
+</head>
+<body>
+<div class="progress" id="bar" aria-hidden="true"></div>
+<div class="wrap">
+  <div class="topbar"><a class="back" href="/aoa">&#8592; All modules</a><button class="theme-toggle" type="button" id="themeToggle"></button></div>
+
+  <header>
+    <h1>AOA Module 4 — Dynamic Programming</h1>
+    <p class="subtitle">Multistage graphs · Floyd–Warshall · 0/1 knapsack · Travelling salesperson · Longest common subsequence</p>
+    <div class="meta">B.E. CSE (AI &amp; ML) · Semester III · Course 2023113 · NEP 2020<br>
+    Module IV · 8 teaching hours · Course outcome CO4 · End-semester paper: 6 questions of 20 marks, Q1 compulsory, answer any 3</div>
+  </header>
+
+  <div class="toc">
+    <ol>
+      <li><a href="#syllabus">Syllabus and scope</a></li>
+      <li><a href="#method">The general method</a></li>
+      <li><a href="#multistage">Multistage graphs</a></li>
+      <li><a href="#floyd">All pairs shortest path: Floyd–Warshall</a></li>
+      <li><a href="#knapsack">0/1 knapsack</a></li>
+      <li><a href="#tsp">Travelling salesperson problem</a></li>
+      <li><a href="#lcs">Longest common subsequence</a></li>
+      <li><a href="#compare">Choosing and comparing</a></li>
+      <li><a href="#self-learning">Self-learning topics</a></li>
+      <li><a href="#practice">Practice questions</a></li>
+      <li><a href="#answer-key">Answer key</a></li>
+      <li><a href="#mistakes">Common mistakes</a></li>
+      <li><a href="#revision">Last-minute revision sheet</a></li>
+      <li><a href="#references">References and attribution</a></li>
+    </ol>
+  </div>
+
+  <nav class="nav" aria-label="Sections">
+    <a href="#method">General method</a>
+    <a href="#multistage">Multistage</a>
+    <a href="#floyd">Floyd–Warshall</a>
+    <a href="#knapsack">Knapsack</a>
+    <a href="#tsp">TSP</a>
+    <a href="#lcs">LCS</a>
+    <a href="#practice">Practice</a>
+    <a href="#revision">Revision</a>
+  </nav>
+<div class="theory">
+<p><strong>How to use this guide.</strong> Read Sections 1–6 once, copying each recurrence by hand. Then close the guide and reproduce the five tables — multistage cost table, Floyd matrices, knapsack table, TSP <code>g</code> table, LCS <code>c</code> table — on blank paper. Finally answer the practice questions without looking at the key.</p>
+</div>
+<h2 id="syllabus">Syllabus and scope</h2>
+<div class="theory">
+<p><strong>Official syllabus — University of Mumbai, 6.21 (N) B.E. AI &amp; ML, Sem III &amp; IV, 2025–26, page 23.</strong> <strong>Module IV — Dynamic Programming Approach:</strong> General Method, Multistage graphs, All pair shortest path: Floyd Warshall Algorithm, 0/1 knapsack Problem, Travelling Salesperson problem, Longest common subsequence. <strong>Self-learning Topics:</strong> Bellman Ford Algorithm, real life applications of all algorithms. <strong>Hours:</strong> 8 · <strong>CO mapping:</strong> CO4 — "Develop solutions using Dynamic Programming and examine its complexity."</p>
+</div>
+<div class="table-scroll"><table>
+<thead><tr><th>Prescribed topic</th><th>What you must be able to do</th><th>Section</th></tr></thead>
+<tbody>
+<tr><td>General method</td><td>State the two DP properties, write the four-step method, compare DP with greedy and divide-and-conquer.</td><td>1</td></tr>
+<tr><td>Multistage graphs</td><td>Write the backward recurrence and compute the cost and decision tables for a staged graph.</td><td>2</td></tr>
+<tr><td>All pairs shortest path (Floyd–Warshall)</td><td>Run the pivot loop and produce D⁰ … Dⁿ.</td><td>3</td></tr>
+<tr><td>0/1 knapsack</td><td>Build the <code>m[i, w]</code> table, give the recurrence and reconstruct the chosen items.</td><td>4</td></tr>
+<tr><td>Travelling salesperson problem</td><td>Use <code>g(i, S)</code>, fill the table by increasing set size and read off the tour.</td><td>5</td></tr>
+<tr><td>Longest common subsequence</td><td>Build the <code>c</code> table, trace the arrows and print an LCS.</td><td>6</td></tr>
+</tbody></table></div>
+<p><strong>Not in Module IV.</strong> Matrix-chain multiplication, optimal binary search trees and assembly-line scheduling are not prescribed here. Bellman–Ford appears only as a self-learning topic. Do not spend revision time on the others unless your teacher covered them in class.</p>
+<h2 id="method">1 — The general method</h2>
+<h3 id="1-1-the-problem-dp-solves">1.1 The problem DP solves</h3>
+<p>Dynamic programming solves an <strong>optimisation problem</strong>: one that asks for a maximum or a minimum — the cheapest path, the largest profit, the longest common subsequence, the shortest tour. A brute-force solution enumerates every possibility and is usually exponential. DP replaces enumeration with a table of smaller answers.</p>
+<h3 id="1-2-the-idea">1.2 The idea</h3>
+<p>Break the problem into smaller versions of itself, solve each distinct smaller version <strong>once</strong>, store the answer, and reuse it. The two properties that make this legal are:</p>
+<div class="table-scroll"><table>
+<thead><tr><th>Property</th><th>Meaning</th><th>Test question</th></tr></thead>
+<tbody>
+<tr><td><strong>Optimal substructure</strong></td><td>An optimal solution to the whole problem can be built from optimal solutions to its subproblems.</td><td>If I knew the best answer for the smaller problem, could I combine it into the best answer for the bigger one?</td></tr>
+<tr><td><strong>Overlapping subproblems</strong></td><td>The same subproblem is needed again and again by different branches of the recursion.</td><td>Does a plain recursive solution recompute the same argument more than once?</td></tr>
+</tbody></table></div>
+<div class="theory">
+<p><strong>Teacher's slide 3.</strong> Dynamic Programming is used to solve optimisation problems. Break the complex problem into simpler subproblems, find the optimal solution to these subproblems, store the results (memoisation), reuse the stored results so that the same subproblem is not calculated more than once, and finally compute the result of the complex problem. It applies to problems with two properties: overlapping subproblems and optimal substructure.</p>
+<p><strong>Teacher's slide 4 — examples given in class.</strong> <strong>Optimal substructure:</strong> in the shortest path problem, the shortest path to a destination depends on the shortest path to an intermediate vertex. <strong>Overlapping subproblems:</strong> in the Fibonacci sequence, values such as <code>fib(n-2)</code> are computed multiple times.</p>
+</div>
+<p>The <strong>principle of optimality</strong> is the sentence that earns the first mark: <em>whatever the first decision is, the remaining decisions must themselves be optimal for the state that results from the first decision.</em></p>
+<h3 id="1-3-how-to-recognise-a-dp-problem">1.3 How to recognise a DP problem</h3>
+<ul>
+<li>The question says "maximum", "minimum", "longest", "shortest", "number of ways" or "optimal".</li>
+<li>A locally best choice is not obviously safe — 0/1 knapsack is the standard trap.</li>
+<li>The same smaller case would be needed repeatedly.</li>
+<li>The question names Floyd–Warshall, LCS, TSP by DP, multistage graph, or says "using dynamic programming".</li>
+<li>The input has a natural sequence, grid, capacity or set that can index a table.</li>
+</ul>
+<h3 id="1-4-how-it-works-the-six-step-method">1.4 How it works — the six-step method</h3>
+<p>For <strong>every</strong> DP answer, write these six headings. Even if an arithmetic slip occurs, the method marks are secure.</p>
+<ol>
+<li><strong>State.</strong> Define exactly what one table entry means, including its indices and units. Example: "<code>m[i, w]</code> is the maximum profit obtainable from a subset of items 1…i using capacity at most <code>w</code>."</li>
+<li><strong>Recurrence and base cases.</strong> Express a state using smaller states. Write the first row and first column explicitly.</li>
+<li><strong>Computation order.</strong> Choose an order in which every state is ready before it is used — increasing <code>i</code>, increasing <code>w</code>, increasing set size, or increasing stage index.</li>
+<li><strong>Final answer.</strong> State which cell (or which minimum over a row) is the answer, with its unit.</li>
+<li><strong>Reconstruction.</strong> Walk backwards through the table to recover the chosen items, path or subsequence, not just the value.</li>
+<li><strong>Complexity.</strong> Give time and space with one line of reasoning based on the table size.</li>
+</ol>
+<h3 id="1-5-pseudocode-template">1.5 Pseudocode template</h3>
+<pre><code>DP-SOLVE(input)
+  allocate table T with the dimensions implied by the state
+  initialise the base row, column or diagonal
+  for each state in a valid computation order:
+      T[state] = min or max over choices of (local cost + T[smaller state])
+  answer = T[final state]
+  reconstruct choices by walking backwards from the final state
+  return answer, choices</code></pre>
+<h3 id="1-6-worked-example-fibonacci">1.6 Worked example — Fibonacci</h3>
+<p><code>fib(n) = fib(n-1) + fib(n-2)</code>, with <code>fib(0) = 0</code> and <code>fib(1) = 1</code>.</p>
+<pre><code>fib(5) = fib(4) + fib(3)
+       = (fib(3)+fib(2)) + (fib(2)+fib(1))
+       = ...</code></pre>
+<p><code>fib(2)</code> is computed three times and <code>fib(3)</code> twice. The DP table removes the repetition:</p>
+<div class="table-scroll"><table>
+<thead><tr><th>n</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+<tbody>
+<tr><td>fib(n)</td><td>0</td><td>1</td><td>1</td><td>2</td><td>3</td><td>5</td></tr>
+</tbody></table></div>
+<p>Time Θ(n), space Θ(n), or Θ(1) if only the last two values are kept.</p>
+<h3 id="1-7-top-down-and-bottom-up">1.7 Top-down and bottom-up</h3>
+<div class="table-scroll"><table>
+<thead><tr><th>Style</th><th>How it works</th><th>Use</th></tr></thead>
+<tbody>
+<tr><td><strong>Top-down (memoisation)</strong></td><td>Write the natural recursion; before computing a state, check a table; store the result after computing it.</td><td>Useful for TSP's <code>g(i,S)</code> while learning.</td></tr>
+<tr><td><strong>Bottom-up (tabulation)</strong></td><td>Fill the table from the smallest states upwards with loops; no recursion.</td><td>All five exam algorithms in this module.</td></tr>
+</tbody></table></div>
+<p>In the examination, write the bottom-up version: it is shorter, it displays the table, and it makes the complexity obvious.</p>
+<h3 id="1-8-dynamic-programming-compared-with-greedy">1.8 Dynamic programming compared with greedy</h3>
+<div class="theory">
+<p><strong>Teacher's slide 16 — comparison table given in class.</strong> <strong>Greedy:</strong> generates only one decision sequence; makes stepwise decisions on local information; does not consider results from subproblems while making locally optimal decisions; determines the first choice before computing any subproblem. Examples: playing cricket, Dijkstra's algorithm, fractional knapsack. <strong>Dynamic programming:</strong> may generate multiple decision sequences; cannot produce stepwise decisions based on local information alone; makes globally optimal decisions that depend on the sub-sequences of decisions obtained by solving subproblems; computes the subproblems before making the first choice. Examples: playing chess, Bellman–Ford, 0/1 knapsack.</p>
+</div>
+<div class="table-scroll"><table>
+<thead><tr><th>Question to ask</th><th>Greedy</th><th>Dynamic programming</th></tr></thead>
+<tbody>
+<tr><td>Can a locally best choice be wrong later?</td><td>No — that is the greedy-choice property.</td><td>Yes — so all candidates are compared.</td></tr>
+<tr><td>Are subproblems overlapping?</td><td>Usually irrelevant.</td><td>Yes, and storing them is the point.</td></tr>
+<tr><td>Typical complexity</td><td>O(n log n) after sorting.</td><td>Polynomial in the table size, e.g. O(nM) or O(n²2ⁿ).</td></tr>
+<tr><td>Example</td><td>Fractional knapsack.</td><td>0/1 knapsack.</td></tr>
+</tbody></table></div>
+<p>A one-mark contrast: <strong>greedy commits to one choice without looking ahead; DP compares every choice using the stored answers to subproblems.</strong></p>
+<h3 id="1-9-common-mistakes-in-the-general-method">1.9 Common mistakes in the general method</h3>
+<ul>
+<li>Calling any recursive solution "dynamic programming" without a stored table.</li>
+<li>Forgetting to state the meaning of the state.</li>
+<li>Writing a recurrence but not the base cases.</li>
+<li>Filling the table in an order that uses a cell before it is computed.</li>
+<li>Giving only the optimal value, not the reconstruction the question asked for.</li>
+<li>Claiming DP is always faster. 0/1 knapsack is O(nM), which is <strong>pseudo-polynomial</strong> — not polynomial in the number of bits of <code>M</code>.</li>
+</ul>
+<h2 id="multistage">2 — Multistage graphs</h2>
+<h3 id="2-1-the-problem">2.1 The problem</h3>
+<p>A <strong>multistage graph</strong> is a directed graph whose vertices are partitioned into <code>k ≥ 2</code> stages <code>S₁, S₂, …, Sₖ</code>. Every edge goes from a vertex in <code>Sᵢ</code> to a vertex in <code>Sᵢ₊₁</code>. There is one source (in <code>S₁</code>) and one sink (in <code>Sₖ</code>). Each edge has a cost. Find a path from source to sink of minimum total cost.</p>
+<h3 id="2-2-the-idea">2.2 The idea</h3>
+<p>Any optimal source-to-sink path must leave the source by some edge and then follow an optimal path from that next vertex to the sink. That is optimal substructure. The same suffix is needed by several prefixes, which is why one table serves all of them.</p>
+<p>Define <code>cost(i, j)</code> = minimum cost from vertex <code>j</code> in stage <code>i</code> to the sink. Then</p>
+<pre><code>cost(k, j) = 0                                   for the sink j in stage k
+cost(i, j) = min over edges (j, l) with l in stage i+1 of [ c(j, l) + cost(i+1, l) ]</code></pre>
+<p>The answer is <code>cost(1, source)</code>. The vertex <code>l</code> that attains the minimum is stored in <code>D[j]</code> so the path can be reconstructed.</p>
+<h3 id="2-3-how-to-recognise-it">2.3 How to recognise it</h3>
+<ul>
+<li>The graph is drawn in vertical columns labelled stages.</li>
+<li>Every edge points from one column to the next; no edge stays in a column or skips a column.</li>
+<li>The question says "multistage", "stages", "source to sink", "minimum cost path".</li>
+<li>If edges may go backwards or stay within a stage, it is a general shortest-path problem, not this algorithm.</li>
+</ul>
+<h3 id="2-4-how-it-works">2.4 How it works</h3>
+<ol>
+<li>Number the stages from 1 (source) to <code>k</code> (sink).</li>
+<li>Set <code>cost(k, sink) = 0</code>.</li>
+<li>Process stages from <code>k−1</code> down to 1. For each vertex <code>j</code> in the current stage, try every edge <code>(j, l)</code> to the next stage, add the already-computed <code>cost(i+1, l)</code>, and keep the smallest.</li>
+<li>Record the winning next vertex in <code>D[j]</code>.</li>
+<li>The answer is <code>cost(1, source)</code>. Follow <code>D</code> from the source to the sink to print the path.</li>
+</ol>
+<p>The computation is <strong>backward</strong>: the sink is solved first. A forward version is also possible: define <code>f(i, j)</code> as the minimum cost from the source to vertex <code>j</code> in stage <code>i</code>, compute stages 1 to <code>k</code>, and read <code>f(k, sink)</code>. Both are O(V + E). The backward version is the one used in the slides and the one that gives the decision table directly.</p>
+<h3 id="2-5-pseudocode">2.5 Pseudocode</h3>
+<pre><code>MULTISTAGE(G, stages, c)
+  // G has vertices 1..n; stage 1 contains the source 1; stage k contains the sink n
+  cost[k][n] = 0
+  for i = k-1 down to 1:
+      for each vertex j in stage[i]:
+          cost[i][j] = INFINITY
+          for each edge (j, l) with l in stage[i+1]:
+              if c[j][l] + cost[i+1][l] &lt; cost[i][j]:
+                  cost[i][j] = c[j][l] + cost[i+1][l]
+                  D[j] = l
+  print &quot;minimum cost =&quot;, cost[1][1]
+  v = 1
+  while v != n:
+      print v, &quot;-&gt;&quot;
+      v = D[v]
+  print n</code></pre>
+<h3 id="2-6-worked-example-twelve-vertices-five-stages">2.6 Worked example — twelve vertices, five stages</h3>
+<p>The class graph has 12 vertices in five stages:</p>
+<ul>
+<li><code>S₁ = {1}</code>, <code>S₂ = {2,3,4,5}</code>, <code>S₃ = {6,7,8}</code>, <code>S₄ = {9,10,11}</code>, <code>S₅ = {12}</code>.</li>
+<li>Edges and costs: 1–2 = 9, 1–3 = 7, 1–4 = 3, 1–5 = 2; 2–6 = 4, 2–7 = 2, 2–8 = 1; 3–6 = 2, 3–7 = 7; 4–8 = 11; 5–7 = 11, 5–8 = 8; 6–9 = 6, 6–10 = 5; 7–9 = 4, 7–10 = 3; 8–10 = 5, 8–11 = 6; 9–12 = 4, 10–12 = 2, 11–12 = 5.</li>
+</ul>
+<figure class="fig-wide">
+<svg viewBox="0 0 700 405" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="multistage-t multistage-d">
+  <title id="multistage-t">Multistage graph with five stages and twelve vertices</title>
+  <desc id="multistage-d">Stage 1 holds the source vertex 1. Stage 2 holds vertices 2, 3, 4, 5. Stage 3 holds 6, 7, 8. Stage 4 holds 9, 10, 11. Stage 5 holds the sink vertex 12. Every edge points from a vertex to the next stage only. Edge weights: 1-2=9, 1-3=7, 1-4=3, 1-5=2, 2-6=4, 2-7=2, 2-8=1, 3-6=2, 3-7=7, 4-8=11, 5-7=11, 5-8=8, 6-9=6, 6-10=5, 7-9=4, 7-10=3, 8-10=5, 8-11=6, 9-12=4, 10-12=2, 11-12=5.</desc>
+<g stroke="var(--rule)" stroke-width="1.4" fill="none">
+<line x1="85.4" y1="197.2" x2="198.1" y2="104.0"/>
+<line x1="89.4" y1="205.3" x2="193.6" y2="180.2"/>
+<line x1="88.9" y1="216.5" x2="194.2" y2="252.8"/>
+<line x1="84.6" y1="223.6" x2="198.9" y2="330.0"/>
+<line x1="234.3" y1="95.3" x2="338.8" y2="124.1"/>
+<line x1="230.1" y1="103.1" x2="343.3" y2="200.6"/>
+<line x1="226.4" y1="106.5" x2="347.5" y2="281.9"/>
+<line x1="234.1" y1="169.1" x2="339.0" y2="136.5"/>
+<line x1="234.3" y1="180.3" x2="338.8" y2="209.1"/>
+<line x1="234.3" y1="265.3" x2="338.8" y2="294.1"/>
+<line x1="229.9" y1="331.6" x2="343.6" y2="229.7"/>
+<line x1="234.1" y1="339.1" x2="339.0" y2="306.5"/>
+<line x1="380.0" y1="130.0" x2="483.0" y2="130.0"/>
+<line x1="377.3" y1="140.1" x2="486.0" y2="203.9"/>
+<line x1="377.3" y1="204.9" x2="486.0" y2="141.1"/>
+<line x1="380.0" y1="215.0" x2="483.0" y2="215.0"/>
+<line x1="377.3" y1="289.9" x2="486.0" y2="226.1"/>
+<line x1="380.0" y1="300.0" x2="483.0" y2="300.0"/>
+<line x1="522.3" y1="140.1" x2="631.0" y2="203.9"/>
+<line x1="525.0" y1="215.0" x2="628.0" y2="215.0"/>
+<line x1="522.3" y1="289.9" x2="631.0" y2="226.1"/>
+</g>
+<g fill="var(--rule)">
+<circle cx="149.5" cy="158.5" r="9"/>
+<circle cx="145.1" cy="203.2" r="9"/>
+<circle cx="138.9" cy="245.4" r="9"/>
+<circle cx="135.0" cy="285.6" r="9"/>
+<circle cx="284.6" cy="120.6" r="9"/>
+<circle cx="280.3" cy="160.8" r="9"/>
+<circle cx="278.4" cy="201.3" r="9"/>
+<circle cx="290.8" cy="163.0" r="9"/>
+<circle cx="284.6" cy="205.6" r="9"/>
+<circle cx="284.6" cy="290.6" r="9"/>
+<circle cx="294.8" cy="288.2" r="9"/>
+<circle cx="290.8" cy="333.0" r="9"/>
+<circle cx="432.5" cy="141.0" r="9"/>
+<circle cx="426.9" cy="182.0" r="9"/>
+<circle cx="438.1" cy="182.0" r="9"/>
+<circle cx="432.5" cy="226.0" r="9"/>
+<circle cx="438.1" cy="267.0" r="9"/>
+<circle cx="432.5" cy="311.0" r="9"/>
+<circle cx="571.9" cy="182.0" r="9"/>
+<circle cx="577.5" cy="226.0" r="9"/>
+<circle cx="583.1" cy="267.0" r="9"/>
+</g>
+<g font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="var(--bg)" text-anchor="middle">
+<text x="149.5" y="162.0">9</text>
+<text x="145.1" y="206.7">7</text>
+<text x="138.9" y="248.9">3</text>
+<text x="135.0" y="289.1">2</text>
+<text x="284.6" y="124.1">4</text>
+<text x="280.3" y="164.3">2</text>
+<text x="278.4" y="204.8">1</text>
+<text x="290.8" y="166.5">2</text>
+<text x="284.6" y="209.1">7</text>
+<text x="284.6" y="294.1">11</text>
+<text x="294.8" y="291.7">11</text>
+<text x="290.8" y="336.5">8</text>
+<text x="432.5" y="144.5">6</text>
+<text x="426.9" y="185.5">5</text>
+<text x="438.1" y="185.5">4</text>
+<text x="432.5" y="229.5">3</text>
+<text x="438.1" y="270.5">5</text>
+<text x="432.5" y="314.5">6</text>
+<text x="571.9" y="185.5">4</text>
+<text x="577.5" y="229.5">2</text>
+<text x="583.1" y="270.5">5</text>
+</g>
+<circle cx="70" cy="210" r="19" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+<text x="70" y="215" text-anchor="middle" font-family="Georgia, Cambria, Times New Roman, serif" font-size="15" font-weight="700" fill="var(--ink)">1</text>
+<circle cx="215" cy="90" r="19" fill="var(--bg)" stroke="var(--ink)" stroke-width="2"/>
+<text x="215" y="95" text-anchor="middle" font-family="Georgia, Cambria, Times New Roman, serif" font-size="15" font-weight="700" fill="var(--ink)">2</text>
+<circle cx="215" cy="175" r="19" fill="var(--bg)" stroke="var(--ink)" stroke-width="2"/>
+<text x="215" y="180" text-anchor="middle" font-family="Georgia, Cambria, Times New Roman, serif" font-size="15" font-weight="700" fill="var(--ink)">3</text>
+<circle cx="215" cy="260" r="19" fill="var(--bg)" stroke="var(--ink)" stroke-width="2"/>
+<text x="215" y="265" text-anchor="middle" font-family="Georgia, Cambria, Times New Roman, serif" font-size="15" font-weight="700" fill="var(--ink)">4</text>
+<circle cx="215" cy="345" r="19" fill="var(--bg)" stroke="var(--ink)" stroke-width="2"/>
+<text x="215" y="350" text-anchor="middle" font-family="Georgia, Cambria, Times New Roman, serif" font-size="15" font-weight="700" fill="var(--ink)">5</text>
+<circle cx="360" cy="130" r="19" fill="var(--bg)" stroke="var(--ink)" stroke-width="2"/>
+<text x="360" y="135" text-anchor="middle" font-family="Georgia, Cambria, Times New Roman, serif" font-size="15" font-weight="700" fill="var(--ink)">6</text>
+<circle cx="360" cy="215" r="19" fill="var(--bg)" stroke="var(--ink)" stroke-width="2"/>
+<text x="360" y="220" text-anchor="middle" font-family="Georgia, Cambria, Times New Roman, serif" font-size="15" font-weight="700" fill="var(--ink)">7</text>
+<circle cx="360" cy="300" r="19" fill="var(--bg)" stroke="var(--ink)" stroke-width="2"/>
+<text x="360" y="305" text-anchor="middle" font-family="Georgia, Cambria, Times New Roman, serif" font-size="15" font-weight="700" fill="var(--ink)">8</text>
+<circle cx="505" cy="130" r="19" fill="var(--bg)" stroke="var(--ink)" stroke-width="2"/>
+<text x="505" y="135" text-anchor="middle" font-family="Georgia, Cambria, Times New Roman, serif" font-size="15" font-weight="700" fill="var(--ink)">9</text>
+<circle cx="505" cy="215" r="19" fill="var(--bg)" stroke="var(--ink)" stroke-width="2"/>
+<text x="505" y="220" text-anchor="middle" font-family="Georgia, Cambria, Times New Roman, serif" font-size="15" font-weight="700" fill="var(--ink)">10</text>
+<circle cx="505" cy="300" r="19" fill="var(--bg)" stroke="var(--ink)" stroke-width="2"/>
+<text x="505" y="305" text-anchor="middle" font-family="Georgia, Cambria, Times New Roman, serif" font-size="15" font-weight="700" fill="var(--ink)">11</text>
+<circle cx="650" cy="215" r="19" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+<text x="650" y="220" text-anchor="middle" font-family="Georgia, Cambria, Times New Roman, serif" font-size="15" font-weight="700" fill="var(--ink)">12</text>
+<g font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11" font-weight="700" fill="var(--muted)" text-anchor="middle">
+<text x="70" y="392">S1</text>
+<line x1="38" y1="378" x2="102" y2="378" stroke="var(--line)" stroke-width="1"/>
+<text x="215" y="392">S2</text>
+<line x1="183" y1="378" x2="247" y2="378" stroke="var(--line)" stroke-width="1"/>
+<text x="360" y="392">S3</text>
+<line x1="328" y1="378" x2="392" y2="378" stroke="var(--line)" stroke-width="1"/>
+<text x="505" y="392">S4</text>
+<line x1="473" y1="378" x2="537" y2="378" stroke="var(--line)" stroke-width="1"/>
+<text x="650" y="392">S5</text>
+<line x1="618" y1="378" x2="682" y2="378" stroke="var(--line)" stroke-width="1"/>
+</g>
+<g font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="10" fill="var(--muted)"><text x="70" y="26" text-anchor="middle">source</text><text x="650" y="26" text-anchor="middle">sink</text></g>
+</svg>
+<figcaption>Figure 1 — the twelve-vertex five-stage graph</figcaption>
+</figure>
+<p><strong>Stage 4.</strong> Every vertex in stage 4 has one edge to the sink:</p>
+<div class="table-scroll"><table>
+<thead><tr><th>j</th><th>edge</th><th>cost(4, j)</th><th>D[j]</th></tr></thead>
+<tbody>
+<tr><td>9</td><td>9→12, 4</td><td>4</td><td>12</td></tr>
+<tr><td>10</td><td>10→12, 2</td><td>2</td><td>12</td></tr>
+<tr><td>11</td><td>11→12, 5</td><td>5</td><td>12</td></tr>
+</tbody></table></div>
+<p><strong>Stage 3.</strong> Add the edge cost to the stage-4 cost:</p>
+<div class="table-scroll"><table>
+<thead><tr><th>j</th><th>candidates</th><th>minimum</th><th>D[j]</th></tr></thead>
+<tbody>
+<tr><td>6</td><td>6–9: 6+4 = 10; 6–10: 5+2 = 7</td><td><strong>7</strong></td><td>10</td></tr>
+<tr><td>7</td><td>7–9: 4+4 = 8; 7–10: 3+2 = 5</td><td><strong>5</strong></td><td>10</td></tr>
+<tr><td>8</td><td>8–10: 5+2 = 7; 8–11: 6+5 = 11</td><td><strong>7</strong></td><td>10</td></tr>
+</tbody></table></div>
+<p><strong>Stage 2.</strong></p>
+<div class="table-scroll"><table>
+<thead><tr><th>j</th><th>candidates</th><th>minimum</th><th>D[j]</th></tr></thead>
+<tbody>
+<tr><td>2</td><td>2–6: 4+7 = 11; 2–7: 2+5 = 7; 2–8: 1+7 = 8</td><td><strong>7</strong></td><td>7</td></tr>
+<tr><td>3</td><td>3–6: 2+7 = 9; 3–7: 7+5 = 12</td><td><strong>9</strong></td><td>6</td></tr>
+<tr><td>4</td><td>4–8: 11+7 = 18</td><td><strong>18</strong></td><td>8</td></tr>
+<tr><td>5</td><td>5–7: 11+5 = 16; 5–8: 8+7 = 15</td><td><strong>15</strong></td><td>8</td></tr>
+</tbody></table></div>
+<p><strong>Stage 1.</strong></p>
+<div class="table-scroll"><table>
+<thead><tr><th>j</th><th>candidates</th><th>minimum</th><th>D[j]</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>1–2: 9+7 = 16; 1–3: 7+9 = 16; 1–4: 3+18 = 21; 1–5: 2+15 = 17</td><td><strong>16</strong></td><td>2</td></tr>
+</tbody></table></div>
+<p>The minimum cost is <strong>16</strong>. Following <code>D</code>: 1 → 2 → 7 → 10 → 12, with cost 9 + 2 + 3 + 2 = 16.</p>
+<p><strong>Tie note.</strong> <code>1 → 3 → 6 → 10 → 12</code> also costs 7 + 2 + 5 + 2 = 16. The table records <code>D[1] = 2</code> only because the candidates are examined in increasing order and <code>&lt;</code> keeps the first minimum. In an examination, state the tie: <em>the optimal cost is 16, and one optimal path is 1–2–7–10–12; 1–3–6–10–12 is an equally optimal path.</em> A complete answer mentions both.</p>
+<h3 id="2-7-full-trace">2.7 Full trace</h3>
+<div class="table-scroll"><table>
+<thead><tr><th>Stage</th><th>Vertex</th><th>Computation</th><th>cost</th><th>D</th></tr></thead>
+<tbody>
+<tr><td>5</td><td>12</td><td>base</td><td>0</td><td>—</td></tr>
+<tr><td>4</td><td>9</td><td>4 + 0</td><td>4</td><td>12</td></tr>
+<tr><td>4</td><td>10</td><td>2 + 0</td><td>2</td><td>12</td></tr>
+<tr><td>4</td><td>11</td><td>5 + 0</td><td>5</td><td>12</td></tr>
+<tr><td>3</td><td>6</td><td>min(6+4, 5+2)</td><td>7</td><td>10</td></tr>
+<tr><td>3</td><td>7</td><td>min(4+4, 3+2)</td><td>5</td><td>10</td></tr>
+<tr><td>3</td><td>8</td><td>min(5+2, 6+5)</td><td>7</td><td>10</td></tr>
+<tr><td>2</td><td>2</td><td>min(4+7, 2+5, 1+7)</td><td>7</td><td>7</td></tr>
+<tr><td>2</td><td>3</td><td>min(2+7, 7+5)</td><td>9</td><td>6</td></tr>
+<tr><td>2</td><td>4</td><td>11 + 7</td><td>18</td><td>8</td></tr>
+<tr><td>2</td><td>5</td><td>min(11+5, 8+7)</td><td>15</td><td>8</td></tr>
+<tr><td>1</td><td>1</td><td>min(9+7, 7+9, 3+18, 2+15)</td><td>16</td><td>2</td></tr>
+</tbody></table></div>
+<h3 id="2-8-complexity">2.8 Complexity</h3>
+<p>Each edge is examined exactly once. With adjacency lists, time is <strong>Θ(V + E)</strong>; with an adjacency matrix and the usual scan of the next stage, <strong>Θ(k·n²)</strong> worst case. Space is <strong>Θ(V)</strong> for the cost and decision arrays. For a dense layered graph, <code>E</code> can be Θ(n²), so the matrix version is not a slowdown in the worst case.</p>
+<h3 id="2-9-common-mistakes">2.9 Common mistakes</h3>
+<ul>
+<li>Using forward greedy and never reconsidering an earlier choice.</li>
+<li>Forgetting the base case <code>cost(k, sink) = 0</code>.</li>
+<li>Adding <code>cost(i, j)</code> to itself, or using <code>cost(i, l)</code> instead of <code>cost(i+1, l)</code>.</li>
+<li>Processing stages from the source downwards while the recurrence needs the next stage.</li>
+<li>Reading the cost from the table but not reconstructing the path, when the question asks for the path.</li>
+<li>Reporting only one path when two are optimal, or claiming the other is wrong.</li>
+</ul>
+<h2 id="floyd">3 — All pairs shortest path: Floyd–Warshall</h2>
+<h3 id="3-1-the-problem">3.1 The problem</h3>
+<p>Given a directed graph with <code>n</code> vertices and edge weights that may be negative (but no negative cycle), compute the shortest distance from every vertex to every other vertex. The output is an <code>n × n</code> matrix <code>D</code> where <code>D[i][j]</code> is the minimum cost of a path from <code>i</code> to <code>j</code>.</p>
+<h3 id="3-2-the-idea">3.2 The idea</h3>
+<p>Number the vertices <code>1…n</code>. Let <code>D⁽ᵏ⁾[i][j]</code> be the shortest path from <code>i</code> to <code>j</code> that uses only vertices from <code>{1, …, k}</code> as intermediate vertices. Then either the path does not use <code>k</code>, or it is a shortest path from <code>i</code> to <code>k</code> followed by a shortest path from <code>k</code> to <code>j</code>:</p>
+<pre><code>D⁽ᵏ⁾[i][j] = min( D⁽ᵏ⁻¹⁾[i][j],  D⁽ᵏ⁻¹⁾[i][k] + D⁽ᵏ⁻¹⁾[k][j] )
+D⁽⁰⁾[i][j] = weight(i, j)     if the edge exists
+D⁽⁰⁾[i][i] = 0
+D⁽⁰⁾[i][j] = ∞               otherwise</code></pre>
+<p>After <code>k = n</code>, <code>D⁽ⁿ⁾</code> is the all-pairs answer. The third vertex <code>k</code> is called the <strong>pivot</strong>.</p>
+<h3 id="3-3-how-to-recognise-it">3.3 How to recognise it</h3>
+<ul>
+<li>"All pairs shortest path", "distance matrix", "every pair".</li>
+<li>A matrix is given, and the question asks for a sequence of matrices <code>D¹, D², …</code>.</li>
+<li>Edge weights may be negative; no negative cycle is stated.</li>
+<li>Contrast: a single source with non-negative weights is Dijkstra; a single source with negative edges is Bellman–Ford.</li>
+</ul>
+<h3 id="3-4-how-it-works">3.4 How it works</h3>
+<ol>
+<li>Initialise <code>D</code> from the weight matrix, with 0 on the diagonal and ∞ where there is no edge.</li>
+<li>For <code>k = 1</code> to <code>n</code> (the pivot):</li>
+</ol>
+<p>for every <code>i</code>, for every <code>j</code>, replace <code>D[i][j]</code> with <code>min(D[i][j], D[i][k] + D[k][j])</code>.</p>
+<ol>
+<li>After the last pivot, <code>D[i][j]</code> is the shortest distance.</li>
+</ol>
+<p>The three loops can be written in place. This is valid because <code>D[i][k]</code> and <code>D[k][j]</code> do not change during pivot <code>k</code>: a shortest path from <code>i</code> to <code>k</code> using <code>k</code> as an intermediate would repeat <code>k</code>, which cannot improve a path without a negative cycle. Some textbooks keep a previous matrix <code>D⁽ᵏ⁻¹⁾</code> to make this argument explicit; both versions produce the same result.</p>
+<p><strong>Path reconstruction.</strong> Keep a <code>next</code> matrix. Initially <code>next[i][j] = j</code> if the edge <code>i→j</code> exists. Whenever <code>D[i][j]</code> improves through pivot <code>k</code>, set <code>next[i][j] = next[i][k]</code>. Then the path from <code>i</code> to <code>j</code> is <code>i</code>, <code>next[i][j]</code>, <code>next[next[i][j]][j]</code>, … until <code>j</code>.</p>
+<h3 id="3-5-pseudocode">3.5 Pseudocode</h3>
+<pre><code>FLOYD-WARSHALL(W, n)
+  D = W                                  // D[i][i] = 0, D[i][j] = infinity if no edge
+  for i = 1 to n:
+      for j = 1 to n:
+          if i != j and W[i][j] &lt; infinity: next[i][j] = j
+  for k = 1 to n:
+      for i = 1 to n:
+          for j = 1 to n:
+              if D[i][k] + D[k][j] &lt; D[i][j]:
+                  D[i][j] = D[i][k] + D[k][j]
+                  next[i][j] = next[i][k]
+  return D, next
+
+PRINT-PATH(i, j)
+  if D[i][j] == infinity: print &quot;no path&quot;
+  else:
+      print i
+      while i != j:
+          i = next[i][j]
+          print i</code></pre>
+<h3 id="3-6-worked-example-four-vertices">3.6 Worked example — four vertices</h3>
+<p>Weight matrix (∞ means no direct edge):</p>
+<pre><code>       1    2    3    4
+1      0    8    ∞    1
+2      ∞    0    1    ∞
+3      4    ∞    0    ∞
+4      ∞    2    9    0</code></pre>
+<p><strong>Initial matrix D⁰</strong></p>
+<div class="table-scroll"><table>
+<thead><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+<tbody>
+<tr><td><strong>1</strong></td><td>0</td><td>8</td><td>∞</td><td>1</td></tr>
+<tr><td><strong>2</strong></td><td>∞</td><td>0</td><td>1</td><td>∞</td></tr>
+<tr><td><strong>3</strong></td><td>4</td><td>∞</td><td>0</td><td>∞</td></tr>
+<tr><td><strong>4</strong></td><td>∞</td><td>2</td><td>9</td><td>0</td></tr>
+</tbody></table></div>
+<p><strong>Pivot k = 1.</strong> Paths that may now pass through vertex 1. The only improvements use row 1 and column 1:</p>
+<ul>
+<li><code>D[3][2] = min(∞, 4 + 8) = 12</code></li>
+<li><code>D[3][4] = min(∞, 4 + 1) = 5</code></li>
+</ul>
+<div class="table-scroll"><table>
+<thead><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+<tbody>
+<tr><td><strong>1</strong></td><td>0</td><td>8</td><td>∞</td><td>1</td></tr>
+<tr><td><strong>2</strong></td><td>∞</td><td>0</td><td>1</td><td>∞</td></tr>
+<tr><td><strong>3</strong></td><td>4</td><td>12</td><td>0</td><td>5</td></tr>
+<tr><td><strong>4</strong></td><td>∞</td><td>2</td><td>9</td><td>0</td></tr>
+</tbody></table></div>
+<p><strong>Pivot k = 2.</strong> Improvements:</p>
+<ul>
+<li><code>D[1][3] = min(∞, 8 + 1) = 9</code></li>
+<li><code>D[4][3] = min(9, 2 + 1) = 3</code></li>
+</ul>
+<div class="table-scroll"><table>
+<thead><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+<tbody>
+<tr><td><strong>1</strong></td><td>0</td><td>8</td><td>9</td><td>1</td></tr>
+<tr><td><strong>2</strong></td><td>∞</td><td>0</td><td>1</td><td>∞</td></tr>
+<tr><td><strong>3</strong></td><td>4</td><td>12</td><td>0</td><td>5</td></tr>
+<tr><td><strong>4</strong></td><td>∞</td><td>2</td><td>3</td><td>0</td></tr>
+</tbody></table></div>
+<p><strong>Pivot k = 3.</strong> Improvements:</p>
+<ul>
+<li><code>D[2][1] = min(∞, 1 + 4) = 5</code></li>
+<li><code>D[2][4] = min(∞, 1 + 5) = 6</code></li>
+<li><code>D[4][1] = min(∞, 3 + 4) = 7</code></li>
+</ul>
+<div class="table-scroll"><table>
+<thead><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+<tbody>
+<tr><td><strong>1</strong></td><td>0</td><td>8</td><td>9</td><td>1</td></tr>
+<tr><td><strong>2</strong></td><td>5</td><td>0</td><td>1</td><td>6</td></tr>
+<tr><td><strong>3</strong></td><td>4</td><td>12</td><td>0</td><td>5</td></tr>
+<tr><td><strong>4</strong></td><td>7</td><td>2</td><td>3</td><td>0</td></tr>
+</tbody></table></div>
+<p><strong>Pivot k = 4.</strong> Improvements:</p>
+<ul>
+<li><code>D[1][2] = min(8, 1 + 2) = 3</code></li>
+<li><code>D[1][3] = min(9, 1 + 3) = 4</code></li>
+<li><code>D[3][2] = min(12, 5 + 2) = 7</code></li>
+</ul>
+<div class="table-scroll"><table>
+<thead><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+<tbody>
+<tr><td><strong>1</strong></td><td>0</td><td><strong>3</strong></td><td><strong>4</strong></td><td>1</td></tr>
+<tr><td><strong>2</strong></td><td>5</td><td>0</td><td>1</td><td>6</td></tr>
+<tr><td><strong>3</strong></td><td>4</td><td><strong>7</strong></td><td>0</td><td>5</td></tr>
+<tr><td><strong>4</strong></td><td>7</td><td>2</td><td>3</td><td>0</td></tr>
+</tbody></table></div>
+<p>For example, <code>D[2][4] = 6</code> is realised by 2 → 3 → 1 → 4: 1 + 4 + 1 = 6. Check with the <code>next</code> matrix: <code>next[2][4] = 3</code> (set at pivot 3), <code>next[3][4] = 1</code> (set at pivot 1), <code>next[1][4] = 4</code>. Path: 2, 3, 1, 4. ✓</p>
+<p><code>D[4][1] = 7</code> is realised by 4 → 2 → 3 → 1: 2 + 1 + 4 = 7. ✓</p>
+<h3 id="3-7-full-trace">3.7 Full trace</h3>
+<div class="table-scroll"><table>
+<thead><tr><th>Pivot</th><th>Cells improved</th><th>D after the pivot (rows 1–4)</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>initial</td><td><code>[0,8,∞,1] [∞,0,1,∞] [4,∞,0,∞] [∞,2,9,0]</code></td></tr>
+<tr><td>1</td><td>D[3][2]=12, D[3][4]=5</td><td><code>[0,8,∞,1] [∞,0,1,∞] [4,12,0,5] [∞,2,9,0]</code></td></tr>
+<tr><td>2</td><td>D[1][3]=9, D[4][3]=3</td><td><code>[0,8,9,1] [∞,0,1,∞] [4,12,0,5] [∞,2,3,0]</code></td></tr>
+<tr><td>3</td><td>D[2][1]=5, D[2][4]=6, D[4][1]=7</td><td><code>[0,8,9,1] [5,0,1,6] [4,12,0,5] [7,2,3,0]</code></td></tr>
+<tr><td>4</td><td>D[1][2]=3, D[1][3]=4, D[3][2]=7</td><td><code>[0,3,4,1] [5,0,1,6] [4,7,0,5] [7,2,3,0]</code></td></tr>
+</tbody></table></div>
+<h3 id="3-8-complexity">3.8 Complexity</h3>
+<p>Three nested loops, each of length <code>n</code>: <strong>Θ(n³)</strong> time. The matrix is <code>n²</code>: <strong>Θ(n²)</strong> space. For comparison, running Dijkstra <code>n</code> times from each source with a binary heap is O(n·(E log V)) and is faster on sparse graphs with non-negative weights; Bellman–Ford from each source is O(n·V·E) and handles negative edges. Floyd–Warshall is the simplest all-pairs method and handles negative edges.</p>
+<h3 id="3-9-common-mistakes">3.9 Common mistakes</h3>
+<ul>
+<li>Putting <code>k</code> in the innermost loop. The pivot must be the <strong>outer</strong> loop; otherwise intermediate vertices are combined incorrectly.</li>
+<li>Using the original matrix for both terms while updating in place, without checking that the in-place argument is valid. (It is valid for this recurrence, but the reason must be understood.)</li>
+<li>Using a finite "large" number and adding to it, producing a false path. Guard with <code>if D[i][k] &lt; ∞ and D[k][j] &lt; ∞</code>.</li>
+<li>Forgetting <code>D[i][i] = 0</code> and <code>D[i][j] = ∞</code> for missing edges.</li>
+<li>Claiming the algorithm works with a negative cycle. It does not: distances would decrease forever. Detect a negative cycle by checking for a negative diagonal after the run.</li>
+<li>Reconstructing a path from the final matrix alone. Keep the <code>next</code> (or predecessor) matrix during the updates.</li>
+</ul>
+<h2 id="knapsack">4 — 0/1 knapsack</h2>
+<h3 id="4-1-the-problem">4.1 The problem</h3>
+<p>Given <code>n</code> items, each with a positive integer weight <code>wᵢ</code> and profit <code>pᵢ</code>, and a knapsack of capacity <code>M</code>, choose a subset of the items so that the total weight is at most <code>M</code> and the total profit is maximum. Each item is taken <strong>once</strong> — that is the "0/1" part.</p>
+<h3 id="4-2-the-idea">4.2 The idea</h3>
+<p>Consider the items one at a time. For item <code>i</code> there are only two decisions: leave it out, or take it (if it fits). If we take it, the remaining capacity is <code>w − wᵢ</code> and the remaining items are <code>1…i−1</code>. The best profit for that smaller problem is already in the table. Define</p>
+<pre><code>m[i, w] = maximum profit using a subset of items 1…i with capacity at most w</code></pre>
+<p>Then</p>
+<pre><code>m[0, w] = 0                         for every w
+m[i, 0] = 0                         for every i
+m[i, w] = m[i-1, w]                 if wᵢ &gt; w
+m[i, w] = max( m[i-1, w],  pᵢ + m[i-1, w - wᵢ] )    if wᵢ ≤ w</code></pre>
+<p>The answer is <code>m[n, M]</code>. The same item is never reused because the second term uses row <code>i−1</code>, not row <code>i</code>.</p>
+<h3 id="4-3-how-to-recognise-it">4.3 How to recognise it</h3>
+<ul>
+<li>A capacity, a budget, a weight limit, or a time limit.</li>
+<li>Each item can be chosen once ("0/1"), not in fractions, not repeatedly.</li>
+<li>The question asks for maximum profit or minimum cost with a constraint.</li>
+<li>If fractions are allowed, use the greedy ratio method, not this DP. If unlimited copies are allowed, use the unbounded recurrence <code>m[i, w] = max(m[i-1,w], pᵢ + m[i, w-wᵢ])</code>.</li>
+</ul>
+<h3 id="4-4-how-it-works">4.4 How it works</h3>
+<ol>
+<li>Create a table with <code>n+1</code> rows (0…n) and <code>M+1</code> columns (0…M).</li>
+<li>Fill row 0 and column 0 with 0.</li>
+<li>For <code>i = 1…n</code> and <code>w = 0…M</code>, apply the recurrence.</li>
+<li>The answer is the bottom-right cell.</li>
+<li>To reconstruct, start at <code>(n, M)</code> and move upwards: if <code>m[i][w] ≠ m[i-1][w]</code>, item <code>i</code> was taken; subtract <code>wᵢ</code> from <code>w</code> and move to row <code>i−1</code>. Otherwise move to row <code>i−1</code> without subtracting.</li>
+</ol>
+<p>Computation order is <strong>row by row, left to right</strong>: every cell uses the row above (already complete) and a cell to the left in the row above (also complete).</p>
+<h3 id="4-5-pseudocode">4.5 Pseudocode</h3>
+<pre><code>KNAPSACK-01(w[1..n], p[1..n], M)
+  for w = 0 to M: m[0][w] = 0
+  for i = 1 to n: m[i][0] = 0
+  for i = 1 to n:
+      for w = 0 to M:
+          if w[i] &gt; w:
+              m[i][w] = m[i-1][w]
+          else:
+              m[i][w] = max(m[i-1][w], p[i] + m[i-1][w - w[i]])
+  // reconstruction
+  w = M
+  for i = n down to 1:
+      if m[i][w] != m[i-1][w]:
+          x[i] = 1
+          w = w - w[i]
+      else:
+          x[i] = 0
+  return m[n][M], x</code></pre>
+<h3 id="4-6-worked-example-four-items-capacity-5">4.6 Worked example — four items, capacity 5</h3>
+<p><code>n = 4</code>, <code>M = 5</code>, weights <code>(2, 3, 4, 5)</code>, profits <code>(3, 4, 5, 6)</code>.</p>
+<p>Base: row 0 is all zeros, column 0 is all zeros.</p>
+<p><strong>Row 1 (item 1: w = 2, p = 3).</strong> For <code>w &lt; 2</code>, copy row 0. For <code>w ≥ 2</code>, compare "leave" (0) with "take" (3 + 0 = 3).</p>
+<div class="table-scroll"><table>
+<thead><tr><th>i \ w</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>3</td><td>3</td><td>3</td><td>3</td></tr>
+</tbody></table></div>
+<p><strong>Row 2 (item 2: w = 3, p = 4).</strong></p>
+<ul>
+<li><code>w = 2</code>: leave 3; take does not fit → 3.</li>
+<li><code>w = 3</code>: max(leave 3, 4 + m[1][0] = 4) = 4.</li>
+<li><code>w = 4</code>: max(3, 4 + m[1][1] = 4) = 4.</li>
+<li><code>w = 5</code>: max(3, 4 + m[1][2] = 7) = 7.</li>
+</ul>
+<div class="table-scroll"><table>
+<thead><tr><th>i \ w</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>3</td><td>3</td><td>3</td><td>3</td></tr>
+<tr><td>2</td><td>0</td><td>0</td><td>3</td><td>4</td><td>4</td><td>7</td></tr>
+</tbody></table></div>
+<p><strong>Row 3 (item 3: w = 4, p = 5).</strong></p>
+<ul>
+<li><code>w = 4</code>: max(4, 5 + m[2][0] = 5) = 5.</li>
+<li><code>w = 5</code>: max(7, 5 + m[2][1] = 5) = 7.</li>
+</ul>
+<div class="table-scroll"><table>
+<thead><tr><th>i \ w</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>3</td><td>3</td><td>3</td><td>3</td></tr>
+<tr><td>2</td><td>0</td><td>0</td><td>3</td><td>4</td><td>4</td><td>7</td></tr>
+<tr><td>3</td><td>0</td><td>0</td><td>3</td><td>4</td><td>5</td><td>7</td></tr>
+</tbody></table></div>
+<p><strong>Row 4 (item 4: w = 5, p = 6).</strong></p>
+<ul>
+<li><code>w = 5</code>: max(leave 7, 6 + m[3][0] = 6) = 7.</li>
+</ul>
+<div class="table-scroll"><table>
+<thead><tr><th>i \ w</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>3</td><td>3</td><td>3</td><td>3</td></tr>
+<tr><td>2</td><td>0</td><td>0</td><td>3</td><td>4</td><td>4</td><td>7</td></tr>
+<tr><td>3</td><td>0</td><td>0</td><td>3</td><td>4</td><td>5</td><td>7</td></tr>
+<tr><td>4</td><td>0</td><td>0</td><td>3</td><td>4</td><td>5</td><td><strong>7</strong></td></tr>
+</tbody></table></div>
+<p>The maximum profit is <strong>7</strong>.</p>
+<p><strong>Reconstruction.</strong> Start at <code>m[4][5] = 7</code>. <code>m[3][5] = 7</code>, so item 4 is not taken; move to <code>(3,5)</code>. <code>m[2][5] = 7</code>, so item 3 is not taken; move to <code>(2,5)</code>. <code>m[1][5] = 3 ≠ 7</code>, so item 2 is taken; <code>w = 5 − 3 = 2</code>, move to <code>(1,2)</code>. <code>m[0][2] = 0 ≠ 3</code>, so item 1 is taken; <code>w = 0</code>. Therefore <code>X = (1, 1, 0, 0)</code>, total weight 5, profit 7.</p>
+<h3 id="4-7-full-trace">4.7 Full trace</h3>
+<div class="table-scroll"><table>
+<thead><tr><th>Cell</th><th>Leave</th><th>Take</th><th>m[i][w]</th><th>Decision</th></tr></thead>
+<tbody>
+<tr><td>m[1][2]</td><td>0</td><td>3 + 0 = 3</td><td>3</td><td>take</td></tr>
+<tr><td>m[1][5]</td><td>0</td><td>3 + 0 = 3</td><td>3</td><td>take</td></tr>
+<tr><td>m[2][3]</td><td>3</td><td>4 + 0 = 4</td><td>4</td><td>take</td></tr>
+<tr><td>m[2][4]</td><td>3</td><td>4 + 0 = 4</td><td>4</td><td>take</td></tr>
+<tr><td>m[2][5]</td><td>3</td><td>4 + 3 = 7</td><td>7</td><td>take</td></tr>
+<tr><td>m[3][4]</td><td>4</td><td>5 + 0 = 5</td><td>5</td><td>take</td></tr>
+<tr><td>m[3][5]</td><td>7</td><td>5 + 0 = 5</td><td>7</td><td>leave</td></tr>
+<tr><td>m[4][5]</td><td>7</td><td>6 + 0 = 6</td><td>7</td><td>leave</td></tr>
+</tbody></table></div>
+<h3 id="4-8-complexity">4.8 Complexity</h3>
+<p>Time <strong>Θ(nM)</strong>: <code>n(M+1)</code> cells, constant work per cell. Space <strong>Θ(nM)</strong> for the full table. If only the value is needed, two rows (or one row scanned right-to-left) give <strong>Θ(M)</strong> space:</p>
+<pre><code>for i = 1 to n:
+    for w = M down to w[i]:
+        dp[w] = max(dp[w], p[i] + dp[w - w[i]])</code></pre>
+<p>The reverse scan is essential: scanning left to right would allow the same item to be taken repeatedly. Reconstructing the chosen items with Θ(M) space requires a divide-and-conquer technique; in the examination, keep the full table.</p>
+<p><code>O(nM)</code> is <strong>pseudo-polynomial</strong>: it is polynomial in the numeric value of <code>M</code>, not in the number of bits used to write <code>M</code>. 0/1 knapsack is NP-hard, so no genuinely polynomial algorithm is known. Saying "O(nM), which is pseudo-polynomial" is a strong answer.</p>
+<h3 id="4-9-common-mistakes">4.9 Common mistakes</h3>
+<ul>
+<li>Using <code>m[i][w−wᵢ]</code> instead of <code>m[i−1][w−wᵢ]</code> — that solves the unbounded knapsack.</li>
+<li>Forgetting row 0 or column 0.</li>
+<li>Using the fractional-knapsack greedy ratio on a 0/1 instance.</li>
+<li>Filling the table column by column without checking that the required cells exist (the recurrence is fine either way, but the row-by-row presentation is easier to mark).</li>
+<li>Reconstructing by comparing <code>m[i][w]</code> with <code>m[i][w−1]</code> instead of <code>m[i−1][w]</code>.</li>
+<li>Reporting the profit but not the selected items or the total weight.</li>
+<li>Writing "O(nM) polynomial" without the pseudo-polynomial qualification.</li>
+</ul>
+<h2 id="tsp">5 — Travelling salesperson problem by dynamic programming</h2>
+<h3 id="5-1-the-problem">5.1 The problem</h3>
+<p>A salesperson starts at city 1, must visit every other city exactly once, and must return to city 1. The cost of travelling from city <code>i</code> to city <code>j</code> is <code>c(i, j)</code>. Find a tour of minimum total cost.</p>
+<p>The graph is usually complete: there is a cost for every ordered pair of distinct cities. If some direct route is missing, set its cost to ∞. The matrix need not be symmetric.</p>
+<h3 id="5-2-the-idea">5.2 The idea</h3>
+<p>Fix the starting city, 1. Suppose the salesperson is at city <code>i</code> and the set <code>S</code> of cities still to be visited is known. The cheapest way to finish does not depend on how the salesperson reached <code>i</code> — only on <code>i</code> and <code>S</code>. That is the state. Define</p>
+<pre><code>g(i, S) = minimum cost of a path that starts at i, visits every city in S exactly once,
+          and ends at city 1</code></pre>
+<p>where <code>i ∉ S</code> and <code>S ⊆ {2, 3, …, n}</code>. Then</p>
+<pre><code>g(i, ∅) = c(i, 1)                                      base case: go straight home
+g(i, S) = min over j in S of [ c(i, j) + g(j, S − {j}) ]</code></pre>
+<p>The answer is</p>
+<pre><code>min over j in {2,…,n} of [ c(1, j) + g(j, {2,…,n} − {j}) ]</code></pre>
+<p>The set <code>S</code> is stored as a bitmask: bit <code>j−2</code> is 1 when city <code>j</code> is still to be visited.</p>
+<h3 id="5-3-how-to-recognise-it">5.3 How to recognise it</h3>
+<ul>
+<li>"Visit every city exactly once and return to the start."</li>
+<li>A cost matrix between cities, and <code>n</code> is small (typically ≤ 15).</li>
+<li>The question says "using dynamic programming" or gives the recurrence <code>g(i, S)</code>.</li>
+<li>Brute force would try <code>(n−1)!</code> tours; DP reduces this to about <code>n²2ⁿ</code>.</li>
+<li>If the question asks only for a lower bound or a search tree, it may be branch and bound (Module V), not this DP.</li>
+</ul>
+<h3 id="5-4-how-it-works">5.4 How it works</h3>
+<ol>
+<li>Write the base values <code>g(i, ∅) = c(i, 1)</code> for every city <code>i ≠ 1</code>.</li>
+<li>Process subsets by <strong>increasing size</strong>: all singletons, then all pairs, then all triples, and so on. A state of size <code>s</code> uses states of size <code>s−1</code>, which are already complete.</li>
+<li>For each state <code>(i, S)</code>, try every <code>j ∈ S</code>, add <code>c(i, j)</code> to <code>g(j, S−{j})</code>, and keep the smallest. Store the winning <code>j</code>.</li>
+<li>Combine at the start: try every first city <code>j</code>, add <code>c(1, j)</code> to <code>g(j, {2…n}−{j})</code>, and take the minimum.</li>
+<li>Reconstruct the tour by following the stored choices.</li>
+</ol>
+<h3 id="5-5-pseudocode">5.5 Pseudocode</h3>
+<pre><code>TSP-DP(c, n)
+  // cities are 1..n; city 1 is the start; S is a bitmask over cities 2..n
+  for i = 2 to n:
+      g[i][0] = c[i][1]
+      choice[i][0] = 1
+  for size = 1 to n-2:
+      for every subset S of {2..n} with |S| = size:
+          for every i in {2..n} with i not in S:
+              g[i][S] = INFINITY
+              for every j in S:
+                  candidate = c[i][j] + g[j][S without j]
+                  if candidate &lt; g[i][S]:
+                      g[i][S] = candidate
+                      choice[i][S] = j
+  best = INFINITY
+  full = {2, 3, ..., n}
+  for j = 2 to n:
+      candidate = c[1][j] + g[j][full without j]
+      if candidate &lt; best:
+          best = candidate
+          first = j
+  return best, first, choice</code></pre>
+<h3 id="5-6-worked-example-four-cities">5.6 Worked example — four cities</h3>
+<p>Cost matrix (the matrix used in Assignment 4 and in the IAT-2 question bank):</p>
+<div class="table-scroll"><table>
+<thead><tr><th>from \ to</th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead>
+<tbody>
+<tr><td><strong>A</strong></td><td>0</td><td>4</td><td>2</td><td>1</td></tr>
+<tr><td><strong>B</strong></td><td>4</td><td>0</td><td>13</td><td>9</td></tr>
+<tr><td><strong>C</strong></td><td>2</td><td>13</td><td>0</td><td>8</td></tr>
+<tr><td><strong>D</strong></td><td>1</td><td>9</td><td>8</td><td>0</td></tr>
+</tbody></table></div>
+<p>Write A = 1, B = 2, C = 3, D = 4, and start at A.</p>
+<p><strong>Base: <code>S = ∅</code>.</strong></p>
+<div class="table-scroll"><table>
+<thead><tr><th>State</th><th>Computation</th><th>Value</th><th>Path</th></tr></thead>
+<tbody>
+<tr><td>g(B, ∅)</td><td>c(B, A)</td><td>4</td><td>B–A</td></tr>
+<tr><td>g(C, ∅)</td><td>c(C, A)</td><td>2</td><td>C–A</td></tr>
+<tr><td>g(D, ∅)</td><td>c(D, A)</td><td>1</td><td>D–A</td></tr>
+</tbody></table></div>
+<p><strong>Size 1.</strong></p>
+<div class="table-scroll"><table>
+<thead><tr><th>State</th><th>Candidates</th><th>Minimum</th><th>Path</th></tr></thead>
+<tbody>
+<tr><td>g(B, {C})</td><td>13 + g(C, ∅) = 13 + 2 = 15</td><td><strong>15</strong></td><td>B–C–A</td></tr>
+<tr><td>g(B, {D})</td><td>9 + g(D, ∅) = 9 + 1 = 10</td><td><strong>10</strong></td><td>B–D–A</td></tr>
+<tr><td>g(C, {B})</td><td>13 + g(B, ∅) = 13 + 4 = 17</td><td><strong>17</strong></td><td>C–B–A</td></tr>
+<tr><td>g(C, {D})</td><td>8 + g(D, ∅) = 8 + 1 = 9</td><td><strong>9</strong></td><td>C–D–A</td></tr>
+<tr><td>g(D, {B})</td><td>9 + g(B, ∅) = 9 + 4 = 13</td><td><strong>13</strong></td><td>D–B–A</td></tr>
+<tr><td>g(D, {C})</td><td>8 + g(C, ∅) = 8 + 2 = 10</td><td><strong>10</strong></td><td>D–C–A</td></tr>
+</tbody></table></div>
+<p><strong>Size 2.</strong></p>
+<div class="table-scroll"><table>
+<thead><tr><th>State</th><th>Candidates</th><th>Minimum</th><th>Path</th></tr></thead>
+<tbody>
+<tr><td>g(B, {C,D})</td><td>via C: 13 + g(C,{D}) = 13 + 9 = 22; via D: 9 + g(D,{C}) = 9 + 10 = 19</td><td><strong>19</strong> via D</td><td>B–D–C–A</td></tr>
+<tr><td>g(C, {B,D})</td><td>via B: 13 + g(B,{D}) = 13 + 10 = 23; via D: 8 + g(D,{B}) = 8 + 13 = 21</td><td><strong>21</strong> via D</td><td>C–D–B–A</td></tr>
+<tr><td>g(D, {B,C})</td><td>via B: 9 + g(B,{C}) = 9 + 15 = 24; via C: 8 + g(C,{B}) = 8 + 17 = 25</td><td><strong>24</strong> via B</td><td>D–B–C–A</td></tr>
+</tbody></table></div>
+<p><strong>Size 3 — the answer.</strong></p>
+<div class="table-scroll"><table>
+<thead><tr><th>First city j</th><th>Candidate</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>B</td><td>c(A,B) + g(B,{C,D}) = 4 + 19</td><td><strong>23</strong></td></tr>
+<tr><td>C</td><td>c(A,C) + g(C,{B,D}) = 2 + 21</td><td><strong>23</strong></td></tr>
+<tr><td>D</td><td>c(A,D) + g(D,{B,C}) = 1 + 24</td><td><strong>25</strong></td></tr>
+</tbody></table></div>
+<p>The minimum tour cost is <strong>23</strong>. There are two optimal tours:</p>
+<ul>
+<li>via B: A → B → D → C → A, cost 4 + 9 + 8 + 2 = 23;</li>
+<li>via C: A → C → D → B → A, cost 2 + 8 + 9 + 4 = 23.</li>
+</ul>
+<p>The table stores the first minimum (<code>B</code>) because the loop examines B before C, but both must be reported.</p>
+<h3 id="5-7-full-trace">5.7 Full trace</h3>
+<div class="table-scroll"><table>
+<thead><tr><th>Subset size</th><th>States computed</th><th>Values</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>g(B,∅), g(C,∅), g(D,∅)</td><td>4, 2, 1</td></tr>
+<tr><td>1</td><td>g(B,{C}), g(B,{D}), g(C,{B}), g(C,{D}), g(D,{B}), g(D,{C})</td><td>15, 10, 17, 9, 13, 10</td></tr>
+<tr><td>2</td><td>g(B,{C,D}), g(C,{B,D}), g(D,{B,C})</td><td>19, 21, 24</td></tr>
+<tr><td>3</td><td>start combination at A</td><td>23</td></tr>
+</tbody></table></div>
+<p>A useful check: <code>g(C, {B,D})</code> must use the already-computed <code>g(D, {B}) = 13</code> and <code>g(B, {D}) = 10</code>; it does not recompute those paths. This is the overlapping-subproblem saving.</p>
+<h3 id="5-8-complexity">5.8 Complexity</h3>
+<p>Number of states: for each of the <code>n</code> cities, <code>2ⁿ⁻¹</code> subsets that do not contain it, so about <code>n·2ⁿ⁻¹</code>. Each state scans up to <code>n</code> choices. Time <strong>O(n²2ⁿ)</strong>; space <strong>O(n·2ⁿ)</strong> for the table (and the choice table). Brute force is <code>(n−1)!</code>, which is far larger: for <code>n = 10</code>, <code>9! = 362,880</code> tours versus roughly <code>10²·2¹⁰ ≈ 10⁵</code> states.</p>
+<h3 id="5-9-common-mistakes">5.9 Common mistakes</h3>
+<ul>
+<li>Using <code>g(j, S)</code> instead of <code>g(j, S−{j})</code>; the next city must be removed from the remaining set.</li>
+<li>Forgetting the base case <code>g(i, ∅) = c(i, 1)</code> — the return to the start.</li>
+<li>Forgetting the final edge from the start to the first city in the answer combination.</li>
+<li>Processing subsets in numeric order rather than by size; a pair may then be used before it is computed.</li>
+<li>Using a visited mask that includes the start city or the current city.</li>
+<li>Reporting only the cost when the question asks for the tour.</li>
+<li>Treating a missing edge as cost 0 instead of ∞.</li>
+<li>Confusing this DP (Module IV) with the branch-and-bound TSP (Module V). The DP fills a table of exact values; branch and bound searches a tree of partial tours with lower bounds.</li>
+</ul>
+<h2 id="lcs">6 — Longest common subsequence</h2>
+<h3 id="6-1-the-problem">6.1 The problem</h3>
+<p>A <strong>subsequence</strong> of a string is obtained by deleting zero or more characters without changing the order of the remaining characters. It is <strong>not</strong> a substring: the characters need not be contiguous. Given two strings <code>X[1…m]</code> and <code>Y[1…n]</code>, find a longest string that is a subsequence of both.</p>
+<p>Example: <code>X = ACADB</code>, <code>Y = CBDA</code>. The string <code>CA</code> is a subsequence of both (take A, C in X and C, A in Y), and no common subsequence has length 3. So the LCS length is 2. <code>CB</code> is another LCS of the same length.</p>
+<h3 id="6-2-the-idea">6.2 The idea</h3>
+<p>Look at the last characters. Let <code>c[i][j]</code> be the length of an LCS of the prefixes <code>X[1…i]</code> and <code>Y[1…j]</code>.</p>
+<ul>
+<li>If <code>X[i] = Y[j]</code>, that character can end an LCS: <code>c[i][j] = c[i−1][j−1] + 1</code>.</li>
+<li>If they differ, the last character of one prefix cannot be in the LCS, so drop one of them: <code>c[i][j] = max(c[i−1][j], c[i][j−1])</code>.</li>
+</ul>
+<p>Base cases: <code>c[0][j] = 0</code> and <code>c[i][0] = 0</code>, because an empty prefix has no common subsequence.</p>
+<p>Optimal substructure holds because an LCS of the prefixes contains an LCS of the smaller prefixes. Overlapping subproblems occur because <code>c[i−1][j]</code> and <code>c[i][j−1]</code> both depend on <code>c[i−1][j−1]</code>.</p>
+<h3 id="6-3-how-to-recognise-it">6.3 How to recognise it</h3>
+<ul>
+<li>Two sequences or strings, and the word "common subsequence".</li>
+<li>"Longest", with deletions allowed but order preserved.</li>
+<li>The question asks for a table, arrows, or a reconstruction.</li>
+<li>Distinguish from longest common <strong>substring</strong> (contiguous), which uses a different recurrence (<code>c[i][j] = c[i−1][j−1] + 1</code> on a match, else 0, and the answer is the maximum cell, not the bottom-right cell).</li>
+<li>Also used for <code>diff</code>, DNA alignment and version control.</li>
+</ul>
+<h3 id="6-4-how-it-works">6.4 How it works</h3>
+<ol>
+<li>Draw a table with <code>m+1</code> rows and <code>n+1</code> columns. Row/column 0 is the empty prefix.</li>
+<li>Fill row by row, left to right.</li>
+<li>On a match, take the diagonal and add 1; on a mismatch, take the larger of the cell above and the cell to the left.</li>
+<li>The bottom-right cell is the LCS length.</li>
+<li>Reconstruct: start at <code>(m, n)</code> and move backwards. On a match, output the character and move diagonally. On a mismatch, move towards the larger neighbour; on a tie, move left (any consistent tie-break gives a valid LCS).</li>
+</ol>
+<h3 id="6-5-pseudocode">6.5 Pseudocode</h3>
+<pre><code>LCS-LENGTH(X[1..m], Y[1..n])
+  for i = 0 to m: c[i][0] = 0
+  for j = 0 to n: c[0][j] = 0
+  for i = 1 to m:
+      for j = 1 to n:
+          if X[i] == Y[j]:
+              c[i][j] = c[i-1][j-1] + 1
+              b[i][j] = &quot;diagonal&quot;
+          else if c[i-1][j] &gt;= c[i][j-1]:
+              c[i][j] = c[i-1][j]
+              b[i][j] = &quot;up&quot;
+          else:
+              c[i][j] = c[i][j-1]
+              b[i][j] = &quot;left&quot;
+  return c, b
+
+PRINT-LCS(b, X, i, j)
+  if i == 0 or j == 0: return
+  if b[i][j] == &quot;diagonal&quot;:
+      PRINT-LCS(b, X, i-1, j-1)
+      print X[i]
+  else if b[i][j] == &quot;up&quot;:
+      PRINT-LCS(b, X, i-1, j)
+  else:
+      PRINT-LCS(b, X, i, j-1)</code></pre>
+<p>The reconstruction above prints the LCS in forward order because the recursive call happens before the <code>print</code>.</p>
+<h3 id="6-6-worked-example-x-acadb-y-cbda">6.6 Worked example — X = ACADB, Y = CBDA</h3>
+<p>Rows are prefixes of X, columns are prefixes of Y.</p>
+<div class="table-scroll"><table>
+<thead><tr><th>c</th><th>—</th><th>C</th><th>B</th><th>D</th><th>A</th></tr></thead>
+<tbody>
+<tr><td><strong>—</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td><strong>A</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><td><strong>C</strong></td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td><strong>A</strong></td><td>0</td><td>1</td><td>1</td><td>1</td><td>2</td></tr>
+<tr><td><strong>D</strong></td><td>0</td><td>1</td><td>1</td><td>2</td><td>2</td></tr>
+<tr><td><strong>B</strong></td><td>0</td><td>1</td><td>2</td><td>2</td><td>2</td></tr>
+</tbody></table></div>
+<p>Selected cells:</p>
+<ul>
+<li><code>c[2][1]</code>: C = C → <code>c[1][0] + 1 = 1</code>.</li>
+<li><code>c[3][4]</code>: A = A → <code>c[2][3] + 1 = 1 + 1 = 2</code>.</li>
+<li><code>c[4][3]</code>: D = D → <code>c[3][2] + 1 = 1 + 1 = 2</code>.</li>
+<li><code>c[5][2]</code>: B = B → <code>c[4][1] + 1 = 1 + 1 = 2</code>.</li>
+<li><code>c[5][3]</code>: B ≠ D → max(c[4][3] = 2, c[5][2] = 2) = 2.</li>
+</ul>
+<p>The LCS length is <strong>2</strong>.</p>
+<p>Reconstruction with the rule "on a tie, move up":</p>
+<ul>
+<li><code>(5,4)</code>: B ≠ A, <code>c[4][4] = 2</code>, <code>c[5][3] = 2</code> → up to <code>(4,4)</code>.</li>
+<li><code>(4,4)</code>: D ≠ A, <code>c[3][4] = 2</code>, <code>c[4][3] = 2</code> → up to <code>(3,4)</code>.</li>
+<li><code>(3,4)</code>: A = A → output <strong>A</strong>, go to <code>(2,3)</code>.</li>
+<li><code>(2,3)</code>: C ≠ D, <code>c[1][3] = 0</code>, <code>c[2][2] = 1</code> → left to <code>(2,2)</code>.</li>
+<li><code>(2,2)</code>: C ≠ B, <code>c[1][2] = 0</code>, <code>c[2][1] = 1</code> → left to <code>(2,1)</code>.</li>
+<li><code>(2,1)</code>: C = C → output <strong>C</strong>, go to <code>(1,0)</code>; stop.</li>
+</ul>
+<p>Output in reverse is A, C; forward is <strong>CA</strong>.</p>
+<p>If ties are broken by moving left instead, the same table yields <strong>CB</strong>. Both are correct. State the tie-break rule you use.</p>
+<h3 id="6-7-worked-example-2-x-savant-y-advent">6.7 Worked example 2 — X = SAVANT, Y = ADVENT</h3>
+<div class="table-scroll"><table>
+<thead><tr><th>c</th><th>—</th><th>A</th><th>D</th><th>V</th><th>E</th><th>N</th><th>T</th></tr></thead>
+<tbody>
+<tr><td><strong>—</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td><strong>S</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td><strong>A</strong></td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td><strong>V</strong></td><td>0</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td><td>2</td></tr>
+<tr><td><strong>A</strong></td><td>0</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td><td>2</td></tr>
+<tr><td><strong>N</strong></td><td>0</td><td>1</td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td></tr>
+<tr><td><strong>T</strong></td><td>0</td><td>1</td><td>1</td><td>2</td><td>2</td><td>3</td><td>4</td></tr>
+</tbody></table></div>
+<p>The LCS length is <strong>4</strong>. Reconstructing with the left-on-tie rule:</p>
+<ul>
+<li><code>(6,6)</code>: T = T → <strong>T</strong>; <code>(5,5)</code>.</li>
+<li><code>(5,5)</code>: N = N → <strong>N</strong>; <code>(4,4)</code>.</li>
+<li><code>(4,4)</code>: A ≠ E, tie at 2 → left; <code>(4,3)</code>.</li>
+<li><code>(4,3)</code>: A ≠ V, <code>c[3][3] = 2 &gt; c[4][2] = 1</code> → up; <code>(3,3)</code>.</li>
+<li><code>(3,3)</code>: V = V → <strong>V</strong>; <code>(2,2)</code>.</li>
+<li><code>(2,2)</code>: A ≠ D, tie at 0 → left; <code>(2,1)</code>.</li>
+<li><code>(2,1)</code>: A = A → <strong>A</strong>; <code>(1,0)</code>; stop.</li>
+</ul>
+<p>Output <strong>AVNT</strong>, length 4.</p>
+<h3 id="6-8-complexity">6.8 Complexity</h3>
+<p>The table has <code>(m+1)(n+1)</code> cells, each filled in constant time: <strong>Θ(mn)</strong> time. Space is <strong>Θ(mn)</strong> for the table and arrows. If only the length is required, two rows (or two columns) suffice, giving <strong>Θ(min(m, n))</strong> space. Recovering the actual subsequence in linear space needs Hirschberg's divide-and-conquer variant; that is beyond the syllabus, but mentioning it is a bonus.</p>
+<h3 id="6-9-common-mistakes">6.9 Common mistakes</h3>
+<ul>
+<li>Solving longest common <strong>substring</strong> instead of subsequence.</li>
+<li>Using <code>c[i−1][j−1] + 1</code> on a mismatch (that is the substring recurrence).</li>
+<li>Reading the answer from the last cell of the wrong dimension, or from the maximum interior cell.</li>
+<li>Off-by-one indexing: <code>X[i]</code> in the recurrence corresponds to row <code>i</code>, but row 0 is the empty prefix.</li>
+<li>Reconstructing forward from <code>(1,1)</code> without stored arrows; backtracking from <code>(m,n)</code> is the reliable method.</li>
+<li>Forgetting that the answer is a string, not only its length.</li>
+<li>Claiming the LCS is unique. It often is not.</li>
+</ul>
+<h2 id="compare">7 — Choosing and comparing the five algorithms</h2>
+<div class="table-scroll"><table>
+<thead><tr><th>Algorithm</th><th>Problem</th><th>State</th><th>Recurrence</th><th>Computation order</th><th>Time</th><th>Space</th></tr></thead>
+<tbody>
+<tr><td>Multistage graph</td><td>Cheapest source-to-sink path in a layered DAG</td><td><code>cost(i,j)</code></td><td><code>min(c(j,l) + cost(i+1,l))</code></td><td>stages backwards</td><td>Θ(V+E)</td><td>Θ(V)</td></tr>
+<tr><td>Floyd–Warshall</td><td>All-pairs shortest paths</td><td><code>D[i][j]</code></td><td><code>min(D[i][j], D[i][k]+D[k][j])</code></td><td>pivot <code>k</code> outermost</td><td>Θ(n³)</td><td>Θ(n²)</td></tr>
+<tr><td>0/1 knapsack</td><td>Maximum profit within capacity</td><td><code>m[i,w]</code></td><td><code>max(leave, take)</code></td><td>rows <code>i</code>, then <code>w</code></td><td>Θ(nM)</td><td>Θ(nM)</td></tr>
+<tr><td>TSP by DP</td><td>Minimum Hamiltonian tour</td><td><code>g(i,S)</code></td><td><code>min(c(i,j)+g(j,S−{j}))</code></td><td>subset size increasing</td><td>O(n²2ⁿ)</td><td>O(n2ⁿ)</td></tr>
+<tr><td>LCS</td><td>Longest common subsequence</td><td><code>c[i][j]</code></td><td>match: diagonal + 1; else max(up, left)</td><td>rows, then columns</td><td>Θ(mn)</td><td>Θ(mn)</td></tr>
+</tbody></table></div>
+<p><strong>How to choose in an exam.</strong></p>
+<ul>
+<li>Layered graph with a source and a sink → multistage.</li>
+<li>"All pairs", matrix output, negative edges → Floyd–Warshall.</li>
+<li>Capacity with each item once → 0/1 knapsack.</li>
+<li>Visit every city and return, small <code>n</code> → TSP DP.</li>
+<li>Two strings and a common subsequence → LCS.</li>
+</ul>
+<p><strong>DP, divide and conquer, greedy — one table.</strong></p>
+<div class="table-scroll"><table>
+<thead><tr><th></th><th>Divide and conquer</th><th>Dynamic programming</th><th>Greedy</th></tr></thead>
+<tbody>
+<tr><td>Subproblems</td><td>Independent, non-overlapping</td><td>Overlapping</td><td>Usually one choice at each step</td></tr>
+<tr><td>Direction</td><td>Top-down recursion</td><td>Bottom-up table (or memoised)</td><td>One pass after sorting or a priority rule</td></tr>
+<tr><td>Correctness</td><td>Combining optimal subsolutions</td><td>Principle of optimality + table</td><td>Greedy-choice property + optimal substructure</td></tr>
+<tr><td>Examples</td><td>Merge sort, binary search, quick sort</td><td>All five algorithms in this module</td><td>Fractional knapsack, Dijkstra, Prim, Kruskal</td></tr>
+<tr><td>Failure mode</td><td>—</td><td>Large table, pseudo-polynomial</td><td>A locally best choice that is globally wrong</td></tr>
+</tbody></table></div>
+<p>The classic contrast: <strong>fractional knapsack is greedy; 0/1 knapsack is DP.</strong> The greedy ratio can leave capacity wasted, and taking a high-ratio item may block a better combination.</p>
+<h2 id="self-learning">8 — Self-learning topics</h2>
+<div class="self-learning">
+<h3 id="8-1-bellman-ford-algorithm">8.1 Bellman–Ford algorithm</h3>
+<div class="theory">
+<p><strong>Supplementary clarification.</strong> The official syllabus lists Bellman–Ford under self-learning. The derivation below is added for completeness and is not claimed to be taught in the Module 4 slide deck.</p>
+</div>
+<p>Bellman–Ford finds shortest paths from <strong>one source</strong> in a graph that may contain negative edges. It repeatedly <strong>relaxes</strong> every edge: if <code>d[u] + w(u,v) &lt; d[v]</code>, update <code>d[v]</code>.</p>
+<pre><code>BELLMAN-FORD(V, E, source)
+  for each vertex v: d[v] = INFINITY
+  d[source] = 0
+  for pass = 1 to |V|-1:
+      for each edge (u, v, w):
+          if d[u] + w &lt; d[v]:
+              d[v] = d[u] + w
+  for each edge (u, v, w):
+      if d[u] + w &lt; d[v]:
+          report &quot;negative cycle reachable from the source&quot;
+  return d</code></pre>
+<p>Why <code>|V|−1</code> passes: a shortest path without a cycle has at most <code>|V|−1</code> edges, and one pass guarantees at least one more edge of every shortest path is correct. If an edge can still be relaxed on pass <code>|V|</code>, the improvement must come from a cycle, and that cycle has negative weight.</p>
+<p><strong>Small example.</strong> Vertices 1–4; edges 1→2 (4), 1→3 (5), 2→3 (−3), 3→4 (2). Source 1.</p>
+<div class="table-scroll"><table>
+<thead><tr><th>Pass</th><th>d[1]</th><th>d[2]</th><th>d[3]</th><th>d[4]</th><th>Relaxations</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>0</td><td>∞</td><td>∞</td><td>∞</td><td>initial</td></tr>
+<tr><td>1</td><td>0</td><td>4</td><td>1</td><td>3</td><td>1→2, 2→3 improves 5 to 1, 3→4</td></tr>
+<tr><td>2</td><td>0</td><td>4</td><td>1</td><td>3</td><td>none</td></tr>
+<tr><td>3</td><td>0</td><td>4</td><td>1</td><td>3</td><td>none</td></tr>
+</tbody></table></div>
+<p>Distances: <code>0, 4, 1, 3</code>. Complexity <strong>O(VE)</strong>. With a negative cycle (for example, adding 4→2 with weight −5), pass 4 would improve <code>d[2]</code> again, and the algorithm reports the cycle.</p>
+<p><strong>Comparison with Floyd–Warshall.</strong> Bellman–Ford is single-source with negative edges and detects negative cycles; Floyd–Warshall is all-pairs and also assumes no negative cycle. Dijkstra is faster (O(E log V)) but fails on negative edges because it finalises a vertex too early.</p>
+<h3 id="8-2-real-life-applications">8.2 Real-life applications</h3>
+<div class="table-scroll"><table>
+<thead><tr><th>Algorithm</th><th>Real-life use</th></tr></thead>
+<tbody>
+<tr><td>Multistage graph</td><td>Stage-wise project planning, resource allocation across phases, assembly-line costs</td></tr>
+<tr><td>Floyd–Warshall</td><td>Road-network distance tables, routing tables, transitive closure, game-map all-pairs distances</td></tr>
+<tr><td>0/1 knapsack</td><td>Budget selection, cargo loading, exam revision with limited hours, feature selection</td></tr>
+<tr><td>TSP by DP</td><td>Delivery-route planning for a small number of stops, PCB drilling, warehouse picking</td></tr>
+<tr><td>LCS</td><td><code>diff</code> and version control, DNA/protein alignment, plagiarism detection, autocomplete</td></tr>
+<tr><td>Bellman–Ford</td><td>Distance-vector routing (RIP), currency-arbitrage detection, network fault analysis</td></tr>
+</tbody></table></div>
+</div>
+<h2 id="practice">9 — Practice questions</h2>
+<div class="practice">
+<p>Attempt these on blank paper. The fully worked answer key follows in Section 10. Each question states its provenance; none of these is a University examination paper.</p>
+<section class="exam-q">
+<h3 id="q1-multistage-graph">Q1 — Multistage graph</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>Class example (Module 4 slide deck).</em> For the twelve-vertex graph in Figure 1, with stages <code>{1}</code>, <code>{2,3,4,5}</code>, <code>{6,7,8}</code>, <code>{9,10,11}</code>, <code>{12}</code>, compute <code>cost(1,1)</code>. Give the cost table and one optimal path.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q2-floyd-warshall">Q2 — Floyd–Warshall</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>Worked example from the Module 4 slide deck.</em> For the weight matrix</p></div>
+<pre><code>      1    2    3    4
+1     0    8    ∞    1
+2     ∞    0    1    ∞
+3     4    ∞    0    ∞
+4     ∞    2    9    0</code></pre>
+<p>compute <code>D⁴</code>. Hence give the shortest path and distance from 2 to 4, and from 4 to 3.</p>
+</section>
+<section class="exam-q">
+<h3 id="q3-0-1-knapsack">Q3 — 0/1 knapsack</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>Assignment 4, Q2 (course assignment — not a University paper).</em> <code>n = 4</code>, <code>M = 5</code>, weights <code>(2, 3, 4, 5)</code>, profits <code>(3, 4, 5, 6)</code>. Build the DP table, give the maximum profit, and reconstruct the chosen items.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q4-travelling-salesperson-problem">Q4 — Travelling salesperson problem</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>Assignment 4, Q3 (course assignment — not a University paper); also in the IAT-2 question bank.</em> For the cost matrix</p></div>
+<pre><code>      A    B    C    D
+A     0    4    2    1
+B     4    0   13    9
+C     2   13    0    8
+D     1    9    8    0</code></pre>
+<p>find an optimal tour using the DP recurrence <code>g(i, S)</code>. Show the <code>g</code> table and the tour.</p>
+</section>
+<section class="exam-q">
+<h3 id="q5-longest-common-subsequence-1">Q5 — Longest common subsequence (1)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>Preliminary (internal) examination — not a University paper.</em> Find an LCS of <code>X = SAVANT</code> and <code>Y = ADVENT</code>, and give its length. Show the <code>c</code> table.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q6-longest-common-subsequence-2">Q6 — Longest common subsequence (2)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>IAT-2 question bank (teacher's revision sheet) — not a University paper.</em> Find an LCS of <code>X = AMERICA</code> and <code>Y = ARMENIA</code>, and give its length. Show the <code>c</code> table.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q7-0-1-knapsack-2">Q7 — 0/1 knapsack (2)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>IAT-2 question bank (teacher's revision sheet) — not a University paper.</em> <code>n = 4</code>, <code>M = 8</code>, weights <code>(3, 4, 6, 5)</code>, profits <code>(2, 3, 1, 4)</code>. Build the DP table and give the optimal selection and profit.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q8-0-1-knapsack-3">Q8 — 0/1 knapsack (3)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>Preliminary (internal) examination — not a University paper.</em> Capacity <code>M = 15</code>; seven items with weights <code>(2, 3, 5, 7, 1, 4, 1)</code> and profits <code>(10, 5, 15, 7, 6, 10, 3)</code>. Find the maximum profit and the selected items.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q9-conceptual">Q9 — Conceptual</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>IAT-2 style theory question — not a University paper.</em> (a) State the principle of optimality. (b) Explain overlapping subproblems using the 0/1 knapsack recurrence. (c) Give three differences between dynamic programming and the greedy method.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q10-bellman-ford-self-learning">Q10 — Bellman–Ford (self-learning)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>Self-learning topic from the official syllabus.</em> For the graph with edges 1→2 (4), 1→3 (5), 2→3 (−3), 3→4 (2), run Bellman–Ford from vertex 1. Show the passes and the final distances. How would you detect a negative cycle?</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q11-lcs-3">Q11 — LCS (3)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>Class practice from the Module 4 slide deck.</em> Find the LCS length of <code>X = ACBAED</code> and <code>Y = ABCABE</code>, and give one LCS.</p></div>
+</section>
+</div>
+<h2 id="answer-key">10 — Answer key</h2>
+<div class="answer-key">
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<h3 id="a1-multistage-graph">A1 — Multistage graph</h3>
+<p>Base: <code>cost(5,12) = 0</code>.</p>
+<div class="table-scroll"><table>
+<thead><tr><th>Stage</th><th>Vertex</th><th>Computation</th><th>cost</th><th>D</th></tr></thead>
+<tbody>
+<tr><td>4</td><td>9</td><td>4 + 0</td><td>4</td><td>12</td></tr>
+<tr><td>4</td><td>10</td><td>2 + 0</td><td>2</td><td>12</td></tr>
+<tr><td>4</td><td>11</td><td>5 + 0</td><td>5</td><td>12</td></tr>
+<tr><td>3</td><td>6</td><td>min(6+4, 5+2)</td><td>7</td><td>10</td></tr>
+<tr><td>3</td><td>7</td><td>min(4+4, 3+2)</td><td>5</td><td>10</td></tr>
+<tr><td>3</td><td>8</td><td>min(5+2, 6+5)</td><td>7</td><td>10</td></tr>
+<tr><td>2</td><td>2</td><td>min(4+7, 2+5, 1+7)</td><td>7</td><td>7</td></tr>
+<tr><td>2</td><td>3</td><td>min(2+7, 7+5)</td><td>9</td><td>6</td></tr>
+<tr><td>2</td><td>4</td><td>11 + 7</td><td>18</td><td>8</td></tr>
+<tr><td>2</td><td>5</td><td>min(11+5, 8+7)</td><td>15</td><td>8</td></tr>
+<tr><td>1</td><td>1</td><td>min(9+7, 7+9, 3+18, 2+15)</td><td>16</td><td>2</td></tr>
+</tbody></table></div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> minimum cost <strong>16</strong>, via <code>1 → 2 → 7 → 10 → 12</code>. The path <code>1 → 3 → 6 → 10 → 12</code> also costs 16.</p></div>
+</div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<h3 id="a2-floyd-warshall">A2 — Floyd–Warshall</h3>
+<p>The four matrices are in Section 3.6. The final matrix is</p>
+<div class="table-scroll"><table>
+<thead><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+<tbody>
+<tr><td><strong>1</strong></td><td>0</td><td>3</td><td>4</td><td>1</td></tr>
+<tr><td><strong>2</strong></td><td>5</td><td>0</td><td>1</td><td>6</td></tr>
+<tr><td><strong>3</strong></td><td>4</td><td>7</td><td>0</td><td>5</td></tr>
+<tr><td><strong>4</strong></td><td>7</td><td>2</td><td>3</td><td>0</td></tr>
+</tbody></table></div>
+<p><strong>2 → 4:</strong> distance <strong>6</strong>, path 2 → 3 → 1 → 4 (1 + 4 + 1). <strong>4 → 3:</strong> distance <strong>3</strong>, path 4 → 2 → 3 (2 + 1). The <code>next</code> matrix: <code>next[2][4] = 3</code>, <code>next[3][4] = 1</code>, <code>next[1][4] = 4</code>; <code>next[4][3] = 2</code>, <code>next[2][3] = 3</code>.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<h3 id="a3-0-1-knapsack-m-5">A3 — 0/1 knapsack, M = 5</h3>
+<div class="table-scroll"><table>
+<thead><tr><th>i \ w</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>3</td><td>3</td><td>3</td><td>3</td></tr>
+<tr><td>2</td><td>0</td><td>0</td><td>3</td><td>4</td><td>4</td><td>7</td></tr>
+<tr><td>3</td><td>0</td><td>0</td><td>3</td><td>4</td><td>5</td><td>7</td></tr>
+<tr><td>4</td><td>0</td><td>0</td><td>3</td><td>4</td><td>5</td><td>7</td></tr>
+</tbody></table></div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> maximum profit <strong>7</strong>, items <strong>1 and 2</strong> (<code>X = 1,1,0,0</code>), weight 2 + 3 = 5.</p></div>
+<p>Reconstruction: <code>m[4][5] = 7 = m[3][5]</code> → item 4 out; <code>m[3][5] = 7 = m[2][5]</code> → item 3 out; <code>m[2][5] = 7 ≠ m[1][5] = 3</code> → item 2 in, <code>w = 2</code>; <code>m[1][2] = 3 ≠ m[0][2] = 0</code> → item 1 in, <code>w = 0</code>.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<h3 id="a4-tsp-four-cities">A4 — TSP, four cities</h3>
+<div class="table-scroll"><table>
+<thead><tr><th>State</th><th>Value</th><th>State</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>g(B,∅)</td><td>4</td><td>g(C,∅)</td><td>2</td></tr>
+<tr><td>g(D,∅)</td><td>1</td><td>g(B,{C})</td><td>15</td></tr>
+<tr><td>g(B,{D})</td><td>10</td><td>g(C,{B})</td><td>17</td></tr>
+<tr><td>g(C,{D})</td><td>9</td><td>g(D,{B})</td><td>13</td></tr>
+<tr><td>g(D,{C})</td><td>10</td><td>g(B,{C,D})</td><td>19</td></tr>
+<tr><td>g(C,{B,D})</td><td>21</td><td>g(D,{B,C})</td><td>24</td></tr>
+</tbody></table></div>
+<p>At the start: <code>4 + 19 = 23</code>, <code>2 + 21 = 23</code>, <code>1 + 24 = 25</code>. <strong>Optimal cost 23.</strong> Tours: <strong>A → B → D → C → A</strong> and <strong>A → C → D → B → A</strong>.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<h3 id="a5-lcs-savant-advent">A5 — LCS, SAVANT / ADVENT</h3>
+<p>The <code>c</code> table is in Section 6.7. Length <strong>4</strong>. One LCS: <strong>AVNT</strong>. Reconstruct from <code>(6,6)</code> as shown there: T, N, V, A.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<h3 id="a6-lcs-america-armenia">A6 — LCS, AMERICA / ARMENIA</h3>
+<div class="table-scroll"><table>
+<thead><tr><th>c</th><th>—</th><th>A</th><th>R</th><th>M</th><th>E</th><th>N</th><th>I</th><th>A</th></tr></thead>
+<tbody>
+<tr><td><strong>—</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td><strong>A</strong></td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td><strong>M</strong></td><td>0</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td></tr>
+<tr><td><strong>E</strong></td><td>0</td><td>1</td><td>1</td><td>2</td><td>3</td><td>3</td><td>3</td><td>3</td></tr>
+<tr><td><strong>R</strong></td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td><td>3</td><td>3</td></tr>
+<tr><td><strong>I</strong></td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td><td>4</td><td>4</td></tr>
+<tr><td><strong>C</strong></td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td><td>4</td><td>4</td></tr>
+<tr><td><strong>A</strong></td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td><td>4</td><td>5</td></tr>
+</tbody></table></div>
+<p>Length <strong>5</strong>. Reconstruction from <code>(7,7)</code>: A = A → <strong>A</strong>; <code>(6,6)</code> C ≠ I → up (4 = 4); <code>(5,6)</code> I = I → <strong>I</strong>; <code>(4,5)</code> R ≠ N, <code>c[3][5] = 3 = c[4][4]</code> → up; <code>(3,5)</code> E = E → <strong>E</strong>; <code>(2,4)</code> M ≠ E, <code>c[1][4] = 1 &lt; c[2][3] = 2</code> → left; <code>(2,3)</code> M = M → <strong>M</strong>; <code>(1,2)</code> A ≠ R, tie → left; <code>(1,1)</code> A = A → <strong>A</strong>; stop. Forward: <strong>A M E I A</strong> (length 5).</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<h3 id="a7-0-1-knapsack-m-8">A7 — 0/1 knapsack, M = 8</h3>
+<div class="table-scroll"><table>
+<thead><tr><th>i \ w</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>0</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td></tr>
+<tr><td>2</td><td>0</td><td>0</td><td>0</td><td>2</td><td>3</td><td>3</td><td>3</td><td>5</td><td>5</td></tr>
+<tr><td>3</td><td>0</td><td>0</td><td>0</td><td>2</td><td>3</td><td>3</td><td>3</td><td>5</td><td>5</td></tr>
+<tr><td>4</td><td>0</td><td>0</td><td>0</td><td>2</td><td>3</td><td>4</td><td>4</td><td>5</td><td>6</td></tr>
+</tbody></table></div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> profit <strong>6</strong>, items <strong>1 and 4</strong> (<code>X = 1,0,0,1</code>), weight 3 + 5 = 8. Reconstruction: <code>m[4][8] = 6 ≠ m[3][8] = 5</code> → item 4 in, <code>w = 3</code>; <code>m[3][3] = m[2][3]</code> → item 3 out; <code>m[2][3] = m[1][3]</code> → item 2 out; <code>m[1][3] = 2 ≠ m[0][3] = 0</code> → item 1 in, <code>w = 0</code>.</p></div>
+</div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<h3 id="a8-0-1-knapsack-m-15">A8 — 0/1 knapsack, M = 15</h3>
+<p>The final row of the table (capacity 0 to 15) is</p>
+<div class="table-scroll"><table>
+<thead><tr><th>w</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th></tr></thead>
+<tbody>
+<tr><td>m[7][w]</td><td>0</td><td>6</td><td>10</td><td>16</td><td>19</td><td>19</td><td>21</td><td>26</td><td>31</td><td>34</td><td>34</td><td>36</td><td>41</td><td>44</td><td>44</td><td><strong>46</strong></td></tr>
+</tbody></table></div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> maximum profit <strong>46</strong>, items <strong>1, 2, 3, 5, 6</strong>, with total weight 2 + 3 + 5 + 1 + 4 = 15. The corresponding profits are 10 + 5 + 15 + 6 + 10 = 46. (Items 4 and 7 are left out: item 4 weighs 7 and adds 7, which would displace a better combination; item 7 adds only 3.)</p></div>
+</div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<h3 id="a9-conceptual">A9 — Conceptual</h3>
+<p><strong>(a) Principle of optimality.</strong> In an optimal sequence of decisions, whatever the first decision is, the remaining decisions must be optimal with respect to the state produced by the first decision. Equivalently, an optimal solution contains optimal solutions to its subproblems.</p>
+<p><strong>(b) Overlapping subproblems in knapsack.</strong> The recurrence <code>m[i][w] = max(m[i−1][w], pᵢ + m[i−1][w−wᵢ])</code> asks for <code>m[i−1][w]</code> and for a cell in the same previous row. Different items and capacities request the same earlier cells repeatedly; the table computes each <code>(i,w)</code> once and reuses it. A plain recursion would recompute the same <code>(i,w)</code> from many branches.</p>
+<p><strong>(c) DP versus greedy.</strong></p>
+<ol>
+<li>Greedy commits to one locally best choice; DP compares all choices using stored subproblem answers.</li>
+<li>Greedy needs the greedy-choice property; DP needs optimal substructure and overlapping subproblems.</li>
+<li>Greedy is usually faster (often O(n log n)); DP is usually polynomial in the table size but can be pseudo-polynomial (knapsack) or exponential (TSP).</li>
+<li>Example: fractional knapsack is greedy; 0/1 knapsack is DP.</li>
+</ol>
+</div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<h3 id="a10-bellman-ford">A10 — Bellman–Ford</h3>
+<p>Initial <code>d = [0, ∞, ∞, ∞]</code>.</p>
+<div class="table-scroll"><table>
+<thead><tr><th>Pass</th><th>Edge relaxations that change a value</th><th>d after the pass</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>1→2 (d₂ = 4); 2→3 (d₃ = 1, better than 5); 3→4 (d₄ = 3)</td><td>0, 4, 1, 3</td></tr>
+<tr><td>2</td><td>none</td><td>0, 4, 1, 3</td></tr>
+<tr><td>3</td><td>none</td><td>0, 4, 1, 3</td></tr>
+</tbody></table></div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> <code>d = [0, 4, 1, 3]</code>. With <code>|V| = 4</code>, three passes suffice. To detect a negative cycle, run one more pass over all edges; if any edge can still be relaxed, a negative cycle is reachable from the source.</p></div>
+</div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<h3 id="a11-lcs-acbaed-abcabe">A11 — LCS, ACBAED / ABCABE</h3>
+<p>The LCS length is <strong>4</strong>. Any one of <strong>ABAE</strong>, <strong>ACAE</strong>, <strong>ACBE</strong> is correct. For example, <code>ACAE</code> is at positions 1, 2, 4, 5 in <code>ACBAED</code> and 1, 3, 4, 6 in <code>ABCABE</code>. The full <code>c</code> table ends at <code>c[6][6] = 4</code>.</p>
+</div>
+</div>
+<h2 id="mistakes">11 — Common mistakes across the module</h2>
+<div class="common-mistakes">
+<div class="table-scroll"><table>
+<thead><tr><th>Trap</th><th>What the examiner expects</th></tr></thead>
+<tbody>
+<tr><td>Writing "DP" without a state definition</td><td>A sentence defining each index and the value stored</td></tr>
+<tr><td>Omitting base cases</td><td>The first row, column or stage written explicitly</td></tr>
+<tr><td>Filling in a wrong order</td><td>A stated order (rows, stages, subset size) with a reason</td></tr>
+<tr><td>Giving only the optimal value</td><td>Reconstruction of items, path or subsequence</td></tr>
+<tr><td>Adding the same edge twice</td><td>Check each recurrence term against the table</td></tr>
+<tr><td>Using a greedy choice in 0/1 knapsack</td><td>Compare leave/take, or state why greedy fails</td></tr>
+<tr><td>Confusing LCS with substring</td><td>Order preserved, gaps allowed</td></tr>
+<tr><td>Forgetting the TSP return edge</td><td>Base case <code>g(i, ∅) = c(i, 1)</code> and the final <code>c(1, j)</code></td></tr>
+<tr><td>Calling Floyd–Warshall O(n²)</td><td>Three nested loops: O(n³)</td></tr>
+<tr><td>Calling knapsack polynomial</td><td>O(nM) is pseudo-polynomial</td></tr>
+<tr><td>Reporting one optimal tour when two exist</td><td>State both, or say "one optimal tour is …"</td></tr>
+<tr><td>Quoting a number without its unit</td><td>"16 cost units", "7 profit", "length 2"</td></tr>
+</tbody></table></div>
+</div>
+<h2 id="revision">12 — Last-minute revision sheet</h2>
+<div class="revision-sheet">
+<p><strong>General.</strong> DP = optimal substructure + overlapping subproblems + table. State, recurrence, base, order, answer, reconstruction, complexity. Top-down = memoisation; bottom-up = tabulation.</p>
+<p><strong>Multistage graph.</strong> <code>cost(i,j) = min_{edge j→l} [c(j,l) + cost(i+1,l)]</code>, <code>cost(k,sink) = 0</code>. Class graph: <strong>cost 16</strong>, path <strong>1–2–7–10–12</strong>; also 1–3–6–10–12. Time Θ(V+E), space Θ(V).</p>
+<p><strong>Floyd–Warshall.</strong> <code>D[i][j] = min(D[i][j], D[i][k] + D[k][j])</code>, pivot <code>k</code> outermost. Θ(n³), Θ(n²). Negative edges allowed; no negative cycles. Final matrix for the class example:</p>
+<pre><code>0 3 4 1
+5 0 1 6
+4 7 0 5
+7 2 3 0</code></pre>
+<p><strong>0/1 knapsack.</strong> <code>m[i][w] = max(m[i−1][w], pᵢ + m[i−1][w−wᵢ])</code> if <code>wᵢ ≤ w</code>, else <code>m[i−1][w]</code>. Class example: <strong>profit 7</strong>, items 1 and 2. Θ(nM) time and space; O(M) space with a right-to-left 1-D array; pseudo-polynomial.</p>
+<p><strong>TSP by DP.</strong> <code>g(i,S) = min_{j∈S} [c(i,j) + g(j,S−{j})]</code>, <code>g(i,∅) = c(i,1)</code>. Class matrix: <strong>23</strong>, tours <strong>A–B–D–C–A</strong> and <strong>A–C–D–B–A</strong>. O(n²2ⁿ) time, O(n2ⁿ) space.</p>
+<p><strong>LCS.</strong> Match: <code>c[i][j] = c[i−1][j−1] + 1</code>. Mismatch: <code>max(c[i−1][j], c[i][j−1])</code>. <code>ACADB</code> / <code>CBDA</code> → length <strong>2</strong> (<code>CA</code> or <code>CB</code>). <code>SAVANT</code> / <code>ADVENT</code> → <strong>AVNT</strong>, length 4. <code>AMERICA</code> / <code>ARMENIA</code> → <strong>AMEIA</strong>, length 5. Θ(mn).</p>
+<p><strong>Bellman–Ford (self-learning).</strong> Relax all edges <code>|V|−1</code> times; O(VE); a further relaxation means a negative cycle.</p>
+<p><strong>Numbers to remember:</strong> 16 (multistage), 23 (TSP), 7 (knapsack M=5), 2 (LCS ACADB/CBDA), 4 (SAVANT/ADVENT), 5 (AMERICA/ARMENIA), 46 (knapsack M=15).</p>
+</div>
+<h2 id="references">13 — References and attribution</h2>
+<div class="references">
+<p><strong>Official syllabus.</strong> University of Mumbai, Faculty of Science and Technology, <em>6.21 (N) B.E. Artificial Intelligence and Machine Learning, Semester III and Semester IV</em>, 2025–26, page 23 (Module IV). PDF: <code>https://mu.ac.in/old/wp-content/uploads/2025/06/6.21-N-B.E.-AI-ML-sem-III-IV.pdf</code>.</p>
+<p><strong>Course material inspected.</strong></p>
+<ul>
+<li>Module 4 slide deck: <code>Module 4 Dynamic Programming (UPDATED)16 sept.pptx (1).pdf</code> — used for the general method, the 12-vertex multistage example, the greedy comparison, the TSP matrix and the LCS examples. Some matrices in the deck are images; values were re-derived and checked independently.</li>
+<li><code>Assignment No 4 AOA.docx</code> — knapsack (<code>n=4, M=5</code>) and TSP matrix.</li>
+<li><code>PRELIMS AOA.docx</code> — LCS <code>SAVANT</code>/<code>ADVENT</code> and the seven-item knapsack.</li>
+<li><code>IAT-2 Question Bank (2025-26) (FINAL) (1).pdf</code> and <code>IAT-2 Question Bank (2026-27) (FINAL) (1).docx</code> — LCS and knapsack practice. These are teacher revision sheets, not University papers.</li>
+</ul>
+<p><strong>Standard references for further reading (not quoted page-by-page).</strong></p>
+<ul>
+<li>T. H. Cormen, C. E. Leiserson, R. L. Rivest and C. Stein, <em>Introduction to Algorithms</em>, 3rd edition, MIT Press.</li>
+<li>E. Horowitz, S. Sahni and S. Rajasekaran, <em>Computer Algorithms</em>, 2nd edition, Universities Press.</li>
+</ul>
+<p><strong>Attribution.</strong> All explanations, tables, pseudocode, worked traces and diagrams in this guide were written for this study guide. The class examples are attributed above. Passages marked <strong>Supplementary clarification</strong> are added by the guide author and are not claimed to be part of the slide deck. No question in this guide is labelled a University examination question; the provenance of each practice question is stated at the question.</p>
+</div>
+<footer>Prepared for the 2025–26 AOA syllabus · Study guide, not a University publication · <a href="/aoa">Back to all modules</a></footer>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('themeToggle'),r=document.documentElement;
+  function dark(){return r.getAttribute('data-theme')==='dark';}
+  function paint(){var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
+  b.addEventListener('click',function(){var n=dark()?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('sg-theme',n);}catch(e){}paint();});
+  paint();
+  var bar=document.getElementById('bar');
+  function onScroll(){
+    var h=document.documentElement.scrollHeight-innerHeight;
+    bar.style.width=(h>0?(scrollY/h)*100:0)+'%';
+  }
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+  var links=[].slice.call(document.querySelectorAll('.nav a'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  function mark(){
+    var y=scrollY+innerHeight*0.3,c=-1;
+    for(var i=0;i<secs.length;i++){if(secs[i]&&secs[i].getBoundingClientRect().top+y-scrollY<=0)c=i;}
+    links.forEach(function(a,i){if(i===c)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current');});
+  }
+  addEventListener('scroll',mark,{passive:true});mark();
+})();
+</script>
+</body>
+</html>
