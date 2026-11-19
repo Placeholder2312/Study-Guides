@@ -258,8 +258,7 @@
       <li><a href="#tsp">TSP by branch and bound</a></li>
       <li><a href="#puzzle">The 15-puzzle problem</a></li>
       <li><a href="#compare">Backtracking versus branch and bound</a></li>
-      <li><a href="#practice">Practice questions</a></li>
-      <li><a href="#answer-key">Answer key</a></li>
+      <li><a href="#practice">Practice questions with solutions</a></li>
       <li><a href="#mistakes">Common mistakes</a></li>
       <li><a href="#revision">Last-minute revision sheet</a></li>
       <li><a href="#references">References and attribution</a></li>
@@ -1278,65 +1277,25 @@ TSP-BB(C, n)
 </tbody></table></div>
 <p><strong>The one-sentence distinction.</strong> Backtracking asks <em>"can this partial assignment be completed?"</em>; branch and bound asks <em>"can this partial assignment beat the best solution I already have?"</em>. The first prunes on feasibility, the second on cost.</p>
 <p><strong>Backtracking versus branch and bound in an answer.</strong> Both build a state-space tree and prune. Backtracking is depth-first and uses a Boolean promising test. Branch and bound maintains an incumbent and a numeric bound, can use best-first order, and is used for optimisation. A question that says "find all solutions" points to backtracking; "find the minimum cost" points to branch and bound.</p>
-<h2 id="practice">9 — Practice questions</h2>
+<h2 id="practice">9 — Practice questions with solutions</h2>
 <div class="practice">
-<p>Attempt these on blank paper; the worked key follows. Each question states its provenance. None is a University examination paper.</p>
+<p>Attempt each question on blank paper first, then check it against the worked solution and final answer directly below it. Each question states its provenance. None is a University examination paper.</p>
 <section class="exam-q">
 <h3 id="q1-n-queens">Q1 — N-queens</h3>
 <div class="qa-question"><div class="qa-label">Question</div>
 <p><em>Assignment 5 (course assignment — not a University paper).</em> Write the backtracking algorithm for the n-queens problem. Explain the state-space tree and the promising test. Trace the first solution for <code>n = 4</code>.</p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<p>The algorithm is in Section 2.5. The state-space tree has one level per row; a node at level <code>k</code> fixes the columns of queens 1…k. A node is promising when <code>PLACE(k, j)</code> is true for every earlier row: different column and different diagonal.</p>
+<p>For <code>n = 4</code>, the first solution is <strong>(2, 4, 1, 3)</strong>: row 1 column 2, row 2 column 4, row 3 column 1, row 4 column 3. The first branch <code>Q1 = 1</code> is exhausted without a solution: <code>Q2 = 3</code> fails at row 3, and <code>Q2 = 4</code> fails at row 4. Backtracking then tries <code>Q1 = 2</code> and succeeds. The complete trace is in Section 2.6; the board is Figure 1.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> for n = 4 the first solution is <code>(Q₁, Q₂, Q₃, Q₄) = (2, 4, 1, 3)</code>, reached after the whole <code>Q₁ = 1</code> branch fails.</p></div>
 </section>
 <section class="exam-q">
 <h3 id="q2-sum-of-subsets">Q2 — Sum of subsets</h3>
 <div class="qa-question"><div class="qa-label">Question</div>
 <p><em>Assignment 5 (course assignment — not a University paper).</em> For <code>n = 4</code>, <code>m = 17</code>, weights <code>(2, 7, 8, 15)</code>, draw the state-space tree and find all subsets that sum to 17. State where pruning occurs.</p></div>
-</section>
-<section class="exam-q">
-<h3 id="q3-sum-of-subsets-2">Q3 — Sum of subsets (2)</h3>
-<div class="qa-question"><div class="qa-label">Question</div>
-<p><em>Preliminary (internal) examination — not a University paper.</em> For weights <code>(3, 5, 6, 7, 2)</code> and target sum 15, find all subsets. Show the pruning tests.</p></div>
-</section>
-<section class="exam-q">
-<h3 id="q4-graph-colouring">Q4 — Graph colouring</h3>
-<div class="qa-question"><div class="qa-label">Question</div>
-<p><em>Course tutorial example.</em> For the graph with edges 1–2, 1–3, 2–3, 2–4, 2–5, 3–5, 4–5, find a 3-colouring using backtracking. Show the trace and the backtrack.</p></div>
-</section>
-<section class="exam-q">
-<h3 id="q5-15-puzzle">Q5 — 15-puzzle</h3>
-<div class="qa-question"><div class="qa-label">Question</div>
-<p><em>Assignment 5 (course assignment — not a University paper).</em> Explain the branch-and-bound formulation of the 15-puzzle with <code>c(x) = f(x) + g(x)</code>. For the start state in Figure 4, compute <code>c</code> for the first level and find a shortest move sequence.</p></div>
-</section>
-<section class="exam-q">
-<h3 id="q6-tsp-by-branch-and-bound">Q6 — TSP by branch and bound</h3>
-<div class="qa-question"><div class="qa-label">Question</div>
-<p><em>Preliminary (internal) examination and IAT-2 question bank — not a University paper.</em> For the cost matrix</p></div>
-<pre><code>      A    B    C    D
-A     ∞    4    2    1
-B     4    ∞   13    9
-C     2   13    ∞    8
-D     1    9    8    ∞</code></pre>
-<p>solve the TSP by branch and bound using the reduced cost matrix. Show the root bound, the child bounds, the search order and the optimal tour.</p>
-</section>
-<section class="exam-q">
-<h3 id="q7-conceptual">Q7 — Conceptual</h3>
-<div class="qa-question"><div class="qa-label">Question</div>
-<p><em>IAT-2 style theory question — not a University paper.</em> (a) Distinguish between backtracking and branch and bound. (b) Define live node, dead node, expanded node and incumbent. (c) Why is a lower bound used in a minimisation problem?</p></div>
-</section>
-<section class="exam-q">
-<h3 id="q8-8-queens-count">Q8 — 8-queens count</h3>
-<div class="qa-question"><div class="qa-label">Question</div>
-<p><em>Preliminary (internal) examination — not a University paper.</em> How many solutions does the 8-queens problem have? Explain why backtracking examines far fewer than <code>8⁸</code> tuples.</p></div>
-</section>
-</div>
-<h2 id="answer-key">10 — Answer key</h2>
-<div class="answer-key">
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
-<h3 id="a1-n-queens">A1 — N-queens</h3>
-<p>The algorithm is in Section 2.5. The state-space tree has one level per row; a node at level <code>k</code> fixes the columns of queens 1…k. A node is promising when <code>PLACE(k, j)</code> is true for every earlier row: different column and different diagonal.</p>
-<p>For <code>n = 4</code>, the first solution is <strong>(2, 4, 1, 3)</strong>: row 1 column 2, row 2 column 4, row 3 column 1, row 4 column 3. The first branch <code>Q1 = 1</code> is exhausted without a solution: <code>Q2 = 3</code> fails at row 3, and <code>Q2 = 4</code> fails at row 4. Backtracking then tries <code>Q1 = 2</code> and succeeds. The complete trace is in Section 2.6; the board is Figure 1.</p>
-</div>
-<div class="qa-solution"><div class="qa-label">Worked solution</div>
-<h3 id="a2-sum-of-subsets-2-7-8-15-m-17">A2 — Sum of subsets, (2, 7, 8, 15), m = 17</h3>
 <p><strong>Solutions:</strong> <code>{2, 7, 8}</code> and <code>{2, 15}</code>. The full trace is Section 3.6. Pruning occurs when:</p>
 <ul>
 <li>the running sum exceeds 17 (for example, <code>2 + 7 + 8 + 15 = 32</code>);</li>
@@ -1344,8 +1303,14 @@ D     1    9    8    ∞</code></pre>
 </ul>
 <p>The include branch is taken only when <code>s + w[i] ≤ 17</code>. The exclude branch is always tried, but is pruned by <code>s + r &lt; 17</code>.</p>
 </div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> the solutions are <code>{2, 7, 8}</code> and <code>{2, 15}</code>.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q3-sum-of-subsets-2">Q3 — Sum of subsets (2)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>Preliminary (internal) examination — not a University paper.</em> For weights <code>(3, 5, 6, 7, 2)</code> and target sum 15, find all subsets. Show the pruning tests.</p></div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
-<h3 id="a3-sum-of-subsets-3-5-6-7-2-sum-15">A3 — Sum of subsets, (3, 5, 6, 7, 2), sum = 15</h3>
 <p>Sorted weights: <code>(2, 3, 5, 6, 7)</code>, total 23. The solutions are:</p>
 <ul>
 <li><strong>{2, 6, 7}</strong> = 15;</li>
@@ -1384,16 +1349,40 @@ D     1    9    8    ∞</code></pre>
 </tbody></table></div>
 <p>The second solution is found after the first, so a search that stops at the first solution would miss it.</p>
 </div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> the solutions are <code>{2, 6, 7}</code> and <code>{3, 5, 7}</code>.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q4-graph-colouring">Q4 — Graph colouring</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>Course tutorial example.</em> For the graph with edges 1–2, 1–3, 2–3, 2–4, 2–5, 3–5, 4–5, find a 3-colouring using backtracking. Show the trace and the backtrack.</p></div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
-<h3 id="a4-graph-colouring">A4 — Graph colouring</h3>
 <p>The graph is in Section 4.6. The trace gives the colouring <strong>x = (1, 2, 3, 3, 1)</strong>. The key backtrack: with <code>x4 = 1</code>, vertex 5 sees colours 1, 2 and 3 on its neighbours 1, 2 and 3 and has no colour; the search undoes <code>x4</code>, tries 2 (blocked by vertex 2), then 3, and vertex 5 takes 1. Verify every edge: 1–2 (1,2), 1–3 (1,3), 2–3 (2,3), 2–4 (2,3), 2–5 (2,1), 3–5 (3,1), 4–5 (3,1). All valid.</p>
 </div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> <code>(x₁, …, x₅) = (1, 2, 3, 3, 1)</code>, found after backtracking once at vertex 4.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q5-15-puzzle">Q5 — 15-puzzle</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>Assignment 5 (course assignment — not a University paper).</em> Explain the branch-and-bound formulation of the 15-puzzle with <code>c(x) = f(x) + g(x)</code>. For the start state in Figure 4, compute <code>c</code> for the first level and find a shortest move sequence.</p></div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
-<h3 id="a5-15-puzzle">A5 — 15-puzzle</h3>
 <p><code>f(x)</code> is the number of moves from the start, <code>g(x)</code> is the number of misplaced tiles, and <code>c(x) = f(x) + g(x)</code> is a lower bound on the total moves through <code>x</code>. The start has <code>g = 3</code>, so <code>c = 3</code>; the Left child has <code>g = 2</code>, <code>f = 1</code>, <code>c = 3</code>; its Down child has <code>g = 1</code>, <code>f = 2</code>, <code>c = 3</code>; the Right move reaches the goal with <code>g = 0</code>, <code>f = 3</code>, <code>c = 3</code>. The shortest sequence is <strong>Left, Down, Right</strong> (three moves). The full table is Section 7.6.</p>
 </div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> the shortest sequence is <code>Left, Down, Right</code>, three moves.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q6-tsp-by-branch-and-bound">Q6 — TSP by branch and bound</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>Preliminary (internal) examination and IAT-2 question bank — not a University paper.</em> For the cost matrix</p></div>
+<pre><code>      A    B    C    D
+A     ∞    4    2    1
+B     4    ∞   13    9
+C     2   13    ∞    8
+D     1    9    8    ∞</code></pre>
+<p>solve the TSP by branch and bound using the reduced cost matrix. Show the root bound, the child bounds, the search order and the optimal tour.</p>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
-<h3 id="a6-tsp-by-branch-and-bound">A6 — TSP by branch and bound</h3>
 <p>Root bound: row minima 1 + 4 + 2 + 1 = 8; column minima 3 + 1 = 4; <strong>root = 12</strong>. Reduced matrix:</p>
 <pre><code>∞  0  0  0
 0  ∞  8  5
@@ -1401,8 +1390,14 @@ D     1    9    8    ∞</code></pre>
 0  5  6  ∞</code></pre>
 <p>Child bounds: <strong>AB = 20</strong>, <strong>AC = 23</strong>, <strong>AD = 18</strong>. LC order: AD (18), then AB (20). AD's children are ADB = 25 and ADC = 26; AB's children are ABC = 26 and ABD = 23. ABD completes the tour <strong>A → B → D → C → A</strong> with cost 4 + 9 + 8 + 2 = <strong>23</strong>, so the incumbent is 23. AC (23), ABC (26), ADB (25) and ADC (26) are pruned. The optimal cost is <strong>23</strong>; A → C → D → B → A is also optimal. The full reduction is in Section 6.6.</p>
 </div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> minimum tour cost <strong>23</strong>, by <code>A → B → D → C → A</code> (A → C → D → B → A is also optimal).</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q7-conceptual">Q7 — Conceptual</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>IAT-2 style theory question — not a University paper.</em> (a) Distinguish between backtracking and branch and bound. (b) Define live node, dead node, expanded node and incumbent. (c) Why is a lower bound used in a minimisation problem?</p></div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
-<h3 id="a7-conceptual">A7 — Conceptual</h3>
 <p><strong>(a) Backtracking versus branch and bound.</strong> Backtracking searches a state-space tree depth-first and prunes a node when it cannot be completed to a feasible solution (a Boolean promising test). Branch and bound searches for an optimum; it maintains an incumbent and a numeric bound, prunes a node when its bound cannot beat the incumbent, and may use FIFO, LIFO or least-cost order. Every branch-and-bound node is also a partial solution, but the pruning criterion is cost, not feasibility.</p>
 <p><strong>(b) Definitions.</strong></p>
 <ul>
@@ -1413,12 +1408,22 @@ D     1    9    8    ∞</code></pre>
 </ul>
 <p><strong>(c) Lower bound.</strong> For minimisation, the true completion cost from a node is at least its lower bound. If the lower bound is already ≥ the incumbent, no completion can improve the incumbent, so the subtree can be discarded safely. An admissible (never-overestimating) bound guarantees that the optimal solution is never pruned.</p>
 </div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> backtracking prunes on infeasibility with a Boolean test; branch and bound prunes on a cost bound against the incumbent, because a lower bound can never overestimate the best completion.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q8-8-queens-count">Q8 — 8-queens count</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>Preliminary (internal) examination — not a University paper.</em> How many solutions does the 8-queens problem have? Explain why backtracking examines far fewer than <code>8⁸</code> tuples.</p></div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
-<h3 id="a8-8-queens">A8 — 8-queens</h3>
 <p>There are <strong>92</strong> solutions. A naive enumeration would examine <code>8⁸ = 16,777,216</code> tuples, but the search fixes one queen per row, so at most <code>8! = 40,320</code> column permutations are possible, and the column/diagonal test rejects most partial permutations after a few rows. The pruning is what makes the search fast; the worst-case bound is still exponential.</p>
 </div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> the 8-queens problem has <strong>92</strong> solutions; fixing one queen per row leaves at most 8! = 40,320 permutations, and pruning cuts most of them early.</p></div>
+</section>
 </div>
-<h2 id="mistakes">11 — Common mistakes across the module</h2>
+
+<h2 id="mistakes">10 — Common mistakes across the module</h2>
 <div class="common-mistakes">
 <div class="table-scroll"><table>
 <thead><tr><th>Trap</th><th>What the examiner expects</th></tr></thead>
@@ -1437,7 +1442,7 @@ D     1    9    8    ∞</code></pre>
 <tr><td>Reporting nodes instead of the tour/moves</td><td>The question asks for the solution, not the search size</td></tr>
 </tbody></table></div>
 </div>
-<h2 id="revision">12 — Last-minute revision sheet</h2>
+<h2 id="revision">11 — Last-minute revision sheet</h2>
 <div class="revision-sheet">
 <p><strong>Backtracking.</strong> State-space tree; DFS; promising/non-promising; bounding function; backtrack. Time O(b^d), space O(d).</p>
 <p><strong>N-queens.</strong> One queen per row; <code>x[i]</code> = column; test <code>x[i] ≠ j</code> and <code>|x[i] − j| ≠ k − i</code>. 4-queens first solution <strong>(2,4,1,3)</strong>; 8-queens has <strong>92</strong> solutions.</p>
@@ -1453,7 +1458,7 @@ D     1    9    8    ∞</code></pre>
 <li>DP: "what is the best value for every state?"</li>
 </ul>
 </div>
-<h2 id="references">13 — References and attribution</h2>
+<h2 id="references">12 — References and attribution</h2>
 <div class="references">
 <p><strong>Official syllabus.</strong> University of Mumbai, Faculty of Science and Technology, <em>6.21 (N) B.E. Artificial Intelligence and Machine Learning, Semester III and Semester IV</em>, 2025–26, page 23 (Module V). PDF: <code>https://mu.ac.in/old/wp-content/uploads/2025/06/6.21-N-B.E.-AI-ML-sem-III-IV.pdf</code>.</p>
 <p><strong>Course material inspected.</strong></p>
