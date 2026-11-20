@@ -4,8 +4,22 @@ Notes for **2023111 Mathematics for Computer Engineering**, B.E. Computer Scienc
 (AI & ML), Semester III, University of Mumbai (NEP 2020).
 
 This folder is the working library: official syllabus scope, faithful transcriptions of the
-lecture notes and tutorial sheets, and an audit report recording how each transcription was
-verified.
+lecture notes and tutorial sheets, the study guides themselves, and audit reports recording how
+each transcription and every computed result was verified.
+
+## Guides
+
+| Guide | Modules covered |
+|---|---|
+| [`modules/module-1`](modules/module-1.html) | Module 1 — Linear Algebra: Theory of Matrices |
+| [`modules/module-1-kindle`](modules/module-1-kindle.html) | Module 1, Kindle edition — same content, static HTML, no JavaScript or MathJax |
+| [`modules/module-4`](modules/module-4.html) | Module 4 — Fourier Series |
+
+Each is a single self-contained HTML page: the guide text is embedded in the page and typeset in
+the browser with MathJax, so they need an internet connection for the formulas. The Module 1 Kindle
+edition is the exception — it ships the formulas already rendered as plain HTML, with no JavaScript,
+so it opens on an e-reader browser. The Module 4 text is also kept as portable Markdown in
+`Module_4_Study_Guide.md`.
 
 ## What's here
 
@@ -14,8 +28,14 @@ verified.
 | `Syllabus_Coverage.md` | Official syllabus extraction — six modules, teaching hours, CO mapping, self-learning topics, textbooks, assessment scheme |
 | `Module_1_Transcription.md` | Module 1 (Linear Algebra / Theory of Matrices), 20 handwritten pages, page-referenced |
 | `Tutorial_1_Transcription.md` | Tutorial 1, five questions with all embedded equations recovered |
+| `Module_4_Study_Guide.md` | Module 4 (Fourier Series) study guide — Dirichlet's conditions, periods 2π and 2l, even and odd functions, worked expansions, graded practice and a separate answer key |
+| `Module_4_Transcription.md` | Module 4 notes, 8 handwritten pages, page-referenced |
+| `Tutorial_4_Transcription.md` | Tutorial 4, five questions with all ten embedded equations recovered |
+| `Exam_Questions_Module_4.md` | 25 Module 4 examination questions with provenance, original wording and a duplicate map |
+| `Module_4_Revision_Sheet.md` | Module 4 revision sheet; self-test answers kept in a separate closing section |
 | `Source_Index.md` | Maps every transcription back to its source file and page numbers |
-| `OCR_Review_Report.md` | Tools tested, why each was chosen or rejected, unresolved readings, SymPy verification results |
+| `OCR_Review_Report.md` | Module 1: tools tested, why each was chosen or rejected, unresolved readings, SymPy verification results |
+| `OCR_Review_Report_Module_4.md` | Module 4: equation recovery from the tutorial DOCX, page readings, source errata, SymPy verification summary |
 | `AGENTS.md` | Conventions for maintaining this library |
 
 ## Scope
@@ -29,8 +49,8 @@ verified.
 | V | Statistical Techniques | 4 |
 | VI | Probability | 4 |
 
-Only Module 1 notes have been transcribed so far. Modules II–VI are extracted in the syllabus but
-no lecture notes for them have been supplied yet.
+Modules I and IV have been transcribed and written up. Modules II, III, V and VI are extracted in
+the syllabus but no lecture notes for them have been supplied yet.
 
 ## Transcription policy
 
@@ -43,9 +63,14 @@ Where a transcription and a study guide disagree, the transcription is the autho
 ## Verification
 
 Every matrix, eigenvalue, eigenvector, Cayley–Hamilton identity and diagonalisation in the
-transcribed material was independently checked with SymPy. Results are recorded in
+transcribed Module 1 material was independently checked with SymPy. Results are recorded in
 `OCR_Review_Report.md`, including the six lecturer slips preserved as written and the one
 genuinely faint reading.
+
+For Module 4, every Fourier coefficient, series, integration sign and numerical deduction was
+checked with SymPy 1.14. `OCR_Review_Report_Module_4.md` records the results, the teacher's one
+numerical slip (notes page 3 prints `4/π` where `4/π²` is correct), and two errata in the
+student-association question bank.
 
 ## Notes on sources
 

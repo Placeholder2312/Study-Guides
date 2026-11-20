@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSGT Module 3 — Functions (Exam Essentials)</title>
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --muted: #444444;
+    --bg: #ffffff;
+    --line: #cccccc;
+    --rule: #999999;
+    --accent: #1d4ed8;
+    --space: 1.5rem;
+    --radius: 0;
+    --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+    --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-mono: "Courier New", Courier, monospace;
+  }
+  * { box-sizing: border-box; }
+  sub, sup { font-size: 0.75em; line-height: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    font-size: 17px;
+    font-weight: 500;
+    text-wrap: pretty;
+  }
+  .wrap {
+    max-width: 62ch;
+    margin: 0 auto;
+    padding: 2.5rem 1rem 4rem;
+  }
+  header {
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+  }
+  h1 {
+    font-family: var(--font-serif);
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0;
+  }
+  .meta {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    font-weight: 500;
+    color: var(--muted);
+    margin-top: 1rem;
+  }
+  h2 {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 3rem 0 1rem;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.4rem;
+  }
+  h2 > a { text-decoration: none; color: inherit; }
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 2rem 0 0.5rem;
+  }
+  h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 1.5rem 0 0.5rem;
+  }
+  p {
+    margin: 0 0 1rem;
+    line-height: 1.6;
+  }
+  .wrap > div { line-height: 1.6; }
+  ul, ol, blockquote, pre, figure { line-height: 1.6; }
+  td { line-height: 1.5; }
+  strong, em, span, b, i { line-height: 1.6; }
+  .theory {
+    border-left: 3px solid var(--ink);
+    padding: 1rem 1.25rem;
+    margin: 1.75rem 0;
+    font-size: 0.98rem;
+  }
+  .theory p:first-child { margin-top: 0; }
+  .theory p:last-child { margin-bottom: 0; }
+  .source {
+    display: block;
+    font-size: 0.78rem;
+    line-height: 1.4;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+  }
+  .eq {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 1.25rem 0;
+    padding: 0.75rem 1rem;
+    background: var(--surface-eq);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    overflow-x: auto;
+  }
+  .eq-note {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--muted);
+    text-align: center;
+    margin-top: -0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .example {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+    font-size: 0.95rem;
+    background: var(--surface);
+  }
+  .example-title {
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0;
+    color: var(--muted);
+  }
+  .example .eq { margin: 0.75rem 0; background: var(--bg); border: 1px solid var(--line); }
+  .qa-question, .qa-solution, .qa-final { margin: 0.9rem 0; padding: 0.75rem 1rem; }
+  .qa-question { border-left: 4px solid var(--ink); background: var(--bg); }
+  .qa-solution { border-left: 4px solid var(--line); }
+  .qa-final { border: 2px solid var(--accent); background: var(--accent-soft); }
+  .qa-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+  .qa-final .qa-label { color: var(--accent); }
+  .qa-question > :last-child, .qa-solution > :last-child, .qa-final > :last-child { margin-bottom: 0; }
+  .qa-question > p:first-of-type, .qa-final > p:first-of-type { margin-top: 0; }
+  .qa-final .eq { margin: 0.25rem 0 0; background: transparent; border: 0; padding: 0; text-align: left; }
+  .qa-final-list { margin: 0; padding-left: 1.25rem; }
+  .qa-final-text { margin: 0; font-weight: 600; }
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    padding: 1rem 1.25rem;
+  }
+  .steps li {
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+  .steps li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.1rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    background: var(--ink);
+    border-radius: 50%;
+  }
+  .steps li:last-child { margin-bottom: 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.75rem 0;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 0.625rem 0.875rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--surface-hi);
+    font-weight: 700;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+  }
+  tr:nth-child(even) td { background: var(--surface-alt); }
+  .kbd {
+    display: inline-block;
+    max-width: 100%;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    white-space: nowrap;
+    word-break: normal;
+    overflow-wrap: normal;
+    overflow-x: auto;
+    vertical-align: baseline;
+    background: var(--surface-hi);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 0.1rem 0.4rem;
+  }
+  .toc {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 2rem 0;
+    background: var(--surface);
+  }
+  .toc ol { margin: 0; padding-left: 1.25rem; }
+  .toc li { margin-bottom: 0.35rem; font-size: 0.95rem; }
+  .toc a { color: var(--ink); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .nav {
+    margin: 1.5rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .nav a {
+    padding: 0.25rem 0.6rem;
+    border: 1px solid var(--line);
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.85rem;
+    border-radius: 3px;
+  }
+  .nav a:hover { background: var(--surface-hi); }
+  .practice {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: var(--surface);
+  }
+  .practice > h3:first-of-type { margin-top: 0; }
+  .answer-key {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: var(--surface);
+  }
+  .answer-key > h3:first-of-type { margin-top: 0; }
+  .common-mistakes {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: var(--surface);
+  }
+  .common-mistakes > h3:first-of-type { margin-top: 0; }
+  .self-learning {
+    border-left: 3px solid var(--muted);
+    padding: 1rem 1.25rem;
+    margin: 1.75rem 0;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+  .self-learning p { margin-bottom: 0.75rem; }
+  .revision-sheet {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: var(--surface);
+  }
+  .revision-sheet > h3:first-of-type { margin-top: 0; }
+  .warning {
+    color: var(--danger);
+    font-weight: 700;
+  }
+  .mu-badge {
+    display: inline-block;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+    margin-left: 0.5rem;
+  }
+  .exam-q {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+    background: var(--surface);
+  }
+  .exam-q-title {
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    letter-spacing: 0;
+    color: var(--muted);
+  }
+  .exam-source {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  svg { width: 100%; max-width: 440px; height: auto; display: block; margin: 1rem auto; padding: 0.5rem; background: var(--bg); border: 1px solid var(--line); }
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+  .references {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 2rem 0;
+    background: var(--surface);
+  }
+  .references > h3:first-of-type { margin-top: 0; }
+  .references p { margin: 0.5rem 0; }
+  .references ul { margin: 0.5rem 0; padding-left: 1.5rem; }
+  ::selection { background: var(--ink); color: var(--bg); }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  @media (max-width: 600px) {
+    .wrap { padding: 1.5rem 1rem 3rem; }
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.4rem; }
+    .eq { font-size: 1.15rem; }
+  }
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    .wrap { padding: 1rem 0.75rem 3rem; }
+    h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.3rem; margin-top: 2.25rem; }
+    table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; font-size: 0.85rem; }
+    th, td { padding: 0.45rem 0.55rem; }
+    .theory, .example, .practice, .answer-key, .common-mistakes, .revision-sheet, .references, .exam-q, .steps, .toc, .self-learning { padding: 0.75rem; }
+    .eq { font-size: 1rem; padding: 0.6rem 0.5rem; text-align: left; }
+    /* Keep mathematical tokens intact on narrow screens; long chips scroll horizontally. */
+    .nav a { padding: 0.4rem 0.7rem; }
+    svg { max-width: 100%; padding: 0.25rem; }
+  }
+  @media print {
+    body { font-size: 12pt; line-height: 1.4; color: #000; background: #fff; }
+    .wrap { max-width: 100%; padding: 0; }
+    header { border-bottom: 1px solid #000; margin-bottom: 1.5rem; padding-bottom: 0.75rem; }
+    h2 { margin: 2rem 0 0.75rem; border-bottom: 1px solid #000; padding-bottom: 0.3rem; }
+    h3 { margin: 1.5rem 0 0.4rem; }
+    .toc, .nav { display: none; }
+    .example, .practice, .answer-key, .revision-sheet, .steps, .theory, .common-mistakes, .references, .exam-q {
+      border: 1px solid #999;
+      background: #fff !important;
+      page-break-inside: avoid;
+    }
+    .eq { background: #fff; border: 1px solid #999; page-break-inside: avoid; }
+    .eq-note { display: none; }
+    a { text-decoration: none; color: #000; }
+    svg { border: 1px solid #000; }
+    footer { margin-top: 2rem; border-top: 1px solid #000; }
+  }
+</style>
+<script>(function(){try{var t=localStorage.getItem('sg-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<style id="theme">
+  :root { color-scheme: light; --ink:#0a0a0a;--muted:#444444;--bg:#ffffff;--line:#cccccc;--rule:#999999;--accent:#1d4ed8;--accent-soft:#eef2ff;--danger:#b00020;--surface:#fafafa;--surface-alt:#f9f9f9;--surface-eq:#f5f5f5;--surface-hi:#f0f0f0; }
+  :root[data-theme="dark"] { color-scheme: dark; --ink:#ececec;--muted:#a8a8ad;--bg:#0f0f11;--line:#34343a;--rule:#5a5a62;--accent:#8ab0ff;--accent-soft:#1b2540;--danger:#ff7b8f;--surface:#17171a;--surface-alt:#1b1b1f;--surface-eq:#1e1e23;--surface-hi:#26262c; }
+  :root[data-theme="dark"] svg circle[fill-opacity] { fill-opacity: .3; }
+  :root[data-theme="dark"] svg text[fill="var(--muted)"] { fill: var(--ink); }
+  .topbar { display:flex; align-items:center; justify-content:space-between; gap:.5rem; margin:0 0 1rem; }
+  .topbar .back { display:inline-flex; align-items:center; min-height:44px; font-size:.85rem; font-weight:600; color:var(--ink); }
+  .theme-toggle { font:inherit; font-size:.85rem; font-weight:600; color:var(--ink); background:var(--bg); border:1px solid var(--ink); border-radius:0; padding:.4rem .8rem; min-height:44px; min-width:44px; cursor:pointer; margin-left:auto; }
+  .theme-toggle:hover { background:var(--surface-hi); }
+  .theme-toggle:focus-visible { outline:2px solid var(--ink); outline-offset:2px; }
+  @media print {
+    :root, :root[data-theme="dark"], :root:not([data-theme="light"]) { color-scheme: light; --ink:#0a0a0a;--muted:#444444;--bg:#ffffff;--line:#cccccc;--rule:#999999;--accent:#1d4ed8;--accent-soft:#eef2ff;--danger:#b00020;--surface:#fafafa;--surface-alt:#f9f9f9;--surface-eq:#f5f5f5;--surface-hi:#f0f0f0; }
+    .topbar { display:none; }
+  }
+</style>
+<style id="dsgt-diagram-layout">.dsgt-diagram .dsgt-mobile-diagram{display:none}@media(max-width:600px){.dsgt-diagram .dsgt-desktop-diagram{display:none!important}.dsgt-diagram .dsgt-mobile-diagram{display:block!important}}.dsgt-diagram{margin:1.25rem 0;padding:.75rem;border:1px solid var(--line);background:var(--surface)}.dsgt-diagram svg{width:100%;max-width:700px;height:auto;display:block;margin:.35rem auto;padding:0;border:0;background:transparent}.dsgt-diagram figcaption{font-size:.85rem;color:var(--muted);line-height:1.45;margin-top:.6rem}.dsgt-diagram .diagram-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;align-items:stretch}.dsgt-diagram .diagram-panel{min-width:0;border:1px solid var(--line);padding:.65rem;background:var(--bg)}.dsgt-diagram .diagram-panel h4{margin:.1rem 0 .35rem;text-align:left}.dsgt-diagram .diagram-panel p{font-size:.84rem;color:var(--muted);margin:.35rem 0 0}.dsgt-diagram .diagram-panel svg{max-width:100%;margin:.3rem auto}@media(max-width:600px){.dsgt-diagram{padding:.55rem}.dsgt-diagram .diagram-panels{grid-template-columns:1fr}.dsgt-diagram .diagram-panel{padding:.5rem}}</style>
+<style id="rail-style">
+  /* Section progress. Phone UI by default (top line + edge tab + bottom sheet);
+     margin rail on wide screens with a mouse. Colours come from the theme variables. */
+  .rail { display:none; }
+  .rm-bar { position:fixed; top:0; left:0; height:3px; width:var(--w,0%); background:var(--accent); z-index:30; pointer-events:none; }
+  .rm-tab { position:fixed; left:env(safe-area-inset-left,0px); bottom:calc(14px + env(safe-area-inset-bottom,0px)); z-index:30; display:flex; align-items:center; width:44px; height:44px; padding:0; border:0; background:transparent; font:inherit; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+  .rm-tab span { display:flex; align-items:center; justify-content:center; min-width:26px; height:28px; padding:0 .35rem; font:700 .66rem/1 var(--font-mono); letter-spacing:.04em; font-variant-numeric:tabular-nums; color:var(--ink); background:var(--bg); border:1px solid var(--rule); border-left:0; opacity:.5; transition:opacity .25s; }
+  body.rm-moving .rm-tab span { opacity:.15; }
+  .rm-tab:hover span, .rm-tab:focus-visible span, .rm-tab[aria-expanded="true"] span { opacity:1; }
+  .rm-tab:focus-visible { outline:2px solid var(--ink); outline-offset:-2px; }
+  .rm-back { position:fixed; inset:0; z-index:40; background:rgba(0,0,0,.4); opacity:0; pointer-events:none; transition:opacity .2s; }
+  .rm-sheet { position:fixed; left:0; right:0; bottom:0; z-index:50; max-height:68vh; overflow-y:auto; background:var(--bg); border-top:1px solid var(--ink); padding-bottom:env(safe-area-inset-bottom,0px); transform:translateY(102%); visibility:hidden; transition:transform .22s ease, visibility 0s .22s; }
+  body.rm-open .rm-back { opacity:1; pointer-events:auto; }
+  body.rm-open .rm-sheet { transform:none; visibility:visible; transition-delay:0s; }
+  .rm-head { position:sticky; top:0; z-index:2; display:flex; align-items:center; justify-content:space-between; padding:.7rem 1rem; background:var(--bg); border-bottom:1px solid var(--line); font:600 .65rem/1 var(--font-mono); letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  .rm-head b { color:var(--ink); }
+  .rm-sheet ol { list-style:none; margin:0; padding:.3rem 0 .6rem; }
+  .rm-sheet a { display:grid; grid-template-columns:1.9rem 1fr; align-items:center; min-height:44px; padding:0 1rem; color:var(--muted); text-decoration:none; font-size:.92rem; font-weight:600; border-left:3px solid transparent; }
+  .rm-sheet a .rm-k { font:600 .7rem/1 var(--font-mono); letter-spacing:.04em; }
+  .rm-sheet a.is-done { color:var(--ink); }
+  .rm-sheet a.is-done .rm-k { color:var(--muted); }
+  .rm-sheet a[aria-current="true"] { color:var(--ink); border-left-color:var(--accent); background:var(--accent-soft); font-family:var(--font-serif); font-weight:700; }
+  .rm-sheet a[aria-current="true"] .rm-k { color:var(--accent); }
+  .rm-sheet a:focus-visible { outline:2px solid var(--ink); outline-offset:-2px; }
+
+  .rail { position:fixed; left:14px; top:50%; transform:translateY(-50%); z-index:20; font-family:var(--font-sans); color:var(--muted); }
+  .rail-in { position:relative; padding:.5rem .6rem .6rem .5rem; border:1px solid transparent; background:transparent; transition:background .15s, border-color .15s; }
+  .rail:hover .rail-in, .rail:focus-within .rail-in { background:var(--bg); border-color:var(--line); }
+  .rail-top { display:flex; align-items:flex-end; gap:.5rem; margin:0 0 .7rem; min-height:2.1rem; }
+  .rail-sec { font-family:var(--font-serif); font-size:1.7rem; line-height:.9; color:var(--ink); font-variant-numeric:tabular-nums; letter-spacing:-.02em; }
+  .rail-meta { display:flex; flex-direction:column; gap:.1rem; font:600 .6rem/1.1 var(--font-mono); letter-spacing:.08em; text-transform:uppercase; padding-bottom:.1rem; }
+  .rail-meta b { font-weight:700; color:var(--ink); }
+  .rail-toggle { margin-left:auto; align-self:flex-start; font:inherit; font-size:.8rem; line-height:1; width:1.3rem; height:1.3rem; padding:0; color:var(--muted); background:var(--bg); border:1px solid var(--line); border-radius:0; cursor:pointer; opacity:.55; transition:opacity .15s; }
+  .rail:hover .rail-toggle, .rail-toggle:focus-visible { opacity:1; }
+  .rail-toggle:hover { color:var(--ink); border-color:var(--ink); }
+  .rail-toggle:focus-visible, .rail a:focus-visible { outline:2px solid var(--ink); outline-offset:2px; }
+  .rail-list { position:relative; list-style:none; margin:0; padding:0; max-height:calc(100vh - 11rem); overflow-y:auto; overflow-x:hidden; scrollbar-width:none; }
+  .rail-list::-webkit-scrollbar { display:none; }
+  .rail-list::before { content:""; position:absolute; left:4px; top:0; bottom:0; width:1px; background:var(--rule); opacity:.55; }
+  .rail-fill { position:absolute; left:3.5px; top:0; width:2px; height:var(--fill,0px); background:var(--accent); }
+  .rail a { position:relative; display:grid; grid-template-columns:9px 1.55rem auto; align-items:center; column-gap:.55rem; height:1.45rem; color:inherit; text-decoration:none; }
+  .rail .node { width:7px; height:7px; box-sizing:border-box; border:1px solid var(--rule); background:var(--bg); justify-self:center; }
+  .rail a.is-done .node { background:var(--muted); border-color:var(--muted); }
+  .rail .num { font:600 .62rem/1 var(--font-mono); letter-spacing:.04em; font-variant-numeric:tabular-nums; }
+  .rail .lbl { display:none; font-size:.74rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:14rem; }
+  .rail-sublist { list-style:none; margin:0 0 .3rem 1.65rem; padding:0 0 0 .55rem; border-left:1px solid var(--line); }
+  .rail-sublist a { grid-template-columns:1rem minmax(0,1fr); column-gap:.3rem; height:1.2rem; padding-left:.1rem; }
+  .rail-sublist .sub-lbl { display:block; font-size:.68rem; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .rail-sublist .sub-num { font:600 .62rem/1 var(--font-mono); color:var(--accent); }
+  .rail-sublist a[aria-current="location"] { color:var(--accent); font-weight:700; }
+  .rail.is-collapsed .rail-sublist { display:none; }
+  .rm-sublist { margin:0 0 .35rem 2.65rem !important; padding:.15rem 0 .25rem .65rem !important; border-left:1px solid var(--line); }
+  .rm-sublist a { grid-template-columns:1.1rem minmax(0,1fr); min-height:34px; padding:.25rem .5rem; border-left:0; font-size:.84rem; }
+  .rm-sublist a[aria-current="location"] { color:var(--accent); background:var(--accent-soft); }
+  .rail-list > li > .rail-sublist { display:none; }
+  .rail-list > li > a[aria-current="true"] ~ .rail-sublist { display:block; }
+  .rail.is-collapsed .rail-list > li > .rail-sublist { display:none; }
+  .rm-sheet > ol > li > .rm-sublist { display:none; }
+  .rm-sheet > ol > li > a[aria-current="true"] ~ .rm-sublist { display:block; }
+
+  .rail a:hover { color:var(--ink); }
+  .rail a:hover .node { border-color:var(--ink); }
+  .rail a[aria-current="true"] { color:var(--ink); }
+  .rail a[aria-current="true"] .node { width:9px; height:9px; border-color:var(--accent); background:linear-gradient(to top, var(--accent) calc(var(--p,0) * 100%), var(--bg) 0); box-shadow:0 0 0 3px var(--accent-soft); }
+  .rail a[aria-current="true"] .num { color:var(--accent); }
+  .rail a[aria-current="true"] .lbl { display:block; font-family:var(--font-serif); font-size:.82rem; font-weight:700; max-width:clamp(0px, calc(50vw - 25.5rem), 14rem); }
+  .rail:hover .lbl, .rail:focus-within .lbl, .rail:hover a[aria-current="true"] .lbl, .rail:focus-within a[aria-current="true"] .lbl { display:block; max-width:14rem; }
+  .rail.is-collapsed .rail-in { padding:.5rem .4rem; background:transparent !important; border-color:transparent !important; }
+  .rail.is-collapsed .rail-top { flex-direction:column; align-items:flex-start; gap:.4rem; margin-bottom:.5rem; min-height:0; }
+  .rail.is-collapsed .rail-sec, .rail.is-collapsed .rail-meta, .rail.is-collapsed .num, .rail.is-collapsed .lbl { display:none !important; }
+  .rail.is-collapsed .rail-toggle { margin:0 0 0 -.25rem; }
+  .rail.is-collapsed a { grid-template-columns:9px; height:1.15rem; }
+  .rail.is-collapsed .node { width:5px; height:5px; }
+  .rail.is-collapsed a[aria-current="true"] .node { width:7px; height:7px; box-shadow:0 0 0 2px var(--accent-soft); }
+  .rail.is-collapsed .rail-list { max-height:calc(100vh - 8rem); }
+
+  @media (min-width:900px) and (pointer:fine) {
+    .rm-tab, .rm-back, .rm-sheet { display:none; }
+    .rm-bar { display:block; }
+    .rail { display:block; }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    .rm-sheet, .rm-back, .rm-tab span, .rail-in { transition:none; }
+  }
+  @media print { .rail, .rm-bar, .rm-tab, .rm-back, .rm-sheet { display:none !important; } }
+
+</style>
+</head><body>
+
+<div class="wrap">
+  <div class="topbar"><a class="back" href="/dsgt">← All modules</a><button class="theme-toggle" type="button" id="themeToggle"></button></div>
+
+  <header>
+    <h1>DSGT Module 3</h1>
+    <p class="subtitle">Functions — selective exam essentials</p>
+    <div class="meta">CSE AIML · Sem III · 3 teaching hours · CO3 · Source: Mrs. Shamal Bagal's Module 3 PPT, the official DSGT syllabus, the Summer 2026 paper and the IAT sample questions</div>
+  </header>
+
+  <div class="theory">
+    <span class="source">READ THIS FIRST — LIMITED TOPIC COVERAGE</span>
+    <p>This is a <strong>compact</strong> guide to a three-hour module. It covers the whole prescribed core: what a function is, the three types, composition and inverses. It does not try to be a textbook.</p>
+    <p><strong>Covered:</strong> definition, domain, codomain, range, image and preimage · injective, surjective and bijective tests · composition and its order · inverse functions and verification · the Summer 2026 discount-and-tax application.</p>
+    <p><strong>Deliberately skipped:</strong> neural networks, insurance risk, tax brackets and vending machines in depth · advanced function theory · dozens of composition variations. These are self-learning or extension material, not core exam method.</p>
+    <p>Every method below is followed by a worked example and a short practice question. Answers are separate, at the end.</p>
+  </div>
+
+  <div class="toc">
+    <ol>
+      <li><a href="#s1">Functions: definition and vocabulary</a></li>
+      <li><a href="#s2">Injective, surjective, bijective</a></li>
+      <li><a href="#s3">Composition of functions</a></li>
+      <li><a href="#s4">Inverse functions</a></li>
+      <li><a href="#practice">Practice questions</a></li>
+      <li><a href="#answers">Answer key</a></li>
+      <li><a href="#revision">Last-minute revision sheet</a></li>
+      <li><a href="#sources">Sources, verification and coverage</a></li>
+    </ol>
+  </div>
+
+  <nav class="nav">
+    <a href="#s1">Fundamentals</a>
+    <a href="#s2">Types</a>
+    <a href="#s3">Composition</a>
+    <a href="#s4">Inverse</a>
+    <a href="#practice">Practice</a>
+    <a href="#revision">Revision</a>
+  </nav>
+
+  <h2 id="s1">1 · Functions: definition and vocabulary</h2>
+
+  <div class="theory">
+    <span class="source">Teacher's definition — Module 3 PPT, slide 3</span>
+    <p>A function f from A to B is defined if for every element a ∈ A there exists a <strong>unique</strong> element b ∈ B such that f(a) = b, that is (a, b) ∈ f.</p>
+    <p>A is called the <strong>domain</strong> of f and B is called the <strong>codomain</strong> of f. If f(a) = b, then b is the <strong>image</strong> of a and a is a <strong>pre-image</strong> of b. The <strong>range</strong> of f is the set of all images of elements of A. Functions are also called mappings or transformations, and we write f : A → B.</p>
+  </div>
+
+  <p><strong>Simple meaning.</strong> A function is a machine with one input slot and one output slot. You put in an element of A. You get back exactly one element of B. No input is left without an output, and no input produces two different outputs.</p>
+
+  <p><strong>The essential rule — two halves.</strong></p>
+  <ol class="steps">
+    <li><strong>Every</strong> element of the domain must be used. If some a ∈ A has no image, it is not a function from A to B.</li>
+    <li><strong>Exactly one</strong> image per element. If some a has two images, it is not a function.</li>
+  </ol>
+  <p>Different inputs are allowed to share an output. That is still a function. "Unique output" does not mean "different output".</p>
+
+  <table>
+    <tr><th>Term</th><th>Meaning</th><th>How to find it</th></tr>
+    <tr><td>Domain</td><td>The set you start from, A</td><td>Given, or the set of all first coordinates</td></tr>
+    <tr><td>Codomain</td><td>The set you are mapping into, B</td><td>Given in the question</td></tr>
+    <tr><td>Range</td><td>The outputs that actually occur</td><td>Collect all f(a) values; range ⊆ codomain</td></tr>
+    <tr><td>Image of a</td><td>The single value f(a)</td><td>Substitute a</td></tr>
+    <tr><td>Pre-image of b</td><td>Every a with f(a) = b</td><td>Solve f(a) = b</td></tr>
+  </table>
+
+  <p><strong>Relation versus function.</strong> Every function is a relation, but not every relation is a function. A relation becomes a function when each first coordinate appears exactly once and the domain equals A. So a function is a relation with "one output per input".</p>
+
+  <h3 id="m3-function-pairs" data-rail-subsection>Testing a set of ordered pairs</h3>
+  <ol class="steps">
+    <li>List the first coordinates. They must be exactly the elements of A — no missing element.</li>
+    <li>Check that no first coordinate is repeated with a different second coordinate.</li>
+    <li>If both checks pass, it is a function. The range is the set of second coordinates that occur.</li>
+  </ol>
+
+  <div class="example qa">
+    <div class="example-title">Worked example — is it a function? (teacher's examples)</div>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>Decide whether each relation is a function from A to B. For those that are, give the domain and range.</p>
+      <p><strong>(a)</strong> A = {1, 2, 3}, B = {a, b, c}, f = {(1, a), (2, b), (3, c)}.</p>
+      <p><strong>(b)</strong> A = {1, 2, 3}, B = {a, b, c}, f = {(1, a), (2, b), (3, a)}.</p>
+      <p><strong>(c)</strong> A = {1, 2, 3, 4}, B = {a, b, c}, f = {(1, a), (2, a), (3, b)}.</p>
+      <p><strong>(d)</strong> A = {1, 2, 3}, f = {(1, a), (1, b), (2, c), (3, a)}.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>(a)</strong> Every element 1, 2, 3 appears exactly once as a first coordinate, and each has one image. Domain = A = {1, 2, 3}. Range = {a, b, c} = B.</p>
+      <p><strong>(b)</strong> All three inputs appear once. Inputs 1 and 3 share the image a, which is allowed. Range = {a, b}, which is smaller than the codomain.</p>
+      <p><strong>(c)</strong> The first coordinates are {1, 2, 3}, but A = {1, 2, 3, 4}. Element 4 has no image, so the rule "every element of A" fails. This is the teacher's Example on slide 4.</p>
+      <p><strong>(d)</strong> Input 1 has two images, a and b. Each input must have exactly one image.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text"><strong>(a)</strong> and <strong>(b)</strong> are functions — ranges {a, b, c} and {a, b}. <strong>(c)</strong> and <strong>(d)</strong> are not functions: 4 has no image, and 1 has two images.</p>
+    </div>
+  </div>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes</h3>
+    <ul>
+      <li>Saying "not a function" just because two inputs share an output. That is allowed.</li>
+      <li>Checking only the repeated first coordinates and forgetting that every element of A must appear.</li>
+      <li>Writing the range as the codomain. The range is only the outputs that actually occur.</li>
+      <li>Confusing the image of a (one value) with the pre-image of b (a set of values).</li>
+    </ul>
+  </div>
+
+  <div class="practice">
+    <h3>Quick check 1</h3>
+    <p>A = {1, 2, 3, 4}, B = {p, q, r}. Which of these are functions from A to B? For those that are, give the range.<br>
+    (i) f = {(1,p), (2,q), (3,r), (4,p)} &nbsp; (ii) g = {(1,p), (2,p), (3,p)} &nbsp; (iii) h = {(1,q), (2,r), (3,q), (4,q)} &nbsp; (iv) k = {(1,p), (2,q), (2,r), (3,q), (4,p)} <em>(Answer Q1.)</em></p>
+  </div>
+
+  
+  <figure class="dsgt-diagram" id="d9-function-validity"><div class="diagram-panels">
+      <div class="diagram-panel"><h4>A · Valid one-to-one</h4>
+        <svg viewBox="0 0 280 230" role="img" aria-labelledby="d9-a-title d9-a-desc"><title id="d9-a-title">Valid one-to-one function</title><desc id="d9-a-desc">Inputs 1, 2 and 3 map respectively to a, b and c. Every input is used exactly once and every output is different.</desc>
+          <text x="60" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">A</text><text x="220" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">B</text>
+          <g stroke="var(--accent)" stroke-width="2" fill="none"><path d="M82 65H198M82 115H198M82 165H198"/></g>
+          <g fill="var(--bg)" stroke="var(--accent)" stroke-width="1.8"><circle cx="60" cy="65" r="18"/><circle cx="60" cy="115" r="18"/><circle cx="60" cy="165" r="18"/><circle cx="220" cy="65" r="18"/><circle cx="220" cy="115" r="18"/><circle cx="220" cy="165" r="18"/></g>
+          <g fill="var(--ink)" font-size="15" font-weight="700" text-anchor="middle" dominant-baseline="middle"><text x="60" y="65">1</text><text x="60" y="115">2</text><text x="60" y="165">3</text><text x="220" y="65">a</text><text x="220" y="115">b</text><text x="220" y="165">c</text></g>
+        </svg><p><strong>VALID.</strong> All inputs appear once; each has one image.</p>
+      </div>
+      <div class="diagram-panel"><h4>B · Valid many-to-one</h4>
+        <svg viewBox="0 0 280 230" role="img" aria-labelledby="d9-b-title d9-b-desc"><title id="d9-b-title">Valid many-to-one function</title><desc id="d9-b-desc">Inputs 1 and 3 both map to a, and input 2 maps to b. Every input has exactly one output, even though outputs may be shared.</desc>
+          <text x="60" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">A</text><text x="220" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">B</text>
+          <g stroke="var(--accent)" stroke-width="2" fill="none"><path d="M82 65H198"/><path d="M82 115H198"/><path d="M82 165Q140 125 198 65"/></g>
+          <g fill="var(--bg)" stroke="var(--accent)" stroke-width="1.8"><circle cx="60" cy="65" r="18"/><circle cx="60" cy="115" r="18"/><circle cx="60" cy="165" r="18"/><circle cx="220" cy="65" r="18"/><circle cx="220" cy="115" r="18"/><circle cx="220" cy="165" r="18"/></g>
+          <g fill="var(--ink)" font-size="15" font-weight="700" text-anchor="middle" dominant-baseline="middle"><text x="60" y="65">1</text><text x="60" y="115">2</text><text x="60" y="165">3</text><text x="220" y="65">a</text><text x="220" y="115">b</text><text x="220" y="165">c</text></g>
+        </svg><p><strong>VALID.</strong> Inputs 1 and 3 share a; that is allowed.</p>
+      </div>
+      <div class="diagram-panel"><h4>C · Invalid: missing input</h4>
+        <svg viewBox="0 0 280 270" role="img" aria-labelledby="d9-c-title d9-c-desc"><title id="d9-c-title">Not a function because an input is missing</title><desc id="d9-c-desc">Domain has inputs 1, 2, 3 and 4. Inputs 1, 2 and 3 have one arrow each, but input 4 has no image.</desc>
+          <text x="60" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">A</text><text x="220" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">B</text>
+          <g stroke="var(--accent)" stroke-width="2" fill="none"><path d="M82 60H198"/><path d="M82 110Q140 70 198 60"/><path d="M82 160Q140 150 198 135"/></g>
+          <g fill="var(--bg)" stroke="var(--accent)" stroke-width="1.8"><circle cx="60" cy="60" r="18"/><circle cx="60" cy="110" r="18"/><circle cx="60" cy="160" r="18"/><circle cx="60" cy="210" r="18"/><circle cx="220" cy="60" r="18"/><circle cx="220" cy="135" r="18"/><circle cx="220" cy="210" r="18"/></g>
+          <circle cx="60" cy="210" r="22" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="4 3"/>
+          <g fill="var(--ink)" font-size="15" font-weight="700" text-anchor="middle" dominant-baseline="middle"><text x="60" y="60">1</text><text x="60" y="110">2</text><text x="60" y="160">3</text><text x="60" y="210">4</text><text x="220" y="60">a</text><text x="220" y="135">b</text><text x="220" y="210">c</text></g>
+          <text x="105" y="220" font-size="11" fill="var(--accent)">no image</text>
+        </svg><p><strong>NOT A FUNCTION.</strong> Input 4 has no image.</p>
+      </div>
+      <div class="diagram-panel"><h4>D · Invalid: two outputs</h4>
+        <svg viewBox="0 0 280 250" role="img" aria-labelledby="d9-d-title d9-d-desc"><title id="d9-d-title">Not a function because one input has two outputs</title><desc id="d9-d-desc">Input 1 has arrows to both a and b. Inputs 2 and 3 each have one image. Input 1 violates the exactly-one-image rule.</desc>
+          <text x="60" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">A</text><text x="220" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">B</text>
+          <g stroke="var(--accent)" stroke-width="2.2" fill="none"><path d="M82 65Q140 42 198 55"/><path d="M82 65Q140 90 198 125"/></g><g stroke="var(--accent)" stroke-width="2" fill="none"><path d="M82 130Q140 170 198 195"/><path d="M82 195Q140 105 198 55"/></g>
+          <g fill="var(--bg)" stroke="var(--accent)" stroke-width="1.8"><circle cx="60" cy="65" r="18"/><circle cx="60" cy="130" r="18"/><circle cx="60" cy="195" r="18"/><circle cx="220" cy="55" r="18"/><circle cx="220" cy="125" r="18"/><circle cx="220" cy="195" r="18"/></g>
+          <circle cx="60" cy="65" r="22" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="4 3"/>
+          <g fill="var(--ink)" font-size="15" font-weight="700" text-anchor="middle" dominant-baseline="middle"><text x="60" y="65">1</text><text x="60" y="130">2</text><text x="60" y="195">3</text><text x="220" y="55">a</text><text x="220" y="125">b</text><text x="220" y="195">c</text></g>
+          <text x="106" y="44" font-size="11" fill="var(--accent)">two images</text>
+        </svg><p><strong>NOT A FUNCTION.</strong> Input 1 points to both a and b.</p>
+      </div>
+    </div>
+    <figcaption>A relation is a function only when (1) every domain element has an image and (2) every domain element has exactly one image. Different inputs may share an output, as in panel B.</figcaption>
+  </figure>
+  <h2 id="s2">2 · Injective, surjective, bijective</h2>
+
+  <div class="theory">
+    <span class="source">Teacher's definitions — Module 3 PPT, slides 5, 8, 11, 12</span>
+    <p><strong>Injective (one-to-one):</strong> distinct elements of the domain have distinct images.</p>
+    <div class="eq">f(a<sub>1</sub>) = f(a<sub>2</sub>) ⇒ a<sub>1</sub> = a<sub>2</sub></div>
+    <p><strong>Surjective (onto):</strong> for every b ∈ B there is some a ∈ A with f(a) = b. Every codomain element has at least one pre-image.</p>
+    <p><strong>Bijective:</strong> both injective and surjective — a one-to-one correspondence.</p>
+  </div>
+
+  <table>
+    <tr><th>Type</th><th>Question it answers</th><th>Disprove it by finding</th><th>Prove it by</th></tr>
+    <tr><td><strong>Injective</strong></td><td>Do different inputs give different outputs?</td><td>Two different inputs with the same output</td><td>Assuming f(a<sub>1</sub>) = f(a<sub>2</sub>) and deriving a<sub>1</sub> = a<sub>2</sub></td></tr>
+    <tr><td><strong>Surjective</strong></td><td>Does every codomain element get hit?</td><td>One codomain element with no pre-image</td><td>Taking arbitrary b ∈ B and producing an a ∈ A with f(a) = b</td></tr>
+    <tr><td><strong>Bijective</strong></td><td>Both at once?</td><td>Either failure above</td><td>Proving both separately</td></tr>
+  </table>
+
+  <p><strong>Quick size check for finite sets.</strong> If A and B are finite: injective needs |A| ≤ |B|; surjective needs |A| ≥ |B|; bijective needs |A| = |B|. These are necessary conditions, so a size mismatch is an instant disproof. They do not by themselves prove the property for a particular function.</p>
+
+  <div class="example qa">
+    <div class="example-title">Worked example 1 — f(x) = x² from Z to Z (teacher's example)</div>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>f : Z → Z, f(x) = x².</p>
+      <p><strong>Find:</strong> Is f injective, surjective, bijective? Justify each answer.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Injective?</strong> Test two inputs. f(1) = 1 and f(−1) = 1. Two different inputs give the same output, so f is <strong>not injective</strong>. One counterexample is enough.</p>
+      <p><strong>Surjective?</strong> Is every integer a square? Take b = 2. There is no integer x with x² = 2, because 1² = 1 and 2² = 4. So 2 has no pre-image and f is <strong>not surjective</strong>.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">f is neither injective nor surjective, so it is <strong>not bijective</strong>.</p>
+    </div>
+    <p><strong>Answer-sheet form.</strong> "f(1) = f(−1) = 1 with 1 ≠ −1, hence not injective. 2 ∈ Z has no pre-image in Z, hence not surjective. Therefore not bijective."</p>
+  </div>
+
+  <div class="example qa">
+    <div class="example-title">Worked example 2 — f(x) = x + 1 from Z to Z (teacher's example)</div>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>f : Z → Z, f(x) = x + 1.</p>
+      <p><strong>Find:</strong> Prove whether f is injective, surjective and bijective.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Injective.</strong> Suppose f(x) = f(y). Then x + 1 = y + 1, so x = y. Hence f is injective.</p>
+      <p><strong>Surjective.</strong> Let b be any integer in the codomain. Choose x = b − 1. Since b is an integer, b − 1 is an integer and lies in the domain. Then f(b − 1) = (b − 1) + 1 = b. Every codomain element has a pre-image, so f is surjective.</p>
+      <p><strong>Bijective.</strong> Injective and surjective.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">f is <strong>bijective</strong>.</p>
+    </div>
+    <p><strong>Why both proofs are needed.</strong> The injective proof compares two outputs. The surjective proof starts from an arbitrary codomain element and constructs an input. They are different arguments.</p>
+  </div>
+
+  <div class="example qa">
+    <div class="example-title">Worked example 3 — finite sets and a bijection</div>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>A = {a, b, c, d}, B = {1, 2, 3, 4}, f = {(a, 4), (b, 2), (c, 1), (d, 3)}.</p>
+      <p><strong>Find:</strong> Is f bijective?</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p>The four images are 4, 2, 1, 3 — all different, so f is injective. The range is {1, 2, 3, 4} = B, so f is surjective.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">f is <strong>bijective</strong>. Equivalently: four inputs, four distinct outputs, so the outputs exhaust the four-element codomain.</p>
+    </div>
+  </div>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes</h3>
+    <ul>
+      <li>Proving injectivity by checking one or two values instead of a general argument. One counterexample disproves; a proof needs the general case.</li>
+      <li>Confusing "not injective" with "not a function". They are different failures.</li>
+      <li>Checking surjectivity against the range instead of the codomain. Surjectivity means range = codomain.</li>
+      <li>Forgetting the domain matters: x² is not injective on Z, but it is injective on the non-negative integers.</li>
+    </ul>
+  </div>
+
+  <div class="practice">
+    <h3>Quick check 2</h3>
+    <p>Test each for injective, surjective and bijective, with a one-line reason:<br>
+    (i) f : Z → Z, f(x) = 2x &nbsp; (ii) g : Z → Z, g(x) = x − 3 &nbsp; (iii) h : R → R, h(x) = x² <em>(Answer Q2.)</em></p>
+  </div>
+
+  
+  <figure class="dsgt-diagram" id="d10-function-types">
+    <div class="diagram-panels">
+      <div class="diagram-panel"><h4>A · Injective, not surjective</h4>
+        <svg viewBox="0 0 280 210" role="img" aria-labelledby="d10-a-title d10-a-desc"><title id="d10-a-title">Injective but not surjective function</title><desc id="d10-a-desc">Inputs 1 and 2 map to different outputs a and b. Codomain element c is not reached.</desc>
+          <text x="60" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">A</text><text x="220" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">B</text><g stroke="var(--accent)" stroke-width="2" fill="none"><path d="M82 75Q140 55 198 45"/><path d="M82 145Q140 120 198 105"/></g><g fill="var(--bg)" stroke="var(--accent)" stroke-width="1.8"><circle cx="60" cy="75" r="18"/><circle cx="60" cy="145" r="18"/><circle cx="220" cy="45" r="18"/><circle cx="220" cy="105" r="18"/><circle cx="220" cy="165" r="18"/></g><circle cx="220" cy="165" r="22" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="4 3"/><g fill="var(--ink)" font-size="15" font-weight="700" text-anchor="middle" dominant-baseline="middle"><text x="60" y="75">1</text><text x="60" y="145">2</text><text x="220" y="45">a</text><text x="220" y="105">b</text><text x="220" y="165">c</text></g><text x="145" y="187" font-size="11" text-anchor="middle" fill="var(--accent)">c is not reached</text>
+        </svg><p><strong>Injective:</strong> no two inputs share an output. <strong>Not onto:</strong> c is missed.</p>
+      </div>
+      <div class="diagram-panel"><h4>B · Surjective, not injective</h4>
+        <svg viewBox="0 0 280 210" role="img" aria-labelledby="d10-b-title d10-b-desc"><title id="d10-b-title">Surjective but not injective function</title><desc id="d10-b-desc">Inputs 1 and 2 both map to a, input 3 maps to b. Every codomain element a and b is reached.</desc>
+          <text x="60" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">A</text><text x="220" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">B</text><g stroke="var(--accent)" stroke-width="2" fill="none"><path d="M82 55Q140 40 198 75"/><path d="M82 105Q140 92 198 75"/><path d="M82 155H198"/></g><g fill="var(--bg)" stroke="var(--accent)" stroke-width="1.8"><circle cx="60" cy="55" r="18"/><circle cx="60" cy="105" r="18"/><circle cx="60" cy="155" r="18"/><circle cx="220" cy="75" r="18"/><circle cx="220" cy="155" r="18"/></g><g fill="var(--ink)" font-size="15" font-weight="700" text-anchor="middle" dominant-baseline="middle"><text x="60" y="55">1</text><text x="60" y="105">2</text><text x="60" y="155">3</text><text x="220" y="75">a</text><text x="220" y="155">b</text></g>
+        </svg><p><strong>Onto:</strong> every codomain element is reached. <strong>Not injective:</strong> 1 and 2 share a.</p>
+      </div>
+      <div class="diagram-panel"><h4>C · Bijective</h4>
+        <svg viewBox="0 0 280 230" role="img" aria-labelledby="d10-c-title d10-c-desc"><title id="d10-c-title">Bijective function</title><desc id="d10-c-desc">Inputs a, b, c and d map one-to-one onto 4, 2, 1 and 3 respectively. Every output is reached exactly once.</desc>
+          <text x="60" y="18" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">A</text><text x="220" y="18" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">B</text><g stroke="var(--accent)" stroke-width="2" fill="none"><path d="M82 55H198"/><path d="M82 100H198"/><path d="M82 145H198"/><path d="M82 190H198"/></g><g fill="var(--bg)" stroke="var(--accent)" stroke-width="1.8"><circle cx="60" cy="55" r="18"/><circle cx="60" cy="100" r="18"/><circle cx="60" cy="145" r="18"/><circle cx="60" cy="190" r="18"/><circle cx="220" cy="55" r="18"/><circle cx="220" cy="100" r="18"/><circle cx="220" cy="145" r="18"/><circle cx="220" cy="190" r="18"/></g><g fill="var(--ink)" font-size="15" font-weight="700" text-anchor="middle" dominant-baseline="middle"><text x="60" y="55">a</text><text x="60" y="100">b</text><text x="60" y="145">c</text><text x="60" y="190">d</text><text x="220" y="55">4</text><text x="220" y="100">2</text><text x="220" y="145">1</text><text x="220" y="190">3</text></g>
+        </svg><p><strong>Bijective:</strong> every input has one unique image, and every codomain element is reached.</p>
+      </div>
+    </div>
+    <figcaption>Injective means distinct inputs have distinct outputs. Surjective means the range equals the codomain. Bijective means both conditions hold at once.</figcaption>
+  </figure>
+  <h2 id="s3">3 · Composition of functions</h2>
+
+  <div class="theory">
+    <span class="source">Teacher's definition — Module 3 PPT, slide 14</span>
+    <p>Let f : A → B and g : B → C be functions. The composition of f and g is denoted g ∘ f : A → C and defined by</p>
+    <div class="eq">(g ∘ f)(a) = g(f(a))</div>
+    <p>The composition of functions is not commutative: in general f ∘ g ≠ g ∘ f.</p>
+  </div>
+
+  <p><strong>How to read the symbol.</strong> g ∘ f is read "g after f". The function nearest the input is applied first. In (g ∘ f)(x), you compute f(x) first and then feed that answer into g.</p>
+
+  <div class="theory">
+    <span class="source">Warning about notation</span>
+    <p>Your lecture slides use both <strong>g ∘ f</strong> and <strong>gof</strong> for the same thing: g applied to the result of f. Some textbooks instead write fg. Always check which order the question uses. The safe rule that never changes: <strong>the inside function runs first</strong>.</p>
+  </div>
+
+  <p><strong>Domain condition.</strong> For g ∘ f to make sense, the range of f must lie inside the domain of g. In the definition above, f outputs into B and g accepts B, so the fit is guaranteed. In an exam question with formulas, check this before composing.</p>
+
+  <h3 id="m3-composition-procedure" data-rail-subsection>Procedure</h3>
+  <ol class="steps">
+    <li>Identify which function is inside and which is outside.</li>
+    <li>Substitute the whole inside formula wherever the outside function has its variable.</li>
+    <li>Expand and simplify.</li>
+    <li>If asked for both orders, repeat with the roles swapped and compare. Different answers prove non-commutativity.</li>
+  </ol>
+
+  <div class="example qa">
+    <div class="example-title">Worked example — the teacher's pair (slide 15)</div>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>f : Z → Z, f(x) = 2x + 3 and g : Z → Z, g(x) = 3x + 2.</p>
+      <p><strong>Find:</strong> (f ∘ g)(x) and (g ∘ f)(x), and compare them.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>(f ∘ g)(x) = f(g(x)).</strong> g is inside. Replace x in f by the whole of g(x):</p>
+      <p>f(3x + 2) = 2(3x + 2) + 3 = 6x + 4 + 3 = <strong>6x + 7</strong>.</p>
+      <p><strong>(g ∘ f)(x) = g(f(x)).</strong> f is inside. Replace x in g by f(x):</p>
+      <p>g(2x + 3) = 3(2x + 3) + 2 = 6x + 9 + 2 = <strong>6x + 11</strong>.</p>
+      <p><strong>Compare.</strong> 6x + 7 ≠ 6x + 11, so f ∘ g ≠ g ∘ f.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">f ∘ g = <strong>6x + 7</strong> and g ∘ f = <strong>6x + 11</strong>; composition is not commutative.</p>
+    </div>
+    <p><strong>Numerical check.</strong> At x = 10: g(10) = 32, then f(32) = 67, matching 6(10) + 7. And f(10) = 23, then g(23) = 71, matching 6(10) + 11. ✓</p>
+  </div>
+
+  <div class="exam-q">
+<div class="exam-q-title">Verified University question <span class="mu-badge">Summer 2026 · Q.2(b) · 7 marks</span></div>
+<p class="exam-source">A shirt costs Rs. 1000. The store gives a 15% discount, then applies 8% sales tax to the discounted price. Develop functions for the discount and the tax, construct the composite function for the final cost, and compute the amount payable.</p>
+<div class="qa-question"><div class="qa-label">Question</div>
+
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Step 1 — define the functions.</strong> Let p be the marked price in rupees.</p>
+      <div class="eq">d(p) = p − 0.15p = 0.85p &nbsp;&nbsp;&nbsp; t(p) = p + 0.08p = 1.08p</div>
+      <p>d is the "apply 15% discount" function. t is the "add 8% tax" function. Both take a price and return a price.</p>
+      <p><strong>Step 2 — choose the order.</strong> The discount happens first, so the discounted price is the input to tax. Therefore the final cost is t applied to d(p):</p>
+      <div class="eq">(t ∘ d)(p) = t(d(p)) = t(0.85p) = 1.08(0.85p) = 0.918p</div>
+      <p><strong>Step 3 — compute.</strong></p>
+      <div class="eq">(t ∘ d)(1000) = 0.918 × 1000 = 918</div>
+      <p><strong>Step 4 — check by hand.</strong> Discount: 15% of 1000 = 150, so the discounted price is 850. Tax: 8% of 850 = 68. Final: 850 + 68 = 918. ✓</p>
+    <p><strong>Step 5 — interpretation.</strong> The composite function collapses a two-step billing rule into one formula, 0.918p. The software can compute the final price in one call, the rule is reusable for any marked price, and the order of the steps is recorded in the composition itself.</p>
+<p><strong>Honest note about order.</strong> Here both steps are pure percentage multiplications, and 0.85 × 1.08 = 1.08 × 0.85, so reversing the order happens to give the same number. The order still matters in the definition — tax is legally computed on the discounted price — and it changes the answer as soon as a step involves a fixed amount. For example, with a flat Rs. 100 discount, t ∘ d gives 1.08(p − 100) = 972 at p = 1000, while d ∘ t gives 1.08p − 100 = 980. Do not claim the two orders always differ; check the actual functions.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">(t ∘ d)(p) = <strong>0.918p</strong>, so a Rs. 1000 shirt costs <strong>Rs. 918</strong>.</p>
+    </div>
+</div>
+
+  <div class="example qa">
+<div class="example-title">Full solution — discount then tax</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>A shirt costs Rs. 1000. The store gives a 15% discount, then applies 8% sales tax to the discounted price. Develop functions for the discount and tax, construct the composite function for the final cost, and compute the amount payable.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Step 1 — define the functions.</strong> Let p be the marked price in rupees.</p>
+      <div class="eq">d(p) = p − 0.15p = 0.85p &nbsp;&nbsp;&nbsp; t(p) = p + 0.08p = 1.08p</div>
+      <p>d is the "apply 15% discount" function. t is the "add 8% tax" function. Both take a price and return a price.</p>
+      <p><strong>Step 2 — choose the order.</strong> The discount happens first, so the discounted price is the input to tax. Therefore the final cost is t applied to d(p):</p>
+      <div class="eq">(t ∘ d)(p) = t(d(p)) = t(0.85p) = 1.08(0.85p) = 0.918p</div>
+      <p><strong>Step 3 — compute.</strong></p>
+      <div class="eq">(t ∘ d)(1000) = 0.918 × 1000 = 918</div>
+      <p><strong>Step 4 — check by hand.</strong> Discount: 15% of 1000 = 150, so the discounted price is 850. Tax: 8% of 850 = 68. Final: 850 + 68 = 918. ✓</p>
+    <p><strong>Step 5 — interpretation.</strong> The composite function collapses a two-step billing rule into one formula, 0.918p. The software can compute the final price in one call, the rule is reusable for any marked price, and the order of the steps is recorded in the composition itself.</p>
+<p><strong>Honest note about order.</strong> Here both steps are pure percentage multiplications, and 0.85 × 1.08 = 1.08 × 0.85, so reversing the order happens to give the same number. The order still matters in the definition — tax is legally computed on the discounted price — and it changes the answer as soon as a step involves a fixed amount. For example, with a flat Rs. 100 discount, t ∘ d gives 1.08(p − 100) = 972 at p = 1000, while d ∘ t gives 1.08p − 100 = 980. Do not claim the two orders always differ; check the actual functions.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">(t ∘ d)(p) = <strong>0.918p</strong>, so a Rs. 1000 shirt costs <strong>Rs. 918</strong>.</p>
+    </div>
+</div>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes</h3>
+    <ul>
+      <li>Applying the outside function first. In (f ∘ g)(x), g runs first.</li>
+      <li>Substituting only the variable x instead of the whole inner expression: f(3x + 2) means replace x by (3x + 2) in f, brackets included.</li>
+      <li>Assuming composition is commutative.</li>
+      <li>Losing a term during expansion: 2(3x + 2) = 6x + 4, not 6x + 2.</li>
+    </ul>
+  </div>
+
+  <div class="practice">
+    <h3>Quick check 3</h3>
+    <p>f(x) = x + 1 and g(x) = 2x² + 3, both on R. Find f ∘ g and g ∘ f, and state whether they are equal. <em>(Answer Q3.)</em></p>
+  </div>
+
+  
+  <figure class="dsgt-diagram wide" id="d11-composition-flow">
+    <svg class="dsgt-desktop-diagram" viewBox="0 0 700 350" role="img" aria-labelledby="d11-composition-title d11-composition-desc">
+      <title id="d11-composition-title">Two orders of function composition</title>
+      <desc id="d11-composition-desc">The first flow applies g to x, giving 3x plus 2, then applies f to give 6x plus 7. The second flow applies f to x, giving 2x plus 3, then applies g to give 6x plus 11.</desc>
+      <defs><marker id="d11-flow-arrow" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7Z" fill="var(--accent)"/></marker></defs>
+      <text x="350" y="28" text-anchor="middle" font-size="17" font-weight="700" fill="var(--ink)">Composition order changes the result</text>
+      <g fill="var(--bg)" stroke="var(--accent)" stroke-opacity=".38" stroke-width="1.5"><rect x="35" y="66" width="150" height="62" rx="7"/><rect x="275" y="66" width="150" height="62" rx="7"/><rect x="515" y="66" width="150" height="62" rx="7"/><rect x="35" y="218" width="150" height="62" rx="7"/><rect x="275" y="218" width="150" height="62" rx="7"/><rect x="515" y="218" width="150" height="62" rx="7"/></g>
+      <g stroke="var(--accent)" stroke-width="2.5" fill="none" marker-end="url(#d11-flow-arrow)"><path d="M185 97H265"/><path d="M425 97H505"/><path d="M185 249H265"/><path d="M425 249H505"/></g>
+      <g fill="var(--ink)" font-size="22" font-weight="700" text-anchor="middle" dominant-baseline="middle"><text x="110" y="97">x</text><text x="350" y="97">3x + 2</text><text x="590" y="97">6x + 7</text><text x="110" y="249">x</text><text x="350" y="249">2x + 3</text><text x="590" y="249">6x + 11</text></g>
+      <g fill="var(--accent)" font-size="17" font-weight="700" text-anchor="middle"><text x="225" y="82">g</text><text x="465" y="82">f</text><text x="225" y="234">f</text><text x="465" y="234">g</text></g>
+      <g fill="var(--muted)" font-size="14" text-anchor="middle"><text x="350" y="158">(f ∘ g)(x) = 6x + 7</text><text x="350" y="310">(g ∘ f)(x) = 6x + 11</text></g>
+    </svg>
+    <svg class="dsgt-mobile-diagram" style="display:none" viewBox="0 0 380 290" role="img" aria-labelledby="d11m-title d11m-desc"><title id="d11m-title">Two orders of function composition</title><desc id="d11m-desc">First flow applies g to x giving 3x plus 2, then f giving 6x plus 7. Second flow applies f to x giving 2x plus 3, then g giving 6x plus 11.</desc><defs><marker id="d11m-arrow" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7Z" fill="var(--accent)"/></marker></defs><text x="190" y="26" text-anchor="middle" font-size="16" font-weight="700" fill="var(--ink)">Composition order changes the result</text><g fill="var(--bg)" stroke="var(--accent)" stroke-opacity=".38" stroke-width="1.5"><rect x="10" y="52" width="90" height="52" rx="7"/><rect x="145" y="52" width="90" height="52" rx="7"/><rect x="280" y="52" width="90" height="52" rx="7"/></g><g stroke="var(--accent)" stroke-width="2.5" fill="none" marker-end="url(#d11m-arrow)"><path d="M100 78 H137"/><path d="M235 78 H272"/></g><g fill="var(--ink)" font-size="18" font-weight="700" text-anchor="middle" dominant-baseline="middle"><text x="55" y="78">x</text><text x="190" y="78">3x + 2</text><text x="325" y="78">6x + 7</text></g><g fill="var(--accent)" font-size="16" font-weight="700" text-anchor="middle"><text x="120" y="61">g</text><text x="254" y="61">f</text></g><text x="190" y="134" text-anchor="middle" font-size="13" fill="var(--muted)">(f ∘ g)(x) = 6x + 7</text><g fill="var(--bg)" stroke="var(--accent)" stroke-opacity=".38" stroke-width="1.5"><rect x="10" y="184" width="90" height="52" rx="7"/><rect x="145" y="184" width="90" height="52" rx="7"/><rect x="280" y="184" width="90" height="52" rx="7"/></g><g stroke="var(--accent)" stroke-width="2.5" fill="none" marker-end="url(#d11m-arrow)"><path d="M100 210 H137"/><path d="M235 210 H272"/></g><g fill="var(--ink)" font-size="18" font-weight="700" text-anchor="middle" dominant-baseline="middle"><text x="55" y="210">x</text><text x="190" y="210">2x + 3</text><text x="325" y="210">6x + 11</text></g><g fill="var(--accent)" font-size="16" font-weight="700" text-anchor="middle"><text x="120" y="193">f</text><text x="254" y="193">g</text></g><text x="190" y="266" text-anchor="middle" font-size="13" fill="var(--muted)">(g ∘ f)(x) = 6x + 11</text></svg>
+    <figcaption>Read each row from left to right. In (f ∘ g)(x), g is applied first, then f. In (g ∘ f)(x), f is applied first, then g. The right-hand function in the composition symbol runs first; the two results differ, so composition is not commutative here.</figcaption>
+  </figure>
+  <h2 id="s4">4 · Inverse functions</h2>
+
+  <div class="theory">
+    <span class="source">Teacher's definition — Module 3 PPT, slides 16–17</span>
+    <p>Let f : A → B be a bijective function with f(a) = b. The inverse of f is denoted f<sup>−1</sup> : B → A and is defined by f<sup>−1</sup>(b) = a, where a ∈ A and b ∈ B.</p>
+    <p>If the inverse can be defined, f is <strong>invertible</strong>. If f is not bijective, an inverse from the full codomain back to the full domain cannot be defined.</p>
+    <p>For a bijection f : A → B:</p>
+    <div class="eq">(f ∘ f<sup>−1</sup>)(x) = x for x ∈ B &nbsp;&nbsp; and &nbsp;&nbsp; (f<sup>−1</sup> ∘ f)(x) = x for x ∈ A</div>
+  </div>
+
+  <p><strong>Simple meaning.</strong> The inverse undoes the function. If f sends 3 to 7, then f<sup>−1</sup> sends 7 back to 3. Every output must be reversible, and no two inputs may share an output — otherwise you would not know which input to return to.</p>
+
+  <p><strong>Why bijectivity is required.</strong> If f is not injective, two inputs share an output, so the reverse rule cannot decide which one to return. If f is not surjective, some codomain element has no pre-image, so the reverse rule has nothing to return. Injectivity gives a unique answer; surjectivity gives an answer for every codomain element.</p>
+
+  <h3 id="m3-inverse-algebra" data-rail-subsection>Algebraic method</h3>
+  <ol class="steps">
+    <li>Write y = f(x).</li>
+    <li>Solve for x in terms of y.</li>
+    <li>Swap the names x and y to get f<sup>−1</sup>(x).</li>
+    <li>Verify with both composition identities.</li>
+  </ol>
+
+  <div class="example qa">
+    <div class="example-title">Worked example — f(x) = 2x + 3, f : R → R (IAT question)</div>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>f : R → R, f(x) = 2x + 3.</p>
+      <p><strong>Find:</strong> f<sup>−1</sup>(x), and verify both composition identities.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Step 1.</strong> y = 2x + 3.</p>
+      <p><strong>Step 2.</strong> y − 3 = 2x, so x = (y − 3)/2.</p>
+      <p><strong>Step 3.</strong> Swap names:</p>
+      <div class="eq">f<sup>−1</sup>(x) = (x − 3) / 2</div>
+      <p><strong>Step 4 — verify both identities.</strong></p>
+      <p>f(f<sup>−1</sup>(x)) = 2[(x − 3)/2] + 3 = (x − 3) + 3 = x. ✓</p>
+      <p>f<sup>−1</sup>(f(x)) = f<sup>−1</sup>(2x + 3) = [(2x + 3) − 3]/2 = 2x/2 = x. ✓</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">f<sup>−1</sup>(x) = <strong>(x − 3)/2</strong>, and both composition identities hold.</p>
+    </div>
+    <p><strong>Numerical check.</strong> f(5) = 13 and f<sup>−1</sup>(13) = (13 − 3)/2 = 5. ✓</p>
+    <p><strong>Answer-sheet form.</strong> Write the four steps, then the two composition verifications under headings, then the boxed answer. The verification is usually worth marks.</p>
+  </div>
+
+  <div class="example qa">
+    <div class="example-title">Worked example — inverse of a finite function (teacher's Example 2.19)</div>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>A = {a, b, c}, B = {1, 2, 3}, f = {(a, 1), (b, 3), (c, 2)}.</p>
+      <p><strong>Find:</strong> Is f invertible? If so, write f<sup>−1</sup>.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p>The images are 1, 3, 2 — all different, so f is injective. Every element of B appears, so f is surjective. Hence f is bijective and invertible.</p>
+      <p>Reverse each pair:</p>
+      <div class="eq">f<sup>−1</sup> = {(1, a), (3, b), (2, c)}</div>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">f<sup>−1</sup> = <strong>{(1, a), (2, c), (3, b)}</strong>. The domain of f<sup>−1</sup> is B and its range is A.</p>
+    </div>
+  </div>
+
+  <div class="example qa">
+    <div class="example-title">Worked example — when there is no inverse</div>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>f : Z → Z, f(x) = x².</p>
+      <p><strong>Find:</strong> Does f<sup>−1</sup> : Z → Z exist?</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p>From Worked example 1, f is neither injective nor surjective. So there is no function f<sup>−1</sup> : Z → Z.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">No inverse exists on Z. If you restrict the domain to the non-negative integers and the codomain to perfect squares, the same formula becomes bijective and the inverse is the positive square root.</p>
+    </div>
+    <p>The formula did not change; the domain and codomain did. Always state them.</p>
+  </div>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes</h3>
+    <ul>
+      <li>Writing f<sup>−1</sup>(x) = 1/f(x). The −1 is inverse-function notation, not a reciprocal.</li>
+      <li>Finding a formula but skipping the verification. Two lines earn marks and catch algebra slips.</li>
+      <li>Forgetting to swap x and y at the end, leaving the answer in terms of y.</li>
+      <li>Claiming an inverse exists for a function that is not bijective.</li>
+      <li>Reversing the pairs but not swapping domain and codomain when describing the inverse.</li>
+    </ul>
+  </div>
+
+  <div class="practice">
+    <h3>Quick check 4</h3>
+    <p>(a) f : R → R, f(x) = 5x − 7. Find f<sup>−1</sup> and verify both identities.<br>
+    (b) f = {(1, 4), (2, 5), (3, 6)} on A = {1,2,3}, B = {4,5,6}. Write f<sup>−1</sup>. <em>(Answer Q4.)</em></p>
+  </div>
+
+  
+  <figure class="dsgt-diagram" id="d12-inverse-mapping">
+    <div class="diagram-panels">
+      <div class="diagram-panel"><h4>Original function f : A → B</h4>
+        <svg viewBox="0 0 280 235" role="img" aria-labelledby="d12-f-title d12-f-desc"><title id="d12-f-title">Original finite function f</title><desc id="d12-f-desc">Domain A has a, b and c. Codomain B has 1, 2 and 3. The mappings are a to 1, b to 3 and c to 2.</desc>
+          <defs><marker id="d12-f-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6Z" fill="var(--accent)"/></marker></defs>
+          <text x="60" y="21" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">A</text><text x="220" y="21" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">B</text>
+          <g stroke="var(--accent)" stroke-width="2" fill="none" marker-end="url(#d12-f-arrow)"><path d="M82 65H198"/><path d="M82 120Q140 108 198 120"/><path d="M82 175Q140 190 198 175"/></g>
+          <g fill="var(--bg)" stroke="var(--accent)" stroke-width="1.8"><circle cx="60" cy="65" r="18"/><circle cx="60" cy="120" r="18"/><circle cx="60" cy="175" r="18"/><circle cx="220" cy="65" r="18"/><circle cx="220" cy="120" r="18"/><circle cx="220" cy="175" r="18"/></g>
+          <g fill="var(--ink)" font-size="15" font-weight="700" text-anchor="middle" dominant-baseline="middle"><text x="60" y="65">a</text><text x="60" y="120">b</text><text x="60" y="175">c</text><text x="220" y="65">1</text><text x="220" y="120">3</text><text x="220" y="175">2</text></g>
+          <text x="140" y="218" text-anchor="middle" font-size="12" fill="var(--muted)">A → B</text>
+        </svg>
+        <p>f = {(a, 1), (b, 3), (c, 2)}</p>
+      </div>
+      <div class="diagram-panel"><h4>Inverse function f<sup>−1</sup> : B → A</h4>
+        <svg viewBox="0 0 280 235" role="img" aria-labelledby="d12-inv-title d12-inv-desc"><title id="d12-inv-title">Inverse finite function f inverse</title><desc id="d12-inv-desc">The domain is now B with 1, 3 and 2. The codomain is A with a, b and c. The mappings are 1 to a, 3 to b and 2 to c, reversing every arrow.</desc>
+          <defs><marker id="d12-inv-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6Z" fill="var(--accent)"/></marker></defs>
+          <text x="60" y="21" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">B</text><text x="220" y="21" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">A</text>
+          <g stroke="var(--accent)" stroke-width="2" fill="none" marker-end="url(#d12-inv-arrow)"><path d="M82 65H198"/><path d="M82 120Q140 108 198 120"/><path d="M82 175Q140 190 198 175"/></g>
+          <g fill="var(--bg)" stroke="var(--accent)" stroke-width="1.8"><circle cx="60" cy="65" r="18"/><circle cx="60" cy="120" r="18"/><circle cx="60" cy="175" r="18"/><circle cx="220" cy="65" r="18"/><circle cx="220" cy="120" r="18"/><circle cx="220" cy="175" r="18"/></g>
+          <g fill="var(--ink)" font-size="15" font-weight="700" text-anchor="middle" dominant-baseline="middle"><text x="60" y="65">1</text><text x="60" y="120">3</text><text x="60" y="175">2</text><text x="220" y="65">a</text><text x="220" y="120">b</text><text x="220" y="175">c</text></g>
+          <text x="140" y="218" text-anchor="middle" font-size="12" fill="var(--muted)">B → A</text>
+        </svg>
+        <p>f<sup>−1</sup> = {(1, a), (3, b), (2, c)}</p>
+      </div>
+    </div>
+    <figcaption>The inverse reverses every ordered pair and swaps domain and codomain. This inverse exists because f is bijective: each element of B is reached exactly once, so every reversed input has exactly one output.</figcaption>
+  </figure>
+  <h2 id="practice">Practice questions</h2>
+
+  <div class="practice">
+    <h3 id="m3-practice-set-a" data-rail-subsection>Set A — short checks</h3>
+    <p><strong>Q1.</strong> From Quick check 1: which of f, g, h, k are functions from A = {1,2,3,4} to B = {p,q,r}? Give the range of each function.</p>
+    <p><strong>Q2.</strong> Test for injective, surjective and bijective, with reasons: (i) f : Z → Z, f(x) = 2x; (ii) g : Z → Z, g(x) = x − 3; (iii) h : R → R, h(x) = x².</p>
+    <p><strong>Q3.</strong> f(x) = x + 1, g(x) = 2x² + 3 on R. Find f ∘ g and g ∘ f. Are they equal?</p>
+    <p><strong>Q4.</strong> (a) f : R → R, f(x) = 5x − 7. Find f<sup>−1</sup> and verify both composition identities. (b) f = {(1,4), (2,5), (3,6)}. Write f<sup>−1</sup>.</p>
+    <p><strong>Q5.</strong> Define function, domain, codomain and range in one line each, and give one example of a relation on {1,2,3} that is not a function.</p>
+  </div>
+
+  <div class="practice">
+    <h3 id="m3-practice-set-b" data-rail-subsection>Set B — exam-style</h3>
+    <p><strong>Q6.</strong> <span class="mu-badge">IAT sample</span> A = {2, 4, 6}, B = {a, b, c, d}, f = {(2, b), (4, a), (6, d)}. Show that f is one-to-one. Is it onto? Is it bijective?</p>
+    <p><strong>Q7.</strong> <span class="mu-badge">Summer 2026 · Q.2(b) style</span> A item costs Rs. 2000. A 20% discount is applied, then 5% tax on the discounted price. Define the two functions, form the composite, and compute the final price. Then repeat with a flat Rs. 200 discount instead of 20%, and say whether the order now matters.</p>
+    <p><strong>Q8.</strong> f : R → R, f(x) = x³ and g : R → R, g(x) = x<sup>1/3</sup>. Show that f and g are inverses of each other. <em>(Teacher's slide 19.)</em></p>
+    <p><strong>Q9.</strong> For f(x) = 3x − 4 on R, find f<sup>−1</sup> and verify. Then explain in two sentences why f is invertible.</p>
+  </div>
+
+  <h2 id="answers">Answer key</h2>
+
+  <div class="answer-key">
+    <h3>Q1</h3>
+    <p><strong>f</strong> is a function: all four inputs appear once. Range = {p, q, r}.</p>
+    <p><strong>g</strong> is not a function from A to B, because 4 has no image (the first coordinates are only {1,2,3}).</p>
+    <p><strong>h</strong> is a function: all four inputs appear once. Range = {q, r}.</p>
+    <p><strong>k</strong> is not a function: input 2 has two images, q and r.</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q2</h3>
+    <p><strong>(i) f(x) = 2x on Z.</strong> Injective: 2x = 2y ⇒ x = y. Not surjective: 3 ∈ Z has no integer pre-image, since 2x = 3 gives x = 1.5 ∉ Z. Not bijective.</p>
+    <p><strong>(ii) g(x) = x − 3 on Z.</strong> Injective: x − 3 = y − 3 ⇒ x = y. Surjective: for b ∈ Z take x = b + 3 ∈ Z, then g(x) = b. Bijective.</p>
+    <p><strong>(iii) h(x) = x² on R.</strong> Not injective: h(2) = h(−2) = 4. Not surjective onto R: −1 has no real pre-image. Not bijective.</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q3</h3>
+    <p>f(g(x)) = f(2x² + 3) = (2x² + 3) + 1 = <strong>2x² + 4</strong>.</p>
+    <p>g(f(x)) = g(x + 1) = 2(x + 1)² + 3 = 2(x² + 2x + 1) + 3 = 2x² + 4x + 2 + 3 = <strong>2x² + 4x + 5</strong>.</p>
+    <p>They are not equal: 2x² + 4 ≠ 2x² + 4x + 5 (for example at x = 0 the values are 4 and 5). Composition is not commutative.</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q4</h3>
+    <p><strong>(a)</strong> y = 5x − 7 ⇒ y + 7 = 5x ⇒ x = (y + 7)/5. So f<sup>−1</sup>(x) = (x + 7)/5.</p>
+    <p>Check: f(f<sup>−1</sup>(x)) = 5[(x + 7)/5] − 7 = (x + 7) − 7 = x. ✓</p>
+    <p>f<sup>−1</sup>(f(x)) = [(5x − 7) + 7]/5 = 5x/5 = x. ✓</p>
+    <p><strong>(b)</strong> f<sup>−1</sup> = {(4, 1), (5, 2), (6, 3)}.</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q5</h3>
+    <p>A function f : A → B assigns to every a ∈ A exactly one element f(a) ∈ B. The domain is the set A of inputs; the codomain is the set B into which we map; the range is the set of outputs that actually occur, a subset of B.</p>
+    <p>Example of a relation on {1,2,3} that is not a function: {(1,2), (1,3), (2,1), (3,1)} — input 1 has two images. Also acceptable: {(1,2), (2,3)} — element 3 has no image.</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q6</h3>
+    <p><strong>One-to-one:</strong> f(2) = b, f(4) = a, f(6) = d. The three images b, a, d are all different, so distinct inputs have distinct outputs. Hence f is injective.</p>
+    <p><strong>Onto?</strong> No. The codomain is B = {a, b, c, d}, and c has no pre-image. The range is {a, b, d} ≠ B.</p>
+    <p><strong>Bijective?</strong> No, because it is not onto. (It is injective, and |A| = 3 &lt; |B| = 4, so it could not be onto.)</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q7</h3>
+    <p><strong>20% discount:</strong> d(p) = 0.80p. <strong>5% tax:</strong> t(p) = 1.05p. Final cost = t(d(p)) = 1.05 × 0.80p = 0.84p. At p = 2000: 0.84 × 2000 = <strong>Rs. 1680</strong>. Check: discount 400, discounted price 1600, tax 80, total 1680. ✓</p>
+    <p><strong>Flat Rs. 200 discount:</strong> d(p) = p − 200, t(p) = 1.05p. Then t(d(p)) = 1.05(p − 200) = 1.05p − 210, giving 2100 − 210 = <strong>Rs. 1890</strong> at p = 2000. The reversed order d(t(p)) = 1.05p − 200 gives 1900. The order matters now, because one step is a fixed amount rather than a percentage. Tax must still be applied after the discount.</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q8</h3>
+    <p>(f ∘ g)(x) = f(g(x)) = f(x<sup>1/3</sup>) = (x<sup>1/3</sup>)³ = x for all real x.</p>
+    <p>(g ∘ f)(x) = g(f(x)) = g(x³) = (x³)<sup>1/3</sup> = x for all real x.</p>
+    <p>Both compositions return the identity, so f and g are inverses: g = f<sup>−1</sup> and f = g<sup>−1</sup>.</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q9</h3>
+    <p>y = 3x − 4 ⇒ y + 4 = 3x ⇒ x = (y + 4)/3. So f<sup>−1</sup>(x) = (x + 4)/3.</p>
+    <p>Verification: f(f<sup>−1</sup>(x)) = 3[(x + 4)/3] − 4 = (x + 4) − 4 = x. ✓ And f<sup>−1</sup>(f(x)) = [(3x − 4) + 4]/3 = 3x/3 = x. ✓</p>
+    <p>f is a non-constant linear function on R: 3x − 4 = 3y − 4 gives x = y, so it is injective; and for any b ∈ R, x = (b + 4)/3 is real with f(x) = b, so it is surjective. Being bijective, it is invertible.</p>
+  </div>
+
+  <h2 id="revision">Last-minute revision sheet</h2>
+
+  <div class="revision-sheet">
+    <h3>Definitions in one line each</h3>
+    <ul>
+      <li><strong>Function:</strong> every element of A has exactly one image in B.</li>
+      <li><strong>Domain / codomain / range:</strong> inputs / target set / outputs that occur.</li>
+      <li><strong>Image / pre-image:</strong> f(a) / every a with f(a) = b.</li>
+      <li><strong>Injective:</strong> f(a<sub>1</sub>) = f(a<sub>2</sub>) ⇒ a<sub>1</sub> = a<sub>2</sub>.</li>
+      <li><strong>Surjective:</strong> every b ∈ B has at least one pre-image.</li>
+      <li><strong>Bijective:</strong> injective and surjective.</li>
+      <li><strong>Composition:</strong> (g ∘ f)(x) = g(f(x)); inside first.</li>
+      <li><strong>Inverse:</strong> f<sup>−1</sup>(b) = a exactly when f(a) = b; exists only for bijections.</li>
+    </ul>
+
+    <h3>Procedures</h3>
+    <ul>
+      <li><strong>Is it a function?</strong> All domain elements used? Each used once? Then yes.</li>
+      <li><strong>Injective?</strong> Assume f(a<sub>1</sub>) = f(a<sub>2</sub>), derive a<sub>1</sub> = a<sub>2</sub>. Or find two inputs with one output to disprove.</li>
+      <li><strong>Surjective?</strong> Take arbitrary b, construct a with f(a) = b. Or find an unhit b to disprove.</li>
+      <li><strong>Compose:</strong> substitute the whole inner formula, expand, simplify.</li>
+      <li><strong>Inverse:</strong> y = f(x) → solve for x → swap x and y → verify both identities.</li>
+    </ul>
+
+    <h3>Sanity checks</h3>
+    <ul>
+      <li>Did you state the domain and codomain before testing?</li>
+      <li>Did you give a counterexample for every "not" claim?</li>
+      <li>In composition, did the inside function run first?</li>
+      <li>Did you verify the inverse with both compositions?</li>
+      <li>Is f<sup>−1</sup> written with the variable x, not y?</li>
+    </ul>
+  </div>
+
+  <h2 id="sources">Sources, verification and coverage</h2>
+
+  <div class="references">
+    <h3>Teacher material</h3>
+    <p>Mrs. Shamal Bagal, <em>Module 3: Functions</em> (PowerPoint, 20 slides): definition of function, domain, codomain, image, pre-image, range; injective, surjective and bijective definitions with examples; composition; inverse function and the two composition identities; the finite inverse example. Teacher's examples are from slides 3–19.</p>
+
+    <h3>Official scope</h3>
+    <p>University of Mumbai DSGT (2023112), Module III — Functions, 3 hours, CO3. Prescribed: injective, surjective and bijective functions, composition, inverse functions, real-life applications. Self-learning: neural networks, insurance risk factors, taxes and tax brackets, vending machines.</p>
+
+    <h3>Questions</h3>
+    <ul>
+      <li><strong>Summer 2026 Q.2(b)</strong> — the discount and tax scenario; the data (Rs. 1000, 15%, 8%) is preserved, and an extra flat-discount variation was added as Q7 for practice.</li>
+      <li><strong>IAT sample</strong> — f(x) = 2x + 3 inverse; f = {(1,4),(2,5),(3,7)} one-to-one style question adapted as Q6.</li>
+      <li>Q1–Q5, Q7–Q9 are written for this guide; they are not claimed to be university questions.</li>
+    </ul>
+
+    <h3>Verification performed</h3>
+    <ul>
+      <li>Compositions checked both algebraically and numerically: at x = 10, f ∘ g = 67 and g ∘ f = 71 for the teacher's pair.</li>
+      <li>The discount/tax computation was checked two ways: 0.918 × 1000 = 918 and 850 + 68 = 918.</li>
+      <li>Both inverse identities were verified symbolically for f(x) = 2x + 3, f(x) = 5x − 7 and f(x) = 3x − 4.</li>
+      <li>The claim that order does not change a two-percentage computation was checked and stated honestly rather than presented as a general rule.</li>
+    </ul>
+
+    <h3>Not covered</h3>
+    <p>Neural-network theory, insurance and taxation case studies, vending machines, advanced abstract function theory, and large sets of composition variations. These are self-learning or extension topics. Deliberate omissions, not oversights.</p>
+  </div>
+
+  <footer>
+    DSGT Module 3 — Selective Exam Essentials · Built from Mrs. Shamal Bagal's Module 3 PPT, the official DSGT syllabus,<br>
+    the Summer 2026 paper and the IAT sample questions. Not a complete module guide.
+  </footer>
+
+</div>
+
+<div class="topbar" style="display:none"></div>
+<script>
+(function(){
+  var b=document.getElementById('themeToggle'),r=document.documentElement;
+  function dark(){var t=r.getAttribute('data-theme');return t==='dark';}
+  function paint(){var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
+  b.addEventListener('click',function(){var n=dark()?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('sg-theme',n);}catch(e){}paint();});
+  paint();
+})();
+</script>
+<script>
+(function(){
+  var hs=[].slice.call(document.querySelectorAll('.wrap h2[id]'));
+  var subHeads=[].slice.call(document.querySelectorAll('.wrap [data-rail-subsection][id]'));
+  if(!hs.length)return;
+  function pad(n){return (n<10?'0':'')+n;}
+  function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
+  var names=hs.map(function(h){return h.textContent.trim();});
+  var subGroups=hs.map(function(){return [];});
+  var sectionIndex=-1;
+  Array.prototype.forEach.call(document.querySelectorAll('.wrap h2[id], .wrap [data-rail-subsection][id]'),function(h){
+    if(h.tagName==='H2'){sectionIndex=hs.indexOf(h);}
+    else if(sectionIndex>=0)subGroups[sectionIndex].push(h);
+  });
+  function makeSublist(parentLi,mobile,headings){
+    if(!headings.length)return [];
+    var list=el('ol',mobile?'rm-sublist':'rail-sublist');
+    var children=headings.map(function(h,i){
+      var li=el('li'),a=el('a',mobile?'rm-sub-link':'rail-sub-link');
+      var label=h.getAttribute('data-rail-label')||h.textContent.trim();
+      a.href='#'+h.id;a.title=label;
+      a.appendChild(el('span',mobile?'rm-k':'sub-num',String.fromCharCode(65+i)));
+      a.appendChild(el('span',mobile?'rm-sub-label':'sub-lbl',label));
+      li.appendChild(a);list.appendChild(li);
+      return {a:a,heading:h,done:false,top:0,mobile:null};
+    });
+    parentLi.appendChild(list);return children;
+  }
+  var nav=el('nav','rail');nav.setAttribute('aria-label','Section progress');
+  var inn=el('div','rail-in'),top=el('div','rail-top'),sec=el('span','rail-sec','01'),meta=el('span','rail-meta');
+  var pct=el('b',null,'0%');meta.appendChild(el('span',null,'of '+pad(hs.length)));meta.appendChild(pct);
+  var tg=el('button','rail-toggle');tg.type='button';tg.setAttribute('aria-controls','railList');
+  top.appendChild(sec);top.appendChild(meta);top.appendChild(tg);
+  var ol=el('ol','rail-list');ol.id='railList';
+  var fill=el('span','rail-fill');fill.setAttribute('aria-hidden','true');ol.appendChild(fill);
+  var items=hs.map(function(h,i){
+    var li=el('li'),a=el('a'),nd=el('span','node');
+    a.href='#'+h.id;a.title=names[i];nd.setAttribute('aria-hidden','true');
+    a.appendChild(nd);a.appendChild(el('span','num',pad(i+1)));a.appendChild(el('span','lbl',names[i]));
+    li.appendChild(a);var children=makeSublist(li,false,subGroups[i]);
+    ol.appendChild(li);return {a:a,nd:nd,p:-1,done:false,subs:children};
+  });
+  inn.appendChild(top);inn.appendChild(ol);nav.appendChild(inn);document.body.appendChild(nav);
+  var bar=el('div','rm-bar');bar.setAttribute('aria-hidden','true');
+  var tab=el('button','rm-tab');tab.type='button';tab.setAttribute('aria-haspopup','dialog');tab.setAttribute('aria-expanded','false');
+  var tn=el('span',null,'01');tab.appendChild(tn);
+  var back=el('div','rm-back'),sheet=el('div','rm-sheet');sheet.setAttribute('role','dialog');sheet.setAttribute('aria-label','Sections');
+  var sh=el('div','rm-head'),shp=el('b',null,'0%');sh.appendChild(el('span',null,'Sections'));sh.appendChild(shp);
+  var sol=el('ol');
+  var mitems=hs.map(function(h,i){
+    var li=el('li'),a=el('a');a.href='#'+h.id;a.appendChild(el('span','rm-k',pad(i+1)));a.appendChild(el('span',null,names[i]));
+    li.appendChild(a);var children=makeSublist(li,true,subGroups[i]);
+    sol.appendChild(li);a.addEventListener('click',function(){setSheet(false);});
+    children.forEach(function(child){child.mobile=child.a;child.a.addEventListener('click',function(){setSheet(false);});});
+    return {a:a,subs:children};
+  });
+  items.forEach(function(item,i){item.subs.forEach(function(child,j){child.mobile=mitems[i].subs[j].a;});});
+  sheet.appendChild(sh);sheet.appendChild(sol);
+  [bar,tab,back,sheet].forEach(function(n){document.body.appendChild(n);});
+  var moveT,cur=-2,currentSubItem=null,tick=false,centers=null,tops=[],end=0;
+  function setSheet(o,refocus){
+    document.body.classList.toggle('rm-open',o);tab.setAttribute('aria-expanded',String(o));
+    if(o){
+      var target=currentSubItem?currentSubItem.mobile:mitems[cur>=0?cur:0].a;
+      sheet.scrollTop+=target.getBoundingClientRect().top-sheet.getBoundingClientRect().top-sheet.clientHeight/3;
+      try{target.focus({preventScroll:true});}catch(e){}
+    }else if(refocus){tab.focus();}
+  }
+  tab.addEventListener('click',function(){setSheet(!document.body.classList.contains('rm-open'));});
+  back.addEventListener('click',function(){setSheet(false);});
+  addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('rm-open'))setSheet(false,true);});
+  var open;
+  try{var sv=localStorage.getItem('sg-rail');open=sv?sv==='o':innerWidth>=1100;}catch(e){open=innerWidth>=1100;}
+  function paintToggle(){
+    nav.classList.toggle('is-collapsed',!open);
+    tg.textContent=open?'\u2039':'\u203A';
+    tg.setAttribute('aria-expanded',String(open));
+    tg.setAttribute('aria-label',open?'Collapse section progress':'Expand section progress');
+    centers=null;req();
+  }
+  tg.addEventListener('click',function(){open=!open;try{localStorage.setItem('sg-rail',open?'o':'c');}catch(e){}paintToggle();});
+  function measure(){
+    var y=scrollY;tops=hs.map(function(h){return h.getBoundingClientRect().top+y;});
+    items.forEach(function(item){item.subs.forEach(function(child){child.top=child.heading.getBoundingClientRect().top+y;});});
+    end=document.querySelector('.wrap').getBoundingClientRect().bottom+y;
+  }
+  function measureCenters(){centers=items.map(function(it){return it.a.offsetTop+it.a.offsetHeight/2;});}
+  function update(){
+    tick=false;if(!centers)measureCenters();
+    var y=scrollY+innerHeight*.25,c=-1,max=document.documentElement.scrollHeight-innerHeight;
+    var pv=Math.round(Math.max(0,Math.min(1,max>0?scrollY/max:0))*100);pct.textContent=pv+'%';shp.textContent=pv+'%';
+    items.forEach(function(it,i){
+      var nx=i+1<tops.length?tops[i+1]:end,p=Math.max(0,Math.min(1,(y-tops[i])/Math.max(1,nx-tops[i])));
+      if(y>=tops[i])c=i;p=Math.round(p*100)/100;if(p!==it.p){it.p=p;it.nd.style.setProperty('--p',p);}
+      var d=y>=nx;if(d!==it.done){it.done=d;it.a.classList.toggle('is-done',d);mitems[i].a.classList.toggle('is-done',d);}
+    });
+    if(c<0)c=0;bar.style.setProperty('--w',Math.round(items[c].p*100)+'%');
+    var fillPosition=centers[c]+(c+1<centers.length?(centers[c+1]-centers[c])*items[c].p:0);
+    if(y<tops[0])fillPosition=centers[0]*Math.max(0,Math.min(1,y/Math.max(1,tops[0])));
+    ol.style.setProperty('--fill',fillPosition.toFixed(1)+'px');
+    var sectionChanged=c!==cur;
+    if(sectionChanged){
+      if(cur>=0){items[cur].a.removeAttribute('aria-current');mitems[cur].a.removeAttribute('aria-current');}
+      cur=c;sec.textContent=pad(c+1);tn.textContent=pad(c+1);
+      tab.setAttribute('aria-label','Sections. Now reading '+pad(c+1)+', '+names[c]);
+      items[c].a.setAttribute('aria-current','true');mitems[c].a.setAttribute('aria-current','true');
+    }
+    var activeSub=null;
+    items[c].subs.forEach(function(child,j){
+      var nx=j+1<items[c].subs.length?items[c].subs[j+1].top:(c+1<tops.length?tops[c+1]:end);
+      var done=y>=nx,active=y>=child.top&&y<nx;
+      if(done!==child.done){child.done=done;child.a.classList.toggle('is-done',done);child.mobile.classList.toggle('is-done',done);}
+      if(active)activeSub=child;
+    });
+    if(activeSub!==currentSubItem){
+      if(currentSubItem){currentSubItem.a.removeAttribute('aria-current');currentSubItem.mobile.removeAttribute('aria-current');}
+      currentSubItem=activeSub;
+      if(currentSubItem){
+        currentSubItem.a.setAttribute('aria-current','location');currentSubItem.mobile.setAttribute('aria-current','location');
+        var childRect=currentSubItem.a.getBoundingClientRect(),listRect=ol.getBoundingClientRect();
+        if(childRect.top<listRect.top||childRect.bottom>listRect.bottom)ol.scrollTop+=childRect.top-listRect.top-listRect.height/2;
+      }
+    }
+    if(sectionChanged&&!activeSub){
+      var a=items[c].a,r=a.getBoundingClientRect(),lr=ol.getBoundingClientRect();
+      if(r.top<lr.top||r.bottom>lr.bottom)ol.scrollTop+=r.top-lr.top-lr.height/2;
+    }
+  }
+  function req(){if(!tick){tick=true;requestAnimationFrame(update);}}
+  addEventListener('scroll',function(){document.body.classList.add('rm-moving');clearTimeout(moveT);moveT=setTimeout(function(){document.body.classList.remove('rm-moving');},700);req();},{passive:true});
+  addEventListener('resize',function(){measure();centers=null;req();});
+  addEventListener('load',function(){measure();centers=null;req();});
+  paintToggle();measure();update();
+})();
+</script>
+</body>
+</html>

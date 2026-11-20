@@ -120,6 +120,7 @@
     border: 1px solid var(--line);
     color: var(--ink);
     overflow-x: auto;
+    white-space: nowrap;
   }
   .eq-note {
     font-size: 0.85rem;
@@ -144,6 +145,17 @@
     letter-spacing: 0;
     color: var(--muted);
   }
+  .qa-question, .qa-solution, .qa-final { margin: 0.9rem 0; padding: 0.75rem 1rem; }
+  .qa-question { border-left: 4px solid var(--ink); background: var(--bg); }
+  .qa-solution { border-left: 4px solid var(--line); }
+  .qa-final { border: 2px solid var(--accent); background: var(--accent-soft); }
+  .qa-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+  .qa-final .qa-label { color: var(--accent); }
+  .qa-question > :last-child, .qa-solution > :last-child, .qa-final > :last-child { margin-bottom: 0; }
+  .qa-question > p:first-of-type, .qa-final > p:first-of-type { margin-top: 0; }
+  .qa-final .eq { margin: 0.25rem 0 0; background: transparent; border: 0; padding: 0; text-align: left; }
+  .qa-final-list { margin: 0; padding-left: 1.25rem; }
+  .qa-final-text { margin: 0; font-weight: 600; }
   .example .eq { margin: 0.75rem 0; background: var(--bg); border: 1px solid var(--line); }
   .steps {
     list-style: none;
@@ -191,9 +203,16 @@
   }
   tr:nth-child(even) td { background: var(--surface-alt); }
   .kbd {
+    display: inline-block;
+    max-width: 100%;
     font-family: var(--font-mono);
     font-size: 0.875rem;
     line-height: 1.4;
+    white-space: nowrap;
+    word-break: normal;
+    overflow-wrap: normal;
+    overflow-x: auto;
+    vertical-align: baseline;
     background: var(--surface-hi);
     border: 1px solid var(--line);
     border-radius: 3px;
@@ -313,8 +332,8 @@
     table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; font-size: 0.85rem; }
     th, td { padding: 0.45rem 0.55rem; }
     .theory, .example, .practice, .answer-key, .common-mistakes, .revision-sheet, .references, .exam-q, .steps, .toc, .self-learning { padding: 0.75rem; }
-    .eq { font-size: 1rem; padding: 0.6rem 0.5rem; text-align: left; overflow-wrap: anywhere; }
-    .kbd { word-break: break-word; }
+    .eq { font-size: 1rem; padding: 0.6rem 0.5rem; text-align: left; }
+    /* Keep mathematical tokens intact on narrow screens; long chips scroll horizontally. */
     .nav a { padding: 0.4rem 0.7rem; }
     svg { max-width: 100%; padding: 0.25rem; }
   }
@@ -350,6 +369,108 @@
     :root, :root[data-theme="dark"], :root:not([data-theme="light"]) { color-scheme: light; --ink:#0a0a0a;--muted:#444444;--bg:#ffffff;--line:#cccccc;--rule:#999999;--accent:#1d4ed8;--accent-soft:#eef2ff;--danger:#b00020;--surface:#fafafa;--surface-alt:#f9f9f9;--surface-eq:#f5f5f5;--surface-hi:#f0f0f0; }
     .topbar { display:none; }
   }
+</style>
+<style id="m5-diagrams">
+  .m5-fig { margin: 1.25rem 0; padding: .75rem; border: 1px solid var(--line); background: var(--surface); }
+  .m5-fig svg { width: 100%; max-width: 520px; height: auto; display: block; margin: .35rem auto; padding: 0; border: 0; background: transparent; }
+  .m5-fig figcaption { font-size: .85rem; color: var(--muted); line-height: 1.45; margin-top: .6rem; }
+  @media (max-width: 600px) { .m5-fig { padding: .5rem; } }
+  /* Five core properties: one colour each, chosen to stay clear of the site's blue accent and red danger colour. */
+  :root { --p1:#15803d; --p2:#b45309; --p3:#6d28d9; --p4:#0e7490; --p5:#a21caf; }
+  :root[data-theme="dark"] { --p1:#4ade80; --p2:#fbbf24; --p3:#a78bfa; --p4:#22d3ee; --p5:#e879f9; }
+  .theory.prop-1 { border-left: 5px solid var(--p1); } .theory.prop-1 > p:first-of-type > strong:first-child { color: var(--p1); }
+  .theory.prop-2 { border-left: 5px solid var(--p2); } .theory.prop-2 > p:first-of-type > strong:first-child { color: var(--p2); }
+  .theory.prop-3 { border-left: 5px solid var(--p3); } .theory.prop-3 > p:first-of-type > strong:first-child { color: var(--p3); }
+  .theory.prop-4 { border-left: 5px solid var(--p4); } .theory.prop-4 > p:first-of-type > strong:first-child { color: var(--p4); }
+  .theory.prop-5 { border-left: 5px solid var(--p5); } .theory.prop-5 > p:first-of-type > strong:first-child { color: var(--p5); }
+  @media print { :root, :root[data-theme="dark"] { --p1:#15803d; --p2:#b45309; --p3:#6d28d9; --p4:#0e7490; --p5:#a21caf; } }
+</style>
+<style id="rail-style">
+  /* Section progress. Phone UI by default (top line + edge tab + bottom sheet);
+     margin rail on wide screens with a mouse. Colours come from the theme variables. */
+  .rail { display:none; }
+  .rm-bar { position:fixed; top:0; left:0; height:3px; width:var(--w,0%); background:var(--accent); z-index:30; pointer-events:none; }
+  .rm-tab { position:fixed; left:env(safe-area-inset-left,0px); bottom:calc(14px + env(safe-area-inset-bottom,0px)); z-index:30; display:flex; align-items:center; width:44px; height:44px; padding:0; border:0; background:transparent; font:inherit; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+  .rm-tab span { display:flex; align-items:center; justify-content:center; min-width:26px; height:28px; padding:0 .35rem; font:700 .66rem/1 var(--font-mono); letter-spacing:.04em; font-variant-numeric:tabular-nums; color:var(--ink); background:var(--bg); border:1px solid var(--rule); border-left:0; opacity:.5; transition:opacity .25s; }
+  body.rm-moving .rm-tab span { opacity:.15; }
+  .rm-tab:hover span, .rm-tab:focus-visible span, .rm-tab[aria-expanded="true"] span { opacity:1; }
+  .rm-tab:focus-visible { outline:2px solid var(--ink); outline-offset:-2px; }
+  .rm-back { position:fixed; inset:0; z-index:40; background:rgba(0,0,0,.4); opacity:0; pointer-events:none; transition:opacity .2s; }
+  .rm-sheet { position:fixed; left:0; right:0; bottom:0; z-index:50; max-height:68vh; overflow-y:auto; background:var(--bg); border-top:1px solid var(--ink); padding-bottom:env(safe-area-inset-bottom,0px); transform:translateY(102%); visibility:hidden; transition:transform .22s ease, visibility 0s .22s; }
+  body.rm-open .rm-back { opacity:1; pointer-events:auto; }
+  body.rm-open .rm-sheet { transform:none; visibility:visible; transition-delay:0s; }
+  .rm-head { position:sticky; top:0; z-index:2; display:flex; align-items:center; justify-content:space-between; padding:.7rem 1rem; background:var(--bg); border-bottom:1px solid var(--line); font:600 .65rem/1 var(--font-mono); letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  .rm-head b { color:var(--ink); }
+  .rm-sheet ol { list-style:none; margin:0; padding:.3rem 0 .6rem; }
+  .rm-sheet a { display:grid; grid-template-columns:1.9rem 1fr; align-items:center; min-height:44px; padding:0 1rem; color:var(--muted); text-decoration:none; font-size:.92rem; font-weight:600; border-left:3px solid transparent; }
+  .rm-sheet a .rm-k { font:600 .7rem/1 var(--font-mono); letter-spacing:.04em; }
+  .rm-sheet a.is-done { color:var(--ink); }
+  .rm-sheet a.is-done .rm-k { color:var(--muted); }
+  .rm-sheet a[aria-current="true"] { color:var(--ink); border-left-color:var(--accent); background:var(--accent-soft); font-family:var(--font-serif); font-weight:700; }
+  .rm-sheet a[aria-current="true"] .rm-k { color:var(--accent); }
+  .rm-sheet a:focus-visible { outline:2px solid var(--ink); outline-offset:-2px; }
+
+  .rail { position:fixed; left:14px; top:50%; transform:translateY(-50%); z-index:20; font-family:var(--font-sans); color:var(--muted); }
+  .rail-in { position:relative; padding:.5rem .6rem .6rem .5rem; border:1px solid transparent; background:transparent; transition:background .15s, border-color .15s; }
+  .rail:hover .rail-in, .rail:focus-within .rail-in { background:var(--bg); border-color:var(--line); }
+  .rail-top { display:flex; align-items:flex-end; gap:.5rem; margin:0 0 .7rem; min-height:2.1rem; }
+  .rail-sec { font-family:var(--font-serif); font-size:1.7rem; line-height:.9; color:var(--ink); font-variant-numeric:tabular-nums; letter-spacing:-.02em; }
+  .rail-meta { display:flex; flex-direction:column; gap:.1rem; font:600 .6rem/1.1 var(--font-mono); letter-spacing:.08em; text-transform:uppercase; padding-bottom:.1rem; }
+  .rail-meta b { font-weight:700; color:var(--ink); }
+  .rail-toggle { margin-left:auto; align-self:flex-start; font:inherit; font-size:.8rem; line-height:1; width:1.3rem; height:1.3rem; padding:0; color:var(--muted); background:var(--bg); border:1px solid var(--line); border-radius:0; cursor:pointer; opacity:.55; transition:opacity .15s; }
+  .rail:hover .rail-toggle, .rail-toggle:focus-visible { opacity:1; }
+  .rail-toggle:hover { color:var(--ink); border-color:var(--ink); }
+  .rail-toggle:focus-visible, .rail a:focus-visible { outline:2px solid var(--ink); outline-offset:2px; }
+  .rail-list { position:relative; list-style:none; margin:0; padding:0; max-height:calc(100vh - 11rem); overflow-y:auto; overflow-x:hidden; scrollbar-width:none; }
+  .rail-list::-webkit-scrollbar { display:none; }
+  .rail-list::before { content:""; position:absolute; left:4px; top:0; bottom:0; width:1px; background:var(--rule); opacity:.55; }
+  .rail-fill { position:absolute; left:3.5px; top:0; width:2px; height:var(--fill,0px); background:var(--accent); }
+  .rail a { position:relative; display:grid; grid-template-columns:9px 1.55rem auto; align-items:center; column-gap:.55rem; height:1.45rem; color:inherit; text-decoration:none; }
+  .rail .node { width:7px; height:7px; box-sizing:border-box; border:1px solid var(--rule); background:var(--bg); justify-self:center; }
+  .rail a.is-done .node { background:var(--muted); border-color:var(--muted); }
+  .rail .num { font:600 .62rem/1 var(--font-mono); letter-spacing:.04em; font-variant-numeric:tabular-nums; }
+  .rail .lbl { display:none; font-size:.74rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:14rem; }
+  .rail-sublist { list-style:none; margin:0 0 .3rem 1.65rem; padding:0 0 0 .55rem; border-left:1px solid var(--line); }
+  .rail-sublist a { grid-template-columns:1rem minmax(0,1fr); column-gap:.3rem; height:1.2rem; padding-left:.1rem; }
+  .rail-sublist .sub-lbl { display:block; font-size:.68rem; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .rail-sublist .sub-num { font:600 .62rem/1 var(--font-mono); color:var(--accent); }
+  .rail-sublist a[aria-current="location"] { color:var(--accent); font-weight:700; }
+  .rail.is-collapsed .rail-sublist { display:none; }
+  .rm-sublist { margin:0 0 .35rem 2.65rem !important; padding:.15rem 0 .25rem .65rem !important; border-left:1px solid var(--line); }
+  .rm-sublist a { grid-template-columns:1.1rem minmax(0,1fr); min-height:34px; padding:.25rem .5rem; border-left:0; font-size:.84rem; }
+  .rm-sublist a[aria-current="location"] { color:var(--accent); background:var(--accent-soft); }
+  .rail-list > li > .rail-sublist { display:none; }
+  .rail-list > li > a[aria-current="true"] ~ .rail-sublist { display:block; }
+  .rail.is-collapsed .rail-list > li > .rail-sublist { display:none; }
+  .rm-sheet > ol > li > .rm-sublist { display:none; }
+  .rm-sheet > ol > li > a[aria-current="true"] ~ .rm-sublist { display:block; }
+
+  .rail a:hover { color:var(--ink); }
+  .rail a:hover .node { border-color:var(--ink); }
+  .rail a[aria-current="true"] { color:var(--ink); }
+  .rail a[aria-current="true"] .node { width:9px; height:9px; border-color:var(--accent); background:linear-gradient(to top, var(--accent) calc(var(--p,0) * 100%), var(--bg) 0); box-shadow:0 0 0 3px var(--accent-soft); }
+  .rail a[aria-current="true"] .num { color:var(--accent); }
+  .rail a[aria-current="true"] .lbl { display:block; font-family:var(--font-serif); font-size:.82rem; font-weight:700; max-width:clamp(0px, calc(50vw - 25.5rem), 14rem); }
+  .rail:hover .lbl, .rail:focus-within .lbl, .rail:hover a[aria-current="true"] .lbl, .rail:focus-within a[aria-current="true"] .lbl { display:block; max-width:14rem; }
+  .rail.is-collapsed .rail-in { padding:.5rem .4rem; background:transparent !important; border-color:transparent !important; }
+  .rail.is-collapsed .rail-top { flex-direction:column; align-items:flex-start; gap:.4rem; margin-bottom:.5rem; min-height:0; }
+  .rail.is-collapsed .rail-sec, .rail.is-collapsed .rail-meta, .rail.is-collapsed .num, .rail.is-collapsed .lbl { display:none !important; }
+  .rail.is-collapsed .rail-toggle { margin:0 0 0 -.25rem; }
+  .rail.is-collapsed a { grid-template-columns:9px; height:1.15rem; }
+  .rail.is-collapsed .node { width:5px; height:5px; }
+  .rail.is-collapsed a[aria-current="true"] .node { width:7px; height:7px; box-shadow:0 0 0 2px var(--accent-soft); }
+  .rail.is-collapsed .rail-list { max-height:calc(100vh - 8rem); }
+
+  @media (min-width:900px) and (pointer:fine) {
+    .rm-tab, .rm-back, .rm-sheet { display:none; }
+    .rm-bar { display:block; }
+    .rail { display:block; }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    .rm-sheet, .rm-back, .rm-tab span, .rail-in { transition:none; }
+  }
+  @media print { .rail, .rm-bar, .rm-tab, .rm-back, .rm-sheet { display:none !important; } }
+
 </style>
 </head>
 <body>
@@ -421,34 +542,34 @@
     <p>Example: Addition on real numbers is a binary operation: <span class="kbd">+: R × S → R</span> given by <span class="kbd">(a, b) → a + b</span>.</p>
   </div>
 
-  <h3>The Five Core Properties</h3>
+  <h3 id="m5-core-properties" data-rail-subsection>The Five Core Properties</h3>
 
-  <div class="theory">
+  <div class="theory prop-1">
     <span class="source">Teacher’s framing: Properties of Algebraic System</span>
     <p><strong>1. Closure property:</strong> A binary operation <span class="kbd">*</span> on a set <span class="kbd">S</span> is closed if <span class="kbd">a * b ∈ S</span> for all <span class="kbd">a, b ∈ S</span>. Every result of the operation must stay inside the set.</p>
     <p>Example: Addition is closed on natural numbers because adding two natural numbers always gives a natural number.</p>
     <p>Counter-example: Subtraction is <em>not</em> closed on natural numbers because <span class="kbd">3 − 5 = −2</span>, which is not a natural number.</p>
   </div>
 
-  <div class="theory">
+  <div class="theory prop-2">
     <span class="source">Teacher’s framing: Properties of Algebraic System</span>
     <p><strong>2. Associative property:</strong> A binary operation <span class="kbd">*</span> is associative if <span class="kbd">(a * b) * c = a * (b * c)</span> for all <span class="kbd">a, b, c ∈ S</span>. The grouping of operations does not change the result.</p>
-    <p>Example: Multiplication on integers is associative: <span class="kbd">(−2 × 6) × (−5) = −60</span> and <span class="kbd">−2 × (6 × −5) = −60</span>.</p>
+    <p>Example: Multiplication on integers is associative: <span class="kbd">(−2 × 6) × (−5) = 60</span> and <span class="kbd">−2 × (6 × −5) = 60</span>.</p>
     <p>Counter-example: Subtraction is not associative because <span class="kbd">(5 − 3) − 2 = 0</span> but <span class="kbd">5 − (3 − 2) = 4</span>.</p>
   </div>
 
-  <div class="theory">
+  <div class="theory prop-3">
     <span class="source">Teacher’s framing: Properties of Algebraic System</span>
     <p><strong>3. Commutative property:</strong> A binary operation <span class="kbd">*</span> is commutative if <span class="kbd">a * b = b * a</span> for all <span class="kbd">a, b ∈ S</span>. The order of operands does not matter.</p>
     <p>Example: Addition on natural numbers is commutative because <span class="kbd">5 + 9 = 9 + 5 = 14</span>.</p>
   </div>
 
-  <div class="theory">
+  <div class="theory prop-4">
     <span class="source">Teacher’s framing: Properties of Algebraic System</span>
     <p><strong>4. Identity element:</strong> An element <span class="kbd">e ∈ S</span> is an identity for operation <span class="kbd">*</span> if <span class="kbd">a * e = e * a = a</span> for all <span class="kbd">a ∈ S</span>. The identity element leaves every element unchanged.</p>
   </div>
 
-  <div class="theory">
+  <div class="theory prop-5">
     <span class="source">Teacher’s framing: Properties of Algebraic System</span>
     <p><strong>5. Inverse element:</strong> Let <span class="kbd">(A, *)</span> be an algebraic system with identity <span class="kbd">e</span>. An element <span class="kbd">b</span> is the inverse of <span class="kbd">a</span> if <span class="kbd">a * b = b * a = e</span>.</p>
   </div>
@@ -475,6 +596,16 @@
     <tr><td>Inverse</td><td>a * b = b * a = e</td><td>Multiplication on R*: a × (1/a) = 1</td></tr>
   </table>
 
+  <figure class="m5-fig" id="d1-five-core-properties-fig">
+    <svg id="d1-five-core-properties" viewBox="0 0 420 524" role="img" aria-labelledby="d1-five-core-properties-title d1-five-core-properties-desc"><title id="d1-five-core-properties-title">The five core properties of a binary operation</title><desc id="d1-five-core-properties-desc">Five cards: closure, associativity, commutativity, identity and inverse. Each shows the rule and a worked example that holds. Closure and associativity also show a counterexample using subtraction: 3 minus 5 is not a natural number, and (5 minus 3) minus 2 differs from 5 minus (3 minus 2).</desc><text x="12" y="26" font-size="15" font-weight="700" fill="var(--ink)">Five properties of a binary operation *  on a set S</text><rect x="8" y="42" width="404" height="100" rx="0" fill="var(--bg)" stroke="var(--line)" stroke-width="1.5"/><rect x="8" y="42" width="6" height="100" fill="var(--p1)"/><circle cx="35" cy="65" r="12.5" fill="var(--p1)" fill-opacity="0.16" stroke="var(--p1)" stroke-width="2"/><text x="35" y="70" font-size="14" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><text x="55" y="70" font-size="16" font-weight="700" fill="var(--p1)">Closure</text><text x="55" y="91" font-size="13.5" font-weight="500" fill="var(--muted)">a * b ∈ S for all a, b ∈ S</text><path d="M20.5 110.0L24.2 114.2L31.8 105.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="44" y="114" font-size="13" font-weight="500" fill="var(--ink)">Addition on N: 3 + 5 = 8 ∈ N</text><path d="M21.4 127.4L30.6 136.6M30.6 127.4L21.4 136.6" stroke="var(--danger)" stroke-width="2.6" fill="none" stroke-linecap="round"/><text x="44" y="136" font-size="13" font-weight="500" fill="var(--danger)">Subtraction on N: 3 − 5 = −2 ∉ N</text><rect x="8" y="152" width="404" height="100" rx="0" fill="var(--bg)" stroke="var(--line)" stroke-width="1.5"/><rect x="8" y="152" width="6" height="100" fill="var(--p2)"/><circle cx="35" cy="175" r="12.5" fill="var(--p2)" fill-opacity="0.16" stroke="var(--p2)" stroke-width="2"/><text x="35" y="180" font-size="14" font-weight="700" fill="var(--ink)" text-anchor="middle">2</text><text x="55" y="180" font-size="16" font-weight="700" fill="var(--p2)">Associativity</text><text x="55" y="201" font-size="13.5" font-weight="500" fill="var(--muted)">(a * b) * c = a * (b * c)</text><path d="M20.5 220.0L24.2 224.2L31.8 215.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="44" y="224" font-size="13" font-weight="500" fill="var(--ink)">Multiplication on Z: (2 × 3) × 4 = 24 = 2 × (3 × 4)</text><path d="M21.4 237.4L30.6 246.6M30.6 237.4L21.4 246.6" stroke="var(--danger)" stroke-width="2.6" fill="none" stroke-linecap="round"/><text x="44" y="246" font-size="13" font-weight="500" fill="var(--danger)">Subtraction: (5 − 3) − 2 = 0, but 5 − (3 − 2) = 4</text><rect x="8" y="262" width="404" height="78" rx="0" fill="var(--bg)" stroke="var(--line)" stroke-width="1.5"/><rect x="8" y="262" width="6" height="78" fill="var(--p3)"/><circle cx="35" cy="285" r="12.5" fill="var(--p3)" fill-opacity="0.16" stroke="var(--p3)" stroke-width="2"/><text x="35" y="290" font-size="14" font-weight="700" fill="var(--ink)" text-anchor="middle">3</text><text x="55" y="290" font-size="16" font-weight="700" fill="var(--p3)">Commutativity</text><text x="55" y="311" font-size="13.5" font-weight="500" fill="var(--muted)">a * b = b * a</text><path d="M20.5 330.0L24.2 334.2L31.8 325.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="44" y="334" font-size="13" font-weight="500" fill="var(--ink)">Addition on N: 5 + 9 = 9 + 5 = 14</text><rect x="8" y="350" width="404" height="78" rx="0" fill="var(--bg)" stroke="var(--line)" stroke-width="1.5"/><rect x="8" y="350" width="6" height="78" fill="var(--p4)"/><circle cx="35" cy="373" r="12.5" fill="var(--p4)" fill-opacity="0.16" stroke="var(--p4)" stroke-width="2"/><text x="35" y="378" font-size="14" font-weight="700" fill="var(--ink)" text-anchor="middle">4</text><text x="55" y="378" font-size="16" font-weight="700" fill="var(--p4)">Identity</text><text x="55" y="399" font-size="13.5" font-weight="500" fill="var(--muted)">a * e = e * a = a for all a ∈ S</text><path d="M20.5 418.0L24.2 422.2L31.8 413.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="44" y="422" font-size="13" font-weight="500" fill="var(--ink)">Multiplication on R*: e = 1, since a × 1 = a</text><rect x="8" y="438" width="404" height="78" rx="0" fill="var(--bg)" stroke="var(--line)" stroke-width="1.5"/><rect x="8" y="438" width="6" height="78" fill="var(--p5)"/><circle cx="35" cy="461" r="12.5" fill="var(--p5)" fill-opacity="0.16" stroke="var(--p5)" stroke-width="2"/><text x="35" y="466" font-size="14" font-weight="700" fill="var(--ink)" text-anchor="middle">5</text><text x="55" y="466" font-size="16" font-weight="700" fill="var(--p5)">Inverse</text><text x="55" y="487" font-size="13.5" font-weight="500" fill="var(--muted)">a * b = b * a = e  (b undoes a)</text><path d="M20.5 506.0L24.2 510.2L31.8 501.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="44" y="510" font-size="13" font-weight="500" fill="var(--ink)">Multiplication on R*: a × (1/a) = 1</text></svg>
+    <figcaption>Each property keeps its own colour, matching the five boxes above. Blue ticks mean the property holds and red crosses mean it fails: subtraction on N fails closure and associativity.</figcaption>
+  </figure>
+
+  <figure class="m5-fig" id="d2-algebraic-structure-hierarchy-fig">
+    <svg id="d2-algebraic-structure-hierarchy" viewBox="0 0 420 484" role="img" aria-labelledby="d2-algebraic-structure-hierarchy-title d2-algebraic-structure-hierarchy-desc"><title id="d2-algebraic-structure-hierarchy-title">Algebraic structure hierarchy as nested sets</title><desc id="d2-algebraic-structure-hierarchy-desc">Five nested regions. Every cyclic group is an abelian group, every abelian group is a group, every group is a monoid, and every monoid is a semigroup. Each ring of the diagram adds a requirement: identity for monoids, inverses for groups, commutativity for abelian groups, and a single generator for cyclic groups. Cyclic groups are only the innermost region: Z2 times Z2 is abelian but not cyclic.</desc><rect x="8" y="8" width="404" height="468" rx="10" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="22" y="31" font-size="15.5" font-weight="700" fill="var(--ink)">Semigroup</text><text x="22" y="51" font-size="13" font-weight="500" fill="var(--muted)">closure + associativity</text><text x="22" y="466" font-size="12.5" font-weight="500" fill="var(--muted)">Just a semigroup: (Z, max) has no identity</text><rect x="22" y="70" width="376" height="376" rx="10" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="36" y="93" font-size="15.5" font-weight="700" fill="var(--ink)">Monoid</text><text x="36" y="113" font-size="13" font-weight="500" fill="var(--muted)">+ an identity element e</text><text x="36" y="436" font-size="12.5" font-weight="500" fill="var(--muted)">Just a monoid: strings under + have no inverses</text><rect x="36" y="132" width="348" height="284" rx="10" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="50" y="155" font-size="15.5" font-weight="700" fill="var(--ink)">Group</text><text x="50" y="175" font-size="13" font-weight="500" fill="var(--muted)">+ every element has an inverse</text><text x="50" y="406" font-size="12.5" font-weight="500" fill="var(--muted)">Just a group: invertible matrices, AB ≠ BA</text><rect x="50" y="194" width="320" height="192" rx="10" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="64" y="217" font-size="15.5" font-weight="700" fill="var(--ink)">Abelian group</text><text x="64" y="237" font-size="13" font-weight="500" fill="var(--muted)">+ commutativity: a * b = b * a</text><text x="64" y="376" font-size="12.5" font-weight="500" fill="var(--muted)">Just abelian: Z₂ × Z₂ has no generator</text><rect x="64" y="256" width="292" height="100" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/><text x="78" y="279" font-size="15.5" font-weight="700" fill="var(--accent)">Cyclic group</text><text x="78" y="299" font-size="13" font-weight="500" fill="var(--ink)">+ a single generator g, so G = ⟨g⟩</text><text x="78" y="319" font-size="12.5" font-weight="500" fill="var(--ink)">e.g. (Z₆, +) is generated by 1</text><text x="78" y="339" font-size="12.5" font-weight="500" fill="var(--muted)">Cyclic ⇒ abelian; the converse is false</text></svg>
+    <figcaption>Each region sits inside the one before it. Cyclic groups are a subset of abelian groups: Z₂ × Z₂ is abelian but not cyclic, so this is not a simple straight-line ladder.</figcaption>
+  </figure>
+
   <h2 id="semigroup">Section 2 — Semigroup</h2>
 
   <div class="theory">
@@ -487,22 +618,34 @@
     <p>A semigroup need not have an identity element or inverses.</p>
   </div>
 
-  <div class="example">
-    <div class="example-title">Teacher’s Example: Maximum operation on integers</div>
-    <p>Let <span class="kbd">Z</span> be the set of integers, and define <span class="kbd">n * m = maximum of (n, m)</span>. Show that <span class="kbd">(Z, *)</span> is a semigroup.</p>
-    <ul>
+  <div class="example qa">
+<div class="example-title">Teacher’s Example: Maximum operation on integers</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Let <span class="kbd">Z</span> be the set of integers, and define <span class="kbd">n * m = maximum of (n, m)</span>. Show that <span class="kbd">(Z, *)</span> is a semigroup.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<ul>
       <li><strong>Closure:</strong> <span class="kbd">a * b = maximum of (a, b)</span> is always an integer, so <span class="kbd">a * b ∈ Z</span> for all <span class="kbd">a, b ∈ Z</span>.</li>
       <li><strong>Associativity:</strong> <span class="kbd">(a * b) * c = maximum of {a, b, c} = a * (b * c)</span> for all integers <span class="kbd">a, b, c</span>.</li>
     </ul>
-    <p>Therefore, <span class="kbd">(Z, *)</span> is a semigroup.</p>
-  </div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p>Therefore, <span class="kbd">(Z, *)</span> is a semigroup.</p>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Teacher’s Example: Is (Z, *) a monoid?</div>
-    <p>Is there an identity element <span class="kbd">x</span> such that <span class="kbd">a * x = maximum of (a, x) = a</span> for all <span class="kbd">a ∈ Z</span>?</p>
-    <p>No. There is no integer <span class="kbd">x</span> such that <span class="kbd">maximum of (a, x) = a</span> for all <span class="kbd">a ∈ Z</span>, because we could always choose <span class="kbd">a = x − 1</span>, giving <span class="kbd">maximum of (x − 1, x) = x ≠ x − 1</span>.</p>
-    <p>Therefore, <span class="kbd">(Z, *)</span> is <strong>not a monoid</strong> — it has no identity element.</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Teacher’s Example: Is (Z, *) a monoid?</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Is there an identity element <span class="kbd">x</span> such that <span class="kbd">a * x = maximum of (a, x) = a</span> for all <span class="kbd">a ∈ Z</span>?</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>No. There is no integer <span class="kbd">x</span> such that <span class="kbd">maximum of (a, x) = a</span> for all <span class="kbd">a ∈ Z</span>, because we could always choose <span class="kbd">a = x − 1</span>, giving <span class="kbd">maximum of (x − 1, x) = x ≠ x − 1</span>.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p>Therefore, <span class="kbd">(Z, *)</span> is <strong>not a monoid</strong> — it has no identity element.</p>
+</div>
+</div>
 
   <h2 id="monoid">Section 3 — Monoid</h2>
 
@@ -517,29 +660,46 @@
     <p>A monoid is a semigroup with an identity element. It need not have inverses.</p>
   </div>
 
-  <div class="example">
-    <div class="example-title">Teacher’s Example: Strings under concatenation</div>
-    <p>Let <span class="kbd">S</span> be the set of all strings, and let <span class="kbd">+</span> denote concatenation. Show that <span class="kbd">(S, +)</span> is a monoid.</p>
-    <ul>
+  <div class="example qa">
+<div class="example-title">Teacher’s Example: Strings under concatenation</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Let <span class="kbd">S</span> be the set of all strings, and let <span class="kbd">+</span> denote concatenation. Show that <span class="kbd">(S, +)</span> is a monoid.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<ul>
       <li><strong>Closure:</strong> Concatenation of two strings is again a string, so <span class="kbd">s1 + s2 ∈ S</span>.</li>
       <li><strong>Associativity:</strong> Concatenation is associative: <span class="kbd">(s1 + s2) + s3 = s1 + (s2 + s3)</span>.</li>
       <li><strong>Identity:</strong> The null string <span class="kbd">λ</span> satisfies <span class="kbd">s1 + λ = s1</span> for all strings <span class="kbd">s1</span>.</li>
     </ul>
-    <p>Therefore, <span class="kbd">(S, +)</span> is a monoid.</p>
-    <p>Is it a group? No. The inverse of a non-empty string does not exist under concatenation (you cannot concatenate anything with "abc" to get the null string "").</p>
-  </div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p>Therefore, <span class="kbd">(S, +)</span> is a monoid.</p>
+<p>Is it a group? No. The inverse of a non-empty string does not exist under concatenation (you cannot concatenate anything with "abc" to get the null string "").</p>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Teacher’s Example: Functions from a finite set to itself under composition</div>
-    <p>Let <span class="kbd">S</span> be a finite set, and let <span class="kbd">F(S)</span> be the collection of all functions <span class="kbd">f: S → S</span> under composition <span class="kbd">∘</span>. Show that <span class="kbd">(F(S), ∘)</span> is a monoid.</p>
-    <ul>
+  <figure class="m5-fig" id="d3-semigroup-vs-monoid-fig">
+    <svg id="d3-semigroup-vs-monoid" viewBox="0 0 420 584" role="img" aria-labelledby="d3-semigroup-vs-monoid-title d3-semigroup-vs-monoid-desc"><title id="d3-semigroup-vs-monoid-title">Semigroup versus monoid: (Z, max) and strings under concatenation</title><desc id="d3-semigroup-vs-monoid-desc">Two panels. Panel one: integers under maximum are closed and associative but have no identity, because for any candidate e the value a equals e minus 1 gives max(a, e) equal to e, not a. So it is only a semigroup. Panel two: strings under concatenation are closed, associative and have the empty string as identity, so they form a monoid. The identity is the only difference.</desc><defs><marker id="d3-arrow" markerWidth="8" markerHeight="8" refX="6.5" refY="3" orient="auto"><path d="M0 0L6.5 3L0 6Z" fill="var(--accent)"/></marker></defs><rect x="8" y="8" width="404" height="258" rx="0" fill="var(--bg)" stroke="var(--line)" stroke-width="1.5"/><rect x="8" y="8" width="5" height="258" rx="0" fill="var(--danger)" stroke="none" stroke-width="0"/><text x="24" y="34" font-size="16" font-weight="700" fill="var(--ink)">(Z, max)  —  semigroup</text><text x="24" y="54" font-size="13.5" font-weight="500" fill="var(--muted)">n * m = max(n, m)</text><path d="M24.5 76.0L28.2 80.2L35.8 71.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="46" y="80" font-size="13" font-weight="500" fill="var(--ink)"><tspan font-weight="700">Closure: </tspan>max(a, b) is always an integer</text><path d="M24.5 98.0L28.2 102.2L35.8 93.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="46" y="102" font-size="13" font-weight="500" fill="var(--ink)"><tspan font-weight="700">Associative: </tspan>max(max(a, b), c) = max(a, max(b, c))</text><path d="M25.4 115.4L34.6 124.6M34.6 115.4L25.4 124.6" stroke="var(--danger)" stroke-width="2.6" fill="none" stroke-linecap="round"/><text x="46" y="124" font-size="13" font-weight="500" fill="var(--danger)"><tspan font-weight="700">Identity: </tspan>no integer e works for every a</text><text x="24" y="154" font-size="13" font-weight="600" fill="var(--danger)">Try e = 5 and a = 4:  max(4, 5) = 5, not 4.</text><text x="24" y="172" font-size="12.5" font-weight="500" fill="var(--muted)">Any e fails the same way: take a = e − 1.</text><path d="M40 234L380 234" stroke="var(--rule)" stroke-width="1.5" fill="none"/><path d="M110 229L110 239" stroke="var(--rule)" stroke-width="1.5" fill="none"/><text x="110" y="255" font-size="12.5" font-weight="600" fill="var(--muted)" text-anchor="middle">3</text><path d="M170 229L170 239" stroke="var(--rule)" stroke-width="1.5" fill="none"/><text x="170" y="255" font-size="12.5" font-weight="600" fill="var(--muted)" text-anchor="middle">4</text><path d="M230 229L230 239" stroke="var(--rule)" stroke-width="1.5" fill="none"/><text x="230" y="255" font-size="12.5" font-weight="600" fill="var(--muted)" text-anchor="middle">5</text><path d="M290 229L290 239" stroke="var(--rule)" stroke-width="1.5" fill="none"/><text x="290" y="255" font-size="12.5" font-weight="600" fill="var(--muted)" text-anchor="middle">6</text><circle cx="170" cy="234" r="9" fill="var(--bg)" stroke="var(--danger)" stroke-width="2" stroke-dasharray="3 2"/><circle cx="230" cy="234" r="9" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.4"/><path d="M170 222 Q200 192 230 222" fill="none" stroke="var(--accent)" stroke-width="2" marker-end="url(#d3-arrow)"/><text x="200" y="204" font-size="12.5" font-weight="700" fill="var(--accent)" text-anchor="middle">max picks 5</text><text x="170" y="220" font-size="1" font-weight="500" fill="var(--ink)"></text><text x="396" y="232" font-size="12.5" font-weight="600" fill="var(--danger)" text-anchor="end">a = 4</text><text x="396" y="248" font-size="12.5" font-weight="600" fill="var(--accent)" text-anchor="end">e = 5</text><rect x="8" y="276" width="404" height="210" rx="0" fill="var(--bg)" stroke="var(--line)" stroke-width="1.5"/><rect x="8" y="276" width="5" height="210" rx="0" fill="var(--accent)" stroke="none" stroke-width="0"/><text x="24" y="302" font-size="16" font-weight="700" fill="var(--ink)">Strings under concatenation (+)  —  monoid</text><text x="24" y="322" font-size="13.5" font-weight="500" fill="var(--muted)">S = all strings;  λ = the empty string</text><path d="M24.5 344.0L28.2 348.2L35.8 339.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="46" y="348" font-size="13" font-weight="500" fill="var(--ink)"><tspan font-weight="700">Closure: </tspan>s₁ + s₂ is again a string</text><path d="M24.5 366.0L28.2 370.2L35.8 361.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="46" y="370" font-size="13" font-weight="500" fill="var(--ink)"><tspan font-weight="700">Associative: </tspan>(s₁ + s₂) + s₃ = s₁ + (s₂ + s₃)</text><path d="M24.5 388.0L28.2 392.2L35.8 383.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="46" y="392" font-size="13" font-weight="500" fill="var(--ink)"><tspan font-weight="700">Identity: </tspan>λ leaves every string unchanged</text><rect x="64.0" y="420.0" width="64" height="28" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="96.0" y="438.9" font-size="14" font-weight="700" fill="var(--ink)" text-anchor="middle">abc</text><text x="142" y="439" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">+</text><rect x="156.0" y="420.0" width="40" height="28" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/><text x="176.0" y="438.9" font-size="14" font-weight="700" fill="var(--ink)" text-anchor="middle">λ</text><text x="210" y="439" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">=</text><rect x="224.0" y="420.0" width="64" height="28" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="256" y="438.9" font-size="14" font-weight="700" fill="var(--ink)" text-anchor="middle">abc</text><rect x="64.0" y="456.0" width="40" height="28" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="84.0" y="474.9" font-size="14" font-weight="700" fill="var(--ink)" text-anchor="middle">λ</text><text x="118" y="475" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">+</text><rect x="132.0" y="456.0" width="64" height="28" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/><text x="164.0" y="474.9" font-size="14" font-weight="700" fill="var(--ink)" text-anchor="middle">abc</text><text x="210" y="475" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">=</text><rect x="224.0" y="456.0" width="64" height="28" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="256" y="474.9" font-size="14" font-weight="700" fill="var(--ink)" text-anchor="middle">abc</text><rect x="8" y="496" width="404" height="80" rx="8" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/><text x="24" y="521" font-size="13.5" font-weight="600" fill="var(--ink)">Both pass closure and associativity.</text><text x="24" y="542" font-size="13.5" font-weight="700" fill="var(--accent)">Only strings have an identity (λ),</text><text x="24" y="561" font-size="13.5" font-weight="700" fill="var(--accent)">so only the strings form a monoid.</text></svg>
+    <figcaption>The two structures pass the same first two tests. The identity decides the classification.</figcaption>
+  </figure>
+
+  <div class="example qa">
+<div class="example-title">Teacher’s Example: Functions from a finite set to itself under composition</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Let <span class="kbd">S</span> be a finite set, and let <span class="kbd">F(S)</span> be the collection of all functions <span class="kbd">f: S → S</span> under composition <span class="kbd">∘</span>. Show that <span class="kbd">(F(S), ∘)</span> is a monoid.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<ul>
       <li><strong>Closure:</strong> Composition of two functions on <span class="kbd">S</span> is again a function on <span class="kbd">S</span>, so <span class="kbd">f1 ∘ f2 ∈ F(S)</span>.</li>
       <li><strong>Associativity:</strong> Composition is associative: <span class="kbd">(f1 ∘ f2) ∘ f3 = f1 ∘ (f2 ∘ f3)</span>.</li>
       <li><strong>Identity:</strong> The identity function <span class="kbd">I: S → S</span> satisfies <span class="kbd">f1 ∘ I = f1</span>.</li>
     </ul>
-    <p>Therefore, <span class="kbd">(F(S), ∘)</span> is a monoid.</p>
-    <p>Is it a group? No. The inverse of a non-bijective function does not exist.</p>
-  </div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p>Therefore, <span class="kbd">(F(S), ∘)</span> is a monoid.</p>
+<p>Is it a group? No. The inverse of a non-bijective function does not exist.</p>
+</div>
+</div>
 
   <h2 id="groups">Section 4 — Groups</h2>
 
@@ -555,48 +715,78 @@
     <p>A group is a monoid with inverses. Every element must be able to "undo" itself via the inverse.</p>
   </div>
 
-  <div class="example">
-    <div class="example-title">Teacher’s Example: Non-zero real numbers under multiplication</div>
-    <p>Show that <span class="kbd">R*</span> = set of all non-zero real numbers is a group under multiplication.</p>
-    <ol>
+  <div class="example qa">
+<div class="example-title">Teacher’s Example: Non-zero real numbers under multiplication</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Show that <span class="kbd">R*</span> = set of all non-zero real numbers is a group under multiplication.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<ol>
       <li><strong>Closure:</strong> Product of two non-zero real numbers is a non-zero real number, so <span class="kbd">a · b ∈ R*</span>.</li>
       <li><strong>Associativity:</strong> Multiplication of real numbers is associative: <span class="kbd">(a · b) · c = a · (b · c)</span>.</li>
       <li><strong>Identity:</strong> <span class="kbd">1 ∈ R*</span> and <span class="kbd">a · 1 = a</span> for all <span class="kbd">a ∈ R*</span>.</li>
       <li><strong>Inverse:</strong> For each <span class="kbd">a ∈ R*</span>, we have <span class="kbd">1/a ∈ R*</span> such that <span class="kbd">a · (1/a) = 1</span>.</li>
     </ol>
-    <p>Commutativity also holds (<span class="kbd">a · b = b · a</span>), so <span class="kbd">(R*, ·)</span> is an abelian group.</p>
-  </div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p>Commutativity also holds (<span class="kbd">a · b = b · a</span>), so <span class="kbd">(R*, ·)</span> is an abelian group.</p>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Teacher’s Example: Real numbers under multiplication is NOT a group</div>
-    <p>0 ∈ R. The multiplicative inverse of 0 does not exist (there is no number <span class="kbd">x</span> such that <span class="kbd">0 · x = 1</span>).</p>
-    <p>Therefore, <span class="kbd">(R, ·)</span> is not a group.</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Teacher’s Example: Real numbers under multiplication is NOT a group</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Is the set of real numbers, ℝ, a group under multiplication?</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>0 ∈ R. The multiplicative inverse of 0 does not exist (there is no number <span class="kbd">x</span> such that <span class="kbd">0 · x = 1</span>).</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p>Therefore, <span class="kbd">(R, ·)</span> is not a group.</p>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Teacher’s Example: Non-singular matrices under multiplication</div>
-    <p>Let <span class="kbd">M</span> be the set of all non-singular matrices of order <span class="kbd">n × n</span>. Show that <span class="kbd">(M, ·)</span> is a group under matrix multiplication.</p>
-    <ol>
+  <div class="example qa">
+<div class="example-title">Teacher’s Example: Non-singular matrices under multiplication</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Let <span class="kbd">M</span> be the set of all non-singular matrices of order <span class="kbd">n × n</span>. Show that <span class="kbd">(M, ·)</span> is a group under matrix multiplication.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<ol>
       <li><strong>Closure:</strong> <span class="kbd">|AB| = |A| · |B| ≠ 0</span> since <span class="kbd">A</span> and <span class="kbd">B</span> are non-singular, so <span class="kbd">AB ∈ M</span>.</li>
       <li><strong>Associativity:</strong> Matrix multiplication is associative: <span class="kbd">(AB)C = A(BC)</span>.</li>
       <li><strong>Identity:</strong> <span class="kbd">I_n ∈ M</span> and <span class="kbd">A I_n = A</span> for all <span class="kbd">A ∈ M</span>.</li>
       <li><strong>Inverse:</strong> For each <span class="kbd">A ∈ M</span>, we have <span class="kbd">A⁻¹ ∈ M</span> such that <span class="kbd">A A⁻¹ = I</span>.</li>
     </ol>
-    <p>Matrix multiplication is not commutative, so <span class="kbd">M</span> is a group but not an abelian group.</p>
-  </div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">Matrix multiplication is not commutative, so <span class="kbd">M</span> is a group but not an abelian group.</p>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Teacher’s Example: Positive rational numbers under a * b = ab/2</div>
-    <p>Let <span class="kbd">A</span> be the set of all positive rational numbers. Define <span class="kbd">a * b = (ab)/2</span>. Show that <span class="kbd">(A, *)</span> is an abelian group.</p>
-    <ol>
+  <figure class="m5-fig" id="d4-group-verification-fig">
+    <svg id="d4-group-verification" viewBox="0 0 420 442" role="img" aria-labelledby="d4-group-verification-title d4-group-verification-desc"><title id="d4-group-verification-title">Checking the four group requirements on three examples</title><desc id="d4-group-verification-desc">A grid of the four group requirements (closure, associativity, identity, inverses) against three examples. Non-zero reals under multiplication pass all four and are commutative, so they form an abelian group. All real numbers under multiplication fail the inverse requirement because zero has no inverse, so they are not a group. Non-singular matrices under multiplication pass all four but are not commutative, so they are a group that is not abelian. Commutativity is an extra test for abelian groups, not a group requirement.</desc><text x="175" y="30" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">(R*, ×)</text><text x="175" y="48" font-size="12" font-weight="500" fill="var(--muted)" text-anchor="middle">non-zero</text><text x="175" y="62" font-size="12" font-weight="500" fill="var(--muted)" text-anchor="middle">reals</text><text x="263" y="30" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">(R, ×)</text><text x="263" y="48" font-size="12" font-weight="500" fill="var(--muted)" text-anchor="middle">all real</text><text x="263" y="62" font-size="12" font-weight="500" fill="var(--muted)" text-anchor="middle">numbers</text><text x="351" y="30" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">(M, ·)</text><text x="351" y="48" font-size="12" font-weight="500" fill="var(--muted)" text-anchor="middle">non-singular</text><text x="351" y="62" font-size="12" font-weight="500" fill="var(--muted)" text-anchor="middle">n × n matrices</text><path d="M8 76L412 76" stroke="var(--rule)" stroke-width="1.5" fill="none"/><circle cx="22" cy="99.0" r="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="22" y="103.5" font-size="12.5" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><text x="40" y="104.0" font-size="14" font-weight="700" fill="var(--ink)">Closure</text><path d="M169.5 93.0L173.2 97.2L180.8 88.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="175" y="114" font-size="12" font-weight="500" fill="var(--muted)" text-anchor="middle">ab ≠ 0</text><path d="M257.5 99.0L261.2 103.2L268.8 94.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M345.5 93.0L349.2 97.2L356.8 88.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="351" y="114" font-size="12" font-weight="500" fill="var(--muted)" text-anchor="middle">|AB| ≠ 0</text><path d="M8 122L412 122" stroke="var(--line)" stroke-width="1" fill="none"/><circle cx="22" cy="145.0" r="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="22" y="149.5" font-size="12.5" font-weight="700" fill="var(--ink)" text-anchor="middle">2</text><text x="40" y="150.0" font-size="14" font-weight="700" fill="var(--ink)">Associative</text><path d="M169.5 145.0L173.2 149.2L180.8 140.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M257.5 145.0L261.2 149.2L268.8 140.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M345.5 139.0L349.2 143.2L356.8 134.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="351" y="160" font-size="12" font-weight="500" fill="var(--muted)" text-anchor="middle">(AB)C = A(BC)</text><path d="M8 168L412 168" stroke="var(--line)" stroke-width="1" fill="none"/><circle cx="22" cy="191.0" r="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="22" y="195.5" font-size="12.5" font-weight="700" fill="var(--ink)" text-anchor="middle">3</text><text x="40" y="196.0" font-size="14" font-weight="700" fill="var(--ink)">Identity</text><path d="M169.5 185.0L173.2 189.2L180.8 180.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="175" y="206" font-size="12" font-weight="500" fill="var(--muted)" text-anchor="middle">e = 1</text><path d="M257.5 185.0L261.2 189.2L268.8 180.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="263" y="206" font-size="12" font-weight="500" fill="var(--muted)" text-anchor="middle">e = 1</text><path d="M345.5 185.0L349.2 189.2L356.8 180.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="351" y="206" font-size="12" font-weight="500" fill="var(--muted)" text-anchor="middle">e = Iₙ</text><path d="M8 214L412 214" stroke="var(--line)" stroke-width="1" fill="none"/><circle cx="22" cy="237.0" r="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="22" y="241.5" font-size="12.5" font-weight="700" fill="var(--ink)" text-anchor="middle">4</text><text x="40" y="242.0" font-size="14" font-weight="700" fill="var(--ink)">Inverses</text><path d="M169.5 231.0L173.2 235.2L180.8 226.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="175" y="252" font-size="12" font-weight="500" fill="var(--muted)" text-anchor="middle">1/a</text><rect x="221" y="217" width="84" height="40" rx="6" fill="none" stroke="var(--danger)" stroke-width="2" stroke-dasharray="4 3"/><path d="M258.4 226.4L267.6 235.6M267.6 226.4L258.4 235.6" stroke="var(--danger)" stroke-width="2.6" fill="none" stroke-linecap="round"/><text x="263" y="252" font-size="12" font-weight="500" fill="var(--danger)" text-anchor="middle">0 has none</text><path d="M345.5 231.0L349.2 235.2L356.8 226.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="351" y="252" font-size="12" font-weight="500" fill="var(--muted)" text-anchor="middle">A⁻¹</text><path d="M8 260L412 260" stroke="var(--line)" stroke-width="1" fill="none"/><rect x="8" y="260" width="404" height="40" rx="0" fill="var(--accent-soft)" stroke="none" stroke-width="0"/><text x="18" y="285" font-size="14" font-weight="700" fill="var(--accent)">Is it a group?</text><text x="175" y="286" font-size="15" font-weight="700" fill="var(--accent)" text-anchor="middle">Yes</text><text x="263" y="286" font-size="15" font-weight="700" fill="var(--danger)" text-anchor="middle">No</text><text x="351" y="286" font-size="15" font-weight="700" fill="var(--accent)" text-anchor="middle">Yes</text><path d="M8 300L412 300" stroke="var(--rule)" stroke-width="1.5" fill="none"/><text x="18" y="318" font-size="12.5" font-weight="700" fill="var(--muted)">Extra test, only for an Abelian group</text><path d="M8 326L412 326" stroke="var(--line)" stroke-width="1" fill="none" stroke-dasharray="4 3"/><text x="40" y="360" font-size="14" font-weight="700" fill="var(--ink)">Commutative</text><path d="M169.5 356.0L173.2 360.2L180.8 351.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M257.5 356.0L261.2 360.2L268.8 351.2" stroke="var(--muted)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M346.4 351.4L355.6 360.6M355.6 351.4L346.4 360.6" stroke="var(--danger)" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M8 380L412 380" stroke="var(--line)" stroke-width="1" fill="none"/><text x="18" y="410" font-size="14" font-weight="700" fill="var(--accent)">Verdict</text><text x="175" y="404" font-size="13.5" font-weight="700" fill="var(--accent)" text-anchor="middle">Abelian</text><text x="175" y="421" font-size="13.5" font-weight="700" fill="var(--accent)" text-anchor="middle">group</text><text x="263" y="404" font-size="13.5" font-weight="700" fill="var(--danger)" text-anchor="middle">Not a</text><text x="263" y="421" font-size="13.5" font-weight="700" fill="var(--danger)" text-anchor="middle">group</text><text x="351" y="404" font-size="13.5" font-weight="700" fill="var(--accent)" text-anchor="middle">Group, not</text><text x="351" y="421" font-size="13.5" font-weight="700" fill="var(--accent)" text-anchor="middle">abelian</text></svg>
+    <figcaption>Dashed red marks the failing test. Commutativity is only needed to upgrade a group to an abelian group.</figcaption>
+  </figure>
+
+  <div class="example qa">
+<div class="example-title">Teacher’s Example: Positive rational numbers under a * b = ab/2</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Let <span class="kbd">A</span> be the set of all positive rational numbers. Define <span class="kbd">a * b = (ab)/2</span>. Show that <span class="kbd">(A, *)</span> is an abelian group.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<ol>
       <li><strong>Closure:</strong> Product of two positive rational numbers is a positive rational number, so <span class="kbd">a * b ∈ A</span>.</li>
       <li><strong>Associativity:</strong> <span class="kbd">(a * b) * c = (ab/2) * c = (abc)/4</span> and <span class="kbd">a * (b * c) = a * (bc/2) = (abc)/4</span>.</li>
       <li><strong>Identity:</strong> Let <span class="kbd">e</span> be the identity. Then <span class="kbd">a * e = (ae)/2 = a</span>, so <span class="kbd">e = 2</span>, and <span class="kbd">2 ∈ A</span>.</li>
       <li><strong>Inverse:</strong> For each <span class="kbd">a ∈ A</span>, we need <span class="kbd">a * b = 2</span>. So <span class="kbd">(ab)/2 = 2</span>, giving <span class="kbd">b = 4/a</span>, which is in <span class="kbd">A</span>.</li>
       <li><strong>Commutativity:</strong> <span class="kbd">a * b = (ab)/2 = (ba)/2 = b * a</span>.</li>
     </ol>
-    <p>Therefore, <span class="kbd">(A, *)</span> is an abelian group with identity 2 and inverse 4/a.</p>
-  </div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">Therefore, <span class="kbd">(A, *)</span> is an abelian group with identity 2 and inverse 4/a.</p>
+</div>
+</div>
 
   <div class="theory">
     <span class="source">Teacher’s framing: Uniqueness proofs</span>
@@ -619,17 +809,28 @@
     <p>Any subset of a group <span class="kbd">G</span> is called a <strong>complex</strong> of <span class="kbd">G</span> (not necessarily a subgroup).</p>
   </div>
 
-  <div class="example">
-    <div class="example-title">Subgroup example: Even integers under addition</div>
-    <p>Let <span class="kbd">2Z = {…, −4, −2, 0, 2, 4, …}</span> be the set of even integers under addition.</p>
-    <ul>
+  <div class="example qa">
+<div class="example-title">Subgroup example: Even integers under addition</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Let <span class="kbd">2Z = {…, −4, −2, 0, 2, 4, …}</span> be the set of even integers under addition.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<ul>
       <li><strong>Closure:</strong> Sum of two even integers is even.</li>
       <li><strong>Associativity:</strong> Integer addition is associative.</li>
       <li><strong>Identity:</strong> <span class="kbd">0 ∈ 2Z</span> and <span class="kbd">a + 0 = a</span>.</li>
       <li><strong>Inverse:</strong> For each <span class="kbd">a ∈ 2Z</span>, <span class="kbd">−a ∈ 2Z</span> and <span class="kbd">a + (−a) = 0</span>.</li>
     </ul>
-    <p>Therefore, <span class="kbd">(2Z, +)</span> is a subgroup of <span class="kbd">(Z, +)</span>.</p>
-  </div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">Therefore, <span class="kbd">(2Z, +)</span> is a subgroup of <span class="kbd">(Z, +)</span>.</p>
+</div>
+</div>
+
+  <figure class="m5-fig" id="d5-subgroup-2z-in-z-fig">
+    <svg id="d5-subgroup-2z-in-z" viewBox="0 0 420 414" role="img" aria-labelledby="d5-subgroup-2z-in-z-title d5-subgroup-2z-in-z-desc"><title id="d5-subgroup-2z-in-z-title">The even integers 2Z as a subgroup of the integers Z</title><desc id="d5-subgroup-2z-in-z-desc">The integers Z drawn as a large region. Inside it, a highlighted region holds the even integers 2Z, including the identity 0. The odd integers sit in Z but outside 2Z. Below, the subgroup test: if a and b are in H then a minus b is in H, shown with 4 and minus 2 giving 6. Closure, identity 0 and additive inverses all hold.</desc><rect x="8" y="8" width="404" height="236" rx="10" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="22" y="34" font-size="15.5" font-weight="700" fill="var(--ink)">Z  —  all integers, under +</text><rect x="24" y="48" width="372" height="104" rx="8" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.2"/><text x="38" y="70" font-size="14.5" font-weight="700" fill="var(--accent)">2Z = H  —  the even integers</text><text x="384" y="70" font-size="13" font-weight="700" fill="var(--muted)" text-anchor="end">H ⊂ Z</text><text x="54" y="114" font-size="16" font-weight="700" fill="var(--muted)" text-anchor="middle">…</text><rect x="86.0" y="93.0" width="40" height="30" rx="6" fill="var(--bg)" stroke="var(--accent)" stroke-width="1.5"/><text x="106" y="113.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">−4</text><rect x="138.0" y="93.0" width="40" height="30" rx="6" fill="var(--bg)" stroke="var(--accent)" stroke-width="1.5"/><text x="158" y="113.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">−2</text><rect x="190.0" y="93.0" width="40" height="30" rx="6" fill="var(--bg)" stroke="var(--accent)" stroke-width="2.6"/><text x="210" y="113.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">0</text><text x="210" y="140" font-size="12" font-weight="700" fill="var(--accent)" text-anchor="middle">0 = identity</text><rect x="242.0" y="93.0" width="40" height="30" rx="6" fill="var(--bg)" stroke="var(--accent)" stroke-width="1.5"/><text x="262" y="113.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">2</text><rect x="294.0" y="93.0" width="40" height="30" rx="6" fill="var(--bg)" stroke="var(--accent)" stroke-width="1.5"/><text x="314" y="113.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">4</text><text x="366" y="114" font-size="16" font-weight="700" fill="var(--muted)" text-anchor="middle">…</text><text x="38" y="180" font-size="13" font-weight="600" fill="var(--muted)">odd integers: in Z, but not in H</text><rect x="38.0" y="194.0" width="40" height="28" rx="6" fill="none" stroke="var(--rule)" stroke-width="1.4" stroke-dasharray="4 3"/><text x="58" y="212.9" font-size="14" font-weight="600" fill="var(--muted)" text-anchor="middle">−3</text><rect x="90.0" y="194.0" width="40" height="28" rx="6" fill="none" stroke="var(--rule)" stroke-width="1.4" stroke-dasharray="4 3"/><text x="110" y="212.9" font-size="14" font-weight="600" fill="var(--muted)" text-anchor="middle">−1</text><rect x="142.0" y="194.0" width="40" height="28" rx="6" fill="none" stroke="var(--rule)" stroke-width="1.4" stroke-dasharray="4 3"/><text x="162" y="212.9" font-size="14" font-weight="600" fill="var(--muted)" text-anchor="middle">1</text><rect x="194.0" y="194.0" width="40" height="28" rx="6" fill="none" stroke="var(--rule)" stroke-width="1.4" stroke-dasharray="4 3"/><text x="214" y="212.9" font-size="14" font-weight="600" fill="var(--muted)" text-anchor="middle">3</text><text x="398" y="214" font-size="16" font-weight="700" fill="var(--muted)" text-anchor="end">…</text><rect x="8" y="256" width="404" height="150" rx="8" fill="var(--bg)" stroke="var(--accent)" stroke-width="2"/><text x="22" y="282" font-size="15" font-weight="700" fill="var(--accent)">Subgroup test:   a, b ∈ H  ⇒  a − b ∈ H</text><text x="22" y="306" font-size="13.5" font-weight="500" fill="var(--ink)">Example:  4, −2 ∈ 2Z   ⇒   4 − (−2) = 6 ∈ 2Z</text><path d="M22.5 334.0L26.2 338.2L33.8 329.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="44" y="338" font-size="13" font-weight="500" fill="var(--ink)">Closure: sums and differences of even numbers stay even</text><path d="M22.5 356.0L26.2 360.2L33.8 351.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="44" y="360" font-size="13" font-weight="500" fill="var(--ink)">Identity: 0 ∈ 2Z, and a + 0 = a</text><path d="M22.5 378.0L26.2 382.2L33.8 373.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="44" y="382" font-size="13" font-weight="500" fill="var(--ink)">Inverses: a ∈ 2Z ⇒ −a ∈ 2Z  (e.g. 4 and −4)</text></svg>
+    <figcaption>H = 2Z sits inside G = Z. Every test is on the group G = (Z, +), where the identity is 0 and the inverse of a is −a, so a * b⁻¹ becomes a − b.</figcaption>
+  </figure>
 
   <div class="theory">
     <span class="source">Added for exam use: standard result (not from the teacher’s PPT)</span>
@@ -655,15 +856,31 @@
     <tr><td>Commutativity</td><td>✗ (not required)</td><td>✓ (required)</td></tr>
   </table>
 
-  <div class="example">
-    <div class="example-title">Abelian group example: Non-zero real numbers under multiplication</div>
-    <p>As shown earlier, <span class="kbd">(R*, ·)</span> is abelian because multiplication of real numbers is commutative.</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Abelian group example: Non-zero real numbers under multiplication</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Explain why (ℝ*, ·), the non-zero real numbers under multiplication, is an abelian group.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Multiplication of real numbers is commutative.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">(ℝ*, ·) is an abelian group.</p>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Non-abelian group example: Non-singular matrices under multiplication</div>
-    <p>As shown earlier, <span class="kbd">M</span> (non-singular <span class="kbd">n × n</span> matrices) is a group but not abelian because matrix multiplication is not commutative.</p>
-  </div>
+  <div class="example qa">
+<div class="example-title">Non-abelian group example: Non-singular matrices under multiplication</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Explain why the group of non-singular matrices under multiplication is not abelian.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Matrix multiplication is not commutative.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">The group of non-singular matrices under multiplication is <strong>not abelian</strong>.</p>
+</div>
+</div>
 
   <h2 id="cyclic">Section 7 — Cyclic Groups</h2>
 
@@ -676,10 +893,14 @@
     <p>Finite cyclic groups: If <span class="kbd">g</span> has finite order <span class="kbd">m</span> (smallest positive integer such that <span class="kbd">gᵐ = e</span>), then <span class="kbd">G = {e, g, g², …, gᵐ⁻¹}</span> and <span class="kbd">|G| = m</span>.</p>
   </div>
 
-  <div class="example">
-    <div class="example-title">Example: Z₆ = {0, 1, 2, 3, 4, 5} under addition modulo 6</div>
-    <p>Is Z₆ cyclic? Yes. Consider the element 1:</p>
-    <ul>
+  <div class="example qa">
+<div class="example-title">Example: Z₆ = {0, 1, 2, 3, 4, 5} under addition modulo 6</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Is Z₆ = {0, 1, 2, 3, 4, 5} cyclic?</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Consider the element 1:</p>
+<ul>
       <li>1·1 = 1</li>
       <li>2·1 = 2</li>
       <li>3·1 = 3</li>
@@ -687,13 +908,20 @@
       <li>5·1 = 5</li>
       <li>6·1 = 0 (mod 6)</li>
     </ul>
-    <p>Since multiples of 1 generate all elements of Z₆, 1 is a generator. The element 5 is also a generator (5·1=5, 5·2=4, 5·3=3, 5·4=2, 5·5=1, 5·6=0).</p>
-  </div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">Since multiples of 1 generate all elements of Z₆, 1 is a generator. The element 5 is also a generator (5·1=5, 5·2=4, 5·3=3, 5·4=2, 5·5=1, 5·6=0).</p>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Example: Z₇* = {1, 2, 3, 4, 5, 6} under multiplication modulo 7</div>
-    <p>Is Z₇* cyclic? Yes. Consider powers of 3 mod 7:</p>
-    <ul>
+  <div class="example qa">
+<div class="example-title">Example: Z₇* = {1, 2, 3, 4, 5, 6} under multiplication modulo 7</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Is Z₇* = {1, 2, 3, 4, 5, 6} cyclic?</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Consider powers of 3 modulo 7:</p>
+<ul>
       <li>3¹ = 3</li>
       <li>3² = 9 ≡ 2</li>
       <li>3³ = 27 ≡ 6</li>
@@ -701,9 +929,17 @@
       <li>3⁵ = 243 ≡ 5</li>
       <li>3⁶ = 729 ≡ 1</li>
     </ul>
-    <p>All six elements appear, so 3 is a generator. The element 5 is also a generator.</p>
-    <p>The element 2 is not a generator: 2¹=2, 2²=4, 2³=1, and then it repeats — only {1, 2, 4} are generated.</p>
-  </div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">All six elements appear, so 3 is a generator. The element 5 is also a generator.</p>
+<p>The element 2 is not a generator: 2¹=2, 2²=4, 2³=1, and then it repeats — only {1, 2, 4} are generated.</p>
+</div>
+</div>
+
+  <figure class="m5-fig" id="d6-cyclic-generators-fig">
+    <svg id="d6-cyclic-generators" viewBox="0 0 420 504" role="img" aria-labelledby="d6-cyclic-generators-title d6-cyclic-generators-desc"><title id="d6-cyclic-generators-title">Cyclic groups and generators: Z6 under addition and Z7 star under multiplication</title><desc id="d6-cyclic-generators-desc">Two panels of orbit sequences. In Z6 under addition mod 6, multiples of 1 give 1, 2, 3, 4, 5, 0 and multiples of 5 give 5, 4, 3, 2, 1, 0, so both 1 and 5 generate every element. In the non-zero integers mod 7 under multiplication, powers of 3 give 3, 2, 6, 4, 5, 1 and powers of 5 give 5, 4, 6, 2, 3, 1, so both generate all six elements. Powers of 2 give 2, 4, 1 and then repeat, so 2 only generates the set 1, 2, 4 and is not a generator.</desc><defs><marker id="d6-arrow" markerWidth="8" markerHeight="8" refX="6.5" refY="3" orient="auto"><path d="M0 0L6.5 3L0 6Z" fill="var(--accent)"/></marker></defs><rect x="8" y="8" width="404" height="202" rx="0" fill="var(--bg)" stroke="var(--line)" stroke-width="1.5"/><text x="22" y="34" font-size="15" font-weight="700" fill="var(--ink)">A.  Z₆ under addition mod 6:  k · g</text><text x="22" y="53" font-size="12.5" font-weight="500" fill="var(--muted)">identity = 0.  List k · g for k = 1, 2, …, 6</text><text x="18" y="87" font-size="14.5" font-weight="700" fill="var(--ink)">g = 1</text><text x="18" y="105" font-size="12" font-weight="500" fill="var(--muted)">step +1</text><rect x="100.0" y="75.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="119.0" y="97.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><path d="M139 92L151 92" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="152.0" y="75.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="171.0" y="97.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">2</text><path d="M191 92L203 92" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="204.0" y="75.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="223.0" y="97.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">3</text><path d="M243 92L255 92" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="256.0" y="75.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="275.0" y="97.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">4</text><path d="M295 92L307 92" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="308.0" y="75.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="327.0" y="97.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">5</text><path d="M347 92L359 92" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="360.0" y="75.0" width="38" height="34" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.4"/><text x="379.0" y="97.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">0</text><path d="M103.6 123.0L106.6 126.4L112.6 119.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="124" y="128" font-size="12.5" font-weight="700" fill="var(--accent)">generates all 6 elements</text><text x="18" y="157" font-size="14.5" font-weight="700" fill="var(--ink)">g = 5</text><text x="18" y="175" font-size="12" font-weight="500" fill="var(--muted)">step +5</text><rect x="100.0" y="145.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="119.0" y="167.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">5</text><path d="M139 162L151 162" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="152.0" y="145.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="171.0" y="167.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">4</text><path d="M191 162L203 162" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="204.0" y="145.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="223.0" y="167.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">3</text><path d="M243 162L255 162" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="256.0" y="145.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="275.0" y="167.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">2</text><path d="M295 162L307 162" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="308.0" y="145.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="327.0" y="167.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><path d="M347 162L359 162" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="360.0" y="145.0" width="38" height="34" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.4"/><text x="379.0" y="167.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">0</text><path d="M103.6 193.0L106.6 196.4L112.6 189.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="124" y="198" font-size="12.5" font-weight="700" fill="var(--accent)">also generates all 6 elements</text><rect x="8" y="220" width="404" height="276" rx="0" fill="var(--bg)" stroke="var(--line)" stroke-width="1.5"/><text x="22" y="246" font-size="15" font-weight="700" fill="var(--ink)">B.  Z₇* under multiplication mod 7:  gᵏ</text><text x="22" y="265" font-size="12.5" font-weight="500" fill="var(--muted)">identity = 1.  List gᵏ for k = 1, 2, 3, …</text><text x="18" y="299" font-size="14.5" font-weight="700" fill="var(--ink)">g = 3</text><text x="18" y="317" font-size="12" font-weight="500" fill="var(--muted)">powers of 3</text><rect x="100.0" y="287.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="119.0" y="309.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">3</text><path d="M139 304L151 304" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="152.0" y="287.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="171.0" y="309.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">2</text><path d="M191 304L203 304" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="204.0" y="287.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="223.0" y="309.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">6</text><path d="M243 304L255 304" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="256.0" y="287.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="275.0" y="309.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">4</text><path d="M295 304L307 304" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="308.0" y="287.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="327.0" y="309.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">5</text><path d="M347 304L359 304" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="360.0" y="287.0" width="38" height="34" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.4"/><text x="379.0" y="309.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><path d="M103.6 335.0L106.6 338.4L112.6 331.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="124" y="340" font-size="12.5" font-weight="700" fill="var(--accent)">generates all 6 non-zero elements</text><text x="18" y="369" font-size="14.5" font-weight="700" fill="var(--ink)">g = 5</text><text x="18" y="387" font-size="12" font-weight="500" fill="var(--muted)">powers of 5</text><rect x="100.0" y="357.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="119.0" y="379.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">5</text><path d="M139 374L151 374" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="152.0" y="357.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="171.0" y="379.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">4</text><path d="M191 374L203 374" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="204.0" y="357.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="223.0" y="379.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">6</text><path d="M243 374L255 374" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="256.0" y="357.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="275.0" y="379.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">2</text><path d="M295 374L307 374" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="308.0" y="357.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="327.0" y="379.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">3</text><path d="M347 374L359 374" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="360.0" y="357.0" width="38" height="34" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.4"/><text x="379.0" y="379.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><path d="M103.6 405.0L106.6 408.4L112.6 401.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="124" y="410" font-size="12.5" font-weight="700" fill="var(--accent)">also generates all 6 non-zero elements</text><text x="18" y="439" font-size="14.5" font-weight="700" fill="var(--ink)">g = 2</text><text x="18" y="457" font-size="12" font-weight="500" fill="var(--muted)">powers of 2</text><rect x="100.0" y="427.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="119.0" y="449.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">2</text><path d="M139 444L151 444" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="152.0" y="427.0" width="38" height="34" rx="6" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="171.0" y="449.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">4</text><path d="M191 444L203 444" stroke="var(--accent)" stroke-width="1.8" fill="none" marker-end="url(#d6-arrow)"/><rect x="204.0" y="427.0" width="38" height="34" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.4"/><text x="223.0" y="449.25" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><text x="250" y="449" font-size="12.5" font-weight="700" fill="var(--danger)">then repeats 2, 4, 1 …</text><path d="M104.3 471.3L111.7 478.7M111.7 471.3L104.3 478.7" stroke="var(--danger)" stroke-width="2.6" fill="none" stroke-linecap="round"/><text x="124" y="480" font-size="12.5" font-weight="700" fill="var(--danger)">only {1, 2, 4}: 2 is not a generator</text></svg>
+    <figcaption>The last chip of each row is the identity: the sequence returns to it after the order of g steps. A generator visits every element before it does.</figcaption>
+  </figure>
 
   <div class="theory">
     <span class="source">Cyclic vs non-cyclic groups</span>
@@ -724,10 +960,14 @@
     <div class="eq">a ×ₚ b = r &nbsp;&nbsp; if ab ≥ p, where r is the remainder when ab is divided by p</div>
   </div>
 
-  <div class="example">
-    <div class="example-title">Teacher’s Example: G = {0, 1, 2, 3, 4, 5} under addition modulo 6</div>
-    <p>Composition table for (G, +₆):</p>
-    <table>
+  <div class="example qa">
+<div class="example-title">Teacher’s Example: G = {0, 1, 2, 3, 4, 5} under addition modulo 6</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Show that G = {0, 1, 2, 3, 4, 5} is a group under addition modulo 6.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Composition table for (G, +₆):</p>
+<table>
       <tr><th>+₆</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
       <tr><td>0</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
       <tr><td>1</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>0</td></tr>
@@ -736,20 +976,27 @@
       <tr><td>4</td><td>4</td><td>5</td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
       <tr><td>5</td><td>5</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
     </table>
-    <ol>
+<ol>
       <li><strong>Closure:</strong> All entries are elements of G, so G is closed under +₆.</li>
       <li><strong>Associativity:</strong> Addition modulo 6 is associative. Example: (2 +₆ 3) +₆ 4 = 5 +₆ 4 = 3 and 2 +₆ (3 +₆ 4) = 2 +₆ 1 = 3.</li>
       <li><strong>Identity:</strong> The first row coincides with the header row, so 0 is the identity element.</li>
       <li><strong>Inverse:</strong> From the table, inverses are: 0→0, 1→5, 2→4, 3→3, 4→2, 5→1.</li>
       <li><strong>Commutativity:</strong> Rows and columns are identical, so +₆ is commutative.</li>
     </ol>
-    <p>Therefore, (G, +₆) is an abelian group.</p>
-  </div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">Therefore, (G, +₆) is an abelian group.</p>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Teacher’s Example: G = {1, 2, 3, 4, 5, 6} under multiplication modulo 7</div>
-    <p>Composition table for (G, ×₇):</p>
-    <table>
+  <div class="example qa">
+<div class="example-title">Teacher’s Example: G = {1, 2, 3, 4, 5, 6} under multiplication modulo 7</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Show that G = {1, 2, 3, 4, 5, 6} is a group under multiplication modulo 7.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Composition table for (G, ×₇):</p>
+<table>
       <tr><th>×₇</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr>
       <tr><td>1</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
       <tr><td>2</td><td>2</td><td>4</td><td>6</td><td>1</td><td>3</td><td>5</td></tr>
@@ -758,16 +1005,19 @@
       <tr><td>5</td><td>5</td><td>3</td><td>1</td><td>6</td><td>4</td><td>2</td></tr>
       <tr><td>6</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td></tr>
     </table>
-    <ol>
+<ol>
       <li><strong>Closure:</strong> All entries are in G, so G is closed under ×₇.</li>
       <li><strong>Associativity:</strong> Multiplication modulo 7 is associative. Example: (2 ×₇ 3) ×₇ 4 = 6 ×₇ 4 = 3 and 2 ×₇ (3 ×₇ 4) = 2 ×₇ 5 = 3.</li>
       <li><strong>Identity:</strong> 1 is the identity element.</li>
       <li><strong>Inverse:</strong> From the table: 1→1, 2→4, 3→5, 4→2, 5→3, 6→6.</li>
       <li><strong>Commutativity:</strong> Rows and columns are identical, so ×₇ is commutative.</li>
     </ol>
-    <p>Therefore, (G, ×₇) is an abelian group.</p>
-    <p class="warning">Correction: The teacher’s PPT lists inverses as “1, 4, 5, 2, 5, 6” which is incorrect. The correct inverses are: 1→1, 2→4, 3→5, 4→2, 5→3, 6→6. Note that 5 ×₇ 3 = 15 ≡ 1 (mod 7), so the inverse of 5 is 3, not 5. And 5 ×₇ 5 = 25 ≡ 4 (mod 7), not 1.</p>
-  </div>
+<p>Therefore, (G, ×₇) is an abelian group.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="warning">Correction: The teacher’s PPT lists inverses as “1, 4, 5, 2, 5, 6” which is incorrect. The correct inverses are: 1→1, 2→4, 3→5, 4→2, 5→3, 6→6. Note that 5 ×₇ 3 = 15 ≡ 1 (mod 7), so the inverse of 5 is 3, not 5. And 5 ×₇ 5 = 25 ≡ 4 (mod 7), not 1.</p>
+</div>
+</div>
 
   <h2 id="rings">Section 9 — Rings</h2>
 
@@ -794,7 +1044,12 @@
     </ul>
   </div>
 
-  <h3>Related Concepts</h3>
+  <figure class="m5-fig" id="d7-anatomy-of-a-ring-fig">
+    <svg id="d7-anatomy-of-a-ring" viewBox="0 0 420 466" role="img" aria-labelledby="d7-anatomy-of-a-ring-title d7-anatomy-of-a-ring-desc"><title id="d7-anatomy-of-a-ring-title">Anatomy of a ring: addition, multiplication and the distributive link</title><desc id="d7-anatomy-of-a-ring-desc">Three blocks. Top: addition on R forms an abelian group, which is closed, associative, has identity zero, additive inverses and is commutative. Bottom: multiplication on R is closed and associative, so a semigroup. A multiplicative identity and commutativity are not required. Between them, the distributive laws a times (b plus c) equals a b plus a c and (a plus b) times c equals a c plus b c connect the two operations.</desc><text x="14" y="26" font-size="15.5" font-weight="700" fill="var(--ink)">A ring (R, +, ·) has two operations</text><rect x="8" y="40" width="404" height="116" rx="8" fill="var(--bg)" stroke="var(--accent)" stroke-width="2"/><text x="22" y="66" font-size="14.5" font-weight="700" fill="var(--accent)">Addition  (R, +)   is an abelian group</text><rect x="22" y="80" width="63" height="28" rx="14.0" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="53.5" y="98.6" font-size="13" font-weight="600" fill="var(--ink)" text-anchor="middle">closed</text><rect x="93" y="80" width="97" height="28" rx="14.0" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="141.5" y="98.6" font-size="13" font-weight="600" fill="var(--ink)" text-anchor="middle">associative</text><rect x="198" y="80" width="90" height="28" rx="14.0" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="243.0" y="98.6" font-size="13" font-weight="600" fill="var(--ink)" text-anchor="middle">identity 0</text><rect x="22" y="116" width="90" height="28" rx="14.0" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="67.0" y="134.6" font-size="13" font-weight="600" fill="var(--ink)" text-anchor="middle">inverse −a</text><rect x="120" y="116" width="199" height="28" rx="14.0" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="219.5" y="134.6" font-size="13" font-weight="600" fill="var(--ink)" text-anchor="middle">commutative: a + b = b + a</text><path d="M52 156L52 272" stroke="var(--accent)" stroke-width="2.2" fill="none"/><path d="M52 157 l-5 9 h10z M52 271 l-5 -9 h10z" fill="var(--accent)"/><path d="M52 214L82 214" stroke="var(--accent)" stroke-width="2" fill="none" stroke-dasharray="4 3"/><rect x="82" y="168" width="326" height="92" rx="8" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/><text x="96" y="192" font-size="14" font-weight="700" fill="var(--accent)">Distributive laws  (the only link)</text><text x="96" y="218" font-size="14" font-weight="600" fill="var(--ink)">a · (b + c) = a · b + a · c</text><text x="96" y="242" font-size="14" font-weight="600" fill="var(--ink)">(a + b) · c = a · c + b · c</text><rect x="8" y="272" width="404" height="186" rx="8" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.8"/><text x="22" y="298" font-size="14.5" font-weight="700" fill="var(--ink)">Multiplication  (R, ·)   is a semigroup</text><rect x="22" y="312" width="63" height="28" rx="14.0" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="53.5" y="330.6" font-size="13" font-weight="600" fill="var(--ink)" text-anchor="middle">closed</text><rect x="93" y="312" width="97" height="28" rx="14.0" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="141.5" y="330.6" font-size="13" font-weight="600" fill="var(--ink)" text-anchor="middle">associative</text><path d="M22 360L398 360" stroke="var(--line)" stroke-width="1" fill="none" stroke-dasharray="4 3"/><text x="22" y="382" font-size="13" font-weight="700" fill="var(--muted)">Not required by the ring definition:</text><rect x="22" y="396" width="178" height="28" rx="14.0" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="4 3"/><text x="111.0" y="414.6" font-size="13" font-weight="600" fill="var(--muted)" text-anchor="middle">multiplicative identity</text><rect x="208" y="396" width="110" height="28" rx="14.0" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="4 3"/><text x="263.0" y="414.6" font-size="13" font-weight="600" fill="var(--muted)" text-anchor="middle">commutative ·</text><text x="22" y="442" font-size="12.5" font-weight="500" fill="var(--muted)">Each may hold or fail: it is extra structure, not a ring axiom.</text></svg>
+    <figcaption>Addition is a full abelian group. Multiplication only needs to be associative. Distributivity connects the two.</figcaption>
+  </figure>
+
+  <h3 id="m5-ring-related" data-rail-subsection>Related Concepts</h3>
 
   <div class="theory">
     <span class="source">Teacher’s framing: Commutative rings</span>
@@ -832,10 +1087,19 @@
     <tr><td>Field</td><td>Two (+, ·)</td><td>Commutative ring + every non-zero element has multiplicative inverse</td></tr>
   </table>
 
-  <div class="example">
-    <div class="example-title">Teacher’s Example A: A = {0, 2, 4, 6, 8} under addition and multiplication modulo 10</div>
-    <p>Addition table (+₁₀):</p>
-    <table>
+  <figure class="m5-fig" id="d8-ring-classification-fig">
+    <svg id="d8-ring-classification" viewBox="0 0 420 460" role="img" aria-labelledby="d8-ring-classification-title d8-ring-classification-desc"><title id="d8-ring-classification-title">Ring classification as nested sets</title><desc id="d8-ring-classification-desc">Four nested regions. Every field is an integral domain, every integral domain is a commutative ring, and every commutative ring is a ring. Each level adds a requirement: commutative multiplication, then no zero divisors, then a multiplicative identity with an inverse for every non-zero element. Examples: Z is an integral domain but not a field; Z4, Z6, Z12 and B modulo 12 are commutative rings with zero divisors; A modulo 10 is a finite field with unity 6.</desc><rect x="8" y="8" width="404" height="444" rx="10" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="22" y="31" font-size="15.5" font-weight="700" fill="var(--ink)">Ring</text><text x="22" y="51" font-size="13" font-weight="500" fill="var(--muted)">(R, +) abelian group · (R, ·) associative · distributive</text><text x="22" y="426" font-size="12.5" font-weight="500" fill="var(--muted)">Just a ring: multiplication may be non-commutative</text><text x="22" y="442" font-size="12.5" font-weight="500" fill="var(--muted)">and need not have an identity</text><rect x="22" y="70" width="376" height="336" rx="10" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="36" y="93" font-size="15.5" font-weight="700" fill="var(--ink)">Commutative ring</text><text x="36" y="113" font-size="13" font-weight="500" fill="var(--muted)">+ commutative multiplication: a · b = b · a</text><text x="36" y="380" font-size="12.5" font-weight="500" fill="var(--muted)">Just commutative: Z₄ (2·2 = 0), Z₆ (2·3 = 0), Z₁₂ (3·4 = 0),</text><text x="36" y="396" font-size="12.5" font-weight="500" fill="var(--muted)">B mod 12 (6·6 = 0) all have zero divisors</text><rect x="36" y="132" width="348" height="228" rx="10" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="50" y="155" font-size="15.5" font-weight="700" fill="var(--ink)">Integral domain</text><text x="50" y="175" font-size="13" font-weight="500" fill="var(--muted)">+ no zero divisors: a · b = 0 ⇒ a = 0 or b = 0</text><text x="50" y="334" font-size="12.5" font-weight="500" fill="var(--muted)">Just an integral domain: Z</text><text x="50" y="350" font-size="12.5" font-weight="500" fill="var(--muted)">(2 has no inverse in Z, so Z is not a field)</text><rect x="50" y="194" width="320" height="120" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/><text x="64" y="217" font-size="15.5" font-weight="700" fill="var(--accent)">Field</text><text x="64" y="237" font-size="13" font-weight="500" fill="var(--ink)">+ a multiplicative identity, and</text><text x="64" y="253" font-size="13" font-weight="500" fill="var(--ink)">  an inverse for every non-zero element</text><text x="64" y="273" font-size="12.5" font-weight="500" fill="var(--ink)">A = {0, 2, 4, 6, 8} mod 10: unity 6,</text><text x="64" y="293" font-size="12.5" font-weight="500" fill="var(--ink)">2 · 8 = 6 and 4 · 4 = 6, a finite field</text></svg>
+    <figcaption>Each ring of the diagram adds one condition. A field needs a multiplicative identity and an inverse for every non-zero element.</figcaption>
+  </figure>
+
+  <div class="example qa">
+<div class="example-title">Teacher’s Example A: A = {0, 2, 4, 6, 8} under addition and multiplication modulo 10</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Determine whether the algebraic system with A = {0, 2, 4, 6, 8}, under addition and multiplication modulo 10, is a ring.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Addition table (+₁₀):</p>
+<table>
       <tr><th>+₁₀</th><th>0</th><th>2</th><th>4</th><th>6</th><th>8</th></tr>
       <tr><td>0</td><td>0</td><td>2</td><td>4</td><td>6</td><td>8</td></tr>
       <tr><td>2</td><td>2</td><td>4</td><td>6</td><td>8</td><td>0</td></tr>
@@ -843,8 +1107,8 @@
       <tr><td>6</td><td>6</td><td>8</td><td>0</td><td>2</td><td>4</td></tr>
       <tr><td>8</td><td>8</td><td>0</td><td>2</td><td>4</td><td>6</td></tr>
     </table>
-    <p>Multiplication table (·₁₀):</p>
-    <table>
+<p>Multiplication table (·₁₀):</p>
+<table>
       <tr><th>·₁₀</th><th>0</th><th>2</th><th>4</th><th>6</th><th>8</th></tr>
       <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
       <tr><td>2</td><td>0</td><td>4</td><td>8</td><td>2</td><td>6</td></tr>
@@ -852,7 +1116,7 @@
       <tr><td>6</td><td>0</td><td>2</td><td>4</td><td>6</td><td>8</td></tr>
       <tr><td>8</td><td>0</td><td>6</td><td>2</td><td>8</td><td>4</td></tr>
     </table>
-    <ol>
+<ol>
       <li><strong>Condition 1 — (A, +₁₀) is an abelian group:</strong>
         <ul>
           <li><strong>Closure:</strong> All entries are in A.</li>
@@ -870,29 +1134,36 @@
       </li>
       <li><strong>Condition 3 — Distributive laws:</strong> Holds (inherited from integers).</li>
     </ol>
-    <p><strong>Verdict:</strong> (A, +₁₀, ·₁₀) is a ring.</p>
-    <p><strong>Additional observations:</strong> The multiplication table is symmetric, so it is a commutative ring. Element 6 is the multiplicative unity (6 ·₁₀ x = x for all x ∈ A). Checking for zero divisors: no pair of non-zero elements multiplies to 0, so there are no zero divisors. Since it is a finite commutative ring with unity and no zero divisors, A is actually an integral domain (and being finite, also a field).</p>
-  </div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text"><strong>Verdict:</strong> (A, +₁₀, ·₁₀) is a ring.</p>
+<p><strong>Additional observations:</strong> The multiplication table is symmetric, so it is a commutative ring. Element 6 is the multiplicative unity (6 ·₁₀ x = x for all x ∈ A). Checking for zero divisors: no pair of non-zero elements multiplies to 0, so there are no zero divisors. Since it is a finite commutative ring with unity and no zero divisors, A is actually an integral domain (and being finite, also a field).</p>
+</div>
+</div>
 
-  <div class="example">
-    <div class="example-title">Teacher’s Example B: B = {0, 3, 6, 9} under addition and multiplication modulo 12</div>
-    <p>Addition table (+₁₂):</p>
-    <table>
+  <div class="example qa">
+<div class="example-title">Teacher’s Example B: B = {0, 3, 6, 9} under addition and multiplication modulo 12</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Consider B = {0, 3, 6, 9} with addition and multiplication modulo 12. Determine whether (B, +₁₂, ·₁₂) is a ring.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Addition table (+₁₂):</p>
+<table>
       <tr><th>+₁₂</th><th>0</th><th>3</th><th>6</th><th>9</th></tr>
       <tr><td>0</td><td>0</td><td>3</td><td>6</td><td>9</td></tr>
       <tr><td>3</td><td>3</td><td>6</td><td>9</td><td>0</td></tr>
       <tr><td>6</td><td>6</td><td>9</td><td>0</td><td>3</td></tr>
       <tr><td>9</td><td>9</td><td>0</td><td>3</td><td>6</td></tr>
     </table>
-    <p>Multiplication table (·₁₂):</p>
-    <table>
+<p>Multiplication table (·₁₂):</p>
+<table>
       <tr><th>·₁₂</th><th>0</th><th>3</th><th>6</th><th>9</th></tr>
       <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
       <tr><td>3</td><td>0</td><td>9</td><td>6</td><td>3</td></tr>
       <tr><td>6</td><td>0</td><td>6</td><td>0</td><td>6</td></tr>
       <tr><td>9</td><td>0</td><td>3</td><td>6</td><td>9</td></tr>
     </table>
-    <ol>
+<ol>
       <li><strong>Condition 1 — (B, +₁₂) is an abelian group:</strong>
         <ul>
           <li><strong>Closure:</strong> All entries are in B.</li>
@@ -910,9 +1181,12 @@
       </li>
       <li><strong>Condition 3 — Distributive laws:</strong> Holds (inherited from integers).</li>
     </ol>
-    <p><strong>Verdict:</strong> (B, +₁₂, ·₁₂) is a ring.</p>
-    <p><strong>Additional observations:</strong> Commutative ring. Multiplicative unity is 9 (9 ·₁₂ x = x for all x ∈ B). Zero divisors exist: 6 ·₁₂ 6 = 36 ≡ 0 (mod 12) but 6 ≠ 0. Since it has zero divisors, it is NOT an integral domain and NOT a field.</p>
-  </div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text"><strong>Verdict:</strong> (B, +₁₂, ·₁₂) is a ring.</p>
+<p><strong>Additional observations:</strong> Commutative ring. Multiplicative unity is 9 (9 ·₁₂ x = x for all x ∈ B). Zero divisors exist: 6 ·₁₂ 6 = 36 ≡ 0 (mod 12) but 6 ≠ 0. Since it has zero divisors, it is NOT an integral domain and NOT a field.</p>
+</div>
+</div>
 
   <h2 id="self-learning">Section 10 — Self-Learning: Error Correcting Codes</h2>
 
@@ -924,24 +1198,31 @@
     <p>Why it matters: Error correcting codes enable reliable digital communication despite noise in transmission channels.</p>
   </div>
 
+  <figure class="m5-fig" id="d9-parity-error-detection-fig">
+    <svg id="d9-parity-error-detection" viewBox="0 0 420 588" role="img" aria-labelledby="d9-parity-error-detection-title d9-parity-error-detection-desc"><title id="d9-parity-error-detection-title">Error detection with an even-parity bit</title><desc id="d9-parity-error-detection-desc">Five steps. A seven-bit message 1011011 has five ones. An even-parity bit equal to 1 is appended so the total number of ones is six. The eight bits are transmitted over a noisy channel and the fourth bit flips from 1 to 0. The receiver counts five ones, an odd number, so the parity check fails and an error is detected. The receiver cannot tell which bit flipped, so parity detects but cannot correct a single-bit error. Hamming codes use several parity bits so the flipped bit can be located and corrected.</desc><defs><marker id="d9-arrow" markerWidth="8" markerHeight="8" refX="6.5" refY="3" orient="auto"><path d="M0 0L6.5 3L0 6Z" fill="var(--accent)"/></marker></defs><circle cx="24" cy="22" r="12" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="24" y="26.5" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><text x="46" y="27" font-size="14.5" font-weight="700" fill="var(--ink)">Binary message (7 bits)</text><rect x="56" y="40" width="34" height="34" rx="5" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="73.0" y="63" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><rect x="94" y="40" width="34" height="34" rx="5" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="111.0" y="63" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">0</text><rect x="132" y="40" width="34" height="34" rx="5" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="149.0" y="63" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><rect x="170" y="40" width="34" height="34" rx="5" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="187.0" y="63" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><rect x="208" y="40" width="34" height="34" rx="5" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="225.0" y="63" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">0</text><rect x="246" y="40" width="34" height="34" rx="5" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="263.0" y="63" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><rect x="284" y="40" width="34" height="34" rx="5" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="301.0" y="63" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><text x="56" y="92" font-size="12.5" font-weight="500" fill="var(--muted)">five 1s: an odd number</text><circle cx="24" cy="118" r="12" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="24" y="122.5" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle">2</text><text x="46" y="123" font-size="14.5" font-weight="700" fill="var(--ink)">Add an even-parity bit</text><rect x="56" y="136" width="34" height="34" rx="5" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="73.0" y="159" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><rect x="94" y="136" width="34" height="34" rx="5" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="111.0" y="159" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">0</text><rect x="132" y="136" width="34" height="34" rx="5" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="149.0" y="159" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><rect x="170" y="136" width="34" height="34" rx="5" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="187.0" y="159" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><rect x="208" y="136" width="34" height="34" rx="5" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="225.0" y="159" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">0</text><rect x="246" y="136" width="34" height="34" rx="5" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="263.0" y="159" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><rect x="284" y="136" width="34" height="34" rx="5" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="301.0" y="159" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><rect x="330" y="136" width="34" height="34" rx="5" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.4"/><text x="347.0" y="159" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><text x="56" y="188" font-size="12.5" font-weight="500" fill="var(--accent)">parity bit = 1, so the total is six 1s: even</text><circle cx="24" cy="214" r="12" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="24" y="218.5" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle">3</text><text x="46" y="219" font-size="14.5" font-weight="700" fill="var(--ink)">Transmit over a noisy channel</text><path d="M210 230L210 254" stroke="var(--accent)" stroke-width="2.2" fill="none" marker-end="url(#d9-arrow)"/><text x="224" y="247" font-size="12.5" font-weight="600" fill="var(--danger)">one bit may flip on the way</text><circle cx="24" cy="270" r="12" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="24" y="274.5" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle">4</text><text x="46" y="275" font-size="14.5" font-weight="700" fill="var(--ink)">Received</text><rect x="56" y="288" width="34" height="34" rx="5" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="73.0" y="311" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><rect x="94" y="288" width="34" height="34" rx="5" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="111.0" y="311" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">0</text><rect x="132" y="288" width="34" height="34" rx="5" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="149.0" y="311" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><rect x="170" y="288" width="34" height="34" rx="5" fill="var(--bg)" stroke="var(--danger)" stroke-width="2.4"/><text x="187.0" y="311" font-size="16" font-weight="700" fill="var(--danger)" text-anchor="middle">0</text><rect x="208" y="288" width="34" height="34" rx="5" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="225.0" y="311" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">0</text><rect x="246" y="288" width="34" height="34" rx="5" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="263.0" y="311" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><rect x="284" y="288" width="34" height="34" rx="5" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5"/><text x="301.0" y="311" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><rect x="330" y="288" width="34" height="34" rx="5" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.4"/><text x="347.0" y="311" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">1</text><text x="187" y="336" font-size="12" font-weight="700" fill="var(--danger)" text-anchor="middle">was 1</text><path d="M56 350 v6 h316 v-6" fill="none" stroke="var(--muted)" stroke-width="1.5"/><text x="214" y="370" font-size="12.5" font-weight="500" fill="var(--muted)" text-anchor="middle">which bit flipped? the receiver cannot tell</text><circle cx="24" cy="394" r="12" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="24" y="398.5" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle">5</text><text x="46" y="399" font-size="14.5" font-weight="700" fill="var(--ink)">Receiver checks the parity</text><text x="46" y="422" font-size="13" font-weight="500" fill="var(--ink)">Received has five 1s: odd, so the parity check fails.</text><rect x="8" y="436" width="404" height="68" rx="8" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/><path d="M22.5 460.0L26.2 464.2L33.8 455.2" stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="44" y="464" font-size="13.5" font-weight="700" fill="var(--accent)">Detects:  a single flipped bit</text><path d="M23.4 479.4L32.6 488.6M32.6 479.4L23.4 488.6" stroke="var(--danger)" stroke-width="2.6" fill="none" stroke-linecap="round"/><text x="44" y="488" font-size="13.5" font-weight="700" fill="var(--danger)">Cannot:  say which bit, so it cannot correct it</text><rect x="8" y="514" width="404" height="66" rx="8" fill="var(--bg)" stroke="var(--rule)" stroke-width="1.5" stroke-dasharray="5 4"/><text x="22" y="538" font-size="13.5" font-weight="700" fill="var(--ink)">Hamming codes: use several parity bits.</text><text x="22" y="558" font-size="12.5" font-weight="500" fill="var(--muted)">The pattern of failed checks points to the bad bit,</text><text x="22" y="574" font-size="12.5" font-weight="500" fill="var(--muted)">so a single error can be corrected, not just detected.</text></svg>
+    <figcaption>Parity can detect a single flipped bit but not locate it. If two bits flip, the parity is even again and the error goes unnoticed.</figcaption>
+  </figure>
+
   <h2 id="previous-exams">Previous End-Semester Questions</h2>
   <div class="practice">
     <h3>Previous Examination Questions</h3>
-    <div class="exam-q">
-      <div class="exam-q-title">Winter 2025 — Q4(a): Multiplication Modulo 7 — QR-based Token System (8 marks)</div>
-      <div class="exam-source">Source: NEP DSGT Winter 2025 — Q4(a)</div>
-      <p>The transformation is T(a) = (a × k) mod 7, where a ∈ {1, 2, 3, 4, 5, 6}.</p>
-      <ol>
+    <div class="exam-q qa">
+<div class="exam-q-title">Winter 2025 — Q4(a): Multiplication Modulo 7 — QR-based Token System (8 marks)</div>
+<div class="exam-source">Source: NEP DSGT Winter 2025 — Q4(a)</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>The transformation is T(a) = (a × k) mod 7, where a ∈ {1, 2, 3, 4, 5, 6}.</p>
+<ol>
         <li><strong>Construct the multiplication table modulo 7.</strong></li>
         <li><strong>Find the inverses of 2, 3 and 5.</strong></li>
         <li><strong>Determine whether the set forms a group.</strong></li>
         <li><strong>Discuss reversibility, forgery prevention and predictable validation.</strong></li>
       </ol>
-      <p><strong>Solution:</strong></p>
-      <ol>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<ol>
         <li>Multiplication table modulo 7:</li>
       </ol>
-      <table>
+<table>
         <tr><th>×₇</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr>
         <tr><td>1</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
         <tr><td>2</td><td>2</td><td>4</td><td>6</td><td>1</td><td>3</td><td>5</td></tr>
@@ -950,26 +1231,32 @@
         <tr><td>5</td><td>5</td><td>3</td><td>1</td><td>6</td><td>4</td><td>2</td></tr>
         <tr><td>6</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td></tr>
       </table>
-      <ol>
+<ol>
         <li>Inverses: 2⁻¹=4, 3⁻¹=5, 5⁻¹=3 (since 2×₇4=1, 3×₇5=1, 5×₇3=1).</li>
         <li><strong>Group:</strong> Closed (all entries in {1..6}), associative (inherited from integers), identity = 1, inverses exist for all elements, commutative. Therefore {1..6} under ×₇ is an abelian group.</li>
         <li><strong>Discussion:</strong> The transformation T(a) = (a × k) mod 7 is invertible when k ∈ {1..6} because every non-zero element mod 7 has a multiplicative inverse. This means the transformation can be reversed: T⁻¹(b) = (b × k⁻¹) mod 7. This provides predictability (anyone with k can validate) but does not by itself guarantee cryptographic security or prevent forgery — forgery resistance requires additional cryptographic properties beyond simple modular multiplication.</li>
       </ol>
-    </div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">The non-zero residues {1, 2, 3, 4, 5, 6} under multiplication modulo 7 form an abelian group. The required inverses are 2⁻¹ = 4, 3⁻¹ = 5 and 5⁻¹ = 3. The transformation is reversible when k is non-zero modulo 7, but simple modular multiplication alone does not guarantee cryptographic security or prevent forgery.</p>
+</div>
+</div>
 
-    <div class="exam-q">
-      <div class="exam-q-title">Winter 2025 — Q6(a): Ring Modulo 6 (8 marks)</div>
-      <div class="exam-source">Source: NEP DSGT Winter 2025 — Q6(a)</div>
-      <p>Consider Z₆ with addition and multiplication modulo 6.</p>
-      <ol>
+    <div class="exam-q qa">
+<div class="exam-q-title">Winter 2025 — Q6(a): Ring Modulo 6 (8 marks)</div>
+<div class="exam-source">Source: NEP DSGT Winter 2025 — Q6(a)</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Consider Z₆ with addition and multiplication modulo 6.</p>
+<ol>
         <li>Check whether addition forms an Abelian group.</li>
         <li>Check closure and associativity.</li>
         <li>Verify distributivity.</li>
         <li>Conclude whether Z₆ forms a ring.</li>
       </ol>
-      <p><strong>Solution:</strong></p>
-      <p><strong>Multiplication table (·₆):</strong></p>
-      <table>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p><strong>Multiplication table (·₆):</strong></p>
+<table>
         <tr><th>·₆</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
         <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
         <tr><td>1</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
@@ -978,88 +1265,104 @@
         <tr><td>4</td><td>0</td><td>4</td><td>2</td><td>0</td><td>4</td><td>2</td></tr>
         <tr><td>5</td><td>0</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td></tr>
       </table>
-      <ol>
+<ol>
         <li><strong>Addition modulo 6 forms an abelian group:</strong> The +₆ table (Section 8) shows closure, associativity, identity = 0, inverses 0→0, 1→5, 2→4, 3→3, 4→2, 5→1, and commutativity.</li>
         <li><strong>Multiplication modulo 6 closure and associativity:</strong> All products of elements in Z₆ remain in Z₆ (closure). Multiplication modulo 6 is associative (inherited from integers).</li>
         <li><strong>Distributivity:</strong> Multiplication distributes over addition modulo 6 (inherited from integers).</li>
         <li><strong>Conclusion:</strong> Z₆ forms a ring under addition and multiplication modulo 6. It is commutative (the ·₆ table is symmetric) and has multiplicative identity 1. It has zero divisors (2·₆3 = 0 and 3·₆4 = 0), so it is NOT an integral domain, and it is not a field (2 has no inverse: no 1 in row 2).</li>
       </ol>
-    </div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">Z₆ forms a commutative ring with multiplicative identity 1. It has zero divisors, so it is not an integral domain and is not a field.</p>
+</div>
+</div>
 
-    <div class="exam-q">
-      <div class="exam-q-title">Summer 2026 — Q4(a): Multiplicative Group Modulo 7 (8 marks)</div>
-      <div class="exam-source">Source: NEP DSGT Summer 2026 — Q4(a)</div>
-      <p>Consider G = {1, 2, 3, 4, 5, 6} under multiplication modulo 7.</p>
-      <ol>
+    <div class="exam-q qa">
+<div class="exam-q-title">Summer 2026 — Q4(a): Multiplicative Group Modulo 7 (8 marks)</div>
+<div class="exam-source">Source: NEP DSGT Summer 2026 — Q4(a)</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Consider G = {1, 2, 3, 4, 5, 6} under multiplication modulo 7.</p>
+<ol>
         <li>Construct the multiplication table.</li>
         <li>Find the inverses of 2, 3, 5 and 6.</li>
         <li>Determine whether G is cyclic.</li>
         <li>Identify at least one generator and justify.</li>
       </ol>
-      <p><strong>Solution:</strong></p>
-      <ol>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<ol>
         <li>Multiplication table modulo 7 (shown above).</li>
         <li>Inverses: 2⁻¹=4, 3⁻¹=5, 5⁻¹=3, 6⁻¹=6.</li>
         <li><strong>Cyclic:</strong> Yes. Powers of 3 mod 7 generate all elements: 3¹=3, 3²=2, 3³=6, 3⁴=4, 3⁵=5, 3⁶=1. So 3 is a generator. Similarly, 5 is a generator.</li>
         <li>3 and 5 are generators of the group.</li>
       </ol>
-    </div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">G is cyclic under multiplication modulo 7. The generators identified are 3 and 5.</p>
+</div>
+</div>
 
-    <div class="exam-q">
-      <div class="exam-q-title">Summer 2026 — Q6(a): Ring Modulo 4 (8 marks)</div>
-      <div class="exam-source">Source: NEP DSGT Summer 2026 — Q6(a)</div>
-      <p>Consider Z₄ = {0, 1, 2, 3} under addition and multiplication modulo 4.</p>
-      <ol>
+    <div class="exam-q qa">
+<div class="exam-q-title">Summer 2026 — Q6(a): Ring Modulo 4 (8 marks)</div>
+<div class="exam-source">Source: NEP DSGT Summer 2026 — Q6(a)</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Consider Z₄ = {0, 1, 2, 3} under addition and multiplication modulo 4.</p>
+<ol>
         <li>Construct both operation tables.</li>
         <li>Verify the ring properties.</li>
         <li>Explain additive identity, additive inverses, multiplicative associativity and distributivity.</li>
         <li>Conclude whether Z₄ forms a ring.</li>
       </ol>
-      <p><strong>Solution:</strong></p>
-      <p><strong>Addition table (+₄):</strong></p>
-      <table>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p><strong>Addition table (+₄):</strong></p>
+<table>
         <tr><th>+₄</th><th>0</th><th>1</th><th>2</th><th>3</th></tr>
         <tr><td>0</td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
         <tr><td>1</td><td>1</td><td>2</td><td>3</td><td>0</td></tr>
         <tr><td>2</td><td>2</td><td>3</td><td>0</td><td>1</td></tr>
         <tr><td>3</td><td>3</td><td>0</td><td>1</td><td>2</td></tr>
       </table>
-      <p><strong>Multiplication table (·₄):</strong></p>
-      <table>
+<p><strong>Multiplication table (·₄):</strong></p>
+<table>
         <tr><th>·₄</th><th>0</th><th>1</th><th>2</th><th>3</th></tr>
         <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
         <tr><td>1</td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
         <tr><td>2</td><td>0</td><td>2</td><td>0</td><td>2</td></tr>
         <tr><td>3</td><td>0</td><td>3</td><td>2</td><td>1</td></tr>
       </table>
-      <ol>
+<ol>
         <li><strong>(Z₄, +₄) is an abelian group:</strong> Closed, associative, identity = 0, inverses = 0→0, 1→3, 2→2, 3→1, commutative.</li>
         <li><strong>(Z₄, ·₄) is a semigroup:</strong> Closed, associative.</li>
         <li><strong>Distributive:</strong> Holds (inherited from integers).</li>
         <li><strong>Conclusion:</strong> Z₄ forms a ring under addition and multiplication modulo 4. It is commutative, has multiplicative identity 1, but has zero divisors (2·₄2=0), so it is NOT an integral domain.</li>
       </ol>
-    </div>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p class="qa-final-text">Z₄ forms a commutative ring with multiplicative identity 1. It has a zero divisor because 2 ·₄ 2 = 0, so it is not an integral domain.</p>
+</div>
+</div>
   </div>
 
   <h2 id="answer-key">Answer Key</h2>
   <div class="answer-key">
     <h3>Answers</h3>
 
-    <h4>Binary Operations and Properties</h4>
+    <h4 id="m5-answer-binary" data-rail-subsection>Binary Operations and Properties</h4>
     <ol>
       <li>Addition on N: For any a, b ∈ N, a + b ∈ N. Subtraction on N: Not closed because 3 − 5 = −2 ∉ N.</li>
       <li>No. Division by zero is undefined.</li>
       <li>Closure: a * b ∈ S for all a, b ∈ S. Example: addition on N. Associativity: (a * b) * c = a * (b * c). Example: multiplication on Z. Commutativity: a * b = b * a. Example: addition on N. Identity: a * e = e * a = a. Example: multiplication on R*, identity = 1. Inverse: a * b = b * a = e. Example: multiplication on R*, inverse of a is 1/a.</li>
     </ol>
 
-    <h4>Semigroup and Monoid</h4>
+    <h4 id="m5-answer-semigroup" data-rail-subsection>Semigroup and Monoid</h4>
     <ol>
       <li>Semigroup: Closed (max of two integers is integer), associative. Not monoid: No identity element.</li>
       <li>Monoid: Closed (concatenation of strings is string), associative, identity = null string. Not group: Non-empty strings have no inverse.</li>
       <li>Monoid: Closed (composition of functions is function), associative, identity = identity function. Not necessarily group: Non-bijective functions have no inverse.</li>
     </ol>
 
-    <h4>Groups</h4>
+    <h4 id="m5-answer-groups" data-rail-subsection>Groups</h4>
     <ol>
       <li>Abelian group: Closed, associative, identity = 1, inverse = 1/a, commutative.</li>
       <li>Not a group: 0 ∈ R has no multiplicative inverse.</li>
@@ -1069,27 +1372,27 @@
       <li>Inverse unique: If b and c are both inverses of a, then a*b = a*c = e, so b = c by cancellation.</li>
     </ol>
 
-    <h4>Subgroups and Abelian Groups</h4>
+    <h4 id="m5-answer-subgroups" data-rail-subsection>Subgroups and Abelian Groups</h4>
     <ol>
       <li>Subgroup: Even integers under addition: closed, associative, identity = 0, inverse = −a. All elements of 2Z are in Z, so 2Z is a subgroup of Z.</li>
       <li>Abelian: Non-zero real numbers under multiplication. Non-abelian: Non-singular matrices under multiplication.</li>
       <li>Difference: An abelian group additionally requires commutativity (a * b = b * a).</li>
     </ol>
 
-    <h4>Cyclic Groups</h4>
+    <h4 id="m5-answer-cyclic" data-rail-subsection>Cyclic Groups</h4>
     <ol>
       <li>Cyclic: Multiples of 1 mod 6 generate all elements {0,1,2,3,4,5}. Generators are 1 and 5.</li>
       <li>Cyclic: Powers of 3 mod 7 generate all elements {1,2,3,4,5,6}. Generators are 3 and 5.</li>
       <li>No. Example: Z₂ × Z₂ is abelian but not cyclic.</li>
     </ol>
 
-    <h4>Modular Arithmetic</h4>
+    <h4 id="m5-answer-modular" data-rail-subsection>Modular Arithmetic</h4>
     <ol>
       <li>Group: Addition mod 4 on {0,1,2,3}: closed, associative, identity = 0, inverses = 0→0, 1→3, 2→2, 3→1, commutative. Abelian group.</li>
       <li>Inverses in Z₇*: 1→1, 2→4, 3→5, 4→2, 5→3, 6→6.</li>
     </ol>
 
-    <h4>Rings</h4>
+    <h4 id="m5-answer-rings" data-rail-subsection>Rings</h4>
     <ol>
       <li>Ring: (A,+₁₀) abelian group, (A,·₁₀) semigroup, distributive laws hold.</li>
       <li>Ring: (B,+₁₂) abelian group, (B,·₁₂) semigroup, distributive laws hold.</li>
@@ -1203,6 +1506,141 @@
   function paint(){var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
   b.addEventListener('click',function(){var n=dark()?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('sg-theme',n);}catch(e){}paint();});
   paint();
+})();
+</script>
+<script>
+(function(){
+  var hs=[].slice.call(document.querySelectorAll('.wrap h2[id]'));
+  var subHeads=[].slice.call(document.querySelectorAll('.wrap [data-rail-subsection][id]'));
+  if(!hs.length)return;
+  function pad(n){return (n<10?'0':'')+n;}
+  function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
+  var names=hs.map(function(h){return h.textContent.trim();});
+  var subGroups=hs.map(function(){return [];});
+  var sectionIndex=-1;
+  Array.prototype.forEach.call(document.querySelectorAll('.wrap h2[id], .wrap [data-rail-subsection][id]'),function(h){
+    if(h.tagName==='H2'){sectionIndex=hs.indexOf(h);}
+    else if(sectionIndex>=0)subGroups[sectionIndex].push(h);
+  });
+  function makeSublist(parentLi,mobile,headings){
+    if(!headings.length)return [];
+    var list=el('ol',mobile?'rm-sublist':'rail-sublist');
+    var children=headings.map(function(h,i){
+      var li=el('li'),a=el('a',mobile?'rm-sub-link':'rail-sub-link');
+      var label=h.getAttribute('data-rail-label')||h.textContent.trim();
+      a.href='#'+h.id;a.title=label;
+      a.appendChild(el('span',mobile?'rm-k':'sub-num',String.fromCharCode(65+i)));
+      a.appendChild(el('span',mobile?'rm-sub-label':'sub-lbl',label));
+      li.appendChild(a);list.appendChild(li);
+      return {a:a,heading:h,done:false,top:0,mobile:null};
+    });
+    parentLi.appendChild(list);return children;
+  }
+  var nav=el('nav','rail');nav.setAttribute('aria-label','Section progress');
+  var inn=el('div','rail-in'),top=el('div','rail-top'),sec=el('span','rail-sec','01'),meta=el('span','rail-meta');
+  var pct=el('b',null,'0%');meta.appendChild(el('span',null,'of '+pad(hs.length)));meta.appendChild(pct);
+  var tg=el('button','rail-toggle');tg.type='button';tg.setAttribute('aria-controls','railList');
+  top.appendChild(sec);top.appendChild(meta);top.appendChild(tg);
+  var ol=el('ol','rail-list');ol.id='railList';
+  var fill=el('span','rail-fill');fill.setAttribute('aria-hidden','true');ol.appendChild(fill);
+  var items=hs.map(function(h,i){
+    var li=el('li'),a=el('a'),nd=el('span','node');
+    a.href='#'+h.id;a.title=names[i];nd.setAttribute('aria-hidden','true');
+    a.appendChild(nd);a.appendChild(el('span','num',pad(i+1)));a.appendChild(el('span','lbl',names[i]));
+    li.appendChild(a);var children=makeSublist(li,false,subGroups[i]);
+    ol.appendChild(li);return {a:a,nd:nd,p:-1,done:false,subs:children};
+  });
+  inn.appendChild(top);inn.appendChild(ol);nav.appendChild(inn);document.body.appendChild(nav);
+  var bar=el('div','rm-bar');bar.setAttribute('aria-hidden','true');
+  var tab=el('button','rm-tab');tab.type='button';tab.setAttribute('aria-haspopup','dialog');tab.setAttribute('aria-expanded','false');
+  var tn=el('span',null,'01');tab.appendChild(tn);
+  var back=el('div','rm-back'),sheet=el('div','rm-sheet');sheet.setAttribute('role','dialog');sheet.setAttribute('aria-label','Sections');
+  var sh=el('div','rm-head'),shp=el('b',null,'0%');sh.appendChild(el('span',null,'Sections'));sh.appendChild(shp);
+  var sol=el('ol');
+  var mitems=hs.map(function(h,i){
+    var li=el('li'),a=el('a');a.href='#'+h.id;a.appendChild(el('span','rm-k',pad(i+1)));a.appendChild(el('span',null,names[i]));
+    li.appendChild(a);var children=makeSublist(li,true,subGroups[i]);
+    sol.appendChild(li);a.addEventListener('click',function(){setSheet(false);});
+    children.forEach(function(child){child.mobile=child.a;child.a.addEventListener('click',function(){setSheet(false);});});
+    return {a:a,subs:children};
+  });
+  items.forEach(function(item,i){item.subs.forEach(function(child,j){child.mobile=mitems[i].subs[j].a;});});
+  sheet.appendChild(sh);sheet.appendChild(sol);
+  [bar,tab,back,sheet].forEach(function(n){document.body.appendChild(n);});
+  var moveT,cur=-2,currentSubItem=null,tick=false,centers=null,tops=[],end=0;
+  function setSheet(o,refocus){
+    document.body.classList.toggle('rm-open',o);tab.setAttribute('aria-expanded',String(o));
+    if(o){
+      var target=currentSubItem?currentSubItem.mobile:mitems[cur>=0?cur:0].a;
+      sheet.scrollTop+=target.getBoundingClientRect().top-sheet.getBoundingClientRect().top-sheet.clientHeight/3;
+      try{target.focus({preventScroll:true});}catch(e){}
+    }else if(refocus){tab.focus();}
+  }
+  tab.addEventListener('click',function(){setSheet(!document.body.classList.contains('rm-open'));});
+  back.addEventListener('click',function(){setSheet(false);});
+  addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('rm-open'))setSheet(false,true);});
+  var open;
+  try{var sv=localStorage.getItem('sg-rail');open=sv?sv==='o':innerWidth>=1100;}catch(e){open=innerWidth>=1100;}
+  function paintToggle(){
+    nav.classList.toggle('is-collapsed',!open);
+    tg.textContent=open?'\u2039':'\u203A';
+    tg.setAttribute('aria-expanded',String(open));
+    tg.setAttribute('aria-label',open?'Collapse section progress':'Expand section progress');
+    centers=null;req();
+  }
+  tg.addEventListener('click',function(){open=!open;try{localStorage.setItem('sg-rail',open?'o':'c');}catch(e){}paintToggle();});
+  function measure(){
+    var y=scrollY;tops=hs.map(function(h){return h.getBoundingClientRect().top+y;});
+    items.forEach(function(item){item.subs.forEach(function(child){child.top=child.heading.getBoundingClientRect().top+y;});});
+    end=document.querySelector('.wrap').getBoundingClientRect().bottom+y;
+  }
+  function measureCenters(){centers=items.map(function(it){return it.a.offsetTop+it.a.offsetHeight/2;});}
+  function update(){
+    tick=false;if(!centers)measureCenters();
+    var y=scrollY+innerHeight*.25,c=-1,max=document.documentElement.scrollHeight-innerHeight;
+    var pv=Math.round(Math.max(0,Math.min(1,max>0?scrollY/max:0))*100);pct.textContent=pv+'%';shp.textContent=pv+'%';
+    items.forEach(function(it,i){
+      var nx=i+1<tops.length?tops[i+1]:end,p=Math.max(0,Math.min(1,(y-tops[i])/Math.max(1,nx-tops[i])));
+      if(y>=tops[i])c=i;p=Math.round(p*100)/100;if(p!==it.p){it.p=p;it.nd.style.setProperty('--p',p);}
+      var d=y>=nx;if(d!==it.done){it.done=d;it.a.classList.toggle('is-done',d);mitems[i].a.classList.toggle('is-done',d);}
+    });
+    if(c<0)c=0;bar.style.setProperty('--w',Math.round(items[c].p*100)+'%');
+    var fillPosition=centers[c]+(c+1<centers.length?(centers[c+1]-centers[c])*items[c].p:0);
+    if(y<tops[0])fillPosition=centers[0]*Math.max(0,Math.min(1,y/Math.max(1,tops[0])));
+    ol.style.setProperty('--fill',fillPosition.toFixed(1)+'px');
+    var sectionChanged=c!==cur;
+    if(sectionChanged){
+      if(cur>=0){items[cur].a.removeAttribute('aria-current');mitems[cur].a.removeAttribute('aria-current');}
+      cur=c;sec.textContent=pad(c+1);tn.textContent=pad(c+1);
+      tab.setAttribute('aria-label','Sections. Now reading '+pad(c+1)+', '+names[c]);
+      items[c].a.setAttribute('aria-current','true');mitems[c].a.setAttribute('aria-current','true');
+    }
+    var activeSub=null;
+    items[c].subs.forEach(function(child,j){
+      var nx=j+1<items[c].subs.length?items[c].subs[j+1].top:(c+1<tops.length?tops[c+1]:end);
+      var done=y>=nx,active=y>=child.top&&y<nx;
+      if(done!==child.done){child.done=done;child.a.classList.toggle('is-done',done);child.mobile.classList.toggle('is-done',done);}
+      if(active)activeSub=child;
+    });
+    if(activeSub!==currentSubItem){
+      if(currentSubItem){currentSubItem.a.removeAttribute('aria-current');currentSubItem.mobile.removeAttribute('aria-current');}
+      currentSubItem=activeSub;
+      if(currentSubItem){
+        currentSubItem.a.setAttribute('aria-current','location');currentSubItem.mobile.setAttribute('aria-current','location');
+        var childRect=currentSubItem.a.getBoundingClientRect(),listRect=ol.getBoundingClientRect();
+        if(childRect.top<listRect.top||childRect.bottom>listRect.bottom)ol.scrollTop+=childRect.top-listRect.top-listRect.height/2;
+      }
+    }
+    if(sectionChanged&&!activeSub){
+      var a=items[c].a,r=a.getBoundingClientRect(),lr=ol.getBoundingClientRect();
+      if(r.top<lr.top||r.bottom>lr.bottom)ol.scrollTop+=r.top-lr.top-lr.height/2;
+    }
+  }
+  function req(){if(!tick){tick=true;requestAnimationFrame(update);}}
+  addEventListener('scroll',function(){document.body.classList.add('rm-moving');clearTimeout(moveT);moveT=setTimeout(function(){document.body.classList.remove('rm-moving');},700);req();},{passive:true});
+  addEventListener('resize',function(){measure();centers=null;req();});
+  addEventListener('load',function(){measure();centers=null;req();});
+  paintToggle();measure();update();
 })();
 </script>
 </body>

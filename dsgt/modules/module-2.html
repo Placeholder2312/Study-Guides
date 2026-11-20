@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSGT Module 2 — Mathematical Relations (Exam Essentials)</title>
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --muted: #444444;
+    --bg: #ffffff;
+    --line: #cccccc;
+    --rule: #999999;
+    --accent: #1d4ed8;
+    --space: 1.5rem;
+    --radius: 0;
+    --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+    --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-mono: "Courier New", Courier, monospace;
+  }
+  * { box-sizing: border-box; }
+  sub, sup { font-size: 0.75em; line-height: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    font-size: 17px;
+    font-weight: 500;
+    text-wrap: pretty;
+  }
+  .wrap {
+    max-width: 62ch;
+    margin: 0 auto;
+    padding: 2.5rem 1rem 4rem;
+  }
+  header {
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+  }
+  h1 {
+    font-family: var(--font-serif);
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0;
+  }
+  .meta {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    font-weight: 500;
+    color: var(--muted);
+    margin-top: 1rem;
+  }
+  h2 {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 3rem 0 1rem;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.4rem;
+  }
+  h2 > a { text-decoration: none; color: inherit; }
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 2rem 0 0.5rem;
+  }
+  h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 1.5rem 0 0.5rem;
+  }
+  p {
+    margin: 0 0 1rem;
+    line-height: 1.6;
+  }
+  .wrap > div { line-height: 1.6; }
+  ul, ol, blockquote, pre, figure { line-height: 1.6; }
+  td { line-height: 1.5; }
+  strong, em, span, b, i { line-height: 1.6; }
+  .theory {
+    border-left: 3px solid var(--ink);
+    padding: 1rem 1.25rem;
+    margin: 1.75rem 0;
+    font-size: 0.98rem;
+  }
+  .theory p:first-child { margin-top: 0; }
+  .theory p:last-child { margin-bottom: 0; }
+  .source {
+    display: block;
+    font-size: 0.78rem;
+    line-height: 1.4;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+  }
+  .eq {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 1.25rem 0;
+    padding: 0.75rem 1rem;
+    background: var(--surface-eq);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    overflow-x: auto;
+  }
+  .eq-note {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--muted);
+    text-align: center;
+    margin-top: -0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .example {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+    font-size: 0.95rem;
+    background: var(--surface);
+  }
+  .example-title {
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0;
+    color: var(--muted);
+  }
+  .example .eq { margin: 0.75rem 0; background: var(--bg); border: 1px solid var(--line); }
+  .qa-question, .qa-solution, .qa-final { margin: 0.9rem 0; padding: 0.75rem 1rem; }
+  .qa-question { border-left: 4px solid var(--ink); background: var(--bg); }
+  .qa-solution { border-left: 4px solid var(--line); }
+  .qa-final { border: 2px solid var(--accent); background: var(--accent-soft); }
+  .qa-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+  .qa-final .qa-label { color: var(--accent); }
+  .qa-question > :last-child, .qa-solution > :last-child, .qa-final > :last-child { margin-bottom: 0; }
+  .qa-question > p:first-of-type, .qa-final > p:first-of-type { margin-top: 0; }
+  .qa-final .eq { margin: 0.25rem 0 0; background: transparent; border: 0; padding: 0; text-align: left; }
+  .qa-final-list { margin: 0; padding-left: 1.25rem; }
+  .qa-final-text { margin: 0; font-weight: 600; }
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    padding: 1rem 1.25rem;
+  }
+  .steps li {
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+  .steps li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.1rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    background: var(--ink);
+    border-radius: 50%;
+  }
+  .steps li:last-child { margin-bottom: 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.75rem 0;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 0.625rem 0.875rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--surface-hi);
+    font-weight: 700;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+  }
+  tr:nth-child(even) td { background: var(--surface-alt); }
+  .kbd {
+    display: inline-block;
+    max-width: 100%;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    white-space: nowrap;
+    word-break: normal;
+    overflow-wrap: normal;
+    overflow-x: auto;
+    vertical-align: baseline;
+    background: var(--surface-hi);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 0.1rem 0.4rem;
+  }
+  .toc {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 2rem 0;
+    background: var(--surface);
+  }
+  .toc ol { margin: 0; padding-left: 1.25rem; }
+  .toc li { margin-bottom: 0.35rem; font-size: 0.95rem; }
+  .toc a { color: var(--ink); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .nav {
+    margin: 1.5rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .nav a {
+    padding: 0.25rem 0.6rem;
+    border: 1px solid var(--line);
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.85rem;
+    border-radius: 3px;
+  }
+  .nav a:hover { background: var(--surface-hi); }
+  .practice {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: var(--surface);
+  }
+  .practice > h3:first-of-type { margin-top: 0; }
+  .answer-key {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: var(--surface);
+  }
+  .answer-key > h3:first-of-type { margin-top: 0; }
+  .common-mistakes {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: var(--surface);
+  }
+  .common-mistakes > h3:first-of-type { margin-top: 0; }
+  .self-learning {
+    border-left: 3px solid var(--muted);
+    padding: 1rem 1.25rem;
+    margin: 1.75rem 0;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+  .self-learning p { margin-bottom: 0.75rem; }
+  .revision-sheet {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: var(--surface);
+  }
+  .revision-sheet > h3:first-of-type { margin-top: 0; }
+  .warning {
+    color: var(--danger);
+    font-weight: 700;
+  }
+  .mu-badge {
+    display: inline-block;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+    margin-left: 0.5rem;
+  }
+  .exam-q {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+    background: var(--surface);
+  }
+  .exam-q-title {
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    letter-spacing: 0;
+    color: var(--muted);
+  }
+  .exam-source {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  svg { width: 100%; max-width: 440px; height: auto; display: block; margin: 1rem auto; padding: 0.5rem; background: var(--bg); border: 1px solid var(--line); }
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+  .references {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 2rem 0;
+    background: var(--surface);
+  }
+  .references > h3:first-of-type { margin-top: 0; }
+  .references p { margin: 0.5rem 0; }
+  .references ul { margin: 0.5rem 0; padding-left: 1.5rem; }
+  ::selection { background: var(--ink); color: var(--bg); }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  @media (max-width: 600px) {
+    .wrap { padding: 1.5rem 1rem 3rem; }
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.4rem; }
+    .eq { font-size: 1.15rem; }
+  }
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    .wrap { padding: 1rem 0.75rem 3rem; }
+    h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.3rem; margin-top: 2.25rem; }
+    table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; font-size: 0.85rem; }
+    th, td { padding: 0.45rem 0.55rem; }
+    .theory, .example, .practice, .answer-key, .common-mistakes, .revision-sheet, .references, .exam-q, .steps, .toc, .self-learning { padding: 0.75rem; }
+    .eq { font-size: 1rem; padding: 0.6rem 0.5rem; text-align: left; }
+    /* Keep mathematical tokens intact on narrow screens; long chips scroll horizontally. */
+    .nav a { padding: 0.4rem 0.7rem; }
+    svg { max-width: 100%; padding: 0.25rem; }
+  }
+  @media print {
+    body { font-size: 12pt; line-height: 1.4; color: #000; background: #fff; }
+    .wrap { max-width: 100%; padding: 0; }
+    header { border-bottom: 1px solid #000; margin-bottom: 1.5rem; padding-bottom: 0.75rem; }
+    h2 { margin: 2rem 0 0.75rem; border-bottom: 1px solid #000; padding-bottom: 0.3rem; }
+    h3 { margin: 1.5rem 0 0.4rem; }
+    .toc, .nav { display: none; }
+    .example, .practice, .answer-key, .revision-sheet, .steps, .theory, .common-mistakes, .references, .exam-q {
+      border: 1px solid #999;
+      background: #fff !important;
+      page-break-inside: avoid;
+    }
+    .eq { background: #fff; border: 1px solid #999; page-break-inside: avoid; }
+    .eq-note { display: none; }
+    a { text-decoration: none; color: #000; }
+    svg { border: 1px solid #000; }
+    footer { margin-top: 2rem; border-top: 1px solid #000; }
+  }
+</style>
+<script>(function(){try{var t=localStorage.getItem('sg-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<style id="theme">
+  :root { color-scheme: light; --ink:#0a0a0a;--muted:#444444;--bg:#ffffff;--line:#cccccc;--rule:#999999;--accent:#1d4ed8;--accent-soft:#eef2ff;--danger:#b00020;--surface:#fafafa;--surface-alt:#f9f9f9;--surface-eq:#f5f5f5;--surface-hi:#f0f0f0; }
+  :root[data-theme="dark"] { color-scheme: dark; --ink:#ececec;--muted:#a8a8ad;--bg:#0f0f11;--line:#34343a;--rule:#5a5a62;--accent:#8ab0ff;--accent-soft:#1b2540;--danger:#ff7b8f;--surface:#17171a;--surface-alt:#1b1b1f;--surface-eq:#1e1e23;--surface-hi:#26262c; }
+  :root[data-theme="dark"] svg circle[fill-opacity] { fill-opacity: .3; }
+  :root[data-theme="dark"] svg text[fill="var(--muted)"] { fill: var(--ink); }
+  .topbar { display:flex; align-items:center; justify-content:space-between; gap:.5rem; margin:0 0 1rem; }
+  .topbar .back { display:inline-flex; align-items:center; min-height:44px; font-size:.85rem; font-weight:600; color:var(--ink); }
+  .theme-toggle { font:inherit; font-size:.85rem; font-weight:600; color:var(--ink); background:var(--bg); border:1px solid var(--ink); border-radius:0; padding:.4rem .8rem; min-height:44px; min-width:44px; cursor:pointer; margin-left:auto; }
+  .theme-toggle:hover { background:var(--surface-hi); }
+  .theme-toggle:focus-visible { outline:2px solid var(--ink); outline-offset:2px; }
+  @media print {
+    :root, :root[data-theme="dark"], :root:not([data-theme="light"]) { color-scheme: light; --ink:#0a0a0a;--muted:#444444;--bg:#ffffff;--line:#cccccc;--rule:#999999;--accent:#1d4ed8;--accent-soft:#eef2ff;--danger:#b00020;--surface:#fafafa;--surface-alt:#f9f9f9;--surface-eq:#f5f5f5;--surface-hi:#f0f0f0; }
+    .topbar { display:none; }
+  }
+</style>
+<style id="dsgt-diagram-layout">.dsgt-diagram{margin:1.25rem 0;padding:.75rem;border:1px solid var(--line);background:var(--surface)}.dsgt-diagram svg{width:100%;max-width:700px;height:auto;display:block;margin:.35rem auto;padding:0;border:0;background:transparent}.dsgt-diagram figcaption{font-size:.85rem;color:var(--muted);line-height:1.45;margin-top:.6rem}.dsgt-diagram.wide svg{max-width:700px}.dsgt-diagram .diagram-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.dsgt-diagram .diagram-panel{min-width:0;border:1px solid var(--line);padding:.65rem;background:var(--bg)}.dsgt-diagram .diagram-panel h4{margin:.1rem 0 .35rem;text-align:center}@media(max-width:600px){.dsgt-diagram .dsgt-desktop-diagram{display:none!important}.dsgt-diagram .dsgt-mobile-diagram{display:block!important;max-width:100%}.dsgt-diagram{padding:.55rem}.dsgt-diagram .diagram-pair{grid-template-columns:1fr}.dsgt-diagram .diagram-panel{padding:.5rem}}</style>
+<style id="rail-style">
+  /* Section progress. Phone UI by default (top line + edge tab + bottom sheet);
+     margin rail on wide screens with a mouse. Colours come from the theme variables. */
+  .rail { display:none; }
+  .rm-bar { position:fixed; top:0; left:0; height:3px; width:var(--w,0%); background:var(--accent); z-index:30; pointer-events:none; }
+  .rm-tab { position:fixed; left:env(safe-area-inset-left,0px); bottom:calc(14px + env(safe-area-inset-bottom,0px)); z-index:30; display:flex; align-items:center; width:44px; height:44px; padding:0; border:0; background:transparent; font:inherit; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+  .rm-tab span { display:flex; align-items:center; justify-content:center; min-width:26px; height:28px; padding:0 .35rem; font:700 .66rem/1 var(--font-mono); letter-spacing:.04em; font-variant-numeric:tabular-nums; color:var(--ink); background:var(--bg); border:1px solid var(--rule); border-left:0; opacity:.5; transition:opacity .25s; }
+  body.rm-moving .rm-tab span { opacity:.15; }
+  .rm-tab:hover span, .rm-tab:focus-visible span, .rm-tab[aria-expanded="true"] span { opacity:1; }
+  .rm-tab:focus-visible { outline:2px solid var(--ink); outline-offset:-2px; }
+  .rm-back { position:fixed; inset:0; z-index:40; background:rgba(0,0,0,.4); opacity:0; pointer-events:none; transition:opacity .2s; }
+  .rm-sheet { position:fixed; left:0; right:0; bottom:0; z-index:50; max-height:68vh; overflow-y:auto; background:var(--bg); border-top:1px solid var(--ink); padding-bottom:env(safe-area-inset-bottom,0px); transform:translateY(102%); visibility:hidden; transition:transform .22s ease, visibility 0s .22s; }
+  body.rm-open .rm-back { opacity:1; pointer-events:auto; }
+  body.rm-open .rm-sheet { transform:none; visibility:visible; transition-delay:0s; }
+  .rm-head { position:sticky; top:0; z-index:2; display:flex; align-items:center; justify-content:space-between; padding:.7rem 1rem; background:var(--bg); border-bottom:1px solid var(--line); font:600 .65rem/1 var(--font-mono); letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  .rm-head b { color:var(--ink); }
+  .rm-sheet ol { list-style:none; margin:0; padding:.3rem 0 .6rem; }
+  .rm-sheet a { display:grid; grid-template-columns:1.9rem 1fr; align-items:center; min-height:44px; padding:0 1rem; color:var(--muted); text-decoration:none; font-size:.92rem; font-weight:600; border-left:3px solid transparent; }
+  .rm-sheet a .rm-k { font:600 .7rem/1 var(--font-mono); letter-spacing:.04em; }
+  .rm-sheet a.is-done { color:var(--ink); }
+  .rm-sheet a.is-done .rm-k { color:var(--muted); }
+  .rm-sheet a[aria-current="true"] { color:var(--ink); border-left-color:var(--accent); background:var(--accent-soft); font-family:var(--font-serif); font-weight:700; }
+  .rm-sheet a[aria-current="true"] .rm-k { color:var(--accent); }
+  .rm-sheet a:focus-visible { outline:2px solid var(--ink); outline-offset:-2px; }
+
+  .rail { position:fixed; left:14px; top:50%; transform:translateY(-50%); z-index:20; font-family:var(--font-sans); color:var(--muted); }
+  .rail-in { position:relative; padding:.5rem .6rem .6rem .5rem; border:1px solid transparent; background:transparent; transition:background .15s, border-color .15s; }
+  .rail:hover .rail-in, .rail:focus-within .rail-in { background:var(--bg); border-color:var(--line); }
+  .rail-top { display:flex; align-items:flex-end; gap:.5rem; margin:0 0 .7rem; min-height:2.1rem; }
+  .rail-sec { font-family:var(--font-serif); font-size:1.7rem; line-height:.9; color:var(--ink); font-variant-numeric:tabular-nums; letter-spacing:-.02em; }
+  .rail-meta { display:flex; flex-direction:column; gap:.1rem; font:600 .6rem/1.1 var(--font-mono); letter-spacing:.08em; text-transform:uppercase; padding-bottom:.1rem; }
+  .rail-meta b { font-weight:700; color:var(--ink); }
+  .rail-toggle { margin-left:auto; align-self:flex-start; font:inherit; font-size:.8rem; line-height:1; width:1.3rem; height:1.3rem; padding:0; color:var(--muted); background:var(--bg); border:1px solid var(--line); border-radius:0; cursor:pointer; opacity:.55; transition:opacity .15s; }
+  .rail:hover .rail-toggle, .rail-toggle:focus-visible { opacity:1; }
+  .rail-toggle:hover { color:var(--ink); border-color:var(--ink); }
+  .rail-toggle:focus-visible, .rail a:focus-visible { outline:2px solid var(--ink); outline-offset:2px; }
+  .rail-list { position:relative; list-style:none; margin:0; padding:0; max-height:calc(100vh - 11rem); overflow-y:auto; overflow-x:hidden; scrollbar-width:none; }
+  .rail-list::-webkit-scrollbar { display:none; }
+  .rail-list::before { content:""; position:absolute; left:4px; top:0; bottom:0; width:1px; background:var(--rule); opacity:.55; }
+  .rail-fill { position:absolute; left:3.5px; top:0; width:2px; height:var(--fill,0px); background:var(--accent); }
+  .rail a { position:relative; display:grid; grid-template-columns:9px 1.55rem auto; align-items:center; column-gap:.55rem; height:1.45rem; color:inherit; text-decoration:none; }
+  .rail .node { width:7px; height:7px; box-sizing:border-box; border:1px solid var(--rule); background:var(--bg); justify-self:center; }
+  .rail a.is-done .node { background:var(--muted); border-color:var(--muted); }
+  .rail .num { font:600 .62rem/1 var(--font-mono); letter-spacing:.04em; font-variant-numeric:tabular-nums; }
+  .rail .lbl { display:none; font-size:.74rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:14rem; }
+  .rail-sublist { list-style:none; margin:0 0 .3rem 1.65rem; padding:0 0 0 .55rem; border-left:1px solid var(--line); }
+  .rail-sublist a { grid-template-columns:1rem minmax(0,1fr); column-gap:.3rem; height:1.2rem; padding-left:.1rem; }
+  .rail-sublist .sub-lbl { display:block; font-size:.68rem; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .rail-sublist .sub-num { font:600 .62rem/1 var(--font-mono); color:var(--accent); }
+  .rail-sublist a[aria-current="location"] { color:var(--accent); font-weight:700; }
+  .rail.is-collapsed .rail-sublist { display:none; }
+  .rm-sublist { margin:0 0 .35rem 2.65rem !important; padding:.15rem 0 .25rem .65rem !important; border-left:1px solid var(--line); }
+  .rm-sublist a { grid-template-columns:1.1rem minmax(0,1fr); min-height:34px; padding:.25rem .5rem; border-left:0; font-size:.84rem; }
+  .rm-sublist a[aria-current="location"] { color:var(--accent); background:var(--accent-soft); }
+  .rail-list > li > .rail-sublist { display:none; }
+  .rail-list > li > a[aria-current="true"] ~ .rail-sublist { display:block; }
+  .rail.is-collapsed .rail-list > li > .rail-sublist { display:none; }
+  .rm-sheet > ol > li > .rm-sublist { display:none; }
+  .rm-sheet > ol > li > a[aria-current="true"] ~ .rm-sublist { display:block; }
+
+  .rail a:hover { color:var(--ink); }
+  .rail a:hover .node { border-color:var(--ink); }
+  .rail a[aria-current="true"] { color:var(--ink); }
+  .rail a[aria-current="true"] .node { width:9px; height:9px; border-color:var(--accent); background:linear-gradient(to top, var(--accent) calc(var(--p,0) * 100%), var(--bg) 0); box-shadow:0 0 0 3px var(--accent-soft); }
+  .rail a[aria-current="true"] .num { color:var(--accent); }
+  .rail a[aria-current="true"] .lbl { display:block; font-family:var(--font-serif); font-size:.82rem; font-weight:700; max-width:clamp(0px, calc(50vw - 25.5rem), 14rem); }
+  .rail:hover .lbl, .rail:focus-within .lbl, .rail:hover a[aria-current="true"] .lbl, .rail:focus-within a[aria-current="true"] .lbl { display:block; max-width:14rem; }
+  .rail.is-collapsed .rail-in { padding:.5rem .4rem; background:transparent !important; border-color:transparent !important; }
+  .rail.is-collapsed .rail-top { flex-direction:column; align-items:flex-start; gap:.4rem; margin-bottom:.5rem; min-height:0; }
+  .rail.is-collapsed .rail-sec, .rail.is-collapsed .rail-meta, .rail.is-collapsed .num, .rail.is-collapsed .lbl { display:none !important; }
+  .rail.is-collapsed .rail-toggle { margin:0 0 0 -.25rem; }
+  .rail.is-collapsed a { grid-template-columns:9px; height:1.15rem; }
+  .rail.is-collapsed .node { width:5px; height:5px; }
+  .rail.is-collapsed a[aria-current="true"] .node { width:7px; height:7px; box-shadow:0 0 0 2px var(--accent-soft); }
+  .rail.is-collapsed .rail-list { max-height:calc(100vh - 8rem); }
+
+  @media (min-width:900px) and (pointer:fine) {
+    .rm-tab, .rm-back, .rm-sheet { display:none; }
+    .rm-bar { display:block; }
+    .rail { display:block; }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    .rm-sheet, .rm-back, .rm-tab span, .rail-in { transition:none; }
+  }
+  @media print { .rail, .rm-bar, .rm-tab, .rm-back, .rm-sheet { display:none !important; } }
+
+</style>
+</head><body>
+
+<div class="wrap">
+  <div class="topbar"><a class="back" href="/dsgt">← All modules</a><button class="theme-toggle" type="button" id="themeToggle"></button></div>
+
+  <header>
+    <h1>DSGT Module 2</h1>
+    <p class="subtitle">Mathematical Relations — selective exam essentials</p>
+    <div class="meta">CSE AIML · Sem III · 8 teaching hours · CO2 · Source: Mrs. Shamal Bagal's Module 2 PPT, the official DSGT syllabus, and the Summer 2026 / Winter 2025 question papers</div>
+  </header>
+
+  <div class="theory">
+    <span class="source">READ THIS FIRST — LIMITED TOPIC COVERAGE</span>
+    <p>This is <strong>not</strong> a complete Module 2 textbook. It teaches a deliberately small set of topics properly, because the examination is tomorrow. Everything here is prescribed syllabus content unless it is labelled as practice.</p>
+    <p><strong>Covered:</strong> relation definition and representation · the four properties · equivalence relations and equivalence classes · transitive closure and Warshall's algorithm · partial orders, posets, meet and join, and how to decide whether a poset is a lattice.</p>
+    <p><strong>Deliberately skipped:</strong> detailed types of lattices (bounded, complemented, distributive proofs) · sublattice proofs · extended chain/antichain theory · path/composition theory beyond what Warshall needs · drawing Hasse diagrams and digraphs (a separate diagram task) · real-world application essays.</p>
+    <p>Each section ends with the exact shape of answer you should write in the answer sheet. Practice questions come first; answers are in a separate section at the end.</p>
+  </div>
+
+  <div class="toc">
+    <ol>
+      <li><a href="#s1">Relations: definition, notation, representation</a></li>
+      <li><a href="#s2">Properties of relations</a></li>
+      <li><a href="#s3">Equivalence relations and equivalence classes</a></li>
+      <li><a href="#s4">Transitive closure and Warshall's algorithm</a></li>
+      <li><a href="#s5">Partial orders, posets and lattices</a></li>
+      <li><a href="#practice">Practice questions</a></li>
+      <li><a href="#answers">Answer key</a></li>
+      <li><a href="#revision">Last-minute revision sheet</a></li>
+      <li><a href="#sources">Sources, verification and coverage</a></li>
+    </ol>
+  </div>
+
+  <nav class="nav">
+    <a href="#s1">Fundamentals</a>
+    <a href="#s2">Properties</a>
+    <a href="#s3">Equivalence</a>
+    <a href="#s4">Warshall</a>
+    <a href="#s5">Posets &amp; lattices</a>
+    <a href="#practice">Practice</a>
+    <a href="#revision">Revision</a>
+  </nav>
+
+  <h2 id="s1">1 · Relations: definition, notation, representation</h2>
+
+  <div class="theory">
+    <span class="source">Teacher's definition — Module 2 PPT, slide 8</span>
+    <p>A <strong>relation</strong> in mathematics is a subset of the Cartesian product of two sets. If X and Y are sets, then X × Y is the set of all ordered pairs (x, y) with x ∈ X and y ∈ Y. A relation R from X to Y is any subset of X × Y.</p>
+  </div>
+
+  <p><strong>Simple meaning.</strong> A relation is a rule that links elements of one set to elements of another set — or links elements of the same set to each other. The link itself is recorded as an <strong>ordered pair</strong>. The order matters: (1, 2) is not the same pair as (2, 1).</p>
+
+  <p><strong>Formal definition.</strong> A <strong>binary relation</strong> R from A to B is a subset of A × B. If (a, b) ∈ R we write <strong>a R b</strong> and say "a is related to b".</p>
+
+  <p><strong>Notation — every symbol.</strong></p>
+  <table>
+    <tr><th>Symbol</th><th>Read as</th><th>Meaning</th></tr>
+    <tr><td>A × B</td><td>A cross B</td><td>All ordered pairs (a, b) with a ∈ A and b ∈ B</td></tr>
+    <tr><td>(a, b) ∈ R</td><td>the pair a b belongs to R</td><td>The link from a to b is part of the relation</td></tr>
+    <tr><td>a R b</td><td>a is related to b</td><td>Same statement, written in infix form</td></tr>
+    <tr><td>R ⊆ A × A</td><td>R is a relation on A</td><td>The two sets are the same set A</td></tr>
+    <tr><td>D<sub>R</sub>(R)</td><td>domain of R</td><td>All first coordinates that actually appear in R</td></tr>
+    <tr><td>R<sub>R</sub>(R)</td><td>range of R</td><td>All second coordinates that actually appear in R</td></tr>
+    <tr><td>R<sup>−1</sup></td><td>inverse of R</td><td>Reverse every pair: (b, a) instead of (a, b)</td></tr>
+  </table>
+
+  <p><strong>Domain versus range — the trap.</strong> The domain and range are <em>not</em> automatically A and B. They are only the coordinates that actually occur. If A = {1, 2, 3} and R = {(1, 5)}, the domain is {1}, not A.</p>
+
+  <h3 id="m2-relation-forms" data-rail-subsection>Four ways to write the same relation</h3>
+  <ul>
+    <li><strong>Roster form:</strong> list the pairs — R = {(1, 2), (2, 4)}.</li>
+    <li><strong>Set-builder form:</strong> state the rule — R = {(a, b) : b = 2a, a ∈ A, b ∈ B}.</li>
+    <li><strong>Matrix form:</strong> rows are the elements of A, columns are the elements of B; put 1 where the pair is in R and 0 where it is not.</li>
+    <li><strong>Digraph:</strong> vertices are elements, arrows are pairs. (You should be able to read one; drawing one belongs to the diagram task.)</li>
+  </ul>
+
+  <div class="example qa">
+    <div class="example-title">Worked example — relation, domain, range, inverse, matrix</div>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>Let A = {1, 2, 3} and B = {2, 4, 6}, and define R = {(a, b) : b = 2a}.</p>
+      <p><strong>Find:</strong> R, its domain, its range, its inverse, and its matrix.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Step 1 — build the pairs.</strong> Take each a in A and compute 2a:</p>
+      <div class="eq">R = {(1, 2), (2, 4), (3, 6)}</div>
+      <p><strong>Step 2 — domain and range.</strong> First coordinates: {1, 2, 3}. Second coordinates: {2, 4, 6}.</p>
+      <div class="eq">D<sub>R</sub>(R) = {1, 2, 3} &nbsp;&nbsp; R<sub>R</sub>(R) = {2, 4, 6}</div>
+      <p><strong>Step 3 — inverse.</strong> Reverse each pair.</p>
+      <div class="eq">R<sup>−1</sup> = {(2, 1), (4, 2), (6, 3)}</div>
+      <p><strong>Step 4 — matrix.</strong> Rows = 1, 2, 3; columns = 2, 4, 6. The pair (1, 2) puts a 1 in row 1, column 2; (2, 4) puts a 1 in row 2, column 4; (3, 6) puts a 1 in row 3, column 6.</p>
+      <table>
+        <tr><th>M<sub>R</sub></th><th>2</th><th>4</th><th>6</th></tr>
+        <tr><td><strong>1</strong></td><td>1</td><td>0</td><td>0</td></tr>
+        <tr><td><strong>2</strong></td><td>0</td><td>1</td><td>0</td></tr>
+        <tr><td><strong>3</strong></td><td>0</td><td>0</td><td>1</td></tr>
+      </table>
+      <p>Read the matrix the same way you read the roster: a 1 in row a, column b means (a, b) ∈ R.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">R = <strong>{(1, 2), (2, 4), (3, 6)}</strong>, domain <strong>{1, 2, 3}</strong>, range <strong>{2, 4, 6}</strong>, R<sup>−1</sup> = <strong>{(2, 1), (4, 2), (6, 3)}</strong>, and M<sub>R</sub> has 1s only on the main diagonal.</p>
+    </div>
+  </div>
+
+  <div class="example qa">
+    <div class="example-title">Worked example — a relation on one set (teacher's Example 1.12)</div>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>Let A = {1, 2, 3, 4} and let R = {(a, b) : a divides b}.</p>
+      <p><strong>Find:</strong> R.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p>Go through each a and keep the multiples that are in A:</p>
+      <div class="eq">R = {(1,1), (1,2), (1,3), (1,4), (2,2), (2,4), (3,3), (4,4)}</div>
+      <p>Every element divides itself, so all four pairs (a, a) appear.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">R = <strong>{(1,1), (1,2), (1,3), (1,4), (2,2), (2,4), (3,3), (4,4)}</strong>. This is the same relation used later in the poset section, and it is the standard example of a partial order.</p>
+    </div>
+  </div>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes in this section</h3>
+    <ul>
+      <li>Writing the domain as A without checking. The domain is only the first coordinates that occur.</li>
+      <li>Reversing only some pairs when forming R<sup>−1</sup>.</li>
+      <li>Forgetting that a relation on A is a subset of A × A, so both coordinates come from the same set.</li>
+      <li>In a matrix, reading columns as A. Rows are the first set, columns are the second set.</li>
+    </ul>
+  </div>
+
+  <div class="practice">
+    <h3>Quick check 1</h3>
+    <p>Let A = {2, 3, 4} and B = {4, 6, 8}, with R = {(a, b) : b = 2a}. Write R in roster form, state its domain, range and inverse, and write its matrix. <em>(Answer Q1.)</em></p>
+  </div>
+
+  
+  <figure class="dsgt-diagram wide" id="d5-relation-representation">
+    <svg class="dsgt-desktop-diagram" viewBox="0 0 640 490" role="img" aria-labelledby="d5-relation-title d5-relation-desc">
+      <title id="d5-relation-title">Bipartite diagram, roster form and matrix of a relation</title>
+      <desc id="d5-relation-desc">Set A contains 1, 2 and 3 on the left. Set B contains 2, 4 and 6 on the right. Arrows connect 1 to 2, 2 to 4 and 3 to 6. Below are the roster and three by three identity matrix.</desc>
+      <defs><marker id="d5-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6Z" fill="var(--accent)"/></marker></defs>
+      <text x="150" y="35" text-anchor="middle" font-size="18" font-weight="700" fill="var(--ink)">A = {1, 2, 3}</text><text x="490" y="35" text-anchor="middle" font-size="18" font-weight="700" fill="var(--ink)">B = {2, 4, 6}</text>
+      <g fill="var(--bg)" stroke="var(--accent)" stroke-width="2"><circle cx="150" cy="95" r="24"/><circle cx="150" cy="185" r="24"/><circle cx="150" cy="275" r="24"/><circle cx="490" cy="95" r="24"/><circle cx="490" cy="185" r="24"/><circle cx="490" cy="275" r="24"/></g>
+      <g font-size="17" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="middle"><text x="150" y="95">1</text><text x="150" y="185">2</text><text x="150" y="275">3</text><text x="490" y="95">2</text><text x="490" y="185">4</text><text x="490" y="275">6</text></g>
+      <g stroke="var(--accent)" stroke-width="2.4" fill="none" marker-end="url(#d5-arrow)"><path d="M176 95H462"/><path d="M176 185H462"/><path d="M176 275H462"/></g>
+      <path d="M36 317H604" stroke="var(--accent)" stroke-opacity=".38"/>
+      <text x="46" y="350" font-size="16" font-weight="700" fill="var(--ink)">Roster form</text><text x="46" y="380" font-size="15" fill="var(--ink)">R = {(1, 2), (2, 4), (3, 6)}</text>
+      <text x="355" y="350" font-size="16" font-weight="700" fill="var(--ink)">Relation matrix M<tspan baseline-shift="sub" font-size="11">R</tspan></text>
+      <g font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle"><text x="426" y="375">2</text><text x="478" y="375">4</text><text x="530" y="375">6</text><text x="384" y="397">1</text><text x="384" y="427">2</text><text x="384" y="457">3</text></g>
+      <g stroke="var(--accent)" stroke-opacity=".38" stroke-width="1" fill="none"><rect x="400" y="382" width="156" height="90"/><path d="M452 382V472M504 382V472M400 412H556M400 442H556"/></g>
+      <g fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1"><rect x="400" y="382" width="52" height="30"/><rect x="452" y="412" width="52" height="30"/><rect x="504" y="442" width="52" height="30"/></g>
+      <g font-size="16" fill="var(--ink)" text-anchor="middle" dominant-baseline="middle"><text x="426" y="397" font-weight="700">1</text><text x="478" y="397">0</text><text x="530" y="397">0</text><text x="426" y="427">0</text><text x="478" y="427" font-weight="700">1</text><text x="530" y="427">0</text><text x="426" y="457">0</text><text x="478" y="457">0</text><text x="530" y="457" font-weight="700">1</text></g>
+    </svg>
+    <svg class="dsgt-mobile-diagram" style="display:none" viewBox="0 0 380 555" role="img" aria-labelledby="d5m-relation-title d5m-relation-desc"><title id="d5m-relation-title">Mobile relation diagram, roster and matrix</title><desc id="d5m-relation-desc">Set A with elements 1, 2 and 3 is on the left and set B with elements 2, 4 and 6 is on the right. Arrows connect 1 to 2, 2 to 4, and 3 to 6. The roster and the three by three matrix appear below.</desc><defs><marker id="d5m-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6Z" fill="var(--accent)"/></marker></defs><text x="95" y="32" text-anchor="middle" font-size="16" font-weight="700" fill="var(--ink)">A = {1, 2, 3}</text><text x="285" y="32" text-anchor="middle" font-size="16" font-weight="700" fill="var(--ink)">B = {2, 4, 6}</text><g fill="var(--bg)" stroke="var(--accent)" stroke-width="2"><circle cx="95" cy="82" r="19"/><circle cx="95" cy="142" r="19"/><circle cx="95" cy="202" r="19"/><circle cx="285" cy="82" r="19"/><circle cx="285" cy="142" r="19"/><circle cx="285" cy="202" r="19"/></g><g fill="var(--ink)" font-size="16" font-weight="700" text-anchor="middle" dominant-baseline="middle"><text x="95" y="82">1</text><text x="95" y="142">2</text><text x="95" y="202">3</text><text x="285" y="82">2</text><text x="285" y="142">4</text><text x="285" y="202">6</text></g><g stroke="var(--accent)" stroke-width="2.2" fill="none" marker-end="url(#d5m-arrow)"><path d="M116 82H262"/><path d="M116 142H262"/><path d="M116 202H262"/></g><path d="M20 238H360" stroke="var(--accent)" stroke-opacity=".38"/><text x="22" y="268" font-size="16" font-weight="700" fill="var(--ink)">Roster form</text><text x="22" y="294" font-size="14" fill="var(--ink)">R = {(1, 2), (2, 4), (3, 6)}</text><path d="M20 316H360" stroke="var(--accent)" stroke-opacity=".38"/><text x="190" y="347" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">Relation matrix M<tspan baseline-shift="sub" font-size="11">R</tspan></text><g font-size="14" font-weight="700" fill="var(--ink)" text-anchor="middle"><text x="160" y="378">2</text><text x="220" y="378">4</text><text x="280" y="378">6</text><text x="105" y="410">1</text><text x="105" y="450">2</text><text x="105" y="490">3</text></g><g stroke="var(--accent)" stroke-opacity=".38" stroke-width="1" fill="none"><rect x="130" y="390" width="180" height="120"/><path d="M190 390V510M250 390V510M130 430H310M130 470H310"/></g><g fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1"><rect x="130" y="390" width="60" height="40"/><rect x="190" y="430" width="60" height="40"/><rect x="250" y="470" width="60" height="40"/></g><g font-size="17" fill="var(--ink)" text-anchor="middle" dominant-baseline="middle"><text x="160" y="410" font-weight="700">1</text><text x="220" y="410">0</text><text x="280" y="410">0</text><text x="160" y="450">0</text><text x="220" y="450" font-weight="700">1</text><text x="280" y="450">0</text><text x="160" y="490">0</text><text x="220" y="490">0</text><text x="280" y="490" font-weight="700">1</text></g><text x="190" y="537" text-anchor="middle" font-size="12" fill="var(--muted)">Rows: A · Columns: B</text></svg>
+    <figcaption>Each arrow is one ordered pair in R. In the matrix, the same pair is represented by a 1 at its row (from A) and column (from B); all other entries are 0. The rows are ordered 1, 2, 3 and columns 2, 4, 6.</figcaption>
+  </figure>
+  <h2 id="s2">2 · Properties of relations</h2>
+
+  <p>From here on, R is a relation <strong>on a set A</strong>, meaning R ⊆ A × A. Four properties decide almost every Module 2 question. Learn the definition and the test together.</p>
+
+  <div class="theory">
+    <span class="source">Teacher's definitions — Module 2 PPT, slides 35, 41, 52, 53, 54</span>
+    <p><strong>Reflexive:</strong> a R a, that is (a, a) ∈ R, for every a ∈ A.</p>
+    <p><strong>Symmetric:</strong> if (a, b) ∈ R then (b, a) ∈ R, for all a, b ∈ A.</p>
+    <p><strong>Antisymmetric:</strong> if (a, b) ∈ R and (b, a) ∈ R then a = b, for all a, b ∈ A.</p>
+    <p><strong>Transitive:</strong> if (a, b) ∈ R and (b, c) ∈ R then (a, c) ∈ R, for all a, b, c ∈ A.</p>
+  </div>
+
+  <table>
+    <tr><th>Property</th><th>Formal statement</th><th>How to test it</th><th>Typical example</th></tr>
+    <tr><td><strong>Reflexive</strong></td><td>(a, a) ∈ R for every a ∈ A</td><td>Every element of A must appear as (a, a). One missing loop is enough to fail.</td><td>"is equal to", "≤", "divides"</td></tr>
+    <tr><td><strong>Symmetric</strong></td><td>(a, b) ∈ R ⇒ (b, a) ∈ R</td><td>For every pair, look for its reverse. One one-way pair is enough to fail.</td><td>"is a sibling of", "is the same age as"</td></tr>
+    <tr><td><strong>Antisymmetric</strong></td><td>(a, b) ∈ R and (b, a) ∈ R ⇒ a = b</td><td>Look for a pair with a ≠ b where both directions occur. One such pair is enough to fail.</td><td>"≤", "divides", "is a subset of"</td></tr>
+    <tr><td><strong>Transitive</strong></td><td>(a, b), (b, c) ∈ R ⇒ (a, c) ∈ R</td><td>For every chain a → b → c, check the shortcut a → c exists.</td><td>"≤", "divides", "is an ancestor of"</td></tr>
+  </table>
+
+  <h3 id="m2-symmetry" data-rail-subsection>Symmetric versus antisymmetric — read this twice</h3>
+  <p>They are <strong>not opposites</strong>. They talk about different situations.</p>
+  <ul>
+    <li><strong>Symmetric</strong> says: whenever a link goes one way, the reverse link must also exist. It <em>forbids</em> one-way links.</li>
+    <li><strong>Antisymmetric</strong> says: if both directions exist, then the two elements must actually be the same element. It <em>forbids</em> two-way links between different elements.</li>
+    <li>A relation can be <strong>both</strong>: equality is symmetric and antisymmetric, because the only two-way pairs are (a, a).</li>
+    <li>A relation can be <strong>neither</strong>: on A = {1, 2, 3}, R = {(1, 2), (2, 1), (2, 3)} is not symmetric (no (3, 2)) and not antisymmetric ((1, 2) and (2, 1) with 1 ≠ 2).</li>
+  </ul>
+  <p>The phrase to remember: <em>symmetric = both directions always; antisymmetric = both directions only for the same element.</em></p>
+
+  <h3 id="m2-property-test" data-rail-subsection>Systematic procedure for checking all four properties</h3>
+  <ol class="steps">
+    <li><strong>Write R in roster form</strong> and list the elements of A. Never test from the English description alone.</li>
+    <li><strong>Reflexive?</strong> Tick off (1,1), (2,2), … for every element. If any is missing, say so and name it.</li>
+    <li><strong>Symmetric?</strong> For each (a, b) with a ≠ b, check whether (b, a) is present. Name the first offender.</li>
+    <li><strong>Antisymmetric?</strong> For each pair with a ≠ b, check that both directions do <em>not</em> occur simultaneously. Name the first offender.</li>
+    <li><strong>Transitive?</strong> For each pair (a, b), look at every pair that starts at b, say (b, c); check (a, c). Name the first missing shortcut.</li>
+    <li><strong>Conclude</strong> with exactly the properties that hold. Do not claim a property you did not test.</li>
+  </ol>
+
+  <div class="example qa">
+    <div class="example-title">Worked example A — an equivalence relation</div>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>Let A = {1, 2, 3, 4} and R = {(1,1), (1,2), (2,1), (2,2), (3,3), (4,4)}.</p>
+      <p><strong>Find:</strong> Test reflexivity, symmetry, antisymmetry and transitivity, and classify the relation.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Reflexive.</strong> (1,1), (2,2), (3,3), (4,4) are all present. ✓</p>
+      <p><strong>Symmetric.</strong> The only non-diagonal pairs are (1,2) and (2,1), and each is the reverse of the other. ✓</p>
+      <p><strong>Antisymmetric.</strong> (1,2) and (2,1) are both present, and 1 ≠ 2. So the condition fails. ✗</p>
+      <p><strong>Transitive.</strong> Check the only possible chains: (1,2) followed by (2,1) needs (1,1) — present. (2,1) followed by (1,2) needs (2,2) — present. Chains through a diagonal pair only repeat the same pair. ✓</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">R is reflexive, symmetric and transitive, so it is an <strong>equivalence relation</strong>. It is <strong>not antisymmetric</strong>.</p>
+    </div>
+    <p><strong>Answer-sheet form.</strong> Write the definition, then "LHS check → present/absent", then a one-line conclusion for each property. Four short blocks, not an essay.</p>
+  </div>
+
+  <div class="example qa">
+    <div class="example-title">Worked example B — a partial order</div>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>Let A = {1, 2, 3, 6} and let x R y mean x divides y.</p>
+      <p><strong>Find:</strong> Test all four properties and classify the relation.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <div class="eq">R = {(1,1), (1,2), (1,3), (1,6), (2,2), (2,6), (3,3), (3,6), (6,6)}</div>
+      <p><strong>Reflexive.</strong> 1|1, 2|2, 3|3, 6|6, so all four diagonal pairs occur. ✓</p>
+      <p><strong>Symmetric.</strong> (1,2) ∈ R but (2,1) ∉ R. ✗</p>
+      <p><strong>Antisymmetric.</strong> If x|y and y|x for positive integers then x = y. There is no pair of distinct elements with both directions. ✓</p>
+      <p><strong>Transitive.</strong> If x|y and y|z then x|z. For example (1,2) and (2,6) give (1,6), which is present. ✓</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">R is reflexive, antisymmetric and transitive — a <strong>partial order</strong>, not an equivalence relation.</p>
+    </div>
+  </div>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes</h3>
+    <ul>
+      <li>Testing symmetry on (1,1). A diagonal pair is always its own reverse and proves nothing.</li>
+      <li>Claiming "not symmetric, therefore antisymmetric". The two properties are independent.</li>
+      <li>Checking only one chain for transitivity. One successful chain does not prove transitivity; one broken chain disproves it.</li>
+      <li>Forgetting that reflexivity is about <em>every</em> element of A, not just the elements that appear in some pair.</li>
+    </ul>
+  </div>
+
+  <div class="practice">
+    <h3>Quick check 2</h3>
+    <p>A = {1, 2, 3, 4} and R = {(1,1), (2,2), (3,3), (4,4), (1,3), (3,1)}. Test all four properties. <em>(Answer Q2.)</em></p>
+  </div>
+
+  <h2 id="s3">3 · Equivalence relations and equivalence classes</h2>
+
+  <div class="theory">
+    <span class="source">Teacher's definition — Module 2 PPT, slide 55</span>
+    <p>A relation R on a set A is an <strong>equivalence relation</strong> if R is reflexive, symmetric and transitive.</p>
+    <p>If R is an equivalence relation and a ∈ A, the <strong>equivalence class</strong> of a, written [a], is the set of all elements related to a:</p>
+    <div class="eq">[a] = {x ∈ A : (x, a) ∈ R}</div>
+    <p>The equivalence classes split A into non-overlapping blocks. Every element belongs to exactly one class.</p>
+  </div>
+
+  <p><strong>How to recognise the question.</strong> Words like "same number of sides", "same remainder", "same city", "is similar to", "is congruent to", "same blood group" all signal an equivalence relation. The question usually asks you to verify the three properties and then list the classes.</p>
+
+  <div class="exam-q">
+<div class="exam-q-title">Verified University question <span class="mu-badge">Summer 2026 · Q.1(a) · 5 marks</span></div>
+<p class="exam-source">A digital geometry learning platform groups polygons based on the number of sides. Let A be the set of all polygons and define R = {(P<sub>1</sub>, P<sub>2</sub>) : P<sub>1</sub> and P<sub>2</sub> have the same number of sides}. Analyse whether R is an equivalence relation, verify the three properties, and construct equivalence classes for triangles, quadrilaterals and pentagons.</p>
+<div class="qa-question"><div class="qa-label">Question</div>
+
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Step 1 — Reflexive.</strong> Take any polygon P ∈ A. P has the same number of sides as itself. So (P, P) ∈ R for every P. ✓</p>
+      <p><strong>Step 2 — Symmetric.</strong> Suppose (P<sub>1</sub>, P<sub>2</sub>) ∈ R. Then P<sub>1</sub> and P<sub>2</sub> have the same number of sides. The statement "P<sub>2</sub> and P<sub>1</sub> have the same number of sides" says exactly the same thing, so (P<sub>2</sub>, P<sub>1</sub>) ∈ R. ✓</p>
+      <p><strong>Step 3 — Transitive.</strong> Suppose (P<sub>1</sub>, P<sub>2</sub>) ∈ R and (P<sub>2</sub>, P<sub>3</sub>) ∈ R. Let the common counts be n. Then P<sub>1</sub> has n sides, P<sub>2</sub> has n sides and P<sub>3</sub> has n sides, so P<sub>1</sub> and P<sub>3</sub> have the same number of sides. Hence (P<sub>1</sub>, P<sub>3</sub>) ∈ R. ✓</p>
+      <p><strong>Step 4 — Conclusion.</strong> R is reflexive, symmetric and transitive.</p>
+      <p><strong>Step 5 — Equivalence classes.</strong> Group by the number of sides:</p>
+      <div class="eq">[triangle] = {all polygons with 3 sides}</div>
+      <div class="eq">[quadrilateral] = {all polygons with 4 sides}</div>
+      <div class="eq">[pentagon] = {all polygons with 5 sides}</div>
+      <p>These classes are disjoint (a polygon cannot have two different side counts) and together they cover every polygon in A. A triangle is not in the quadrilateral class, so the classes do not overlap.</p>
+    
+<p><strong>Step 6 — Interpretation (the last part carries marks).</strong> An equivalence relation turns a messy collection into labelled buckets. The platform can compute one number — the side count — and use it as a class label. Retrieval becomes "find the class, then search inside it", and no polygon is filed twice.</p>
+<p><strong>Answer-sheet form.</strong> Three labelled property blocks, a conclusion sentence, then one line per class, then two or three sentences of interpretation. That is a complete 5-mark answer.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">R is an <strong>equivalence relation</strong> on A. Its classes are <strong>[triangle]</strong> (3 sides), <strong>[quadrilateral]</strong> (4 sides) and <strong>[pentagon]</strong> (5 sides); they are disjoint and cover A.</p>
+    </div>
+</div>
+
+  <div class="example qa">
+<div class="example-title">Full solution — polygon classification</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>A digital geometry learning platform groups polygons by their number of sides. Let A be the set of all polygons and define R = {(P₁, P₂) : P₁ and P₂ have the same number of sides}. Determine whether R is an equivalence relation, verify its three properties, and construct the equivalence classes for triangles, quadrilaterals and pentagons.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Step 1 — Reflexive.</strong> Take any polygon P ∈ A. P has the same number of sides as itself. So (P, P) ∈ R for every P. ✓</p>
+      <p><strong>Step 2 — Symmetric.</strong> Suppose (P<sub>1</sub>, P<sub>2</sub>) ∈ R. Then P<sub>1</sub> and P<sub>2</sub> have the same number of sides. The statement "P<sub>2</sub> and P<sub>1</sub> have the same number of sides" says exactly the same thing, so (P<sub>2</sub>, P<sub>1</sub>) ∈ R. ✓</p>
+      <p><strong>Step 3 — Transitive.</strong> Suppose (P<sub>1</sub>, P<sub>2</sub>) ∈ R and (P<sub>2</sub>, P<sub>3</sub>) ∈ R. Let the common counts be n. Then P<sub>1</sub> has n sides, P<sub>2</sub> has n sides and P<sub>3</sub> has n sides, so P<sub>1</sub> and P<sub>3</sub> have the same number of sides. Hence (P<sub>1</sub>, P<sub>3</sub>) ∈ R. ✓</p>
+      <p><strong>Step 4 — Conclusion.</strong> R is reflexive, symmetric and transitive.</p>
+      <p><strong>Step 5 — Equivalence classes.</strong> Group by the number of sides:</p>
+      <div class="eq">[triangle] = {all polygons with 3 sides}</div>
+      <div class="eq">[quadrilateral] = {all polygons with 4 sides}</div>
+      <div class="eq">[pentagon] = {all polygons with 5 sides}</div>
+      <p>These classes are disjoint (a polygon cannot have two different side counts) and together they cover every polygon in A. A triangle is not in the quadrilateral class, so the classes do not overlap.</p>
+    
+<p><strong>Step 6 — Interpretation (the last part carries marks).</strong> An equivalence relation turns a messy collection into labelled buckets. The platform can compute one number — the side count — and use it as a class label. Retrieval becomes "find the class, then search inside it", and no polygon is filed twice.</p>
+<p><strong>Answer-sheet form.</strong> Three labelled property blocks, a conclusion sentence, then one line per class, then two or three sentences of interpretation. That is a complete 5-mark answer.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">R is an <strong>equivalence relation</strong> on A. Its classes are <strong>[triangle]</strong> (3 sides), <strong>[quadrilateral]</strong> (4 sides) and <strong>[pentagon]</strong> (5 sides); they are disjoint and cover A.</p>
+    </div>
+</div>
+
+  <h3 id="m2-equivalence-classes" data-rail-subsection>Finding equivalence classes from a roster</h3>
+  <ol class="steps">
+    <li>Start with the smallest element of A that has not been placed in a class.</li>
+    <li>Collect every element related to it (look at both (a, x) and (x, a) — in an equivalence relation they come together).</li>
+    <li>That collection is one class. Cross those elements off your list.</li>
+    <li>Repeat with the next unplaced element until A is exhausted.</li>
+    <li>Check: the classes must be disjoint, and their union must be A.</li>
+  </ol>
+
+  <div class="example qa">
+    <div class="example-title">Worked example — classes from a finite relation (teacher's example)</div>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>A = {1, 2, 3, 4, 5, 6} and</p>
+      <p>R = {(1,1), (1,5), (2,2), (2,3), (2,6), (3,2), (3,3), (3,6), (4,4), (5,1), (5,5), (6,2), (6,3), (6,6)}.</p>
+      <p><strong>Find:</strong> All equivalence classes.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Start at 1.</strong> The pairs involving 1 are (1,1), (1,5), (5,1), (5,5). So [1] = {1, 5}.</p>
+      <p><strong>Next unplaced element: 2.</strong> Pairs: (2,2), (2,3), (2,6), (3,2), (3,3), (3,6), (6,2), (6,3), (6,6). So [2] = {2, 3, 6}, and therefore [3] and [6] are the same set.</p>
+      <p><strong>Next unplaced element: 4.</strong> Only (4,4), so [4] = {4}.</p>
+      <div class="eq">[1] = [5] = {1, 5} &nbsp;&nbsp; [2] = [3] = [6] = {2, 3, 6} &nbsp;&nbsp; [4] = {4}</div>
+      <p><strong>Check.</strong> {1,5}, {2,3,6}, {4} are disjoint and together contain 1,2,3,4,5,6. ✓</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">The classes are <strong>{1, 5}</strong>, <strong>{2, 3, 6}</strong> and <strong>{4}</strong> — three classes, disjoint and covering A.</p>
+    </div>
+    <p><strong>Note the wording.</strong> [2], [3] and [6] are three names for the <em>same</em> class. Writing "the classes are [2], [3] and [6]" as three separate classes is wrong; there are three classes, not six.</p>
+  </div>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes</h3>
+    <ul>
+      <li>Saying "reflexive because (1,1) is present" while ignoring the other elements.</li>
+      <li>Confusing the number of classes with the number of elements. Different representatives can name the same class.</li>
+      <li>Listing overlapping classes. If two classes share an element, the relation is not an equivalence relation (or the classes were computed wrongly).</li>
+      <li>Forgetting to conclude explicitly: "Hence R is an equivalence relation."</li>
+    </ul>
+  </div>
+
+  <div class="practice">
+    <h3>Quick check 3</h3>
+    <p>A = {1, 2, 3, 4, 5, 6} and a R b means a ≡ b (mod 3), i.e. a and b leave the same remainder on division by 3. Show R is an equivalence relation and find all classes. <em>(Answer Q3.)</em></p>
+  </div>
+
+  
+  <figure class="dsgt-diagram wide" id="d6-equivalence-partition">
+    <svg class="dsgt-desktop-diagram" viewBox="0 0 640 300" role="img" aria-labelledby="d6-partition-title d6-partition-desc">
+      <title id="d6-partition-title">Equivalence classes partition set A</title>
+      <desc id="d6-partition-desc">Inside universal set A are three disjoint blocks. The first contains 1 and 5 and is class [1]=[5]. The second contains 2, 3 and 6 and is class [2]=[3]=[6]. The third contains 4 and is class [4].</desc>
+      <rect x="18" y="18" width="604" height="260" rx="8" fill="none" stroke="var(--accent)" stroke-opacity=".38" stroke-width="1.5"/><text x="35" y="43" font-size="17" font-weight="700" fill="var(--ink)">A = {1, 2, 3, 4, 5, 6}</text>
+      <g fill="var(--surface)" stroke="var(--accent)" stroke-width="2"><rect x="42" y="70" width="166" height="175" rx="9"/><rect x="237" y="70" width="166" height="175" rx="9"/><rect x="432" y="70" width="166" height="175" rx="9"/></g>
+      <g font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle"><text x="125" y="100">[1] = [5]</text><text x="320" y="100">[2] = [3] = [6]</text><text x="515" y="100">[4]</text></g>
+      <g fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.4"><circle cx="95" cy="165" r="27"/><circle cx="165" cy="165" r="27"/><circle cx="266" cy="165" r="23"/><circle cx="320" cy="165" r="23"/><circle cx="374" cy="165" r="23"/><circle cx="515" cy="165" r="27"/></g>
+      <g font-size="18" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="middle"><text x="95" y="165">1</text><text x="165" y="165">5</text><text x="266" y="165">2</text><text x="320" y="165">3</text><text x="374" y="165">6</text><text x="515" y="165">4</text></g>
+      <g font-size="12" fill="var(--muted)" text-anchor="middle"><text x="125" y="224">2 elements</text><text x="320" y="224">3 elements</text><text x="515" y="224">1 element</text></g>
+    </svg>
+    <svg class="dsgt-mobile-diagram" style="display:none" viewBox="0 0 380 400" role="img" aria-labelledby="d6m-partition-title d6m-partition-desc"><title id="d6m-partition-title">Equivalence classes partition set A</title><desc id="d6m-partition-desc">Three disjoint blocks stacked vertically: [1]=[5] containing 1 and 5, [2]=[3]=[6] containing 2, 3 and 6, and [4] containing 4.</desc><rect x="8" y="8" width="364" height="384" rx="8" fill="none" stroke="var(--accent)" stroke-opacity=".38" stroke-width="1.5"/><text x="24" y="38" font-size="16" font-weight="700" fill="var(--ink)">A = {1, 2, 3, 4, 5, 6}</text><g fill="var(--surface)" stroke="var(--accent)" stroke-width="2"><rect x="24" y="56" width="332" height="100" rx="9"/><rect x="24" y="168" width="332" height="100" rx="9"/><rect x="24" y="280" width="332" height="100" rx="9"/></g><g font-size="15" font-weight="700" fill="var(--ink)"><text x="40" y="82">[1] = [5]</text><text x="40" y="194">[2] = [3] = [6]</text><text x="40" y="306">[4]</text></g><g font-size="12" fill="var(--muted)" text-anchor="end"><text x="340" y="82">2 elements</text><text x="340" y="194">3 elements</text><text x="340" y="306">1 element</text></g><g fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.4"><circle cx="150" cy="122" r="21"/><circle cx="230" cy="122" r="21"/><circle cx="110" cy="234" r="21"/><circle cx="190" cy="234" r="21"/><circle cx="270" cy="234" r="21"/><circle cx="190" cy="346" r="21"/></g><g font-size="18" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="middle"><text x="150" y="122">1</text><text x="230" y="122">5</text><text x="110" y="234">2</text><text x="190" y="234">3</text><text x="270" y="234">6</text><text x="190" y="346">4</text></g></svg>
+    <figcaption>The blocks are pairwise disjoint: no element appears in two classes. Their union is all of A: {1, 5} ∪ {2, 3, 6} ∪ {4} = A. These two conditions are exactly what makes the classes a partition.</figcaption>
+  </figure>
+  <h2 id="s4">4 · Transitive closure and Warshall's algorithm</h2>
+
+  <div class="theory">
+    <span class="source">Teacher's definition — Module 2 PPT, slides 63 and 73</span>
+    <p>A relation R is <strong>transitive</strong> if (a, b) ∈ R and (b, c) ∈ R always forces (a, c) ∈ R.</p>
+    <p>The <strong>transitive closure</strong> of R is the smallest transitive relation that contains R. Equivalently, it is the set of all pairs (a, b) such that there is a directed path of length at least 1 from a to b.</p>
+    <p>For a relation on n elements, the transitive closure is an n × n Boolean matrix T where T<sub>ij</sub> = 1 if there is a path from i to j, and 0 otherwise.</p>
+  </div>
+
+  <p><strong>Simple meaning.</strong> A direct edge tells you one flight. The closure tells you every city you can eventually reach, including by changing planes and including by going round a loop.</p>
+
+  <table>
+    <tr><th>Term</th><th>Meaning in plain words</th></tr>
+    <tr><td>Path of length 1</td><td>A direct pair (a, b) already in R</td></tr>
+    <tr><td>Path of length 2</td><td>a → x → b for some intermediate x</td></tr>
+    <tr><td>Reachability</td><td>There is a path of some length ≥ 1 from a to b</td></tr>
+    <tr><td>Transitive closure R<sup>+</sup></td><td>All reachable pairs</td></tr>
+    <tr><td>Reflexive–transitive closure R<sup>*</sup></td><td>R<sup>+</sup> plus every (a, a). Some books call this "the" closure.</td></tr>
+  </table>
+
+  <h3 id="m2-warshall-rule" data-rail-subsection>The update rule and what k means</h3>
+  <div class="eq">W<sub>ij</sub><sup>(k)</sup> = W<sub>ij</sub><sup>(k−1)</sup> ∨ ( W<sub>ik</sub><sup>(k−1)</sup> ∧ W<sub>kj</sub><sup>(k−1)</sup> )</div>
+  <p class="eq-note">W = matrix &nbsp;·&nbsp; i = row (start) &nbsp;·&nbsp; j = column (end) &nbsp;·&nbsp; k = the intermediate vertex currently allowed &nbsp;·&nbsp; ∨ = OR &nbsp;·&nbsp; ∧ = AND</p>
+  <p>Read it as a sentence: <em>"i reaches j if it already did, or if i reaches the current intermediate k and k reaches j."</em></p>
+  <p><strong>What k means.</strong> After round k, the matrix records every path whose intermediate vertices come only from the first k elements. Round 1 allows paths through vertex 1 only. Round 2 allows paths through vertices 1 and 2. After n rounds, every possible intermediate vertex is allowed, so the matrix is the full transitive closure. That is why the outer loop must run over all vertices in order — you are widening the set of permitted stopovers one vertex at a time.</p>
+
+  <h3 id="m2-warshall-procedure" data-rail-subsection>Procedure</h3>
+  <ol class="steps">
+    <li>Label the elements in a fixed order and write the initial matrix W<sup>(0)</sup> with 1 for each direct pair.</li>
+    <li>For k = first element, then second, … last element:
+      <ul>
+        <li>find every row i with a 1 in column k (i reaches k);</li>
+        <li>find every column j with a 1 in row k (k reaches j);</li>
+        <li>put a 1 in every position (i, j) formed by those rows and columns;</li>
+        <li>write down the new matrix and list the entries that changed.</li>
+      </ul>
+    </li>
+    <li>After the last round, read the pairs straight off the final matrix.</li>
+    <li>Sanity check by tracing the actual paths for two or three pairs.</li>
+  </ol>
+
+  <div class="exam-q">
+<div class="exam-q-title">Verified University question <span class="mu-badge">Summer 2026 · Q.3(a) · 8 marks</span></div>
+<p class="exam-source">A domestic airline maintains a directed flight network among four cities V = {a, b, c, d}. The direct connections are R = {(a, b), (b, d), (d, c), (d, a)}. Find the transitive closure and represent the final connectivity relation.</p>
+<div class="qa-question"><div class="qa-label">Question</div>
+
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+    <p><strong>Step 0 — initial matrix.</strong> Rows and columns in the order a, b, c, d. A 1 means a direct flight.</p>
+    <table>
+      <tr><th>W<sup>(0)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><td><strong>a</strong></td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+      <tr><td><strong>b</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+      <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td><strong>d</strong></td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+    </table>
+
+    <p><strong>Round k = a.</strong> Column a has a 1 in row d, so d reaches a. Row a has a 1 in column b, so a reaches b. Therefore d reaches b. Add (d, b).</p>
+    <table>
+      <tr><th>W<sup>(a)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><td><strong>a</strong></td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+      <tr><td><strong>b</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+      <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td><strong>d</strong></td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+    </table>
+    <p class="eq-note">Added: (d, b). This is the route d → a → b.</p>
+
+    <p><strong>Round k = b.</strong> Column b has 1s in rows a and d. Row b has a 1 in column d. Therefore a reaches d and d reaches d. Add (a, d) and (d, d).</p>
+    <table>
+      <tr><th>W<sup>(b)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><td><strong>a</strong></td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+      <tr><td><strong>b</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+      <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td><strong>d</strong></td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+    </table>
+    <p class="eq-note">Added: (a, d) from a → b → d, and (d, d) from d → a → b → d, a circular route.</p>
+
+    <p><strong>Round k = c.</strong> Column c has a 1 only in row d, and row c has no 1s at all. Nothing can be added.</p>
+    <table>
+      <tr><th>W<sup>(c)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><td><strong>a</strong></td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+      <tr><td><strong>b</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+      <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td><strong>d</strong></td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+    </table>
+    <p class="eq-note">No change. This already tells you c is a dead end: c has no outgoing flight and nothing returns to c.</p>
+
+    <p><strong>Round k = d.</strong> Column d has 1s in rows a, b and d. Row d has 1s in columns a, b, c and d. So rows a, b and d all become 1 in every column.</p>
+    <table>
+      <tr><th>W<sup>(d)</sup> = closure</th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><td><strong>a</strong></td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+      <tr><td><strong>b</strong></td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+      <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td><strong>d</strong></td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+    </table>
+    <p class="eq-note">Added: (a, a), (a, c), (b, a), (b, b), (b, c).</p>
+
+    
+<p><strong>Independent check by tracing paths.</strong> The cycle a → b → d → a lets a, b and d each return to themselves, which is why (a,a), (b,b) and (d,d) appear. From a: a → b → d → c reaches c. From b: b → d → a → … reaches a and c. From d: d → a → b reaches b and d → c reaches c. From c: no outgoing edge, so no pair starts at c. Every one of the twelve entries is accounted for.</p>
+<p><strong>Direct, layover and circular routes (the question's wording).</strong> Direct: (a,b), (b,d), (d,c), (d,a). Layover: (a,d), (a,c), (b,a), (b,c), (d,b), (b,? ) and so on — all the new pairs. Circular: (a,a), (b,b), (d,d).</p>
+<p><strong>Note on the diagonal.</strong> We used paths of length at least 1, which is the convention in your lecture slides. If your lecturer instead starts the matrix with 1s on the diagonal, then (c,c) is also added and every diagonal entry is 1. Say which convention you used in your answer; both are defensible, but do not mix them.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+      <div class="eq">R<sup>+</sup> = {(a,a), (a,b), (a,c), (a,d), (b,a), (b,b), (b,c), (b,d), (d,a), (d,b), (d,c), (d,d)}</div>
+      <p class="qa-final-text">Twelve pairs. Row c is entirely zero, so c is related to nothing — not even to itself.</p>
+    </div>
+</div>
+
+  <div class="example qa">
+<div class="example-title">Full Warshall solution — airline network</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>A domestic airline has directed flight network V = {a, b, c, d} with direct connections R = {(a, b), (b, d), (d, c), (d, a)}. Find the transitive closure using Warshall’s algorithm and state the final connectivity relation.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+    <p><strong>Step 0 — initial matrix.</strong> Rows and columns in the order a, b, c, d. A 1 means a direct flight.</p>
+    <table>
+      <tr><th>W<sup>(0)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><td><strong>a</strong></td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+      <tr><td><strong>b</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+      <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td><strong>d</strong></td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+    </table>
+
+    <p><strong>Round k = a.</strong> Column a has a 1 in row d, so d reaches a. Row a has a 1 in column b, so a reaches b. Therefore d reaches b. Add (d, b).</p>
+    <table>
+      <tr><th>W<sup>(a)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><td><strong>a</strong></td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+      <tr><td><strong>b</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+      <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td><strong>d</strong></td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+    </table>
+    <p class="eq-note">Added: (d, b). This is the route d → a → b.</p>
+
+    <p><strong>Round k = b.</strong> Column b has 1s in rows a and d. Row b has a 1 in column d. Therefore a reaches d and d reaches d. Add (a, d) and (d, d).</p>
+    <table>
+      <tr><th>W<sup>(b)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><td><strong>a</strong></td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+      <tr><td><strong>b</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+      <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td><strong>d</strong></td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+    </table>
+    <p class="eq-note">Added: (a, d) from a → b → d, and (d, d) from d → a → b → d, a circular route.</p>
+
+    <p><strong>Round k = c.</strong> Column c has a 1 only in row d, and row c has no 1s at all. Nothing can be added.</p>
+    <table>
+      <tr><th>W<sup>(c)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><td><strong>a</strong></td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+      <tr><td><strong>b</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+      <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td><strong>d</strong></td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+    </table>
+    <p class="eq-note">No change. This already tells you c is a dead end: c has no outgoing flight and nothing returns to c.</p>
+
+    <p><strong>Round k = d.</strong> Column d has 1s in rows a, b and d. Row d has 1s in columns a, b, c and d. So rows a, b and d all become 1 in every column.</p>
+    <table>
+      <tr><th>W<sup>(d)</sup> = closure</th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><td><strong>a</strong></td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+      <tr><td><strong>b</strong></td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+      <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td><strong>d</strong></td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+    </table>
+    <p class="eq-note">Added: (a, a), (a, c), (b, a), (b, b), (b, c).</p>
+
+    
+<p><strong>Independent check by tracing paths.</strong> The cycle a → b → d → a lets a, b and d each return to themselves, which is why (a,a), (b,b) and (d,d) appear. From a: a → b → d → c reaches c. From b: b → d → a → … reaches a and c. From d: d → a → b reaches b and d → c reaches c. From c: no outgoing edge, so no pair starts at c. Every one of the twelve entries is accounted for.</p>
+<p><strong>Direct, layover and circular routes (the question's wording).</strong> Direct: (a,b), (b,d), (d,c), (d,a). Layover: (a,d), (a,c), (b,a), (b,c), (d,b), (b,? ) and so on — all the new pairs. Circular: (a,a), (b,b), (d,d).</p>
+<p><strong>Note on the diagonal.</strong> We used paths of length at least 1, which is the convention in your lecture slides. If your lecturer instead starts the matrix with 1s on the diagonal, then (c,c) is also added and every diagonal entry is 1. Say which convention you used in your answer; both are defensible, but do not mix them.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+      <div class="eq">R<sup>+</sup> = {(a,a), (a,b), (a,c), (a,d), (b,a), (b,b), (b,c), (b,d), (d,a), (d,b), (d,c), (d,d)}</div>
+      <p class="qa-final-text">Twelve pairs. Row c is entirely zero, so c is related to nothing — not even to itself.</p>
+    </div>
+</div>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes</h3>
+    <ul>
+      <li>Using the <em>updated</em> matrix in the wrong places. Round k uses the matrix from round k−1 throughout.</li>
+      <li>Skipping rounds because "nothing seems to change". Write the matrix anyway — examiners award method marks.</li>
+      <li>Adding a pair because a path exists backwards. Paths are directed; (a, c) does not give (c, a).</li>
+      <li>Reading the closure off the original matrix instead of the final one.</li>
+      <li>Forgetting that a vertex on a cycle gets a self-pair, while a vertex not on a cycle does not (under the length ≥ 1 convention).</li>
+    </ul>
+  </div>
+
+  <div class="practice">
+    <h3>Quick check 4</h3>
+    <p>A = {a, b, c, d} and R = {(a,b), (b,a), (b,c), (c,d), (d,a)}. Find the transitive closure using Warshall's algorithm, showing each round. <em>(Answer Q4.)</em></p>
+  </div>
+
+  
+  <figure class="dsgt-diagram wide" id="d7-warshall-network">
+    <svg class="dsgt-desktop-diagram" viewBox="0 0 700 535" role="img" aria-labelledby="d7-warshall-title d7-warshall-desc">
+      <title id="d7-warshall-title">Airline network and transitive reachability</title>
+      <desc id="d7-warshall-desc">The direct network has a to b, b to d, d to a and d to c. Nodes a, b and d form a directed cycle. Additional derived reachability pairs are listed, followed by the final closure matrix in which rows a, b and d are all ones and row c is all zeros.</desc>
+      <defs><marker id="d7-direct-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6Z" fill="var(--accent)"/></marker></defs>
+      <text x="170" y="28" text-anchor="middle" font-size="17" font-weight="700" fill="var(--ink)">Direct airline routes</text>
+      <g fill="none" stroke="var(--accent)" stroke-width="2.6" marker-end="url(#d7-direct-arrow)"><path d="M112 142L197 88"/><path d="M220 99V201"/><path d="M197 224L112 170"/><path d="M244 230H310"/></g>
+      <g fill="var(--bg)" stroke="var(--accent)" stroke-width="2.2"><circle cx="95" cy="155" r="24"/><circle cx="220" cy="75" r="24"/><circle cx="220" cy="230" r="24"/><circle cx="335" cy="230" r="24"/></g>
+      <g fill="var(--ink)" font-size="19" font-weight="700" text-anchor="middle" dominant-baseline="middle"><text x="95" y="155">a</text><text x="220" y="75">b</text><text x="220" y="230">d</text><text x="335" y="230">c</text></g>
+      <g font-size="12" fill="var(--muted)" text-anchor="middle"><text x="157" y="102">a → b</text><text x="242" y="151">b → d</text><text x="150" y="218">d → a</text><text x="285" y="218">d → c</text></g>
+      <path d="M376 18V290" stroke="var(--accent)" stroke-opacity=".38" stroke-width="1.2"/>
+      <text x="402" y="28" font-size="17" font-weight="700" fill="var(--ink)">Additional reachability</text>
+      <path d="M405 52H454" stroke="var(--accent)" stroke-opacity=".68" stroke-width="2.2" stroke-dasharray="6 4"/><path d="M449 47L456 52L449 57" fill="none" stroke="var(--accent)" stroke-opacity=".68" stroke-width="1.5"/>
+      <text x="465" y="56" font-size="12" fill="var(--muted)">derived through paths</text>
+      <g font-size="14" fill="var(--ink)"><text x="405" y="93" font-weight="700">From a:</text><text x="475" y="93">(a,a), (a,d), (a,c)</text><text x="405" y="136" font-weight="700">From b:</text><text x="475" y="136">(b,a), (b,b), (b,c)</text><text x="405" y="179" font-weight="700">From d:</text><text x="475" y="179">(d,b), (d,d)</text></g>
+      <text x="405" y="226" font-size="12" fill="var(--muted)">Cycle a → b → d → a</text><text x="405" y="246" font-size="12" fill="var(--muted)">makes a, b and d mutually reachable.</text><text x="405" y="270" font-size="12" fill="var(--muted)">c has no outgoing route.</text>
+      <path d="M22 300H678" stroke="var(--accent)" stroke-opacity=".38" stroke-width="1.2"/>
+      <text x="350" y="330" text-anchor="middle" font-size="17" font-weight="700" fill="var(--ink)">Final transitive-closure matrix</text>
+      <g font-size="14" font-weight="700" fill="var(--ink)" text-anchor="middle"><text x="326" y="359">a</text><text x="370" y="359">b</text><text x="414" y="359">c</text><text x="458" y="359">d</text><text x="282" y="391">a</text><text x="282" y="423">b</text><text x="282" y="455">c</text><text x="282" y="487">d</text></g>
+      <g stroke="var(--accent)" stroke-opacity=".38" fill="none"><rect x="304" y="370" width="176" height="128"/><path d="M348 370V498M392 370V498M436 370V498M304 402H480M304 434H480M304 466H480"/></g>
+      <g fill="var(--accent-soft)" stroke="var(--accent)" stroke-width=".8"><rect x="304" y="370" width="44" height="32"/><rect x="348" y="370" width="44" height="32"/><rect x="392" y="370" width="44" height="32"/><rect x="436" y="370" width="44" height="32"/><rect x="304" y="402" width="44" height="32"/><rect x="348" y="402" width="44" height="32"/><rect x="392" y="402" width="44" height="32"/><rect x="436" y="402" width="44" height="32"/><rect x="304" y="466" width="44" height="32"/><rect x="348" y="466" width="44" height="32"/><rect x="392" y="466" width="44" height="32"/><rect x="436" y="466" width="44" height="32"/></g>
+      <g font-size="16" fill="var(--ink)" text-anchor="middle" dominant-baseline="middle"><text x="326" y="386">1</text><text x="370" y="386">1</text><text x="414" y="386">1</text><text x="458" y="386">1</text><text x="326" y="418">1</text><text x="370" y="418">1</text><text x="414" y="418">1</text><text x="458" y="418">1</text><text x="326" y="450">0</text><text x="370" y="450">0</text><text x="414" y="450">0</text><text x="458" y="450">0</text><text x="326" y="482">1</text><text x="370" y="482">1</text><text x="414" y="482">1</text><text x="458" y="482">1</text></g>
+    </svg>
+    <svg class="dsgt-mobile-diagram" style="display:none" viewBox="0 0 380 690" role="img" aria-labelledby="d7m-warshall-title d7m-warshall-desc"><title id="d7m-warshall-title">Mobile airline network and reachability matrix</title><desc id="d7m-warshall-desc">Direct routes are a to b, b to d, d to c and d to a. Derived reachability through longer paths is listed below. Rows a, b and d of the closure matrix are all ones, and row c is all zeros.</desc><defs><marker id="d7m-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6Z" fill="var(--accent)"/></marker></defs><text x="190" y="24" text-anchor="middle" font-size="16" font-weight="700" fill="var(--ink)">Direct airline routes</text><g stroke="var(--accent)" stroke-width="2.3" fill="none" marker-end="url(#d7m-arrow)"><path d="M105 112L168 82"/><path d="M190 94V171"/><path d="M171 190L105 133"/><path d="M212 190H273"/></g><g fill="var(--bg)" stroke="var(--accent)" stroke-width="2"><circle cx="85" cy="122" r="19"/><circle cx="190" cy="70" r="19"/><circle cx="190" cy="190" r="19"/><circle cx="300" cy="190" r="19"/></g><g fill="var(--ink)" font-size="17" font-weight="700" text-anchor="middle" dominant-baseline="middle"><text x="85" y="122">a</text><text x="190" y="70">b</text><text x="190" y="190">d</text><text x="300" y="190">c</text></g><g fill="var(--muted)" font-size="11" text-anchor="middle"><text x="130" y="82">a → b</text><text x="209" y="135">b → d</text><text x="119" y="177">d → a</text><text x="244" y="178">d → c</text></g><path d="M20 228H360" stroke="var(--accent)" stroke-opacity=".38"/><text x="22" y="257" font-size="15" font-weight="700" fill="var(--ink)">Additional reachability (via paths)</text><path d="M24 280H67" stroke="var(--accent)" stroke-opacity=".68" stroke-width="2" stroke-dasharray="5 4"/><path d="M62 275L69 280L62 285" fill="none" stroke="var(--accent)" stroke-opacity=".68" stroke-width="1.5"/><text x="80" y="284" font-size="12" fill="var(--muted)">derived, not a direct edge</text><g font-size="13" fill="var(--ink)"><text x="24" y="318"><tspan font-weight="700">From a:</tspan> (a,a), (a,d), (a,c)</text><text x="24" y="348"><tspan font-weight="700">From b:</tspan> (b,a), (b,b), (b,c)</text><text x="24" y="378"><tspan font-weight="700">From d:</tspan> (d,b), (d,d)</text></g><path d="M20 398H360" stroke="var(--accent)" stroke-opacity=".38"/><text x="190" y="427" text-anchor="middle" font-size="16" font-weight="700" fill="var(--ink)">Final transitive-closure matrix</text><g font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle"><text x="146" y="458">a</text><text x="190" y="458">b</text><text x="234" y="458">c</text><text x="278" y="458">d</text><text x="101" y="490">a</text><text x="101" y="522">b</text><text x="101" y="554">c</text><text x="101" y="586">d</text></g><g stroke="var(--accent)" stroke-opacity=".38" fill="none"><rect x="124" y="468" width="176" height="128"/><path d="M168 468V596M212 468V596M256 468V596M124 500H300M124 532H300M124 564H300"/></g><g fill="var(--accent-soft)" stroke="var(--accent)" stroke-width=".8"><rect x="124" y="468" width="44" height="32"/><rect x="168" y="468" width="44" height="32"/><rect x="212" y="468" width="44" height="32"/><rect x="256" y="468" width="44" height="32"/><rect x="124" y="500" width="44" height="32"/><rect x="168" y="500" width="44" height="32"/><rect x="212" y="500" width="44" height="32"/><rect x="256" y="500" width="44" height="32"/><rect x="124" y="564" width="44" height="32"/><rect x="168" y="564" width="44" height="32"/><rect x="212" y="564" width="44" height="32"/><rect x="256" y="564" width="44" height="32"/></g><g font-size="15" fill="var(--ink)" text-anchor="middle" dominant-baseline="middle"><text x="146" y="484">1</text><text x="190" y="484">1</text><text x="234" y="484">1</text><text x="278" y="484">1</text><text x="146" y="516">1</text><text x="190" y="516">1</text><text x="234" y="516">1</text><text x="278" y="516">1</text><text x="146" y="548">0</text><text x="190" y="548">0</text><text x="234" y="548">0</text><text x="278" y="548">0</text><text x="146" y="580">1</text><text x="190" y="580">1</text><text x="234" y="580">1</text><text x="278" y="580">1</text></g><text x="190" y="628" text-anchor="middle" font-size="12" fill="var(--muted)">Cycle a → b → d → a gives diagonal 1s.</text><text x="190" y="649" text-anchor="middle" font-size="12" fill="var(--muted)">c has no outgoing path, so row c is all 0s.</text></svg>
+    <figcaption>Solid arrows are direct routes; dashed pairs are additional reachability found by following paths. The cycle among a, b and d gives each of those vertices a diagonal 1 (a non-empty path returns to itself). Since c has no outgoing edge, no vertex is reachable from c and its entire row is 0.</figcaption>
+  </figure>
+  <h2 id="s5">5 · Partial orders, posets and lattices</h2>
+
+  <div class="theory">
+    <span class="source">Definitions — Module 2 PPT, slides 53–54 and the syllabus's poset/lattice section</span>
+    <p>A relation R on A is a <strong>partial order</strong> if it is reflexive, antisymmetric and transitive. The pair (A, R) is then called a <strong>partially ordered set</strong>, or <strong>poset</strong>.</p>
+    <p>For elements a, b of a poset:</p>
+    <ul>
+      <li><strong>a ≤ b</strong> means (a, b) ∈ R. In a divisibility poset, a ≤ b means a divides b.</li>
+      <li><strong>Minimal element:</strong> no element of A is strictly below it.</li>
+      <li><strong>Maximal element:</strong> no element of A is strictly above it.</li>
+      <li><strong>Least element:</strong> an element below every element of A.</li>
+      <li><strong>Greatest element:</strong> an element above every element of A.</li>
+      <li><strong>Lower bound of a set B:</strong> an element of A below every element of B. The largest such bound is the <strong>greatest lower bound</strong>, or <strong>meet</strong> (written a ∧ b).</li>
+      <li><strong>Upper bound of B:</strong> an element of A above every element of B. The smallest such bound is the <strong>least upper bound</strong>, or <strong>join</strong> (written a ∨ b).</li>
+      <li><strong>Lattice:</strong> a poset in which <em>every pair</em> of elements has both a meet and a join inside the set.</li>
+    </ul>
+  </div>
+
+  <p><strong>Why divisibility is a partial order.</strong> For positive integers: x|x (reflexive); x|y and y|x force x = y (antisymmetric); x|y and y|z force x|z (transitive). It is only a <em>partial</em> order because not every pair is comparable — 2 does not divide 3 and 3 does not divide 2.</p>
+
+  <p><strong>Meet and join under divisibility.</strong> When the poset is divisibility on a set of positive integers, and the answers happen to lie in the set:</p>
+  <div class="eq">meet(a, b) = gcd(a, b) &nbsp;&nbsp;&nbsp; join(a, b) = lcm(a, b)</div>
+  <p>This is a shortcut, not a definition. The definition is "greatest lower bound" and "least upper bound" <em>within A</em>. If the gcd or lcm is not an element of A, then that meet or join does not exist in the poset, and the poset is not a lattice.</p>
+
+  <div class="exam-q">
+<div class="exam-q-title">Verified University question <span class="mu-badge">Summer 2026 · Q.3(b) · 7 marks</span></div>
+<p class="exam-source">A cloud access-control system organises permission levels A = {1, 2, 3, 6, 12, 24, 36, 72} by divisibility: (x, y) ∈ R if x | y. Write all ordered pairs, construct the Hasse diagram, and analyse whether the poset is a lattice, justifying with meet and join examples.</p>
+<div class="qa-question"><div class="qa-label">Question</div>
+
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>For each element x, list the elements of A that x divides. Working systematically prevents omissions:</p>
+<table>
+      <tr><th>x</th><th>Elements of A divisible by x</th><th>Number</th></tr>
+      <tr><td>1</td><td>1, 2, 3, 6, 12, 24, 36, 72</td><td>8</td></tr>
+      <tr><td>2</td><td>2, 6, 12, 24, 36, 72</td><td>6</td></tr>
+      <tr><td>3</td><td>3, 6, 12, 24, 36, 72</td><td>6</td></tr>
+      <tr><td>6</td><td>6, 12, 24, 36, 72</td><td>5</td></tr>
+      <tr><td>12</td><td>12, 24, 36, 72</td><td>4</td></tr>
+      <tr><td>24</td><td>24, 72</td><td>2</td></tr>
+      <tr><td>36</td><td>36, 72</td><td>2</td></tr>
+      <tr><td>72</td><td>72</td><td>1</td></tr>
+    </table>
+<p>So R contains 8 + 6 + 6 + 5 + 4 + 2 + 2 + 1 = 34 ordered pairs. In roster form:</p>
+<p>R = {(1,1),(1,2),(1,3),(1,6),(1,12),(1,24),(1,36),(1,72), (2,2),(2,6),(2,12),(2,24),(2,36),(2,72), (3,3),(3,6),(3,12),(3,24),(3,36),(3,72), (6,6),(6,12),(6,24),(6,36),(6,72), (12,12),(12,24),(12,36),(12,72), (24,24),(24,72), (36,36),(36,72), (72,72)}.</p>
+<p><strong>Check.</strong> Every element divides itself, so all eight diagonal pairs appear. The count is 34, not 8 × 8 = 64, because most pairs fail the divisibility test.</p>
+<p><strong>Part 2 — Hasse diagram: what it would show (no drawing here)</strong></p>
+<p>A Hasse diagram draws one dot per element, with y placed above x and joined by a line exactly when <strong>y covers x</strong>: x | y, x ≠ y, and there is no element z of A with x | z | y. The covering pairs for this set are:</p>
+<div class="eq">1–2, 1–3, 2–6, 3–6, 6–12, 12–24, 12–36, 24–72, 36–72</div>
+<p>Read the diagram bottom-up: 1 is at the bottom; 72 is at the top; 24 and 36 sit side by side on the level below 72. A line means "covers", not "divides" — 1 divides 72 but there is no direct line, because intermediate elements exist.</p>
+<p>If you are asked to draw it, place: level 0 — 1; level 1 — 2, 3; level 2 — 6; level 3 — 12; level 4 — 24, 36; level 5 — 72.</p>
+<p><strong>Part 3 — is it a lattice? Meet and join for every kind of pair</strong></p>
+<p>The test is: for every pair, does gcd lie in A, and does lcm lie in A? Work through representative pairs, including the awkward ones.</p>
+<table>
+      <tr><th>Pair (a, b)</th><th>gcd — meet</th><th>In A?</th><th>lcm — join</th><th>In A?</th></tr>
+      <tr><td>(2, 3)</td><td>1</td><td>Yes</td><td>6</td><td>Yes</td></tr>
+      <tr><td>(6, 12)</td><td>6</td><td>Yes</td><td>12</td><td>Yes</td></tr>
+      <tr><td>(12, 24)</td><td>12</td><td>Yes</td><td>24</td><td>Yes</td></tr>
+      <tr><td>(12, 36)</td><td>12</td><td>Yes</td><td>36</td><td>Yes</td></tr>
+      <tr><td>(24, 36)</td><td>12</td><td>Yes</td><td>72</td><td>Yes</td></tr>
+      <tr><td>(24, 72)</td><td>24</td><td>Yes</td><td>72</td><td>Yes</td></tr>
+      <tr><td>(2, 72)</td><td>2</td><td>Yes</td><td>72</td><td>Yes</td></tr>
+      <tr><td>(1, 72)</td><td>1</td><td>Yes</td><td>72</td><td>Yes</td></tr>
+    </table>
+<p>The critical pair is (24, 36): the meet is 12 (not 24 or 36) and the join is 72. Both are in A. Every other pair behaves the same way, because A was built from the divisors of 72 = 2³ · 3² and is closed under gcd and lcm for these elements.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p><strong>Conclusion.</strong> Every pair has a meet and a join in A, so (A, |) is a lattice. It is also a bounded lattice: 1 is the least element (the zero) and 72 is the greatest element (the one).</p>
+<p><strong>Justification sentence for the answer sheet.</strong> "For the pair (24, 36), meet = gcd(24, 36) = 12 ∈ A and join = lcm(24, 36) = 72 ∈ A. Since gcd and lcm of every pair lie in A, the poset is a lattice."</p>
+</div>
+</div>
+
+  <div class="example qa">
+<div class="example-title">Part 1 — all ordered pairs of R</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>A cloud access-control system organises permission levels A = {1, 2, 3, 6, 12, 24, 36, 72} by divisibility: (x, y) ∈ R if x | y. Write all ordered pairs, construct the Hasse diagram, and determine whether the poset is a lattice, justifying with meet and join examples.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>For each element x, list the elements of A that x divides. Working systematically prevents omissions:</p>
+<table>
+      <tr><th>x</th><th>Elements of A divisible by x</th><th>Number</th></tr>
+      <tr><td>1</td><td>1, 2, 3, 6, 12, 24, 36, 72</td><td>8</td></tr>
+      <tr><td>2</td><td>2, 6, 12, 24, 36, 72</td><td>6</td></tr>
+      <tr><td>3</td><td>3, 6, 12, 24, 36, 72</td><td>6</td></tr>
+      <tr><td>6</td><td>6, 12, 24, 36, 72</td><td>5</td></tr>
+      <tr><td>12</td><td>12, 24, 36, 72</td><td>4</td></tr>
+      <tr><td>24</td><td>24, 72</td><td>2</td></tr>
+      <tr><td>36</td><td>36, 72</td><td>2</td></tr>
+      <tr><td>72</td><td>72</td><td>1</td></tr>
+    </table>
+<p>So R contains 8 + 6 + 6 + 5 + 4 + 2 + 2 + 1 = 34 ordered pairs. In roster form:</p>
+<p>R = {(1,1),(1,2),(1,3),(1,6),(1,12),(1,24),(1,36),(1,72), (2,2),(2,6),(2,12),(2,24),(2,36),(2,72), (3,3),(3,6),(3,12),(3,24),(3,36),(3,72), (6,6),(6,12),(6,24),(6,36),(6,72), (12,12),(12,24),(12,36),(12,72), (24,24),(24,72), (36,36),(36,72), (72,72)}.</p>
+<p><strong>Check.</strong> Every element divides itself, so all eight diagonal pairs appear. The count is 34, not 8 × 8 = 64, because most pairs fail the divisibility test.</p>
+<p><strong>Part 2 — Hasse diagram: what it would show (no drawing here)</strong></p>
+<p>A Hasse diagram draws one dot per element, with y placed above x and joined by a line exactly when <strong>y covers x</strong>: x | y, x ≠ y, and there is no element z of A with x | z | y. The covering pairs for this set are:</p>
+<div class="eq">1–2, 1–3, 2–6, 3–6, 6–12, 12–24, 12–36, 24–72, 36–72</div>
+<p>Read the diagram bottom-up: 1 is at the bottom; 72 is at the top; 24 and 36 sit side by side on the level below 72. A line means "covers", not "divides" — 1 divides 72 but there is no direct line, because intermediate elements exist.</p>
+<p>If you are asked to draw it, place: level 0 — 1; level 1 — 2, 3; level 2 — 6; level 3 — 12; level 4 — 24, 36; level 5 — 72.</p>
+<p><strong>Part 3 — is it a lattice? Meet and join for every kind of pair</strong></p>
+<p>The test is: for every pair, does gcd lie in A, and does lcm lie in A? Work through representative pairs, including the awkward ones.</p>
+<table>
+      <tr><th>Pair (a, b)</th><th>gcd — meet</th><th>In A?</th><th>lcm — join</th><th>In A?</th></tr>
+      <tr><td>(2, 3)</td><td>1</td><td>Yes</td><td>6</td><td>Yes</td></tr>
+      <tr><td>(6, 12)</td><td>6</td><td>Yes</td><td>12</td><td>Yes</td></tr>
+      <tr><td>(12, 24)</td><td>12</td><td>Yes</td><td>24</td><td>Yes</td></tr>
+      <tr><td>(12, 36)</td><td>12</td><td>Yes</td><td>36</td><td>Yes</td></tr>
+      <tr><td>(24, 36)</td><td>12</td><td>Yes</td><td>72</td><td>Yes</td></tr>
+      <tr><td>(24, 72)</td><td>24</td><td>Yes</td><td>72</td><td>Yes</td></tr>
+      <tr><td>(2, 72)</td><td>2</td><td>Yes</td><td>72</td><td>Yes</td></tr>
+      <tr><td>(1, 72)</td><td>1</td><td>Yes</td><td>72</td><td>Yes</td></tr>
+    </table>
+<p>The critical pair is (24, 36): the meet is 12 (not 24 or 36) and the join is 72. Both are in A. Every other pair behaves the same way, because A was built from the divisors of 72 = 2³ · 3² and is closed under gcd and lcm for these elements.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p><strong>Conclusion.</strong> Every pair has a meet and a join in A, so (A, |) is a lattice. It is also a bounded lattice: 1 is the least element (the zero) and 72 is the greatest element (the one).</p>
+<p><strong>Justification sentence for the answer sheet.</strong> "For the pair (24, 36), meet = gcd(24, 36) = 12 ∈ A and join = lcm(24, 36) = 72 ∈ A. Since gcd and lcm of every pair lie in A, the poset is a lattice."</p>
+</div>
+</div>
+
+  <div class="example">
+<div class="example-title">When a poset is <em>not</em> a lattice — the counterexample you should memorise</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Let S = {2, 3, 4, 6} under divisibility. Show that (S, |) is not a lattice.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
+<p>Let S = {2, 3, 4, 6} under divisibility. Take the pair (3, 4).</p>
+<p>gcd(3, 4) = 1, but 1 ∉ S. So no element of S is a lower bound of {3, 4} that is greatest — the meet does not exist inside S. Also lcm(3, 4) = 12 ∉ S. Either failure is enough.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final Answer</div>
+<p><strong>Conclusion.</strong> (S, |) is a poset but <em>not</em> a lattice. A set being a poset never automatically makes it a lattice.</p>
+</div>
+</div>
+
+  <h3 id="m2-chain-antichain" data-rail-subsection>Chain and antichain — one line each</h3>
+  <p><strong>Chain:</strong> a subset in which every two elements are comparable. In the example, {1, 2, 6, 12, 24, 72} is a chain. <strong>Antichain:</strong> a subset in which no two distinct elements are comparable. In the example, {24, 36} and {2, 3} are antichains.</p>
+
+  <div class="common-mistakes">
+    <h3>Common mistakes</h3>
+    <ul>
+      <li>Assuming "poset" implies "lattice". It does not; you must check every pair.</li>
+      <li>Computing gcd and lcm but forgetting to check that the answers lie in A.</li>
+      <li>Confusing minimal with least. A poset can have several minimal elements but at most one least element.</li>
+      <li>Drawing a Hasse diagram with an edge for every divisibility pair instead of only covering pairs.</li>
+      <li>Forgetting the diagonal pairs when listing R for a partial order.</li>
+    </ul>
+  </div>
+
+  <div class="practice">
+    <h3>Quick check 5</h3>
+    <p>(a) Is A = {1, 2, 4, 8, 16} under divisibility a lattice? (b) Is S = {2, 3, 4, 6} under divisibility a lattice? Justify each with a meet and a join. <em>(Answer Q5.)</em></p>
+  </div>
+
+  
+  <figure class="dsgt-diagram wide" id="d8-hasse-divisibility">
+    <svg class="dsgt-desktop-diagram" viewBox="0 0 660 490" role="img" aria-labelledby="d8-hasse-title d8-hasse-desc">
+      <title id="d8-hasse-title">Hasse diagram of divisibility on the set</title>
+      <desc id="d8-hasse-desc">The divisibility poset has levels: 1; then 2 and 3; then 6; then 12; then 24 and 36; then 72. The only edges are the nine covering pairs specified for the poset.</desc>
+      <g stroke="var(--accent)" stroke-opacity=".68" stroke-width="2" fill="none">
+        <path d="M290 420L220 345M290 420L360 345M220 345L290 270M360 345L290 270M290 270L290 195M290 195L220 120M290 195L360 120M220 120L290 45M360 120L290 45"/>
+      </g>
+      <g fill="var(--bg)" stroke="var(--accent)" stroke-width="2.2"><circle cx="290" cy="420" r="22"/><circle cx="220" cy="345" r="22"/><circle cx="360" cy="345" r="22"/><circle cx="290" cy="270" r="22"/><circle cx="290" cy="195" r="22"/><circle cx="220" cy="120" r="22"/><circle cx="360" cy="120" r="22"/><circle cx="290" cy="45" r="22"/></g>
+      <g fill="var(--ink)" font-size="16" font-weight="700" text-anchor="middle" dominant-baseline="middle"><text x="290" y="420">1</text><text x="220" y="345">2</text><text x="360" y="345">3</text><text x="290" y="270">6</text><text x="290" y="195">12</text><text x="220" y="120">24</text><text x="360" y="120">36</text><text x="290" y="45">72</text></g>
+      <g fill="var(--muted)" font-size="12" text-anchor="end"><text x="90" y="424">Level 0</text><text x="90" y="349">Level 1</text><text x="90" y="274">Level 2</text><text x="90" y="199">Level 3</text><text x="90" y="124">Level 4</text><text x="90" y="49">Level 5</text></g>
+      <rect x="445" y="165" width="195" height="150" rx="7" fill="var(--surface)" stroke="var(--accent)" stroke-opacity=".38"/><text x="542" y="193" text-anchor="middle" font-size="15" font-weight="700" fill="var(--ink)">For 24 and 36</text><text x="542" y="236" text-anchor="middle" font-size="20" font-weight="700" fill="var(--accent)">24 ∧ 36 = 12</text><text x="542" y="277" text-anchor="middle" font-size="20" font-weight="700" fill="var(--accent)">24 ∨ 36 = 72</text>
+      <text x="542" y="298" text-anchor="middle" font-size="11" fill="var(--muted)">meet · join</text>
+    </svg>
+    <svg class="dsgt-mobile-diagram" style="display:none" viewBox="0 0 380 590" role="img" aria-labelledby="d8m-hasse-title d8m-hasse-desc"><title id="d8m-hasse-title">Hasse diagram of divisibility on the set</title><desc id="d8m-hasse-desc">Levels from bottom: 1; then 2 and 3; then 6; then 12; then 24 and 36; then 72. Only the nine covering edges are drawn. The meet of 24 and 36 is 12 and the join is 72.</desc><g stroke="var(--accent)" stroke-opacity=".68" stroke-width="2" fill="none"><path d="M190 440L135 365M190 440L245 365M135 365L190 290M245 365L190 290M190 290L190 215M190 215L135 140M190 215L245 140M135 140L190 65M245 140L190 65"/></g><g fill="var(--bg)" stroke="var(--accent)" stroke-width="2.2"><circle cx="190" cy="440" r="22"/><circle cx="135" cy="365" r="22"/><circle cx="245" cy="365" r="22"/><circle cx="190" cy="290" r="22"/><circle cx="190" cy="215" r="22"/><circle cx="135" cy="140" r="22"/><circle cx="245" cy="140" r="22"/><circle cx="190" cy="65" r="22"/></g><g fill="var(--ink)" font-size="16" font-weight="700" text-anchor="middle" dominant-baseline="middle"><text x="190" y="440">1</text><text x="135" y="365">2</text><text x="245" y="365">3</text><text x="190" y="290">6</text><text x="190" y="215">12</text><text x="135" y="140">24</text><text x="245" y="140">36</text><text x="190" y="65">72</text></g><g fill="var(--muted)" font-size="13"><text x="20" y="444">Level 0</text><text x="20" y="369">Level 1</text><text x="20" y="294">Level 2</text><text x="20" y="219">Level 3</text><text x="20" y="144">Level 4</text><text x="20" y="69">Level 5</text></g><rect x="50" y="486" width="280" height="92" rx="7" fill="var(--surface)" stroke="var(--accent)" stroke-opacity=".38"/><text x="190" y="508" text-anchor="middle" font-size="15" font-weight="700" fill="var(--ink)">For 24 and 36</text><text x="190" y="536" text-anchor="middle" font-size="19" font-weight="700" fill="var(--accent)">24 ∧ 36 = 12  ·  24 ∨ 36 = 72</text><text x="190" y="562" text-anchor="middle" font-size="12" fill="var(--muted)">meet · join</text></svg>
+    <figcaption>Only covering pairs are connected; edges have no arrowheads. The meet (greatest lower bound) of 24 and 36 is 12, and their join (least upper bound) is 72.</figcaption>
+  </figure>
+  <h2 id="practice">Practice questions</h2>
+
+  <div class="practice">
+    <h3 id="m2-practice-set-a" data-rail-subsection>Set A — short checks</h3>
+    <p><strong>Q1.</strong> A = {2, 3, 4}, B = {4, 6, 8}, R = {(a, b) : b = 2a}. Write R, its domain, its range, R<sup>−1</sup>, and the matrix M<sub>R</sub>.</p>
+    <p><strong>Q2.</strong> A = {1, 2, 3, 4}, R = {(1,1), (2,2), (3,3), (4,4), (1,3), (3,1)}. Test reflexivity, symmetry, antisymmetry and transitivity.</p>
+    <p><strong>Q3.</strong> A = {1, 2, 3, 4, 5, 6} with a R b meaning a ≡ b (mod 3). Prove R is an equivalence relation and list its classes.</p>
+    <p><strong>Q4.</strong> A = {a, b, c, d}, R = {(a,b), (b,a), (b,c), (c,d), (d,a)}. Apply Warshall's algorithm and give the transitive closure.</p>
+    <p><strong>Q5.</strong> (a) A = {1, 2, 4, 8, 16} under divisibility: lattice or not? (b) S = {2, 3, 4, 6}: lattice or not? Give reasons.</p>
+  </div>
+
+  <div class="practice">
+    <h3 id="m2-practice-set-b" data-rail-subsection>Set B — exam-style</h3>
+    <p><strong>Q6.</strong> <span class="mu-badge">Winter 2025 · Q.3(a) · 8 marks</span> A Data Science programme has modules M1 … M5 with prerequisite relation R = {(1,2), (2,3), (3,4), (4,5), (1,1), (3,3), (5,5)}. Apply Warshall's algorithm to compute the transitive closure. Then list, for each Mi, the modules it unlocks, and identify the root and terminal modules.</p>
+    <p><strong>Q7.</strong> <span class="mu-badge">Winter 2025 · Q.3(b) · 7 marks</span> S = {1 TB, 2 TB, 4 TB, 8 TB, 16 TB} with a | b. List all pairs, state the covering pairs for the Hasse diagram, and check whether S is a lattice. Identify the least and greatest elements.</p>
+    <p><strong>Q8.</strong> For A = {1, 2, 3, 6, 12, 24, 36, 72} under divisibility, find meet and join of (a) 6 and 36, (b) 24 and 72, (c) 8 is not in A — explain what that tells you about testing membership before computing.</p>
+    <p><strong>Q9.</strong> Explain, in two or three sentences each, the difference between a symmetric relation and an antisymmetric relation, and give one relation on A = {1, 2, 3} that is symmetric but not antisymmetric, and one that is antisymmetric but not symmetric.</p>
+    <p><strong>Q10.</strong> A = {1, 2, 3, 4, 6, 12} under divisibility. Find the minimal elements, maximal elements, least element and greatest element. Is it a lattice?</p>
+  </div>
+
+  <h2 id="answers">Answer key</h2>
+
+  <div class="answer-key">
+    <h3>Q1</h3>
+    <p>R = {(2, 4), (3, 6), (4, 8)}. Domain = {2, 3, 4}. Range = {4, 6, 8}. R<sup>−1</sup> = {(4, 2), (6, 3), (8, 4)}. Matrix (rows 2,3,4; columns 4,6,8):</p>
+    <table>
+      <tr><th>M<sub>R</sub></th><th>4</th><th>6</th><th>8</th></tr>
+      <tr><td><strong>2</strong></td><td>1</td><td>0</td><td>0</td></tr>
+      <tr><td><strong>3</strong></td><td>0</td><td>1</td><td>0</td></tr>
+      <tr><td><strong>4</strong></td><td>0</td><td>0</td><td>1</td></tr>
+    </table>
+    <p>Each element maps to exactly one double, so the 1s lie on the diagonal of this particular matrix — not because it is a diagonal relation, but because the columns happen to be the doubles in order.</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q2</h3>
+    <p><strong>Reflexive:</strong> yes, all four diagonal pairs are present. <strong>Symmetric:</strong> yes, the only off-diagonal pairs are (1,3) and (3,1). <strong>Antisymmetric:</strong> no, because (1,3) and (3,1) both occur with 1 ≠ 3. <strong>Transitive:</strong> yes — the only composite chains are (1,3)(3,1) → (1,1), present, and (3,1)(1,3) → (3,3), present.</p>
+    <p>So R is reflexive, symmetric and transitive: an equivalence relation, with classes [1] = [3] = {1, 3}, [2] = {2}, [4] = {4}.</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q3</h3>
+    <p><strong>Reflexive:</strong> a − a = 0 = 3 · 0, so 3 | (a − a) and a ≡ a (mod 3). <strong>Symmetric:</strong> if 3 | (a − b) then 3 | (b − a), so a ≡ b implies b ≡ a. <strong>Transitive:</strong> if 3 | (a − b) and 3 | (b − c) then 3 | ((a − b) + (b − c)) = (a − c), so a ≡ c. Hence an equivalence relation.</p>
+    <p>Classes: remainder 1 → {1, 4}; remainder 2 → {2, 5}; remainder 0 → {3, 6}. So [1] = [4] = {1,4}, [2] = [5] = {2,5}, [3] = [6] = {3,6}.</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q4 — Warshall, all four rounds</h3>
+    <p>Initial matrix (rows and columns a, b, c, d):</p>
+    <table>
+      <tr><th>W<sup>(0)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><td><strong>a</strong></td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+      <tr><td><strong>b</strong></td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+      <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+      <tr><td><strong>d</strong></td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+    </table>
+    <p><strong>k = a:</strong> column a has 1s in rows b and d; row a has a 1 at b. Add (b,b) and (d,b).</p>
+    <table>
+      <tr><th>W<sup>(a)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><td><strong>a</strong></td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+      <tr><td><strong>b</strong></td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+      <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+      <tr><td><strong>d</strong></td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+    </table>
+    <p><strong>k = b:</strong> column b has 1s in rows a, b, d; row b has 1s in columns a, b, c. So add (a,a), (a,c), (d,a), (d,c). The remaining combinations, such as (a,b) and (d,b), were already present.</p>
+    <table>
+      <tr><th>W<sup>(b)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><td><strong>a</strong></td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+      <tr><td><strong>b</strong></td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+      <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+      <tr><td><strong>d</strong></td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+    </table>
+    <p><strong>k = c:</strong> column c has 1s in rows a, b, d; row c has a 1 at d. Add (a,d), (b,d), (d,d).</p>
+    <table>
+      <tr><th>W<sup>(c)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><td><strong>a</strong></td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+      <tr><td><strong>b</strong></td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+      <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+      <tr><td><strong>d</strong></td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+    </table>
+    <p><strong>k = d:</strong> column d has 1s in rows a, b, c, d; row d has 1s at a, b, c, d. Row c gains a, b, c. Every entry becomes 1.</p>
+    <p>Final: all sixteen pairs. R<sup>+</sup> = A × A. Every city can reach every city, including itself, because a → b → a is already a 2-step cycle and the whole set is strongly connected.</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q5</h3>
+    <p><strong>(a)</strong> Lattice. For any two powers of 2, gcd is the smaller and lcm is the larger, both in A. Example: gcd(4, 8) = 4, lcm(4, 8) = 8. It is a chain, and every chain is a lattice.</p>
+    <p><strong>(b)</strong> Not a lattice. gcd(3, 4) = 1 ∉ S and lcm(3, 4) = 12 ∉ S, so the pair (3, 4) has neither a meet nor a join inside S.</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q6 — Winter 2025 modules</h3>
+    <p>The chain 1 → 2 → 3 → 4 → 5 plus loops at 1, 3, 5. Running Warshall leaves the following reachability matrix:</p>
+    <table>
+      <tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+      <tr><td><strong>1</strong></td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+      <tr><td><strong>2</strong></td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+      <tr><td><strong>3</strong></td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+      <tr><td><strong>4</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+      <tr><td><strong>5</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+    </table>
+    <p>R<sup>+</sup> = {(1,1),(1,2),(1,3),(1,4),(1,5),(2,3),(2,4),(2,5),(3,3),(3,4),(3,5),(4,5),(5,5)} — 13 pairs.</p>
+    <p><strong>Unlocks:</strong> M1 unlocks M2, M3, M4, M5. M2 unlocks M3, M4, M5. M3 unlocks M4, M5. M4 unlocks M5. M5 unlocks nothing further.</p>
+    <p><strong>Root:</strong> M1 (no prerequisites). <strong>Terminal:</strong> M5 (unlocks nothing further). Note M2 and M4 are not on the self-loop list, so (2,2) and (4,4) are absent under the length ≥ 1 convention.</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q7 — Winter 2025 storage plans</h3>
+    <p>S = {1, 2, 4, 8, 16}. Pairs (x, y) with x | y: every (x, y) with x ≤ y in this chain, because each smaller power of 2 divides every larger one. That gives 5 + 4 + 3 + 2 + 1 = 15 pairs.</p>
+    <p><strong>Covers:</strong> 1–2, 2–4, 4–8, 8–16 — a single vertical chain, because each element covers only the next one.</p>
+    <p><strong>Lattice?</strong> Yes. gcd and lcm of two powers of 2 are the smaller and larger of the two, both in S. Example: meet(4, 8) = 4, join(4, 8) = 8.</p>
+    <p><strong>Least:</strong> 1. <strong>Greatest:</strong> 16. It is a bounded lattice.</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q8</h3>
+    <p><strong>(a)</strong> gcd(6, 36) = 6, lcm(6, 36) = 36. Meet 6, join 36 (since 6 | 36, the pair is comparable).</p>
+    <p><strong>(b)</strong> gcd(24, 72) = 24, lcm(24, 72) = 72. Meet 24, join 72.</p>
+    <p><strong>(c)</strong> 8 ∉ A, so 8 is not an element of the poset at all. You cannot ask for its meet or join <em>in A</em>. The lesson: always check that the elements you are pairing belong to the set, and that gcd/lcm land inside the set.</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q9</h3>
+    <p><strong>Symmetric:</strong> every link that goes one way must also come back. <strong>Antisymmetric:</strong> if a link goes both ways, the two endpoints must be the same element. Symmetric forbids one-way links; antisymmetric forbids two-way links between different elements. Neither property implies the other.</p>
+    <p><strong>Symmetric but not antisymmetric:</strong> R = {(1,1),(1,2),(2,1),(2,2),(3,3)} on {1,2,3}. (1,2) and (2,1) are both present with 1 ≠ 2.</p>
+    <p><strong>Antisymmetric but not symmetric:</strong> R = {(1,1),(1,2),(2,2),(3,3)} — the "≤" relation on {1,2,3}. (1,2) has no reverse, but the only two-way pairs are diagonal.</p>
+  </div>
+
+  <div class="answer-key">
+    <h3>Q10</h3>
+    <p>A = {1, 2, 3, 4, 6, 12} under divisibility. 1 divides everything, so <strong>least = 1</strong> and the only minimal element is 1. 12 is divisible by every element, so <strong>greatest = 12</strong> and the only maximal element is 12.</p>
+    <p><strong>Lattice?</strong> Check the awkward pair (4, 6): gcd(4, 6) = 2 ∈ A; lcm(4, 6) = 12 ∈ A. Pair (3, 4): gcd = 1 ∈ A; lcm = 12 ∈ A. Pair (2, 3): gcd = 1, lcm = 6. Pair (6, 4) done. Checking all pairs, gcd and lcm always lie in A, so it is a lattice.</p>
+  </div>
+
+  <h2 id="revision">Last-minute revision sheet</h2>
+
+  <div class="revision-sheet">
+    <h3>Definitions in one line each</h3>
+    <ul>
+      <li><strong>Relation:</strong> a subset of A × B.</li>
+      <li><strong>Domain / range:</strong> first / second coordinates that actually occur.</li>
+      <li><strong>Reflexive:</strong> (a, a) ∈ R for all a.</li>
+      <li><strong>Symmetric:</strong> (a, b) ∈ R ⇒ (b, a) ∈ R.</li>
+      <li><strong>Antisymmetric:</strong> (a, b), (b, a) ∈ R ⇒ a = b.</li>
+      <li><strong>Transitive:</strong> (a, b), (b, c) ∈ R ⇒ (a, c) ∈ R.</li>
+      <li><strong>Equivalence relation:</strong> reflexive + symmetric + transitive.</li>
+      <li><strong>Equivalence class [a]:</strong> all elements related to a.</li>
+      <li><strong>Transitive closure:</strong> all (a, b) with a path from a to b.</li>
+      <li><strong>Partial order:</strong> reflexive + antisymmetric + transitive.</li>
+      <li><strong>Poset:</strong> a set with a partial order.</li>
+      <li><strong>Lattice:</strong> every pair has a meet and a join in the set.</li>
+    </ul>
+
+    <h3>Procedures</h3>
+    <ul>
+      <li><strong>Check properties:</strong> roster → reflexive → symmetric → antisymmetric → transitive → conclude.</li>
+      <li><strong>Prove equivalence:</strong> three labelled proofs + "hence equivalence relation".</li>
+      <li><strong>Classes:</strong> pick unplaced element → collect related elements → cross off → repeat → check disjoint and covering.</li>
+      <li><strong>Warshall:</strong> W<sup>(0)</sup> → rounds k = 1…n → record changes → read pairs.</li>
+      <li><strong>Lattice test:</strong> every pair → gcd and lcm → both in A? → witness pair if not → conclusion.</li>
+    </ul>
+
+    <h3>Sanity checks before you hand in</h3>
+    <ul>
+      <li>Did you list the elements of A before testing reflexivity?</li>
+      <li>Did you give a named counterexample for every property you rejected?</li>
+      <li>In Warshall, did you write a matrix for every k, even when nothing changed?</li>
+      <li>Did you check that gcd and lcm belong to the given set?</li>
+      <li>Did you write a conclusion sentence?</li>
+    </ul>
+  </div>
+
+  <h2 id="sources">Sources, verification and coverage</h2>
+
+  <div class="references">
+    <h3>Teacher material</h3>
+    <p>Mrs. Shamal Bagal, <em>Module 2: Mathematical Relations</em> (PowerPoint, 76 slides): definitions of relation, binary relation, matrix representation, inverse, reflexive/symmetric/antisymmetric/transitive relations, equivalence relations, closures, Warshall's algorithm, equivalence-class example. Examples marked "teacher's" above are reproduced from slides 8, 12, 35–54, 55, 62, 72 and 73–76.</p>
+
+    <h3>Official scope</h3>
+    <p>University of Mumbai, <em>DSGT (2023112)</em>, Module II — Mathematical Relations, 8 hours, CO2. Prescribed topics: definition and representation, properties, equivalence relations and classes, closures, Warshall's algorithm, partial orders, posets, Hasse diagrams, chains and antichains, lattices, types of lattices, sublattices. Self-learning: applications of relations in databases, economics, social networks, sports, medical diagnosis and weather.</p>
+
+    <h3>Questions</h3>
+    <ul>
+      <li><strong>Summer 2026 Q.1(a)</strong> and <strong>Q.3(a)</strong>, <strong>Q.3(b)</strong> — transcribed from the supplied paper, wording condensed but the data preserved exactly.</li>
+      <li><strong>Winter 2025 Q.3(a)</strong>, <strong>Q.3(b)</strong> — read directly from the scanned paper, page 3 of 4.</li>
+      <li>Practice questions 1–5, 8–10 are written for this guide; they are not claimed to be university questions.</li>
+    </ul>
+
+    <h3>Verification performed</h3>
+    <ul>
+      <li>Every Warshall matrix in this guide was recomputed independently with a Boolean-matrix implementation; the Summer 2026 closure (12 pairs) and the Winter 2025 closure (13 pairs) were checked pair by pair against explicit paths.</li>
+      <li>The divisibility poset A = {1,2,3,6,12,24,36,72} was checked programmatically: all 28 pairs have gcd and lcm inside A, which is why the lattice conclusion is "yes".</li>
+      <li>All equivalence classes were re-derived from the roster and checked for disjointness and coverage.</li>
+    </ul>
+
+    <h3>Not covered</h3>
+    <p>Types of lattices (bounded, complemented, distributive) beyond the one-line mention of "bounded"; sublattice proofs; detailed closure theory other than transitive closure; relation composition and paths beyond Warshall; drawing Hasse diagrams and digraphs; application essays. These are deliberate omissions, not oversights.</p>
+  </div>
+
+  <footer>
+    DSGT Module 2 — Selective Exam Essentials · Built from Mrs. Shamal Bagal's Module 2 PPT, the official DSGT syllabus,<br>
+    and the Summer 2026 and Winter 2025 question papers. Not a complete module guide.
+  </footer>
+
+</div>
+
+<div class="topbar" style="display:none"></div>
+<script>
+(function(){
+  var b=document.getElementById('themeToggle'),r=document.documentElement;
+  function dark(){var t=r.getAttribute('data-theme');return t==='dark';}
+  function paint(){var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
+  b.addEventListener('click',function(){var n=dark()?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('sg-theme',n);}catch(e){}paint();});
+  paint();
+})();
+</script>
+<script>
+(function(){
+  var hs=[].slice.call(document.querySelectorAll('.wrap h2[id]'));
+  var subHeads=[].slice.call(document.querySelectorAll('.wrap [data-rail-subsection][id]'));
+  if(!hs.length)return;
+  function pad(n){return (n<10?'0':'')+n;}
+  function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
+  var names=hs.map(function(h){return h.textContent.trim();});
+  var subGroups=hs.map(function(){return [];});
+  var sectionIndex=-1;
+  Array.prototype.forEach.call(document.querySelectorAll('.wrap h2[id], .wrap [data-rail-subsection][id]'),function(h){
+    if(h.tagName==='H2'){sectionIndex=hs.indexOf(h);}
+    else if(sectionIndex>=0)subGroups[sectionIndex].push(h);
+  });
+  function makeSublist(parentLi,mobile,headings){
+    if(!headings.length)return [];
+    var list=el('ol',mobile?'rm-sublist':'rail-sublist');
+    var children=headings.map(function(h,i){
+      var li=el('li'),a=el('a',mobile?'rm-sub-link':'rail-sub-link');
+      var label=h.getAttribute('data-rail-label')||h.textContent.trim();
+      a.href='#'+h.id;a.title=label;
+      a.appendChild(el('span',mobile?'rm-k':'sub-num',String.fromCharCode(65+i)));
+      a.appendChild(el('span',mobile?'rm-sub-label':'sub-lbl',label));
+      li.appendChild(a);list.appendChild(li);
+      return {a:a,heading:h,done:false,top:0,mobile:null};
+    });
+    parentLi.appendChild(list);return children;
+  }
+  var nav=el('nav','rail');nav.setAttribute('aria-label','Section progress');
+  var inn=el('div','rail-in'),top=el('div','rail-top'),sec=el('span','rail-sec','01'),meta=el('span','rail-meta');
+  var pct=el('b',null,'0%');meta.appendChild(el('span',null,'of '+pad(hs.length)));meta.appendChild(pct);
+  var tg=el('button','rail-toggle');tg.type='button';tg.setAttribute('aria-controls','railList');
+  top.appendChild(sec);top.appendChild(meta);top.appendChild(tg);
+  var ol=el('ol','rail-list');ol.id='railList';
+  var fill=el('span','rail-fill');fill.setAttribute('aria-hidden','true');ol.appendChild(fill);
+  var items=hs.map(function(h,i){
+    var li=el('li'),a=el('a'),nd=el('span','node');
+    a.href='#'+h.id;a.title=names[i];nd.setAttribute('aria-hidden','true');
+    a.appendChild(nd);a.appendChild(el('span','num',pad(i+1)));a.appendChild(el('span','lbl',names[i]));
+    li.appendChild(a);var children=makeSublist(li,false,subGroups[i]);
+    ol.appendChild(li);return {a:a,nd:nd,p:-1,done:false,subs:children};
+  });
+  inn.appendChild(top);inn.appendChild(ol);nav.appendChild(inn);document.body.appendChild(nav);
+  var bar=el('div','rm-bar');bar.setAttribute('aria-hidden','true');
+  var tab=el('button','rm-tab');tab.type='button';tab.setAttribute('aria-haspopup','dialog');tab.setAttribute('aria-expanded','false');
+  var tn=el('span',null,'01');tab.appendChild(tn);
+  var back=el('div','rm-back'),sheet=el('div','rm-sheet');sheet.setAttribute('role','dialog');sheet.setAttribute('aria-label','Sections');
+  var sh=el('div','rm-head'),shp=el('b',null,'0%');sh.appendChild(el('span',null,'Sections'));sh.appendChild(shp);
+  var sol=el('ol');
+  var mitems=hs.map(function(h,i){
+    var li=el('li'),a=el('a');a.href='#'+h.id;a.appendChild(el('span','rm-k',pad(i+1)));a.appendChild(el('span',null,names[i]));
+    li.appendChild(a);var children=makeSublist(li,true,subGroups[i]);
+    sol.appendChild(li);a.addEventListener('click',function(){setSheet(false);});
+    children.forEach(function(child){child.mobile=child.a;child.a.addEventListener('click',function(){setSheet(false);});});
+    return {a:a,subs:children};
+  });
+  items.forEach(function(item,i){item.subs.forEach(function(child,j){child.mobile=mitems[i].subs[j].a;});});
+  sheet.appendChild(sh);sheet.appendChild(sol);
+  [bar,tab,back,sheet].forEach(function(n){document.body.appendChild(n);});
+  var moveT,cur=-2,currentSubItem=null,tick=false,centers=null,tops=[],end=0;
+  function setSheet(o,refocus){
+    document.body.classList.toggle('rm-open',o);tab.setAttribute('aria-expanded',String(o));
+    if(o){
+      var target=currentSubItem?currentSubItem.mobile:mitems[cur>=0?cur:0].a;
+      sheet.scrollTop+=target.getBoundingClientRect().top-sheet.getBoundingClientRect().top-sheet.clientHeight/3;
+      try{target.focus({preventScroll:true});}catch(e){}
+    }else if(refocus){tab.focus();}
+  }
+  tab.addEventListener('click',function(){setSheet(!document.body.classList.contains('rm-open'));});
+  back.addEventListener('click',function(){setSheet(false);});
+  addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('rm-open'))setSheet(false,true);});
+  var open;
+  try{var sv=localStorage.getItem('sg-rail');open=sv?sv==='o':innerWidth>=1100;}catch(e){open=innerWidth>=1100;}
+  function paintToggle(){
+    nav.classList.toggle('is-collapsed',!open);
+    tg.textContent=open?'\u2039':'\u203A';
+    tg.setAttribute('aria-expanded',String(open));
+    tg.setAttribute('aria-label',open?'Collapse section progress':'Expand section progress');
+    centers=null;req();
+  }
+  tg.addEventListener('click',function(){open=!open;try{localStorage.setItem('sg-rail',open?'o':'c');}catch(e){}paintToggle();});
+  function measure(){
+    var y=scrollY;tops=hs.map(function(h){return h.getBoundingClientRect().top+y;});
+    items.forEach(function(item){item.subs.forEach(function(child){child.top=child.heading.getBoundingClientRect().top+y;});});
+    end=document.querySelector('.wrap').getBoundingClientRect().bottom+y;
+  }
+  function measureCenters(){centers=items.map(function(it){return it.a.offsetTop+it.a.offsetHeight/2;});}
+  function update(){
+    tick=false;if(!centers)measureCenters();
+    var y=scrollY+innerHeight*.25,c=-1,max=document.documentElement.scrollHeight-innerHeight;
+    var pv=Math.round(Math.max(0,Math.min(1,max>0?scrollY/max:0))*100);pct.textContent=pv+'%';shp.textContent=pv+'%';
+    items.forEach(function(it,i){
+      var nx=i+1<tops.length?tops[i+1]:end,p=Math.max(0,Math.min(1,(y-tops[i])/Math.max(1,nx-tops[i])));
+      if(y>=tops[i])c=i;p=Math.round(p*100)/100;if(p!==it.p){it.p=p;it.nd.style.setProperty('--p',p);}
+      var d=y>=nx;if(d!==it.done){it.done=d;it.a.classList.toggle('is-done',d);mitems[i].a.classList.toggle('is-done',d);}
+    });
+    if(c<0)c=0;bar.style.setProperty('--w',Math.round(items[c].p*100)+'%');
+    var fillPosition=centers[c]+(c+1<centers.length?(centers[c+1]-centers[c])*items[c].p:0);
+    if(y<tops[0])fillPosition=centers[0]*Math.max(0,Math.min(1,y/Math.max(1,tops[0])));
+    ol.style.setProperty('--fill',fillPosition.toFixed(1)+'px');
+    var sectionChanged=c!==cur;
+    if(sectionChanged){
+      if(cur>=0){items[cur].a.removeAttribute('aria-current');mitems[cur].a.removeAttribute('aria-current');}
+      cur=c;sec.textContent=pad(c+1);tn.textContent=pad(c+1);
+      tab.setAttribute('aria-label','Sections. Now reading '+pad(c+1)+', '+names[c]);
+      items[c].a.setAttribute('aria-current','true');mitems[c].a.setAttribute('aria-current','true');
+    }
+    var activeSub=null;
+    items[c].subs.forEach(function(child,j){
+      var nx=j+1<items[c].subs.length?items[c].subs[j+1].top:(c+1<tops.length?tops[c+1]:end);
+      var done=y>=nx,active=y>=child.top&&y<nx;
+      if(done!==child.done){child.done=done;child.a.classList.toggle('is-done',done);child.mobile.classList.toggle('is-done',done);}
+      if(active)activeSub=child;
+    });
+    if(activeSub!==currentSubItem){
+      if(currentSubItem){currentSubItem.a.removeAttribute('aria-current');currentSubItem.mobile.removeAttribute('aria-current');}
+      currentSubItem=activeSub;
+      if(currentSubItem){
+        currentSubItem.a.setAttribute('aria-current','location');currentSubItem.mobile.setAttribute('aria-current','location');
+        var childRect=currentSubItem.a.getBoundingClientRect(),listRect=ol.getBoundingClientRect();
+        if(childRect.top<listRect.top||childRect.bottom>listRect.bottom)ol.scrollTop+=childRect.top-listRect.top-listRect.height/2;
+      }
+    }
+    if(sectionChanged&&!activeSub){
+      var a=items[c].a,r=a.getBoundingClientRect(),lr=ol.getBoundingClientRect();
+      if(r.top<lr.top||r.bottom>lr.bottom)ol.scrollTop+=r.top-lr.top-lr.height/2;
+    }
+  }
+  function req(){if(!tick){tick=true;requestAnimationFrame(update);}}
+  addEventListener('scroll',function(){document.body.classList.add('rm-moving');clearTimeout(moveT);moveT=setTimeout(function(){document.body.classList.remove('rm-moving');},700);req();},{passive:true});
+  addEventListener('resize',function(){measure();centers=null;req();});
+  addEventListener('load',function(){measure();centers=null;req();});
+  paintToggle();measure();update();
+})();
+</script>
+</body>
+</html>

@@ -32,16 +32,6 @@
       "source": "/modules/module-5.html",
       "destination": "/dsgt/modules/module-5",
       "permanent": false
-    },
-    {
-      "source": "/dsgt/modules/module-1",
-      "destination": "/dsgt",
-      "permanent": false
-    },
-    {
-      "source": "/dsgt/modules/module-1.html",
-      "destination": "/dsgt",
-      "permanent": false
     }
   ]
 }

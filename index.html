@@ -4,83 +4,91 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Study Guides</title>
+<meta name="description" content="Study guides for B.E. CSE (AI &amp; ML), Semesters I–III, University of Mumbai.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Study Guides">
+<meta property="og:title" content="Study Guides">
+<meta property="og:description" content="Study guides for B.E. CSE (AI &amp; ML), Semesters I–III, University of Mumbai.">
+<meta property="og:url" content="https://study-guides-placeholder.vercel.app/">
+<meta property="og:image" content="https://study-guides-placeholder.vercel.app/assets/og-dsgt.png">
+<meta property="og:image:secure_url" content="https://study-guides-placeholder.vercel.app/assets/og-dsgt.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="1200">
+<meta property="og:image:alt" content="Boring Placeholder">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Study Guides">
+<meta name="twitter:description" content="Study guides for B.E. CSE (AI &amp; ML), Semesters I–III, University of Mumbai.">
+<meta name="twitter:image" content="https://study-guides-placeholder.vercel.app/assets/og-dsgt.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/a11y.css">
+<link rel="stylesheet" href="/assets/calendar.css">
 <style>
-  :root { --ink:#0a0a0a; --muted:#444; --bg:#fff; --line:#ccc; --accent:#1d4ed8; }
-  * { box-sizing: border-box; }
-  body { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; color:var(--ink); background:var(--bg); line-height:1.6; margin:0; font-size:17px; font-weight:500; }
-  .wrap { max-width:68ch; margin:0 auto; padding:2.5rem 1rem 4rem; }
-  header { border-bottom:2px solid var(--ink); margin-bottom:2rem; padding-bottom:1rem; }
-  h1 { font-family:Georgia,Cambria,"Times New Roman",serif; font-size:2.25rem; line-height:1.25; margin:0 0 .5rem; letter-spacing:-.01em; }
-  .subtitle { color:var(--muted); font-size:1rem; font-weight:400; margin:0; }
-  .meta { font-size:.85rem; color:var(--muted); margin-top:1rem; }
-  .grid { display:grid; grid-template-columns:1fr; gap:.75rem; }
-  .semester + .semester { margin-top:3rem; }
-  .semester-title { font-family:Georgia,Cambria,"Times New Roman",serif; font-size:1.1rem; line-height:1.3; margin:0 0 .75rem; padding-bottom:.35rem; border-bottom:1px solid var(--line); }
-  .card { display:flex; flex-direction:column; gap:.2rem; border:1px solid var(--line); background:var(--surface); padding:1rem 1.25rem; text-decoration:none; color:var(--ink); min-height:44px; }
-  a.card { border-left:3px solid var(--ink); }
-  a.card:hover, a.card:focus-visible { background:var(--surface-hi); outline:2px solid var(--ink); outline-offset:2px; }
-  .num { font-size:.78rem; font-weight:700; letter-spacing:.04em; color:var(--muted); text-transform:uppercase; }
-  .name { font-family:Georgia,Cambria,serif; font-size:1.25rem; font-weight:700; line-height:1.3; }
-  .go { font-size:.9rem; color:var(--accent); font-weight:600; }
-  .soon { color:var(--muted); background:var(--bg); border-style:dashed; }
-  .soon .go { color:var(--muted); font-weight:500; }
-  footer { margin-top:3rem; padding-top:1.25rem; border-top:1px solid var(--line); color:var(--muted); font-size:.85rem; text-align:center; }
-  @media (min-width:640px) { .grid { grid-template-columns:1fr 1fr; } }
-  @media (max-width:600px) { .wrap { padding:1rem .75rem 3rem; } h1 { font-size:1.7rem; } body { font-size:16px; } }
-</style>
-<script>(function(){try{var t=localStorage.getItem('sg-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-<style id="theme">
-  :root { color-scheme: light; --ink:#0a0a0a;--muted:#444444;--bg:#ffffff;--line:#cccccc;--rule:#999999;--accent:#1d4ed8;--accent-soft:#eef2ff;--danger:#b00020;--surface:#fafafa;--surface-alt:#f9f9f9;--surface-eq:#f5f5f5;--surface-hi:#f0f0f0; }
-  :root[data-theme="dark"] { color-scheme: dark; --ink:#ececec;--muted:#a8a8ad;--bg:#0f0f11;--line:#34343a;--rule:#5a5a62;--accent:#8ab0ff;--accent-soft:#1b2540;--danger:#ff7b8f;--surface:#17171a;--surface-alt:#1b1b1f;--surface-eq:#1e1e23;--surface-hi:#26262c; }
-  .topbar { display:flex; align-items:center; justify-content:space-between; gap:.5rem; margin:0 0 1rem; }
-  .topbar .back { display:inline-flex; align-items:center; min-height:44px; font-size:.85rem; font-weight:600; color:var(--ink); }
-  .theme-toggle { font:inherit; font-size:.85rem; font-weight:600; color:var(--ink); background:var(--bg); border:1px solid var(--ink); border-radius:0; padding:.4rem .8rem; min-height:44px; min-width:44px; cursor:pointer; margin-left:auto; }
-  .theme-toggle:hover { background:var(--surface-hi); }
-  .theme-toggle/* minimal flair: subtle transitions for polish */
-a, .card, .exam-q, .quote, .theory, .example, .practice, .answer-key, .common-mistakes, .revision-sheet, .references, .callout, .nav, .small, .warning, .mu-badge {
-  transition: color .15s ease, background-color .15s ease, border-color .15s ease;
-}
-a:hover, a:focus-visible {
-  background-color: var(--surface-hi);
-}
-.card:hover, .exam-q:hover {
-  border-color: var(--accent);
-}
-  @media print {
-    :root, :root[data-theme="dark"], :root:not([data-theme="light"]) { color-scheme: light; --ink:#0a0a0a;--muted:#444444;--bg:#ffffff;--line:#cccccc;--rule:#999999;--accent:#1d4ed8;--accent-soft:#eef2ff;--danger:#b00020;--surface:#fafafa;--surface-alt:#f9f9f9;--surface-eq:#f5f5f5;--surface-hi:#f0f0f0; }
-    .topbar { display:none; }
+  /* Home-page hover flair (kept as it behaved before; a stray comment had been
+     swallowing the toggle's hover/focus rules, those now live in site.css). */
+  .card { transition: color .15s ease, background-color .15s ease, border-color .15s ease; }
+  a:hover, a:focus-visible { background-color: var(--surface-hi); }
+  .card:hover { border-color: var(--accent); }
+  /* Finished exam: crossed off with caution tape, still a normal link. */
+  .card.done { position: relative; overflow: hidden; isolation: isolate; border-left-color: var(--ink); }
+  .card.done .num, .card.done .name, .card.done .go { opacity: .62; }
+  .card.done .go { color: var(--muted); }
+  .card.done .name { text-decoration: line-through; text-decoration-thickness: 2px; text-decoration-color: var(--ink); }
+  .card.done::before, .card.done::after {
+    content: ""; position: absolute; left: -2%; width: 130%; top: 52%; height: 12px; margin-top: -6px;
+    background: repeating-linear-gradient(-45deg, var(--ink) 0 9px, var(--bg) 9px 18px);
+    border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink);
+    pointer-events: none; z-index: 1; opacity: .92;
+  }
+  .card.done::before { transform: rotate(-12deg); }
+  .card.done::after { transform: rotate(12deg); }
+  .card.done:hover, .card.done:focus-visible { background-color: var(--surface); border-color: var(--ink); }
+  .card.done:hover::before, .card.done:hover::after { opacity: .5; }
+  .tape-tag {
+    position: absolute; top: .55rem; right: .6rem; z-index: 2; padding: .1rem .5rem;
+    font-size: .68rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+    background: var(--ink); color: var(--bg); border: 1.5px solid var(--ink); transform: rotate(3deg);
   }
 </style>
+<script src="/assets/theme.js"></script>
+<script src="/assets/calendar.js" defer></script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <div class="wrap">
-  <div class="topbar"><button class="theme-toggle" type="button" id="themeToggle"></button></div>
+  <div class="topbar"><button class="theme-toggle" type="button" id="themeToggle" hidden></button></div>
   <header>
     <h1>Study Guides</h1>
     <p class="subtitle">Choose a subject</p>
     <div class="meta">Sem I, II &amp; III · Mumbai University</div>
   </header>
-  <main>
+  <main id="main" tabindex="-1">
+    <section class="calendar" aria-labelledby="calendar-heading">
+      <h2 class="semester-title" id="calendar-heading">Calendar</h2>
+      <div class="cal" id="calendar"></div>
+      <details class="cal-key" id="calendar-key"></details>
+      <noscript><p class="meta">The calendar needs JavaScript to display.</p></noscript>
+    </section>
     <section class="semester" aria-labelledby="semester-1-heading">
       <h2 class="semester-title" id="semester-1-heading">Semester I</h2>
       <div class="grid">
-        <a class="card" href="/applied-physics"><span class="num">Course 10412</span><span class="name">Applied Physics</span><span class="go">View modules →</span></a>
-        <a class="card" href="/engineering-mechanics"><span class="num">Course 10414</span><span class="name">Engineering Mechanics</span><span class="go">View modules →</span></a>
-        <a class="card" href="/beee"><span class="num">Course ESC102</span><span class="name">Basic Electrical and Electronics Engineering</span><span class="go">BEEE · 1 of 6 modules ready →</span></a>
+        <a class="card" href="/applied-physics"><span class="num">Course 10412</span><span class="name">Applied Physics</span><span class="go">0 of 6 modules ready →</span></a>
+        <a class="card" href="/engineering-mechanics"><span class="num">Course 10414</span><span class="name">Engineering Mechanics</span><span class="go">0 of 6 modules ready →</span></a>
+        <a class="card" href="/beee"><span class="num">Course ESC102</span><span class="name">Basic Electrical and Electronics Engineering</span><span class="go">2 of 6 modules ready →</span></a>
       </div>
     </section>
     <section class="semester" aria-labelledby="semester-2-heading">
       <h2 class="semester-title" id="semester-2-heading">Semester II</h2>
       <div class="grid">
-        <a class="card" href="/applied-mathematics-ii"><span class="num">Course 10521</span><span class="name">Applied Mathematics-II</span><span class="go">View modules →</span></a>
-        <a class="card" href="/semiconductor-physics"><span class="num">Course 10552 · Physics elective</span><span class="name">Physics</span><span class="go">View modules →</span></a>
+        <a class="card" href="/applied-mathematics-ii"><span class="num">Course 10521</span><span class="name">Applied Mathematics-II</span><span class="go">0 of 6 modules ready →</span></a>
+        <a class="card" href="/semiconductor-physics"><span class="num">Course 10552 · Physics elective</span><span class="name">Physics</span><span class="go">0 of 6 modules ready →</span></a>
       </div>
     </section>
     <section class="semester" aria-labelledby="semester-3-heading">
       <h2 class="semester-title" id="semester-3-heading">Semester III</h2>
       <div class="grid">
-        <a class="card" href="/dsgt"><span class="num">Course 2023112</span><span class="name">Discrete Structures and Graph Theory</span><span class="go">DSGT · 2 of 6 modules ready →</span></a>
-        <a class="card" href="/maths"><span class="num">Course 2023111</span><span class="name">Mathematics for Computer Engineering</span><span class="go">1 of 6 modules ready →</span></a>
+        <a class="card" href="/dsgt"><span class="num">Course 2023112</span><span class="name">Discrete Structures and Graph Theory</span><span class="go">6 of 6 modules ready →</span></a>
+        <a class="card done" href="/maths"><span class="tape-tag">Exam done</span><span class="num">Course 2023111</span><span class="name">Mathematics for Computer Engineering</span><span class="go">Exam done · 2 of 6 modules still open →</span></a>
         <a class="card" href="/aoa"><span class="num">Course 2023113</span><span class="name">Analysis of Algorithm</span><span class="go">0 of 6 modules ready →</span></a>
         <a class="card" href="/coa"><span class="num">Course 2023114</span><span class="name">Computer Organization and Architecture</span><span class="go">0 of 6 modules ready →</span></a>
       </div>
@@ -88,14 +96,5 @@ a:hover, a:focus-visible {
   </main>
   <footer>More subjects will appear here as they are added.</footer>
 </div>
-<script>
-(function(){
-  var b=document.getElementById('themeToggle'),r=document.documentElement;
-  function dark(){var t=r.getAttribute('data-theme');return t==='dark';}
-  function paint(){var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
-  b.addEventListener('click',function(){var n=dark()?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('sg-theme',n);}catch(e){}paint();});
-  paint();
-})();
-</script>
 </body>
 </html>

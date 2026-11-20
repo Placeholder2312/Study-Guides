@@ -1,0 +1,2383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Maths Endsem Question Bank for Mathematics for Computer Engineering (2023111), B.E. CSE (AI &amp; ML), Semester III, University of Mumbai: every supplied question bank question for Module I, beginner teaching, independently verified answers and a separate answer key.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffffff'/%3E%3Ctext x='16' y='24' font-family='Georgia,serif' font-size='21' text-anchor='middle' fill='%230a0a0a'%3E%CE%A3%3C/text%3E%3C/svg%3E">
+<title>Maths Endsem Question Bank — Mathematics for Computer Engineering (2023111)</title>
+<style>
+:root{
+  --ink:#0a0a0a;
+  --muted:#444444;
+  --bg:#ffffff;
+  --line:#cccccc;
+  --rule:#999999;
+  --accent:#1d4ed8;
+  --space:1.5rem;
+  --radius:0;
+  --font-serif:Georgia,"Iowan Old Style","Palatino Linotype",Cambria,"Times New Roman",serif;
+  --font-sans:"Helvetica Neue",Helvetica,Arial,system-ui,-apple-system,sans-serif;
+  --font-mono:"Courier New",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font:400 17px/1.66 var(--font-sans);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+a{color:var(--ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.18em}
+a:hover{color:var(--accent)}
+a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex="0"]:focus-visible{
+  outline:2px solid var(--accent);outline-offset:2px;
+}
+.skip{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:.65rem 1rem;z-index:100;text-decoration:none}
+.skip:focus{left:1rem;top:1rem}
+
+/* reading progress */
+.progress{position:fixed;top:0;left:0;width:100%;height:3px;z-index:60;pointer-events:none;background:transparent}
+.progress span{display:block;height:100%;width:0;background:var(--ink)}
+
+/* header */
+.site-header{border-bottom:2px solid var(--ink);background:var(--bg)}
+.header-inner{max-width:1160px;margin:0 auto;padding:3rem 2rem 1.6rem}
+.eyebrow{margin:0 0 1rem;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.site-header h1{
+  margin:0;font-family:var(--font-serif);font-weight:400;
+  font-size:clamp(2.05rem,4.4vw,3.15rem);line-height:1.06;letter-spacing:-.02em;
+}
+.site-header h1 .h1-sub{display:block;margin-top:.5rem;font-size:.5em;letter-spacing:.005em;color:var(--muted)}
+.subtitle{max-width:62ch;margin:1.15rem 0 0;color:var(--muted);font-size:.98rem}
+.meta{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem .55rem;margin-top:1.4rem}
+.mu-badge{
+  display:inline-block;border:1px solid var(--accent);color:var(--accent);
+  font-size:.68rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  padding:.32rem .55rem;white-space:nowrap;
+}
+.meta-item{
+  font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);
+  border:1px solid var(--line);padding:.32rem .55rem;white-space:nowrap;
+}
+.header-note{margin:1.05rem 0 0;font-size:.8rem;color:var(--muted)}
+.header-note code{font-family:var(--font-mono);font-size:.95em;background:#f4f4f4;border:1px solid #e6e6e6;padding:.05em .3em}
+.math-fallback{border-left:3px solid #b00020;background:#fff5f5;padding:.6rem .8rem;color:#7a0016}
+
+/* section pill nav */
+.crumbs{margin:0 0 .4rem;font:600 .9rem var(--font-sans)}
+.crumbs a{display:inline-block;min-height:44px;line-height:44px;color:var(--ink)}
+.nav{display:flex;flex-wrap:wrap;gap:.4rem;max-width:1160px;margin:0 auto;padding:0 2rem 1.7rem}
+.nav a{
+  font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;
+  border:1px solid var(--line);color:var(--muted);padding:.38rem .6rem;line-height:1.2;
+}
+.nav a:hover{border-color:var(--ink);color:var(--ink)}
+.nav a.active{border-color:var(--ink);color:var(--ink);font-weight:700;background:#f4f4f4}
+
+/* layout */
+.layout{
+  display:grid;grid-template-columns:272px minmax(0,1fr);gap:3.5rem;
+  max-width:1160px;margin:0 auto;padding:2.6rem 2rem 4.5rem;align-items:start;
+}
+.sidebar{
+  position:sticky;top:1.25rem;max-height:calc(100vh - 2.5rem);overflow:auto;
+  border-right:1px solid var(--line);padding-right:1.2rem;
+  scrollbar-width:thin;
+}
+.toc-toggle{display:none}
+.toc-collapse{
+  position:fixed;left:4px;top:50%;transform:translateY(-50%);z-index:55;
+  display:flex;align-items:center;justify-content:center;width:22px;height:44px;padding:0;
+  background:transparent;border:0;border-radius:var(--radius);color:var(--muted);
+  opacity:.4;cursor:pointer;transition:opacity .15s;
+}
+.toc-collapse:hover,.toc-collapse:focus-visible{opacity:1;color:var(--ink)}
+.toc-collapse svg{width:14px;height:14px;display:block;transition:transform .15s}
+.toc-collapse[aria-expanded="false"] svg{transform:rotate(180deg)}
+.layout.toc-collapsed{grid-template-columns:minmax(0,1fr)}
+.layout.toc-collapsed .sidebar{display:none}
+.layout.toc-collapsed #content{margin-left:auto;margin-right:auto;width:100%}
+.toc-title{margin:.1rem 0 .7rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.toc-root,.toc-sub{list-style:none;margin:0;padding:0}
+.toc-sub{margin:.1rem 0 .5rem}
+.toc a{
+  display:block;margin-left:-.75rem;padding:.26rem 0 .26rem .75rem;
+  border-left:2px solid transparent;text-decoration:none;color:var(--muted);
+  font-size:.8rem;line-height:1.34;
+}
+.toc a:hover{color:var(--ink);border-left-color:var(--line)}
+.toc a.active{color:var(--ink);border-left-color:var(--ink);font-weight:700;background:#fafafa}
+.toc .lvl1 > a{
+  margin-top:.75rem;font-family:var(--font-serif);font-size:.95rem;line-height:1.25;
+  color:var(--ink);font-weight:700;letter-spacing:-.005em;
+}
+.toc .lvl1:first-child > a{margin-top:0}
+.toc .lvl2 a{padding-left:1.35rem;font-size:.79rem}
+.toc .lvl2-top a{padding-left:.75rem;font-size:.85rem;margin-top:.75rem;color:var(--ink);font-weight:700}
+
+/* content */
+#content{max-width:72ch;min-width:0;overflow-wrap:break-word}
+#content > h1{
+  margin:3.4rem 0 1.15rem;padding-bottom:.5rem;border-bottom:2px solid var(--ink);
+  font-family:var(--font-serif);font-weight:400;font-size:1.92rem;line-height:1.2;
+  letter-spacing:-.012em;scroll-margin-top:1.25rem;
+}
+#content > h1:first-child{margin-top:0}
+#content h2{
+  margin:2.7rem 0 .85rem;font-family:var(--font-serif);font-weight:400;
+  font-size:1.34rem;line-height:1.28;letter-spacing:-.008em;scroll-margin-top:1.25rem;
+}
+#content h3{
+  margin:2rem 0 .55rem;font-family:var(--font-serif);font-weight:700;
+  font-size:1.06rem;line-height:1.35;scroll-margin-top:1.25rem;
+}
+#content h4{
+  margin:1.6rem 0 .4rem;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);scroll-margin-top:1.25rem;
+}
+#content p{margin:.95rem 0}
+#content strong{font-weight:700}
+#content ul,#content ol{margin:.9rem 0;padding-left:1.45rem}
+#content li{margin:.36rem 0}
+#content li > ul,#content li > ol{margin:.3rem 0}
+#content hr{border:0;border-top:1px solid var(--line);margin:2.8rem 0}
+
+#content blockquote{
+  margin:1.5rem 0;padding:.95rem 1.15rem;border-left:3px solid var(--ink);
+  background:#fafafa;
+}
+#content blockquote p{margin:.45rem 0}
+#content blockquote > :first-child{margin-top:0}
+#content blockquote > :last-child{margin-bottom:0}
+#content blockquote blockquote{border-left-color:var(--rule);background:#f4f4f4;margin:.8rem 0}
+
+/* tables */
+.table-wrap{
+  margin:1.5rem 0;border:1px solid var(--line);overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+#content table{border-collapse:collapse;width:100%;font-size:.875rem;line-height:1.5;background:#fff}
+#content th,#content td{
+  border-right:1px solid #e2e2e2;border-bottom:1px solid #e2e2e2;
+  padding:.52rem .68rem;text-align:left;vertical-align:top;
+}
+#content th:last-child,#content td:last-child{border-right:0}
+#content tbody tr:last-child td{border-bottom:0}
+#content thead th{
+  background:#f4f4f4;border-bottom:1px solid var(--rule);
+  font-size:.7rem;letter-spacing:.07em;text-transform:uppercase;font-weight:700;
+}
+#content tbody tr:nth-child(even){background:#fafafa}
+#content td code,#content th code{font-size:.85em}
+
+/* code */
+#content code{
+  font-family:var(--font-mono);font-size:.86em;background:#f4f4f4;
+  border:1px solid #e8e8e8;padding:.05em .3em;
+  overflow-wrap:anywhere;word-break:break-word;
+}
+#content th,#content td{overflow-wrap:break-word}
+#content pre{
+  margin:1.4rem 0;padding:1rem 1.1rem;background:#f7f7f7;border:1px solid var(--line);
+  overflow-x:auto;font-size:.8rem;line-height:1.55;
+}
+#content pre code{background:none;border:0;padding:0;font-size:inherit;white-space:pre}
+
+/* mathematics */
+.math-block{
+  margin:1.15rem 0;overflow-x:auto;overflow-y:hidden;padding:.1rem 0 .2rem;
+  scrollbar-width:thin;scrollbar-color:#c4c4c4 transparent;
+}
+.math-block mjx-container[display="true"]{margin:0 !important}
+mjx-container{max-width:100%}
+mjx-container[jax="CHTML"][display="true"]{padding:.1rem 0}
+mjx-container[jax="CHTML"]:focus{outline:none}
+/* MathJax's absolutely positioned assistive-MathML copy is wider than the
+   visible glyphs and would otherwise add phantom horizontal scroll range */
+mjx-assistive-mml{
+  width:1px !important;height:1px !important;overflow:hidden !important;
+  max-width:1px !important;clip-path:inset(50%);white-space:nowrap;
+}
+.mj-inline{
+  display:inline-block;width:max-content;max-width:100%;
+  overflow-x:auto;overflow-y:hidden;vertical-align:middle;
+  scrollbar-width:thin;scrollbar-color:#c4c4c4 transparent;
+}
+.math-block::-webkit-scrollbar,.table-wrap::-webkit-scrollbar,.mj-inline::-webkit-scrollbar{height:8px}
+.math-block::-webkit-scrollbar-track,.table-wrap::-webkit-scrollbar-track,.mj-inline::-webkit-scrollbar-track{background:#f4f4f4}
+.math-block::-webkit-scrollbar-thumb,.table-wrap::-webkit-scrollbar-thumb,.mj-inline::-webkit-scrollbar-thumb{background:#c4c4c4}
+
+/* footer */
+footer{border-top:2px solid var(--ink);margin-top:1rem;background:var(--bg)}
+.footer-inner{
+  max-width:1160px;margin:0 auto;padding:2rem;display:flex;flex-wrap:wrap;
+  gap:.8rem 2rem;justify-content:space-between;align-items:baseline;
+  font-size:.78rem;color:var(--muted);line-height:1.55;
+}
+.footer-inner p{margin:0;max-width:62ch}
+.footer-inner a{color:var(--muted)}
+
+/* error / noscript */
+.render-error{
+  max-width:70ch;margin:1.5rem auto;padding:1rem 1.15rem;border:1px solid #b00020;
+  background:#fff5f5;color:#7a0016;font-size:.9rem;
+}
+.render-error p{margin:.4rem 0}
+.render-error code{font-family:var(--font-mono);font-size:.9em}
+.noscript{max-width:70ch;margin:2rem auto;padding:1rem 1.15rem;border:1px solid var(--line);background:#fafafa}
+.noscript p{margin:.4rem 0}
+
+/* responsive */
+@media (max-width:980px){
+  .layout{grid-template-columns:1fr;gap:0;padding:1.6rem 1.25rem 3rem}
+  .sidebar{
+    position:static;max-height:none;overflow:visible;
+    border-right:0;border-bottom:1px solid var(--line);
+    padding:0 0 .9rem;margin-bottom:1.6rem;
+  }
+  .toc-collapse{display:none}
+  .toc-toggle{
+    display:block;width:100%;text-align:left;cursor:pointer;
+    background:#fff;border:1px solid var(--line);padding:.72rem .9rem;
+    font:700 .74rem/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);
+  }
+  .toc{display:none;padding-top:.8rem}
+  .sidebar.open .toc{display:block}
+  #section-nav{display:none}
+  #content{max-width:none}
+  .header-inner{padding:2.1rem 1.25rem 1.2rem}
+  .nav{padding:0 1.25rem 1.3rem}
+  .footer-inner{padding:1.6rem 1.25rem}
+  #content table{font-size:.82rem}
+}
+@media (max-width:600px){
+  body{font-size:16px}
+  #content > h1{font-size:1.6rem}
+  #content h2{font-size:1.18rem}
+  #content h3{font-size:1rem}
+  .header-inner{padding-top:1.7rem}
+  .meta{gap:.35rem}
+  .meta-item{font-size:.66rem}
+  .subtitle{font-size:.92rem}
+  #content blockquote{padding:.8rem .9rem}
+  .table-wrap{margin-left:-.2rem;margin-right:-.2rem}
+}
+@media (max-width:380px){
+  .nav a{font-size:.66rem;padding:.3rem .45rem}
+}
+
+
+/* ---------- v0.2: sections, progress, question banners ---------- */
+.path{margin-top:1.3rem;max-width:34rem}
+.path-top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;font-size:.8rem;color:var(--muted)}
+.path-top strong{color:var(--ink);font-size:.86rem}
+.linkbtn{background:none;border:0;padding:.3rem 0;font:inherit;font-size:.74rem;color:var(--muted);text-decoration:underline;cursor:pointer}
+.linkbtn:hover{color:var(--ink)}
+.path-bar{height:6px;border:1px solid var(--ink);margin-top:.35rem;background:#fff}
+.path-bar span{display:block;height:100%;width:0;background:var(--ink);transition:width .35s}
+.nav a.done::after,.toc .lvl1 > a.done::after{content:" ✓";font-weight:700;color:var(--ink)}
+
+.sec{padding-top:1rem;margin-top:3.4rem;border-top:2px solid var(--ink)}
+.sec:first-child{margin-top:0;border-top:0;padding-top:0}
+.sec > hr{display:none}
+#content .sec > h1{margin-top:1rem;border-bottom:0;padding-bottom:0}
+.sec-goal{margin:.6rem 0 0}
+.sec > p:first-of-type > strong:first-child{color:var(--ink)}
+.sec-done{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.2rem;margin:2.4rem 0 .4rem;padding:1rem 1.1rem;border:2px solid var(--ink)}
+.done-btn{font:700 .8rem/1 var(--font-sans);letter-spacing:.06em;text-transform:uppercase;min-height:44px;padding:.7rem 1.1rem;background:#fff;color:var(--ink);border:2px solid var(--ink);cursor:pointer}
+.done-btn:hover{background:#f4f4f4}
+.done-btn[aria-pressed="true"]{background:var(--ink);color:#fff}
+.sec-done .next{font-size:.9rem}
+
+/* each question starts clean, under a black bar */
+.question{margin:4.2rem 0 0;padding-bottom:1.6rem;border-bottom:1px solid var(--line)}
+#content .question > h2.q-head{
+  margin:0 0 1.3rem;padding:.8rem 1.1rem;background:var(--ink);color:#fff;
+  font-family:var(--font-sans);font-size:.86rem;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;line-height:1.35;
+}
+.q-end{margin:1.6rem 0 0;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:center}
+.q-end::before,.q-end::after{content:"";display:inline-block;width:2.2rem;height:1px;background:var(--line);vertical-align:middle;margin:0 .8rem}
+
+/* blockquote roles */
+#content blockquote.bq-q{border-left-width:6px;background:#fff;border:1px solid var(--ink);border-left:6px solid var(--ink);font-size:1.05rem}
+#content blockquote.bq-expect{background:#fff;border-left:3px dashed var(--rule);color:var(--muted)}
+#content blockquote.bq-plain{background:#f0f5ff;border-left:3px solid var(--accent)}
+#content blockquote.bq-note{background:#fafafa;border-left:3px solid var(--rule)}
+#content blockquote.bq-answer{background:#fff;border:2px solid var(--ink);border-left-width:2px;padding:0 1.1rem 1rem;margin:1.8rem 0 .6rem}
+#content blockquote.bq-answer > p:first-child{margin:0 -1.1rem .8rem;padding:.4rem 1.1rem;background:var(--ink);color:#fff;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}
+#content blockquote.bq-answer .table-wrap{margin:.6rem 0 0}
+#content blockquote.bq-answer table{font-size:.95rem}
+
+/* numbered steps inside solutions */
+#content h4.step{
+  margin:1.9rem 0 .5rem;padding:.15rem 0 .15rem .8rem;border-left:4px solid var(--ink);
+  font-family:var(--font-serif);font-size:1.04rem;font-weight:700;letter-spacing:0;text-transform:none;color:var(--ink);
+}
+
+/* reveal boxes */
+details.solution,details.check{margin:1.4rem 0;border:1px solid var(--ink);background:#fff}
+details.check{border-style:dashed}
+details.solution > summary,details.check > summary{
+  cursor:pointer;list-style:none;padding:.95rem 1.1rem;min-height:44px;font-weight:700;font-size:.95rem;
+  display:flex;gap:.7rem;align-items:center;
+}
+details.solution > summary::-webkit-details-marker,details.check > summary::-webkit-details-marker{display:none}
+details.solution > summary::before,details.check > summary::before{content:"+";font-family:var(--font-mono);font-size:1.2rem;width:1.1rem;flex:none}
+details[open].solution > summary::before,details[open].check > summary::before{content:"\2212"}
+details.solution[open] > summary,details.check[open] > summary{background:#f4f4f4;border-bottom:1px solid var(--line)}
+details.solution > :not(summary),details.check > :not(summary){margin-left:1.1rem;margin-right:1.1rem}
+details.solution > h4.step:first-of-type{margin-top:1.3rem}
+details.solution > :last-child,details.check > :last-child{margin-bottom:1.1rem}
+details:not([class]){margin:1.2rem 0;border:1px solid var(--line)}
+details:not([class]) > summary{cursor:pointer;padding:.8rem 1rem;font-weight:700;font-size:.9rem}
+details:not([class]) > :not(summary){margin-left:1rem;margin-right:1rem}
+
+/* figures */
+figure.fig{margin:1.6rem 0;padding:1rem;border:1px solid var(--line);background:#fff}
+.fig-row{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
+.fig svg{width:min(250px,100%);height:auto;flex:1 1 220px;max-width:280px}
+.fig svg text{font:11.5px var(--font-sans);fill:var(--muted)}
+.fig svg text.blue{fill:var(--accent);font-weight:700}
+.fig svg text.bold{fill:var(--ink);font-weight:700}
+figure.fig figcaption{margin-top:.7rem;font-size:.85rem;color:var(--muted);text-align:center}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;justify-content:center;gap:.4rem}
+.flow span{border:1px solid var(--ink);padding:.55rem .75rem;font-size:.88rem;background:#fafafa;display:flex;align-items:center;text-align:center}
+.flow i{font-style:normal;display:flex;align-items:center;color:var(--muted)}
+@media (max-width:600px){
+  .flow{flex-direction:column;align-items:stretch}.flow i{justify-content:center;transform:rotate(90deg);height:1.2rem}
+  .question{margin-top:3.2rem}
+  #content .question > h2.q-head{font-size:.78rem;padding:.7rem .85rem}
+  details.solution > :not(summary),details.check > :not(summary){margin-left:.8rem;margin-right:.8rem}
+}
+@media print{
+  .path,.sec-done{display:none !important}
+  .question{page-break-before:always}
+  #content .question > h2.q-head,#content blockquote.bq-answer > p:first-child,.path-bar span{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+
+/* print */
+@page{margin:14mm 12mm}
+@media print{
+  .progress,.skip,.crumbs,.sidebar,.toc-toggle,.toc-collapse,.nav,#section-nav,.render-error{display:none !important}
+  body{font-size:11pt;line-height:1.5;color:#000}
+  .site-header{border-bottom:1px solid #000}
+  .header-inner{padding:0 0 .8rem;max-width:none}
+  .site-header h1{font-size:22pt}
+  .subtitle,.header-note{font-size:9pt}
+  .layout{display:block;max-width:none;padding:0}
+  #content{max-width:none}
+  #content > h1{page-break-before:always;font-size:15pt;margin-top:0}
+  #content > h1:first-child{page-break-before:avoid}
+  #content h2{font-size:12.5pt;page-break-after:avoid}
+  #content h3{font-size:11pt;page-break-after:avoid}
+  table,blockquote,pre,.math-block{page-break-inside:avoid}
+  .table-wrap{overflow:visible;border:1px solid #999}
+  #content table{table-layout:fixed;width:100%;font-size:8.5pt}
+  #content th,#content td{overflow-wrap:anywhere;padding:.35rem .4rem}
+  #content thead th,#content tbody tr:nth-child(even){background:#f2f2f2 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  a{text-decoration:none;color:#000}
+  a[href^="http"]::after{content:" (" attr(href) ")";font-size:7.5pt;color:#444;word-break:break-all}
+  #content td a[href^="http"]::after,#content th a[href^="http"]::after{content:""}
+  footer{border-top:1px solid #000}
+  .footer-inner{padding:1rem 0;max-width:none}
+}
+</style>
+</head>
+<body id="top">
+
+<div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+<a class="skip" href="#content">Skip to content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <p class="crumbs"><a href="/">All subjects</a> · <a href="/maths">Mathematics modules</a></p>
+    <p class="eyebrow">University of Mumbai · Mathematics for Computer Engineering · 2023111 · Supplied question bank</p>
+    <h1>Maths Endsem Question Bank <span class="h1-sub">Module I — Linear Algebra (Theory of Matrices)</span></h1>
+    <p class="subtitle">Module I, Part 1 taught from zero in seven short sections, then every eigenvalue question from the supplied 2026 MUSA bank worked out step by step, one question at a time. Study one section, tick it off, and carry on whenever you like.</p>
+    <div class="meta">
+      <span class="mu-badge">Mumbai University</span>
+      <span class="meta-item">2026 MUSA bank + 2025 practice paper</span>
+      <span class="meta-item">CO1</span>
+      <span class="meta-item">Part 1 of Module I published</span>
+      <span class="meta-item">SymPy-verified</span>
+    </div>
+    <p class="header-note">Version 0.2 · 17 November 2026 · Offline copy: <code>Module_1_Endsem_Questionbank.md</code> · <a href="#about-the-sources">Status and sources</a></p>
+    <div class="path" id="path" aria-live="polite">
+      <div class="path-top"><strong id="path-count">0 of 7 sections done</strong><button type="button" id="path-reset" class="linkbtn">Reset ticks</button></div>
+      <div class="path-bar" aria-hidden="true"><span id="path-fill"></span></div>
+    </div>
+    <p class="header-note math-fallback" id="math-fallback" hidden><strong>Formulas not rendered.</strong> The MathJax library could not be loaded, so mathematics is shown as LaTeX source. Open <code>Module_1_Endsem_Questionbank.md</code> or reconnect to the internet to see it typeset.</p>
+  </div>
+  <nav class="nav" id="section-nav" aria-label="Guide sections"></nav>
+</header>
+
+<button class="toc-collapse" id="toc-collapse" type="button" aria-expanded="true" aria-controls="sidebar" aria-label="Hide contents" title="Hide contents"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><path d="M7 2L2 7l5 5M12 2L7 7l5 5"/></svg></button>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <button class="toc-toggle" id="toc-toggle" type="button" aria-expanded="false" aria-controls="toc-list">Contents</button>
+    <nav class="toc" aria-label="Table of contents">
+      <p class="toc-title">On this page</p>
+      <div id="toc-list"></div>
+    </nav>
+  </aside>
+
+  <main id="content" class="wrap" tabindex="-1">
+    <p>Loading the guide…</p>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <p><strong>Mathematics for Computer Engineering (2023111)</strong> — Maths Endsem Question Bank, version 0.2, 17 November 2026. Questions are quoted from the supplied MUSA 2026 question bank and the MUSA Winter 2025 practice paper, which are local source files and are not part of this repository.</p>
+    <p>Every matrix was compared with the scanned page, and every eigenvalue, eigenvector and characteristic equation was recomputed exactly with SymPy 1.14. Answers that disagree with the supplied solutions booklet are recorded, not silently corrected. See <a href="#about-the-sources">the sources section</a> and <code>VERIFICATION_REPORT.md</code>.</p>
+  </div>
+</footer>
+
+<noscript>
+  <div class="noscript">
+    <p><strong>JavaScript is disabled.</strong> This page typesets the guide in your browser, so without JavaScript you will only see this message.</p>
+    <p>Open <code>Module_1_Endsem_Questionbank.md</code> and <code>Module_1_Endsem_Answer_Key.md</code> in this folder — they contain the complete Part 1 material in portable Markdown with LaTeX mathematics.</p>
+  </div>
+</noscript>
+
+<div class="render-error" id="render-error" hidden>
+  <p><strong>The guide could not be rendered.</strong></p>
+  <p data-msg></p>
+  <p>The same content is available offline in <code>Module_1_Endsem_Questionbank.md</code> and <code>Module_1_Endsem_Answer_Key.md</code>, which need no network connection.</p>
+</div>
+
+<script type="text/markdown" id="md-source">
+# Start here
+
+**Mathematics for Computer Engineering (2023111)** · University of Mumbai · B.E. CSE (AI &amp; ML) · Semester III · NEP 2020
+
+This page teaches **Module I, Part 1: eigenvalues and eigenvectors** from zero, then walks you through every question from the supplied question bank, one at a time, with the full working.
+
+## How the page works
+
+You do not have to finish it in one sitting. It is cut into **7 short sections**. Each one takes about 5–15 minutes and ends with a *Check yourself* box and a **Mark section done** button. Your ticks are saved in this browser, so you can stop after any section and carry on later.
+
+| Section | What you will be able to do | Time |
+|---|---|---|
+| 1 · The big idea | Say what an eigenvector and an eigenvalue are, and test one | 8 min |
+| 2 · Finding the eigenvalues | Build and solve the characteristic equation | 12 min |
+| 3 · Finding the eigenvectors | Row-reduce and read off the vectors, including repeated roots | 15 min |
+| 4 · Exam toolkit | Spot the question type, check any answer in 10 seconds, avoid the usual slips | 8 min |
+| 5 · Practice 1 | Four questions where all eigenvalues are different | 30 min |
+| 6 · Practice 2 | Four questions with a repeated eigenvalue | 35 min |
+| 7 · One-page revision | Everything on one screen for the night before | 5 min |
+
+> **In plain words.** If you are short on time, finish Sections 1–4 first. They give you the whole method. Sections 5 and 6 are just that method used on the real questions.
+
+## How to use a practice question
+
+Every question starts under a **black bar** so you always know where one ends and the next begins. Try it on paper first. When you are done, open **Show the full solution** and compare. Each solution is built from the same numbered steps, so you can see exactly where a slip happened.
+
+## Difficulty labels
+
+- **Basic**: the idea in its simplest form.
+- **Exam-level**: the standard University standard for this topic.
+- **Challenging**: longer arithmetic or a trap.
+
+---
+
+# Section 1 · The big idea
+
+**Goal of this section:** know what an eigenvector and an eigenvalue are, and be able to test whether a given vector is one.
+
+## 1.1 Warm-up: a matrix moves a vector
+
+A **matrix** is a grid of numbers. A **column vector** is a list of numbers stacked vertically, such as \(X=\begin{bmatrix}1\\0\end{bmatrix}\). Multiplying a matrix by a vector gives a new vector, which we write \(AX\).
+
+To do it, take each *row* of \(A\), multiply it entry by entry with the vector, and add:
+
+\[
+\begin{bmatrix}4&1\\2&3\end{bmatrix}\begin{bmatrix}1\\0\end{bmatrix}
+=\begin{bmatrix}4\cdot1+1\cdot0\\2\cdot1+3\cdot0\end{bmatrix}
+=\begin{bmatrix}4\\2\end{bmatrix}
+\]
+
+You can picture \(AX\) as the matrix **moving** the arrow \(X\) to a new place: it can stretch it, shrink it, turn it, or flip it.
+
+## 1.2 The special arrows
+
+For most arrows, the move **changes their direction**. But for a few special arrows, the move only **stretches or shrinks them along the same line**. Compare the two cases for the same matrix \(A=\begin{bmatrix}4&1\\2&3\end{bmatrix}\):
+
+<figure class="fig">
+<div class="fig-row">
+<svg viewBox="0 0 250 250" role="img" aria-label="The vector (1,0) is moved to (4,2), which points in a different direction">
+<defs><marker id="a1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#0a0a0a"/></marker><marker id="a2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#1d4ed8"/></marker></defs>
+<line x1="30" y1="220" x2="240" y2="220" stroke="#999" stroke-width="1"/>
+<line x1="30" y1="220" x2="30" y2="20" stroke="#999" stroke-width="1"/>
+<line x1="30" y1="220" x2="66" y2="220" stroke="#0a0a0a" stroke-width="3" marker-end="url(#a1)"/>
+<line x1="30" y1="220" x2="178" y2="144" stroke="#1d4ed8" stroke-width="3" marker-end="url(#a2)"/>
+<text x="38" y="238">X = (1, 0)</text>
+<text x="112" y="128" class="blue">AX = (4, 2)</text>
+<text x="38" y="38" class="bold">Direction changed ✗</text>
+</svg>
+<svg viewBox="0 0 250 250" role="img" aria-label="The vector (1,1) is moved to (5,5), which lies on the same line and is five times longer">
+<defs><marker id="a3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#0a0a0a"/></marker><marker id="a4" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#1d4ed8"/></marker></defs>
+<line x1="30" y1="220" x2="240" y2="220" stroke="#999" stroke-width="1"/>
+<line x1="30" y1="220" x2="30" y2="20" stroke="#999" stroke-width="1"/>
+<line x1="30" y1="220" x2="212" y2="38" stroke="#1d4ed8" stroke-width="3" marker-end="url(#a4)"/>
+<line x1="30" y1="220" x2="64" y2="186" stroke="#0a0a0a" stroke-width="4" marker-end="url(#a3)"/>
+<text x="74" y="212">X = (1, 1)</text>
+<text x="120" y="170" class="blue">AX = (5, 5) = 5·X</text>
+<text x="38" y="38" class="bold">Same line, 5× longer ✓</text>
+</svg>
+</div>
+<figcaption>Left: an ordinary arrow gets turned. Right: <b>(1, 1) is an eigenvector</b> of this matrix, and the stretch factor <b>5</b> is its eigenvalue.</figcaption>
+</figure>
+
+\[
+A\begin{bmatrix}1\\1\end{bmatrix}=\begin{bmatrix}4+1\\2+3\end{bmatrix}=\begin{bmatrix}5\\5\end{bmatrix}=5\begin{bmatrix}1\\1\end{bmatrix}
+\]
+
+> **In plain words.** An **eigenvector** is an arrow the matrix does not turn. The **eigenvalue** is the number by which the matrix stretches it. The German word *eigen* means "own": these are the matrix's own special directions.
+
+## 1.3 The definition
+
+> **Definition.** Let \(A\) be an \(n\times n\) (square) matrix. A **non-zero** column vector \(X\) is an **eigenvector** of \(A\) if
+> \[AX=\lambda X\]
+> for some number \(\lambda\). That number \(\lambda\) (Greek *lambda*) is the **eigenvalue** belonging to \(X\).
+
+Reading it symbol by symbol:
+
+- \(A\): a square matrix. Eigenvalues only exist for square matrices.
+- \(X\): the special arrow, a column with \(n\) entries.
+- \(\lambda\): one ordinary number (it can be positive, negative or zero). The stretch factor.
+- \(AX=\lambda X\): "moving \(X\) gives the same arrow, just scaled".
+
+**Why \(X\) must not be the zero vector.** If \(X=0\), then \(A\cdot0=\lambda\cdot0\) is true for *every* \(\lambda\), so every number would be an eigenvalue of every matrix, which says nothing. So the definition rules zero out.
+
+**Other names your exam may use.** Eigenvalues are also called *characteristic roots*, *latent roots*, *characteristic values* or *proper values*. All mean the same thing.
+
+> **Remember.** Any non-zero multiple of an eigenvector is again an eigenvector: \((1,1)\), \((2,2)\) and \((-3,-3)\) all point along the same line. So an answer like \((1,1)^T\) and an answer like \((2,2)^T\) are the same eigenvector.
+
+## Check yourself: Section 1
+
+<details class="check">
+<summary>Try these three, then open to compare</summary>
+
+**(a)** For \(A=\begin{bmatrix}2&0\\0&3\end{bmatrix}\) and \(X=\begin{bmatrix}1\\0\end{bmatrix}\), compute \(AX\). Is \(X\) an eigenvector? What is \(\lambda\)?
+
+**(b)** Is \((1,1)^T\) an eigenvector of \(A=\begin{bmatrix}2&1\\0&3\end{bmatrix}\)?
+
+**(c)** Why is the zero vector never called an eigenvector?
+
+> **Answers.**
+> (a) \(AX=(2,0)^T=2X\). Yes, \(\lambda=2\).
+> (b) \(A(1,1)^T=(2+1,\,0+3)^T=(3,3)^T=3\,(1,1)^T\). Yes, with \(\lambda=3\).
+> (c) \(A\cdot0=\lambda\cdot0\) holds for every \(\lambda\), so it would tell us nothing.
+
+</details>
+
+---
+
+# Section 2 · Finding the eigenvalues
+
+**Goal of this section:** given a matrix, write its characteristic equation and solve it for \(\lambda\).
+
+## 2.1 The idea: turn it into an equation we can solve
+
+We want every \(\lambda\) for which \(AX=\lambda X\) has a non-zero solution \(X\). The unknown \(X\) appears on both sides, so move everything to one side:
+
+\[
+AX-\lambda X=0\quad\Longrightarrow\quad(A-\lambda I)X=0
+\]
+
+Here \(I\) is the **identity matrix** (1s on the diagonal, 0s elsewhere). We need it because you cannot subtract a plain number from a matrix: \(\lambda I\) is the matrix with \(\lambda\) down the diagonal.
+
+Now the key fact. The system \((A-\lambda I)X=0\) has a non-zero solution **only when** the matrix \(A-\lambda I\) is *singular*, which means its **determinant is zero**. That gives the central equation of this module:
+
+> **Characteristic equation.** \(\;|A-\lambda I|=0\)
+> - \(A-\lambda I\) is the **characteristic matrix**.
+> - Expanding \(|A-\lambda I|\) gives the **characteristic polynomial**.
+> - Its roots are the **eigenvalues**.
+
+**How many eigenvalues?** A \(2\times2\) matrix gives a degree-2 equation, so 2 eigenvalues. A \(3\times3\) matrix gives a degree-3 equation, so 3 eigenvalues (some may repeat).
+
+## 2.2 Example: a 2×2 matrix
+
+Take the same matrix as before, \(A=\begin{bmatrix}4&1\\2&3\end{bmatrix}\). Subtract \(\lambda\) from the diagonal and take the determinant (a \(2\times2\) determinant is *main diagonal product minus other diagonal product*):
+
+\[
+\begin{vmatrix}4-\lambda&1\\2&3-\lambda\end{vmatrix}=(4-\lambda)(3-\lambda)-(1)(2)=\lambda^{2}-7\lambda+10=0
+\]
+
+Factorise: two numbers that multiply to 10 and add to 7 are 5 and 2.
+
+\[
+(\lambda-5)(\lambda-2)=0\quad\Longrightarrow\quad\lambda=5\ \text{ or }\ \lambda=2
+\]
+
+The 5 matches what we found in Section 1. The matrix has a second special stretch, 2.
+
+## 2.3 The teacher's shortcut (use this for every 3×3)
+
+Expanding a \(3\times3\) determinant with \(\lambda\) in it is slow and error-prone. Your teacher's notes use a formula that skips it:
+
+\[
+\boxed{\;\lambda^{3}-S_1\lambda^{2}+S_2\lambda-|A|=0\;}
+\]
+
+| Symbol | What it is | How to get it |
+|---|---|---|
+| \(S_1\) | **Sum of the diagonal** (the trace) | \(a_{11}+a_{22}+a_{33}\) |
+| \(S_2\) | **Sum of the three diagonal minors** | Cross out row 1 and column 1, take the \(2\times2\) determinant that is left. Repeat for row 2 / column 2, then row 3 / column 3. Add the three. |
+| \(\lvert A\rvert\) | The determinant of \(A\) | Expand along any row |
+
+For a \(2\times2\) matrix the same idea is \(\lambda^{2}-S_1\lambda+|A|=0\). Check it on our example: \(S_1=4+3=7\) and \(|A|=12-2=10\), which gives \(\lambda^2-7\lambda+10\). ✓
+
+<figure class="fig">
+<div class="flow">
+<span>Matrix \(A\)</span><i>→</i><span>\(S_1,\ S_2,\ |A|\)</span><i>→</i><span>Equation \(\lambda^3-S_1\lambda^2+S_2\lambda-|A|=0\)</span><i>→</i><span>Roots \(\lambda_1,\lambda_2,\lambda_3\)</span>
+</div>
+<figcaption>The whole eigenvalue step in one line.</figcaption>
+</figure>
+
+## 2.4 Solving the cubic
+
+Your cubic will almost always have whole-number roots. Try \(\lambda=\pm1,\pm2,\pm3,\dots\), numbers that divide the last term. If \(\lambda=a\) makes the polynomial zero, then \((\lambda-a)\) is a factor. Divide it out and you are left with a quadratic.
+
+**Example.** \(\lambda^3-6\lambda^2+11\lambda-6\). Try \(\lambda=1\): \(1-6+11-6=0\) ✓. Divide by \((\lambda-1)\):
+
+\[
+\lambda^3-6\lambda^2+11\lambda-6=(\lambda-1)(\lambda^2-5\lambda+6)=(\lambda-1)(\lambda-2)(\lambda-3)
+\]
+
+So \(\lambda=1,2,3\).
+
+## 2.5 The two free checks
+
+If the roots are \(\lambda_1,\lambda_2,\lambda_3\), then **always**
+
+\[
+\lambda_1+\lambda_2+\lambda_3=S_1,\qquad\lambda_1\lambda_2\lambda_3=|A|
+\]
+
+For \(1,2,3\): sum \(=6=S_1\) and product \(=6=|A|\) ✓. If your roots fail either check, the equation is wrong. Do this every time; it takes ten seconds and saves whole questions.
+
+## Check yourself: Section 2
+
+<details class="check">
+<summary>Try these, then open to compare</summary>
+
+**(a)** For the triangular matrix \(A=\begin{bmatrix}3&1\\0&2\end{bmatrix}\), find the eigenvalues using \(S_1\) and \(|A|\).
+
+**(b)** A \(3\times3\) matrix has \(S_1=6\), \(S_2=11\), \(|A|=6\). Write its characteristic equation and say why \(\lambda=1\) is a root.
+
+> **Answers.**
+> (a) \(S_1=5\), \(|A|=6\), so \(\lambda^2-5\lambda+6=0\), giving \(\lambda=2,3\). (For a triangular matrix the eigenvalues are just the diagonal entries.)
+> (b) \(\lambda^3-6\lambda^2+11\lambda-6=0\). At \(\lambda=1\): \(1-6+11-6=0\).
+
+</details>
+
+---
+
+# Section 3 · Finding the eigenvectors
+
+**Goal of this section:** for each eigenvalue, find its eigenvector(s) by row reduction, and know how many to expect.
+
+## 3.1 The recipe
+
+Once \(\lambda\) is known, its eigenvectors are the non-zero solutions of \((A-\lambda I)X=0\). The teacher's seven steps, with the reasons:
+
+1. **Write the characteristic equation** \(|A-\lambda I|=0\) (Section 2).
+2. **Solve it** to get the eigenvalues.
+3. **Pick one eigenvalue** and write \((A-\lambda I)X=0\): subtract \(\lambda\) from the diagonal.
+4. **Row-reduce.** Only three moves are allowed: swap two rows, multiply a row by a non-zero number, add a multiple of one row to another. Aim for as many zero rows as you can get.
+5. **Count the free parameters.** If there are \(n\) unknowns and \(r\) rows survive (the **rank**), there are \(n-r\) free parameters.
+6. **Cramer's rule** can be quicker for small systems (see Example B for the idea).
+7. **Read off the vectors.** Give each free parameter the value 1 in turn (the others 0).
+
+<figure class="fig">
+<div class="flow">
+<span>Eigenvalue \(\lambda\)</span><i>→</i><span>Form \(A-\lambda I\)</span><i>→</i><span>Row-reduce</span><i>→</i><span>Count \(n-r\)</span><i>→</i><span>Eigenvectors</span>
+</div>
+<figcaption>Repeat this once for every different eigenvalue.</figcaption>
+</figure>
+
+## 3.2 How many eigenvectors does a root give?
+
+This is the step beginners skip. It decides everything.
+
+| Rank \(r\) of \(A-\lambda I\) (3×3) | Free parameters \(n-r\) | Independent eigenvectors |
+|---|---|---|
+| 2 | 1 | **1** (the usual case) |
+| 1 | 2 | **2** (the equations collapse to a single one) |
+| 0 | 3 | 3 (only when \(A=\lambda I\)) |
+
+**Example of reading it off.** Suppose row reduction gives \(\begin{bmatrix}1&0&-1\\0&1&2\\0&0&0\end{bmatrix}\). Two rows survive, so \(r=2\) and \(n-r=1\). The equations say \(x_1=x_3\) and \(x_2=-2x_3\), so every eigenvector is a multiple of \((1,-2,1)^T\). Listing two "different" vectors here would be a mistake, because they would point the same way.
+
+## 3.3 Example A: finish the 2×2 matrix
+
+In Section 2 we found \(\lambda=5\) and \(\lambda=2\) for \(A=\begin{bmatrix}4&1\\2&3\end{bmatrix}\).
+
+#### Step 1 · Eigenvector for \(\lambda=5\)
+
+Subtract 5 from the diagonal:
+
+\[
+A-5I=\begin{bmatrix}-1&1\\2&-2\end{bmatrix}\quad\Longrightarrow\quad -x_1+x_2=0,\quad 2x_1-2x_2=0
+\]
+
+The second row is just \(-2\times\) the first, so only **one** equation survives: \(x_2=x_1\). Rank \(r=1\), so \(n-r=2-1=1\) free parameter. Put \(x_1=t\), then \(x_2=t\):
+
+\[
+X_1=t\begin{bmatrix}1\\1\end{bmatrix}\quad\text{take }t=1:\ X_1=(1,1)^T
+\]
+
+#### Step 2 · Eigenvector for \(\lambda=2\)
+
+\[
+A-2I=\begin{bmatrix}2&1\\2&1\end{bmatrix}\quad\Longrightarrow\quad 2x_1+x_2=0\ \Rightarrow\ x_2=-2x_1
+\]
+
+Again one free parameter: \(X_2=t(1,-2)^T\), so take \(X_2=(1,-2)^T\).
+
+#### Step 3 · Verify by substitution
+
+This is not optional: it is the only real proof the answer is right.
+
+\[
+A\begin{bmatrix}1\\1\end{bmatrix}=\begin{bmatrix}5\\5\end{bmatrix}=5\begin{bmatrix}1\\1\end{bmatrix}\ \checkmark\qquad
+A\begin{bmatrix}1\\-2\end{bmatrix}=\begin{bmatrix}2\\-4\end{bmatrix}=2\begin{bmatrix}1\\-2\end{bmatrix}\ \checkmark
+\]
+
+> **Answer.**
+>
+> | Eigenvalue \(\lambda\) | Eigenvector \(X\) |
+> |---|---|
+> | 5 | \((1,1)^T\) |
+> | 2 | \((1,-2)^T\) |
+
+## 3.4 Example B: a 3×3 matrix with a repeated eigenvalue
+
+> **Question.** Find the eigenvalues and eigenvectors of \(A=\begin{bmatrix}0&1&1\\1&0&1\\1&1&0\end{bmatrix}\).
+
+#### Step 1 · The three numbers
+
+\[
+S_1=0+0+0=0,\qquad
+S_2=\begin{vmatrix}0&1\\1&0\end{vmatrix}+\begin{vmatrix}0&1\\1&0\end{vmatrix}+\begin{vmatrix}0&1\\1&0\end{vmatrix}=-1-1-1=-3
+\]
+
+Expanding \(|A|\) along the first row: \(|A|=0-1(0-1)+1(1-0)=1+1=2\).
+
+#### Step 2 · Equation and roots
+
+\[
+\lambda^{3}-3\lambda-2=0
+\]
+
+Try \(\lambda=2\): \(8-6-2=0\) ✓, so \((\lambda-2)\) is a factor:
+
+\[
+\lambda^3-3\lambda-2=(\lambda-2)(\lambda+1)^2\quad\Longrightarrow\quad\lambda=2,\ -1,\ -1
+\]
+
+Check: \(2-1-1=0=S_1\) ✓ and \(2\cdot(-1)(-1)=2=|A|\) ✓.
+
+#### Step 3 · Eigenvector for \(\lambda=2\)
+
+\[
+A-2I=\begin{bmatrix}-2&1&1\\1&-2&1\\1&1&-2\end{bmatrix}
+\]
+
+Subtract row 2 from row 1: \(-3x_1+3x_2=0\), so \(x_1=x_2\). Put that in row 3: \(2x_1-2x_3=0\), so \(x_3=x_1\). All three entries are equal. Rank 2, one parameter: \(X=(1,1,1)^T\).
+
+#### Step 4 · Eigenvectors for \(\lambda=-1\) (the repeated root)
+
+\[
+A+I=\begin{bmatrix}1&1&1\\1&1&1\\1&1&1\end{bmatrix}\ \longrightarrow\ \begin{bmatrix}1&1&1\\0&0&0\\0&0&0\end{bmatrix}
+\]
+
+Every row says the same thing: \(x_1+x_2+x_3=0\). Rank 1, so \(n-r=3-1=2\) free parameters, which means **two** independent eigenvectors. Solve \(x_1=-x_2-x_3\) and give the free parameters the values (1, 0) and (0, 1):
+
+- \(x_2=1,\ x_3=0\ \Rightarrow\ x_1=-1\): \((-1,1,0)^T\)
+- \(x_2=0,\ x_3=1\ \Rightarrow\ x_1=-1\): \((-1,0,1)^T\)
+
+#### Step 5 · Verify
+
+\[
+A\begin{bmatrix}-1\\1\\0\end{bmatrix}=\begin{bmatrix}1\\-1\\0\end{bmatrix}=-1\begin{bmatrix}-1\\1\\0\end{bmatrix}\ \checkmark\quad
+A\begin{bmatrix}-1\\0\\1\end{bmatrix}=\begin{bmatrix}1\\0\\-1\end{bmatrix}\ \checkmark\quad
+A\begin{bmatrix}1\\1\\1\end{bmatrix}=\begin{bmatrix}2\\2\\2\end{bmatrix}=2\begin{bmatrix}1\\1\\1\end{bmatrix}\ \checkmark
+\]
+
+> **Answer.**
+>
+> | Eigenvalue \(\lambda\) | Eigenvectors |
+> |---|---|
+> | 2 | \((1,1,1)^T\) |
+> | \(-1\) (repeated) | \((-1,1,0)^T\) and \((-1,0,1)^T\) |
+
+> **What this example teaches.** A repeated eigenvalue is *not* automatically a problem. Here the rank dropped to 1, which gave two vectors, as many as the repeat count. A matrix like \(B=\begin{bmatrix}3&1&0\\0&3&0\\0&0&5\end{bmatrix}\) has \(\lambda=3\) twice, but \(B-3I\) has rank 2, so it gives only one eigenvector for that value. That gap is what "not diagonalisable" means later (Part 4).
+
+## Check yourself: Section 3
+
+<details class="check">
+<summary>Try these, then open to compare</summary>
+
+**(a)** A \(3\times3\) matrix has \(A-\lambda I\) of rank 1. How many independent eigenvectors does that \(\lambda\) have?
+
+**(b)** Row reduction of \(A-\lambda I\) gives the single equation \(x_1+x_2+x_3=0\). Write two independent eigenvectors.
+
+**(c)** After finding a vector \(X\), what is the one check that proves it is correct?
+
+> **Answers.**
+> (a) \(n-r=3-1=2\).
+> (b) For example \((-1,1,0)^T\) and \((-1,0,1)^T\). Any two independent solutions are fine.
+> (c) Compute \(AX\) and confirm it equals \(\lambda X\).
+
+</details>
+
+---
+
+# Section 4 · Exam toolkit
+
+**Goal of this section:** recognise the type of question straight away, check any answer in ten seconds, and dodge the common slips.
+
+## 4.1 The four types
+
+Your teacher sorts every question with two yes/no tests: is the matrix **symmetric** (\(A=A^T\), the grid is a mirror image across the diagonal), and are the eigenvalues **distinct or repeated**? The method never changes. Only the number of eigenvectors for a repeated root changes.
+
+| | **Non-symmetric** | **Symmetric** |
+|---|---|---|
+| **All eigenvalues distinct** | **Type I** · one vector per root | **Type II** · one vector per root; vectors of different roots are perpendicular |
+| **A repeated eigenvalue** | **Type III** · a repeated root may give 1 or 2 vectors: compute \(n-r\) | **Type IV** · a repeated root always gives 2 vectors |
+
+Section 5 uses Types I and II. Section 6 uses Types III and IV.
+
+## 4.2 Checking an answer in ten seconds
+
+1. **Substitute.** Compute \(AX\) for each vector. It must equal \(\lambda X\).
+2. **Add the roots.** They must equal the trace \(S_1\).
+3. **Multiply the roots.** They must equal \(|A|\).
+4. **Triangular matrix?** If everything above or below the diagonal is zero, the eigenvalues are the diagonal entries, with no determinant needed.
+5. **\(|A|=0\)?** Then at least one eigenvalue is \(0\). That is a real answer, not an error.
+
+## 4.3 Common mistakes
+
+| Mistake | What it looks like | The fix |
+|---|---|---|
+| Sign slip | \(\lambda^2-7\lambda-10\) instead of \(+10\) | Check sum and product of roots against \(S_1\) and \(|A|\) |
+| Wrong \(S_2\) | Adding all nine minors | Only the **three diagonal** \(2\times2\) minors |
+| Stopping at one vector | One vector for a root with rank 1 | Compute \(n-r\); if it is 2, give two vectors |
+| Listing the same direction twice | \((1,1,1)\) and \((2,2,2)\) as a pair | Use independent parameters |
+| Zero vector as an answer | "\(X=0\)" | Eigenvectors are never zero |
+| Dividing by something that might be 0 | Cancelling a symbol | Only divide by known non-zero numbers |
+
+## 4.4 Which method for which question?
+
+| If the question gives… | Do this |
+|---|---|
+| a \(2\times2\) matrix | \(\lambda^2-S_1\lambda+|A|=0\), then one row reduction per root |
+| a \(3\times3\) with distinct roots | \(S_1,S_2,|A|\), factor, one row reduction per root |
+| a \(3\times3\) with a repeated root | Same, then compute \(n-r\) for the repeated root |
+| a triangular matrix | Diagonal gives the eigenvalues |
+| an expression such as \(A^2-2A+I\) | Do not multiply matrices. This is Part 2 (not yet written) |
+
+## Check yourself: Section 4
+
+<details class="check">
+<summary>Try these, then open to compare</summary>
+
+**(a)** Write down the eigenvalues of \(\begin{bmatrix}3&5&7\\0&-2&4\\0&0&6\end{bmatrix}\) and their product.
+
+**(b)** Is \(\begin{bmatrix}2&2&1\\1&3&1\\1&2&2\end{bmatrix}\) symmetric?
+
+> **Answers.**
+> (a) Triangular, so \(\lambda=3,-2,6\). Product \(=-36=|A|\).
+> (b) No: the entry in row 1, column 2 is 2 but in row 2, column 1 it is 1. It is a non-symmetric matrix (Type I or III).
+
+</details>
+
+---
+
+# Section 5 · Practice 1: all eigenvalues different
+
+**Goal of this section:** solve four full questions where the three eigenvalues are distinct, so every root gives exactly one eigenvector.
+
+**Source:** `musa-question-bank-2026.pdf`, page 1, "MODULE 1 → Eigen Value and Eigen Vector", Q.1. The bank prints no marks, so none are invented.
+
+> **Numbering note.** The bank prints the sixth matrix as "v)" a second time. It is a printing slip in the source, not a merged question. Both matrices are kept and each has its own question here.
+
+## Question 1 · Bank Q.1 i) · Type I · Basic
+
+> **Find the eigenvalues and eigenvectors of** \(A=\begin{bmatrix}2&-1&1\\1&2&-1\\1&-1&2\end{bmatrix}\)
+
+> **What to expect.** Non-symmetric with distinct eigenvalues, so three roots and one vector each. This is exactly the teacher's own worked example (notes pp. 2–4).
+
+<details class="solution">
+<summary>I have tried it on paper: show the full solution</summary>
+
+#### Step 1 · Characteristic equation
+
+\[
+S_1=2+2+2=6,\qquad S_2=(4-1)+(4-1)+(4+1)=3+3+5=11,\qquad |A|=6
+\]
+\[
+\lambda^{3}-6\lambda^{2}+11\lambda-6=0
+\]
+
+#### Step 2 · Roots
+
+\(\lambda=1\) works (\(1-6+11-6=0\)), so
+
+\[
+(\lambda-1)(\lambda-2)(\lambda-3)=0\quad\Longrightarrow\quad\lambda=1,\,2,\,3
+\]
+
+Check: \(1+2+3=6=S_1\) ✓ and \(1\cdot2\cdot3=6=|A|\) ✓.
+
+#### Step 3 · Eigenvectors
+
+**For \(\lambda=1\):**
+\[
+A-I=\begin{bmatrix}1&-1&1\\1&1&-1\\1&-1&1\end{bmatrix}\xrightarrow{R_2-R_1}\begin{bmatrix}1&-1&1\\0&2&-2\\0&0&0\end{bmatrix}
+\]
+\(2x_2-2x_3=0\) gives \(x_2=x_3\). Then \(x_1-x_2+x_3=0\) gives \(x_1=0\). Take \(x_3=1\): \(X_1=(0,1,1)^T\).
+
+**For \(\lambda=2\):**
+\[
+A-2I=\begin{bmatrix}0&-1&1\\1&0&-1\\1&-1&0\end{bmatrix}\longrightarrow\begin{bmatrix}1&0&-1\\0&-1&1\\0&0&0\end{bmatrix}
+\]
+\(x_1=x_3\) and \(x_2=x_3\). Take \(x_3=1\): \(X_2=(1,1,1)^T\).
+
+**For \(\lambda=3\):**
+\[
+A-3I=\begin{bmatrix}-1&-1&1\\1&-1&-1\\1&-1&-1\end{bmatrix}\longrightarrow\begin{bmatrix}1&1&-1\\0&-2&0\\0&0&0\end{bmatrix}
+\]
+\(x_2=0\), then \(x_1=x_3\). Take \(x_3=1\): \(X_3=(1,0,1)^T\).
+
+#### Step 4 · Verify
+
+\[
+A\begin{bmatrix}0\\1\\1\end{bmatrix}=\begin{bmatrix}0\\1\\1\end{bmatrix}\ \checkmark\qquad
+A\begin{bmatrix}1\\1\\1\end{bmatrix}=\begin{bmatrix}2\\2\\2\end{bmatrix}\ \checkmark\qquad
+A\begin{bmatrix}1\\0\\1\end{bmatrix}=\begin{bmatrix}3\\0\\3\end{bmatrix}\ \checkmark
+\]
+
+> **Answer.**
+>
+> | Eigenvalue \(\lambda\) | Eigenvector \(X\) |
+> |---|---|
+> | 1 | \((0,1,1)^T\) |
+> | 2 | \((1,1,1)^T\) |
+> | 3 | \((1,0,1)^T\) |
+
+</details>
+
+## Question 2 · Bank Q.1 v) · Type II · Exam-level
+
+> **Find the eigenvalues and eigenvectors of** \(A=\begin{bmatrix}8&-6&2\\-6&7&-4\\2&-4&3\end{bmatrix}\)
+
+> **What to expect.** Symmetric with distinct eigenvalues (Type II, the teacher's own example). Here \(|A|=0\), so one eigenvalue will be **0**. Do not panic: zero is a perfectly good eigenvalue.
+
+<details class="solution">
+<summary>I have tried it on paper: show the full solution</summary>
+
+#### Step 1 · Characteristic equation
+
+\[
+S_1=8+7+3=18,\qquad S_2=(56-36)+(24-4)+(21-16)=20+20+5=45,\qquad |A|=0
+\]
+\[
+\lambda^{3}-18\lambda^{2}+45\lambda=0
+\]
+
+#### Step 2 · Roots
+
+Take out a common \(\lambda\): \(\lambda(\lambda^2-18\lambda+45)=\lambda(\lambda-3)(\lambda-15)\), so \(\lambda=0,\,3,\,15\).
+
+Check: \(0+3+15=18=S_1\) ✓ and \(0\cdot3\cdot15=0=|A|\) ✓.
+
+#### Step 3 · Eigenvectors
+
+**For \(\lambda=0\)** (use \(A\) itself):
+\[
+\begin{bmatrix}8&-6&2\\-6&7&-4\\2&-4&3\end{bmatrix}\longrightarrow\begin{bmatrix}1&0&-1/2\\0&1&-1\\0&0&0\end{bmatrix}
+\]
+\(x_1=\tfrac12x_3\) and \(x_2=x_3\). Take \(x_3=2\): \(X_1=(1,2,2)^T\).
+
+**For \(\lambda=3\):**
+\[
+A-3I=\begin{bmatrix}5&-6&2\\-6&4&-4\\2&-4&0\end{bmatrix}\longrightarrow\begin{bmatrix}1&0&1\\0&1&1/2\\0&0&0\end{bmatrix}
+\]
+\(x_1=-x_3\) and \(x_2=-\tfrac12x_3\). Take \(x_3=-2\): \(X_2=(2,1,-2)^T\).
+
+**For \(\lambda=15\):**
+\[
+A-15I=\begin{bmatrix}-7&-6&2\\-6&-8&-4\\2&-4&-12\end{bmatrix}\longrightarrow\begin{bmatrix}1&0&-2\\0&1&2\\0&0&0\end{bmatrix}
+\]
+\(x_1=2x_3\) and \(x_2=-2x_3\). Take \(x_3=1\): \(X_3=(2,-2,1)^T\).
+
+#### Step 4 · Verify
+
+\[
+A\begin{bmatrix}1\\2\\2\end{bmatrix}=\begin{bmatrix}0\\0\\0\end{bmatrix}=0\cdot X\ \checkmark\qquad
+A\begin{bmatrix}2\\1\\-2\end{bmatrix}=\begin{bmatrix}6\\3\\-6\end{bmatrix}=3X\ \checkmark\qquad
+A\begin{bmatrix}2\\-2\\1\end{bmatrix}=\begin{bmatrix}30\\-30\\15\end{bmatrix}=15X\ \checkmark
+\]
+
+> **Bonus check (Type II only).** In a symmetric matrix the eigenvectors of different eigenvalues are perpendicular. For example \((1,2,2)\cdot(2,1,-2)=2+2-4=0\). If this fails for a symmetric matrix, you have a slip.
+
+> **Answer.**
+>
+> | Eigenvalue \(\lambda\) | Eigenvector \(X\) |
+> |---|---|
+> | 0 | \((1,2,2)^T\) |
+> | 3 | \((2,1,-2)^T\) |
+> | 15 | \((2,-2,1)^T\) |
+
+</details>
+
+## Question 3 · Bank Q.1 v) printed a second time · Type II · Exam-level
+
+> **Find the eigenvalues and eigenvectors of** \(A=\begin{bmatrix}1&0&0\\0&3&-1\\0&-1&3\end{bmatrix}\)
+
+> **What to expect.** Symmetric with distinct roots. The first row and column hold only a single 1, so the matrix splits into a \(1\times1\) block and a \(2\times2\) block. That makes this one quick.
+
+<details class="solution">
+<summary>I have tried it on paper: show the full solution</summary>
+
+#### Step 1 · Characteristic equation
+
+\[
+S_1=1+3+3=7,\qquad S_2=(3-0)+(3-0)+(9-1)=3+3+8=14,\qquad |A|=1\cdot(9-1)=8
+\]
+\[
+\lambda^{3}-7\lambda^{2}+14\lambda-8=0
+\]
+
+#### Step 2 · Roots
+
+\(\lambda=1\) works (\(1-7+14-8=0\)), leaving \(\lambda^2-6\lambda+8=(\lambda-2)(\lambda-4)\):
+
+\[
+\lambda=1,\,2,\,4
+\]
+
+Check: \(1+2+4=7=S_1\) ✓ and \(1\cdot2\cdot4=8=|A|\) ✓.
+
+#### Step 3 · Eigenvectors
+
+**For \(\lambda=1\):** \(A-I=\begin{bmatrix}0&0&0\\0&2&-1\\0&-1&2\end{bmatrix}\). The first row is all zeros, so \(x_1\) is free. The other two rows force \(2x_2-x_3=0\) and \(-x_2+2x_3=0\), whose only solution is \(x_2=x_3=0\). So \(X_1=(1,0,0)^T\).
+
+**For \(\lambda=2\):** \(A-2I=\begin{bmatrix}-1&0&0\\0&1&-1\\0&-1&1\end{bmatrix}\) gives \(x_1=0\) and \(x_2=x_3\). So \(X_2=(0,1,1)^T\).
+
+**For \(\lambda=4\):** \(A-4I=\begin{bmatrix}-3&0&0\\0&-1&-1\\0&-1&-1\end{bmatrix}\) gives \(x_1=0\) and \(x_2=-x_3\). So \(X_3=(0,1,-1)^T\).
+
+#### Step 4 · Verify
+
+\[
+A\begin{bmatrix}1\\0\\0\end{bmatrix}=\begin{bmatrix}1\\0\\0\end{bmatrix}\ \checkmark\qquad
+A\begin{bmatrix}0\\1\\1\end{bmatrix}=\begin{bmatrix}0\\2\\2\end{bmatrix}=2X\ \checkmark\qquad
+A\begin{bmatrix}0\\1\\-1\end{bmatrix}=\begin{bmatrix}0\\4\\-4\end{bmatrix}=4X\ \checkmark
+\]
+
+> **Answer.**
+>
+> | Eigenvalue \(\lambda\) | Eigenvector \(X\) |
+> |---|---|
+> | 1 | \((1,0,0)^T\) |
+> | 2 | \((0,1,1)^T\) |
+> | 4 | \((0,1,-1)^T\) |
+
+</details>
+
+## Question 4 · Practice paper (Winter 2025) Q.4 b) · Type II · Exam-level · 5 marks
+
+> **Find the eigenvalues and eigenvectors of** \(A=\begin{bmatrix}3&-1&1\\-1&5&-1\\1&-1&3\end{bmatrix}\)
+
+> **What to expect.** Symmetric with distinct roots. This is from the **2025 practice paper**, not the 2026 bank, and it prints 5 marks. Give it about 8 minutes.
+
+<details class="solution">
+<summary>I have tried it on paper: show the full solution</summary>
+
+#### Step 1 · Characteristic equation
+
+\[
+S_1=3+5+3=11,\qquad S_2=(15-1)+(9-1)+(15-1)=14+8+14=36,\qquad |A|=36
+\]
+\[
+\lambda^{3}-11\lambda^{2}+36\lambda-36=0
+\]
+
+#### Step 2 · Roots
+
+\(\lambda=2\) works (\(8-44+72-36=0\)), leaving \(\lambda^2-9\lambda+18=(\lambda-3)(\lambda-6)\):
+
+\[
+\lambda=2,\,3,\,6
+\]
+
+Check: \(2+3+6=11=S_1\) ✓ and \(2\cdot3\cdot6=36=|A|\) ✓.
+
+#### Step 3 · Eigenvectors
+
+**For \(\lambda=2\):**
+\[
+A-2I=\begin{bmatrix}1&-1&1\\-1&3&-1\\1&-1&1\end{bmatrix}\longrightarrow\begin{bmatrix}1&-1&1\\0&2&0\\0&0&0\end{bmatrix}
+\]
+\(x_2=0\), then \(x_1=-x_3\). Take \(x_3=-1\): \(X_1=(1,0,-1)^T\) (or \((-1,0,1)^T\); same direction).
+
+**For \(\lambda=3\):**
+\[
+A-3I=\begin{bmatrix}0&-1&1\\-1&2&-1\\1&-1&0\end{bmatrix}\longrightarrow\begin{bmatrix}1&0&-1\\0&1&-1\\0&0&0\end{bmatrix}
+\]
+\(x_1=x_3\) and \(x_2=x_3\). So \(X_2=(1,1,1)^T\).
+
+**For \(\lambda=6\):**
+\[
+A-6I=\begin{bmatrix}-3&-1&1\\-1&-1&-1\\1&-1&-3\end{bmatrix}\longrightarrow\begin{bmatrix}1&0&-1\\0&1&2\\0&0&0\end{bmatrix}
+\]
+\(x_1=x_3\) and \(x_2=-2x_3\). So \(X_3=(1,-2,1)^T\).
+
+#### Step 4 · Verify
+
+\[
+A\begin{bmatrix}1\\0\\-1\end{bmatrix}=\begin{bmatrix}2\\0\\-2\end{bmatrix}=2X\ \checkmark\qquad
+A\begin{bmatrix}1\\1\\1\end{bmatrix}=\begin{bmatrix}3\\3\\3\end{bmatrix}=3X\ \checkmark\qquad
+A\begin{bmatrix}1\\-2\\1\end{bmatrix}=\begin{bmatrix}6\\-12\\6\end{bmatrix}=6X\ \checkmark
+\]
+
+> **Answer.**
+>
+> | Eigenvalue \(\lambda\) | Eigenvector \(X\) |
+> |---|---|
+> | 2 | \((1,0,-1)^T\) |
+> | 3 | \((1,1,1)^T\) |
+> | 6 | \((1,-2,1)^T\) |
+
+</details>
+
+> **Source note on the practice paper.** Its printed instructions say "Attempt any three questions from Q.2 to Q.5", but the paper also contains a Q.6, and the official pattern is three answers out of six questions with Q.1 compulsory. This is recorded, not silently corrected.
+
+## Check yourself: Section 5
+
+<details class="check">
+<summary>Open when you have finished all four questions</summary>
+
+- Did you check **sum of roots = trace** and **product = determinant** *before* row-reducing?
+- In Question 2, did you expect a zero eigenvalue as soon as you saw \(|A|=0\)?
+- In Question 3, did you notice the matrix splits into blocks, so the first eigenvector is just \((1,0,0)^T\)?
+- Did you substitute at least one vector back into \(AX=\lambda X\)?
+
+If any answer is "no", redo that part of the question once. That habit is worth more marks than any shortcut.
+
+</details>
+
+---
+
+# Section 6 · Practice 2: a repeated eigenvalue
+
+**Goal of this section:** solve four questions where one eigenvalue appears twice, and decide whether that root gives one vector or two.
+
+> **The rule that decides everything.** For a repeated root, compute \(n-r\) from the rank of \(A-\lambda I\). In every question below the rank drops to **1**, so the repeated root gets **two** independent eigenvectors and the equations collapse to a single equation.
+
+## Question 5 · Bank Q.1 ii) · Type III · Exam-level
+
+> **Find the eigenvalues and eigenvectors of** \(A=\begin{bmatrix}2&2&1\\1&3&1\\1&2&2\end{bmatrix}\)
+
+> **What to expect.** Non-symmetric with a repeated root (the teacher's Type III example, notes pp. 7–8).
+
+<details class="solution">
+<summary>I have tried it on paper: show the full solution</summary>
+
+#### Step 1 · Characteristic equation
+
+\[
+S_1=2+3+2=7,\qquad S_2=(6-2)+(4-1)+(6-2)=4+3+4=11,\qquad |A|=5
+\]
+\[
+\lambda^{3}-7\lambda^{2}+11\lambda-5=0
+\]
+
+#### Step 2 · Roots
+
+\(\lambda=1\) works (\(1-7+11-5=0\)), leaving \(\lambda^2-6\lambda+5=(\lambda-1)(\lambda-5)\):
+
+\[
+(\lambda-5)(\lambda-1)^{2}=0\quad\Longrightarrow\quad\lambda=5,\ 1,\ 1
+\]
+
+Check: \(5+1+1=7=S_1\) ✓ and \(5\cdot1\cdot1=5=|A|\) ✓.
+
+#### Step 3 · Eigenvectors
+
+**For \(\lambda=5\):**
+\[
+A-5I=\begin{bmatrix}-3&2&1\\1&-2&1\\1&2&-3\end{bmatrix}\longrightarrow\begin{bmatrix}1&-2&1\\0&-4&4\\0&4&-4\end{bmatrix}
+\]
+Rank 2, one parameter. \(x_2=x_3\) and \(x_1=2x_2-x_3=x_2\). So \(X_3=(1,1,1)^T\).
+
+**For \(\lambda=1\) (repeated):**
+\[
+A-I=\begin{bmatrix}1&2&1\\1&2&1\\1&2&1\end{bmatrix}\longrightarrow\begin{bmatrix}1&2&1\\0&0&0\\0&0&0\end{bmatrix}
+\]
+Three identical rows, so rank 1 and \(n-r=2\): **two** eigenvectors. The one equation is \(x_1+2x_2+x_3=0\).
+
+- \(x_2=1,\ x_3=0\ \Rightarrow\ x_1=-2\): \(X_1=(-2,1,0)^T\)
+- \(x_2=0,\ x_3=1\ \Rightarrow\ x_1=-1\): \(X_2=(-1,0,1)^T\)
+
+#### Step 4 · Verify
+
+\[
+A\begin{bmatrix}1\\1\\1\end{bmatrix}=\begin{bmatrix}5\\5\\5\end{bmatrix}\ \checkmark\qquad
+A\begin{bmatrix}-2\\1\\0\end{bmatrix}=\begin{bmatrix}-2\\1\\0\end{bmatrix}\ \checkmark\qquad
+A\begin{bmatrix}-1\\0\\1\end{bmatrix}=\begin{bmatrix}-1\\0\\1\end{bmatrix}\ \checkmark
+\]
+
+> **Answer.**
+>
+> | Eigenvalue \(\lambda\) | Eigenvectors |
+> |---|---|
+> | 5 | \((1,1,1)^T\) |
+> | 1 (repeated) | \((-2,1,0)^T\) and \((-1,0,1)^T\) |
+
+</details>
+
+## Question 6 · Bank Q.1 iii) · Type III · Exam-level
+
+> **Find the eigenvalues and eigenvectors of** \(A=\begin{bmatrix}2&1&1\\2&3&2\\3&3&4\end{bmatrix}\)
+
+> **What to expect.** Non-symmetric with a repeated root. Note the three rows of \(A-I\) are multiples of each other, which is how you can spot rank 1 at a glance.
+
+<details class="solution">
+<summary>I have tried it on paper: show the full solution</summary>
+
+#### Step 1 · Characteristic equation
+
+\[
+S_1=2+3+4=9,\qquad S_2=(6-2)+(8-3)+(12-6)=4+5+6=15,\qquad |A|=7
+\]
+\[
+\lambda^{3}-9\lambda^{2}+15\lambda-7=0
+\]
+
+#### Step 2 · Roots
+
+\(\lambda=1\) works (\(1-9+15-7=0\)), leaving \(\lambda^2-8\lambda+7=(\lambda-1)(\lambda-7)\):
+
+\[
+(\lambda-7)(\lambda-1)^{2}=0\quad\Longrightarrow\quad\lambda=7,\ 1,\ 1
+\]
+
+Check: \(7+1+1=9=S_1\) ✓ and \(7\cdot1\cdot1=7=|A|\) ✓.
+
+#### Step 3 · Eigenvectors
+
+**For \(\lambda=7\):**
+\[
+A-7I=\begin{bmatrix}-5&1&1\\2&-4&2\\3&3&-3\end{bmatrix}\longrightarrow\begin{bmatrix}1&0&-1/3\\0&1&-2/3\\0&0&0\end{bmatrix}
+\]
+\(x_1=\tfrac13x_3\) and \(x_2=\tfrac23x_3\). Take \(x_3=3\): \(X_3=(1,2,3)^T\).
+
+**For \(\lambda=1\) (repeated):**
+\[
+A-I=\begin{bmatrix}1&1&1\\2&2&2\\3&3&3\end{bmatrix}\longrightarrow\begin{bmatrix}1&1&1\\0&0&0\\0&0&0\end{bmatrix}
+\]
+Rank 1, so two eigenvectors. The equation is \(x_1+x_2+x_3=0\).
+
+- \(x_2=1,\ x_3=0\): \(X_1=(-1,1,0)^T\)
+- \(x_2=0,\ x_3=1\): \(X_2=(-1,0,1)^T\)
+
+#### Step 4 · Verify
+
+\[
+A\begin{bmatrix}1\\2\\3\end{bmatrix}=\begin{bmatrix}7\\14\\21\end{bmatrix}=7X\ \checkmark\qquad
+A\begin{bmatrix}-1\\1\\0\end{bmatrix}=\begin{bmatrix}-1\\1\\0\end{bmatrix}\ \checkmark\qquad
+A\begin{bmatrix}-1\\0\\1\end{bmatrix}=\begin{bmatrix}-1\\0\\1\end{bmatrix}\ \checkmark
+\]
+
+> **Answer.**
+>
+> | Eigenvalue \(\lambda\) | Eigenvectors |
+> |---|---|
+> | 7 | \((1,2,3)^T\) |
+> | 1 (repeated) | \((-1,1,0)^T\) and \((-1,0,1)^T\) |
+
+</details>
+
+## Question 7 · Bank Q.1 iv) · Type IV · Exam-level
+
+> **Find the eigenvalues and eigenvectors of** \(A=\begin{bmatrix}6&-2&2\\-2&3&-1\\2&-1&3\end{bmatrix}\)
+
+> **What to expect.** Symmetric with a repeated root (Type IV). For a symmetric matrix a repeated root *always* gives the full number of vectors, so you can be confident you need two.
+
+<details class="solution">
+<summary>I have tried it on paper: show the full solution</summary>
+
+#### Step 1 · Characteristic equation
+
+\[
+S_1=6+3+3=12,\qquad S_2=(18-4)+(18-4)+(9-1)=14+14+8=36,\qquad |A|=32
+\]
+\[
+\lambda^{3}-12\lambda^{2}+36\lambda-32=0
+\]
+
+#### Step 2 · Roots
+
+\(\lambda=2\) works (\(8-48+72-32=0\)), leaving \(\lambda^2-10\lambda+16=(\lambda-2)(\lambda-8)\):
+
+\[
+(\lambda-8)(\lambda-2)^{2}=0\quad\Longrightarrow\quad\lambda=8,\ 2,\ 2
+\]
+
+Check: \(8+2+2=12=S_1\) ✓ and \(8\cdot2\cdot2=32=|A|\) ✓.
+
+#### Step 3 · Eigenvectors
+
+**For \(\lambda=8\):**
+\[
+A-8I=\begin{bmatrix}-2&-2&2\\-2&-5&-1\\2&-1&-5\end{bmatrix}\longrightarrow\begin{bmatrix}1&1&-1\\0&-3&-3\\0&0&0\end{bmatrix}
+\]
+\(x_2=-x_3\) and \(x_1=-x_2+x_3=2x_3\). Take \(x_3=1\): \(X_3=(2,-1,1)^T\).
+
+**For \(\lambda=2\) (repeated):**
+\[
+A-2I=\begin{bmatrix}4&-2&2\\-2&1&-1\\2&-1&1\end{bmatrix}\longrightarrow\begin{bmatrix}2&-1&1\\0&0&0\\0&0&0\end{bmatrix}
+\]
+Rank 1, two eigenvectors. The equation is \(2x_1-x_2+x_3=0\).
+
+- \(x_1=1,\ x_2=2\ \Rightarrow\ x_3=0\): \(X_1=(1,2,0)^T\)
+- \(x_1=1,\ x_2=0\ \Rightarrow\ x_3=-2\): \(X_2=(1,0,-2)^T\)
+
+#### Step 4 · Verify
+
+\[
+A\begin{bmatrix}2\\-1\\1\end{bmatrix}=\begin{bmatrix}16\\-8\\8\end{bmatrix}=8X\ \checkmark\qquad
+A\begin{bmatrix}1\\2\\0\end{bmatrix}=\begin{bmatrix}2\\4\\0\end{bmatrix}=2X\ \checkmark\qquad
+A\begin{bmatrix}1\\0\\-2\end{bmatrix}=\begin{bmatrix}2\\0\\-4\end{bmatrix}=2X\ \checkmark
+\]
+
+> **Answer.**
+>
+> | Eigenvalue \(\lambda\) | Eigenvectors |
+> |---|---|
+> | 8 | \((2,-1,1)^T\) |
+> | 2 (repeated) | \((1,2,0)^T\) and \((1,0,-2)^T\) |
+
+</details>
+
+## Question 8 · Bank Q.1 vii) · Type III · Exam-level
+
+> **Find the eigenvalues and eigenvectors of** \(A=\begin{bmatrix}-2&2&-3\\2&1&-6\\-1&-2&0\end{bmatrix}\)
+
+> **What to expect.** Non-symmetric with a repeated root, and negative numbers everywhere. The classic trap here is pairing the wrong minors in \(S_2\).
+
+<details class="solution">
+<summary>I have tried it on paper: show the full solution</summary>
+
+#### Step 1 · Characteristic equation
+
+\[
+S_1=-2+1+0=-1
+\]
+
+> **Careful.** The three diagonal minors are
+> \(\begin{vmatrix}-2&2\\2&1\end{vmatrix}=-2-4=-6\),
+> \(\begin{vmatrix}-2&-3\\-1&0\end{vmatrix}=0-3=-3\),
+> \(\begin{vmatrix}1&-6\\-2&0\end{vmatrix}=0-12=-12\).
+> So \(S_2=-6-3-12=-21\).
+
+\[
+|A|=-2(0-12)-2(0-6)+(-3)(-4+1)=24+12+9=45
+\]
+\[
+\lambda^{3}+\lambda^{2}-21\lambda-45=0
+\]
+
+#### Step 2 · Roots
+
+\(\lambda=5\) works (\(125+25-105-45=0\)), leaving \(\lambda^2+6\lambda+9=(\lambda+3)^2\):
+
+\[
+(\lambda-5)(\lambda+3)^{2}=0\quad\Longrightarrow\quad\lambda=5,\ -3,\ -3
+\]
+
+Check: \(5-3-3=-1=S_1\) ✓ and \(5\cdot(-3)(-3)=45=|A|\) ✓.
+
+#### Step 3 · Eigenvectors
+
+**For \(\lambda=5\):**
+\[
+A-5I=\begin{bmatrix}-7&2&-3\\2&-4&-6\\-1&-2&-5\end{bmatrix}\longrightarrow\begin{bmatrix}1&0&1\\0&1&2\\0&0&0\end{bmatrix}
+\]
+\(x_1=-x_3\) and \(x_2=-2x_3\). Take \(x_3=-1\): \(X_3=(1,2,-1)^T\).
+
+**For \(\lambda=-3\) (repeated):**
+\[
+A+3I=\begin{bmatrix}1&2&-3\\2&4&-6\\-1&-2&3\end{bmatrix}\longrightarrow\begin{bmatrix}1&2&-3\\0&0&0\\0&0&0\end{bmatrix}
+\]
+Rank 1, two eigenvectors. The equation is \(x_1+2x_2-3x_3=0\).
+
+- \(x_2=1,\ x_3=0\ \Rightarrow\ x_1=-2\): \(X_1=(-2,1,0)^T\)
+- \(x_2=0,\ x_3=1\ \Rightarrow\ x_1=3\): \(X_2=(3,0,1)^T\)
+
+#### Step 4 · Verify
+
+\[
+A\begin{bmatrix}1\\2\\-1\end{bmatrix}=\begin{bmatrix}5\\10\\-5\end{bmatrix}=5X\ \checkmark\qquad
+A\begin{bmatrix}-2\\1\\0\end{bmatrix}=\begin{bmatrix}6\\-3\\0\end{bmatrix}=-3X\ \checkmark\qquad
+A\begin{bmatrix}3\\0\\1\end{bmatrix}=\begin{bmatrix}-9\\0\\-3\end{bmatrix}=-3X\ \checkmark
+\]
+
+> **Answer.**
+>
+> | Eigenvalue \(\lambda\) | Eigenvectors |
+> |---|---|
+> | 5 | \((1,2,-1)^T\) |
+> | \(-3\) (repeated) | \((-2,1,0)^T\) and \((3,0,1)^T\) |
+
+</details>
+
+## Check yourself: Section 6
+
+<details class="check">
+<summary>Open when you have finished all four questions</summary>
+
+- In each question, did you compute \(n-r\) for the repeated root *before* writing vectors?
+- Did you give **two different** vectors for the repeated root (not a vector and its multiple)?
+- Could you tell from the three rows of \(A-\lambda I\) alone that the rank was 1?
+
+All four repeated roots here had rank 1. Part 4 shows what happens when a repeated root gives fewer vectors than its repeat count.
+
+</details>
+
+---
+
+# Section 7 · One-page revision
+
+**Goal of this section:** have everything on one screen for the night before the exam.
+
+## The method
+
+1. \(S_1=\) sum of diagonal. \(S_2=\) sum of the three diagonal \(2\times2\) minors. \(|A|=\) determinant.
+2. \(\lambda^{3}-S_1\lambda^{2}+S_2\lambda-|A|=0\) (for \(2\times2\): \(\lambda^2-S_1\lambda+|A|=0\)).
+3. Try small whole numbers to find one root, divide, and solve the quadratic.
+4. **Check:** sum of roots \(=S_1\), product of roots \(=|A|\).
+5. For each \(\lambda\): form \(A-\lambda I\), row-reduce, count \(n-r\), read off the vectors.
+6. **Check:** \(AX=\lambda X\).
+
+## Facts to know
+
+- \(AX=\lambda X\) with \(X\neq0\). Any non-zero multiple of an eigenvector is an eigenvector.
+- Triangular matrix: eigenvalues are the diagonal entries.
+- \(|A|=0\) means one eigenvalue is 0.
+- Rank 2 gives 1 vector; rank 1 gives 2 vectors (for a \(3\times3\)).
+- Symmetric matrix: eigenvectors of different eigenvalues are perpendicular.
+
+## The four types
+
+| | **Non-symmetric** | **Symmetric** |
+|---|---|---|
+| **Distinct** | Type I | Type II |
+| **Repeated** | Type III | Type IV |
+
+## Your results from this page
+
+| Question | Source | Eigenvalues |
+|---|---|---|
+| 1 | Bank Q.1 i) | \(1,2,3\) |
+| 2 | Bank Q.1 v) | \(0,3,15\) |
+| 3 | Bank Q.1 v) again | \(1,2,4\) |
+| 4 | Practice paper Q.4 b) | \(2,3,6\) |
+| 5 | Bank Q.1 ii) | \(5,1,1\) |
+| 6 | Bank Q.1 iii) | \(7,1,1\) |
+| 7 | Bank Q.1 iv) | \(8,2,2\) |
+| 8 | Bank Q.1 vii) | \(5,-3,-3\) |
+
+---
+
+# About the sources
+
+## What is on this page, and what is not
+
+| Block | Source | Status |
+|---|---|---|
+| Module I, eigenvalues and eigenvectors | MUSA 2026 bank, page 1, Q.1 (i)–(vii), plus practice paper Q.4 b) | **Complete** (this page) |
+| Module I, eigenvalues of matrix expressions | MUSA 2026 bank, Q.2 (i)–(ii) | Planned, Part 2 |
+| Module I, Cayley–Hamilton theorem | MUSA 2026 bank, Q.1–Q.8 | Planned, Part 3 |
+| Module I, diagonalisation | MUSA 2026 bank, Q.1–Q.6 | Planned, Part 4 |
+| Modules II, III, V, VI | MUSA 2026 bank and practice paper | Not started |
+| Module IV, Fourier series | Existing Module 4 guide | Will be reconciled, not duplicated |
+
+Nothing marked "planned" or "not started" has been written yet. An empty section is never shown as finished.
+
+## Where every question comes from
+
+- **The question bank controls the wording and the numbers.** Every matrix was read from the scanned page at 200–400 dpi and compared against a second enlarged crop.
+- **The solutions booklet is a secondary source.** It was treated as a claim to check, not as an answer key. Every Module I eigenvalue answer in it agrees with the solutions here, up to a scalar multiple of an eigenvector (which is still the same eigenvector).
+- **Every answer is independently verified** with SymPy 1.14 using exact rational arithmetic, and every eigenvector is checked by substitution into \(AX=\lambda X\).
+
+<details>
+<summary>Source files and checksums</summary>
+
+| Source | File on the project machine | SHA-256 (verified 16 November 2026) |
+|---|---|---|
+| MUSA question bank, Winter Session 2026 (9 pages) | `musa-question-bank-2026.pdf` | `1c24161e4d16e5c3624f610e56ee2034a705475b604a2d39f16849eb921a89f2` |
+| MUSA solutions booklet (108 pages) | `maths-question-bank-solutions.pdf` | `523d42600fc54da00b87702edd6ea17dafd8469e286046a4e9ee0e7ffcc404c2` |
+| MUSA practice paper, Set-I, Winter 2025 (3 pages) | `musa-practice-paper-set1-w2025.pdf` | `17fb8559daa4f7dec2ac625dc2053c56ab691ef7894650707c048f3ee125d404` |
+
+</details>
+
+*The teacher's method comes from the handwritten Module 1 notes (PDF pages 1–11). For a second view of the geometric picture, see Margalit and Rabinoff, [Interactive Linear Algebra, §5.1](https://textbooks.math.gatech.edu/ila/eigenvectors.html) (Georgia Tech, GNU Free Documentation License). The compact offline answer key is `Module_1_Endsem_Answer_Key.md`.*
+
+---
+
+**Separate answer key — nothing below this line reveals an answer to a question you have not yet attempted.**
+
+# Part 1 · Answer key
+
+Fully worked answers for every question in Part 1. Each solution shows the characteristic equation, the roots, the row reduction that produces the eigenvectors, and a substitution check. Every number below was recomputed exactly with SymPy; the raw output is in `_work/endsem/out_part1_vectors.txt`.
+
+## `M1-EV-Q1-i` — the teacher's Type I example
+
+\[A=\begin{bmatrix}2&-1&1\\1&2&-1\\1&-1&2\end{bmatrix}\]
+
+**Characteristic equation** (teacher's shortcut, PDF page 2):
+\[
+S_1=2+2+2=6,\qquad
+S_2=(4-1)+(4-1)+(4+1)=3+3+5=11,\qquad
+|A|=6
+\]
+\[
+\lambda^{3}-6\lambda^{2}+11\lambda-6=0
+\quad\Longrightarrow\quad
+(\lambda-1)(\lambda-2)(\lambda-3)=0
+\]
+Checks: \(1+2+3=6=S_1\) ✓ and \(1\cdot2\cdot3=6=|A|\) ✓.
+
+**Eigenvectors.**
+
+For \(\lambda=1\):
+\[
+A-I=\begin{bmatrix}1&-1&1\\1&1&-1\\1&-1&1\end{bmatrix}
+\ \xrightarrow{R_2-R_1}\
+\begin{bmatrix}1&-1&1\\0&2&-2\\0&0&0\end{bmatrix}
+\]
+\(2x_2-2x_3=0\Rightarrow x_2=x_3\); then \(x_1-x_2+x_3=0\Rightarrow x_1=0\). With \(x_3=t\): \(X_1=(0,1,1)^T\).
+
+For \(\lambda=2\):
+\[
+A-2I=\begin{bmatrix}0&-1&1\\1&0&-1\\1&-1&0\end{bmatrix}
+\ \xrightarrow{}\
+\begin{bmatrix}1&0&-1\\0&-1&1\\0&0&0\end{bmatrix}
+\]
+\(x_1=x_3\) and \(x_2=x_3\). With \(x_3=t\): \(X_2=(1,1,1)^T\).
+
+For \(\lambda=3\):
+\[
+A-3I=\begin{bmatrix}-1&-1&1\\1&-1&-1\\1&-1&-1\end{bmatrix}
+\ \xrightarrow{}\
+\begin{bmatrix}1&1&-1\\0&-2&0\\0&0&0\end{bmatrix}
+\]
+\(x_2=0\), then \(x_1=x_3\). With \(x_3=t\): \(X_3=(1,0,1)^T\).
+
+**Check.** \(A(0,1,1)^T=(0,1,1)^T\) ✓, \(A(1,1,1)^T=(2,2,2)^T\) ✓, \(A(1,0,1)^T=(3,0,3)^T\) ✓.
+
+**Answer.** \(\lambda=1,2,3\) with \(X=(0,1,1)^T,(1,1,1)^T,(1,0,1)^T\). The three vectors are linearly independent (the matrix having them as columns has determinant \(-1\neq0\)).
+
+**Supplied booklet (PDF page 4–5):** checked; same eigenvalues and the same three vectors.
+
+> This question is literally the teacher's worked example (notes PDF pages 2–4). Read those pages if you want to see the identical working in the teacher's hand.
+
+## `M1-EV-Q1-ii`
+
+\[A=\begin{bmatrix}2&2&1\\1&3&1\\1&2&2\end{bmatrix}\]
+
+\[
+S_1=2+3+2=7,\quad
+S_2=(6-2)+(4-1)+(6-2)=4+3+4=11,\quad
+|A|=5
+\]
+\[
+\lambda^{3}-7\lambda^{2}+11\lambda-5=0
+\quad\Longrightarrow\quad
+(\lambda-5)(\lambda-1)^{2}=0
+\]
+Check: \(5+1+1=7=S_1\) ✓, \(5\cdot1\cdot1=5=|A|\) ✓.
+
+For \(\lambda=5\):
+\[
+A-5I=\begin{bmatrix}-3&2&1\\1&-2&1\\1&2&-3\end{bmatrix}
+\ \longrightarrow\
+\begin{bmatrix}1&-2&1\\0&-4&4\\0&4&-4\end{bmatrix}
+\]
+\(x_2=x_3\), \(x_1=2x_2-x_3=x_2\): \(X_3=(1,1,1)^T\).
+
+For \(\lambda=1\):
+\[
+A-I=\begin{bmatrix}1&2&1\\1&2&1\\1&2&1\end{bmatrix}
+\ \longrightarrow\
+\begin{bmatrix}1&2&1\\0&0&0\\0&0&0\end{bmatrix}
+\]
+Rank 1, so two parameters. Equation \(x_1+2x_2+x_3=0\):
+
+- \(x_2=1,x_3=0\Rightarrow x_1=-2\): \(X_1=(-2,1,0)^T\);
+- \(x_2=0,x_3=1\Rightarrow x_1=-1\): \(X_2=(-1,0,1)^T\).
+
+**Check.** \(A(1,1,1)^T=(5,5,5)^T\) ✓, \(A(-2,1,0)^T=(-2,1,0)^T\) ✓, \(A(-1,0,1)^T=(-1,0,1)^T\) ✓.
+
+**Answer.** \(\lambda=5\): \((1,1,1)^T\); \(\lambda=1\) (repeated): \((-2,1,0)^T\) and \((-1,0,1)^T\).
+
+**Supplied booklet (PDF pages 5–6):** checked; same results (its final-answer box omits the \(\lambda=5\) row, but the working above it gives \((1,1,1)^T\)).
+
+## `M1-EV-Q1-iii`
+
+\[A=\begin{bmatrix}2&1&1\\2&3&2\\3&3&4\end{bmatrix}\]
+
+\[
+S_1=2+3+4=9,\quad
+S_2=(6-2)+(8-3)+(12-6)=4+5+6=15,\quad
+|A|=7
+\]
+\[
+\lambda^{3}-9\lambda^{2}+15\lambda-7=0
+\quad\Longrightarrow\quad
+(\lambda-7)(\lambda-1)^{2}=0
+\]
+Check: \(7+1+1=9=S_1\) ✓, \(7\cdot1\cdot1=7=|A|\) ✓.
+
+For \(\lambda=7\):
+\[
+A-7I=\begin{bmatrix}-5&1&1\\2&-4&2\\3&3&-3\end{bmatrix}
+\ \longrightarrow\
+\begin{bmatrix}1&0&-1/3\\0&1&-2/3\\0&0&0\end{bmatrix}
+\]
+so \(x_1=x_3/3\) and \(x_2=2x_3/3\). With \(x_3=3t\): \(X_3=(1,2,3)^T\).
+
+For \(\lambda=1\):
+\[
+A-I=\begin{bmatrix}1&1&1\\2&2&2\\3&3&3\end{bmatrix}
+\ \longrightarrow\
+\begin{bmatrix}1&1&1\\0&0&0\\0&0&0\end{bmatrix}
+\]
+Equation \(x_1+x_2+x_3=0\), two parameters:
+
+- \(x_2=1,x_3=0\): \(X_1=(-1,1,0)^T\);
+- \(x_2=0,x_3=1\): \(X_2=(-1,0,1)^T\).
+
+**Check.** \(A(1,2,3)^T=(7,14,21)^T\) ✓, \(A(-1,1,0)^T=(-1,1,0)^T\) ✓, \(A(-1,0,1)^T=(-1,0,1)^T\) ✓.
+
+**Answer.** \(\lambda=7\): \((1,2,3)^T\); \(\lambda=1\) (repeated): \((-1,1,0)^T\) and \((-1,0,1)^T\).
+
+**Supplied booklet:** checked; same results.
+
+## `M1-EV-Q1-iv`
+
+\[A=\begin{bmatrix}6&-2&2\\-2&3&-1\\2&-1&3\end{bmatrix}\]
+
+\[
+S_1=6+3+3=12,\quad
+S_2=(18-4)+(18-4)+(9-1)=14+14+8=36,\quad
+|A|=32
+\]
+\[
+\lambda^{3}-12\lambda^{2}+36\lambda-32=0
+\quad\Longrightarrow\quad
+(\lambda-8)(\lambda-2)^{2}=0
+\]
+Check: \(8+2+2=12=S_1\) ✓, \(8\cdot2\cdot2=32=|A|\) ✓.
+
+For \(\lambda=8\):
+\[
+A-8I=\begin{bmatrix}-2&-2&2\\-2&-5&-1\\2&-1&-5\end{bmatrix}
+\ \longrightarrow\
+\begin{bmatrix}1&1&-1\\0&-3&-3\\0&0&0\end{bmatrix}
+\]
+\(x_2=-x_3\), \(x_1=-x_2+x_3=2x_3\): \(X_3=(2,-1,1)^T\).
+
+For \(\lambda=2\):
+\[
+A-2I=\begin{bmatrix}4&-2&2\\-2&1&-1\\2&-1&1\end{bmatrix}
+\ \longrightarrow\
+\begin{bmatrix}2&-1&1\\0&0&0\\0&0&0\end{bmatrix}
+\]
+Rank 1, two parameters, equation \(2x_1-x_2+x_3=0\):
+
+- \(x_1=1,\ x_2=2\Rightarrow x_3=0\): \(X_1=(1,2,0)^T\);
+- \(x_1=1,\ x_2=0\Rightarrow x_3=-2\): \(X_2=(1,0,-2)^T\).
+
+**Check.** \(A(2,-1,1)^T=(16,-8,8)^T\) ✓, \(A(1,2,0)^T=(2,4,0)^T\) ✓, \(A(1,0,-2)^T=(2,0,-4)^T\) ✓.
+
+**Answer.** \(\lambda=8\): \((2,-1,1)^T\); \(\lambda=2\) (repeated): \((1,2,0)^T\) and \((1,0,-2)^T\).
+
+**Supplied booklet:** checked; same results.
+
+## `M1-EV-Q1-v` — the teacher's Type II example
+
+\[A=\begin{bmatrix}8&-6&2\\-6&7&-4\\2&-4&3\end{bmatrix}\]
+
+\[
+S_1=8+7+3=18,\quad
+S_2=(56-36)+(24-4)+(21-16)=20+20+5=45,\quad
+|A|=0
+\]
+\[
+\lambda^{3}-18\lambda^{2}+45\lambda-0=0
+\quad\Longrightarrow\quad
+\lambda(\lambda-3)(\lambda-15)=0
+\]
+Check: \(0+3+15=18=S_1\) ✓, \(0\cdot3\cdot15=0=|A|\) ✓. A zero eigenvalue is expected here precisely because \(|A|=0\).
+
+For \(\lambda=15\):
+\[
+A-15I=\begin{bmatrix}-7&-6&2\\-6&-8&-4\\2&-4&-12\end{bmatrix}
+\ \longrightarrow\
+\begin{bmatrix}1&0&-2\\0&1&2\\0&0&0\end{bmatrix}
+\]
+\(x_1=2x_3\) and \(x_2=-2x_3\): with \(x_3=1\), \(X_3=(2,-2,1)^T\).
+
+For \(\lambda=3\):
+\[
+A-3I=\begin{bmatrix}5&-6&2\\-6&4&-4\\2&-4&0\end{bmatrix}
+\ \longrightarrow\
+\begin{bmatrix}1&0&1\\0&1&1/2\\0&0&0\end{bmatrix}
+\]
+\(x_1=-x_3\) and \(x_2=-\tfrac12x_3\): with \(x_3=-2\), \(X_2=(2,1,-2)^T\).
+
+For \(\lambda=0\):
+\[
+A-0I=A=\begin{bmatrix}8&-6&2\\-6&7&-4\\2&-4&3\end{bmatrix}
+\ \longrightarrow\
+\begin{bmatrix}1&0&-1/2\\0&1&-1\\0&0&0\end{bmatrix}
+\]
+\(x_1=x_3/2\), \(x_2=x_3\): \(X_1=(1,2,2)^T\).
+
+**Check.** \(A(2,-2,1)^T=(30,-30,15)^T\) ✓, \(A(2,1,-2)^T=(6,3,-6)^T\) ✓, \(A(1,2,2)^T=(0,0,0)^T\) ✓.
+
+**Answer.** \(\lambda=15\): \((2,-2,1)^T\); \(\lambda=3\): \((2,1,-2)^T\); \(\lambda=0\): \((1,2,2)^T\).
+
+**Supplied booklet:** checked; same results.
+
+## `M1-EV-Q1-vi` (printed as "v)" a second time)
+
+\[A=\begin{bmatrix}1&0&0\\0&3&-1\\0&-1&3\end{bmatrix}\]
+
+This matrix is block-triangular, so its first eigenvalue is visible immediately: the first row has a single 1 on the diagonal.
+
+\[
+S_1=1+3+3=7,\quad
+S_2=(3-0)+(3-0)+(9-1)=3+3+8=14,\quad
+|A|=1\cdot(9-1)=8
+\]
+\[
+\lambda^{3}-7\lambda^{2}+14\lambda-8=0
+\quad\Longrightarrow\quad
+(\lambda-1)(\lambda-2)(\lambda-4)=0
+\]
+Check: \(1+2+4=7=S_1\) ✓, \(1\cdot2\cdot4=8=|A|\) ✓.
+
+For \(\lambda=1\): \(A-I=\begin{bmatrix}0&0&0\\0&2&-1\\0&-1&2\end{bmatrix}\). The first row vanishes, so \(x_1\) is free; the other two rows force \(2x_2-x_3=0\) and \(-x_2+2x_3=0\), whose only solution is \(x_2=x_3=0\). Hence \(X_1=(1,0,0)^T\).
+
+For \(\lambda=2\): \(A-2I=\begin{bmatrix}-1&0&0\\0&1&-1\\0&-1&1\end{bmatrix}\) gives \(x_1=0\) and \(x_2=x_3\), so \(X_2=(0,1,1)^T\).
+
+For \(\lambda=4\): \(A-4I=\begin{bmatrix}-3&0&0\\0&-1&-1\\0&-1&-1\end{bmatrix}\) gives \(x_1=0\) and \(x_2=-x_3\), so \(X_3=(0,1,-1)^T\).
+
+**Check.** \(A(1,0,0)^T=(1,0,0)^T\) ✓, \(A(0,1,1)^T=(0,2,2)^T\) ✓, \(A(0,1,-1)^T=(0,4,-4)^T\) ✓.
+
+**Answer.** \(\lambda=1,2,4\) with \((1,0,0)^T,(0,1,1)^T,(0,1,-1)^T\).
+
+**Supplied booklet:** checked; same results (it writes the third vector as \((0,1,-1)^T\), the negative of the one here — the same direction, so the same eigenvector).
+
+## `M1-EV-Q1-vii`
+
+\[A=\begin{bmatrix}-2&2&-3\\2&1&-6\\-1&-2&0\end{bmatrix}\]
+
+\[
+S_1=-2+1+0=-1
+\]
+
+> **Careful with this one.** The three principal minors are
+> \(\begin{vmatrix}-2&2\\2&1\end{vmatrix}=-2-4=-6\),
+> \(\begin{vmatrix}-2&-3\\-1&0\end{vmatrix}=0-3=-3\),
+> \(\begin{vmatrix}1&-6\\-2&0\end{vmatrix}=0-12=-12\).
+> So \(S_2=-6-3-12=-21\). Mis-pairing the minors here is the classic slip in this question.
+
+\[
+|A|=-2(0-12)-2(0-6)+(-3)(-4+1)=24+12+9=45
+\]
+\[
+\lambda^{3}+\lambda^{2}-21\lambda-45=0
+\quad\Longrightarrow\quad
+(\lambda-5)(\lambda+3)^{2}=0
+\]
+Check: \(5-3-3=-1=S_1\) ✓, \(5\cdot(-3)\cdot(-3)=45=|A|\) ✓.
+
+For \(\lambda=5\):
+\[
+A-5I=\begin{bmatrix}-7&2&-3\\2&-4&-6\\-1&-2&-5\end{bmatrix}
+\ \longrightarrow\
+\begin{bmatrix}1&0&1\\0&1&2\\0&0&0\end{bmatrix}
+\]
+\(x_1=-x_3\), \(x_2=-2x_3\): with \(x_3=-1\), \(X_3=(1,2,-1)^T\).
+
+For \(\lambda=-3\):
+\[
+A+3I=\begin{bmatrix}1&2&-3\\2&4&-6\\-1&-2&3\end{bmatrix}
+\ \longrightarrow\
+\begin{bmatrix}1&2&-3\\0&0&0\\0&0&0\end{bmatrix}
+\]
+Equation \(x_1+2x_2-3x_3=0\), two parameters:
+
+- \(x_2=1,x_3=0\Rightarrow x_1=-2\): \(X_1=(-2,1,0)^T\);
+- \(x_2=0,x_3=1\Rightarrow x_1=3\): \(X_2=(3,0,1)^T\).
+
+**Check.** \(A(1,2,-1)^T=(5,10,-5)^T\) ✓, \(A(-2,1,0)^T=(6,-3,0)^T=-3(-2,1,0)^T\) ✓, \(A(3,0,1)^T=(-9,0,-3)^T=-3(3,0,1)^T\) ✓.
+
+**Answer.** \(\lambda=5\): \((1,2,-1)^T\); \(\lambda=-3\) (repeated): \((-2,1,0)^T\) and \((3,0,1)^T\).
+
+**Supplied booklet:** checked; same results.
+
+## `PP25-Q4-b` — supplementary, Winter 2025 practice paper Q.4 b) [5 marks]
+
+\[A=\begin{bmatrix}3&-1&1\\-1&5&-1\\1&-1&3\end{bmatrix}\]
+
+\[
+S_1=3+5+3=11,\quad
+S_2=(15-1)+(9-1)+(15-1)=14+8+14=36,\quad
+|A|=36
+\]
+\[
+\lambda^{3}-11\lambda^{2}+36\lambda-36=0
+\quad\Longrightarrow\quad
+(\lambda-2)(\lambda-3)(\lambda-6)=0
+\]
+Check: \(2+3+6=11=S_1\) ✓, \(2\cdot3\cdot6=36=|A|\) ✓.
+
+For \(\lambda=2\):
+\[
+A-2I=\begin{bmatrix}1&-1&1\\-1&3&-1\\1&-1&1\end{bmatrix}
+\ \longrightarrow\
+\begin{bmatrix}1&-1&1\\0&2&0\\0&0&0\end{bmatrix}
+\]
+\(x_2=0\), \(x_1=-x_3\): \(X_1=(1,0,-1)^T\), equivalently \((-1,0,1)^T\).
+
+For \(\lambda=3\):
+\[
+A-3I=\begin{bmatrix}0&-1&1\\-1&2&-1\\1&-1&0\end{bmatrix}
+\ \longrightarrow\
+\begin{bmatrix}1&0&-1\\0&1&-1\\0&0&0\end{bmatrix}
+\]
+\(x_1=x_3\), \(x_2=x_3\): \(X_2=(1,1,1)^T\).
+
+For \(\lambda=6\):
+\[
+A-6I=\begin{bmatrix}-3&-1&1\\-1&-1&-1\\1&-1&-3\end{bmatrix}
+\ \longrightarrow\
+\begin{bmatrix}1&0&-1\\0&1&2\\0&0&0\end{bmatrix}
+\]
+\(x_1=x_3\), \(x_2=-2x_3\): \(X_3=(1,-2,1)^T\).
+
+**Check.** \(A(1,0,-1)^T=(2,0,-2)^T\) ✓, \(A(1,1,1)^T=(3,3,3)^T\) ✓, \(A(1,-2,1)^T=(6,-12,6)^T\) ✓.
+
+**Answer.** \(\lambda=2\): \((-1,0,1)^T\); \(\lambda=3\): \((1,1,1)^T\); \(\lambda=6\): \((1,-2,1)^T\).
+
+**Supplied booklet:** this question is not in the 2026 bank, so the booklet (which follows the bank) does not cover it. Solved and verified independently here.
+
+---
+
+*End of Part 1. Parts 2–4 of Module I, and Modules II–VI, are not yet written. See `PROGRESS.md` for the exact next action.*
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)']],
+    displayMath: [['\\[', '\\]']],
+    processEscapes: true,
+    tags: 'none'
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  startup: { typeset: false }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var content = document.getElementById('content');
+  var errorBox = document.getElementById('render-error');
+  var progressBar = document.getElementById('progress-bar');
+
+  function showError(msg) {
+    if (progressBar && progressBar.parentNode) progressBar.parentNode.hidden = true;
+    if (!errorBox) return;
+    errorBox.hidden = false;
+    var slot = errorBox.querySelector('[data-msg]');
+    if (slot) slot.textContent = msg;
+  }
+
+  try {
+    if (!window.marked) {
+      showError('The Markdown renderer (marked) could not be loaded from the CDN. Check your internet connection and reload.');
+      return;
+    }
+
+    /* ---------------------------------------------------------------
+       1. Extract mathematics before Markdown parsing.
+       Markdown would otherwise eat the backslashes in \\ row separators,
+       the brackets in \[ \], and the pipes in |A| inside tables.
+       --------------------------------------------------------------- */
+
+    var store = [];
+    var BRK = /\u0000BRK([^\u0000]*)\u0000/g;
+
+    function esc(s) {
+      return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function texOut(tex) {
+      return esc(tex.replace(BRK, function (m, p) { return '\\\\[' + p + ']'; }));
+    }
+
+    function token(tex, display, off) {
+      store.push({ tex: tex, display: display, off: off });
+      var i = store.length - 1;
+      return display
+        ? '\n\n<div class="math-block" data-math="' + i + '" data-off="' + off + '"></div>\n\n'
+        : '<span class="math-inline" data-math="' + i + '"></span>';
+    }
+
+    var src = document.getElementById('md-source').textContent.replace(/^\n/, '');
+    var fences = [];
+
+    /* protect fenced code blocks */
+    src = src.replace(/```[\s\S]*?```/g, function (m) {
+      fences.push(m);
+      return '\u0000F' + (fences.length - 1) + '\u0000';
+    });
+
+    /* protect LaTeX line-break spacing such as \\[2pt] */
+    src = src.replace(/\\\\\[(\s*\d+pt\s*)\]/g, function (m, p) {
+      return '\u0000BRK' + p + '\u0000';
+    });
+
+    /* display mathematics */
+    src = src.replace(/\$\$([\s\S]*?)\$\$/g, function (m, t, off) { return token(t.trim(), true, off); });
+    src = src.replace(/\\\[([\s\S]*?)\\\]/g, function (m, t, off) { return token(t.trim(), true, off); });
+
+    /* inline mathematics */
+    src = src.replace(/\\\(([\s\S]*?)\\\)/g, function (m, t, off) { return token(t.trim(), false, off); });
+
+    /* restore fenced code blocks (still unparsed, still containing their own text) */
+    src = src.replace(/\u0000F(\d+)\u0000/g, function (m, i) { return fences[+i]; });
+
+    /* ---------------------------------------------------------------
+       2. Parse Markdown
+       --------------------------------------------------------------- */
+
+    var html = marked.parse(src, { gfm: true, breaks: false });
+
+    /* ---------------------------------------------------------------
+       3. Put the mathematics back
+       --------------------------------------------------------------- */
+
+    html = html.replace(/<div class="math-block" data-math="(\d+)" data-off="(\d+)"><\/div>/g, function (m, i, off) {
+      return '<div class="math-block" data-math="' + i + '" data-off="' + off + '">\\[' + texOut(store[+i].tex) + '\\]</div>';
+    });
+    html = html.replace(/<span class="math-inline" data-math="(\d+)"><\/span>/g, function (m, i) {
+      var it = store[+i];
+      var body = '\\(' + texOut(it.tex) + '\\)';
+      return it.tex.length >= 40 ? '<span class="mj-inline">' + body + '</span>' : body;
+    });
+
+    content.innerHTML = html;
+
+    /* ---------------------------------------------------------------
+       4. Post-processing: drop the duplicate title, wrap tables,
+          open external links safely, assign heading anchors
+       --------------------------------------------------------------- */
+
+
+    Array.prototype.forEach.call(content.querySelectorAll('table'), function (t) {
+      if (t.tHead && !t.tHead.textContent.trim()) t.tHead.style.display = 'none';
+      var w = document.createElement('div');
+      w.className = 'table-wrap';
+      w.setAttribute('role', 'region');
+      w.setAttribute('tabindex', '0');
+      w.setAttribute('aria-label', 'Table (scroll horizontally to see all columns)');
+      t.parentNode.insertBefore(w, t);
+      w.appendChild(t);
+    });
+
+    Array.prototype.forEach.call(content.querySelectorAll('a[href^="http"]'), function (a) {
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+    });
+
+    var used = Object.create(null);
+
+    function slugify(s) {
+      var out;
+      try {
+        out = s.toLowerCase().replace(/[^\p{L}\p{N}\s-]/gu, '');
+      } catch (e) {
+        out = s.toLowerCase().replace(/[^a-z0-9\s-]/g, '');
+      }
+      return out.trim().replace(/\s+/g, '-');
+    }
+
+    var headings = Array.prototype.slice.call(content.querySelectorAll('h1, h2, h3'));
+
+    headings.forEach(function (h) {
+      var base = slugify(h.textContent) || 'section';
+      var id = base;
+      var n = 2;
+      while (used[id]) { id = base + '-' + n; n += 1; }
+      used[id] = true;
+      h.id = id;
+    });
+
+
+    /* ---------------------------------------------------------------
+       4b. Study structure: sections, black question banners, roles
+       --------------------------------------------------------------- */
+
+    var secEls = [];
+    (function () {
+      var cur = null;
+      Array.prototype.slice.call(content.children).forEach(function (el) {
+        if (el.tagName === 'H1') {
+          cur = document.createElement('section');
+          cur.className = 'sec';
+          content.insertBefore(cur, el);
+          secEls.push(cur);
+        }
+        if (cur) cur.appendChild(el);
+      });
+    })();
+
+    secEls.forEach(function (sec) {
+      var kids = Array.prototype.slice.call(sec.children);
+      var art = null;
+      kids.forEach(function (el) {
+        var isQ = el.tagName === 'H2' && /^Question \d+/.test(el.textContent.trim());
+        if (isQ) {
+          if (art) art.appendChild(endMark(art));
+          art = document.createElement('article');
+          art.className = 'question';
+          sec.insertBefore(art, el);
+          el.classList.add('q-head');
+        } else if (el.tagName === 'H1' || el.tagName === 'H2') {
+          if (art) art.appendChild(endMark(art));
+          art = null;
+        }
+        if (art) art.appendChild(el);
+      });
+      if (art) art.appendChild(endMark(art));
+    });
+
+    function endMark(art) {
+      var n = (art.querySelector('h2.q-head').textContent.match(/^Question (\d+)/) || [])[1];
+      var d = document.createElement('div');
+      d.className = 'q-end';
+      d.textContent = 'End of question ' + n;
+      return d;
+    }
+
+    Array.prototype.forEach.call(content.querySelectorAll('h4'), function (h) {
+      if (/^Step \d/.test(h.textContent.trim())) h.classList.add('step');
+    });
+
+    var ROLES = [
+      [/^Answer/, 'bq-answer'], [/^(Find|Question)/, 'bq-q'], [/^What to expect/, 'bq-expect'],
+      [/^In plain words/, 'bq-plain'],
+      [/^(Remember|Careful|Bonus|What this example|The rule|Numbering note|Source note|Definition|Characteristic equation)/, 'bq-note']
+    ];
+    Array.prototype.forEach.call(content.querySelectorAll('blockquote'), function (bq) {
+      var s = bq.querySelector('p > strong:first-child, strong');
+      if (!s) return;
+      var txt = s.textContent.trim();
+      for (var i = 0; i < ROLES.length; i += 1) {
+        if (ROLES[i][0].test(txt)) { bq.classList.add(ROLES[i][1]); break; }
+      }
+    });
+
+    /* "Goal of this section" line */
+    secEls.forEach(function (sec) {
+      var p = sec.querySelector(':scope > p');
+      if (p && /^Goal of this section/.test(p.textContent)) p.classList.add('sec-goal');
+    });
+
+    /* section completion bar */
+    var sections = [];
+    secEls.forEach(function (sec) {
+      var h = sec.querySelector(':scope > h1');
+      if (h && /^Section \d/.test(h.textContent.trim())) sections.push({ el: sec, h: h });
+    });
+    sections.forEach(function (s, i) {
+      var bar = document.createElement('div');
+      bar.className = 'sec-done';
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'done-btn';
+      btn.setAttribute('data-n', String(i + 1));
+      bar.appendChild(btn);
+      var nextH = i + 1 < sections.length ? sections[i + 1].h : null;
+      var next = document.createElement('a');
+      next.className = 'next';
+      if (nextH) {
+        next.href = '#' + (nextH.id || '');
+        next.setAttribute('data-next', String(i + 1));
+        next.textContent = 'Next: ' + nextH.textContent.trim() + ' →';
+      } else {
+        next.href = '#top';
+        next.textContent = 'Back to the top ↑';
+      }
+      bar.appendChild(next);
+      s.el.appendChild(bar);
+      s.btn = btn; s.next = next; s.nextH = nextH;
+    });
+
+    /* open every reveal box when printing */
+    window.addEventListener('beforeprint', function () {
+      Array.prototype.forEach.call(content.querySelectorAll('details'), function (d) { d.open = true; });
+    });
+
+    /* ---------------------------------------------------------------
+       5. Build the sidebar contents and the pill navigation
+       --------------------------------------------------------------- */
+
+    var tocList = document.getElementById('toc-list');
+    var navBar = document.getElementById('section-nav');
+
+    function makeLink(h) {
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent.replace(/\s+/g, ' ').trim();
+      return a;
+    }
+
+    var rootUl = document.createElement('ul');
+    rootUl.className = 'toc-root';
+    var currentSub = null;
+    var mainHeads = [];
+
+    headings.forEach(function (h) {
+      if (h.tagName === 'H3') return;
+
+      if (h.tagName === 'H1') {
+        mainHeads.push(h);
+        var li = document.createElement('li');
+        li.className = 'lvl1';
+        li.appendChild(makeLink(h));
+        currentSub = document.createElement('ul');
+        currentSub.className = 'toc-sub';
+        li.appendChild(currentSub);
+        rootUl.appendChild(li);
+        return;
+      }
+
+      if (/^Contents$/.test(h.textContent.trim())) return;
+
+      var li2 = document.createElement('li');
+      if (currentSub) {
+        li2.className = 'lvl2';
+        li2.appendChild(makeLink(h));
+        currentSub.appendChild(li2);
+      } else {
+        li2.className = 'lvl2 lvl2-top';
+        li2.appendChild(makeLink(h));
+        rootUl.appendChild(li2);
+      }
+    });
+
+    tocList.appendChild(rootUl);
+
+    mainHeads.forEach(function (h) {
+      navBar.appendChild(makeLink(h));
+    });
+
+    /* ---------------------------------------------------------------
+       6. Scroll spy and reading progress
+       --------------------------------------------------------------- */
+
+    var links = Array.prototype.slice.call(
+      document.querySelectorAll('#toc-list a, #section-nav a')
+    );
+
+    var byId = Object.create(null);
+    links.forEach(function (a) {
+      var id = a.getAttribute('href').slice(1);
+      if (!byId[id]) byId[id] = [];
+      byId[id].push(a);
+    });
+
+    var targets = headings.filter(function (h) { return h.tagName !== 'H3'; });
+    var ticking = false;
+
+    function update() {
+      ticking = false;
+      var marker = window.scrollY + 130;
+      var current = null;
+
+      for (var i = 0; i < targets.length; i += 1) {
+        var top = targets[i].getBoundingClientRect().top + window.scrollY;
+        if (top <= marker) current = targets[i]; else break;
+      }
+
+      links.forEach(function (a) { a.classList.remove('active'); });
+      if (current && byId[current.id]) {
+        byId[current.id].forEach(function (a) { a.classList.add('active'); });
+      }
+
+      if (progressBar) {
+        var doc = document.documentElement;
+        var max = doc.scrollHeight - window.innerHeight;
+        var pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+        progressBar.style.width = (pct < 0 ? 0 : pct > 100 ? 100 : pct).toFixed(2) + '%';
+      }
+    }
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(update);
+    }
+
+
+    /* ---------------------------------------------------------------
+       6b. Section progress (saved in this browser only)
+       --------------------------------------------------------------- */
+
+    var KEY = 'endsem-ev-sections-done-v2';
+    var done = [];
+    try {
+      done = JSON.parse(localStorage.getItem(KEY) || '[]');
+      if (!Array.isArray(done)) done = [];
+    } catch (e) { done = []; }
+
+    function saveDone() { try { localStorage.setItem(KEY, JSON.stringify(done)); } catch (e) {} }
+
+    function paintProgress() {
+      var total = sections.length;
+      var count = 0;
+      sections.forEach(function (s, i) {
+        var on = done.indexOf(i + 1) !== -1;
+        if (on) count += 1;
+        s.btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        s.btn.textContent = on ? '✓ Section done' : 'Mark section done';
+        (byId[s.h.id] || []).forEach(function (a) { a.classList.toggle('done', on); });
+      });
+      var c = document.getElementById('path-count');
+      var f = document.getElementById('path-fill');
+      if (c) c.textContent = count === total
+        ? 'All ' + total + ' sections done. Well done!'
+        : count + ' of ' + total + ' sections done' + (count ? ' · keep going' : '');
+      if (f) f.style.width = (total ? (count / total) * 100 : 0) + '%';
+    }
+
+    sections.forEach(function (s, i) {
+      s.btn.addEventListener('click', function () {
+        var n = i + 1;
+        var at = done.indexOf(n);
+        if (at === -1) done.push(n); else done.splice(at, 1);
+        saveDone();
+        paintProgress();
+      });
+    });
+
+    var resetBtn = document.getElementById('path-reset');
+    if (resetBtn) resetBtn.addEventListener('click', function () { done = []; saveDone(); paintProgress(); });
+    paintProgress();
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+
+    /* ---------------------------------------------------------------
+       7. Mobile contents toggle
+       --------------------------------------------------------------- */
+
+    var toggle = document.getElementById('toc-toggle');
+    var sidebar = document.getElementById('sidebar');
+
+    if (toggle && sidebar) {
+      toggle.addEventListener('click', function () {
+        var open = sidebar.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+
+      tocList.addEventListener('click', function (e) {
+        if (e.target && e.target.tagName === 'A' &&
+            window.matchMedia('(max-width: 980px)').matches) {
+          sidebar.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+
+    /* Desktop collapse button */
+    var collapseBtn = document.getElementById('toc-collapse');
+    var layoutEl = document.querySelector('.layout');
+
+    function setCollapsed(collapsed) {
+      layoutEl.classList.toggle('toc-collapsed', collapsed);
+      collapseBtn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+      var label = collapsed ? 'Show contents' : 'Hide contents';
+      collapseBtn.setAttribute('aria-label', label);
+      collapseBtn.title = label;
+      try { localStorage.setItem('toc-collapsed', collapsed ? '1' : '0'); } catch (e) {}
+    }
+
+    if (collapseBtn && layoutEl) {
+      collapseBtn.addEventListener('click', function () {
+        setCollapsed(!layoutEl.classList.contains('toc-collapsed'));
+      });
+      try {
+        if (localStorage.getItem('toc-collapsed') === '1') setCollapsed(true);
+      } catch (e) {}
+    }
+
+        /* ---------------------------------------------------------------
+       8. Typeset mathematics
+       --------------------------------------------------------------- */
+
+    var attempts = 0;
+
+    function typeset() {
+      if (window.MathJax && MathJax.startup && MathJax.startup.promise) {
+        MathJax.startup.promise
+          .then(function () { return MathJax.typesetPromise([content]); })
+          .then(function () { update(); })
+          .catch(function (err) {
+            if (window.console && console.error) console.error(err);
+            var fb = document.getElementById('math-fallback');
+            if (fb) fb.hidden = false;
+          });
+        return;
+      }
+      attempts += 1;
+      if (attempts <= 48) {
+        window.setTimeout(typeset, 250);
+      } else {
+        var fb = document.getElementById('math-fallback');
+        if (fb) fb.hidden = false;
+      }
+    }
+
+    typeset();
+
+  } catch (err) {
+    if (window.console && console.error) console.error(err);
+    showError(err && err.message ? err.message : String(err));
+  }
+})();
+</script>
+</body>
+</html>

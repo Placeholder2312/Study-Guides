@@ -1,0 +1,87 @@
+/* Home-page calendar. Uses the shared theme variables from site.css only,
+   so light and dark both follow the toggle. */
+/* Semester colours: deep, slightly muted tones next to the site's ink and blue.
+   Light and dark values both keep the number (var(--bg)) readable on top. */
+:root { --sem-1: #1d4ed8; --sem-2: #0f766e; --sem-3: #c2410c; }
+:root[data-theme="dark"] { --sem-1: #8ab0ff; --sem-2: #5fd0c0; --sem-3: #f2a56b; }
+@media print { :root, :root[data-theme="dark"] { --sem-1: #1d4ed8; --sem-2: #0f766e; --sem-3: #c2410c; } }
+
+.calendar { margin-bottom: 3rem; }
+.cal { border: 1px solid var(--line); border-left: 3px solid var(--ink); background: var(--surface); padding: .6rem .8rem 1rem 1rem; position: relative; }
+.cal:empty { display: none; }
+
+/* Month switcher */
+.cal-nav { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-bottom: .6rem; }
+.cal-title { flex: 1; text-align: center; font-family: Georgia, Cambria, "Times New Roman", serif; font-size: 1.25rem; font-weight: 700; line-height: 1.3; }
+.cal-btn { font: inherit; font-size: 1.5rem; line-height: 1; color: var(--ink); background: var(--bg); border: 1px solid var(--ink); border-radius: 0; width: 44px; min-height: 44px; padding: 0; cursor: pointer; }
+.cal-btn:hover:not(:disabled) { background: var(--surface-hi); }
+.cal-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.cal-btn:disabled { opacity: .3; cursor: default; }
+
+/* Month grid */
+.cal-month[hidden] { display: none; }
+.cal-grid { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.cal-grid th { text-align: center; font-size: .68rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); padding: .3rem 0; border-bottom: 2px solid var(--ink); }
+.cal-grid td { position: relative; height: 3rem; padding: 0; text-align: center; vertical-align: middle; font-size: .95rem; font-variant-numeric: tabular-nums; }
+.cal-grid td.day { border: 1px solid var(--line); }
+
+/* Today: an outlined square. */
+.cal-grid td.today, .sw.today { box-shadow: inset 0 0 0 2px var(--ink); font-weight: 800; }
+
+/* Exams: a filled, bordered square. The border and the number colour are shared by
+   every semester; only the fill colour changes (blue, teal, burnt orange). */
+.cal-grid td.exam, .sw.sem-1, .sw.sem-2, .sw.sem-3 { color: var(--bg); font-weight: 800; box-shadow: inset 0 0 0 2px var(--ink); }
+.sw.sem-1, .sw.sem-2, .sw.sem-3 { border-color: var(--ink); }
+.cal-grid td.sem-1, .sw.sem-1 { background: var(--sem-1); }
+.cal-grid td.sem-2, .sw.sem-2 { background: var(--sem-2); }
+.cal-grid td.sem-3, .sw.sem-3 { background: var(--sem-3); }
+/* Exam on today's date: the border doubles. */
+.cal-grid td.today.exam { box-shadow: inset 0 0 0 2px var(--ink), inset 0 0 0 4px var(--bg), inset 0 0 0 6px var(--ink); }
+
+/* Days already gone are dimmed. */
+.cal-grid td.past:not(.exam) { opacity: .5; }
+
+/* Finished exams get the same caution tape as the "Exam done" subject card. */
+.cal-grid td.past.exam, .cal-exams li.past .sw { overflow: hidden; isolation: isolate; }
+.cal-grid td.past.exam::before, .cal-grid td.past.exam::after,
+.cal-exams li.past .sw::before, .cal-exams li.past .sw::after {
+  content: ""; position: absolute; box-sizing: border-box; left: -10%; width: 120%; top: 50%; height: 9px; margin-top: -4.5px;
+  background: repeating-linear-gradient(-45deg, var(--ink) 0 6px, var(--bg) 6px 12px);
+  border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink);
+  pointer-events: none; z-index: 1; opacity: .92;
+}
+.cal-grid td.past.exam::before, .cal-exams li.past .sw::before { transform: rotate(-12deg); }
+.cal-grid td.past.exam::after, .cal-exams li.past .sw::after { transform: rotate(12deg); }
+.cal-exams li.past .ex-name { text-decoration: line-through; text-decoration-thickness: 2px; text-decoration-color: var(--ink); }
+.cal-exams li.past .ex-name, .cal-exams li.past .ex-meta { opacity: .62; }
+
+
+/* Let the highlights survive printing. */
+.cal-grid td, .sw { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+/* Key: collapsed by default. */
+.cal-key { margin-top: .75rem; border: 1px solid var(--line); border-left: 3px solid var(--ink); background: var(--surface); }
+.cal-key:empty { display: none; }
+.cal-key summary { display: flex; align-items: center; min-height: 44px; padding: 0 1rem; cursor: pointer; font-size: .78rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+.cal-key summary::-webkit-details-marker { display: none; }
+.cal-key summary::after { content: "+"; margin-left: auto; font-size: 1.2rem; line-height: 1; }
+.cal-key[open] summary::after { content: "\2212"; }
+.cal-key summary:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; }
+.cal-legend, .cal-exams { list-style: none; padding: 0; }
+.cal-legend { display: flex; flex-wrap: wrap; gap: .4rem 1.1rem; margin: .2rem 1rem .75rem; font-size: .85rem; color: var(--muted); }
+.cal-legend li { display: inline-flex; align-items: center; gap: .45rem; }
+.cal-legend .sw { width: 1.5rem; height: 1.5rem; }
+.sw { position: relative; display: inline-flex; align-items: center; justify-content: center; flex: none; width: 2.25rem; height: 2.25rem; border: 1px solid var(--line); font-size: .85rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.cal-exams { margin: 0 1rem .6rem; }
+.cal-exams li { display: flex; align-items: center; gap: .75rem; padding: .45rem 0; }
+.cal-exams li + li { border-top: 1px solid var(--line); }
+.ex-name { display: block; font-family: Georgia, Cambria, "Times New Roman", serif; font-size: 1.05rem; font-weight: 700; line-height: 1.3; }
+.ex-meta { display: block; font-size: .82rem; font-weight: 500; color: var(--muted); }
+
+@media (max-width: 600px) {
+  .cal { padding: .5rem .55rem .85rem .75rem; }
+  .cal-grid td { height: 2.7rem; font-size: .9rem; }
+  .cal-legend { gap: .4rem .9rem; }
+}

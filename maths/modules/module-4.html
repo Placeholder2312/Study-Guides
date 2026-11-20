@@ -1,0 +1,3474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Module 4 study guide: Fourier Series for Mathematics for Computer Engineering (2023111), B.E. CSE (AI &amp; ML), Semester III, University of Mumbai. Dirichlet's conditions, periods 2π and 2l, even and odd functions, self-learning topics, verified practice and answer key.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffffff'/%3E%3Ctext x='16' y='24' font-family='Georgia,serif' font-size='21' text-anchor='middle' fill='%230a0a0a'%3E%CF%80%3C/text%3E%3C/svg%3E">
+<title>Module 4 — Fourier Series | Mathematics for Computer Engineering (2023111)</title>
+<style>
+:root{
+  --ink:#0a0a0a;
+  --muted:#444444;
+  --bg:#ffffff;
+  --line:#cccccc;
+  --rule:#999999;
+  --accent:#1d4ed8;
+  --space:1.5rem;
+  --radius:0;
+  --font-serif:Georgia,"Iowan Old Style","Palatino Linotype",Cambria,"Times New Roman",serif;
+  --font-sans:"Helvetica Neue",Helvetica,Arial,system-ui,-apple-system,sans-serif;
+  --font-mono:"Courier New",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font:400 17px/1.66 var(--font-sans);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+a{color:var(--ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.18em}
+a:hover{color:var(--accent)}
+a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex="0"]:focus-visible{
+  outline:2px solid var(--accent);outline-offset:2px;
+}
+.skip{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:.65rem 1rem;z-index:100;text-decoration:none}
+.skip:focus{left:1rem;top:1rem}
+
+/* reading progress */
+.progress{position:fixed;top:0;left:0;width:100%;height:3px;z-index:60;pointer-events:none;background:transparent}
+.progress span{display:block;height:100%;width:0;background:var(--ink)}
+
+/* header */
+.site-header{border-bottom:2px solid var(--ink);background:var(--bg)}
+.header-inner{max-width:1160px;margin:0 auto;padding:3rem 2rem 1.6rem}
+.eyebrow{margin:0 0 1rem;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.site-header h1{
+  margin:0;font-family:var(--font-serif);font-weight:400;
+  font-size:clamp(2.05rem,4.4vw,3.15rem);line-height:1.06;letter-spacing:-.02em;
+}
+.site-header h1 .h1-sub{display:block;margin-top:.5rem;font-size:.5em;letter-spacing:.005em;color:var(--muted)}
+.subtitle{max-width:62ch;margin:1.15rem 0 0;color:var(--muted);font-size:.98rem}
+.meta{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem .55rem;margin-top:1.4rem}
+.mu-badge{
+  display:inline-block;border:1px solid var(--accent);color:var(--accent);
+  font-size:.68rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  padding:.32rem .55rem;white-space:nowrap;
+}
+.meta-item{
+  font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);
+  border:1px solid var(--line);padding:.32rem .55rem;white-space:nowrap;
+}
+.header-note{margin:1.05rem 0 0;font-size:.8rem;color:var(--muted)}
+.header-note code{font-family:var(--font-mono);font-size:.95em;background:#f4f4f4;border:1px solid #e6e6e6;padding:.05em .3em}
+.math-fallback{border-left:3px solid #b00020;background:#fff5f5;padding:.6rem .8rem;color:#7a0016}
+
+/* section pill nav */
+.crumbs{margin:0 0 .4rem;font:600 .9rem var(--font-sans)}
+.crumbs a{display:inline-block;min-height:44px;line-height:44px;color:var(--ink)}
+.nav{display:flex;flex-wrap:wrap;gap:.4rem;max-width:1160px;margin:0 auto;padding:0 2rem 1.7rem}
+.nav a{
+  font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;
+  border:1px solid var(--line);color:var(--muted);padding:.38rem .6rem;line-height:1.2;
+}
+.nav a:hover{border-color:var(--ink);color:var(--ink)}
+.nav a.active{border-color:var(--ink);color:var(--ink);font-weight:700;background:#f4f4f4}
+
+/* layout */
+.layout{
+  display:grid;grid-template-columns:272px minmax(0,1fr);gap:3.5rem;
+  max-width:1160px;margin:0 auto;padding:2.6rem 2rem 4.5rem;align-items:start;
+}
+.sidebar{
+  position:sticky;top:1.25rem;max-height:calc(100vh - 2.5rem);overflow:auto;
+  border-right:1px solid var(--line);padding-right:1.2rem;
+  scrollbar-width:thin;
+}
+.toc-toggle{display:none}
+.toc-collapse{
+  position:fixed;left:4px;top:50%;transform:translateY(-50%);z-index:55;
+  display:flex;align-items:center;justify-content:center;width:22px;height:44px;padding:0;
+  background:transparent;border:0;border-radius:var(--radius);color:var(--muted);
+  opacity:.4;cursor:pointer;transition:opacity .15s;
+}
+.toc-collapse:hover,.toc-collapse:focus-visible{opacity:1;color:var(--ink)}
+.toc-collapse svg{width:14px;height:14px;display:block;transition:transform .15s}
+.toc-collapse[aria-expanded="false"] svg{transform:rotate(180deg)}
+.layout.toc-collapsed{grid-template-columns:minmax(0,1fr)}
+.layout.toc-collapsed .sidebar{display:none}
+.layout.toc-collapsed #content{margin-left:auto;margin-right:auto;width:100%}
+.toc-title{margin:.1rem 0 .7rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.toc-root,.toc-sub{list-style:none;margin:0;padding:0}
+.toc-sub{margin:.1rem 0 .5rem}
+.toc a{
+  display:block;margin-left:-.75rem;padding:.26rem 0 .26rem .75rem;
+  border-left:2px solid transparent;text-decoration:none;color:var(--muted);
+  font-size:.8rem;line-height:1.34;
+}
+.toc a:hover{color:var(--ink);border-left-color:var(--line)}
+.toc a.active{color:var(--ink);border-left-color:var(--ink);font-weight:700;background:#fafafa}
+.toc .lvl1 > a{
+  margin-top:.75rem;font-family:var(--font-serif);font-size:.95rem;line-height:1.25;
+  color:var(--ink);font-weight:700;letter-spacing:-.005em;
+}
+.toc .lvl1:first-child > a{margin-top:0}
+.toc .lvl2 a{padding-left:1.35rem;font-size:.79rem}
+.toc .lvl2-top a{padding-left:.75rem;font-size:.85rem;margin-top:.75rem;color:var(--ink);font-weight:700}
+
+/* content */
+#content{max-width:72ch;min-width:0;overflow-wrap:break-word}
+#content > h1{
+  margin:3.4rem 0 1.15rem;padding-bottom:.5rem;border-bottom:2px solid var(--ink);
+  font-family:var(--font-serif);font-weight:400;font-size:1.92rem;line-height:1.2;
+  letter-spacing:-.012em;scroll-margin-top:1.25rem;
+}
+#content > h1:first-child{margin-top:0}
+#content h2{
+  margin:2.7rem 0 .85rem;font-family:var(--font-serif);font-weight:400;
+  font-size:1.34rem;line-height:1.28;letter-spacing:-.008em;scroll-margin-top:1.25rem;
+}
+#content h3{
+  margin:2rem 0 .55rem;font-family:var(--font-serif);font-weight:700;
+  font-size:1.06rem;line-height:1.35;scroll-margin-top:1.25rem;
+}
+#content h4{
+  margin:1.6rem 0 .4rem;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);scroll-margin-top:1.25rem;
+}
+#content p{margin:.95rem 0}
+#content strong{font-weight:700}
+#content ul,#content ol{margin:.9rem 0;padding-left:1.45rem}
+#content li{margin:.36rem 0}
+#content li > ul,#content li > ol{margin:.3rem 0}
+#content hr{border:0;border-top:1px solid var(--line);margin:2.8rem 0}
+
+#content blockquote{
+  margin:1.5rem 0;padding:.95rem 1.15rem;border-left:3px solid var(--ink);
+  background:#fafafa;
+}
+#content blockquote p{margin:.45rem 0}
+#content blockquote > :first-child{margin-top:0}
+#content blockquote > :last-child{margin-bottom:0}
+#content blockquote blockquote{border-left-color:var(--rule);background:#f4f4f4;margin:.8rem 0}
+
+/* tables */
+.table-wrap{
+  margin:1.5rem 0;border:1px solid var(--line);overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+#content table{border-collapse:collapse;width:100%;font-size:.875rem;line-height:1.5;background:#fff}
+#content th,#content td{
+  border-right:1px solid #e2e2e2;border-bottom:1px solid #e2e2e2;
+  padding:.52rem .68rem;text-align:left;vertical-align:top;
+}
+#content th:last-child,#content td:last-child{border-right:0}
+#content tbody tr:last-child td{border-bottom:0}
+#content thead th{
+  background:#f4f4f4;border-bottom:1px solid var(--rule);
+  font-size:.7rem;letter-spacing:.07em;text-transform:uppercase;font-weight:700;
+}
+#content tbody tr:nth-child(even){background:#fafafa}
+#content td code,#content th code{font-size:.85em}
+
+/* code */
+#content code{
+  font-family:var(--font-mono);font-size:.86em;background:#f4f4f4;
+  border:1px solid #e8e8e8;padding:.05em .3em;
+  overflow-wrap:anywhere;word-break:break-word;
+}
+#content th,#content td{overflow-wrap:break-word}
+#content pre{
+  margin:1.4rem 0;padding:1rem 1.1rem;background:#f7f7f7;border:1px solid var(--line);
+  overflow-x:auto;font-size:.8rem;line-height:1.55;
+}
+#content pre code{background:none;border:0;padding:0;font-size:inherit;white-space:pre}
+
+/* mathematics */
+.math-block{
+  margin:1.15rem 0;overflow-x:auto;overflow-y:hidden;padding:.1rem 0 .2rem;
+  scrollbar-width:thin;scrollbar-color:#c4c4c4 transparent;
+}
+.math-block mjx-container[display="true"]{margin:0 !important}
+mjx-container{max-width:100%}
+mjx-container[jax="CHTML"][display="true"]{padding:.1rem 0}
+mjx-container[jax="CHTML"]:focus{outline:none}
+/* MathJax's absolutely positioned assistive-MathML copy is wider than the
+   visible glyphs and would otherwise add phantom horizontal scroll range */
+mjx-assistive-mml{
+  width:1px !important;height:1px !important;overflow:hidden !important;
+  max-width:1px !important;clip-path:inset(50%);white-space:nowrap;
+}
+.mj-inline{
+  display:inline-block;width:max-content;max-width:100%;
+  overflow-x:auto;overflow-y:hidden;vertical-align:middle;
+  scrollbar-width:thin;scrollbar-color:#c4c4c4 transparent;
+}
+.math-block::-webkit-scrollbar,.table-wrap::-webkit-scrollbar,.mj-inline::-webkit-scrollbar{height:8px}
+.math-block::-webkit-scrollbar-track,.table-wrap::-webkit-scrollbar-track,.mj-inline::-webkit-scrollbar-track{background:#f4f4f4}
+.math-block::-webkit-scrollbar-thumb,.table-wrap::-webkit-scrollbar-thumb,.mj-inline::-webkit-scrollbar-thumb{background:#c4c4c4}
+
+/* footer */
+footer{border-top:2px solid var(--ink);margin-top:1rem;background:var(--bg)}
+.footer-inner{
+  max-width:1160px;margin:0 auto;padding:2rem;display:flex;flex-wrap:wrap;
+  gap:.8rem 2rem;justify-content:space-between;align-items:baseline;
+  font-size:.78rem;color:var(--muted);line-height:1.55;
+}
+.footer-inner p{margin:0;max-width:62ch}
+.footer-inner a{color:var(--muted)}
+
+/* error / noscript */
+.render-error{
+  max-width:70ch;margin:1.5rem auto;padding:1rem 1.15rem;border:1px solid #b00020;
+  background:#fff5f5;color:#7a0016;font-size:.9rem;
+}
+.render-error p{margin:.4rem 0}
+.render-error code{font-family:var(--font-mono);font-size:.9em}
+.noscript{max-width:70ch;margin:2rem auto;padding:1rem 1.15rem;border:1px solid var(--line);background:#fafafa}
+.noscript p{margin:.4rem 0}
+
+/* responsive */
+@media (max-width:980px){
+  .layout{grid-template-columns:1fr;gap:0;padding:1.6rem 1.25rem 3rem}
+  .sidebar{
+    position:static;max-height:none;overflow:visible;
+    border-right:0;border-bottom:1px solid var(--line);
+    padding:0 0 .9rem;margin-bottom:1.6rem;
+  }
+  .toc-collapse{display:none}
+  .toc-toggle{
+    display:block;width:100%;text-align:left;cursor:pointer;
+    background:#fff;border:1px solid var(--line);padding:.72rem .9rem;
+    font:700 .74rem/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);
+  }
+  .toc{display:none;padding-top:.8rem}
+  .sidebar.open .toc{display:block}
+  #section-nav{display:none}
+  #content{max-width:none}
+  .header-inner{padding:2.1rem 1.25rem 1.2rem}
+  .nav{padding:0 1.25rem 1.3rem}
+  .footer-inner{padding:1.6rem 1.25rem}
+  #content table{font-size:.82rem}
+}
+@media (max-width:600px){
+  body{font-size:16px}
+  #content > h1{font-size:1.6rem}
+  #content h2{font-size:1.18rem}
+  #content h3{font-size:1rem}
+  .header-inner{padding-top:1.7rem}
+  .meta{gap:.35rem}
+  .meta-item{font-size:.66rem}
+  .subtitle{font-size:.92rem}
+  #content blockquote{padding:.8rem .9rem}
+  .table-wrap{margin-left:-.2rem;margin-right:-.2rem}
+}
+@media (max-width:380px){
+  .nav a{font-size:.66rem;padding:.3rem .45rem}
+}
+
+/* print */
+@page{margin:14mm 12mm}
+@media print{
+  .progress,.skip,.crumbs,.sidebar,.toc-toggle,.toc-collapse,.nav,#section-nav,.render-error{display:none !important}
+  body{font-size:11pt;line-height:1.5;color:#000}
+  .site-header{border-bottom:1px solid #000}
+  .header-inner{padding:0 0 .8rem;max-width:none}
+  .site-header h1{font-size:22pt}
+  .subtitle,.header-note{font-size:9pt}
+  .layout{display:block;max-width:none;padding:0}
+  #content{max-width:none}
+  #content > h1{page-break-before:always;font-size:15pt;margin-top:0}
+  #content > h1:first-child{page-break-before:avoid}
+  #content h2{font-size:12.5pt;page-break-after:avoid}
+  #content h3{font-size:11pt;page-break-after:avoid}
+  table,blockquote,pre,.math-block{page-break-inside:avoid}
+  .table-wrap{overflow:visible;border:1px solid #999}
+  #content table{table-layout:fixed;width:100%;font-size:8.5pt}
+  #content th,#content td{overflow-wrap:anywhere;padding:.35rem .4rem}
+  #content thead th,#content tbody tr:nth-child(even){background:#f2f2f2 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  a{text-decoration:none;color:#000}
+  a[href^="http"]::after{content:" (" attr(href) ")";font-size:7.5pt;color:#444;word-break:break-all}
+  #content td a[href^="http"]::after,#content th a[href^="http"]::after{content:""}
+  footer{border-top:1px solid #000}
+  .footer-inner{padding:1rem 0;max-width:none}
+}
+</style>
+</head>
+<body id="top">
+
+<div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+<a class="skip" href="#content">Skip to content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <p class="crumbs"><a href="/">All subjects</a> · <a href="/maths">Mathematics modules</a></p>
+    <p class="eyebrow">University of Mumbai · Mathematics for Computer Engineering · 2023111 · Module IV</p>
+    <h1>Fourier Series <span class="h1-sub">Dirichlet's conditions, period 2π and 2l, even and odd functions — study guide</span></h1>
+    <p class="subtitle">A complete, source-referenced guide for B.E. Computer Science and Engineering (Artificial Intelligence and Machine Learning), Semester III, NEP 2020: worked examples from the teacher's notes, honestly labelled MUSA practice questions, graded practice, and a separate answer key.</p>
+    <div class="meta">
+      <span class="mu-badge">Mumbai University</span>
+      <span class="meta-item">4 teaching hours</span>
+      <span class="meta-item">CO4</span>
+      <span class="meta-item">24 practice questions · 130 marks</span>
+      <span class="meta-item">SymPy-verified</span>
+    </div>
+    <p class="header-note">Version 1.0 · 14 November 2026 · Offline copy: <code>Module_4_Study_Guide.md</code> · <a href="#9-references-and-attribution">Sources &amp; attribution</a></p>
+    <p class="header-note math-fallback" id="math-fallback" hidden><strong>Formulas not rendered.</strong> The MathJax library could not be loaded, so mathematics is shown as LaTeX source. Open <code>Module_4_Study_Guide.md</code> or reconnect to the internet to see it typeset.</p>
+  </div>
+  <nav class="nav" id="section-nav" aria-label="Guide sections"></nav>
+</header>
+
+<button class="toc-collapse" id="toc-collapse" type="button" aria-expanded="true" aria-controls="sidebar" aria-label="Hide contents" title="Hide contents"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><path d="M7 2L2 7l5 5M12 2L7 7l5 5"/></svg></button>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <button class="toc-toggle" id="toc-toggle" type="button" aria-expanded="false" aria-controls="toc-list">Contents</button>
+    <nav class="toc" aria-label="Table of contents">
+      <p class="toc-title">On this page</p>
+      <div id="toc-list"></div>
+    </nav>
+  </aside>
+
+  <main id="content" class="wrap" tabindex="-1">
+    <p>Loading the guide…</p>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <p><strong>Mathematics for Computer Engineering (2023111)</strong> — Module 4 study guide, version 1.0, 14 November 2026. Built on the official University of Mumbai syllabus (PDF pp. 16–18), the teacher's 8-page handwritten notes as faithfully transcribed, and Tutorial 4.</p>
+    <p>All mathematics checked with SymPy 1.14. Examination questions are taken from MUSA practice paper Set-I (Winter 2025) and the MUSA question bank (Winter 2026) — student-association material, not University of Mumbai papers. Provenance for all 25 questions is stated in <a href="#31-provenance-read-this-before-trusting-any-pyq">§3.1</a>; see <a href="#9-references-and-attribution">§9</a> for sources, licences and open uncertainties.</p>
+  </div>
+</footer>
+
+<noscript>
+  <div class="noscript">
+    <p><strong>JavaScript is disabled.</strong> This page typesets the guide in your browser, so without JavaScript you will only see this message.</p>
+    <p>Open <code>Module_4_Study_Guide.md</code> in the course folder (<code>/maths/</code>) - it contains the complete guide in portable Markdown with LaTeX mathematics.</p>
+  </div>
+</noscript>
+
+<div class="render-error" id="render-error" hidden>
+  <p><strong>The guide could not be rendered.</strong></p>
+  <p data-msg></p>
+  <p>The same content is available offline in <code>Module_4_Study_Guide.md</code>, which needs no network connection.</p>
+</div>
+
+<script type="text/markdown" id="md-source">
+# Module 4 — Fourier Series
+
+**Study guide for Mathematics for Computer Engineering (2023111)**
+B.E. Computer Science and Engineering (Artificial Intelligence and Machine Learning), Semester III
+University of Mumbai · NEP 2020 · Module IV · 4 teaching hours · CO4
+
+| | |
+|---|---|
+| **Official module title** | Fourier Series |
+| **Prescribed content** | 1. Dirichlet's conditions, Fourier series of periodic function with period \(2\pi\) and \(2l\). 2. Fourier series of even and odd functions. |
+| **Self-learning topics** | Orthogonal and orthonormal set of functions; complex form of Fourier series; half-range sine and cosine series |
+| **Primary teaching source** | Your teacher's handwritten notes, `01_Original_Notes/Module_4/Module 4 CSE.pdf` (8 pages), transcribed faithfully in `Module_4_Transcription.md` |
+| **Companion tutorial** | Tutorial 4, `02_Tutorials/Tutorial 4.docx` (5 questions, all recovered from embedded equation objects) |
+| **Examination sources available** | MUSA practice paper Set-I (Winter 2025) and MUSA question bank (Winter 2026) — **student-association material, not University of Mumbai papers** (see §3.1) |
+| **Mathematical verification** | Every coefficient, series, integral sign and numerical deduction checked with SymPy 1.14; script listed in §9.5 |
+| **Guide version** | 1.0 — prepared 14 November 2026 |
+
+---
+
+## How to use this guide
+
+This guide is built around one idea: **you should be able to expand a function yourself, and know why each step is allowed.**
+
+- **§1** tells you exactly what the University prescribes, and how Module 4 is actually shaped by the questions available to you.
+- **§2** teaches the concepts in order. Each idea gives you the intuition first, then the formal statement, then a numbered recipe, then a fully worked example taken from your teacher's notes.
+- **§3** lists all 25 Module 4 examination questions available in this project, with their provenance stated honestly.
+- **§4** covers the three self-learning topics, plus Parseval's identity (not listed in the syllabus, but needed for one question bank item). All of it is marked as enrichment.
+- **§5** is practice, sorted into basic / exam-level / challenging, plus Tutorial 4 and the practice-paper questions.
+- **§6** is the **answer key**, deliberately placed at the end so you cannot see answers while attempting §5.
+- **§7** is the mistakes list — read it the night before the exam.
+- **§8** is a condensed revision sheet; a standalone copy is in `Module_4_Revision_Sheet.md`.
+- **§9** is the source list, the verification log, and what remains uncertain.
+
+**Three rules used everywhere in this guide:**
+
+1. Your teacher's notes are the authority for *method and notation*. Where the notes contain a slip, the slip is **flagged, never silently changed**, and the correct calculation is shown separately. The single slip in Module 4 is collected in §7.4.
+2. Anything from outside the prescribed list is labelled **self-learning** or **enrichment**. If it is not in `00_University_Syllabus/Syllabus_Coverage.md`, it will not be asked as prescribed content.
+3. **One convention, used throughout.** Your teacher writes the constant term as \(a_0\). The solution booklet you may find online writes \(\frac{a_0}{2}\). This guide uses your teacher's form everywhere, and §2.4 explains the conversion once, with a table. Do not mix the two inside one derivation.
+
+---
+
+## Contents
+
+1. [The syllabus, precisely](#1-the-syllabus-precisely)
+2. [Concept-wise learning](#2-concept-wise-learning)
+3. [Examination questions available for Module 4](#3-examination-questions-available-for-module-4)
+4. [Self-learning and supplementary topics](#4-self-learning-and-supplementary-topics)
+5. [Practice by difficulty](#5-practice-by-difficulty)
+6. [Answer key](#6-answer-key)
+7. [Common mistakes](#7-common-mistakes)
+8. [Last-minute revision sheet](#8-last-minute-revision-sheet)
+9. [References and attribution](#9-references-and-attribution)
+
+The online version carries a full expanding contents list in the left sidebar; this file lists
+the nine main sections only, so no link depends on a generated heading id.
+
+---
+
+# 1. The syllabus, precisely
+
+## 1.1 Official wording
+
+From the University of Mumbai syllabus (PDF pages 16–18), Module IV:
+
+> **Module IV — Fourier Series** — 4 hours — CO4
+>
+> 1. Dirichlet's conditions, Fourier series of periodic function with period \(2\pi\) and \(2l\).
+> 2. Fourier series of even and odd functions.
+>
+> **Self-learning topics:** Orthogonal and orthonormal set of functions; Complex form of Fourier Series; Half range Sine and Cosine Series.
+
+Three things follow immediately, and they shape this whole guide:
+
+- **Only two prescribed topics.** Everything you will be asked to *calculate* is either (i) an expansion on a stated interval, or (ii) an expansion that exploits evenness/oddness. There is no third prescribed technique.
+- **"period \(2\pi\) and \(2l\)"** means the same machine with two settings. The interval \((0,2\pi)\) or \((-\pi,\pi)\) gives period \(2\pi\); the interval \((0,2l)\) or \((-l,l)\) gives period \(2l\). §2.5 is one table that covers every interval a question can print.
+- **Numerical deductions are not a separate syllabus topic**, but they appear in almost every question that was set on this module. They are taught in §2.11 and §2.14 as part of using the expansion, not as extra theory.
+
+## 1.2 Where Module 4 sits in the course
+
+| Field | Value |
+|---|---|
+| Course code | **2023111** |
+| Teaching scheme | Theory 2 h + Tutorial 1 h per week |
+| Credits | 3 |
+| Module hours | **4** (the smallest allocation, shared with Modules V and VI) |
+| Course outcome | **CO4** — *Expand the periodic function by using the Fourier series for real-life problems and complex engineering problems.* |
+| End-semester paper | 60 marks, 2 hours |
+
+## 1.3 The examination pattern (official)
+
+1. Six questions in total, 20 marks each.
+2. **Q1 is compulsory** and covers the widest possible span of the syllabus.
+3. **Answer any three** of Q2–Q6.
+4. Parts (a) and (b) of the same question must come from **different modules** — so a single question never gives you two Module 4 parts.
+
+**Consequence for Module 4.** A Fourier expansion of a polynomial or a simple piecewise function is a 5–6 mark item, and the "hence deduce" version is the standard 6-mark shape. Because Module IV has only 4 teaching hours, expect **one part in Q1 (3–4 marks) and at most one longer part**, not a whole 15-mark question.
+
+## 1.4 What Module 4 looks like in the questions you actually have
+
+This project contains **no University of Mumbai question paper for Module 4.** What it contains is:
+
+| Source | What it is | Module 4 items |
+|---|---|---|
+| `musa-practice-paper-set1-w2025.pdf` | MUSA practice paper, Set-I, Winter 2025 (2 hours, 60 marks). The paper itself says *"This is the test paper for practice purpose"* | 3 parts: 5, 6 and 4 marks |
+| `musa-question-bank-2026.pdf` | MUSA topic-wise question bank, Winter 2026 | 22 questions, no marks printed |
+| `maths-question-bank-solutions.pdf` | Third-party worked-solution booklet (Module 4 = pp. 46–77) | solutions to the same 22 |
+
+**None of these is a University paper, and this guide never calls them one.** They are student-association material. They are still useful, because the *functions* they use are the standard teaching examples, and every one of them can be checked independently.
+
+The three practice-paper parts are:
+
+| Ref | Marks | Task | §  |
+|---|---:|---|---|
+| PP-1 | 5 | \(f(x)=x^2\) on \(-\pi\le x\le\pi\), hence prove \(\frac{\pi^2}{8}=\frac1{1^2}+\frac1{3^2}+\frac1{5^2}+\cdots\) | 3.2 |
+| PP-2 | 6 | \(f(x)=x^2\) on \((0,2\pi)\), hence deduce \(\frac{\pi^2}{12}=1-\frac1{2^2}+\frac1{3^2}-\cdots\) | 3.2 |
+| PP-3 | 4 | \(f(x)=1-x^2\) on \((-1,1)\) | 3.2 |
+
+That is the realistic shape of a Module 4 question: **expand, then substitute one clever value of \(x\)**. The five Tutorial 4 questions are all pure expansions, with no deduction at all.
+
+## 1.5 A warning before you open any other book
+
+Fourier series is the one topic in this syllabus where textbooks disagree about a *letter*, not about mathematics. Two conventions are in common use:
+
+\[
+\text{(A) } f(x)=a_0+\sum_{n=1}^{\infty}\left(a_n\cos\frac{n\pi x}{l}+b_n\sin\frac{n\pi x}{l}\right),
+\qquad a_0=\frac{1}{2l}\int_c^{c+2l}f(x)\,dx ;
+\]
+
+\[
+\text{(B) } f(x)=\frac{a_0}{2}+\sum_{n=1}^{\infty}\left(a_n\cos\frac{n\pi x}{l}+b_n\sin\frac{n\pi x}{l}\right),
+\qquad a_0=\frac{1}{l}\int_c^{c+2l}f(x)\,dx .
+\]
+
+Your teacher uses **(A)**. The MUSA solution booklet uses **(B)**. Both are correct, and they give the *same series*: the constant term is \(a_0^{(\mathrm{A})}\), and it equals \(a_0^{(\mathrm{B})}/2\). §2.4 settles this once. Everything after that uses (A) without comment.
+
+---
+
+# 2. Concept-wise learning
+
+## 2.1 Why this topic exists
+
+Take a complicated periodic signal — the mains voltage, a vibrating string, a train of pulses, the position of a pendulum. Fourier's idea is:
+
+> **Every reasonable periodic function is a sum of pure waves** — a constant, plus a wave with one cycle per period, plus one with two cycles, plus one with three, and so on.
+
+Written out:
+
+\[
+f(x)=\underbrace{a_0}_{\text{average}}+\underbrace{a_1\cos\frac{\pi x}{l}+b_1\sin\frac{\pi x}{l}}_{\text{one cycle}}+\underbrace{a_2\cos\frac{2\pi x}{l}+b_2\sin\frac{2\pi x}{l}}_{\text{two cycles}}+\cdots
+\]
+
+Each term is called a **harmonic**. The constant \(a_0\) is the average level of the signal; \(a_n\) and \(b_n\) say how much of the \(n\)-th harmonic is present.
+
+Why engineers care:
+
+- **Signal processing.** An audio equaliser is a set of Fourier coefficients: it turns individual harmonics up or down. MP3 compression works by throwing away the harmonics you cannot hear.
+- **Vibration and acoustics.** A guitar string's motion is a sum of its natural modes — the same cosine terms, with frequencies \(n\) times the fundamental.
+- **Heat and circuits.** The heat equation and AC circuit analysis are solved by expanding the input in harmonics, solving each harmonic separately, and adding up.
+- **Data and images.** JPEG is a two-dimensional relative of this idea.
+
+Your syllabus asks for two things: the conditions under which the expansion is allowed (Dirichlet), and the mechanics of computing the coefficients for period \(2\pi\) and \(2l\), including the even/odd shortcuts.
+
+> **Source for this section.** The motivation is the standard one; see Kreyszig, *Advanced Engineering Mathematics*, the Fourier series chapter (Chapter 11 in the 10th edition), §11.1. The formal statements below are taken from your teacher's notes, pages 1–2.
+
+## 2.2 Prerequisites, in plain language
+
+You need five mechanical skills. None is deep, but each one is used in every single example, so fix them now.
+
+### (a) Summation notation
+
+\[
+\sum_{n=1}^{\infty}c_n \quad\text{means}\quad c_1+c_2+c_3+\cdots
+\]
+
+It is a compact way of writing "and so on forever". Two rules you will use constantly:
+
+\[
+\sum_{n=1}^{\infty}k\,c_n=k\sum_{n=1}^{\infty}c_n \qquad(\text{a constant factor moves out}),
+\]
+\[
+\sum_{n=1}^{\infty}(c_n+d_n)=\sum_{n=1}^{\infty}c_n+\sum_{n=1}^{\infty}d_n .
+\]
+
+A Fourier series is *not* a formula you evaluate at a point; it is a limit of partial sums. At any point \(x\) inside the interval where \(f\) is continuous, that limit equals \(f(x)\).
+
+### (b) The four trigonometric values that do almost all the work
+
+\[
+\sin n\pi=0,\qquad \sin 2n\pi=0,\qquad \cos n\pi=(-1)^n,\qquad \cos 2n\pi=1 .
+\]
+
+Read them as: at every whole multiple of \(\pi\), the sine is zero; the cosine is \(+1\) at even multiples and \(-1\) at odd multiples. Your teacher writes exactly these four values at the top of page 3. Together they turn almost every Fourier coefficient into a tidy formula.
+
+Two consequences worth memorising:
+
+\[
+(-1)^{2n}=1,\qquad (-1)^{2n+1}=-1,\qquad (-1)^{n+1}=-(-1)^n .
+\]
+
+### (c) Integration by parts
+
+\[
+\int u\,dv=uv-\int v\,du .
+\]
+
+For polynomials times sine or cosine, choose
+
+\[
+u=\text{the polynomial},\qquad dv=\text{the trigonometric factor}.
+\]
+
+Each application lowers the polynomial's degree by one. So:
+
+- \(x\cos nx\) or \(x\sin nx\) needs **one** application;
+- \(x^2\cos nx\) or \(x^2\sin nx\) needs **two** applications;
+- \((a-x)^2\cos nx\) is still degree 2, so also **two**.
+
+That is the whole difficulty of this module. There are no clever substitutions.
+
+### (d) Three standard integrals you must be able to write instantly
+
+\[
+\int\cos kx\,dx=\frac{\sin kx}{k},\qquad
+\int\sin kx\,dx=-\frac{\cos kx}{k},\qquad
+\int x\cos kx\,dx=\frac{x\sin kx}{k}+\frac{\cos kx}{k^2},
+\]
+\[
+\int x\sin kx\,dx=-\frac{x\cos kx}{k}+\frac{\sin kx}{k^2}.
+\]
+
+(Here \(k=n\pi/l\) or \(k=n\); it is a constant as far as \(x\) is concerned.) Differentiate the right-hand sides to check them — that is a thirty-second exercise and it prevents most sign errors.
+
+### (e) Even and odd functions
+
+\[
+f \text{ is even if } f(-x)=f(x),\qquad f \text{ is odd if } f(-x)=-f(x).
+\]
+
+Even: \(x^2,\ \cos x,\ \lvert x\rvert,\ 1-x^2\). Odd: \(x,\ x^3,\ \sin x,\ x\cos x\). Most functions are neither; a sum of an even and an odd part is neither (for example \(x-x^2\)).
+
+The one fact that saves the most time:
+
+\[
+\int_{-a}^{a}f(x)\,dx=
+\begin{cases}
+2\displaystyle\int_0^a f(x)\,dx, & f\text{ even},\\[2mm]
+0, & f\text{ odd}.
+\end{cases}
+\]
+
+Your teacher calls this a "Property" (page 2 writes it as "Boperty" `[as written]`). It is the reason half the coefficients vanish in §2.6.
+
+> **Where to read this.** Any first-year calculus text covers integration by parts and even/odd symmetry; for example OpenStax *Calculus Volume 2*, the integration-by-parts section. There is nothing module-specific to learn here.
+
+## 2.3 Periodic functions and Dirichlet's conditions
+
+### 2.3.1 What "periodic" means
+
+A function is **periodic with period \(2l\)** if
+
+\[
+f(x+2l)=f(x)\qquad\text{for every }x .
+\]
+
+The smallest positive such number is *the* period (the Fourier series only needs *a* period). A function given on an interval of length \(2l\), say \((c,\,c+2l)\), is understood to be repeated outside it: the graph is copied left and right forever.
+
+Why this matters for the exam: when a question says "\(f(x)=x^2\) in \((0,2\pi)\)", the series you produce is not just for \(0<x<2\pi\). It represents the **periodic extension** — the same shape repeated every \(2\pi\). That is why at \(x=0\) the series does *not* give \(0^2\), but the average of the two ends (see §2.13).
+
+### 2.3.2 Dirichlet's conditions, as your teacher states them
+
+> A function \(f(x)\) defined in the interval \(c_1\le x\le c_2\) can be expressed as a Fourier series if in the interval
+>
+> i) \(f(x)\) and its integrals are finite and single valued.
+>
+> ii) \(f(x)\) has dis continuities, finite number. `[as written]`
+>
+> iii) \(f(x)\) has finite number of maxima and minima.
+>
+> These conditions are known as Dirichlet's conditions.
+
+In modern language, the three conditions say:
+
+1. \(f\) is **single-valued and bounded** on the interval (no infinities, no vertical branches).
+2. \(f\) has **finitely many discontinuities**, and each is a *jump*: the left-hand and right-hand limits both exist.
+3. \(f\) has **finitely many maxima and minima** (no infinite oscillation, such as \(\sin(1/x)\) near \(0\)).
+
+Your teacher's phrase "and its integrals are finite" is a loose way of saying the coefficients — which are integrals of \(f\) — exist. It is not a separate condition; the guide keeps the teacher's wording but you should not write "integrals are finite" as if it were a fourth hypothesis.
+
+### 2.3.3 Dirichlet's theorem: what the series converges to
+
+This is the part students skip and then lose marks on. Let \(S(x)\) be the sum of the Fourier series.
+
+- At a point where \(f\) is **continuous**, \(S(x)=f(x)\).
+- At a point where \(f\) **jumps**, the series takes the **midpoint of the jump**:
+  \[
+  S(x)=\frac{f(x^-)+f(x^+)}{2},
+  \]
+  where \(f(x^-)\) and \(f(x^+)\) are the limits from the left and from the right.
+- At the **endpoints** of the interval, the periodic extension joins the two ends, so the series takes
+  \[
+  S(c)=S(c+2l)=\frac{f(c^+)+f(c+2l^-)}{2}.
+  \]
+
+Every "hence deduce" question in §3 depends on one of these three lines. §2.13 works through the traps.
+
+### 2.3.4 Recipe: is the expansion allowed?
+
+1. Is \(f\) bounded on the interval? If it blows up, stop — Dirichlet does not apply.
+2. Are the discontinuities finitely many jumps? A piecewise formula with finitely many pieces always passes.
+3. Finitely many turning points? A polynomial or a simple piecewise-linear curve always passes.
+4. Then the series converges to \(f\) at continuity points and to the midpoint at jumps.
+
+In this module every function satisfies the conditions, so the exam never asks you to *verify* them. You are asked to *state* them — a 3-mark Q1 part is the natural place.
+
+## 2.4 The Fourier coefficients, and the one convention you must fix now
+
+### 2.4.1 The formulas, in your teacher's convention
+
+On the interval \((c,\,c+2l)\):
+
+\[
+\boxed{\;f(x)=a_0+\sum_{n=1}^{\infty}\left(a_n\cos\frac{n\pi x}{l}+b_n\sin\frac{n\pi x}{l}\right)\;}
+\]
+
+with
+
+\[
+\boxed{\;a_0=\frac{1}{2l}\int_c^{c+2l}f(x)\,dx\;}
+\]
+\[
+\boxed{\;a_n=\frac{1}{l}\int_c^{c+2l}f(x)\cos\frac{n\pi x}{l}\,dx\;}
+\qquad
+\boxed{\;b_n=\frac{1}{l}\int_c^{c+2l}f(x)\sin\frac{n\pi x}{l}\,dx\;}
+\]
+
+Every symbol, explained:
+
+| Symbol | Meaning |
+|---|---|
+| \(l\) | **Half** the length of the interval (so the period is \(2l\)) |
+| \(c\) | Left end of the interval; the interval is \((c,\,c+2l)\) |
+| \(n\) | A positive whole number \(1,2,3,\dots\); the answer is always a formula in \(n\) |
+| \(a_0\) | The constant term — the average value of \(f\) over one period |
+| \(a_n\) | Coefficient of the \(n\)-th cosine harmonic |
+| \(b_n\) | Coefficient of the \(n\)-th sine harmonic |
+
+### 2.4.2 Why \(a_0\) is the average — the one-line proof
+
+Integrate the series from \(c\) to \(c+2l\). Every \(\cos\) and \(\sin\) term integrates to zero over a whole number of periods, because
+
+\[
+\int_c^{c+2l}\cos\frac{n\pi x}{l}\,dx=\frac{l}{n\pi}\left[\sin\frac{n\pi x}{l}\right]_c^{c+2l}=0
+\]
+
+(the sine takes the same value at both ends, since the argument changes by \(2n\pi\)). So
+
+\[
+\int_c^{c+2l}f(x)\,dx=a_0\cdot 2l
+\qquad\Longrightarrow\qquad
+a_0=\frac{1}{2l}\int_c^{c+2l}f(x)\,dx .
+\]
+
+So \(a_0\) is exactly the **mean height** of the graph over one period. This is worth remembering: it gives you an instant sanity check on any answer (a function that is positive everywhere must have \(a_0>0\); the average of \(x\) on \((0,2\pi)\) is \(\pi\), and indeed your teacher gets \(a_0=\pi\)).
+
+### 2.4.3 The convention question, settled once
+
+The constant term of the series is a *number*. Textbooks give it two different names:
+
+| | Teacher's form (used in this guide) | Booklet's form (used by the MUSA solutions) |
+|---|---|---|
+| Series | \(a_0+\sum(a_n\cos+b_n\sin)\) | \(\dfrac{a_0}{2}+\sum(a_n\cos+b_n\sin)\) |
+| Constant coefficient | \(a_0=\dfrac{1}{2l}\displaystyle\int f\) | \(a_0=\dfrac{1}{l}\displaystyle\int f\) |
+| Constant term of the series | \(a_0\) | \(\dfrac{a_0}{2}\) |
+| Relation | \(a_0^{(\text{teacher})}=\dfrac{a_0^{(\text{book})}}{2}\) | \(a_0^{(\text{book})}=2a_0^{(\text{teacher})}\) |
+
+The cosine and sine coefficients \(a_n,b_n\) are **identical** in both conventions. Only the constant is renamed.
+
+**A conversion table you can use in one second:**
+
+| Function and interval | Teacher's \(a_0\) | Booklet's \(a_0\) |
+|---|---:|---:|
+| \(x^2\) on \((-\pi,\pi)\) | \(\dfrac{\pi^2}{3}\) | \(\dfrac{2\pi^2}{3}\) |
+| \(x^2\) on \((0,2\pi)\) | \(\dfrac{4\pi^2}{3}\) | \(\dfrac{8\pi^2}{3}\) |
+| \(4-x^2\) on \((0,2\pi)\) | \(4-\dfrac{4\pi^2}{3}\) | \(8-\dfrac{8\pi^2}{3}\) |
+| \(x^2\) on \((0,2)\) | \(\dfrac43\) | \(\dfrac83\) |
+| \(1-x^2\) on \((-1,1)\) | \(\dfrac23\) | \(\dfrac43\) |
+
+**What to do in the exam.** Use your teacher's form. If you are checking against an online solution, double the booklet's constant coefficient before comparing — or, more safely, compare the *series*: if the two series have the same constant term, the same \(a_n\) and the same \(b_n\), they are the same series and the naming does not matter.
+
+> **Common failure mode.** Writing \(a_0=\frac1l\int f\) (booklet formula) while closing the series with \(a_0\) (teacher formula) doubles the constant term. That single mix-up is the most expensive error in this module; see §7.2.
+
+### 2.4.4 What the coefficients mean physically
+
+For a periodic signal:
+
+- \(\lvert a_n\rvert\) and \(\lvert b_n\rvert\) measure how much of the \(n\)-th harmonic is present;
+- the **amplitude** of the \(n\)-th harmonic is \(\sqrt{a_n^2+b_n^2}\);
+- the sequence of amplitudes is the **spectrum** of the signal.
+
+You do not need this for the exam. It is here so that the formulas feel like something rather than arbitrary integrals.
+
+## 2.5 Choosing the right formulas for the interval
+
+Every Module 4 question is one of five interval types. Learn the table and you never have to derive a formula under exam pressure.
+
+| Question says | Meaning | \(l\) | Argument of \(\cos,\sin\) | \(a_0\) | \(a_n\) | \(b_n\) |
+|---|---|---|---|---|---:|---|
+| \((c,\,c+2l)\) | general period \(2l\) | \(l\) | \(\dfrac{n\pi x}{l}\) | \(\dfrac{1}{2l}\displaystyle\int_c^{c+2l}\) | \(\dfrac1l\displaystyle\int_c^{c+2l}\) | \(\dfrac1l\displaystyle\int_c^{c+2l}\) |
+| \((0,\,2l)\) | \(c=0\) | \(l\) | \(\dfrac{n\pi x}{l}\) | \(\dfrac{1}{2l}\displaystyle\int_0^{2l}\) | \(\dfrac1l\displaystyle\int_0^{2l}\) | \(\dfrac1l\displaystyle\int_0^{2l}\) |
+| \((0,\,2\pi)\) | \(c=0,\ l=\pi\) | \(\pi\) | \(nx\) | \(\dfrac{1}{2\pi}\displaystyle\int_0^{2\pi}\) | \(\dfrac1\pi\displaystyle\int_0^{2\pi}\) | \(\dfrac1\pi\displaystyle\int_0^{2\pi}\) |
+| \((-l,\,l)\) | \(c=-l\) | \(l\) | \(\dfrac{n\pi x}{l}\) | \(\dfrac{1}{2l}\displaystyle\int_{-l}^{l}\) | \(\dfrac1l\displaystyle\int_{-l}^{l}\) | \(\dfrac1l\displaystyle\int_{-l}^{l}\) |
+| \((-\pi,\,\pi)\) | \(c=-\pi,\ l=\pi\) | \(\pi\) | \(nx\) | \(\dfrac{1}{2\pi}\displaystyle\int_{-\pi}^{\pi}\) | \(\dfrac1\pi\displaystyle\int_{-\pi}^{\pi}\) | \(\dfrac1\pi\displaystyle\int_{-\pi}^{\pi}\) |
+
+Two more shapes that appear in the question bank and do **not** fit the five rows literally:
+
+| Question says | What to do | \(l\) | Argument | \(a_0\) |
+|---|---|---|---|---:|
+| \((0,\,a)\) | interval length \(a\), so \(2l=a\) | \(\dfrac a2\) | \(\dfrac{2n\pi x}{a}\) | \(\dfrac1a\displaystyle\int_0^a\) |
+| "period 3", on \((0,3)\) | interval length \(3\) | \(\dfrac32\) | \(\dfrac{2n\pi x}{3}\) | \(\dfrac13\displaystyle\int_0^3\) |
+| "period 2", on \((0,2)\) or \((-1,1)\) | interval length \(2\) | \(1\) | \(n\pi x\) | \(\dfrac12\displaystyle\int\) |
+
+**The three-step decision:**
+
+1. **Read the interval.** Its length is the period, \(2l\). Write down \(l\) (half of it).
+2. **Write the argument** \(\frac{n\pi x}{l}\). This is the single most common place to lose marks: on \((0,2)\) with \(l=1\) the argument is \(n\pi x\), **not** \(nx\); on \((0,2\pi)\) with \(l=\pi\) it is \(nx\).
+3. **Divide by the right constant**: \(2l\) for \(a_0\), \(l\) for \(a_n\) and \(b_n\).
+
+**Worked illustration of step 1–2.**
+
+- \((0,2)\): length 2, so \(l=1\), argument \(n\pi x\). \(a_0=\frac12\int_0^2\), \(a_n=\int_0^2\).
+- \((0,2\pi)\): length \(2\pi\), so \(l=\pi\), argument \(nx\). \(a_0=\frac{1}{2\pi}\int_0^{2\pi}\), \(a_n=\frac1\pi\int_0^{2\pi}\).
+- \((-1,1)\): length 2, so \(l=1\), argument \(n\pi x\). \(a_0=\frac12\int_{-1}^{1}\), \(a_n=\int_{-1}^{1}\).
+- \((0,a)\): length \(a\), so \(l=\frac a2\), argument \(\frac{2n\pi x}{a}\). \(a_0=\frac1a\int_0^a\), \(a_n=\frac2a\int_0^a\).
+
+Note how \((0,2)\) and \((-1,1)\) share the same \(l=1\) and the same argument; only the integration limits differ.
+
+## 2.6 Even and odd functions: the biggest time-saver
+
+### 2.6.1 The parity test, and how to do it fast
+
+Substitute \(-x\) and simplify. If you get the original expression back, it is even; if you get its negative, it is odd; otherwise neither.
+
+\[
+f(-x)=f(x)\ \Rightarrow\ \text{even},\qquad f(-x)=-f(x)\ \Rightarrow\ \text{odd}.
+\]
+
+Your teacher does exactly this on page 5:
+
+\[
+f(x)=x,\qquad f(-x)=-x=-f(x)\ \Rightarrow\ \text{odd}.
+\]
+
+Fast recognition:
+
+- **Even:** any even power of \(x\); \(\cos x\); \(\lvert x\rvert\); \(1-x^2\); \(\sqrt{1-\cos x}\) (since \(\cos\) is even); \(x\sin x\) (odd × odd); \(x^2\cos x\) (even × even).
+- **Odd:** any odd power of \(x\); \(\sin x\); \(x\cos x\) (odd × even); \(x^3+x\).
+- **A constant plus an even function stays even** (\(4-x^2\) is even). A constant plus an odd function is neither.
+
+### 2.6.2 Why the shortcuts work
+
+Split the integral at zero:
+
+\[
+\int_{-l}^{l}F(x)\,dx=\int_{-l}^{0}F(x)\,dx+\int_{0}^{l}F(x)\,dx .
+\]
+
+In the first integral put \(x=-t\). If \(F\) is even, \(F(-t)=F(t)\) and the two pieces are equal, giving \(2\int_0^l\). If \(F\) is odd, \(F(-t)=-F(t)\) and the two pieces cancel, giving \(0\). This is the teacher's "Property" on page 2.
+
+Now apply it to the coefficients on \((-l,l)\):
+
+- \(a_0\): integrand \(f\). If \(f\) is odd, \(a_0=0\).
+- \(a_n\): integrand \(f(x)\cos\frac{n\pi x}{l}\). Cosine is even, so the parity of the integrand is the parity of \(f\). If \(f\) is odd, \(a_n=0\).
+- \(b_n\): integrand \(f(x)\sin\frac{n\pi x}{l}\). Sine is odd, so an even \(f\) makes the integrand odd — and \(b_n=0\).
+
+### 2.6.3 The reduced formulas
+
+**Even function on \((-l,l)\):** only cosines survive.
+
+\[
+f(x)=a_0+\sum_{n=1}^{\infty}a_n\cos\frac{n\pi x}{l},
+\]
+\[
+a_0=\frac{1}{2l}\int_{-l}^{l}f(x)\,dx=\frac{1}{l}\int_0^{l}f(x)\,dx,
+\qquad
+a_n=\frac{2}{l}\int_0^{l}f(x)\cos\frac{n\pi x}{l}\,dx,
+\qquad
+b_n=0 .
+\]
+
+**Odd function on \((-l,l)\):** only sines survive.
+
+\[
+f(x)=\sum_{n=1}^{\infty}b_n\sin\frac{n\pi x}{l},
+\]
+\[
+a_0=0,\qquad a_n=0,\qquad
+b_n=\frac{2}{l}\int_0^{l}f(x)\sin\frac{n\pi x}{l}\,dx .
+\]
+
+Check the factors: \(a_0\) gets \(\frac{1}{l}\) (because \(\frac{1}{2l}\times 2=\frac1l\)); \(a_n\) and \(b_n\) get \(\frac2l\) (because \(\frac1l\times2=\frac2l\)). Students who write \(\frac1l\) for \(a_n\) lose half the coefficient — see §7.3.
+
+**Only on a symmetric interval.** The shortcut needs \((-l,l)\) or \((-\pi,\pi)\). A function can be even *as a formula* and still be given on \((0,2\pi)\), where the symmetry is not available; then you must compute all three coefficients. Example: \(4-x^2\) on \((0,2\pi)\) is an even function, but the interval is not symmetric about 0, so the teacher computes \(b_n\neq0\) (§2.10). Remember this — it is the classic trap.
+
+### 2.6.4 Worked example — \(f(x)=x\) on \((-\pi,\pi)\) (notes, page 5)
+
+**Step 1. Parity.**
+
+\[
+f(-x)=-x=-f(x)\ \Rightarrow\ f \text{ is odd}.
+\]
+
+**Step 2. Immediate consequences.** On a symmetric interval, an odd function has
+
+\[
+a_0=0,\qquad a_n=0 .
+\]
+
+Only \(b_n\) remains, and it needs the halved interval:
+
+\[
+b_n=\frac{2}{\pi}\int_0^{\pi}x\sin nx\,dx .
+\]
+
+**Step 3. Integrate by parts** with \(u=x\), \(dv=\sin nx\,dx\):
+
+\[
+\int x\sin nx\,dx=-\frac{x\cos nx}{n}+\frac{\sin nx}{n^2}.
+\]
+
+So
+
+\[
+b_n=\frac{2}{\pi}\left[-\frac{x\cos nx}{n}+\frac{\sin nx}{n^2}\right]_0^{\pi}
+=\frac{2}{\pi}\left[\left(-\frac{\pi\cos n\pi}{n}+0\right)-\left(0+0\right)\right].
+\]
+
+Using \(\cos n\pi=(-1)^n\):
+
+\[
+b_n=\frac{2}{\pi}\left(-\frac{\pi(-1)^n}{n}\right)=\frac{2(-1)^{n+1}}{n}.
+\]
+
+**Step 4. Write the series.**
+
+\[
+x=2\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}\sin nx
+=2\left[\frac{\sin x}{1}-\frac{\sin 2x}{2}+\frac{\sin 3x}{3}-\frac{\sin 4x}{4}+\cdots\right].
+\]
+
+**Step 5. Sanity checks.**
+
+- At \(x=\frac{\pi}{2}\): the right side is \(2\left(1-0-\frac13\cdot(-1)+\cdots\right)=2\left(1-\frac13+\frac15-\cdots\right)\), which should equal \(\frac{\pi}{2}\); so \(\frac{\pi}{4}=1-\frac13+\frac15-\cdots\). (This is the Gregory–Leibniz series; it is the deduction in QB-4 and in practice item C2.)
+- At \(x=\pi\): both sides are 0, consistent with the jump midpoint (the periodic extension jumps from \(\pi\) to \(-\pi\) there).
+- All coefficients are bounded by \(2/n\), which is what makes the series converge.
+
+## 2.7 The integration toolkit
+
+Every calculation in this module is one of six integrals. Learn the pattern once.
+
+### 2.7.1 The by-parts bracket your teacher uses
+
+For a polynomial \(P(x)\) of degree 2, the teacher writes the antiderivative as a **three-term bracket**:
+
+\[
+\int P(x)\cos kx\,dx
+=P\frac{\sin kx}{k}-P'\left(-\frac{\cos kx}{k^2}\right)+P''\left(-\frac{\sin kx}{k^3}\right),
+\]
+\[
+\int P(x)\sin kx\,dx
+=P\left(-\frac{\cos kx}{k}\right)-P'\left(-\frac{\sin kx}{k^2}\right)+P''\left(\frac{\cos kx}{k^3}\right).
+\]
+
+The signs alternate, and each term lowers the derivative order: \(P\), then \(P'\), then \(P''\). For \(P=x^2\) this gives the exact brackets printed on pages 3 and 7:
+
+\[
+\int x^2\cos kx\,dx=x^2\frac{\sin kx}{k}+2x\frac{\cos kx}{k^2}-2\frac{\sin kx}{k^3},
+\]
+\[
+\int x^2\sin kx\,dx=-x^2\frac{\cos kx}{k}+2x\frac{\sin kx}{k^2}+2\frac{\cos kx}{k^3}.
+\]
+
+For degree 1, stop after two terms:
+
+\[
+\int x\cos kx\,dx=\frac{x\sin kx}{k}+\frac{\cos kx}{k^2},
+\qquad
+\int x\sin kx\,dx=-\frac{x\cos kx}{k}+\frac{\sin kx}{k^2}.
+\]
+
+**How to write it in the exam.** Do not memorise the brackets; write "integrating by parts twice" and produce them. Markers give method marks for the bracket structure, and a correct bracket with one sign slip loses less than a wrong final answer alone.
+
+### 2.7.2 The four substitutions at the limits
+
+At the limits \(0\) and \(2\pi\), or \(0\) and \(2\), or \(-\pi\) and \(\pi\), the bracket collapses because:
+
+\[
+\sin 0=\sin n\pi=\sin 2n\pi=0,\qquad \cos 0=1,\qquad \cos 2n\pi=1,\qquad \cos n\pi=(-1)^n .
+\]
+
+So in practice **every sine term at a limit vanishes**, and only cosine terms survive. That is why \(a_n\) (which pairs with cosine) produces a cosine evaluated at the limit, and \(b_n\) (which pairs with sine) produces the \(1/n\) terms from the boundary.
+
+### 2.7.3 A table you can reuse
+
+| Integral | Value at \(0\to 2\pi\) | Value at \(0\to 2\) (that is, \(k=n\pi\)) |
+|---|---|---|
+| \(\displaystyle\int\cos nx\,dx\) | \(0\) | \(0\) |
+| \(\displaystyle\int\sin nx\,dx\) | \(0\) | \(0\) |
+| \(\displaystyle\int_0^{2\pi}x\cos nx\,dx\) | \(0\) | \(0\) |
+| \(\displaystyle\int_0^{2\pi}x\sin nx\,dx\) | \(-\dfrac{2\pi}{n}\) | \(-\dfrac{2}{n\pi}\) |
+| \(\displaystyle\int_0^{2\pi}x^2\cos nx\,dx\) | \(\dfrac{4\pi}{n^2}\) | \(\dfrac{4}{n^2\pi^2}\) |
+| \(\displaystyle\int_0^{2\pi}x^2\sin nx\,dx\) | \(-\dfrac{4\pi^2}{n}\) | \(-\dfrac{4}{n\pi}\) |
+
+Each entry is checked in `_work/verify_m4_guide.py`. Note the pattern: a factor of \(\pi\) appears once for each power of \(x\) that meets the upper limit \(2\pi\).
+
+### 2.7.4 Sign bookkeeping with \((-1)^n\)
+
+Three rules prevent almost every sign error:
+
+1. \((-1)^n\) is **not** a sign you can drop; write it explicitly at the last step.
+2. \((-1)^{n+1}=-(-1)^n\). Use whichever form makes the series look like the standard alternation \(1-\frac12+\frac13-\cdots\).
+3. When \((-1)^n\) multiplies \((-1)^n\), you get \((-1)^{2n}=1\). This is exactly what turns the \(x^2\) deduction at \(x=\pi\) into \(\sum 1/n^2\) (§2.11).
+
+## 2.8 Worked example 1 — x² on (0, 2), and a factor-of-π slip
+
+This is your teacher's first example (page 3) and Tutorial 4, Question 1. It is the cleanest place to see the whole machine: an interval that is not \(2\pi\), both coefficients non-zero, and one genuine slip to learn from.
+
+**Question.** Expand \(f(x)=x^2\) in \((0,2)\).
+
+**Step 1. Identify the interval.** Length \(=2\), so \(2l=2\), that is \(l=1\). The argument is
+
+\[
+\frac{n\pi x}{l}=n\pi x .
+\]
+
+The teacher writes this in the margin: \(\left[(c,c+2l),\ c=0,\ 2l=2\ \therefore l=1\right]\).
+
+**Step 2. Write the assumed form.**
+
+\[
+f(x)=a_0+\sum_{n=1}^{\infty}a_n\cos n\pi x+\sum_{n=1}^{\infty}b_n\sin n\pi x .
+\]
+
+**Step 3. The constant term.**
+
+\[
+a_0=\frac{1}{2l}\int_0^{2}x^2\,dx=\frac12\left[\frac{x^3}{3}\right]_0^{2}=\frac12\cdot\frac83=\frac43 .
+\]
+
+Sanity check: the average of \(x^2\) on \((0,2)\) is \(\frac12\int_0^2x^2=\frac43\), which is between \(0^2\) and \(2^2\). ✓
+
+**Step 4. The cosine coefficients.** With \(l=1\),
+
+\[
+a_n=\frac{1}{l}\int_0^{2}x^2\cos n\pi x\,dx=\int_0^{2}x^2\cos n\pi x\,dx .
+\]
+
+Integrating by parts twice (using the bracket of §2.7.1 with \(k=n\pi\)):
+
+\[
+a_n=\left[x^2\frac{\sin n\pi x}{n\pi}-2x\left(-\frac{\cos n\pi x}{n^2\pi^2}\right)+2\left(-\frac{\sin n\pi x}{n^3\pi^3}\right)\right]_0^{2}.
+\]
+
+At \(x=2\): \(\sin 2n\pi=0\), \(\cos 2n\pi=1\), so the bracket is
+
+\[
+0+\frac{4}{n^2\pi^2}-0=\frac{4}{n^2\pi^2}.
+\]
+
+At \(x=0\): every term contains \(x\) or \(\sin 0\), so the bracket is \(0\). Therefore
+
+\[
+a_n=\frac{4}{n^2\pi^2}.
+\]
+
+**Step 5. The sine coefficients.**
+
+\[
+b_n=\int_0^{2}x^2\sin n\pi x\,dx
+=\left[-x^2\frac{\cos n\pi x}{n\pi}+2x\frac{\sin n\pi x}{n^2\pi^2}+2\frac{\cos n\pi x}{n^3\pi^3}\right]_0^{2}.
+\]
+
+At \(x=2\):
+
+\[
+-\frac{4\cos 2n\pi}{n\pi}+0+\frac{2\cos 2n\pi}{n^3\pi^3}
+=-\frac{4}{n\pi}+\frac{2}{n^3\pi^3}.
+\]
+
+At \(x=0\): \(0+0+\dfrac{2}{n^3\pi^3}\). Subtracting,
+
+\[
+b_n=\left(-\frac{4}{n\pi}+\frac{2}{n^3\pi^3}\right)-\frac{2}{n^3\pi^3}=-\frac{4}{n\pi}.
+\]
+
+The \(1/n^3\) terms cancel — they always do for a polynomial, because both limits contribute the same constant.
+
+**Step 6. Assemble.**
+
+\[
+x^2=\frac43+\sum_{n=1}^{\infty}\frac{4}{n^2\pi^2}\cos n\pi x+\sum_{n=1}^{\infty}\left(-\frac{4}{n\pi}\right)\sin n\pi x .
+\]
+
+Taking the common factors out:
+
+\[
+\boxed{\;x^2=\frac43+\frac{4}{\pi^2}\sum_{n=1}^{\infty}\frac{\cos n\pi x}{n^2}-\frac{4}{\pi}\sum_{n=1}^{\infty}\frac{\sin n\pi x}{n}\;}
+\]
+
+or, written out,
+
+\[
+x^2=\frac43+\frac{4}{\pi^2}\left[\frac{\cos\pi x}{1^2}+\frac{\cos 2\pi x}{2^2}+\frac{\cos 3\pi x}{3^2}+\cdots\right]
+-\frac{4}{\pi}\left[\frac{\sin\pi x}{1}+\frac{\sin 2\pi x}{2}+\frac{\sin 3\pi x}{3}+\cdots\right].
+\]
+
+### The slip on page 3 — read this carefully
+
+Your teacher's page computes the three coefficients **correctly** as \(\frac43,\ \frac{4}{n^2\pi^2},\ -\frac{4}{n\pi}\), but then closes the cosine sum with the common factor \(\frac{4}{\pi}\):
+
+\[
+x^2=\frac43+\frac{\mathbf{4}}{\boldsymbol{\pi}}\left[\frac{\cos\pi x}{1^2}+\frac{\cos 2\pi x}{2^2}+\cdots\right]-\frac{4}{\pi}\left[\frac{\sin\pi x}{1}+\cdots\right].
+\]
+
+That is a factor of \(\pi\) too small on the cosine sum. Since \(a_n=\frac{4}{n^2\pi^2}\), the correct common factor is \(\frac{4}{\pi^2}\). Evidence that it is a copying slip and not an integration error:
+
+1. The bracket itself has \(1^2,2^2,3^2,\dots\) in the denominators, which is exactly what \(a_n=\frac{4}{n^2\pi^2}\) produces.
+2. Substituting \(x=1\) into the *slip* version gives \(1\approx\frac43+\frac4\pi(0.79)\approx2.34\), badly wrong; the corrected version gives \(1.000\) to three decimals.
+3. The teacher's own \(a_n\) line two steps earlier is right.
+
+**What to write in the exam:** the corrected form. **What to say if asked about the notes:** the coefficient computation is right, the closing factor is a slip. The transcription reproduces the page unchanged and flags it in `Module_4_Transcription.md`.
+
+**Checks on the corrected answer.**
+
+- At \(x=0\): the right side is \(\frac43+\frac{4}{\pi^2}\sum\frac{1}{n^2}=\frac43+\frac{4}{\pi^2}\cdot\frac{\pi^2}{6}=\frac43+\frac23=2\). The periodic extension of \(x^2\) on \((0,2)\) jumps at 0 (from \(4\) down to \(0\)), so Dirichlet's midpoint is \(\frac{0+4}{2}=2\). ✓ (This is §2.13 in action.)
+- At \(x=1\): numerically the series gives \(1.0000\). ✓
+- The sine coefficients decay like \(1/n\), which is the signature of a jump; the cosine coefficients decay like \(1/n^2\), the signature of a continuous function with a corner. Both match the graph.
+
+## 2.9 Worked example 2 — x on (0, 2π): the sawtooth
+
+This is the teacher's second example (pages 3–4) and Tutorial 4, Question 4. It is the standard "straight line" case, and its series is the source of the Gregory–Leibniz deduction.
+
+**Question.** Find the Fourier series of \(f(x)=x\), \(0<x<2\pi\).
+
+**Step 1. Interval.** Length \(2\pi\), so \(l=\pi\); argument \(nx\).
+
+**Step 2. Constant term.**
+
+\[
+a_0=\frac{1}{2\pi}\int_0^{2\pi}x\,dx=\frac{1}{2\pi}\left[\frac{x^2}{2}\right]_0^{2\pi}
+=\frac{1}{2\pi}\cdot\frac{4\pi^2}{2}=\pi .
+\]
+
+This is the average height of the line \(y=x\) from \(0\) to \(2\pi\). ✓
+
+**Step 3. Cosine coefficients.**
+
+\[
+a_n=\frac{1}{\pi}\int_0^{2\pi}x\cos nx\,dx
+=\frac{1}{\pi}\left[\frac{x\sin nx}{n}+\frac{\cos nx}{n^2}\right]_0^{2\pi}.
+\]
+
+At \(2\pi\): \(\frac{2\pi\cdot 0}{n}+\frac{1}{n^2}=\frac{1}{n^2}\). At \(0\): \(0+\frac{1}{n^2}=\frac{1}{n^2}\). They are equal, so
+
+\[
+a_n=\frac{1}{\pi}\left(\frac{1}{n^2}-\frac{1}{n^2}\right)=0 .
+\]
+
+The teacher writes the same cancellation as \(\left[\left(0+\frac{1}{n^2}\right)-\left(0+\frac{1}{n^2}\right)\right]=0\).
+
+**Step 4. Sine coefficients.**
+
+\[
+b_n=\frac{1}{\pi}\int_0^{2\pi}x\sin nx\,dx
+=\frac{1}{\pi}\left[-\frac{x\cos nx}{n}+\frac{\sin nx}{n^2}\right]_0^{2\pi}.
+\]
+
+At \(2\pi\): \(-\frac{2\pi\cos 2n\pi}{n}+0=-\frac{2\pi}{n}\). At \(0\): \(0+0=0\). Therefore
+
+\[
+b_n=\frac{1}{\pi}\left(-\frac{2\pi}{n}\right)=-\frac{2}{n}.
+\]
+
+**Step 5. Assemble.**
+
+\[
+x=\pi+\sum_{n=1}^{\infty}\left(-\frac{2}{n}\right)\sin nx
+=\pi-2\sum_{n=1}^{\infty}\frac{\sin nx}{n}.
+\]
+
+Written out:
+
+\[
+x=\pi-2\left[\sin x+\frac{\sin 2x}{2}+\frac{\sin 3x}{3}+\cdots\right],\qquad 0<x<2\pi .
+\]
+
+**Step 6. What the endpoints do.** At \(x=0\) the series is \(\pi-0=\pi\), not \(0\). That is correct behaviour: the periodic extension of \(x\) on \((0,2\pi)\) jumps from \(2\pi\) (at \(2\pi^-\)) to \(0\) (at \(0^+\)), and the midpoint is \(\pi\). The constant term \(a_0=\pi\) is exactly that midpoint, which is why every sine term vanishes at the jump.
+
+**Step 7. The famous deduction.** Put \(x=\frac{\pi}{2}\):
+
+\[
+\frac{\pi}{2}=\pi-2\left[1+0-\frac13+0+\frac15-\cdots\right]
+\ \Longrightarrow\
+\frac{\pi}{4}=1-\frac13+\frac15-\frac17+\cdots
+\]
+
+This is QB-4's deduction and practice item C2. Note how it needs a point where \(\sin nx\) is simple: \(x=\frac{\pi}{2}\) gives \(1,0,-1,0,\dots\).
+
+## 2.10 Worked example 3 — 4 − x² on (0, 2π)
+
+The teacher's third example (page 4). Its purpose is different from Example 1: here the function is **even as a formula**, but the interval is \((0,2\pi)\), which is **not symmetric about 0**. The shortcut of §2.6 therefore does **not** apply, and \(b_n\neq0\). This is the most commonly missed distinction in the module.
+
+**Question.** Find the Fourier expansion of \(f(x)=4-x^2\) in \((0,2\pi)\).
+
+**Step 1. Interval.** \(l=\pi\), argument \(nx\); all three coefficients must be computed.
+
+**Step 2. Constant term.**
+
+\[
+a_0=\frac{1}{2\pi}\int_0^{2\pi}(4-x^2)\,dx
+=\frac{1}{2\pi}\left[4x-\frac{x^3}{3}\right]_0^{2\pi}
+=\frac{1}{2\pi}\left(8\pi-\frac{8\pi^3}{3}\right)
+=4-\frac{4\pi^2}{3}.
+\]
+
+The average of \(4-x^2\) on \((0,2\pi)\) is negative, because the parabola is below the axis for most of the interval. ✓
+
+**Step 3. Cosine coefficients.** Here \(P(x)=4-x^2\), so \(P'=-2x\), \(P''=-2\). Using the bracket with \(k=n\):
+
+\[
+a_n=\frac{1}{\pi}\left[(4-x^2)\frac{\sin nx}{n}-(-2x)\left(-\frac{\cos nx}{n^2}\right)+(-2)\left(-\frac{\sin nx}{n^3}\right)\right]_0^{2\pi}.
+\]
+
+At \(2\pi\): the first term is \(0\); the second is \(-(-4\pi)\left(-\frac{1}{n^2}\right)=-\frac{4\pi}{n^2}\); the third is \(0\). At \(0\): the first is \(0\); the second is \(-0=0\); the third is \(0\). Hence
+
+\[
+a_n=\frac{1}{\pi}\left(-\frac{4\pi}{n^2}\right)=-\frac{4}{n^2}.
+\]
+
+**Step 4. Sine coefficients.**
+
+\[
+b_n=\frac{1}{\pi}\left[(4-x^2)\left(-\frac{\cos nx}{n}\right)-(-2x)\left(-\frac{\sin nx}{n^2}\right)+(-2)\left(\frac{\cos nx}{n^3}\right)\right]_0^{2\pi}.
+\]
+
+At \(2\pi\):
+
+\[
+(4-4\pi^2)\left(-\frac{1}{n}\right)-0+(-2)\left(\frac{1}{n^3}\right)
+=\frac{4\pi^2-4}{n}-\frac{2}{n^3}.
+\]
+
+At \(0\):
+
+\[
+4\left(-\frac{1}{n}\right)-0-\frac{2}{n^3}=-\frac4n-\frac{2}{n^3}.
+\]
+
+Subtracting:
+
+\[
+b_n=\frac{1}{\pi}\left[\frac{4\pi^2-4}{n}+\frac4n\right]
+=\frac{1}{\pi}\cdot\frac{4\pi^2}{n}=\frac{4\pi}{n}.
+\]
+
+**Step 5. Assemble.**
+
+\[
+\boxed{\;4-x^2=4-\frac{4\pi^2}{3}-4\sum_{n=1}^{\infty}\frac{\cos nx}{n^2}+4\pi\sum_{n=1}^{\infty}\frac{\sin nx}{n}\;}
+\]
+
+**Step 6. Why \(b_n\) did not vanish.** The teacher's own page shows it: the two brackets differ by \(\frac{8}{n}\) before the \(1/\pi\). If you apply the even-function shortcut here you get \(b_n=0\) and the answer is wrong by the whole sine sum. The shortcut requires a symmetric interval, not merely an even formula.
+
+**Step 7. Check at \(x=\pi\).** The function value is \(4-\pi^2\approx-5.87\). The series gives
+
+\[
+4-\frac{4\pi^2}{3}-4\sum\frac{(-1)^n}{n^2}+4\pi\sum\frac{\sin n\pi}{n}
+=4-\frac{4\pi^2}{3}+\frac{4\pi^2}{12}
+=4-\pi^2 .
+\]
+
+The sine sum is zero because \(\sin n\pi=0\), and \(\sum(-1)^n/n^2=-\pi^2/12\). ✓
+
+## 2.11 Worked example 4 — x² on (−π, π) and three deductions
+
+This is the teacher's most examined example (pages 5–6): it is Tutorial 4, Question 2 in a different interval, PP-1 and QB-13, and the source of \(\pi^2/6\), \(\pi^2/12\) and \(\pi^2/8\).
+
+**Question.** Find the Fourier expansion of \(f(x)=x^2\), \(-\pi<x<\pi\), and hence prove that
+
+(i) \(\dfrac{\pi^2}{6}=\displaystyle\sum_{n=1}^{\infty}\frac{1}{n^2}\), (ii) \(\dfrac{\pi^2}{12}=\displaystyle\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n^2}\), (iii) \(\dfrac{\pi^2}{8}=\dfrac{1}{1^2}+\dfrac{1}{3^2}+\dfrac{1}{5^2}+\cdots\)
+
+**Step 1. Parity.** \(f(-x)=(-x)^2=x^2=f(x)\), so \(f\) is **even**. On the symmetric interval \((-\pi,\pi)\):
+
+\[
+b_n=0,\qquad a_0=\frac{1}{\pi}\int_0^{\pi}x^2\,dx,\qquad a_n=\frac{2}{\pi}\int_0^{\pi}x^2\cos nx\,dx .
+\]
+
+(The teacher writes \(a_0=\frac{1}{2\pi}\int_{-\pi}^{\pi}=\frac{2}{2\pi}\int_0^{\pi}\), which is the same line.)
+
+**Step 2. Constant term.**
+
+\[
+a_0=\frac{1}{\pi}\left[\frac{x^3}{3}\right]_0^{\pi}=\frac{\pi^2}{3}.
+\]
+
+**Step 3. Cosine coefficients.**
+
+\[
+a_n=\frac{2}{\pi}\int_0^{\pi}x^2\cos nx\,dx
+=\frac{2}{\pi}\left[\frac{x^2\sin nx}{n}+\frac{2x\cos nx}{n^2}-\frac{2\sin nx}{n^3}\right]_0^{\pi}.
+\]
+
+At \(\pi\): the first term is \(0\); the second is \(\frac{2\pi\cos n\pi}{n^2}=\frac{2\pi(-1)^n}{n^2}\); the third is \(0\). At \(0\): the first two terms are \(0\), the third is \(0\). Hence
+
+\[
+a_n=\frac{2}{\pi}\cdot\frac{2\pi(-1)^n}{n^2}=\frac{4(-1)^n}{n^2}.
+\]
+
+**Step 4. The series.**
+
+\[
+\boxed{\;x^2=\frac{\pi^2}{3}+4\sum_{n=1}^{\infty}\frac{(-1)^n}{n^2}\cos nx\;}
+\]
+
+Written out:
+
+\[
+x^2=\frac{\pi^2}{3}-4\left[\frac{\cos x}{1^2}-\frac{\cos 2x}{2^2}+\frac{\cos 3x}{3^2}-\cdots\right].
+\]
+
+(Equivalently \(4\sum(-1)^n\cos nx/n^2=-4\sum(-1)^{n+1}\cos nx/n^2\); both forms are the same series.)
+
+**Step 5. Deduction (i): put \(x=\pi\).** The function is continuous at \(\pi\) (the periodic extension matches: \(f(\pi^-)=\pi^2\), \(f(-\pi^+)=\pi^2\)), so the series equals \(\pi^2\).
+
+\[
+\pi^2=\frac{\pi^2}{3}+4\sum_{n=1}^{\infty}\frac{(-1)^n}{n^2}\cos n\pi
+=\frac{\pi^2}{3}+4\sum_{n=1}^{\infty}\frac{(-1)^n(-1)^n}{n^2}.
+\]
+
+Since \((-1)^n(-1)^n=(-1)^{2n}=1\),
+
+\[
+\pi^2-\frac{\pi^2}{3}=4\sum_{n=1}^{\infty}\frac{1}{n^2}
+\ \Longrightarrow\
+\frac{2\pi^2}{3}=4\sum\frac{1}{n^2}
+\ \Longrightarrow\
+\frac{\pi^2}{6}=\sum_{n=1}^{\infty}\frac{1}{n^2}.
+\]
+
+**Step 6. Deduction (ii): put \(x=0\).**
+
+\[
+0=\frac{\pi^2}{3}+4\sum_{n=1}^{\infty}\frac{(-1)^n}{n^2}
+\ \Longrightarrow\
+-\frac{\pi^2}{3}=4\sum\frac{(-1)^n}{n^2}
+\ \Longrightarrow\
+\frac{\pi^2}{12}=\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n^2}.
+\]
+
+**Step 7. Deduction (iii): add (i) and (ii).**
+
+\[
+\frac{\pi^2}{6}+\frac{\pi^2}{12}
+=\sum_{n=1}^{\infty}\frac{1}{n^2}+\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n^2}
+=\sum_{n=1}^{\infty}\frac{1+(-1)^{n+1}}{n^2}.
+\]
+
+For even \(n\), \(1+(-1)^{n+1}=1-1=0\). For odd \(n\), \(1+(-1)^{n+1}=1+1=2\). So
+
+\[
+\frac{\pi^2}{4}=2\left(\frac{1}{1^2}+\frac{1}{3^2}+\frac{1}{5^2}+\cdots\right)
+\ \Longrightarrow\
+\frac{\pi^2}{8}=\frac{1}{1^2}+\frac{1}{3^2}+\frac{1}{5^2}+\cdots .
+\]
+
+**Why (iii) cannot be done in one substitution.** Each single substitution of a nice value of \(x\) produces *one* numerical series. The odd-denominator series is not produced by any single real \(x\) here; it is the average of the two series you already have. If a question asks only for \(\pi^2/8\), you must prove both (i) and (ii) first — or use a different function whose coefficients vanish at even \(n\) (for example \(\lvert x\rvert\), QB-18).
+
+**Step 8. Check.** Numerically, \(\pi^2/6=1.644934\ldots\), and the partial sum to 200 000 terms is \(1.644929\). ✓ (See the verification log, §9.5.)
+
+## 2.12 Worked example 5 — ((π − x)/2)² on (0, 2π)
+
+The teacher's fifth example (pages 7–8) and Tutorial 4, Question 5. It is the one whose coefficients come out as \(1/n^2\) with **no alternating sign**, which makes it the standard route to \(\pi^2/6\), \(\pi^2/12\) and \(\pi^4/90\) (QB-6).
+
+**Question.** Expand \(f(x)=\left(\dfrac{\pi-x}{2}\right)^2\) in \((0,2\pi)\).
+
+**Step 1. Interval.** \(l=\pi\), argument \(nx\). The function is a shifted parabola; it is even about \(x=\pi\), but the interval is \((0,2\pi)\), not symmetric about 0, so again all three coefficients must be computed.
+
+**Step 2. Constant term.** Write \(f=\frac{(\pi-x)^2}{4}\).
+
+\[
+a_0=\frac{1}{2\pi}\int_0^{2\pi}\frac{(\pi-x)^2}{4}\,dx
+=\frac{1}{8\pi}\left[-\frac{(\pi-x)^3}{3}\right]_0^{2\pi}.
+\]
+
+At \(2\pi\): \(-\frac{(-\pi)^3}{3}=+\frac{\pi^3}{3}\). At \(0\): \(-\frac{\pi^3}{3}\). Difference: \(\frac{2\pi^3}{3}\). Therefore
+
+\[
+a_0=\frac{1}{8\pi}\cdot\frac{2\pi^3}{3}=\frac{\pi^2}{12}.
+\]
+
+**Step 3. Cosine coefficients.** With \(P=(\pi-x)^2/4\), \(P'=-(\pi-x)/2\), \(P''=\frac12\). It is cleanest to keep the \(\frac14\) outside:
+
+\[
+a_n=\frac{1}{4\pi}\int_0^{2\pi}(\pi-x)^2\cos nx\,dx .
+\]
+
+Integrating by parts twice,
+
+\[
+a_n=\frac{1}{4\pi}\left[(\pi-x)^2\frac{\sin nx}{n}-2(\pi-x)\frac{\cos nx}{n^2}-\frac{2\sin nx}{n^3}\right]_0^{2\pi}.
+\]
+
+At \(2\pi\): the first term is \(0\); the second is \(-2(-\pi)\frac{1}{n^2}=\frac{2\pi}{n^2}\); the third is \(0\). At \(0\): the first is \(0\); the second is \(-2\pi\frac{1}{n^2}=-\frac{2\pi}{n^2}\); the third is \(0\). Subtracting,
+
+\[
+a_n=\frac{1}{4\pi}\left(\frac{2\pi}{n^2}+\frac{2\pi}{n^2}\right)=\frac{1}{4\pi}\cdot\frac{4\pi}{n^2}=\frac{1}{n^2}.
+\]
+
+**Step 4. Sine coefficients.**
+
+\[
+b_n=\frac{1}{4\pi}\left[-(\pi-x)^2\frac{\cos nx}{n}-2(\pi-x)\frac{\sin nx}{n^2}+\frac{2\cos nx}{n^3}\right]_0^{2\pi}.
+\]
+
+At \(2\pi\):
+
+\[
+-\pi^2\frac{1}{n}-0+\frac{2}{n^3}=-\frac{\pi^2}{n}+\frac{2}{n^3}.
+\]
+
+At \(0\): exactly the same expression, \(-\frac{\pi^2}{n}+\frac{2}{n^3}\). The two brackets cancel, so
+
+\[
+b_n=0 .
+\]
+
+**Step 5. The series.**
+
+\[
+\boxed{\;\left(\frac{\pi-x}{2}\right)^2=\frac{\pi^2}{12}+\sum_{n=1}^{\infty}\frac{\cos nx}{n^2}\;}
+\]
+
+that is,
+
+\[
+\left(\frac{\pi-x}{2}\right)^2=\frac{\pi^2}{12}+\frac{\cos x}{1^2}+\frac{\cos 2x}{2^2}+\frac{\cos 3x}{3^2}+\cdots
+\]
+
+**Step 6. Why this one is so useful.** Every coefficient is \(+\frac{1}{n^2}\), with no \((-1)^n\). So:
+
+- at \(x=0\): \(\frac{\pi^2}{4}=\frac{\pi^2}{12}+\sum\frac{1}{n^2}\), giving \(\sum\frac{1}{n^2}=\frac{\pi^2}{6}\);
+- at \(x=\pi\): \(0=\frac{\pi^2}{12}+\sum\frac{(-1)^n}{n^2}\), giving \(\sum\frac{(-1)^{n+1}}{n^2}=\frac{\pi^2}{12}\);
+- and Parseval gives \(\sum\frac{1}{n^4}=\frac{\pi^4}{90}\) (§4.4).
+
+The same three numbers as Example 4, obtained from a single function. That is why QB-6 uses it.
+
+## 2.13 What the series does at a jump
+
+Every deduction depends on knowing the value the series takes. Three rules, then worked cases.
+
+**Rule 1 — continuity point.** If the periodic extension is continuous at \(x\), the series equals \(f(x)\). Almost every "hence prove" question uses an interior continuity point.
+
+**Rule 2 — jump point.** If the periodic extension jumps at \(x\), the series equals the **midpoint**:
+
+\[
+S(x)=\frac{f(x^-)+f(x^+)}{2}.
+\]
+
+**Rule 3 — endpoints.** The interval's two ends are the same point of the periodic extension, so
+
+\[
+S(c)=S(c+2l)=\frac{f(c^+)+f(c+2l^-)}{2}.
+\]
+
+### Case A — \(x^2\) on \((0,2\pi)\)
+
+The series is \(x^2=\frac{4\pi^2}{3}+4\sum\frac{\cos nx}{n^2}-4\pi\sum\frac{\sin nx}{n}\).
+
+- At \(x=\pi\) (interior, continuous): \(f(\pi)=\pi^2\). The series gives \(\frac{4\pi^2}{3}+4\sum\frac{(-1)^n}{n^2}=\frac{4\pi^2}{3}-\frac{4\pi^2}{12}=\pi^2\). ✓ This is the route to \(\pi^2/12\) for PP-2/QB-1.
+- At \(x=0\) (a jump: \(f(0^+)=0\), \(f(2\pi^-)=4\pi^2\)): the series must give \(2\pi^2\). Check: \(\frac{4\pi^2}{3}+4\cdot\frac{\pi^2}{6}=\frac{4\pi^2}{3}+\frac{2\pi^2}{3}=2\pi^2\). ✓ This is the route to \(\pi^2/6\).
+
+**Note the contrast.** On \((-\pi,\pi)\), \(x=\pi\) gives \(\pi^2/6\); on \((0,2\pi)\), \(x=\pi\) gives \(\pi^2/12\) and \(x=0\) gives \(\pi^2/6\). Same function, different interval, different substitution. Never copy a deduction across intervals without re-checking which point is continuous.
+
+### Case B — \(4-x^2\) on \((0,2)\)
+
+This is QB-12's deduction. On \((0,2)\) the series is
+
+\[
+4-x^2=\frac83-\frac{4}{\pi^2}\sum\frac{\cos n\pi x}{n^2}+\frac{4}{\pi}\sum\frac{\sin n\pi x}{n}.
+\]
+
+At \(x=2\) the extension jumps from \(0\) (at \(2^-\)) to \(4\) (at \(0^+\)); the midpoint is \(2\). The series gives
+
+\[
+\frac83-\frac{4}{\pi^2}\sum\frac{\cos 2n\pi}{n^2}+0
+=\frac83-\frac{4}{\pi^2}\sum\frac{1}{n^2}.
+\]
+
+Setting this equal to \(2\) gives \(\sum\frac{1}{n^2}=\frac{\pi^2}{6}\). If you instead substitute \(x=2\) into the formula \(4-x^2\) and get \(0\), you will "prove" a false identity. The midpoint is the whole point.
+
+### Case C — using a jump to *check* an answer
+
+A jump always leaves a fingerprint: the coefficients that accompany the jump decay like \(1/n\), while the others decay like \(1/n^2\). In Example 2 the function jumps and \(b_n\sim 1/n\); in Example 4 the function is continuous and \(a_n\sim 1/n^2\). If your coefficients do not show the right decay, you have made an algebra error.
+
+## 2.14 Reading a series back: the deduction checklist
+
+When a question says "hence deduce", it is asking you to substitute one value of \(x\). The whole skill is choosing the value. Use this checklist.
+
+| Target series | Best substitution | Usual function |
+|---|---|---|
+| \(\sum \frac{1}{n^2}=\frac{\pi^2}{6}\) | \(x=\pi\) on \((-\pi,\pi)\); or \(x=0\) (jump) on \((0,2\pi)\); or \(x=0\) on the \(\left(\frac{\pi-x}{2}\right)^2\) series | \(x^2\), \(\frac{(\pi-x)^2}{4}\), \(x(2\pi-x)\) |
+| \(\sum \frac{(-1)^{n+1}}{n^2}=\frac{\pi^2}{12}\) | \(x=0\) on \((-\pi,\pi)\); or \(x=\pi\) on \((0,2\pi)\) | \(x^2\), \(x-x^2\) |
+| \(\sum_{\text{odd}}\frac{1}{n^2}=\frac{\pi^2}{8}\) | add the two results above; or \(x=0\) with \(\lvert x\rvert\) | \(x^2\), \(\lvert x\rvert\) |
+| \(\sum \frac{1}{n^4}=\frac{\pi^4}{90}\) | Parseval (§4.4) — **no** substitution works | \(x^2\), \(\frac{(\pi-x)^2}{4}\) |
+| \(1-\frac13+\frac15-\cdots=\frac{\pi}{4}\) | \(x=\frac{\pi}{2}\) in the sine series of \(x\) | \(x\) on \((0,2\pi)\) or \((-\pi,\pi)\) |
+| \(\sum_{n\ge2}\frac{1}{n^2-1}=\frac34\) | \(x=0\) in the \(x\sin x\) series | \(x\sin x\) |
+| \(\sum\frac{1}{4n^2-1}=\frac12\) | \(x=0\) in the \(\sqrt{1-\cos x}\) series | \(\sqrt{1-\cos x}\) |
+
+**Checklist before you write the deduction:**
+
+1. Is the point inside the open interval? If not, you are using an endpoint rule — compute the midpoint.
+2. Is the periodic extension continuous there? If yes, the series equals \(f(x)\); if no, use the midpoint.
+3. Does every term simplify? You want \(\cos nx=\pm1\) or \(0\), and \(\sin nx=0\) if possible. \(\sin nx\neq0\) usually means you picked the wrong point.
+4. Do the two sides have the same dimensions? \(\pi^2/6\) is a number; \(\pi^4/90\) is a number; if your identity mixes \(\pi^2\) with a fourth-power series, you have a misprint or an error.
+
+## 2.15 Choosing a method: the whole module on one page
+
+```text
+Read the interval.
+│
+├─ Is it symmetric about 0, i.e. (−l,l) or (−π,π)?
+│   │
+│   ├─ Yes → test parity f(−x).
+│   │         ├─ Even  → b_n = 0;  a_0, a_n from 2× the half interval
+│   │         ├─ Odd   → a_0 = a_n = 0;  b_n from 2× the half interval
+│   │         └─ Neither → compute all three on the full interval
+│   │
+│   └─ No → compute all three coefficients.
+│             (An even formula on (0,2π) still has b_n ≠ 0.)
+│
+├─ Write l = half the interval length; argument = nπx/l.
+│
+├─ Compute a_0 by the average; check its sign against the graph.
+│
+├─ Compute a_n, b_n by parts (degree of polynomial = number of applications).
+│
+├─ Assemble; take out common factors; write (−1)^n explicitly.
+│
+└─ If asked to "deduce": choose x by §2.14, check continuity/jump, simplify.
+```
+
+**The five things that decide your mark:**
+
+1. Correct \(l\) and therefore correct argument.
+2. Correct divisor: \(2l\) for \(a_0\), \(l\) for \(a_n,b_n\) — or the halved versions on a symmetric interval.
+3. Correct parity decision, and the realisation that it needs a symmetric interval.
+4. Correct \((-1)^n\) accounting.
+5. Correct treatment of the deduction point.
+
+# 3. Examination questions available for Module 4
+
+## 3.1 Provenance — read this before trusting any "PYQ"
+
+This project contains **no University of Mumbai question paper for Module 4**. Every Module 4 question in this guide comes from one of three documents, none of which is an official paper:
+
+| Tag | Document | Local file | What it actually is |
+|---|---|---|---|
+| **PP** | MUSA practice paper, Set-I, Winter 2025 | `_work/sources/musa-practice-paper-set1-w2025.pdf` | A 3-page practice paper (2 hours, 60 marks) issued by a student association. It states on its face: *"This is the test paper for practice purpose"* and *"Numerical values may change in the exam, but the type of questions will remain the same."* |
+| **QB** | MUSA question bank, Winter 2026 | `_work/sources/musa-question-bank-2026.pdf` | A 9-page topic-wise question bank for regular and KT batches. Module 4 occupies the bottom of page 4 and the top two-thirds of page 5. |
+| **SOL** | Third-party solution booklet | `_work/sources/maths-question-bank-solutions.pdf` | 108 pages of worked solutions; Module 4 is pp. 46–77. It has no official standing and was used here only as a cross-check. |
+
+The complete, exact-wording extraction is in `Exam_Questions_Module_4.md`. Marks are quoted **only** where the source prints them (the practice paper does; the question bank does not).
+
+**What this means for you.** These questions tell you the *shape* of a Module 4 item very reliably — they use the same handful of standard functions as every textbook. They do **not** tell you how often Module 4 appears, which marks it carries in a real paper, or what next year's paper will contain. This guide makes no such claim.
+
+## 3.2 The three practice-paper questions
+
+These are the only Module 4 items in the practice paper with printed marks. All three are full "expand and deduce" questions.
+
+### PP-1 — Q.2(b) — 5 marks
+
+> Find the Fourier series of \(f(x)=x^2\), \(-\pi\le x\le\pi\), and hence, prove that \(\dfrac{\pi^2}{8}=\dfrac{1}{1^2}+\dfrac{1}{3^2}+\dfrac{1}{5^2}+\cdots\)
+
+*Identical to QB-13 and to the teacher's pages 5–6 (different final deduction). Worked in §2.11.*
+
+### PP-2 — Q.3(c) — 6 marks
+
+> Find Fourier to represent \(f(x)=x^2\) in \((0,2\pi)\) and hence, deduce that: \(\dfrac{\pi^2}{12}=\dfrac{1}{1^2}-\dfrac{1}{2^2}+\dfrac{1}{3^2}-\dfrac{1}{4^2}+\cdots\)
+
+`[as printed — "Find Fourier to represent" is missing "the series"]`
+
+*Identical to QB-1 and to the teacher's page 7 series. The deduction uses \(x=\pi\), not \(x=0\).*
+
+### PP-3 — Q.5(a) — 4 marks
+
+> Find the Fourier series for \(f(x)=1-x^2\) in \((-1,1)\)
+
+*Identical to QB-19. No deduction asked — a pure 4-mark expansion.*
+
+**What the marks tell you.** 4 marks buys a full expansion on \((-1,1)\): three coefficients, no deduction. 5–6 marks buys the expansion *plus* a numerical deduction. A 3-mark Q1 part would be either "state Dirichlet's conditions" or a short even/odd expansion.
+
+## 3.3 The 22 question-bank questions
+
+Reproduced with the bank's own grouping headings and wording; interval notes are this guide's. Every answer is in §6.5.
+
+### 3.3.1 Group "Fourier series (0, 2π)" — QB-1 to QB-7
+
+**QB-1.** Find a Fourier series to represent \(f(x)=x^2\) in \((0,2\pi)\) and hence, deduce that \(\dfrac{\pi^2}{12}=\dfrac{1}{1^2}-\dfrac{1}{2^2}+\dfrac{1}{3^2}-\dfrac{1}{4^2}+\cdots\)
+
+**QB-2.** Find the Fourier series for \(f(x)=\dfrac{3x^2-6\pi x+2\pi^2}{12}\) in \((0,2\pi)\). Hence deduce that \(\dfrac{\pi^2}{6}=\dfrac{1}{1^2}+\dfrac{1}{2^2}+\dfrac{1}{3^2}\cdots\)
+
+**QB-3.** Find the Fourier series for \(f(x)=x\sin x\) in the interval \(0\le x\le 2\pi\). Deduce that \(\displaystyle\sum_{n=2}^{\infty}\dfrac{1}{n^2-1}=\dfrac34\).
+
+**QB-4.** Find the Fourier series for \(f(x)=\frac12(\pi-x)\) in \((0,2\pi)\). Hence deduce that \(\dfrac{\pi}{4}=1-\dfrac13+\dfrac15-\dfrac17+\cdots\)
+
+**QB-5.** Find Fourier expansion for \(f(x)=\sqrt{1-\cos x}\) in \((0,2\pi)\). Hence deduce that \(\dfrac12=\displaystyle\sum_{1}^{\infty}\dfrac{1}{4n^2-1}\).
+
+**QB-6.** Find Fourier expansion for \(f(x)=\left(\dfrac{\pi-x}{2}\right)^2\) in the interval \(0\le x\le 2\pi\) and \(f(x+2\pi)=f(x)\). Also deduce that:
+(i) \(\dfrac{\pi^2}{12}=\dfrac{1}{1^2}-\dfrac{1}{2^2}+\dfrac{1}{3^2}-\dfrac{1}{4^2}+\cdots\)
+(ii) \(\dfrac{\pi^2}{90}=\dfrac{1}{1^4}+\dfrac{1}{2^4}+\dfrac{1}{3^4}+\dfrac{1}{4^4}+\cdots\)d `[as printed; the "d" is a stray character]`
+
+**QB-7.** Obtain Fourier series for the function
+\[
+f(x)=\begin{cases}1+\dfrac{2x}{\pi},&-\pi\le x\le 0\\[2mm]1-\dfrac{2x}{\pi},&0\le x\le\pi\end{cases}
+\]
+
+> **Note on QB-7.** The bank files it under "(0, 2π)", but the formula is on \((-\pi,\pi)\). It is even, and equals \(1-\frac{2\lvert x\rvert}{\pi}\).
+
+### 3.3.2 Group "Fourier series (0, 2l)" — QB-8 to QB-12
+
+**QB-8.** Find the Fourier series of \(f(x)=x^2\) in \((0,a)\). Hence deduce that \(\dfrac{\pi^2}{6}=\dfrac{1}{1^2}+\dfrac{1}{2^2}+\dfrac{1}{3^2}+\dfrac{1}{4^2}+\cdots\)
+
+> Here the interval length is \(a\), so \(l=\frac a2\) and the argument is \(\frac{2n\pi x}{a}\). The bank uses **a** where other books use \(l\).
+
+**QB-9.** Find the Fourier expansion of \(f(x)=2x-x^2\), whose period is 3.
+
+> "Period 3" means the interval length is 3; take \((0,3)\), so \(l=\frac32\).
+
+**QB-10.** If \(f(x)=\begin{cases}\pi x,&0\le x\le 1\\ \pi(2-x),&1\le x\le 2\end{cases}\) with the period of 2, show that
+\[
+f(x)=\frac{\pi}{2}-\frac{4}{\pi}\sum_{n=0}^{\infty}\frac{1}{(2n+1)^2}\cos(2n+1)\pi x .
+\]
+
+**QB-11.** If \(f(x)=\begin{cases}\pi x,&0<x<1\\ 0,&1<x<2\end{cases}\) with the period of 2.
+
+> The bank gives no instruction beyond the function; the task is to find the expansion.
+
+**QB-12.** Find the Fourier expansion of \(f(x)=4-x^2\) in the interval \((0,2)\). Hence deduce that \(\dfrac{\pi^2}{6}=\dfrac{1}{1^2}+\dfrac{1}{2^2}+\dfrac{1}{3^2}+\cdots\)
+
+> The bank numbers **two different questions "Q.2"** in this section: the period-3 parabola and the piecewise triangle. Both are listed here; this guide calls the second one QB-10.
+
+### 3.3.3 Group "Fourier series of even and odd functions — \((-\pi,\pi)\)" — QB-13 to QB-18
+
+**QB-13.** Find the Fourier series of \(f(x)=x^2\), \(-\pi\le x\le\pi\), and hence, prove that \(\dfrac{\pi^2}{8}=\dfrac{1}{1^2}+\dfrac{1}{3^2}+\dfrac{1}{5^2}+\cdots\)
+
+**QB-14.** Obtain the Fourier series for the function
+\[
+f(x)=\begin{cases}1+\dfrac{2x}{\pi},&-\pi\le x\le 0\\[2mm]1-\dfrac{2x}{\pi},&0\le x\le\pi\end{cases}
+\]
+Hence deduce that \(\dfrac{\pi^2}{8}=\dfrac{1}{1^2}+\dfrac{1}{3^2}+\dfrac{1}{5^2}+\cdots\)
+
+**QB-15.** Obtain Fourier series for \(x\cos x\) in \((-\pi,\pi)\).
+
+**QB-16.** Obtain Fourier series for \(f(x)=\begin{cases}x+\dfrac{2x}{\pi},&-\pi<x<0\\[2mm]\dfrac{\pi}{2}-x,&0<x<\pi\end{cases}\) Hence deduce that \(\dfrac{\pi^2}{8}=\dfrac{1}{1^2}+\dfrac{1}{3^2}+\dfrac{1}{5^2}+\cdots\)
+
+> **QB-16 is misprinted, and this is the one place in the supplied sources where the data is internally inconsistent.** The first branch \(x+\frac{2x}{\pi}\) makes \(f\) neither even nor odd, and the stated deduction cannot follow from it. The intended function — confirmed by the solution booklet (p. 69) and by the fact that the deduction *only* works for it — is
+> \[
+> f(x)=\begin{cases}\frac{\pi}{2}+x,&-\pi<x<0\\[1mm]\frac{\pi}{2}-x,&0<x<\pi\end{cases}=\frac{\pi}{2}-\lvert x\rvert .
+> \]
+> The guide solves the corrected version and says so explicitly (§6.5). Do not "fix" it silently in an exam answer; state the correction you are using.
+
+**QB-17.** If \(f(x)=x-x^2\), \(-\pi<x<\pi\). Hence, deduce that \(\dfrac{\pi^2}{12}=\dfrac{1}{1^2}-\dfrac{1}{2^2}+\dfrac{1}{3^2}-\dfrac{1}{4^2}+\cdots\)
+
+**QB-18.** If \(f(x)=\lvert x\rvert\) in \((-\pi,\pi)\). Hence, deduce that \(\dfrac{\pi^2}{8}=\dfrac{1}{1^2}+\dfrac{1}{3^2}+\dfrac{1}{5^2}+\dfrac{1}{7^2}\cdots\)
+
+### 3.3.4 Group "\((-l,l)\)" — QB-19 to QB-22
+
+**QB-19.** Find the Fourier series for \(f(x)=1-x^2\) in \((-1,1)\)
+
+**QB-20.** Obtain the Fourier series of \(x^2\) from \(-l\) to \(x=l\) and hence, deduce that \(\dfrac{\pi^2}{12}=\dfrac{1}{1^2}-\dfrac{1}{2^2}+\dfrac{1}{3^2}-\dfrac{1}{4^2}+\cdots\)
+
+`[as printed — "from −l to x = l" is the bank's phrasing for (−l, l)]`
+
+**QB-21.** Find Fourier expansion for \(f(x)=x-x^2\), \(-1<x<1\)
+
+**QB-22.** Find the Fourier expansion of \(f(x)=f(x)=\begin{cases}0,&-2<x<-1\\1+x,&-1<x<0\\1-x,&0<x<1\\0,&1<x<2\end{cases}\)
+
+`[as printed — "f(x) = f(x) =" is duplicated in the bank]`
+
+## 3.4 What these 25 questions tell you about the module's shape
+
+Counting the *skills* rather than the questions:
+
+| Skill | How often it appears | Where |
+|---|---:|---|
+| Expansion on \((0,2\pi)\) with all three coefficients | 7 | QB-1 to QB-6, PP-2 |
+| Expansion on a general interval \(2l\) (period 3, period 2, \((0,a)\), \((0,2)\)) | 5 | QB-8 to QB-12 |
+| Even/odd shortcut on \((-\pi,\pi)\) | 6 | QB-13 to QB-18, PP-1 |
+| Expansion on \((-1,1)\) | 3 | QB-19, QB-21, PP-3 |
+| A piecewise function | 4 | QB-7, QB-10, QB-11, QB-22 |
+| A deduction of \(\pi^2/6\), \(\pi^2/12\) or \(\pi^2/8\) | 11 | most of the above |
+| A deduction requiring Parseval (\(\pi^4/90\)) | 1 | QB-6(ii) |
+| A deduction of \(\pi/4\) | 1 | QB-4 |
+| A deduction of a non-\(\pi\) sum | 2 | QB-3, QB-5 |
+| Dirichlet's conditions stated or used | 0 | — |
+| Half-range series, complex form, orthogonal sets | 0 | — |
+
+**Conclusions you can rely on:**
+
+1. **The three standard deductions dominate.** \(\pi^2/6\), \(\pi^2/12\), \(\pi^2/8\) account for almost every "hence". Practise them until the choice of \(x\) is automatic (§2.14).
+2. **\((0,2\pi)\) is the most common interval**, followed by \((-\pi,\pi)\). \((0,2)\) and \((-1,1)\) appear because they are the teacher's examples.
+3. **Piecewise functions appear, but only simple triangles and pulses.** They are never harder than two or four linear pieces.
+4. **The self-learning topics are not examined here.** That does not prove they will not be asked (the syllabus lists them, and the term-work presentation is graded on them), but no supplied question uses them. §4 teaches them anyway, clearly labelled.
+5. **Dirichlet's conditions are never asked** in these 25, but they are prescribed topic 1 and are the natural 3-mark Q1 part. Learn the statement (§2.3) even though no question in §3 tests it.
+
+## 3.5 Source errors and oddities, collected
+
+Everything below is preserved as printed in `Exam_Questions_Module_4.md` and flagged in `OCR_Review_Report_Module_4.md` §7.
+
+| Item | What is printed | Status |
+|---|---|---|
+| QB-16 first branch | \(x+\frac{2x}{\pi}\) on \((-\pi,0)\) | **Inconsistent with its own required deduction.** Corrected version solved and labelled |
+| QB-6(ii) | \(\pi^2/90\) against a sum of fourth powers | **Misprint** for \(\pi^4/90\); the booklet itself flags it (p. 57). \(\pi^2/90\approx0.11\) cannot equal \(1.0823\) |
+| QB-6 | trailing "d" after the display | Typo |
+| QB-22 | "\(f(x)=f(x)=\)" | Typo |
+| Section 3.3.2 | two questions both numbered "Q.2" | Numbering error; both recorded |
+| QB-7 | filed under "(0, 2π)" but set on \((-\pi,\pi)\) | Filing error; solved on its actual interval |
+| PP-2 | "Find Fourier to represent" | Missing words |
+| PP-1, QB-13 | "hence, prove \(\pi^2/8\)" after an \(x^2\) expansion | Not an error, but it requires **two** substitutions (§2.11) |
+
+---
+
+# 4. Self-learning and supplementary topics
+
+> **Status.** These topics are **not** in the prescribed 4 hours. The syllabus lists the first three explicitly as self-learning; Parseval is not listed at all but is the only way to do QB-6(ii), so it is included and labelled. Nothing in this section is claimed to be examinable as prescribed content.
+
+## 4.1 Half-range sine and cosine series
+
+### 4.1.1 The idea
+
+Sometimes a function is given only on **half** a period, \((0,l)\), and you are free to choose how to continue it to \((-l,0)\). Two choices are useful:
+
+- continue it as an **odd** function → you get a **sine** series;
+- continue it as an **even** function → you get a **cosine** series.
+
+Both series equal \(f(x)\) on \((0,l)\). They differ outside it, and they converge at different rates. This is why the same half-function has two different expansions.
+
+### 4.1.2 The formulas
+
+On \((0,l)\):
+
+**Half-range sine series** (odd extension):
+
+\[
+f(x)=\sum_{n=1}^{\infty}b_n\sin\frac{n\pi x}{l},
+\qquad
+b_n=\frac{2}{l}\int_0^{l}f(x)\sin\frac{n\pi x}{l}\,dx .
+\]
+
+**Half-range cosine series** (even extension):
+
+\[
+f(x)=a_0+\sum_{n=1}^{\infty}a_n\cos\frac{n\pi x}{l},
+\qquad
+a_0=\frac{1}{l}\int_0^{l}f(x)\,dx,
+\qquad
+a_n=\frac{2}{l}\int_0^{l}f(x)\cos\frac{n\pi x}{l}\,dx .
+\]
+
+Notice the factor \(\frac2l\) in both \(b_n\) (sine) and \(a_n\) (cosine): these are the *symmetrised* formulas of §2.6.3, with \(l\) now the end of the given half-interval. The constant \(a_0\) uses \(\frac1l\) because it comes from \(\frac{1}{2l}\times 2\).
+
+### 4.1.3 Worked example — \(f(x)=x\) on \((0,\pi)\)
+
+**Sine series.** Here \(l=\pi\):
+
+\[
+b_n=\frac{2}{\pi}\int_0^{\pi}x\sin nx\,dx
+=\frac{2}{\pi}\left[-\frac{x\cos nx}{n}+\frac{\sin nx}{n^2}\right]_0^{\pi}
+=\frac{2}{\pi}\left(-\frac{\pi(-1)^n}{n}\right)=\frac{2(-1)^{n+1}}{n}.
+\]
+
+So
+
+\[
+x=2\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}\sin nx
+=2\left[\sin x-\frac{\sin 2x}{2}+\frac{\sin 3x}{3}-\cdots\right],\qquad 0<x<\pi .
+\]
+
+This is exactly the series of §2.6.4 — as it must be, because the odd extension of \(x\) on \((0,\pi)\) is \(x\) itself on \((-\pi,\pi)\).
+
+**Cosine series.** With \(a_0=\frac{1}{\pi}\int_0^\pi x\,dx=\frac{\pi}{2}\) and
+
+\[
+a_n=\frac{2}{\pi}\int_0^{\pi}x\cos nx\,dx
+=\frac{2}{\pi}\left[\frac{x\sin nx}{n}+\frac{\cos nx}{n^2}\right]_0^{\pi}
+=\frac{2}{\pi}\cdot\frac{(-1)^n-1}{n^2},
+\]
+
+we get
+
+\[
+x=\frac{\pi}{2}+\frac{2}{\pi}\sum_{n=1}^{\infty}\frac{(-1)^n-1}{n^2}\cos nx
+=\frac{\pi}{2}-\frac{4}{\pi}\left[\frac{\cos x}{1^2}+\frac{\cos 3x}{3^2}+\frac{\cos 5x}{5^2}+\cdots\right].
+\]
+
+Only odd \(n\) survive, because \((-1)^n-1=0\) for even \(n\). Check at \(x=0\): the right side is \(\frac{\pi}{2}-\frac{4}{\pi}\cdot\frac{\pi^2}{8}=0\), which is the even extension's value at 0 (it is continuous there). ✓
+
+### 4.1.4 Which one should you use?
+
+| You want… | Use | Why |
+|---|---|---|
+| The series to vanish at both ends | sine series | odd extension is 0 at 0 and \(l\) |
+| The series to have zero slope at both ends | cosine series | even extension has a flat join |
+| Faster convergence for a function that is 0 at the ends | sine series | no jump at the join |
+| A function given on \((0,l)\) and asked for "half-range sine" | sine series | the name tells you |
+
+In an exam, the wording decides: "half-range sine series" or "cosine series" is printed explicitly. If both are asked, compute both — they share the same integrals up to the trig factor.
+
+## 4.2 Orthogonal and orthonormal sets of functions
+
+### 4.2.1 Definition
+
+Two functions \(g,h\) are **orthogonal on \([a,b]\)** if
+
+\[
+\int_a^b g(x)h(x)\,dx=0 .
+\]
+
+A set \(\{g_0,g_1,g_2,\dots\}\) is an **orthogonal set** if every pair of distinct members is orthogonal. It is **orthonormal** if, in addition, each member has norm 1:
+
+\[
+\lVert g_n\rVert=\sqrt{\int_a^b g_n(x)^2\,dx}=1 .
+\]
+
+### 4.2.2 The trigonometric set is orthogonal on \((-\pi,\pi)\)
+
+The three facts that make Fourier series work are:
+
+\[
+\int_{-\pi}^{\pi}\cos mx\cos nx\,dx=
+\begin{cases}0,&m\neq n\\ \pi,&m=n\ge1\end{cases}
+\]
+\[
+\int_{-\pi}^{\pi}\sin mx\sin nx\,dx=
+\begin{cases}0,&m\neq n\\ \pi,&m=n\ge1\end{cases}
+\]
+\[
+\int_{-\pi}^{\pi}\sin mx\cos nx\,dx=0\quad\text{for all }m,n,
+\qquad
+\int_{-\pi}^{\pi}\cos nx\,dx=\int_{-\pi}^{\pi}\sin nx\,dx=0 .
+\]
+
+Each follows from the product-to-sum identities — for example
+
+\[
+\cos mx\cos nx=\tfrac12\left[\cos(m-n)x+\cos(m+n)x\right],
+\]
+
+and both cosines integrate to zero over a whole number of periods unless \(m=n\). Your teacher uses the \(m=n\) cases implicitly every time a term survives; the \(m\neq n\) cases are what make the coefficients *independent*, so that \(a_n\) can be extracted without knowing any other coefficient.
+
+### 4.2.3 Where the coefficient formulas come from
+
+This is the one derivation that explains the odd-looking factors. Start from the series on \((-\pi,\pi)\),
+
+\[
+f(x)=a_0+\sum_{m=1}^{\infty}\left(a_m\cos mx+b_m\sin mx\right),
+\]
+
+multiply both sides by \(\cos nx\) and integrate from \(-\pi\) to \(\pi\). By orthogonality every term on the right dies except the \(m=n\) cosine term: the constant integrates to zero against \(\cos nx\), every other cosine is orthogonal, every sine is orthogonal. So
+
+\[
+\int_{-\pi}^{\pi}f(x)\cos nx\,dx=a_n\int_{-\pi}^{\pi}\cos^2nx\,dx=a_n\pi
+\ \Longrightarrow\
+a_n=\frac1\pi\int_{-\pi}^{\pi}f(x)\cos nx\,dx .
+\]
+
+Multiplying by \(\sin nx\) instead isolates \(b_n\), and integrating with no factor at all isolates \(a_0\):
+
+\[
+\int_{-\pi}^{\pi}f(x)\,dx=a_0\cdot2\pi
+\ \Longrightarrow\
+a_0=\frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)\,dx .
+\]
+
+So the coefficients are **projections** of \(f\) onto the orthogonal directions \(1,\cos nx,\sin nx\) — exactly like coordinates of a vector in an orthogonal basis. The factors \(\frac1\pi\) and \(\frac{1}{2\pi}\) are the squared norms of those directions.
+
+### 4.2.4 The orthonormal version
+
+Divide each function by its norm:
+
+\[
+\frac{1}{\sqrt{2\pi}},\qquad \frac{\cos nx}{\sqrt{\pi}},\qquad \frac{\sin nx}{\sqrt{\pi}}
+\]
+
+is an orthonormal set on \((-\pi,\pi)\). The expansion becomes
+
+\[
+f(x)=c_0\frac{1}{\sqrt{2\pi}}+\sum_{n=1}^{\infty}\left(c_n\frac{\cos nx}{\sqrt{\pi}}+d_n\frac{\sin nx}{\sqrt{\pi}}\right),
+\]
+\[
+c_0=\int_{-\pi}^{\pi}\frac{f(x)}{\sqrt{2\pi}}\,dx,\qquad
+c_n=\int_{-\pi}^{\pi}\frac{f(x)\cos nx}{\sqrt{\pi}}\,dx,\qquad
+d_n=\int_{-\pi}^{\pi}\frac{f(x)\sin nx}{\sqrt{\pi}}\,dx .
+\]
+
+The advantage is that every formula now has the same shape: coefficient = inner product with the normalised function. No \(\pi\) factors to remember. This is the form used in quantum mechanics and in numerical spectral methods.
+
+## 4.3 Complex form of the Fourier series
+
+### 4.3.1 Euler's formula does the work
+
+\[
+e^{i\theta}=\cos\theta+i\sin\theta,\qquad
+\cos\theta=\frac{e^{i\theta}+e^{-i\theta}}{2},\qquad
+\sin\theta=\frac{e^{i\theta}-e^{-i\theta}}{2i}.
+\]
+
+Substituting these into the real series and collecting terms with the same exponential gives the **complex form** on \((-\pi,\pi)\):
+
+\[
+\boxed{\;f(x)=\sum_{n=-\infty}^{\infty}c_n e^{inx}\;}
+\qquad
+\boxed{\;c_n=\frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)e^{-inx}\,dx\;}
+\]
+
+The sum runs over **all integers**, positive, negative and zero. The coefficients are complex numbers in general.
+
+### 4.3.2 Converting between the two forms
+
+\[
+c_0=a_0^{(\text{teacher})},\qquad
+c_n=\frac{a_n-ib_n}{2},\qquad
+c_{-n}=\frac{a_n+ib_n}{2}\quad(n\ge1).
+\]
+
+In reverse:
+
+\[
+a_0=c_0,\qquad a_n=c_n+c_{-n},\qquad b_n=i\left(c_n-c_{-n}\right).
+\]
+
+Notice that \(|c_n|=|c_{-n}|=\frac12\sqrt{a_n^2+b_n^2}\): the complex coefficient's modulus is half the real amplitude. This is why the complex form is compact — one number \(c_n\) carries both the cosine and sine coefficients.
+
+### 4.3.3 Worked example — \(f(x)=x\) on \((-\pi,\pi)\)
+
+\[
+c_n=\frac{1}{2\pi}\int_{-\pi}^{\pi}x e^{-inx}\,dx .
+\]
+
+For \(n=0\) the integrand is odd, so \(c_0=0\). For \(n\neq0\), integrate by parts with \(u=x\), \(dv=e^{-inx}dx\):
+
+\[
+c_n=\frac{1}{2\pi}\left[\frac{x e^{-inx}}{-in}\right]_{-\pi}^{\pi}
+-\frac{1}{2\pi}\int_{-\pi}^{\pi}\frac{e^{-inx}}{-in}\,dx .
+\]
+
+At the limits, \(e^{-in\pi}=e^{in\pi}=(-1)^n\), so the bracket is
+
+\[
+\frac{\pi(-1)^n+\pi(-1)^n}{-in}=\frac{2\pi(-1)^n}{-in}=\frac{2\pi i(-1)^n}{n}.
+\]
+
+The remaining integral is zero (a full period of an exponential). Hence
+
+\[
+c_n=\frac{1}{2\pi}\cdot\frac{2\pi i(-1)^n}{n}=\frac{i(-1)^n}{n},\qquad n\neq0 .
+\]
+
+So
+
+\[
+x=\sum_{n\neq0}\frac{i(-1)^n}{n}e^{inx},
+\]
+
+and pairing \(n\) with \(-n\) recovers the real series of §2.6.4:
+
+\[
+\frac{i(-1)^n}{n}e^{inx}+\frac{i(-1)^{-n}}{-n}e^{-inx}
+=\frac{i(-1)^n}{n}\left(e^{inx}-e^{-inx}\right)
+=\frac{i(-1)^n}{n}\cdot2i\sin nx
+=\frac{2(-1)^{n+1}}{n}\sin nx .
+\]
+
+✓ Same answer. This is worth doing once by hand: it shows the complex form is not new mathematics, just a change of bookkeeping.
+
+## 4.4 Parseval's identity
+
+### 4.4.1 Statement
+
+For \(f\) on \((c,c+2l)\) with the teacher's coefficients,
+
+\[
+\boxed{\;\frac{1}{2l}\int_c^{c+2l}\lvert f(x)\rvert^2\,dx
+=a_0^2+\frac12\sum_{n=1}^{\infty}\left(a_n^2+b_n^2\right)\;}
+\]
+
+In the booklet's convention (series \(\frac{a_0}{2}+\sum\)), the same identity reads
+
+\[
+\frac{1}{2l}\int_c^{c+2l}\lvert f(x)\rvert^2\,dx
+=\frac{a_0^2}{4}+\frac12\sum_{n=1}^{\infty}\left(a_n^2+b_n^2\right),
+\]
+
+which is the same statement once you remember \(a_0^{(\text{book})}=2a_0^{(\text{teacher})}\).
+
+**Meaning.** The left side is the **average power** of the signal; the right side is the sum of the powers of its harmonics. Energy is conserved when you decompose a signal into harmonics. In the complex form it is even cleaner:
+
+\[
+\frac{1}{2\pi}\int_{-\pi}^{\pi}\lvert f(x)\rvert^2\,dx=\sum_{n=-\infty}^{\infty}\lvert c_n\rvert^2 .
+\]
+
+**Why it is in this guide.** It is not in the syllabus list, but QB-6(ii) cannot be done without it. It is the one "extra" that a question in your own question bank requires, so it is taught rather than omitted.
+
+### 4.4.2 Worked example — \(\sum 1/n^4=\pi^4/90\) from \(x^2\) on \((-\pi,\pi)\)
+
+Take \(a_0=\frac{\pi^2}{3}\), \(a_n=\frac{4(-1)^n}{n^2}\), \(b_n=0\), \(l=\pi\).
+
+**Left side:**
+
+\[
+\frac{1}{2\pi}\int_{-\pi}^{\pi}x^4\,dx=\frac{1}{2\pi}\cdot\frac{2\pi^5}{5}=\frac{\pi^4}{5}.
+\]
+
+**Right side:**
+
+\[
+a_0^2+\frac12\sum a_n^2=\frac{\pi^4}{9}+\frac12\sum_{n=1}^{\infty}\frac{16}{n^4}
+=\frac{\pi^4}{9}+8\sum_{n=1}^{\infty}\frac{1}{n^4}.
+\]
+
+**Equate and solve:**
+
+\[
+\frac{\pi^4}{5}=\frac{\pi^4}{9}+8\sum\frac{1}{n^4}
+\ \Longrightarrow\
+8\sum\frac{1}{n^4}=\pi^4\left(\frac15-\frac19\right)=\frac{4\pi^4}{45}
+\ \Longrightarrow\
+\sum_{n=1}^{\infty}\frac{1}{n^4}=\frac{\pi^4}{90}.
+\]
+
+**Second example — QB-6(ii).** For \(f=\left(\frac{\pi-x}{2}\right)^2\) on \((0,2\pi)\), \(a_0=\frac{\pi^2}{12}\), \(a_n=\frac{1}{n^2}\), \(b_n=0\), \(l=\pi\):
+
+\[
+\frac{1}{2\pi}\int_0^{2\pi}\frac{(\pi-x)^4}{16}\,dx=\frac{\pi^4}{80},
+\qquad
+\frac{\pi^4}{144}+\frac12\sum\frac{1}{n^4}=\frac{\pi^4}{80}.
+\]
+
+So
+
+\[
+\frac12\sum\frac{1}{n^4}=\pi^4\left(\frac1{80}-\frac1{144}\right)=\frac{\pi^4}{180}
+\ \Longrightarrow\
+\sum\frac{1}{n^4}=\frac{\pi^4}{90}.
+\]
+
+The same series, two different functions — a good check that the identity is consistent.
+
+## 4.5 The enrichment boundary, stated plainly
+
+| Topic | Status | Where taught |
+|---|---|---|
+| Dirichlet's conditions; period \(2\pi\) and \(2l\) | **Prescribed** | §2.3, §2.4, §2.5 |
+| Even and odd functions | **Prescribed** | §2.6 |
+| Numerical deductions | Not a listed topic, but universal in the supplied questions | §2.11, §2.13, §2.14 |
+| Half-range sine and cosine series | **Self-learning** | §4.1 |
+| Orthogonal and orthonormal sets | **Self-learning** | §4.2 |
+| Complex form | **Self-learning** | §4.3 |
+| Parseval's identity | **Enrichment** — needed for QB-6(ii) only | §4.4 |
+| Convergence proofs, Gibbs phenomenon, Fourier transforms | **Beyond the syllabus** — not taught here | — |
+
+# 5. Practice by difficulty
+
+## 5.1 How to use this section
+
+- **Attempt before reading §6.** The answer key is a separate section on purpose.
+- Each question carries a mark allocation in the University style, so you can practise timing: roughly **1.5 minutes per mark**, plus reading time.
+- Labels: **basic** (learn the machine), **exam-level** (what a 5–6 mark answer actually contains), **challenging** (stretch, or enrichment).
+- Most items are *variations* of the teacher's examples, not copies. Changing the interval or one coefficient is exactly how a new question is made.
+- Write full solutions, not sketches. In the exam you are marked for the correct \(l\), the integration by parts, the assembled series and the deduction — not only the final line.
+- Questions marked **[QB]** or **[PP]** are the real supplied questions, repeated here so you can attempt them in one sequence. Their full statements are in §3.
+
+**Coverage at a glance**
+
+| Set | Questions | Marks | Purpose |
+|---|---:|---:|---|
+| Basic (B) | 6 | 25 | Fluency with the coefficient machine |
+| Exam-level (I) | 7 | 42 | Full 5–6 mark answers with a deduction |
+| Challenging (C) | 3 | 22 | Long integrals, endpoint subtleties, Parseval |
+| Tutorial 4 (Q1–Q5) | 5 | 26 | Your official tutorial, unchanged (marks not printed on the sheet) |
+| MUSA Set-I | 3 | 15 | The only items with printed marks |
+| **Total** | **24** | **130** | |
+
+## 5.2 Basic — learn the machine
+
+### B1 (4 marks)
+
+Find the Fourier series of \(f(x)=x\) in \((0,2)\). State the value the series takes at \(x=0\).
+
+### B2 (4 marks)
+
+Find the Fourier series of \(f(x)=x^2\) in \((-1,1)\).
+
+### B3 (5 marks)
+
+Find the Fourier series of \(f(x)=\pi-x\) in \((0,2\pi)\), and explain why every cosine coefficient vanishes. What value does the series take at \(x=0\)?
+
+### B4 (3 marks)
+
+Write down the Fourier series of \(f(x)=\cos x\) on \((-\pi,\pi)\), and of \(g(x)=\sin x\) on \((-\pi,\pi)\), **without doing any integration**. Justify each non-zero coefficient.
+
+### B5 (5 marks)
+
+Find the Fourier series of \(f(x)=x+x^2\) in \((-1,1)\).
+
+### B6 (4 marks)
+
+Using the series
+\[
+x^2=\frac{4\pi^2}{3}+4\sum_{n=1}^{\infty}\frac{\cos nx}{n^2}-4\pi\sum_{n=1}^{\infty}\frac{\sin nx}{n}
+\qquad(0<x<2\pi),
+\]
+state — with a one-line justification from Dirichlet's theorem — the value to which the series converges at \(x=0\), at \(x=\pi\), and at \(x=2\pi\).
+
+## 5.3 Exam-level — full 5–6 mark answers
+
+### I1 (6 marks)
+
+Find the Fourier series of \(f(x)=x(2\pi-x)\) in \((0,2\pi)\), and hence deduce that
+\[
+\frac{\pi^2}{6}=\frac{1}{1^2}+\frac{1}{2^2}+\frac{1}{3^2}+\cdots
+\]
+
+### I2 (6 marks)
+
+For \(f(x)=x^2\) on \((0,2\pi)\), obtain the Fourier series, and hence deduce **both**
+\[
+\frac{\pi^2}{6}=\sum_{n=1}^{\infty}\frac{1}{n^2}
+\qquad\text{and}\qquad
+\frac{\pi^2}{12}=\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n^2}.
+\]
+Say explicitly which value of \(x\) you use for each, and why the first one is a jump point.
+
+### I3 (6 marks) **[PP-3 / QB-19]**
+
+Find the Fourier series of \(f(x)=1-x^2\) in \((-1,1)\), and hence deduce that
+\[
+\frac{\pi^2}{12}=\frac{1}{1^2}-\frac{1}{2^2}+\frac{1}{3^2}-\frac{1}{4^2}+\cdots
+\]
+
+### I4 (6 marks) **[QB-17]**
+
+If \(f(x)=x-x^2\) on \((-\pi,\pi)\), obtain the Fourier series and hence deduce that
+\[
+\frac{\pi^2}{12}=\frac{1}{1^2}-\frac{1}{2^2}+\frac{1}{3^2}-\frac{1}{4^2}+\cdots
+\]
+
+### I5 (6 marks) **[QB-9]**
+
+Find the Fourier expansion of \(f(x)=2x-x^2\), whose period is 3.
+
+### I6 (6 marks) **[QB-11]**
+
+If
+\[
+f(x)=\begin{cases}\pi x,&0<x<1\\ 0,&1<x<2\end{cases}
+\]
+with period 2, find its Fourier series.
+
+### I7 (6 marks) **[QB-3]**
+
+Find the Fourier series of \(f(x)=x\sin x\) on \(0\le x\le 2\pi\), and hence deduce that
+\[
+\sum_{n=2}^{\infty}\frac{1}{n^2-1}=\frac34 .
+\]
+
+## 5.4 Challenging
+
+### C1 (8 marks)
+
+Expand \(f(x)=\lvert\sin x\rvert\) on \((-\pi,\pi)\) in a Fourier series, and hence deduce that
+\[
+\frac12=\sum_{n=1}^{\infty}\frac{1}{4n^2-1}.
+\]
+*(Hint: the coefficients vanish for odd \(n\ge3\).)*
+
+### C2 (6 marks)
+
+Starting from
+\[
+x=\pi-2\sum_{n=1}^{\infty}\frac{\sin nx}{n}\qquad(0<x<2\pi),
+\]
+(a) deduce that \(\dfrac{\pi}{4}=1-\dfrac13+\dfrac15-\dfrac17+\cdots\);
+(b) find the value of the series at \(x=0\) and at \(x=2\pi\), and explain why it is **not** \(0\) and \(2\pi\).
+
+### C3 (8 marks)
+
+Using Parseval's identity on the series of \(x^2\) over \((0,2\pi)\), prove that
+\[
+\frac{\pi^4}{90}=\frac{1}{1^4}+\frac{1}{2^4}+\frac{1}{3^4}+\cdots
+\]
+*(This is the skill needed for QB-6(ii); Parseval is enrichment, not prescribed content.)*
+
+## 5.5 Tutorial 4 — original numbering
+
+> These are the five questions from `02_Tutorials/Tutorial 4.docx`, reproduced with the original numbering (see `Tutorial_4_Transcription.md`). The sheet prints no marks, hints or deductions. The marks shown are typical exam weightings, added here for timing practice only.
+
+**1.** Expand Fourier series for \(f(x)=x^2\) in \((0,2)\). *(5 marks)*
+
+**2.** Expand Fourier series for \(f(x)=x^2\) in \((0,2\pi)\). *(6 marks)*
+
+**3.** Expand Fourier series for \(f(x)=x\) in \((-\pi,\pi)\). *(5 marks)*
+
+**4.** Expand Fourier series for \(f(x)=x\) in \((0,2\pi)\). *(4 marks)*
+
+**5.** Expand Fourier series for \(f(x)=\left(\dfrac{\pi-x}{2}\right)^2\) in \((0,2\pi)\). *(6 marks)*
+
+> **Why these five?** They are exactly the teacher's worked examples: Q1 = notes p. 3, Q2 = p. 7, Q3 = p. 5, Q4 = pp. 3–4, Q5 = pp. 7–8. If you can do Tutorial 4 unaided, you can do every technique the prescribed syllabus requires.
+
+## 5.6 MUSA Set-I Module 4 parts — attempt under exam conditions
+
+| Ref | Question | Marks | Suggested time |
+|---|---|---:|---:|
+| PP-1 | \(x^2\) on \([-\pi,\pi]\); prove \(\pi^2/8=\sum_{\text{odd}}1/n^2\) | 5 | 8 min |
+| PP-2 | \(x^2\) on \((0,2\pi)\); deduce \(\pi^2/12=1-\frac1{2^2}+\frac1{3^2}-\cdots\) | 6 | 10 min |
+| PP-3 | \(1-x^2\) on \((-1,1)\) | 4 | 7 min |
+
+Full statements are in §3.2. Total 15 marks, about 25 minutes.
+
+> **Reminder.** These are the only marks printed anywhere in the Module 4 sources, and they come from a student-association practice paper, not from a University paper. Use them for timing, not as a forecast.
+
+# 6. Answer key
+
+> **Read only after attempting §5.** The working shown is the *minimum* needed to justify each answer. In the exam, write the interval, the value of \(l\), the three integrals and the assembled series explicitly — markers award method marks at each stage.
+
+## 6.1 Basic (B1–B6)
+
+### B1
+
+Interval \((0,2)\), so \(l=1\) and the argument is \(n\pi x\).
+
+\[
+a_0=\frac12\int_0^2 x\,dx=1,\qquad
+a_n=\int_0^2 x\cos n\pi x\,dx=\left[\frac{x\sin n\pi x}{n\pi}+\frac{\cos n\pi x}{n^2\pi^2}\right]_0^2=0,
+\]
+\[
+b_n=\int_0^2 x\sin n\pi x\,dx=\left[-\frac{x\cos n\pi x}{n\pi}+\frac{\sin n\pi x}{n^2\pi^2}\right]_0^2=-\frac{2}{n\pi}.
+\]
+
+\[
+\boxed{\;x=1-\frac{2}{\pi}\sum_{n=1}^{\infty}\frac{\sin n\pi x}{n}\;}
+\]
+
+At \(x=0\) the series gives \(1\), which is the midpoint of \(f(0^+)=0\) and \(f(2^-)=2\). ✓
+
+### B2
+
+Interval \((-1,1)\), \(l=1\); \(f\) is even, so \(b_n=0\).
+
+\[
+a_0=\int_0^1 x^2\,dx=\frac13,\qquad
+a_n=2\int_0^1 x^2\cos n\pi x\,dx=2\cdot\frac{2(-1)^n}{n^2\pi^2}=\frac{4(-1)^n}{n^2\pi^2}.
+\]
+
+\[
+\boxed{\;x^2=\frac13+\frac{4}{\pi^2}\sum_{n=1}^{\infty}\frac{(-1)^n}{n^2}\cos n\pi x\;}
+\]
+
+Check at \(x=1\): \(\frac13+\frac{4}{\pi^2}\cdot\frac{\pi^2}{6}=1\). ✓
+
+### B3
+
+Interval \((0,2\pi)\), \(l=\pi\).
+
+\[
+a_0=\frac{1}{2\pi}\int_0^{2\pi}(\pi-x)\,dx=0,\qquad
+a_n=\frac1\pi\int_0^{2\pi}(\pi-x)\cos nx\,dx=0,
+\]
+because \(\int_0^{2\pi}\cos nx\,dx=0\) and \(\int_0^{2\pi}x\cos nx\,dx=0\) (the latter was computed in §2.9).
+
+\[
+b_n=\frac1\pi\int_0^{2\pi}(\pi-x)\sin nx\,dx=\frac{2}{n}.
+\]
+
+\[
+\boxed{\;\pi-x=2\sum_{n=1}^{\infty}\frac{\sin nx}{n}=2\left[\sin x+\frac{\sin 2x}{2}+\frac{\sin 3x}{3}+\cdots\right]\;}
+\]
+
+At \(x=0\): the sine sum is 0, and the midpoint of \(f(0^+)=\pi\) and \(f(2\pi^-)=-\pi\) is 0. ✓
+
+### B4
+
+No integration is needed, because both functions are already members of the orthogonal set.
+
+\[
+\boxed{\;\cos x=1\cdot\cos x\;}
+\quad\Longrightarrow\quad a_0=0,\ a_1=1,\ a_n=0\ (n\ge2),\ b_n=0 .
+\]
+\[
+\boxed{\;\sin x=1\cdot\sin x\;}
+\quad\Longrightarrow\quad a_0=a_n=0,\ b_1=1,\ b_n=0\ (n\ge2).
+\]
+
+Justification: by orthogonality, \(a_n=\frac1\pi\int_{-\pi}^{\pi}\cos x\cos nx\,dx\) is 0 unless \(n=1\), when it is 1. Fourier coefficients are unique, so the series must be the function itself.
+
+### B5
+
+Interval \((-1,1)\), \(l=1\). Split \(f=x+x^2\): the \(x\) part is odd, the \(x^2\) part is even.
+
+\[
+a_0=\frac12\int_{-1}^{1}(x+x^2)\,dx=\frac12\left(0+\frac23\right)=\frac13,
+\]
+\[
+a_n=\int_{-1}^{1}x\cos n\pi x\,dx+\int_{-1}^{1}x^2\cos n\pi x\,dx=0+\frac{4(-1)^n}{n^2\pi^2},
+\]
+\[
+b_n=\int_{-1}^{1}x\sin n\pi x\,dx=2\int_0^1 x\sin n\pi x\,dx=\frac{2(-1)^{n+1}}{n\pi}.
+\]
+
+\[
+\boxed{\;x+x^2=\frac13+\frac{4}{\pi^2}\sum_{n=1}^{\infty}\frac{(-1)^n}{n^2}\cos n\pi x+\frac{2}{\pi}\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}\sin n\pi x\;}
+\]
+
+### B6
+
+The function's periodic extension has \(f(0^+)=0\), \(f(2\pi^-)=4\pi^2\), and is continuous at \(\pi\) with value \(\pi^2\).
+
+- **\(x=0\):** jump, so the series gives the midpoint \(\dfrac{0+4\pi^2}{2}=2\pi^2\).
+- **\(x=\pi\):** continuous, so the series gives \(\pi^2\).
+- **\(x=2\pi\):** the same jump point as \(x=0\), so the series again gives \(2\pi^2\).
+
+Check against the series: at \(x=0\), \(\frac{4\pi^2}{3}+4\sum\frac{1}{n^2}=\frac{4\pi^2}{3}+\frac{2\pi^2}{3}=2\pi^2\); at \(x=\pi\), \(\frac{4\pi^2}{3}+4\sum\frac{(-1)^n}{n^2}=\frac{4\pi^2}{3}-\frac{\pi^2}{3}=\pi^2\). ✓
+
+## 6.2 Exam-level (I1–I7)
+
+### I1
+
+\[
+a_0=\frac{1}{2\pi}\int_0^{2\pi}(2\pi x-x^2)\,dx
+=\frac{1}{2\pi}\left[\pi x^2-\frac{x^3}{3}\right]_0^{2\pi}=\frac{2\pi^2}{3},
+\]
+\[
+a_n=\frac1\pi\left[2\pi\int_0^{2\pi}x\cos nx\,dx-\int_0^{2\pi}x^2\cos nx\,dx\right]
+=\frac1\pi\left(0-\frac{4\pi}{n^2}\right)=-\frac{4}{n^2},
+\]
+\[
+b_n=\frac1\pi\left[2\pi\int_0^{2\pi}x\sin nx\,dx-\int_0^{2\pi}x^2\sin nx\,dx\right]
+=\frac1\pi\left(2\pi\cdot\left(-\frac{2\pi}{n}\right)-\left(-\frac{4\pi^2}{n}\right)\right)=0 .
+\]
+
+\[
+\boxed{\;x(2\pi-x)=\frac{2\pi^2}{3}-4\sum_{n=1}^{\infty}\frac{\cos nx}{n^2}\;}
+\]
+
+**Deduction.** At \(x=0\) the periodic extension is continuous (\(f(0)=f(2\pi)=0\)), so the series equals 0:
+
+\[
+0=\frac{2\pi^2}{3}-4\sum\frac{1}{n^2}
+\ \Longrightarrow\
+\sum_{n=1}^{\infty}\frac{1}{n^2}=\frac{\pi^2}{6}.
+\]
+
+### I2
+
+From §2.12 (Example 6, notes p. 7):
+
+\[
+x^2=\frac{4\pi^2}{3}+4\sum_{n=1}^{\infty}\frac{\cos nx}{n^2}-4\pi\sum_{n=1}^{\infty}\frac{\sin nx}{n}.
+\]
+
+**For \(\pi^2/6\):** \(x=0\) is a jump point (the extension drops from \(4\pi^2\) to \(0\)), so
+
+\[
+2\pi^2=\frac{4\pi^2}{3}+4\sum\frac{1}{n^2}
+\ \Longrightarrow\
+4\sum\frac{1}{n^2}=2\pi^2-\frac{4\pi^2}{3}=\frac{2\pi^2}{3}
+\ \Longrightarrow\
+\sum\frac{1}{n^2}=\frac{\pi^2}{6}.
+\]
+
+**For \(\pi^2/12\):** \(x=\pi\) is an interior continuity point, so
+
+\[
+\pi^2=\frac{4\pi^2}{3}+4\sum\frac{(-1)^n}{n^2}
+\ \Longrightarrow\
+4\sum\frac{(-1)^n}{n^2}=-\frac{\pi^2}{3}
+\ \Longrightarrow\
+\sum\frac{(-1)^{n+1}}{n^2}=\frac{\pi^2}{12}.
+\]
+
+### I3
+
+Interval \((-1,1)\), \(l=1\); \(f=1-x^2\) is even, so \(b_n=0\).
+
+\[
+a_0=\int_0^1(1-x^2)\,dx=\frac23,\qquad
+a_n=2\int_0^1(1-x^2)\cos n\pi x\,dx=-\frac{4(-1)^n}{n^2\pi^2}=\frac{4(-1)^{n+1}}{n^2\pi^2}.
+\]
+
+\[
+\boxed{\;1-x^2=\frac23+\frac{4}{\pi^2}\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n^2}\cos n\pi x\;}
+\]
+
+**Deduction.** At \(x=0\) (continuous, \(f(0)=1\)):
+
+\[
+1=\frac23+\frac{4}{\pi^2}\sum\frac{(-1)^{n+1}}{n^2}
+\ \Longrightarrow\
+\sum\frac{(-1)^{n+1}}{n^2}=\frac{\pi^2}{4}\cdot\frac13=\frac{\pi^2}{12}.
+\]
+
+### I4
+
+Neither even nor odd, so all three coefficients are needed.
+
+\[
+a_0=\frac{1}{2\pi}\int_{-\pi}^{\pi}(x-x^2)\,dx=-\frac{\pi^2}{3},
+\]
+\[
+a_n=\frac1\pi\int_{-\pi}^{\pi}(x-x^2)\cos nx\,dx
+=\frac1\pi\left(0-\frac{4\pi(-1)^n}{n^2}\right)=-\frac{4(-1)^n}{n^2},
+\]
+\[
+b_n=\frac1\pi\int_{-\pi}^{\pi}(x-x^2)\sin nx\,dx
+=\frac1\pi\left(-\frac{2\pi(-1)^n}{n}-0\right)=\frac{2(-1)^{n+1}}{n}.
+\]
+
+\[
+\boxed{\;x-x^2=-\frac{\pi^2}{3}-4\sum_{n=1}^{\infty}\frac{(-1)^n}{n^2}\cos nx+2\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}\sin nx\;}
+\]
+
+**Deduction.** At \(x=0\): the sine sum vanishes, so
+
+\[
+0=-\frac{\pi^2}{3}-4\sum\frac{(-1)^n}{n^2}
+\ \Longrightarrow\
+\sum\frac{(-1)^{n+1}}{n^2}=\frac{\pi^2}{12}.
+\]
+
+### I5
+
+Period 3, interval \((0,3)\), so \(l=\frac32\) and the argument is \(\frac{2n\pi x}{3}\).
+
+\[
+a_0=\frac13\int_0^3(2x-x^2)\,dx=\frac13\left[x^2-\frac{x^3}{3}\right]_0^3=0,
+\]
+\[
+a_n=\frac23\int_0^3(2x-x^2)\cos\frac{2n\pi x}{3}\,dx=-\frac{9}{n^2\pi^2},
+\qquad
+b_n=\frac23\int_0^3(2x-x^2)\sin\frac{2n\pi x}{3}\,dx=\frac{3}{n\pi}.
+\]
+
+\[
+\boxed{\;2x-x^2=-\frac{9}{\pi^2}\sum_{n=1}^{\infty}\frac{1}{n^2}\cos\frac{2n\pi x}{3}+\frac{3}{\pi}\sum_{n=1}^{\infty}\frac{1}{n}\sin\frac{2n\pi x}{3}\;}
+\]
+
+Check at \(x=3\): the series gives \(-\frac{9}{\pi^2}\sum\frac{1}{n^2}=-\frac32\), which is the midpoint of \(f(3^-)=-3\) and \(f(0^+)=0\). ✓
+
+### I6
+
+Period 2, interval \((0,2)\), so \(l=1\).
+
+\[
+a_0=\frac12\int_0^1\pi x\,dx=\frac{\pi}{4},
+\]
+\[
+a_n=\int_0^1\pi x\cos n\pi x\,dx=\frac{(-1)^n-1}{n\pi^2},
+\qquad
+b_n=\int_0^1\pi x\sin n\pi x\,dx=\frac{(-1)^{n+1}}{n}.
+\]
+
+Since \((-1)^n-1\) is \(-2\) for odd \(n\) and \(0\) for even \(n\),
+
+\[
+\boxed{\;f(x)=\frac{\pi}{4}-\frac{2}{\pi^2}\sum_{n\ \text{odd}}\frac{\cos n\pi x}{n^2}+\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}\sin n\pi x\;}
+\]
+
+Check at \(x=1\) (the jump): the series gives \(\frac{\pi}{4}-\frac{2}{\pi^2}\left(-\frac{\pi^2}{8}\right)=\frac{\pi}{4}+\frac{\pi}{4}=\frac{\pi}{2}\), the midpoint of \(\pi\) and \(0\). ✓
+
+### I7
+
+\[
+a_0=\frac{1}{2\pi}\int_0^{2\pi}x\sin x\,dx=-\frac{1}{2\pi}\left[x\cos x-\sin x\right]_0^{2\pi}=-1,
+\]
+\[
+a_1=-\frac12,\qquad
+b_1=\pi,\qquad
+a_n=\frac{2}{n^2-1}\ (n\ge2),\qquad
+b_n=0\ (n\ge2).
+\]
+
+\[
+\boxed{\;x\sin x=-1-\frac12\cos x+\pi\sin x+2\sum_{n=2}^{\infty}\frac{\cos nx}{n^2-1}\;}
+\]
+
+**Deduction.** At \(x=0\) (continuous, \(f(0)=0\)):
+
+\[
+0=-1-\frac12+2\sum_{n=2}^{\infty}\frac{1}{n^2-1}
+\ \Longrightarrow\
+\sum_{n=2}^{\infty}\frac{1}{n^2-1}=\frac34 .
+\]
+
+## 6.3 Challenging (C1–C3)
+
+### C1
+
+\(f(x)=\lvert\sin x\rvert\) is even, so \(b_n=0\).
+
+\[
+a_0=\frac{1}{\pi}\int_0^{\pi}\sin x\,dx=\frac{2}{\pi},
+\]
+\[
+a_n=\frac{2}{\pi}\int_0^{\pi}\sin x\cos nx\,dx .
+\]
+
+Using \(\sin x\cos nx=\frac12\left[\sin(1+n)x+\sin(1-n)x\right]\) and \(\int_0^\pi\sin mx\,dx=\frac{1-(-1)^m}{m}\):
+
+- \(n=1\): the integral is \(\frac12\int_0^\pi\sin 2x\,dx=0\);
+- \(n\ge3\) odd: \(1+n\) and \(1-n\) are both even, so both integrals vanish;
+- \(n\) even: both integrals equal \(\frac{2}{1+n}\) and \(\frac{2}{1-n}\), giving \(a_n=\frac{2}{\pi}\cdot\frac{2}{1-n^2}=-\frac{4}{\pi(n^2-1)}\).
+
+Replacing \(n\) by \(2m\):
+
+\[
+\boxed{\;\lvert\sin x\rvert=\frac{2}{\pi}-\frac{4}{\pi}\sum_{m=1}^{\infty}\frac{\cos 2mx}{4m^2-1}\;}
+\]
+
+**Deduction.** At \(x=0\) the function is continuous with value 0:
+
+\[
+0=\frac{2}{\pi}-\frac{4}{\pi}\sum_{m=1}^{\infty}\frac{1}{4m^2-1}
+\ \Longrightarrow\
+\sum_{m=1}^{\infty}\frac{1}{4m^2-1}=\frac12 .
+\]
+
+### C2
+
+**(a)** Put \(x=\frac{\pi}{2}\) in \(x=\pi-2\sum\frac{\sin nx}{n}\):
+
+\[
+\frac{\pi}{2}=\pi-2\left(1+0-\frac13+0+\frac15-\cdots\right)
+\ \Longrightarrow\
+2\left(1-\frac13+\frac15-\cdots\right)=\frac{\pi}{2}
+\ \Longrightarrow\
+\frac{\pi}{4}=1-\frac13+\frac15-\cdots
+\]
+
+**(b)** At \(x=0\) and \(x=2\pi\) the series gives \(\pi\) (all sine terms vanish). This is correct: the periodic extension of \(x\) on \((0,2\pi)\) jumps from \(2\pi\) to \(0\), and Dirichlet's value is \(\frac{0+2\pi}{2}=\pi\). At \(x=\pi\) the series gives \(\pi-2\sum\frac{\sin n\pi}{n}=\pi\), and the function is continuous there. So the series equals \(x\) only on the **open** interval \((0,2\pi)\).
+
+### C3
+
+For \(x^2\) on \((0,2\pi)\): \(a_0=\frac{4\pi^2}{3}\), \(a_n=\frac{4}{n^2}\), \(b_n=-\frac{4\pi}{n}\), \(l=\pi\). Parseval (§4.4):
+
+\[
+\frac{1}{2\pi}\int_0^{2\pi}x^4\,dx=a_0^2+\frac12\sum_{n=1}^{\infty}\left(a_n^2+b_n^2\right).
+\]
+
+Left side:
+
+\[
+\frac{1}{2\pi}\cdot\frac{32\pi^5}{5}=\frac{16\pi^4}{5}.
+\]
+
+Right side:
+
+\[
+\frac{16\pi^4}{9}+\frac12\sum\left(\frac{16}{n^4}+\frac{16\pi^2}{n^2}\right)
+=\frac{16\pi^4}{9}+8\sum\frac{1}{n^4}+8\pi^2\cdot\frac{\pi^2}{6}
+=\frac{16\pi^4}{9}+\frac{4\pi^4}{3}+8\sum\frac{1}{n^4}.
+\]
+
+Equating:
+
+\[
+\frac{16\pi^4}{5}-\frac{16\pi^4}{9}-\frac{4\pi^4}{3}=8\sum\frac{1}{n^4}.
+\]
+
+With common denominator 45: \(144-80-60=4\), so
+
+\[
+\frac{4\pi^4}{45}=8\sum\frac{1}{n^4}
+\ \Longrightarrow\
+\boxed{\;\sum_{n=1}^{\infty}\frac{1}{n^4}=\frac{\pi^4}{90}\;}
+\]
+
+## 6.4 Tutorial 4 (Q1–Q5)
+
+| Q | Function, interval | Answer | Notes |
+|---|---|---|---|
+| 1 | \(x^2\), \((0,2)\) | \(\dfrac43+\dfrac{4}{\pi^2}\sum\dfrac{\cos n\pi x}{n^2}-\dfrac{4}{\pi}\sum\dfrac{\sin n\pi x}{n}\) | §2.8; the notes' closing factor \(4/\pi\) is a slip |
+| 2 | \(x^2\), \((0,2\pi)\) | \(\dfrac{4\pi^2}{3}+4\sum\dfrac{\cos nx}{n^2}-4\pi\sum\dfrac{\sin nx}{n}\) | §2.12 |
+| 3 | \(x\), \((-\pi,\pi)\) | \(2\sum\dfrac{(-1)^{n+1}}{n}\sin nx\) | odd; §2.6.4 |
+| 4 | \(x\), \((0,2\pi)\) | \(\pi-2\sum\dfrac{\sin nx}{n}\) | §2.9 |
+| 5 | \(\left(\dfrac{\pi-x}{2}\right)^2\), \((0,2\pi)\) | \(\dfrac{\pi^2}{12}+\sum\dfrac{\cos nx}{n^2}\) | §2.12 |
+
+Full working for each is in the section named in the last column. All five are the teacher's own classroom examples, so the tutorial is a complete rehearsal of the module.
+
+## 6.5 The 25 supplied examination questions
+
+Every result below was re-derived symbolically (`_work/verify_m4_guide.py`). The convention is the teacher's throughout: the constant term shown **is** the constant term of the series.
+
+### 6.5.1 The three practice-paper questions
+
+**PP-1 (= QB-13)** — \(x^2\) on \((-\pi,\pi)\):
+
+\[
+x^2=\frac{\pi^2}{3}+4\sum_{n=1}^{\infty}\frac{(-1)^n}{n^2}\cos nx .
+\]
+
+Put \(x=\pi\): \(\frac{\pi^2}{6}=\sum\frac{1}{n^2}\). Put \(x=0\): \(\frac{\pi^2}{12}=\sum\frac{(-1)^{n+1}}{n^2}\). Add: \(\frac{\pi^2}{8}=\sum_{\text{odd}}\frac{1}{n^2}\).
+
+**PP-2 (= QB-1)** — \(x^2\) on \((0,2\pi)\):
+
+\[
+x^2=\frac{4\pi^2}{3}+4\sum_{n=1}^{\infty}\frac{\cos nx}{n^2}-4\pi\sum_{n=1}^{\infty}\frac{\sin nx}{n}.
+\]
+
+Put \(x=\pi\): \(\pi^2=\frac{4\pi^2}{3}+4\sum\frac{(-1)^n}{n^2}\), hence \(\frac{\pi^2}{12}=\sum\frac{(-1)^{n+1}}{n^2}\).
+
+**PP-3 (= QB-19)** — \(1-x^2\) on \((-1,1)\):
+
+\[
+1-x^2=\frac23+\frac{4}{\pi^2}\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n^2}\cos n\pi x .
+\]
+
+### 6.5.2 Group (0, 2π)
+
+**QB-1** — see PP-2.
+
+**QB-2** — \(f=\dfrac{3x^2-6\pi x+2\pi^2}{12}\) on \((0,2\pi)\):
+
+\[
+a_0=0,\qquad a_n=\frac{1}{n^2},\qquad b_n=0,
+\qquad
+f(x)=\sum_{n=1}^{\infty}\frac{\cos nx}{n^2}.
+\]
+
+At \(x=0\): \(f(0)=\frac{2\pi^2}{12}=\frac{\pi^2}{6}\), so \(\frac{\pi^2}{6}=\sum\frac{1}{n^2}\), using continuity at 0.
+
+**QB-3** — \(x\sin x\) on \((0,2\pi)\):
+
+\[
+x\sin x=-1-\frac12\cos x+\pi\sin x+2\sum_{n=2}^{\infty}\frac{\cos nx}{n^2-1};
+\qquad
+a_0=-1,\ a_1=-\frac12,\ a_n=\frac{2}{n^2-1},\ b_1=\pi,\ b_n=0\ (n\ge2).
+\]
+
+At \(x=0\): \(\sum_{n\ge2}\frac{1}{n^2-1}=\frac34\).
+
+**QB-4** — \(\frac12(\pi-x)\) on \((0,2\pi)\):
+
+\[
+a_0=a_n=0,\qquad b_n=\frac1n,\qquad
+\frac{\pi-x}{2}=\sum_{n=1}^{\infty}\frac{\sin nx}{n}.
+\]
+
+At \(x=\frac{\pi}{2}\): \(\frac{\pi}{4}=1-\frac13+\frac15-\cdots\).
+
+**QB-5** — \(\sqrt{1-\cos x}=\sqrt2\left\lvert\sin\frac x2\right\rvert=\sqrt2\sin\frac x2\) on \((0,2\pi)\):
+
+\[
+a_0=\frac{2\sqrt2}{\pi},\qquad
+a_n=-\frac{4\sqrt2}{\pi(4n^2-1)},\qquad
+b_n=0,
+\]
+\[
+\sqrt{1-\cos x}=\frac{2\sqrt2}{\pi}-\frac{4\sqrt2}{\pi}\sum_{n=1}^{\infty}\frac{\cos nx}{4n^2-1}.
+\]
+
+At \(x=0\): \(0=\frac{2\sqrt2}{\pi}-\frac{4\sqrt2}{\pi}\sum\frac{1}{4n^2-1}\), so \(\sum\frac{1}{4n^2-1}=\frac12\).
+
+**QB-6** — \(\left(\frac{\pi-x}{2}\right)^2\) on \((0,2\pi)\):
+
+\[
+\left(\frac{\pi-x}{2}\right)^2=\frac{\pi^2}{12}+\sum_{n=1}^{\infty}\frac{\cos nx}{n^2}.
+\]
+
+(i) At \(x=\pi\): \(0=\frac{\pi^2}{12}+\sum\frac{(-1)^n}{n^2}\), so \(\frac{\pi^2}{12}=\sum\frac{(-1)^{n+1}}{n^2}\). (ii) Parseval (§4.4.2): \(\frac{\pi^4}{90}=\sum\frac{1}{n^4}\). **The printed \(\pi^2/90\) is a misprint.**
+
+**QB-7** — \(1\pm\frac{2x}{\pi}\) on \((-\pi,\pi)\), that is \(1-\frac{2\lvert x\rvert}{\pi}\):
+
+\[
+a_0=0,\qquad a_n=\frac{8}{\pi^2n^2}\ (n\text{ odd}),\quad a_n=0\ (n\text{ even}),\qquad b_n=0,
+\]
+\[
+1-\frac{2\lvert x\rvert}{\pi}=\frac{8}{\pi^2}\sum_{n\ \text{odd}}\frac{\cos nx}{n^2}.
+\]
+
+At \(x=0\): \(1=\frac{8}{\pi^2}\sum_{\text{odd}}\frac{1}{n^2}\), so \(\frac{\pi^2}{8}=\sum_{\text{odd}}\frac{1}{n^2}\).
+
+### 6.5.3 Group (0, 2l) and general periods
+
+**QB-8** — \(x^2\) on \((0,a)\); \(l=\frac a2\), argument \(\frac{2n\pi x}{a}\):
+
+\[
+x^2=\frac{a^2}{3}+\frac{a^2}{\pi^2}\sum_{n=1}^{\infty}\frac{1}{n^2}\cos\frac{2n\pi x}{a}
+-\frac{a^2}{\pi}\sum_{n=1}^{\infty}\frac{1}{n}\sin\frac{2n\pi x}{a}.
+\]
+
+At \(x=a\) the series equals the midpoint \(\frac{a^2}{2}\), giving \(\frac{\pi^2}{6}=\sum\frac{1}{n^2}\).
+
+**QB-9** — \(2x-x^2\), period 3, interval \((0,3)\):
+
+\[
+2x-x^2=-\frac{9}{\pi^2}\sum_{n=1}^{\infty}\frac{1}{n^2}\cos\frac{2n\pi x}{3}
++\frac{3}{\pi}\sum_{n=1}^{\infty}\frac{1}{n}\sin\frac{2n\pi x}{3}.
+\]
+
+**QB-10** — triangle \(\pi x\) on \((0,1)\), \(\pi(2-x)\) on \((1,2)\), period 2:
+
+\[
+a_0=\frac{\pi}{2},\qquad
+a_n=-\frac{4}{\pi n^2}\ (n\text{ odd}),\quad a_n=0\ (n\text{ even}),\qquad b_n=0,
+\]
+\[
+f(x)=\frac{\pi}{2}-\frac{4}{\pi}\sum_{n=0}^{\infty}\frac{\cos(2n+1)\pi x}{(2n+1)^2},
+\]
+
+which is the printed result.
+
+**QB-11** — \(\pi x\) on \((0,1)\), \(0\) on \((1,2)\), period 2:
+
+\[
+f(x)=\frac{\pi}{4}-\frac{2}{\pi^2}\sum_{n\ \text{odd}}\frac{\cos n\pi x}{n^2}
++\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}\sin n\pi x .
+\]
+
+**QB-12** — \(4-x^2\) on \((0,2)\); \(l=1\), argument \(n\pi x\):
+
+\[
+4-x^2=\frac83-\frac{4}{\pi^2}\sum_{n=1}^{\infty}\frac{\cos n\pi x}{n^2}
++\frac{4}{\pi}\sum_{n=1}^{\infty}\frac{\sin n\pi x}{n}.
+\]
+
+At \(x=2\) the series equals the midpoint 2, giving \(\frac{\pi^2}{6}=\sum\frac{1}{n^2}\).
+
+### 6.5.4 Group even/odd on \((-\pi,\pi)\)
+
+**QB-13** — see PP-1.
+
+**QB-14** — see QB-7 (same function).
+
+**QB-15** — \(x\cos x\) on \((-\pi,\pi)\); odd, so \(a_0=a_n=0\):
+
+\[
+b_1=-\frac12,\qquad b_n=\frac{2n(-1)^n}{n^2-1}\ (n\ge2),
+\]
+\[
+x\cos x=-\frac12\sin x+2\sum_{n=2}^{\infty}\frac{n(-1)^n}{n^2-1}\sin nx .
+\]
+
+**QB-16 (corrected)** — \(\frac{\pi}{2}-\lvert x\rvert\) on \((-\pi,\pi)\); even:
+
+\[
+a_0=0,\qquad a_n=\frac{4}{\pi n^2}\ (n\text{ odd}),\quad a_n=0\ (n\text{ even}),\qquad b_n=0,
+\]
+\[
+\frac{\pi}{2}-\lvert x\rvert=\frac{4}{\pi}\sum_{n\ \text{odd}}\frac{\cos nx}{n^2}.
+\]
+
+At \(x=0\): \(\frac{\pi}{2}=\frac{4}{\pi}\sum_{\text{odd}}\frac{1}{n^2}\), so \(\frac{\pi^2}{8}=\sum_{\text{odd}}\frac{1}{n^2}\). The printed first branch \(x+\frac{2x}{\pi}\) does **not** give this; see §3.3.3.
+
+**QB-17** — \(x-x^2\) on \((-\pi,\pi)\); see I4:
+
+\[
+x-x^2=-\frac{\pi^2}{3}-4\sum_{n=1}^{\infty}\frac{(-1)^n}{n^2}\cos nx
++2\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}\sin nx,
+\]
+and at \(x=0\), \(\frac{\pi^2}{12}=\sum\frac{(-1)^{n+1}}{n^2}\).
+
+**QB-18** — \(\lvert x\rvert\) on \((-\pi,\pi)\); even:
+
+\[
+a_0=\frac{\pi}{2},\qquad
+a_n=-\frac{4}{\pi n^2}\ (n\text{ odd}),\quad a_n=0\ (n\text{ even}),\qquad b_n=0,
+\]
+\[
+\lvert x\rvert=\frac{\pi}{2}-\frac{4}{\pi}\sum_{n\ \text{odd}}\frac{\cos nx}{n^2}.
+\]
+
+At \(x=0\): \(\frac{\pi^2}{8}=\sum_{\text{odd}}\frac{1}{n^2}\).
+
+### 6.5.5 Group \((-l,l)\)
+
+**QB-19** — see PP-3.
+
+**QB-20** — \(x^2\) on \((-l,l)\); even:
+
+\[
+a_0=\frac{l^2}{3},\qquad a_n=\frac{4l^2(-1)^n}{n^2\pi^2},\qquad b_n=0,
+\]
+\[
+x^2=\frac{l^2}{3}+\frac{4l^2}{\pi^2}\sum_{n=1}^{\infty}\frac{(-1)^n}{n^2}\cos\frac{n\pi x}{l}.
+\]
+
+At \(x=0\): \(0=\frac{l^2}{3}+\frac{4l^2}{\pi^2}\sum\frac{(-1)^n}{n^2}\), so \(\frac{\pi^2}{12}=\sum\frac{(-1)^{n+1}}{n^2}\).
+
+**QB-21** — \(x-x^2\) on \((-1,1)\); \(l=1\):
+
+\[
+x-x^2=-\frac13-\frac{4}{\pi^2}\sum_{n=1}^{\infty}\frac{(-1)^n}{n^2}\cos n\pi x
++\frac{2}{\pi}\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}\sin n\pi x .
+\]
+
+**QB-22** — the four-part pulse on \((-2,2)\); even, \(l=2\), argument \(\frac{n\pi x}{2}\):
+
+\[
+a_0=\frac14,\qquad
+a_n=\frac{4\left(1-\cos\frac{n\pi}{2}\right)}{n^2\pi^2},\qquad b_n=0,
+\]
+\[
+f(x)=\frac14+\frac{4}{\pi^2}\sum_{n=1}^{\infty}\frac{1-\cos\frac{n\pi}{2}}{n^2}\cos\frac{n\pi x}{2}.
+\]
+
+The coefficient is 0 when \(n\) is a multiple of 4, and \(8/(n^2\pi^2)\) when \(n\) is odd.
+
+---
+
+# 7. Common mistakes
+
+## 7.1 The twelve that cost the most marks
+
+| # | Wrong | Right | Why |
+|---|---|---|---|
+| 1 | Using \(nx\) on \((0,2)\) | \(n\pi x\), because \(l=1\) | The argument is always \(\frac{n\pi x}{l}\); it is \(nx\) only when \(l=\pi\) |
+| 2 | Using \(l=2\) on \((0,2)\) | \(l=1\) | \(l\) is **half** the interval length, not the length |
+| 3 | \(a_n=\frac1l\int_0^{2l}\), \(a_0=\frac1l\int_0^{2l}\) | \(a_0=\frac{1}{2l}\int\) | The constant uses \(2l\); the others use \(l\) |
+| 4 | \(a_n=\frac1l\int_0^l\) for an even function | \(a_n=\frac2l\int_0^l\) | Doubling the interval doubles the integral |
+| 5 | \(b_n=0\) because the formula is even | Check the **interval** is symmetric | \(4-x^2\) on \((0,2\pi)\) has \(b_n\neq0\) |
+| 6 | Closing with \(a_0\) but computing \(a_0=\frac1l\int f\) | One convention throughout | Doubles the constant (§2.4.3) |
+| 7 | Dropping \((-1)^n\) | Keep it until the last line | It decides the alternating signs in the answer |
+| 8 | \((-1)^n(-1)^n=-1\) | \(=(-1)^{2n}=1\) | This is exactly the \(x=\pi\) deduction |
+| 9 | Substituting \(x=0\) into \(f\) when the extension jumps | Use \(\frac{f(0^+)+f(2l^-)}{2}\) | The series equals the midpoint, not \(f(0)\) |
+| 10 | Applying a deduction from \((-\pi,\pi)\) to \((0,2\pi)\) | Recompute the point's status | \(x=\pi\) gives \(\pi^2/6\) on one and \(\pi^2/12\) on the other |
+| 11 | Integrating \(x^2\cos nx\) with one by-parts | Two applications | Degree 2 needs two |
+| 12 | Writing \(\sum\frac{(-1)^n}{n^2}=-\frac{\pi^2}{12}\) as \(+\frac{\pi^2}{12}\) | Watch the sign | The alternating sum is negative; the series with \((-1)^{n+1}\) is positive |
+
+## 7.2 Mistakes specific to the a₀ convention
+
+- **Reading a solution online and copying its constant.** If the solution's series begins \(\frac{a_0}{2}\), its \(a_0\) is twice your teacher's. Convert before comparing (§2.4.3).
+- **Mixing formulas inside one line.** Writing \(a_0=\frac1l\int f\) and then \(f=a_0+\sum\) is the single most expensive error in this module. Choose the teacher's pair and stay with it.
+- **Thinking the two conventions give different series.** They do not. The constant term is the average of \(f\) over the period; only its name changes.
+- **Forgetting that \(a_0\) can be negative.** For \(x-x^2\) on \((-\pi,\pi)\), \(a_0=-\pi^2/3\). A negative average is normal when the function is mostly below the axis.
+
+## 7.3 Mistakes specific to even/odd shortcuts
+
+- **Using the shortcut on \((0,2\pi)\).** The symmetry argument needs \((-l,l)\). On \((0,2\pi)\) you must compute \(b_n\), even if the formula looks even.
+- **Using the shortcut on \((-\pi,\pi)\) when the function is neither.** A sum such as \(x-x^2\) has both parities; only the odd part contributes to \(b_n\) and only the even part to \(a_n\), but you must split it explicitly.
+- **Forgetting the factor 2.** On a symmetric interval, \(a_n=\frac2l\int_0^l\), not \(\frac1l\int_0^l\).
+- **Claiming \(a_0=0\) for an even function.** Only odd functions have \(a_0=0\). An even function's \(a_0\) is usually the largest coefficient.
+- **Treating a piecewise definition as automatically odd.** Check \(f(-x)\) on each piece, including the pieces' endpoints.
+
+## 7.4 The teacher's slip, collected
+
+Module 4 has **one** numerical slip in eight pages. It is reproduced unchanged in `Module_4_Transcription.md` and documented in `OCR_Review_Report_Module_4.md` §7.1.
+
+| Page | What the notes say | What is correct | Effect on the answer |
+|---:|---|---|---|
+| 3 | \(x^2=\frac43+\frac{4}{\pi}\left[\frac{\cos\pi x}{1^2}+\cdots\right]-\cdots\) | \(\frac{4}{\pi^2}\) on the cosine sum | None on the coefficients (\(a_0=\frac43,\ a_n=\frac{4}{n^2\pi^2},\ b_n=-\frac{4}{n\pi}\) are all correct); the printed series is wrong by a factor \(\pi\) on the cosine part |
+
+Every other coefficient, integral sign and deduction on pages 3–8 is correct, including the three deductions \(\pi^2/6,\pi^2/12,\pi^2/8\). A second, non-mathematical oddity: the heading "Property" on page 2 is written "Boperty", and "discontinuities" is split into two words on page 1 — both recorded `[as written]`, neither affecting the mathematics.
+
+## 7.5 If you have five minutes before the exam
+
+1. \(l\) is **half** the interval; the argument is \(\frac{n\pi x}{l}\).
+2. \(a_0=\frac{1}{2l}\int\), \(a_n=\frac1l\int f\cos\), \(b_n=\frac1l\int f\sin\).
+3. On \((-l,l)\): odd → only \(b_n\); even → only \(a_0,a_n\); both with \(\frac2l\int_0^l\).
+4. \(\sin n\pi=\sin 2n\pi=0\), \(\cos n\pi=(-1)^n\), \(\cos 2n\pi=1\).
+5. At a jump the series gives the **midpoint**.
+6. \(x^2\) on \((-\pi,\pi)\): \(x=\pi\Rightarrow\pi^2/6\), \(x=0\Rightarrow\pi^2/12\).
+7. \(x^2\) on \((0,2\pi)\): \(x=\pi\Rightarrow\pi^2/12\), \(x=0\Rightarrow\pi^2/6\).
+
+# 8. Last-minute revision sheet
+
+> The same material, set out as a standalone sheet for printing, is in
+> `Module_4_Revision_Sheet.md`.
+
+## 8.1 Definitions in one line each
+
+| Term | One-line definition |
+|---|---|
+| Periodic, period \(2l\) | \(f(x+2l)=f(x)\) for all \(x\) |
+| Dirichlet's conditions | Bounded, finitely many jump discontinuities, finitely many maxima/minima |
+| Fourier series on \((c,c+2l)\) | \(a_0+\sum\left(a_n\cos\frac{n\pi x}{l}+b_n\sin\frac{n\pi x}{l}\right)\) |
+| \(a_0\) (teacher) | The constant term, equal to the mean value \(\frac{1}{2l}\int_c^{c+2l}f\) |
+| \(a_n,b_n\) | Projections of \(f\) on \(\cos\frac{n\pi x}{l}\), \(\sin\frac{n\pi x}{l}\) |
+| Even function | \(f(-x)=f(x)\); cosines only on a symmetric interval |
+| Odd function | \(f(-x)=-f(x)\); sines only on a symmetric interval |
+| Harmonic | One \(\cos\) or \(\sin\) term of the series |
+| Dirichlet's value at a jump | \(\frac{f(x^-)+f(x^+)}{2}\) |
+| Half-range series (self-learning) | Sine series = odd extension; cosine series = even extension |
+| Complex form (self-learning) | \(f=\sum_{n=-\infty}^{\infty}c_ne^{inx}\), \(c_n=\frac{1}{2\pi}\int f e^{-inx}dx\) |
+| Parseval (enrichment) | \(\frac{1}{2l}\int\lvert f\rvert^2=a_0^2+\frac12\sum(a_n^2+b_n^2)\) |
+
+## 8.2 The formula sheet
+
+**General interval \((c,\,c+2l)\):**
+
+\[
+\boxed{\;f(x)=a_0+\sum_{n=1}^{\infty}\left(a_n\cos\frac{n\pi x}{l}+b_n\sin\frac{n\pi x}{l}\right)\;}
+\]
+\[
+a_0=\frac{1}{2l}\int_c^{c+2l}f(x)\,dx,\qquad
+a_n=\frac{1}{l}\int_c^{c+2l}f(x)\cos\frac{n\pi x}{l}\,dx,\qquad
+b_n=\frac{1}{l}\int_c^{c+2l}f(x)\sin\frac{n\pi x}{l}\,dx .
+\]
+
+**Five intervals at a glance:**
+
+| Interval | \(l\) | Argument | \(a_0\) | \(a_n,b_n\) |
+|---|---|---|---:|---|
+| \((0,2l)\) | \(l\) | \(\frac{n\pi x}{l}\) | \(\frac{1}{2l}\int_0^{2l}\) | \(\frac1l\int_0^{2l}\) |
+| \((0,2\pi)\) | \(\pi\) | \(nx\) | \(\frac{1}{2\pi}\int_0^{2\pi}\) | \(\frac1\pi\int_0^{2\pi}\) |
+| \((-l,l)\) | \(l\) | \(\frac{n\pi x}{l}\) | \(\frac{1}{2l}\int_{-l}^{l}\) | \(\frac1l\int_{-l}^{l}\) |
+| \((-\pi,\pi)\) | \(\pi\) | \(nx\) | \(\frac{1}{2\pi}\int_{-\pi}^{\pi}\) | \(\frac1\pi\int_{-\pi}^{\pi}\) |
+| \((0,a)\) | \(\frac a2\) | \(\frac{2n\pi x}{a}\) | \(\frac1a\int_0^a\) | \(\frac2a\int_0^a\) |
+
+**Even function on \((-l,l)\):**
+
+\[
+a_0=\frac1l\int_0^l f,\qquad a_n=\frac2l\int_0^l f\cos\frac{n\pi x}{l},\qquad b_n=0 .
+\]
+
+**Odd function on \((-l,l)\):**
+
+\[
+a_0=a_n=0,\qquad b_n=\frac2l\int_0^l f\sin\frac{n\pi x}{l}.
+\]
+
+**The three standard integrals:**
+
+\[
+\int x\cos kx\,dx=\frac{x\sin kx}{k}+\frac{\cos kx}{k^2},\qquad
+\int x\sin kx\,dx=-\frac{x\cos kx}{k}+\frac{\sin kx}{k^2},
+\]
+\[
+\int x^2\cos kx\,dx=\frac{x^2\sin kx}{k}+\frac{2x\cos kx}{k^2}-\frac{2\sin kx}{k^3},
+\]
+\[
+\int x^2\sin kx\,dx=-\frac{x^2\cos kx}{k}+\frac{2x\sin kx}{k^2}+\frac{2\cos kx}{k^3}.
+\]
+
+**The four values:**
+
+\[
+\sin n\pi=\sin 2n\pi=0,\qquad \cos n\pi=(-1)^n,\qquad \cos 2n\pi=1 .
+\]
+
+**Half-range on \((0,l)\)** (self-learning):
+
+\[
+\text{sine: } b_n=\frac2l\int_0^l f\sin\frac{n\pi x}{l};\qquad
+\text{cosine: } a_0=\frac1l\int_0^l f,\quad a_n=\frac2l\int_0^l f\cos\frac{n\pi x}{l}.
+\]
+
+## 8.3 The four recipes
+
+**Expand on a general interval**
+
+1. Length \(=2l\); write \(l\).
+2. Write the argument \(\frac{n\pi x}{l}\).
+3. \(a_0\) by the average; sanity-check its sign.
+4. \(a_n,b_n\) by parts; apply the four trig values.
+5. Assemble; take out common factors.
+
+**Use parity**
+
+1. Check the interval is symmetric.
+2. Compute \(f(-x)\).
+3. Odd → \(a_0=a_n=0\), \(b_n=\frac2l\int_0^l f\sin\).
+4. Even → \(b_n=0\), \(a_0=\frac1l\int_0^l f\), \(a_n=\frac2l\int_0^l f\cos\).
+5. Neither → all three coefficients.
+
+**Deduce a numerical series**
+
+1. Pick \(x\) that makes \(\cos nx=\pm1\) or \(0\), and \(\sin nx=0\).
+2. Decide: continuity point or jump?
+3. Continuity → series \(=f(x)\); jump/endpoint → series \(=\) midpoint.
+4. Simplify; check the identity is dimensionally sensible.
+
+**Half-range (self-learning)**
+
+1. Sine series: \(b_n=\frac2l\int_0^l f\sin\).
+2. Cosine series: \(a_0=\frac1l\int_0^l f\), \(a_n=\frac2l\int_0^l f\cos\).
+3. Both hold on \((0,l)\); they differ outside.
+
+## 8.4 Parity table
+
+| Function (on a symmetric interval) | Parity | Surviving coefficients |
+|---|---|---|
+| \(x\) | odd | \(b_n\) |
+| \(x^2\) | even | \(a_0,a_n\) |
+| \(x-x^2\) | neither | all three |
+| \(\lvert x\rvert\) | even | \(a_0,a_n\) |
+| \(1-x^2\) | even | \(a_0,a_n\) |
+| \(4-x^2\) | even **as a formula** | all three **if** the interval is \((0,2\pi)\) |
+| \(\sin x\) | odd | \(b_1=1\), rest 0 |
+| \(\cos x\) | even | \(a_1=1\), rest 0 |
+| \(x\sin x\) | even | \(a_0,a_n\) |
+| \(x\cos x\) | odd | \(b_n\) |
+| \(\sqrt{1-\cos x}\) | even about \(\pi\), not about 0 | all three on \((0,2\pi)\) |
+
+## 8.5 Ten-second sanity checks
+
+- Is \(a_0\) the average? Does its sign match the graph?
+- Do the coefficients decay like \(1/n\) (jump) or \(1/n^2\) (continuous)?
+- At a point inside the interval, does a partial sum land near \(f(x)\)?
+- Does every \(\sin n\pi\) vanish in your final line?
+- Is \((-1)^n\) still there, and does it produce the right alternation?
+- Did you use \(\frac{1}{2l}\) for \(a_0\) and \(\frac1l\) for \(a_n,b_n\)?
+- On a symmetric interval, did you double the half-integral?
+- At the deduction point, did you use the midpoint if it is a jump?
+
+## 8.6 The five things examiners reward
+
+1. The interval length, \(l\), and the argument written explicitly.
+2. The integration by parts shown, not just the result.
+3. The correct divisor in each coefficient.
+4. The assembled series with common factors taken out and \((-1)^n\) visible.
+5. The deduction with the substituted point named, and the continuity/jump reasoning stated.
+
+---
+
+# 9. References and attribution
+
+## 9.1 Local sources (authority for this module)
+
+| Source | Location | What it was used for |
+|---|---|---|
+| Official syllabus (University of Mumbai, 72 pp.) | `00_University_Syllabus/Portion (6.21-N-B.E.-AI-ML-sem-III-IV).pdf`, PDF pp. 16–18 | Module IV wording, 4 hours, CO4, self-learning list, exam pattern |
+| Syllabus extraction | `00_University_Syllabus/Syllabus_Coverage.md` | Quoted in §1.1–§1.3 |
+| Teacher's handwritten notes, 8 pages | `01_Original_Notes/Module_4/Module 4 CSE.pdf` | All methods, notation, seven worked examples, three deductions |
+| Faithful transcription | `Module_4_Transcription.md` | Page-by-page text used throughout; page numbers cited as "notes, page N" |
+| Tutorial 4 | `02_Tutorials/Tutorial 4.docx` | The five tutorial questions in §5.5 |
+| Tutorial transcription | `Tutorial_4_Transcription.md` | Exact functions, intervals, and the OLE/WMF recovery map |
+| MUSA practice paper Set-I | `_work/sources/musa-practice-paper-set1-w2025.pdf` | PP-1 to PP-3, with printed marks |
+| MUSA question bank | `_work/sources/musa-question-bank-2026.pdf` | QB-1 to QB-22 |
+| Third-party solution booklet | `_work/sources/maths-question-bank-solutions.pdf`, pp. 46–77 | Cross-check only; not an authority |
+| OCR and verification report | `OCR_Review_Report_Module_4.md` | The teacher's slip, the QB-16 inconsistency, the QB-6(ii) misprint, verification tables |
+
+**Citation convention.** "Notes, page N" means **PDF page N** of `Module 4 CSE.pdf`, matching the transcription's section headings. The handwritten pages themselves are not numbered.
+
+## 9.2 Textbooks and open course material
+
+| Source | Section / pages | Used for |
+|---|---|---|
+| Erwin Kreyszig, *Advanced Engineering Mathematics*, Wiley (official syllabus book 2) | The Fourier analysis chapter (Chapter 11 in the 10th edition), the Fourier series section | Independent statement of the expansion, the Dirichlet conditions and the convergence-at-a-jump rule |
+| B. S. Grewal, *Higher Engineering Mathematics*, Khanna (official syllabus book 1) | The Fourier series chapter | The Indian-engineering presentation of the same method, including the \(a_0/2\) convention |
+| R. K. Jain & S. R. K. Iyengar, *Advanced Engineering Mathematics*, Narosa (official syllabus book 3) | Fourier series chapter | Cross-check of the even/odd reductions |
+| OpenStax, *Calculus Volume 2* | Chapter 3, §3.1 Integration by Parts | The by-parts formula used in §2.7 |
+| MIT OpenCourseWare 18.03SC, *Differential Equations* | Unit III, Fourier Series | Independent explanation of orthogonality and of the coefficient formulas (self-learning §4.2) |
+
+**Edition warning.** Chapter and section numbers differ between editions, and Indian reprints often renumber. The *names* of the chapters are stable; use the index if a number does not match. No long extracts are reproduced from any of these books — only short paraphrases of standard definitions, with the chapter named so you can read the original.
+
+**Why these books.** Books 1–3 are the University's own prescribed list (`Syllabus_Coverage.md` §8). OpenStax and MIT OCW are free, open resources chosen for the two topics the prescribed books treat briefly.
+
+## 9.3 Prescribed online references
+
+These five links appear in the official syllabus (`Syllabus_Coverage.md` §9). They are listed here **because the University lists them**, not because their content was inspected or is described in this guide:
+
+1. https://nptel.ac.in/courses/111/104/111104085/
+2. https://nptel.ac.in/courses/111/106/111106139/
+3. https://www.youtube.com/watch?v=2CP3m3EgL1Q
+4. https://www.youtube.com/watch?v=Hw8KHNgRaOE
+5. https://nptel.ac.in/courses/111/105/111105041/
+
+No claim is made about which module each link covers.
+
+## 9.4 Examination sources used
+
+| Tag | Document | Pages | Status |
+|---|---|---|---|
+| PP | `musa-practice-paper-set1-w2025.pdf` | 3 pp.; Module 4 on p. 2 | Student-association practice paper, Winter 2025. **Not a University paper** |
+| QB | `musa-question-bank-2026.pdf` | 9 pp.; Module 4 on pp. 4–5 | Student-association question bank, Winter 2026. **Not a University paper** |
+| SOL | `maths-question-bank-solutions.pdf` | 108 pp.; Module 4 on pp. 46–77 | Third-party solutions. **Not an official key** |
+
+SHA-256 hashes for all three are recorded in `Source_Index.md` (SRC-06, SRC-07, SRC-08). The exact wording of all 25 questions is in `Exam_Questions_Module_4.md`.
+
+**What is not claimed.** No statement is made about how often Module 4 appears in University papers, about which marks it carries there, or about "expected" questions. The marks quoted in §1.4 and §5.6 are the ones printed on the practice paper.
+
+## 9.5 Verification log
+
+Every coefficient, series, integral sign and numerical deduction in this guide was checked with **SymPy 1.14** under Python 3.12. The script is retained so any result can be re-run.
+
+| Script | What it checks |
+|---|---|
+| `_work/verify_m4_guide.py` | The authoritative check: the teacher's seven examples, all 22 bank questions, the 3 practice-paper questions, the 6 basic and 7 exam-level practice items, the 3 challenging items, the half-range example, the complex coefficients, Parseval, the seven numerical series (exact sums), and the behaviour at two jumps |
+| `_work/verify_m4.py`, `_work/verify_m4b.py` | Earlier exploratory scripts (per-page coefficient checks, odd/even cases, partial-sum spot checks). Superseded by `verify_m4_guide.py` where they overlap |
+
+**Representative results (exact, not decimal):**
+
+| Claim | SymPy result |
+|---|---|
+| \(x^2\) on \((0,2)\): \(a_0,a_n,b_n\) | \(\frac43,\ \frac{4}{n^2\pi^2},\ -\frac{4}{n\pi}\) |
+| \(x^2\) on \((0,2\pi)\): \(a_0,a_n,b_n\) | \(\frac{4\pi^2}{3},\ \frac{4}{n^2},\ -\frac{4\pi}{n}\) |
+| \(x^2\) on \((-\pi,\pi)\): \(a_0,a_n,b_n\) | \(\frac{\pi^2}{3},\ \frac{4(-1)^n}{n^2},\ 0\) |
+| \(4-x^2\) on \((0,2\pi)\): \(a_0,a_n,b_n\) | \(4-\frac{4\pi^2}{3},\ -\frac4{n^2},\ \frac{4\pi}{n}\) |
+| \(\left(\frac{\pi-x}{2}\right)^2\) on \((0,2\pi)\) | \(\frac{\pi^2}{12},\ \frac1{n^2},\ 0\) |
+| \(1-x^2\) on \((-1,1)\) | \(\frac23,\ \frac{4(-1)^{n+1}}{n^2\pi^2},\ 0\) |
+| \(2x-x^2\), period 3 | \(0,\ -\frac{9}{n^2\pi^2},\ \frac{3}{n\pi}\) |
+| triangle, period 2 | \(\frac{\pi}{2},\ -\frac{4}{\pi n^2}\) (odd \(n\)), \(0\) |
+| \(x\sin x\) on \((0,2\pi)\) | \(-1,\ -\frac12\ (n=1),\ \frac{2}{n^2-1}\ (n\ge2);\ b_1=\pi\) |
+| \(\sqrt{1-\cos x}\) | \(\frac{2\sqrt2}{\pi},\ -\frac{4\sqrt2}{\pi(4n^2-1)},\ 0\) |
+| Parseval, \(x^2\) on \((-\pi,\pi)\) | \(\frac{\pi^4}{5}=\frac{\pi^4}{9}+8\cdot\frac{\pi^4}{90}\) |
+| Seven numerical series | \(\frac{\pi^2}{6},\frac{\pi^2}{12},\frac{\pi^2}{8},\frac{\pi^4}{90},\frac34,\frac12,\frac{\pi}{4}\) — all confirmed exactly by symbolic summation |
+| Jump values | \(x^2\) on \((0,2\pi)\) at 0 → \(2\pi^2\); \(4-x^2\) on \((0,2)\) at 2 → \(2\) |
+
+**What "verified" does and does not mean.** SymPy confirms that each computation is arithmetically correct and that each stated identity holds exactly. It does not confirm that a question is typical, important or likely to appear; those are claims about the syllabus or the sources, and they are supported only by the documents cited in §9.1–§9.4.
+
+## 9.6 Known uncertainties
+
+| ID | Uncertainty | Status and handling |
+|---|---|---|
+| **U1** | Notes page 3: the interval is written "(0, 2l)" while the working sets \(2l=2\) | Annotated in the transcription; both readings give the same working because \(l=1\). Tutorial 4 Q1 confirms \((0,2)\) |
+| **U2** | Notes page 3: the cosine sum closes with \(\frac4\pi\) instead of \(\frac4{\pi^2}\) | Reproduced, flagged, corrected in §2.8 and §7.4. High confidence (the bracket and the coefficient line both prove it) |
+| **U3** | QB-16's printed first branch \(x+\frac{2x}{\pi}\) | Genuinely inconsistent; the corrected function \(\frac{\pi}{2}-\lvert x\rvert\) is solved and labelled. The correction is supported by the solution booklet (p. 69) and by the stated deduction |
+| **U4** | QB-6(ii) prints \(\pi^2/90\) | Misprint for \(\pi^4/90\); the booklet itself flags it. Recorded, not silently changed |
+| **U5** | No University paper for Module 4 is available | No frequency or mark claims are made. The three marks quoted come from a practice paper and are labelled as such |
+| **U6** | The MUSA documents may or may not mirror a University paper | **Unknown and not claimed.** They are student-association materials and are labelled so everywhere |
+| **U7** | The teacher's Dirichlet wording ("and its integrals are finite") | Reproduced as written; the standard modern statement is given alongside in §2.3.2 |
+| **U8** | The HTML version loads MathJax and a Markdown renderer from a CDN | With no internet connection, formulas and layout will not render. The Markdown file is the offline-safe copy |
+| **U9** | Textbook chapter numbers vary by edition | Chapter *names* are cited; §9.2 warns explicitly |
+
+## 9.7 Attribution, licences and disclosure
+
+- **Teacher's notes, tutorial and syllabus** are the student's own course materials, reproduced here only as citations and short quotations. They were not modified.
+- **MUSA practice paper and question bank** are student-association documents. Only short quotations of question wording are used, with page references; the files are retained locally for audit and are not redistributed.
+- **The solution booklet** is third-party material used solely as a cross-check; no solution text is reproduced.
+- **Kreyszig, Grewal, Jain–Iyengar** are commercial textbooks on the University's prescribed list; only chapter-level citation and short paraphrase are used.
+- **OpenStax Calculus Volume 2** is openly licensed (CC BY-NC-SA); **MIT OCW 18.03SC** is openly available under MIT OCW's terms. Only section-level citation and paraphrase are used.
+- **AI disclosure.** The explanatory prose, structure, practice sets and answer key were drafted with AI assistance for this project. Every mathematical statement was independently checked with SymPy; every source claim is tied to a page or section listed above. No exam question, year, mark or paper code was invented. Where a fact could not be confirmed, it is listed in §9.6 rather than asserted.
+
+## 9.8 File map
+
+```text
+maths/
+├── modules/module-4.html          ← browser version with clickable contents and rendered mathematics
+├── Module_4_Study_Guide.md        ← this document (portable, offline)
+├── Module_4_Transcription.md      ← faithful 8-page transcription (the authority)
+├── Tutorial_4_Transcription.md    ← five questions + OLE/WMF map
+├── Exam_Questions_Module_4.md     ← 25 questions with provenance
+├── Module_4_Revision_Sheet.md     ← condensed revision sheet
+├── OCR_Review_Report_Module_4.md  ← flags, misprints, verification tables
+└── Source_Index.md                ← source library, hashes, page maps
+```
+
+**Re-running the checks.** The verification script and the page renders used for transcription are
+audit artefacts: they are kept in the working copy and are not published here. In that working
+copy, from its root:
+
+```powershell
+python -X utf8 _work\verify_m4_guide.py
+```
+
+The script prints one PASS/FAIL line per coefficient or identity and ends with `FAILURES: 0 []` when everything agrees. It takes a few minutes, because it integrates every coefficient symbolically.
+
+---
+
+*End of guide. If a claim in this guide disagrees with `Module_4_Transcription.md`, the transcription of the original notes is the authority — investigate before changing either.*
+
+
+
+
+
+
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)']],
+    displayMath: [['\\[', '\\]']],
+    processEscapes: true,
+    tags: 'none'
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  startup: { typeset: false }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var content = document.getElementById('content');
+  var errorBox = document.getElementById('render-error');
+  var progressBar = document.getElementById('progress-bar');
+
+  function showError(msg) {
+    if (progressBar && progressBar.parentNode) progressBar.parentNode.hidden = true;
+    if (!errorBox) return;
+    errorBox.hidden = false;
+    var slot = errorBox.querySelector('[data-msg]');
+    if (slot) slot.textContent = msg;
+  }
+
+  try {
+    if (!window.marked) {
+      showError('The Markdown renderer (marked) could not be loaded from the CDN. Check your internet connection and reload.');
+      return;
+    }
+
+    /* ---------------------------------------------------------------
+       1. Extract mathematics before Markdown parsing.
+       Markdown would otherwise eat the backslashes in \\ row separators,
+       the brackets in \[ \], and the pipes in |A| inside tables.
+       --------------------------------------------------------------- */
+
+    var store = [];
+    var BRK = /\u0000BRK([^\u0000]*)\u0000/g;
+
+    function esc(s) {
+      return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function texOut(tex) {
+      return esc(tex.replace(BRK, function (m, p) { return '\\\\[' + p + ']'; }));
+    }
+
+    function token(tex, display, off) {
+      store.push({ tex: tex, display: display, off: off });
+      var i = store.length - 1;
+      return display
+        ? '\n\n<div class="math-block" data-math="' + i + '" data-off="' + off + '"></div>\n\n'
+        : '<span class="math-inline" data-math="' + i + '"></span>';
+    }
+
+    var src = document.getElementById('md-source').textContent.replace(/^\n/, '');
+    var fences = [];
+
+    /* protect fenced code blocks */
+    src = src.replace(/```[\s\S]*?```/g, function (m) {
+      fences.push(m);
+      return '\u0000F' + (fences.length - 1) + '\u0000';
+    });
+
+    /* protect LaTeX line-break spacing such as \\[2pt] */
+    src = src.replace(/\\\\\[(\s*\d+pt\s*)\]/g, function (m, p) {
+      return '\u0000BRK' + p + '\u0000';
+    });
+
+    /* display mathematics */
+    src = src.replace(/\$\$([\s\S]*?)\$\$/g, function (m, t, off) { return token(t.trim(), true, off); });
+    src = src.replace(/\\\[([\s\S]*?)\\\]/g, function (m, t, off) { return token(t.trim(), true, off); });
+
+    /* inline mathematics */
+    src = src.replace(/\\\(([\s\S]*?)\\\)/g, function (m, t, off) { return token(t.trim(), false, off); });
+
+    /* restore fenced code blocks (still unparsed, still containing their own text) */
+    src = src.replace(/\u0000F(\d+)\u0000/g, function (m, i) { return fences[+i]; });
+
+    /* ---------------------------------------------------------------
+       2. Parse Markdown
+       --------------------------------------------------------------- */
+
+    var html = marked.parse(src, { gfm: true, breaks: false });
+
+    /* ---------------------------------------------------------------
+       3. Put the mathematics back
+       --------------------------------------------------------------- */
+
+    html = html.replace(/<div class="math-block" data-math="(\d+)" data-off="(\d+)"><\/div>/g, function (m, i, off) {
+      return '<div class="math-block" data-math="' + i + '" data-off="' + off + '">\\[' + texOut(store[+i].tex) + '\\]</div>';
+    });
+    html = html.replace(/<span class="math-inline" data-math="(\d+)"><\/span>/g, function (m, i) {
+      var it = store[+i];
+      var body = '\\(' + texOut(it.tex) + '\\)';
+      return it.tex.length >= 40 ? '<span class="mj-inline">' + body + '</span>' : body;
+    });
+
+    content.innerHTML = html;
+
+    /* ---------------------------------------------------------------
+       4. Post-processing: drop the duplicate title, wrap tables,
+          open external links safely, assign heading anchors
+       --------------------------------------------------------------- */
+
+    var firstH1 = content.querySelector('h1');
+    if (firstH1 && /^Module 4\b/.test(firstH1.textContent.trim())) {
+      var nextEl = firstH1.nextElementSibling;
+      if (nextEl && nextEl.tagName === 'P' && /^Study guide for\b/.test(nextEl.textContent.trim())) {
+        nextEl.parentNode.removeChild(nextEl);
+      }
+      firstH1.parentNode.removeChild(firstH1);
+    }
+
+    Array.prototype.forEach.call(content.querySelectorAll('table'), function (t) {
+      if (t.tHead && !t.tHead.textContent.trim()) t.tHead.style.display = 'none';
+      var w = document.createElement('div');
+      w.className = 'table-wrap';
+      w.setAttribute('role', 'region');
+      w.setAttribute('tabindex', '0');
+      w.setAttribute('aria-label', 'Table (scroll horizontally to see all columns)');
+      t.parentNode.insertBefore(w, t);
+      w.appendChild(t);
+    });
+
+    Array.prototype.forEach.call(content.querySelectorAll('a[href^="http"]'), function (a) {
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+    });
+
+    var used = Object.create(null);
+
+    function slugify(s) {
+      var out;
+      try {
+        out = s.toLowerCase().replace(/[^\p{L}\p{N}\s-]/gu, '');
+      } catch (e) {
+        out = s.toLowerCase().replace(/[^a-z0-9\s-]/g, '');
+      }
+      return out.trim().replace(/\s+/g, '-');
+    }
+
+    var headings = Array.prototype.slice.call(content.querySelectorAll('h1, h2, h3'));
+
+    headings.forEach(function (h) {
+      var base = slugify(h.textContent) || 'section';
+      var id = base;
+      var n = 2;
+      while (used[id]) { id = base + '-' + n; n += 1; }
+      used[id] = true;
+      h.id = id;
+    });
+
+    /* ---------------------------------------------------------------
+       5. Build the sidebar contents and the pill navigation
+       --------------------------------------------------------------- */
+
+    var tocList = document.getElementById('toc-list');
+    var navBar = document.getElementById('section-nav');
+
+    function makeLink(h) {
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent.replace(/\s+/g, ' ').trim();
+      return a;
+    }
+
+    var rootUl = document.createElement('ul');
+    rootUl.className = 'toc-root';
+    var currentSub = null;
+    var mainHeads = [];
+
+    headings.forEach(function (h) {
+      if (h.tagName === 'H3') return;
+
+      if (h.tagName === 'H1') {
+        mainHeads.push(h);
+        var li = document.createElement('li');
+        li.className = 'lvl1';
+        li.appendChild(makeLink(h));
+        currentSub = document.createElement('ul');
+        currentSub.className = 'toc-sub';
+        li.appendChild(currentSub);
+        rootUl.appendChild(li);
+        return;
+      }
+
+      if (/^Contents$/.test(h.textContent.trim())) return;
+
+      var li2 = document.createElement('li');
+      if (currentSub) {
+        li2.className = 'lvl2';
+        li2.appendChild(makeLink(h));
+        currentSub.appendChild(li2);
+      } else {
+        li2.className = 'lvl2 lvl2-top';
+        li2.appendChild(makeLink(h));
+        rootUl.appendChild(li2);
+      }
+    });
+
+    tocList.appendChild(rootUl);
+
+    mainHeads.forEach(function (h) {
+      navBar.appendChild(makeLink(h));
+    });
+
+    /* ---------------------------------------------------------------
+       6. Scroll spy and reading progress
+       --------------------------------------------------------------- */
+
+    var links = Array.prototype.slice.call(
+      document.querySelectorAll('#toc-list a, #section-nav a')
+    );
+
+    var byId = Object.create(null);
+    links.forEach(function (a) {
+      var id = a.getAttribute('href').slice(1);
+      if (!byId[id]) byId[id] = [];
+      byId[id].push(a);
+    });
+
+    var targets = headings.filter(function (h) { return h.tagName !== 'H3'; });
+    var ticking = false;
+
+    function update() {
+      ticking = false;
+      var marker = window.scrollY + 130;
+      var current = null;
+
+      for (var i = 0; i < targets.length; i += 1) {
+        var top = targets[i].getBoundingClientRect().top + window.scrollY;
+        if (top <= marker) current = targets[i]; else break;
+      }
+
+      links.forEach(function (a) { a.classList.remove('active'); });
+      if (current && byId[current.id]) {
+        byId[current.id].forEach(function (a) { a.classList.add('active'); });
+      }
+
+      if (progressBar) {
+        var doc = document.documentElement;
+        var max = doc.scrollHeight - window.innerHeight;
+        var pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+        progressBar.style.width = (pct < 0 ? 0 : pct > 100 ? 100 : pct).toFixed(2) + '%';
+      }
+    }
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(update);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+
+    /* ---------------------------------------------------------------
+       7. Mobile contents toggle
+       --------------------------------------------------------------- */
+
+    var toggle = document.getElementById('toc-toggle');
+    var sidebar = document.getElementById('sidebar');
+
+    if (toggle && sidebar) {
+      toggle.addEventListener('click', function () {
+        var open = sidebar.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+
+      tocList.addEventListener('click', function (e) {
+        if (e.target && e.target.tagName === 'A' &&
+            window.matchMedia('(max-width: 980px)').matches) {
+          sidebar.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+
+    /* Desktop collapse button */
+    var collapseBtn = document.getElementById('toc-collapse');
+    var layoutEl = document.querySelector('.layout');
+
+    function setCollapsed(collapsed) {
+      layoutEl.classList.toggle('toc-collapsed', collapsed);
+      collapseBtn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+      var label = collapsed ? 'Show contents' : 'Hide contents';
+      collapseBtn.setAttribute('aria-label', label);
+      collapseBtn.title = label;
+      try { localStorage.setItem('toc-collapsed', collapsed ? '1' : '0'); } catch (e) {}
+    }
+
+    if (collapseBtn && layoutEl) {
+      collapseBtn.addEventListener('click', function () {
+        setCollapsed(!layoutEl.classList.contains('toc-collapsed'));
+      });
+      try {
+        if (localStorage.getItem('toc-collapsed') === '1') setCollapsed(true);
+      } catch (e) {}
+    }
+
+    /* ---------------------------------------------------------------
+       8. Typeset mathematics
+       --------------------------------------------------------------- */
+
+    var attempts = 0;
+
+    function typeset() {
+      if (window.MathJax && MathJax.startup && MathJax.startup.promise) {
+        MathJax.startup.promise
+          .then(function () { return MathJax.typesetPromise([content]); })
+          .then(function () { update(); })
+          .catch(function (err) {
+            if (window.console && console.error) console.error(err);
+            var fb = document.getElementById('math-fallback');
+            if (fb) fb.hidden = false;
+          });
+        return;
+      }
+      attempts += 1;
+      if (attempts <= 48) {
+        window.setTimeout(typeset, 250);
+      } else {
+        var fb = document.getElementById('math-fallback');
+        if (fb) fb.hidden = false;
+      }
+    }
+
+    typeset();
+
+  } catch (err) {
+    if (window.console && console.error) console.error(err);
+    showError(err && err.message ? err.message : String(err));
+  }
+})();
+</script>
+</body>
+</html>

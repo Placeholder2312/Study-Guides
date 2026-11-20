@@ -1,0 +1,108 @@
+======================================================================
+M1-EV-Q1-i   A = [[2, -1, 1], [1, 2, -1], [1, -1, 2]]
+char poly  : (lam - 3)*(lam - 2)*(lam - 1)
+char eq    : det(A - lam I) = 0   -> (lam - 3)*(lam - 2)*(lam - 1) = 0
+trace      : 6   det: 6
+eigenvals  : {3: 1, 2: 1, 1: 1}
+eigenvects :
+   lam = 1  alg.mult = 1  geo.mult = 1
+       [[0, 1, 1]]
+   lam = 2  alg.mult = 1  geo.mult = 1
+       [[1, 1, 1]]
+   lam = 3  alg.mult = 1  geo.mult = 1
+       [[1, 0, 1]]
+diagonalisable: True
+======================================================================
+M1-EV-Q1-ii   A = [[2, 2, 1], [1, 3, 1], [1, 2, 2]]
+char poly  : (lam - 5)*(lam - 1)**2
+char eq    : det(A - lam I) = 0   -> (lam - 5)*(lam - 1)**2 = 0
+trace      : 7   det: 5
+eigenvals  : {5: 1, 1: 2}
+eigenvects :
+   lam = 1  alg.mult = 2  geo.mult = 2
+       [[-2, 1, 0]]
+       [[-1, 0, 1]]
+   lam = 5  alg.mult = 1  geo.mult = 1
+       [[1, 1, 1]]
+diagonalisable: True
+======================================================================
+M1-EV-Q1-iii   A = [[2, 1, 1], [2, 3, 2], [3, 3, 4]]
+char poly  : (lam - 7)*(lam - 1)**2
+char eq    : det(A - lam I) = 0   -> (lam - 7)*(lam - 1)**2 = 0
+trace      : 9   det: 7
+eigenvals  : {7: 1, 1: 2}
+eigenvects :
+   lam = 1  alg.mult = 2  geo.mult = 2
+       [[-1, 1, 0]]
+       [[-1, 0, 1]]
+   lam = 7  alg.mult = 1  geo.mult = 1
+       [[1/3, 2/3, 1]]
+diagonalisable: True
+======================================================================
+M1-EV-Q1-iv   A = [[6, -2, 2], [-2, 3, -1], [2, -1, 3]]
+char poly  : (lam - 8)*(lam - 2)**2
+char eq    : det(A - lam I) = 0   -> (lam - 8)*(lam - 2)**2 = 0
+trace      : 12   det: 32
+eigenvals  : {8: 1, 2: 2}
+eigenvects :
+   lam = 2  alg.mult = 2  geo.mult = 2
+       [[1/2, 1, 0]]
+       [[-1/2, 0, 1]]
+   lam = 8  alg.mult = 1  geo.mult = 1
+       [[2, -1, 1]]
+diagonalisable: True
+======================================================================
+M1-EV-Q1-v   A = [[8, -6, 2], [-6, 7, -4], [2, -4, 3]]
+char poly  : lam*(lam - 15)*(lam - 3)
+char eq    : det(A - lam I) = 0   -> lam*(lam - 15)*(lam - 3) = 0
+trace      : 18   det: 0
+eigenvals  : {15: 1, 3: 1, 0: 1}
+eigenvects :
+   lam = 0  alg.mult = 1  geo.mult = 1
+       [[1/2, 1, 1]]
+   lam = 3  alg.mult = 1  geo.mult = 1
+       [[-1, -1/2, 1]]
+   lam = 15  alg.mult = 1  geo.mult = 1
+       [[2, -2, 1]]
+diagonalisable: True
+======================================================================
+M1-EV-Q1-vi   A = [[1, 0, 0], [0, 3, -1], [0, -1, 3]]
+char poly  : (lam - 4)*(lam - 2)*(lam - 1)
+char eq    : det(A - lam I) = 0   -> (lam - 4)*(lam - 2)*(lam - 1) = 0
+trace      : 7   det: 8
+eigenvals  : {1: 1, 4: 1, 2: 1}
+eigenvects :
+   lam = 1  alg.mult = 1  geo.mult = 1
+       [[1, 0, 0]]
+   lam = 2  alg.mult = 1  geo.mult = 1
+       [[0, 1, 1]]
+   lam = 4  alg.mult = 1  geo.mult = 1
+       [[0, -1, 1]]
+diagonalisable: True
+======================================================================
+M1-EV-Q1-vii   A = [[-2, 2, -3], [2, 1, -6], [-1, -2, 0]]
+char poly  : (lam - 5)*(lam + 3)**2
+char eq    : det(A - lam I) = 0   -> (lam - 5)*(lam + 3)**2 = 0
+trace      : -1   det: 45
+eigenvals  : {5: 1, -3: 2}
+eigenvects :
+   lam = -3  alg.mult = 2  geo.mult = 2
+       [[-2, 1, 0]]
+       [[3, 0, 1]]
+   lam = 5  alg.mult = 1  geo.mult = 1
+       [[-1, -2, 1]]
+diagonalisable: True
+======================================================================
+M1-EV-Q2-i   A^3 + 5A + 8I
+A char poly: (lam - 3)*(lam + 1)*(lam + 2)
+eig(A): {-2: 1, 3: 1, -1: 1}
+A^3+5A+8I = [[2, 24, 36], [0, 50, 60], [0, 0, -10]]
+eig of expression, direct  : {-10: 1, 50: 1, 2: 1}
+eig of expression, spectral: {-10: 1, 50: 1, 2: 1}
+======================================================================
+M1-EV-Q2-ii   A^2 - 2A + I
+A char poly: (lam - 4)*(lam - 3)*(lam - 2)
+eig(A): {3: 1, 4: 1, 2: 1}
+A^2-2A+I = [[1, 12, 18], [0, 9, 10], [0, 0, 4]]
+eig of expression, direct  : {4: 1, 9: 1, 1: 1}
+eig of expression, spectral: {4: 1, 9: 1, 1: 1}
