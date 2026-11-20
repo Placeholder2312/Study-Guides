@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AOA End-Sem Question Bank — Study Guide</title>
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --muted: #444444;
+    --bg: #ffffff;
+    --line: #cccccc;
+    --rule: #999999;
+    --accent: #1d4ed8;
+    --space: 1.5rem;
+    --radius: 0;
+    --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+    --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-mono: "Courier New", Courier, monospace;
+    --surface: #fafafa;
+    --surface-alt: #f9f9f9;
+    --surface-eq: #f5f5f5;
+    --surface-hi: #f0f0f0;
+  }}
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 1rem; }
+  body {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    font-size: 17px;
+    font-weight: 500;
+    text-wrap: pretty;
+  }
+  .wrap {
+    max-width: 62ch;
+    margin: 0 auto;
+    padding: 2.5rem 1rem 4rem;
+  }
+  header {
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+  }
+  h1 {
+    font-family: var(--font-serif);
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0;
+  }
+  .meta {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    font-weight: 500;
+    color: var(--muted);
+    margin-top: 1rem;
+  }
+  h2 {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 3rem 0 1rem;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.4rem;
+  }
+  h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 2rem 0 0.5rem;
+  }
+  h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 1.5rem 0 0.5rem;
+  }
+  p {
+    margin: 0 0 1rem;
+    line-height: 1.6;
+  }
+  ul, ol { margin:0 0 1rem; padding-left:1.35rem; }
+  li { margin-bottom:.3rem; }
+  strong { font-weight:700; }
+  code, .kbd { display: inline-block; max-width: 100%; font-family: var(--font-mono); font-size: 0.875rem; line-height: 1.4; white-space: nowrap; word-break: normal; overflow-wrap: normal; overflow-x: auto; vertical-align: baseline; background: var(--surface-hi); border: 1px solid var(--line); border-radius: 3px; padding: 0.1rem 0.4rem; }
+  pre { font-family:var(--font-mono); font-size:.82rem; line-height:1.55; background:var(--surface);
+        border:1px solid var(--line); border-left:3px solid var(--ink); padding:.9rem 1rem;
+        overflow-x:auto; margin:1.25rem 0; white-space:pre; }
+  .theory {
+    border-left: 3px solid var(--ink);
+    padding: 1rem 1.25rem;
+    margin: 1.75rem 0;
+    font-size: 0.98rem;
+  }
+  .theory p:first-child { margin-top: 0; }
+  .theory p:last-child { margin-bottom: 0; }
+  .source {
+    display: block;
+    font-size: 0.78rem;
+    line-height: 1.4;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+  }
+  .eq {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 1.25rem 0;
+    padding: 0.75rem 1rem;
+    background: var(--surface-eq);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .eq-note {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--muted);
+    text-align: center;
+    margin-top: -0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .example {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+    font-size: 0.95rem;
+    background: var(--surface);
+  }
+  .example-title {
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0;
+    color: var(--muted);
+  }
+  .example .eq { margin: 0.75rem 0; background: var(--bg); border: 1px solid var(--line); }
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    padding: 1rem 1.25rem;
+  }
+  .steps li {
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+  .steps li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.1rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    background: var(--ink);
+    border-radius: 50%;
+  }
+  .steps li:last-child { margin-bottom: 0; }
+  .table-scroll { overflow-x:auto; margin:1.5rem 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.75rem 0;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 0.625rem 0.875rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--surface-hi);
+    font-weight: 700;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+  }
+  tr:nth-child(even) td { background: var(--surface-alt); }
+  .dp { width:auto; min-width:100%; font-family:var(--font-mono); font-size:.85rem; }
+  .dp td, .dp th { text-align:center; padding:.38rem .5rem; }
+  .dp th:first-child, .dp td:first-child { text-align:left; font-weight:700; background:var(--surface-hi); }
+  .dp .hit { background:var(--accent-soft); font-weight:700; color:var(--ink); }
+  .dp caption { caption-side:top; text-align:left; font-family:var(--font-sans); font-size:.8rem; font-weight:700;
+                color:var(--muted); padding-bottom:.4rem; }
+  .toc {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 2rem 0;
+    background: var(--surface);
+  }
+  .toc ol { margin: 0; padding-left: 1.25rem; }
+  .toc li { margin-bottom: 0.35rem; font-size: 0.95rem; }
+  .toc a { color: var(--ink); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .nav {
+    margin: 1.5rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .nav a {
+    padding: 0.25rem 0.6rem;
+    border: 1px solid var(--line);
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.85rem;
+    border-radius: 3px;
+  }
+  .nav a:hover { background: var(--surface-hi); }
+  .nav a[aria-current="true"] { border-color:var(--accent); color:var(--accent); background:var(--accent-soft); }
+  .practice, .answer-key, .common-mistakes, .revision-sheet, .references { border: 1px solid var(--line); padding: 1rem 1.25rem; margin: 1.5rem 0; background: var(--surface); }
+  .practice > h3:first-of-type, .answer-key > h3:first-of-type, .common-mistakes > h3:first-of-type,
+  .revision-sheet > h3:first-of-type, .references > h3:first-of-type { margin-top:0; }
+  .practice > h3:first-of-type, .answer-key > h3:first-of-type, .common-mistakes > h3:first-of-type, .revision-sheet > h3:first-of-type, .references > h3:first-of-type { margin-top: 0; }
+  .self-learning {
+    border-left: 3px solid var(--muted);
+    padding: 1rem 1.25rem;
+    margin: 1.75rem 0;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+  .warning { color:#b00020; font-weight:700; }
+  .exam-q {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+    background: var(--surface);
+  }
+  .exam-q-title {
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    letter-spacing: 0;
+    color: var(--muted);
+  }
+  .exam-source {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  .qa-question, .qa-solution, .qa-final { margin: 0.9rem 0; padding: 0.75rem 1rem; }
+  .qa-question { border-left: 4px solid var(--ink); background: var(--bg); }
+  .qa-solution { border-left: 4px solid var(--line); }
+  .qa-final { border: 2px solid var(--accent); background: var(--accent-soft); }
+  .qa-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+  .qa-final .qa-label { color: var(--accent); }
+  .qa-question > :last-child, .qa-solution > :last-child, .qa-final > :last-child { margin-bottom: 0; }
+  .qa-question > p:first-of-type, .qa-final > p:first-of-type { margin-top: 0; }
+  .qa-final .eq { margin: 0.25rem 0 0; background: transparent; border: 0; padding: 0; text-align: left; }
+  .qa-final-text { margin: 0; font-weight: 600; }
+  .qa-list { margin:.3rem 0 0; padding-left:1.2rem; }
+  .qa-list li { margin-bottom:.2rem; }
+  figure { max-width:100%; margin:1rem auto; }
+  /* Match DSGT: keep diagrams comfortably inside the reading column. */
+  svg { width:100%; max-width:440px; height:auto; display:block; margin:1rem auto; padding:.5rem; background:var(--bg); border:1px solid var(--line); }
+  figcaption { font-size:.82rem; color:var(--muted); margin-top:.5rem; line-height:1.45; }
+  .fig-wide { max-width:100%; margin:1rem auto; }
+  .fig-wide svg { max-width:440px; }
+  h1, h2, h3, h4 { text-wrap: balance; }
+  ul, ol, blockquote, pre, figure { line-height: 1.6; }
+  td { line-height: 1.5; }
+  strong, em, span, b, i { line-height: 1.6; }
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+  ::selection { background: var(--ink); color: var(--bg); }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .progress { position:fixed; top:0; left:0; height:3px; width:0; background:var(--accent); z-index:50; }
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  @media (max-width: 600px) {
+    .wrap { padding: 1.5rem 1rem 3rem; }
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.4rem; }
+    .eq { font-size: 1.15rem; }
+  }
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    .wrap { padding: 1rem 0.75rem 3rem; }
+    h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.3rem; margin-top: 2.25rem; }
+    table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; font-size: 0.85rem; }
+    th, td { padding: 0.45rem 0.55rem; }
+    .theory, .example, .practice, .answer-key, .common-mistakes, .revision-sheet, .references, .exam-q, .steps, .toc, .self-learning { padding: 0.75rem; }
+    .eq { font-size: 1rem; padding: 0.6rem 0.5rem; text-align: left; }
+    /* Keep mathematical tokens intact on narrow screens; long chips scroll horizontally. */
+    .nav a { padding: 0.4rem 0.7rem; }
+    svg { max-width: 100%; padding: 0.25rem; }
+  }
+  @media (max-width: 600px) {
+    .dp { display: table; }
+    .fig-wide { margin-left: 0; margin-right: 0; }
+    pre { font-size: 0.74rem; }
+    .nav a { padding: 0.4rem 0.7rem; }
+  }
+  @media print {
+    body { font-size: 12pt; line-height: 1.4; color: #000; background: #fff; }
+    .wrap { max-width: 100%; padding: 0; }
+    header { border-bottom: 1px solid #000; margin-bottom: 1.5rem; padding-bottom: 0.75rem; }
+    h2 { margin: 2rem 0 0.75rem; border-bottom: 1px solid #000; padding-bottom: 0.3rem; }
+    h3 { margin: 1.5rem 0 0.4rem; }
+    .toc, .nav, .progress, .topbar { display: none; }
+    .example, .practice, .answer-key, .revision-sheet, .steps, .theory, .common-mistakes, .references, .exam-q, .qa-question, .qa-solution, .qa-final {
+      border: 1px solid #999;
+      background: #fff !important;
+      page-break-inside: avoid;
+    }
+    .eq { background: #fff; border: 1px solid #999; page-break-inside: avoid; }
+    .eq-note { display: none; }
+    a { text-decoration: none; color: #000; }
+    svg { border: 1px solid #000; page-break-inside: avoid; }
+    footer { margin-top: 2rem; border-top: 1px solid #000; }
+  }
+</style>
+<script>(function(){try{var t=localStorage.getItem('sg-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<style id="theme">
+  :root { color-scheme:light; --ink:#0a0a0a;--muted:#444444;--bg:#ffffff;--line:#cccccc;--rule:#999999;--accent:#1d4ed8;--accent-soft:#eef2ff;--surface:#fafafa;--surface-alt:#f9f9f9;--surface-eq:#f5f5f5;--surface-hi:#f0f0f0; }
+  :root[data-theme="dark"] { color-scheme:dark; --ink:#ececec;--muted:#a8a8ad;--bg:#0f0f11;--line:#34343a;--rule:#5a5a62;--accent:#8ab0ff;--accent-soft:#1b2540;--surface:#17171a;--surface-alt:#1b1b1f;--surface-eq:#1e1e23;--surface-hi:#26262c; }
+  :root[data-theme="dark"] svg circle[fill="var(--accent-soft)"] { fill:#1b2540; }
+  .topbar { display:flex; align-items:center; justify-content:space-between; gap:.5rem; margin:0 0 1rem; }
+  .topbar .back { display:inline-flex; align-items:center; min-height:44px; font-size:.85rem; font-weight:600; color:var(--ink); }
+  .theme-toggle { font:inherit; font-size:.85rem; font-weight:600; color:var(--ink); background:var(--bg); border:1px solid var(--ink); border-radius:0; padding:.4rem .8rem; min-height:44px; min-width:44px; cursor:pointer; margin-left:auto; }
+  .theme-toggle:hover { background:var(--surface-hi); }
+  .theme-toggle:focus-visible { outline:2px solid var(--ink); outline-offset:2px; }
+  @media print {
+    :root, :root[data-theme="dark"], :root:not([data-theme="light"]) { color-scheme:light; --ink:#0a0a0a;--muted:#444444;--bg:#ffffff;--line:#cccccc;--rule:#999999;--accent:#1d4ed8;--accent-soft:#eef2ff;--surface:#fafafa;--surface-alt:#f9f9f9;--surface-eq:#f5f5f5;--surface-hi:#f0f0f0; }
+    .topbar { display:none; }
+  }
+</style>
+<style id="rail-style">
+  /* Section progress. Phone UI by default (top line + edge tab + bottom sheet);
+     margin rail on wide screens with a mouse. Colours come from the theme variables. */
+  .rail { display:none; }
+  .rm-bar { position:fixed; top:0; left:0; height:3px; width:var(--w,0%); background:var(--accent); z-index:30; pointer-events:none; }
+  .rm-tab { position:fixed; left:env(safe-area-inset-left,0px); bottom:calc(14px + env(safe-area-inset-bottom,0px)); z-index:30; display:flex; align-items:center; width:44px; height:44px; padding:0; border:0; background:transparent; font:inherit; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+  .rm-tab span { display:flex; align-items:center; justify-content:center; min-width:26px; height:28px; padding:0 .35rem; font:700 .66rem/1 var(--font-mono); letter-spacing:.04em; font-variant-numeric:tabular-nums; color:var(--ink); background:var(--bg); border:1px solid var(--rule); border-left:0; opacity:.5; transition:opacity .25s; }
+  body.rm-moving .rm-tab span { opacity:.15; }
+  .rm-tab:hover span, .rm-tab:focus-visible span, .rm-tab[aria-expanded="true"] span { opacity:1; }
+  .rm-tab:focus-visible { outline:2px solid var(--ink); outline-offset:-2px; }
+  .rm-back { position:fixed; inset:0; z-index:40; background:rgba(0,0,0,.4); opacity:0; pointer-events:none; transition:opacity .2s; }
+  .rm-sheet { position:fixed; left:0; right:0; bottom:0; z-index:50; max-height:68vh; overflow-y:auto; background:var(--bg); border-top:1px solid var(--ink); padding-bottom:env(safe-area-inset-bottom,0px); transform:translateY(102%); visibility:hidden; transition:transform .22s ease, visibility 0s .22s; }
+  body.rm-open .rm-back { opacity:1; pointer-events:auto; }
+  body.rm-open .rm-sheet { transform:none; visibility:visible; transition-delay:0s; }
+  .rm-head { position:sticky; top:0; z-index:2; display:flex; align-items:center; justify-content:space-between; padding:.7rem 1rem; background:var(--bg); border-bottom:1px solid var(--line); font:600 .65rem/1 var(--font-mono); letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  .rm-head b { color:var(--ink); }
+  .rm-sheet ol { list-style:none; margin:0; padding:.3rem 0 .6rem; }
+  .rm-sheet a { display:grid; grid-template-columns:1.9rem 1fr; align-items:center; min-height:44px; padding:0 1rem; color:var(--muted); text-decoration:none; font-size:.92rem; font-weight:600; border-left:3px solid transparent; }
+  .rm-sheet a .rm-k { font:600 .7rem/1 var(--font-mono); letter-spacing:.04em; }
+  .rm-sheet a.is-done { color:var(--ink); }
+  .rm-sheet a.is-done .rm-k { color:var(--muted); }
+  .rm-sheet a[aria-current="true"] { color:var(--ink); border-left-color:var(--accent); background:var(--accent-soft); font-family:var(--font-serif); font-weight:700; }
+  .rm-sheet a[aria-current="true"] .rm-k { color:var(--accent); }
+  .rm-sheet a:focus-visible { outline:2px solid var(--ink); outline-offset:-2px; }
+
+  .rail { position:fixed; left:14px; top:50%; transform:translateY(-50%); z-index:20; font-family:var(--font-sans); color:var(--muted); }
+  .rail-in { position:relative; padding:.5rem .6rem .6rem .5rem; border:1px solid transparent; background:transparent; transition:background .15s, border-color .15s; }
+  .rail:hover .rail-in, .rail:focus-within .rail-in { background:var(--bg); border-color:var(--line); }
+  .rail-top { display:flex; align-items:flex-end; gap:.5rem; margin:0 0 .7rem; min-height:2.1rem; }
+  .rail-sec { font-family:var(--font-serif); font-size:1.7rem; line-height:.9; color:var(--ink); font-variant-numeric:tabular-nums; letter-spacing:-.02em; }
+  .rail-meta { display:flex; flex-direction:column; gap:.1rem; font:600 .6rem/1.1 var(--font-mono); letter-spacing:.08em; text-transform:uppercase; padding-bottom:.1rem; }
+  .rail-meta b { font-weight:700; color:var(--ink); }
+  .rail-toggle { margin-left:auto; align-self:flex-start; font:inherit; font-size:.8rem; line-height:1; width:1.3rem; height:1.3rem; padding:0; color:var(--muted); background:var(--bg); border:1px solid var(--line); border-radius:0; cursor:pointer; opacity:.55; transition:opacity .15s; }
+  .rail:hover .rail-toggle, .rail-toggle:focus-visible { opacity:1; }
+  .rail-toggle:hover { color:var(--ink); border-color:var(--ink); }
+  .rail-toggle:focus-visible, .rail a:focus-visible { outline:2px solid var(--ink); outline-offset:2px; }
+  .rail-list { position:relative; list-style:none; margin:0; padding:0; max-height:calc(100vh - 11rem); overflow-y:auto; overflow-x:hidden; scrollbar-width:none; }
+  .rail-list::-webkit-scrollbar { display:none; }
+  .rail-list::before { content:""; position:absolute; left:4px; top:0; bottom:0; width:1px; background:var(--rule); opacity:.55; }
+  .rail-fill { position:absolute; left:3.5px; top:0; width:2px; height:var(--fill,0px); background:var(--accent); }
+  .rail a { position:relative; display:grid; grid-template-columns:9px 1.55rem auto; align-items:center; column-gap:.55rem; height:1.45rem; color:inherit; text-decoration:none; }
+  .rail .node { width:7px; height:7px; box-sizing:border-box; border:1px solid var(--rule); background:var(--bg); justify-self:center; }
+  .rail a.is-done .node { background:var(--muted); border-color:var(--muted); }
+  .rail .num { font:600 .62rem/1 var(--font-mono); letter-spacing:.04em; font-variant-numeric:tabular-nums; }
+  .rail .lbl { display:none; font-size:.74rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:14rem; }
+  .rail-sublist { list-style:none; margin:0 0 .3rem 1.65rem; padding:0 0 0 .55rem; border-left:1px solid var(--line); }
+  .rail-sublist a { grid-template-columns:1rem minmax(0,1fr); column-gap:.3rem; height:1.2rem; padding-left:.1rem; }
+  .rail-sublist .sub-lbl { display:block; font-size:.68rem; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .rail-sublist .sub-num { font:600 .62rem/1 var(--font-mono); color:var(--accent); }
+  .rail-sublist a[aria-current="location"] { color:var(--accent); font-weight:700; }
+  .rail.is-collapsed .rail-sublist { display:none; }
+  .rm-sublist { margin:0 0 .35rem 2.65rem !important; padding:.15rem 0 .25rem .65rem !important; border-left:1px solid var(--line); }
+  .rm-sublist a { grid-template-columns:1.1rem minmax(0,1fr); min-height:34px; padding:.25rem .5rem; border-left:0; font-size:.84rem; }
+  .rm-sublist a[aria-current="location"] { color:var(--accent); background:var(--accent-soft); }
+
+  .rail a:hover { color:var(--ink); }
+  .rail a:hover .node { border-color:var(--ink); }
+  .rail a[aria-current="true"] { color:var(--ink); }
+  .rail a[aria-current="true"] .node { width:9px; height:9px; border-color:var(--accent); background:linear-gradient(to top, var(--accent) calc(var(--p,0) * 100%), var(--bg) 0); box-shadow:0 0 0 3px var(--accent-soft); }
+  .rail a[aria-current="true"] .num { color:var(--accent); }
+  .rail a[aria-current="true"] .lbl { display:block; font-family:var(--font-serif); font-size:.82rem; font-weight:700; max-width:clamp(0px, calc(50vw - 25.5rem), 14rem); }
+  .rail:hover .lbl, .rail:focus-within .lbl, .rail:hover a[aria-current="true"] .lbl, .rail:focus-within a[aria-current="true"] .lbl { display:block; max-width:14rem; }
+  .rail.is-collapsed .rail-in { padding:.5rem .4rem; background:transparent !important; border-color:transparent !important; }
+  .rail.is-collapsed .rail-top { flex-direction:column; align-items:flex-start; gap:.4rem; margin-bottom:.5rem; min-height:0; }
+  .rail.is-collapsed .rail-sec, .rail.is-collapsed .rail-meta, .rail.is-collapsed .num, .rail.is-collapsed .lbl { display:none !important; }
+  .rail.is-collapsed .rail-toggle { margin:0 0 0 -.25rem; }
+  .rail.is-collapsed a { grid-template-columns:9px; height:1.15rem; }
+  .rail.is-collapsed .node { width:5px; height:5px; }
+  .rail.is-collapsed a[aria-current="true"] .node { width:7px; height:7px; box-shadow:0 0 0 2px var(--accent-soft); }
+  .rail.is-collapsed .rail-list { max-height:calc(100vh - 8rem); }
+
+  @media (min-width:900px) and (pointer:fine) {
+    .rm-tab, .rm-back, .rm-sheet { display:none; }
+    .rm-bar { display:block; }
+    .rail { display:block; }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    .rm-sheet, .rm-back, .rm-tab span, .rail-in { transition:none; }
+  }
+  /* Show children only for the section currently being read. */
+  .rail-list > li > .rail-sublist { display:none; }
+  .rail-list > li > a[aria-current="true"] ~ .rail-sublist { display:block; }
+  .rail.is-collapsed .rail-list > li > .rail-sublist { display:none; }
+  .rm-sheet > ol > li > .rm-sublist { display:none; }
+  .rm-sheet > ol > li > a[aria-current="true"] ~ .rm-sublist { display:block; }
+  @media print { .rail, .rm-bar, .rm-tab, .rm-back, .rm-sheet { display:none !important; } }
+
+</style>
+<style id="aoa-diagrams">
+  .aoa-fig { margin: 1.25rem 0; padding: .75rem; border: 1px solid var(--line); background: var(--surface); }
+  .aoa-fig svg { width: 100%; max-width: 480px; height: auto; display: block; margin: .35rem auto; padding: 0; border: 0; background: transparent; }
+  :root { --danger: #b00020; }
+  :root[data-theme="dark"] { --danger: #ff7b8f; }
+  @media print { :root, :root[data-theme="dark"] { --danger: #b00020; } }
+  .aoa-fig figcaption { font-size: .85rem; color: var(--muted); line-height: 1.45; margin-top: .6rem; }
+  @media (max-width: 600px) { .aoa-fig { padding: .5rem; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><a class="back" href="/aoa">&#8592; All modules</a><button class="theme-toggle" type="button" id="themeToggle"></button></div>
+  <header>
+    <h1>AOA End-Sem Question Bank</h1>
+    <p class="subtitle">Winter 2026 · every question as Question → Solution → Final answer</p>
+    <div class="meta">B.E. CSE (AI &amp; ML) · Semester III · Course 2023113 · NEP 2020<br>Built from the MUSA question bank (2026) and MUSA Practice Paper Set I · 6 topic groups, 30 questions</div>
+  </header>
+  <div class="toc"><ol><li><a href="#basics">Analysis basics and divide and conquer</a></li><li><a href="#greedy">Greedy method</a></li><li><a href="#dp">Dynamic programming</a></li><li><a href="#bt">Backtracking and branch and bound</a></li><li><a href="#strings">String matching</a></li><li><a href="#diff">Differentiate between</a></li></ol></div>
+  <nav class="nav" aria-label="Sections"><a href="#basics">Analysis</a><a href="#greedy">Greedy</a><a href="#dp">Dynamic</a><a href="#bt">Backtracking</a><a href="#strings">String</a><a href="#diff">Differentiate</a></nav>
+<h2 id="basics">1 — Analysis basics and divide and conquer</h2>
+<div class="practice">
+<section class="exam-q">
+<h3 id="q-asym">Q1 — Asymptotic notations (5 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Explain Big Oh, Big Omega and Theta notation.<br><em>MUSA QB Q1</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+Asymptotic notations describe how the running time or space of an algorithm grows with input size n, ignoring constants and lower-order terms.<ul><li><strong>Big O, upper bound:</strong> T(n) = O(g(n)) if there are constants c &gt; 0 and n₀ such that 0 ≤ T(n) ≤ c·g(n) for all n ≥ n₀. Used for the worst case.</li><li><strong>Big Omega, lower bound:</strong> T(n) = Ω(g(n)) if 0 ≤ c·g(n) ≤ T(n) for all n ≥ n₀. T grows at least as fast as g.</li><li><strong>Theta, tight bound:</strong> T(n) = Θ(g(n)) if 0 ≤ c₁·g(n) ≤ T(n) ≤ c₂·g(n) for all n ≥ n₀. T grows at the same rate as g.</li><li>Θ holds exactly when both O and Ω hold. Common orders: 1, log n, n, n log n, n², n³, 2ⁿ, n!.</li></ul>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">O is the upper bound, Ω the lower bound and Θ the tight bound; all three are defined by constants c (or c₁, c₂) and n₀ valid for all n ≥ n₀.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q-master">Q2 — Master method (5 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Solve using the master method: (i) T(n) = 8T(n/2) + n<sup>d</sup>  (ii) T(n) = 4T(n/2) + n².<br><em>MUSA Practice Paper Set I, Q1(a)</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<p>For T(n) = aT(n/b) + f(n) compare f(n) with n<sup>log<sub>b</sub>a</sup>.</p><p><strong>(i)</strong> a = 8, b = 2, so n<sup>log₂8</sup> = n³. The paper prints the exponent as d, so all three cases are given:</p><ul><li>d &lt; 3: f(n) is smaller, case 1, T(n) = Θ(n³).</li><li>d = 3: equal, case 2, T(n) = Θ(n³ log n).</li><li>d &gt; 3: f(n) is larger (regularity holds), case 3, T(n) = Θ(n<sup>d</sup>).</li></ul><p><strong>(ii)</strong> a = 4, b = 2, n<sup>log₂4</sup> = n². f(n) = n² equals it, so case 2 applies: T(n) = Θ(n² log n).</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">(i) Θ(n³) for d &lt; 3, Θ(n³ log n) for d = 3, Θ(n<sup>d</sup>) for d &gt; 3.  (ii) Θ(n² log n).</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q-binary">Q3 — Binary search (5 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Write and explain the binary search algorithm and derive its complexity.<br><em>MUSA QB Q13</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<pre><code>BinarySearch(A, n, key)
+ low ← 0; high ← n − 1
+ while low ≤ high do
+   mid ← ⌊(low + high) / 2⌋
+   if A[mid] = key then return mid
+   else if key &lt; A[mid] then high ← mid − 1
+   else low ← mid + 1
+ return NOT FOUND</code></pre><p>The array must be sorted. Divide: pick the middle. Conquer: keep only the half that can hold the key. Combine: nothing to do.</p><p>Each step halves the range and does O(1) work, so T(n) = T(n/2) + O(1). By the master method (a = 1, b = 2, f = 1 = n⁰) this is case 2, giving T(n) = O(log n). Best case is O(1), when the key is the first middle element.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">Binary search takes T(n) = T(n/2) + O(1) = O(log n) in the average and worst case, and O(1) in the best case.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q-qsort">Q4 — Quick sort algorithm and complexity (8 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Write an algorithm for quick sort and derive its complexity.<br><em>MUSA QB Q7 and Set I Q3(a)</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<pre><code>QuickSort(A, low, high)
+ if low &lt; high then
+   p ← Partition(A, low, high)
+   QuickSort(A, low, p − 1); QuickSort(A, p + 1, high)
+
+Partition(A, low, high)      // pivot = last element
+ pivot ← A[high]; i ← low − 1
+ for j ← low to high − 1 do
+   if A[j] ≤ pivot then i ← i + 1; swap A[i], A[j]
+ swap A[i + 1], A[high]; return i + 1</code></pre><ul><li><strong>Best case:</strong> the pivot splits the array in half, T(n) = 2T(n/2) + O(n) = O(n log n).</li><li><strong>Average case:</strong> splits are reasonably balanced, about log n levels of O(n) work, so O(n log n).</li><li><strong>Worst case:</strong> the pivot is always the smallest or largest element, so the split is 0 and n − 1: T(n) = T(n−1) + O(n) = n + (n−1) + … + 1 = n(n+1)/2 = O(n²).</li></ul>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">Best and average case O(n log n); worst case O(n²). Quick sort sorts in place.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q-qsort-num">Q5 — Quick sort on 50, 31, 71, 38, 77, 81, 12, 33 (8 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Sort the numbers 50, 31, 71, 38, 77, 81, 12, 33 using quick sort (last element as pivot).<br><em>Set I Q3(a) OR</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<table><thead><tr><th>Partition</th><th>Pivot</th><th>Array after partition</th></tr></thead><tbody><tr><td>[50 31 71 38 77 81 12 33]</td><td>33</td><td>31 12 <strong>33</strong> 38 77 81 50 71</td></tr><tr><td>[31 12]</td><td>12</td><td><strong>12</strong> 31</td></tr><tr><td>[38 77 81 50 71]</td><td>71</td><td>38 50 <strong>71</strong> 77 81</td></tr><tr><td>[38 50]</td><td>50</td><td>38 <strong>50</strong></td></tr><tr><td>[77 81]</td><td>81</td><td>77 <strong>81</strong></td></tr></tbody></table><p>Each pivot lands in its final place, the left and right parts are sorted the same way, and no merge is needed. Complexity is as in Q4.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">Sorted array: <strong>12, 31, 33, 38, 50, 71, 77, 81</strong>.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q-ins">Q6 — Insertion sort with passes (8 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Write the algorithm for insertion sort and sort 11, 7, 17, 3, 9, 29, 85, 9, showing the output after every pass.<br><em>Set I Q6(a)</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<pre><code>InsertionSort(A, n)
+ for i ← 1 to n − 1 do
+   key ← A[i]; j ← i − 1
+   while j ≥ 0 and A[j] &gt; key do A[j+1] ← A[j]; j ← j − 1
+   A[j+1] ← key</code></pre><table><thead><tr><th>Pass</th><th>Key</th><th>Array</th></tr></thead><tbody><tr><td>1</td><td>7</td><td>7 11 17 3 9 29 85 9</td></tr><tr><td>2</td><td>17</td><td>7 11 17 3 9 29 85 9</td></tr><tr><td>3</td><td>3</td><td>3 7 11 17 9 29 85 9</td></tr><tr><td>4</td><td>9</td><td>3 7 9 11 17 29 85 9</td></tr><tr><td>5</td><td>29</td><td>3 7 9 11 17 29 85 9</td></tr><tr><td>6</td><td>85</td><td>3 7 9 11 17 29 85 9</td></tr><tr><td>7</td><td>9</td><td>3 7 9 9 11 17 29 85</td></tr></tbody></table><p>Best case O(n) (already sorted), worst and average O(n²).</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">Sorted: <strong>3, 7, 9, 9, 11, 17, 29, 85</strong>.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q-dc">Q7 — Divide and conquer strategy (3 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Explain the concept of the Divide and Conquer strategy.<br><em>MUSA QB Q17(i)</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<ul><li><strong>Divide:</strong> split the problem into smaller subproblems of the same type.</li><li><strong>Conquer:</strong> solve each subproblem recursively; a small enough one is solved directly (base case).</li><li><strong>Combine:</strong> merge the sub-solutions into the answer.</li><li>Subproblems are independent. Examples: merge sort, quick sort, binary search.</li></ul>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">Divide, conquer and combine; the subproblems are independent.</p></div>
+</section>
+</div>
+<h2 id="greedy">2 — Greedy method</h2>
+<div class="practice">
+<section class="exam-q">
+<h3 id="q-greedy">Q8 — Greedy method and abstract algorithm (5 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>What is the greedy method? Write an abstract algorithm for the general design method.<br><em>MUSA QB Q14</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<ul><li>Builds the solution step by step, always taking the best-looking (locally optimal) choice, and never reconsiders it.</li><li>Works when the problem has the greedy-choice property and optimal substructure.</li><li>Typical uses: fractional knapsack, Prim, Kruskal, Dijkstra, Huffman coding.</li></ul><pre><code>Greedy(C)
+ S ← ∅
+ while C ≠ ∅ and S is not complete do
+   x ← Select(C); C ← C − {x}
+   if Feasible(S, x) then S ← S ∪ {x}
+ return S</code></pre>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">Greedy picks a locally optimal feasible choice at each step, using Select and Feasible, and returns the set S.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q-frac">Q9 — Fractional knapsack (7 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Write the greedy knapsack algorithm and solve: n = 5, m = 100, P = (10, 20, 30, 40, 50), W = (20, 30, 66, 40, 60).<br><em>Set I Q3(b)</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<p>Algorithm: compute P/W for each item, sort in decreasing order, add whole items while they fit, then add the fraction of the next item that fills the remaining capacity.</p><table><thead><tr><th>Item</th><th>P</th><th>W</th><th>P/W</th></tr></thead><tbody><tr><td>1</td><td>10</td><td>20</td><td>0.50</td></tr><tr><td>2</td><td>20</td><td>30</td><td>0.67</td></tr><tr><td>3</td><td>30</td><td>66</td><td>0.45</td></tr><tr><td>4</td><td>40</td><td>40</td><td>1.00</td></tr><tr><td>5</td><td>50</td><td>60</td><td>0.83</td></tr></tbody></table><p>Order: 4, 5, 2, 1, 3. Take item 4 (W 40, capacity left 60, profit 40). Take item 5 (W 60, capacity left 0, profit 90). The knapsack is full. Complexity is O(n log n) for the sort.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">Select items 4 and 5 fully: x = (0, 0, 0, 1, 1), weight 100, <strong>maximum profit = 90</strong>.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q-mst">Q10 — MST by Prim and Kruskal (8 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Find the MST of the given graph using Prim's and Kruskal's algorithms.<br><em>Set I Q5(a)</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<p>The graph in the supplied paper is too small to read reliably, so its edge weights are not reproduced here and no answer is invented. Method:</p><ul><li><strong>Kruskal:</strong> sort edges by weight; add each edge that does not form a cycle (check with union-find) until V − 1 edges are chosen. O(E log E).</li><li><strong>Prim:</strong> start from any vertex; repeatedly add the cheapest edge joining the tree to a new vertex. O(E log V) with a heap.</li><li>Both give the same MST weight.</li></ul>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">Needs the graph weights; send a clearer image and I will add the full solution.</p></div>
+</section>
+</div>
+<h2 id="dp">3 — Dynamic programming</h2>
+<div class="practice">
+<section class="exam-q">
+<h3 id="q-multi">Q11 — Multistage graph (5 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Explain multistage graph with an example.<br><em>MUSA QB Q3, Set I Q1(c)</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<ul><li>A directed weighted graph whose vertices are split into stages V₁, …, V<sub>k</sub>; V₁ holds the source, V<sub>k</sub> the sink, and every edge goes from one stage to the next, so it is a DAG.</li><li>Aim: the minimum-cost path from source to sink.</li><li>DP works backward from the sink: Cost(k, t) = 0 and Cost(i, j) = min over r in the next stage of { c(j, r) + Cost(i+1, r) }. Store the chosen r to trace the path.</li></ul><p>A full worked example with figure is in <a href="/aoa/modules/module-4">Module 4</a>.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">Cost(i, j) = min { c(j, r) + Cost(i+1, r) }, computed from the last stage back to the source; the stored choices give the shortest path.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q-lcs">Q12 — LCS algorithm and complexity (8 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Explain and write an algorithm to find the longest common subsequence and derive its time complexity.<br><em>MUSA QB Q11</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<p>A subsequence keeps the order of characters but need not be consecutive. L[i][j] is the LCS length of the first i characters of X and the first j of Y.</p><p>L[i][j] = 0 if i = 0 or j = 0; 1 + L[i−1][j−1] if X[i] = Y[j]; max(L[i−1][j], L[i][j−1]) otherwise.</p><pre><code>LCS(X, Y)   // lengths m, n
+ for i ← 0 to m do L[i][0] ← 0
+ for j ← 0 to n do L[0][j] ← 0
+ for i ← 1 to m do
+   for j ← 1 to n do
+     if X[i] = Y[j] then L[i][j] ← L[i−1][j−1] + 1
+     else L[i][j] ← max(L[i−1][j], L[i][j−1])
+ return L</code></pre><p>The two nested loops fill m·n cells at O(1) each. Backtracking from L[m][n] takes O(m + n).</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">Time O(mn) and space O(mn).</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q-lcs1">Q13 — LCS of ACBAED and ABCABE (8 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Find the LCS of X = ACBAED and Y = ABCABE.<br><em>MUSA QB Q11 example</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<p>The table (rows A, C, B, A, E, D; columns A, B, C, A, B, E) ends with L[6][6] = 4. Backtracking selects E, B, C, A in reverse order.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">LCS = <strong>ACBE</strong>, length 4.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q-lcs2">Q14 — LCS of xyzytxy and ytzxyx (8 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Find the longest common subsequence of String 1 = xyzytxy and String 2 = ytzxyx.<br><em>Set I Q4(a)</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<p>Rows are x, y, z, y, t, x, y; columns are y, t, z, x, y, x.</p><table><thead><tr><th></th><th>∅</th><th>y</th><th>t</th><th>z</th><th>x</th><th>y</th><th>x</th></tr></thead><tbody><tr><td>∅</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>x</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td></tr><tr><td>y</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td></tr><tr><td>z</td><td>0</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td><td>2</td></tr><tr><td>y</td><td>0</td><td>1</td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td></tr><tr><td>t</td><td>0</td><td>1</td><td>2</td><td>2</td><td>2</td><td>3</td><td>3</td></tr><tr><td>x</td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td><td>4</td></tr><tr><td>y</td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td><td>4</td><td>4</td></tr></tbody></table><p>L[7][6] = 4. Tracing back from the bottom-right (diagonal on a match, otherwise toward the larger neighbour) picks y, z, y, x.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">LCS length = <strong>4</strong>; one LCS is <strong>yzyx</strong> (ytxy is another of length 4).</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q-knap">Q15 — 0/1 knapsack with dynamic programming (7 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Explain 0/1 knapsack using dynamic programming, with the algorithm.<br><em>MUSA QB Q12, Set I Q5(b)</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<ul><li>Each item is taken whole or not at all. K[i][w] is the best profit using the first i items with capacity w.</li><li>K[i][w] = 0 if i = 0 or w = 0; K[i−1][w] if w<sub>i</sub> &gt; w; max(K[i−1][w], p<sub>i</sub> + K[i−1][w − w<sub>i</sub>]) otherwise.</li></ul><pre><code>Knapsack01(wt, p, n, W)
+ for i ← 0 to n do K[i][0] ← 0
+ for w ← 0 to W do K[0][w] ← 0
+ for i ← 1 to n do
+   for w ← 1 to W do
+     if wt[i] ≤ w then K[i][w] ← max(K[i−1][w], p[i] + K[i−1][w − wt[i]])
+     else K[i][w] ← K[i−1][w]
+ return K[n][W]</code></pre>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">Answer is K[n][W]; time and space O(nW).</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q-knap1">Q16 — 0/1 knapsack instance (7 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Solve M = 21, n = 4, (p₁, p₂, p₃, p₄) = (2, 5, 8, 1), (w₁, w₂, w₃, w₄) = (10, 15, 6, 9).<br><em>Set I Q5(b) OR</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<p>Fill K[i][w] for w = 0 to 21. Key rows at w = 21:</p><table><thead><tr><th>i</th><th>K[i][21]</th><th>Reason</th></tr></thead><tbody><tr><td>1</td><td>2</td><td>item 1 fits (10 ≤ 21)</td></tr><tr><td>2</td><td>5</td><td>items 1 and 2 weigh 25 &gt; 21, so take the better one</td></tr><tr><td>3</td><td>13</td><td>item 3 (6) + item 2 (15) = 21, profit 8 + 5</td></tr><tr><td>4</td><td>13</td><td>item 4 adds nothing better</td></tr></tbody></table><p>Trace back: K[4][21] = K[3][21], so item 4 is out. K[3][21] ≠ K[2][21], so item 3 is in (capacity 15). K[2][15] = 5 ≠ K[1][15] = 2, so item 2 is in (capacity 0).</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">Select items 2 and 3: x = (0, 1, 1, 0), weight 21, <strong>maximum profit = 13</strong>.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q-opt">Q17 — Principle of optimality and DP concept (3 marks each)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Explain the principle of optimality and the dynamic programming approach.<br><em>MUSA QB Q17(iii), (iv)</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<ul><li><strong>Dynamic programming:</strong> solve overlapping subproblems once, store the results (top-down memoization or bottom-up tabulation) and reuse them. Needs optimal substructure and overlapping subproblems. Examples: multistage graph, Floyd–Warshall, 0/1 knapsack, TSP, LCS.</li><li><strong>Principle of optimality (Bellman):</strong> an optimal solution is built from optimal solutions of its subproblems; after any decision, the remaining decisions must be optimal for the resulting subproblem.</li><li>General form: Opt(S) = opt over d of { Cost(S, d) + Opt(S′) }.</li></ul>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">DP stores subproblem results; the principle of optimality says optimal solutions contain optimal sub-solutions.</p></div>
+</section>
+</div>
+<h2 id="bt">4 — Backtracking and branch and bound</h2>
+<div class="practice">
+<section class="exam-q">
+<h3 id="q-nq">Q18 — N-queen and 8-queen problem (7 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Explain the 8 queen problem using backtracking (and the N-queen problem with the 4-queen example).<br><em>MUSA QB Q6, Q15; Set I Q6(b)</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<ul><li>Place N queens on an N × N board so that no two share a row, column or diagonal.</li><li>Place one queen per row. Before placing, check the column and both diagonals against the queens already placed. If a safe square exists, place and go to the next row; if none exists, backtrack: remove the previous queen and try its next square.</li><li>The state-space tree has partial placements as nodes; unsafe branches are pruned.</li><li><strong>4-queen:</strong> two solutions, (1,2), (2,4), (3,1), (4,3) and (1,3), (2,1), (3,4), (4,2).</li><li><strong>8-queen, one solution:</strong> (1,1), (2,5), (3,8), (4,6), (5,3), (6,7), (7,2), (8,4).</li></ul>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">8-queen has 92 solutions (12 distinct up to symmetry); one is (1,1), (2,5), (3,8), (4,6), (5,3), (6,7), (7,2), (8,4).</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q-col">Q19 — Graph colouring with backtracking (5 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Explain how graph colouring can be solved with backtracking using a suitable example.<br><em>MUSA QB Q9, Set I Q1(d)</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<p>Colour vertices one at a time with at most m colours so that no two adjacent vertices share a colour. If no colour is valid for a vertex, backtrack to the previous vertex and change its colour.</p><p><strong>Example:</strong> path A–C–B (edges A–C, B–C), colours Red and Green. A = Red. B = Green is allowed (A and B are not adjacent). C touches both A and B, so neither colour works, so backtrack: B = Red. Now C = Green works.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">Solutions (A, B, C): (Red, Red, Green) and (Green, Green, Red); the graph is 2-colourable.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q-sos">Q20 — Sum of subsets (8 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Write and explain the sum of subset algorithm for n = 5, W = {2, 7, 8, 9, 15}, M = 17.<br><em>Set I Q2(a)</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<p>Include or exclude each element in order. Prune a branch if the sum so far plus the next element exceeds M, or if the sum plus all remaining elements falls short of M.</p><p>Trace (weights already sorted): include 2, 7 (sum 9), 8 (sum 17) gives a solution. Backtrack: after 2, 7 the sum 9 + 9 = 18 exceeds 17, so prune. Include 2, 15 (sum 17) gives a solution. Exclude 2, 7, 8: then 8, 9 (sum 17) gives a solution; 7 with 9 and 15 overshoots or falls short, so those branches are pruned.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">Solutions: {2, 7, 8}, {2, 15} and {8, 9}.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q-15">Q21 — 15-puzzle by branch and bound (7 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>What is the 15 puzzle problem? Explain with an example how it is solved using branch and bound.<br><em>MUSA QB Q5, Set I Q4(b)</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<ul><li>15 numbered tiles and one blank on a 4 × 4 board; slide tiles into the blank (up, down, left, right) to reach the goal arrangement in the fewest moves.</li><li>Each board is a node of a state-space tree. Cost f(n) = g(n) + h(n), where g is the moves made so far and h the number of misplaced tiles (blank excluded) or the Manhattan distance.</li><li>Least-cost branch and bound always expands the live node with the smallest f. A node whose f ≥ the best solution found (upper bound) is pruned, and repeated states are discarded.</li><li><strong>Example:</strong> start 1 2 3 4 / 5 6 7 8 / 9 10 11 12 / 13 _ 14 15; goal has 14 and 15 in the last row beside 13. Initial h = 2, so f = 2. Blank moves: up f = 4, left f = 4, right f = 2 (expanded). From there, left returns to the start (discarded), up f = 4, right reaches the goal with f = 2. Upper bound becomes 2 and the f = 4 states are pruned.</li></ul>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">Optimal sequence: Right, Right; <strong>minimum moves = 2</strong>. Worst-case time O(b<sup>d</sup>) ≤ O(4<sup>d</sup>).</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q-tsp">Q22 — Travelling salesman by branch and bound (7 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Explain with an example how the travelling salesman problem can be solved using branch and bound.<br><em>MUSA QB Q8, Set I Q4(b) OR</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<ul><li>Find the cheapest tour visiting every city once and returning to the start.</li><li>Reduce the cost matrix: subtract each row minimum, then each column minimum. The total subtracted is the lower bound of the root.</li><li>Branching on edge (i, j): set row i and column j to ∞ and block j → start prematurely; reduce again. Child bound = parent bound + matrix entry + reduction cost.</li><li>Always expand the live node with the smallest bound; prune nodes whose bound is not below the best tour found. The first complete tour with the least bound is optimal.</li></ul><p>The question bank leaves this answer blank. A full worked example with matrices and the state-space tree is in <a href="/aoa/modules/module-5">Module 5</a>.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">Optimal tour cost = the smallest bound that reaches a complete tour; computed by repeated matrix reduction.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q-btbb">Q23 — Backtracking and branch and bound concepts (3 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Explain the concept of backtracking and branch and bound.<br><em>MUSA QB Q17(ii)</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<ul><li><strong>Backtracking:</strong> builds a solution step by step and returns to the previous step when a partial solution breaks the constraints. For constraint-satisfaction and combinatorial problems (N-queen, graph colouring, sum of subsets).</li><li><strong>Branch and bound:</strong> divides the problem into subproblems and uses bounds to discard branches that cannot beat the best solution. For optimisation (0/1 knapsack, TSP, 15-puzzle).</li><li>Both use a state-space tree; backtracking prunes invalid branches, branch and bound prunes non-improving ones.</li></ul>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">Backtracking prunes infeasible branches; branch and bound prunes branches whose bound cannot improve the best solution.</p></div>
+</section>
+</div>
+<h2 id="strings">5 — String matching</h2>
+<div class="practice">
+<section class="exam-q">
+<h3 id="q-naive">Q24 — Naïve string matching (7 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Explain the naïve string matching algorithm with an example.<br><em>MUSA QB Q4, Set I Q2(b) OR</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<pre><code>NaiveMatcher(T, P)
+ n ← length(T); m ← length(P)
+ for s ← 0 to n − m do
+   j ← 0
+   while j &lt; m and T[s + j] = P[j] do j ← j + 1
+   if j = m then print "found at", s</code></pre><p>Slide the pattern over the text one position at a time and compare character by character. <strong>Example:</strong> T = ABABABC, P = ABABC. Shift 0: ABAB match, then A ≠ C, mismatch. Shift 1: B ≠ A. Shift 2: ABABC matches fully. Shift 3: B ≠ A.</p><p>Best case O(n) (mismatch on the first character), worst case O((n − m + 1)·m), extra space O(1).</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">Pattern ABABC found at index (shift) 2. Worst case O((n−m+1)m).</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q-kmp">Q25 — KMP algorithm and advantages (7 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>What is the Knuth–Morris–Pratt method? Give an example and explain its advantages over the naïve algorithm.<br><em>MUSA QB Q2, Set I Q2(b)</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<p>KMP preprocesses the pattern into a prefix function π, where π[q] is the length of the longest proper prefix of P[1..q] that is also its suffix. On a mismatch after q matched characters, set q ← π[q] and continue without moving back in the text.</p><pre><code>PrefixFunction(P)
+ π[1] ← 0; k ← 0
+ for q ← 2 to m do
+   while k &gt; 0 and P[k+1] ≠ P[q] do k ← π[k]
+   if P[k+1] = P[q] then k ← k + 1
+   π[q] ← k</code></pre><p><strong>Example:</strong> P = abababca (m = 8): π = [0, 0, 1, 2, 3, 4, 0, 1]. Search T = bacbabaabbabca: matches grow and fall back through π (for example after matching ababa and failing, q falls to π[5] = 3 and so on). The match length never reaches 8, so the pattern is not found.</p><ul><li>No re-comparison of characters already matched; the text pointer never moves back.</li><li>Time O(m) for π plus O(n) for the search, total O(n + m), against O(nm) for naïve.</li><li>Good for repetitive patterns and large texts.</li></ul>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">Pattern abababca is <strong>not found</strong> in bacbabaabbabca; KMP runs in O(n + m).</p></div>
+</section>
+<section class="exam-q">
+<h3 id="q-rk">Q26 — Rabin–Karp (7 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Write and explain the Rabin–Karp algorithm in detail and state its time complexity.<br><em>MUSA QB Q10</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<ul><li>Compare the hash of the pattern with the hash of each length-m window of the text; compare characters only when the hashes are equal.</li><li>Rolling hash: t<sub>s+1</sub> = (d·(t<sub>s</sub> − T[s]·h) + T[s+m]) mod q, with h = d<sup>m−1</sup> mod q.</li><li>Equal hashes can be a spurious hit (collision), so every hit is verified character by character.</li></ul><p><strong>Example:</strong> T = ABABABC, P = ABABC, d = 10, q = 13, A=1, B=2, C=3. Pattern hash p = 12123 mod 13 = 7. h = 10⁴ mod 13 = 3. t₀ (ABABA = 12121) = 5, no match. t₁ = (10(5 − 1·3) + 2) mod 13 = 9, no match. t₂ = (10(9 − 2·3) + 3) mod 13 = 7, equal to p, so verify: ABABC matches.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">Pattern found at index 2. Time: average and expected O(n + m); worst case O((n − m + 1)·m).</p></div>
+</section>
+</div>
+<h2 id="diff">6 — Differentiate between</h2>
+<div class="practice">
+<section class="exam-q">
+<h3 id="d1">Q27 — Greedy vs dynamic programming</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Differentiate between Greedy method and Dynamic programming.<br><em>MUSA QB Q16</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<table><thead><tr><th>Point</th><th>Greedy method</th><th>Dynamic programming</th></tr></thead><tbody><tr><td>Choice</td><td>Locally best choice, never reconsidered</td><td>Considers all subproblem results and combines them</td></tr><tr><td>Stores results</td><td>No</td><td>Yes (table)</td></tr><tr><td>Optimality</td><td>Not always optimal</td><td>Optimal when correctly formulated</td></tr><tr><td>Needs</td><td>Greedy-choice property and optimal substructure</td><td>Optimal substructure and overlapping subproblems</td></tr><tr><td>Cost</td><td>Faster, less memory</td><td>More computation and memory</td></tr><tr><td>Examples</td><td>Prim, Kruskal, Dijkstra, fractional knapsack</td><td>0/1 knapsack, LCS, matrix chain, Floyd–Warshall</td></tr></tbody></table>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">See the table above.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="d2">Q28 — Fractional vs 0/1 knapsack</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Differentiate between Fractional knapsack and 0/1 knapsack.<br><em>MUSA QB Q16</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<table><thead><tr><th>Point</th><th>Fractional knapsack</th><th>0/1 knapsack</th></tr></thead><tbody><tr><td>Items</td><td>Can be divided</td><td>Taken whole or not at all</td></tr><tr><td>Method</td><td>Greedy (by profit/weight)</td><td>Dynamic programming</td></tr><tr><td>Decision</td><td>Value between 0 and 1</td><td>0 or 1</td></tr><tr><td>Greedy optimal?</td><td>Yes</td><td>No</td></tr><tr><td>Time</td><td>O(n log n)</td><td>O(nW)</td></tr></tbody></table>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">See the table above.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="d3">Q29 — Backtracking vs branch and bound</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Differentiate between Backtracking and Branch and bound.<br><em>MUSA QB Q16</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<table><thead><tr><th>Point</th><th>Backtracking</th><th>Branch and bound</th></tr></thead><tbody><tr><td>Used for</td><td>Constraint-satisfaction and decision problems</td><td>Optimisation problems</td></tr><tr><td>Prunes</td><td>Branches that violate constraints</td><td>Branches whose bound cannot beat the best solution</td></tr><tr><td>Search</td><td>Depth-first</td><td>FIFO, LIFO or least-cost</td></tr><tr><td>Objective function and bounds</td><td>Not required</td><td>Required</td></tr><tr><td>Examples</td><td>N-queen, graph colouring, sum of subsets</td><td>0/1 knapsack, TSP, 15-puzzle</td></tr></tbody></table>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">See the table above.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="d4">Q30 — Divide and conquer vs dynamic programming</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Differentiate between Divide and conquer and Dynamic programming.<br><em>MUSA QB Q16</em></p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<table><thead><tr><th>Point</th><th>Divide and conquer</th><th>Dynamic programming</th></tr></thead><tbody><tr><td>Subproblems</td><td>Independent</td><td>Overlapping</td></tr><tr><td>Approach</td><td>Divide, conquer, combine</td><td>Solve, store, reuse</td></tr><tr><td>Repeated work</td><td>May repeat</td><td>Avoided by storing results</td></tr><tr><td>Storage</td><td>Recursion stack</td><td>Table or memo</td></tr><tr><td>Examples</td><td>Merge sort, quick sort, binary search</td><td>Fibonacci, 0/1 knapsack, matrix chain</td></tr></tbody></table>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text">See the table above.</p></div>
+</section>
+</div>
+
+<footer>Study guide compiled from MUSA practice material, not a University publication · <a href="/aoa">Back to all modules</a></footer>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('themeToggle'),r=document.documentElement;
+  function dark(){return r.getAttribute('data-theme')==='dark';}
+  function paint(){var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
+  b.addEventListener('click',function(){var n=dark()?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('sg-theme',n);}catch(e){}paint();});
+  paint();
+  var links=[].slice.call(document.querySelectorAll('.nav a'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  function mark(){
+    var y=scrollY+innerHeight*0.3,c=-1;
+    for(var i=0;i<secs.length;i++){if(secs[i]&&secs[i].getBoundingClientRect().top+y-scrollY<=0)c=i;}
+    links.forEach(function(a,i){if(i===c)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current');});
+  }
+  addEventListener('scroll',mark,{passive:true});mark();
+})();
+</script>
+<script>
+(function(){
+  var hs=[].slice.call(document.querySelectorAll('.wrap h2[id]'));
+  var subHeads=[].slice.call(document.querySelectorAll('.wrap [data-rail-subsection][id]'));
+  if(!hs.length)return;
+  function pad(n){return (n<10?'0':'')+n;}
+  function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
+  var names=hs.map(function(h){return h.textContent.trim();});
+  var subGroups=hs.map(function(){return [];});
+  var sectionIndex=-1;
+  Array.prototype.forEach.call(document.querySelectorAll('.wrap h2[id], .wrap [data-rail-subsection][id]'),function(h){
+    if(h.tagName==='H2'){sectionIndex=hs.indexOf(h);}
+    else if(sectionIndex>=0)subGroups[sectionIndex].push(h);
+  });
+
+  function makeSublist(parentLi,mobile,headings){
+    if(!headings.length)return [];
+    var list=el('ol',mobile?'rm-sublist':'rail-sublist');
+    var children=headings.map(function(h,i){
+      var li=el('li'),a=el('a',mobile?'rm-sub-link':'rail-sub-link');
+      var label=h.getAttribute('data-rail-label')||h.textContent.trim();
+      a.href='#'+h.id;a.title=label;
+      a.appendChild(el('span',mobile?'rm-k':'sub-num',String.fromCharCode(65+i)));
+      a.appendChild(el('span',mobile?'rm-sub-label':'sub-lbl',label));
+      li.appendChild(a);list.appendChild(li);
+      return {a:a,heading:h,done:false,top:0,mobile:null};
+    });
+    parentLi.appendChild(list);return children;
+  }
+
+  /* Wide screens: nested subsection links below their parent sections. */
+  var nav=el('nav','rail');nav.setAttribute('aria-label','Section progress');
+  var inn=el('div','rail-in'),top=el('div','rail-top'),sec=el('span','rail-sec','01'),meta=el('span','rail-meta');
+  var pct=el('b',null,'0%');meta.appendChild(el('span',null,'of '+pad(hs.length)));meta.appendChild(pct);
+  var tg=el('button','rail-toggle');tg.type='button';tg.setAttribute('aria-controls','railList');
+  top.appendChild(sec);top.appendChild(meta);top.appendChild(tg);
+  var ol=el('ol','rail-list');ol.id='railList';
+  var fill=el('span','rail-fill');fill.setAttribute('aria-hidden','true');ol.appendChild(fill);
+  var items=hs.map(function(h,i){
+    var li=el('li'),a=el('a'),nd=el('span','node');
+    a.href='#'+h.id;a.title=names[i];nd.setAttribute('aria-hidden','true');
+    a.appendChild(nd);a.appendChild(el('span','num',pad(i+1)));a.appendChild(el('span','lbl',names[i]));
+    li.appendChild(a);var children=makeSublist(li,false,subGroups[i]);
+    ol.appendChild(li);return {a:a,nd:nd,p:-1,done:false,subs:children};
+  });
+  inn.appendChild(top);inn.appendChild(ol);nav.appendChild(inn);document.body.appendChild(nav);
+
+  /* Phones and tablets: keep the same nested tree in the section sheet. */
+  var bar=el('div','rm-bar');bar.setAttribute('aria-hidden','true');
+  var tab=el('button','rm-tab');tab.type='button';tab.setAttribute('aria-haspopup','dialog');tab.setAttribute('aria-expanded','false');
+  var tn=el('span',null,'01');tab.appendChild(tn);
+  var back=el('div','rm-back'),sheet=el('div','rm-sheet');sheet.setAttribute('role','dialog');sheet.setAttribute('aria-label','Sections');
+  var sh=el('div','rm-head'),shp=el('b',null,'0%');sh.appendChild(el('span',null,'Sections'));sh.appendChild(shp);
+  var sol=el('ol');
+  var mitems=hs.map(function(h,i){
+    var li=el('li'),a=el('a');a.href='#'+h.id;a.appendChild(el('span','rm-k',pad(i+1)));a.appendChild(el('span',null,names[i]));
+    li.appendChild(a);var children=makeSublist(li,true,subGroups[i]);
+    sol.appendChild(li);a.addEventListener('click',function(){setSheet(false);});
+    children.forEach(function(child){child.mobile=child.a;child.a.addEventListener('click',function(){setSheet(false);});});
+    return {a:a,subs:children};
+  });
+  items.forEach(function(item,i){item.subs.forEach(function(child,j){child.mobile=mitems[i].subs[j].a;});});
+  sheet.appendChild(sh);sheet.appendChild(sol);
+  [bar,tab,back,sheet].forEach(function(n){document.body.appendChild(n);});
+  var moveT,cur=-2,currentSubItem=null,tick=false,centers=null,tops=[],end=0;
+
+  function setSheet(o,refocus){
+    document.body.classList.toggle('rm-open',o);tab.setAttribute('aria-expanded',String(o));
+    if(o){
+      var target=currentSubItem?currentSubItem.mobile:mitems[cur>=0?cur:0].a;
+      sheet.scrollTop+=target.getBoundingClientRect().top-sheet.getBoundingClientRect().top-sheet.clientHeight/3;
+      try{target.focus({preventScroll:true});}catch(e){}
+    }else if(refocus){tab.focus();}
+  }
+  tab.addEventListener('click',function(){setSheet(!document.body.classList.contains('rm-open'));});
+  back.addEventListener('click',function(){setSheet(false);});
+  addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('rm-open'))setSheet(false,true);});
+
+  var open;
+  try{var sv=localStorage.getItem('sg-rail');open=sv?sv==='o':innerWidth>=1100;}catch(e){open=innerWidth>=1100;}
+  function paintToggle(){
+    nav.classList.toggle('is-collapsed',!open);
+    tg.textContent=open?'\u2039':'\u203A';
+    tg.setAttribute('aria-expanded',String(open));
+    tg.setAttribute('aria-label',open?'Collapse section progress':'Expand section progress');
+    centers=null;req();
+  }
+  tg.addEventListener('click',function(){open=!open;try{localStorage.setItem('sg-rail',open?'o':'c');}catch(e){}paintToggle();});
+
+  function measure(){
+    var y=scrollY;
+    tops=hs.map(function(h){return h.getBoundingClientRect().top+y;});
+    items.forEach(function(item){item.subs.forEach(function(child){child.top=child.heading.getBoundingClientRect().top+y;});});
+    end=document.querySelector('.wrap').getBoundingClientRect().bottom+y;
+  }
+  function measureCenters(){centers=items.map(function(it){return it.a.offsetTop+it.a.offsetHeight/2;});}
+  function update(){
+    tick=false;
+    if(!centers)measureCenters();
+    var y=scrollY+innerHeight*.25,c=-1,max=document.documentElement.scrollHeight-innerHeight;
+    var pv=Math.round(Math.max(0,Math.min(1,max>0?scrollY/max:0))*100);pct.textContent=pv+'%';shp.textContent=pv+'%';
+    items.forEach(function(it,i){
+      var nx=i+1<tops.length?tops[i+1]:end,p=Math.max(0,Math.min(1,(y-tops[i])/Math.max(1,nx-tops[i])));
+      if(y>=tops[i])c=i;
+      p=Math.round(p*100)/100;
+      if(p!==it.p){it.p=p;it.nd.style.setProperty('--p',p);}
+      var d=y>=nx;if(d!==it.done){it.done=d;it.a.classList.toggle('is-done',d);mitems[i].a.classList.toggle('is-done',d);}
+    });
+    if(c<0)c=0;
+    bar.style.setProperty('--w',Math.round(items[c].p*100)+'%');
+    var fillPosition=centers[c]+(c+1<centers.length?(centers[c+1]-centers[c])*items[c].p:0);
+    if(y<tops[0])fillPosition=centers[0]*Math.max(0,Math.min(1,y/Math.max(1,tops[0])));
+    ol.style.setProperty('--fill',fillPosition.toFixed(1)+'px');
+    var sectionChanged=c!==cur;
+    if(sectionChanged){
+      if(cur>=0){items[cur].a.removeAttribute('aria-current');mitems[cur].a.removeAttribute('aria-current');}
+      cur=c;sec.textContent=pad(c+1);tn.textContent=pad(c+1);
+      tab.setAttribute('aria-label','Sections. Now reading '+pad(c+1)+', '+names[c]);
+      items[c].a.setAttribute('aria-current','true');mitems[c].a.setAttribute('aria-current','true');
+    }
+
+    var activeSub=null;
+    items[c].subs.forEach(function(child,j){
+      var nx=j+1<items[c].subs.length?items[c].subs[j+1].top:(c+1<tops.length?tops[c+1]:end);
+      var done=y>=nx,active=y>=child.top&&y<nx;
+      if(done!==child.done){child.done=done;child.a.classList.toggle('is-done',done);child.mobile.classList.toggle('is-done',done);}
+      if(active)activeSub=child;
+    });
+    if(activeSub!==currentSubItem){
+      if(currentSubItem){currentSubItem.a.removeAttribute('aria-current');currentSubItem.mobile.removeAttribute('aria-current');}
+      currentSubItem=activeSub;
+      if(currentSubItem){
+        currentSubItem.a.setAttribute('aria-current','location');currentSubItem.mobile.setAttribute('aria-current','location');
+        var childRect=currentSubItem.a.getBoundingClientRect(),listRect=ol.getBoundingClientRect();
+        if(childRect.top<listRect.top||childRect.bottom>listRect.bottom)ol.scrollTop+=childRect.top-listRect.top-listRect.height/2;
+      }
+    }
+    if(sectionChanged&&!activeSub){
+      var a=items[c].a,r=a.getBoundingClientRect(),lr=ol.getBoundingClientRect();
+      if(r.top<lr.top||r.bottom>lr.bottom)ol.scrollTop+=r.top-lr.top-lr.height/2;
+    }
+  }
+  function req(){if(!tick){tick=true;requestAnimationFrame(update);}}
+  addEventListener('scroll',function(){
+    document.body.classList.add('rm-moving');clearTimeout(moveT);moveT=setTimeout(function(){document.body.classList.remove('rm-moving');},700);req();
+  },{passive:true});
+  addEventListener('resize',function(){measure();centers=null;req();});
+  addEventListener('load',function(){measure();centers=null;req();});
+  paintToggle();measure();update();
+})();
+</script>
+</body>
+</html>
