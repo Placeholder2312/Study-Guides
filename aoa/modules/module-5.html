@@ -268,6 +268,7 @@
       <li><a href="#puzzle">The 15-puzzle problem</a></li>
       <li><a href="#compare">Backtracking versus branch and bound</a></li>
       <li><a href="#practice">Practice questions with solutions</a></li>
+      <li><a href="#pyq">Previous-year questions</a></li>
       <li><a href="#mistakes">Common mistakes</a></li>
       <li><a href="#revision">Last-minute revision sheet</a></li>
       <li><a href="#references">References and attribution</a></li>
@@ -283,6 +284,7 @@
     <a href="#tsp">TSP</a>
     <a href="#puzzle">15-puzzle</a>
     <a href="#practice">Practice</a>
+    <a href="#pyq">PYQs</a>
     <a href="#revision">Revision</a>
   </nav>
 <h2 id="syllabus">Syllabus and scope</h2>
@@ -1168,7 +1170,124 @@ D     1    9    8    ∞</code></pre>
 </section>
 </div>
 
-<h2 id="mistakes">10 — Common mistakes across the module</h2>
+<h2 id="pyq">10 — Previous-year questions (University of Mumbai)</h2>
+<div class="practice">
+<p>Questions from University of Mumbai and Mumbai-University-affiliated college papers on this module, each with its source, a worked solution and a final answer. Where a paper gives no data, the example from this module is used and the question says so.</p>
+<section class="exam-q">
+<h3 id="pyq1-mu-2021-queens-mcq">PYQ1 — 4-queens (MCQ)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>University of Mumbai, SE Sem IV (Rev 2019), CSC402 Analysis of Algorithm, June 2021, Q1(16).</em> Which of these tuples <code>(Q₁, Q₂, Q₃, Q₄)</code> is a solution of the 4-queens problem?</p>
+<ol type="a"><li><code>(3, 1, 4, 2)</code></li><li><code>(2, 3, 1, 4)</code></li><li><code>(4, 3, 2, 1)</code></li><li><code>(4, 2, 3, 1)</code></li></ol></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<ul>
+<li><code>(3, 1, 4, 2)</code>: columns are all different; neighbouring rows differ by 2, 3 and 2 columns, and rows two apart differ by 1 and 1 columns, so no two queens share a diagonal.</li>
+<li><code>(2, 3, 1, 4)</code>: rows 1 and 2 are in columns 2 and 3, one apart, so they attack diagonally.</li>
+<li><code>(4, 3, 2, 1)</code>: rows 1 and 2 are in columns 4 and 3, one apart, so they attack diagonally.</li>
+<li><code>(4, 2, 3, 1)</code>: rows 2 and 3 are in columns 2 and 3, one apart, so they attack diagonally.</li>
+</ul>
+<p>The two valid solutions for n = 4 are <code>(2, 4, 1, 3)</code> and its mirror image <code>(3, 1, 4, 2)</code>.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> <code>(3, 1, 4, 2)</code>.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="pyq2-mu-2021-bb-mcq">PYQ2 — Branch generation (MCQ)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>University of Mumbai, SE Sem IV (Rev 2019), CSC402 Analysis of Algorithm, June 2021, Q1(15).</em> Which of the following is <em>not</em> a way of generating branches (selecting the next live node) in branch and bound?</p>
+<ol type="a"><li>LIFO</li><li>FIFO</li><li>Lowest cost</li><li>Highest cost</li></ol></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<p>Branch and bound picks the next live node by FIFO order (a queue, breadth first), LIFO order (a stack, depth first) or lowest cost (a priority queue on the bound, "least-cost search"). Choosing the node with the <em>highest</em> cost would expand the least promising node first and has no use for finding a minimum.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> highest cost.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="pyq3-kjsit-aug25-compare">PYQ3 — Backtracking versus branch and bound (5 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>K. J. Somaiya Institute of Technology (autonomous, affiliated to University of Mumbai), SY Sem IV CEC402, Aug 2025, Q2.</em> Compare the backtracking approach with the branch and bound technique.</p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<div class="table-scroll"><table>
+<thead><tr><th>Point</th><th>Backtracking</th><th>Branch and bound</th></tr></thead>
+<tbody>
+<tr><td>Problems</td><td>Decision and enumeration problems (N-queens, sum of subsets, graph colouring)</td><td>Optimisation problems (TSP, 15-puzzle, assignment)</td></tr>
+<tr><td>Search order</td><td>Depth first</td><td>FIFO, LIFO or least-cost</td></tr>
+<tr><td>Pruning test</td><td>Boolean: can the node still become a feasible solution?</td><td>Numeric: can its lower bound beat the best solution found so far?</td></tr>
+<tr><td>Bounding function</td><td>Not needed</td><td>Needed, and it must never overestimate the best completion</td></tr>
+<tr><td>Nodes</td><td>Partial solutions only</td><td>Every node is a partial solution with a bound</td></tr>
+<tr><td>Result</td><td>All or the first feasible solution</td><td>An optimal solution, tracked by the incumbent</td></tr>
+</tbody></table></div>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> backtracking prunes on infeasibility during a depth-first search; branch and bound prunes on a cost bound against the best solution so far and is used for optimisation.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="pyq4-sies-2026-queens">PYQ4 — N-queens (5 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>SIES GST (affiliated to University of Mumbai), SE Sem IV CEC403 Analysis of Algorithm, End Semester Exam (R-24) FH 2026, Q1(E).</em> Explain the N-queens problem with its rules and write a 4 × 4 solution.</p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<p>Place N queens on an N × N board so that no two attack each other. Rules: no two queens in the same row, none in the same column, and none on the same diagonal, that is <code>|Qᵢ − Qⱼ| ≠ |i − j|</code>. Backtracking places one queen per row, so the row rule is automatic, and it abandons a partial placement as soon as a new queen breaks a column or diagonal rule.</p>
+<p>For N = 4 the search tries <code>Q₁ = 1</code> first and fails (<code>Q₂ = 3</code> and <code>Q₂ = 4</code> both lead to dead ends), then <code>Q₁ = 2</code>, <code>Q₂ = 4</code>, <code>Q₃ = 1</code>, <code>Q₄ = 3</code> succeeds (see Figure 2).</p>
+<div class="table-scroll"><table>
+<thead><tr><th></th><th>col 1</th><th>col 2</th><th>col 3</th><th>col 4</th></tr></thead>
+<tbody>
+<tr><td>row 1</td><td></td><td>Q</td><td></td><td></td></tr>
+<tr><td>row 2</td><td></td><td></td><td></td><td>Q</td></tr>
+<tr><td>row 3</td><td>Q</td><td></td><td></td><td></td></tr>
+<tr><td>row 4</td><td></td><td></td><td>Q</td><td></td></tr>
+</tbody></table></div>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> the rules are no shared row, column or diagonal, and a 4 × 4 solution is <code>(2, 4, 1, 3)</code>.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="pyq5-kjsit-may26-colouring">PYQ5 — Graph colouring (5 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>K. J. Somaiya Institute of Technology (autonomous, affiliated to University of Mumbai), SY Sem IV CEC402, May–June 2026, Q2(c).</em> Explain how graph colouring can be solved using backtracking, with a suitable example.</p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<p>Assign colours 1 to m to the vertices one at a time. A colour is allowed for vertex k only if no already coloured neighbour has it. If no colour is allowed, backtrack and change the previous vertex.</p>
+<p>Example (the graph of Worked example 4.6, m = 3, edges 1–2, 1–3, 2–3, 2–4, 2–5, 3–5, 4–5): <code>x₁ = 1</code>, <code>x₂ = 2</code>, <code>x₃ = 3</code>, <code>x₄ = 1</code> is allowed, but then vertex 5 sees colours 1, 2 and 3 on its neighbours 4, 2 and 3, so it has no colour. Backtrack to vertex 4 and try <code>x₄ = 3</code>; then <code>x₅ = 1</code> works (see Figure 4).</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> try colours in order, reject any colour used by a neighbour, and backtrack when none is left; for the example <code>(x₁, …, x₅) = (1, 2, 3, 3, 1)</code>.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="pyq6-sies-2026-tsp">PYQ6 — TSP by branch and bound (10 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>SIES GST (affiliated to University of Mumbai), SE Sem IV CEC403 Analysis of Algorithm, End Semester Exam (R-24) FH 2026, Q2(D). The paper gives no data, so the cost matrix of Worked example 6.6 is used as the example.</em> Explain the travelling salesperson problem and solve an example using branch and bound.</p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<p>A tour visits every city once and returns to the start; the aim is the cheapest tour. Branch and bound builds a tree of partial tours. Each node carries a lower bound obtained by reducing the cost matrix (subtract each row minimum, then each column minimum; the total subtracted is the bound).</p>
+<ul>
+<li>The root (city A) has bound <strong>8</strong>.</li>
+<li>Its children have bounds A→D = <strong>18</strong>, A→B = <strong>20</strong> and A→C = <strong>23</strong>.</li>
+<li>Expand the smallest, A→D: its children have bounds 25 (ADB) and 26 (ADC).</li>
+<li>Expand the next smallest live node, A→B: its children have bounds 26 (ABC) and <strong>23</strong> (ABD).</li>
+<li>ABD completes the tour A→B→D→C→A with cost 23, so the incumbent is 23.</li>
+<li>Every other live node has bound at least 23 and is pruned (Figure 5).</li>
+</ul>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> minimum tour cost <strong>23</strong>, by <code>A → B → D → C → A</code>.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="pyq7-mu-2021-puzzle">PYQ7 — 15-puzzle (10 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>University of Mumbai, SE Sem IV (Rev 2019), CSC402 Analysis of Algorithm, June 2021, Q3(B). The paper gives no configuration, so the start state of Worked example 7.6 is used.</em> Solve the 15-puzzle using branch and bound.</p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<p>Use the cost <code>c(x) = f(x) + g(x)</code>, where f is the number of moves made and g is the number of misplaced tiles (an underestimate of the moves still needed). Always expand the live node with the smallest c.</p>
+<ul>
+<li>Start state: tiles 12, 11 and 15 are misplaced, so g = 3 and c = 3.</li>
+<li>Children: Left (c = 3), Down (c = 4), Up (c = 5). Expand Left.</li>
+<li>Children of Left: Down (g = 1, f = 2, c = 3), Up (c = 6), Left (c = 6). Expand Down.</li>
+<li>Its child Right is the goal (g = 0, f = 3, c = 3).</li>
+</ul>
+<p>Every other live node has c of at least 4, so no shorter solution exists (Figure 6).</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> <code>Left, Down, Right</code>, a three-move solution.</p></div>
+</section>
+</div>
+
+<h2 id="mistakes">11 — Common mistakes across the module</h2>
 <div class="common-mistakes">
 <div class="table-scroll"><table>
 <thead><tr><th>Trap</th><th>What the examiner expects</th></tr></thead>
@@ -1187,7 +1306,7 @@ D     1    9    8    ∞</code></pre>
 <tr><td>Reporting nodes instead of the tour/moves</td><td>The question asks for the solution, not the search size</td></tr>
 </tbody></table></div>
 </div>
-<h2 id="revision">11 — Last-minute revision sheet</h2>
+<h2 id="revision">12 — Last-minute revision sheet</h2>
 <div class="revision-sheet">
 <p><strong>Backtracking.</strong> State-space tree; DFS; promising/non-promising; bounding function; backtrack. Time O(b^d), space O(d).</p>
 <p><strong>N-queens.</strong> One queen per row; <code>x[i]</code> = column; test <code>x[i] ≠ j</code> and <code>|x[i] − j| ≠ k − i</code>. 4-queens first solution <strong>(2,4,1,3)</strong>; 8-queens has <strong>92</strong> solutions.</p>
@@ -1203,7 +1322,7 @@ D     1    9    8    ∞</code></pre>
 <li>DP: "what is the best value for every state?"</li>
 </ul>
 </div>
-<h2 id="references">12 — References and attribution</h2>
+<h2 id="references">13 — References and attribution</h2>
 <div class="references">
 <p><strong>Official syllabus.</strong> University of Mumbai, Faculty of Science and Technology, <em>6.21 (N) B.E. Artificial Intelligence and Machine Learning, Semester III and Semester IV</em>, 2025–26, page 23 (Module V). PDF: <code>https://mu.ac.in/old/wp-content/uploads/2025/06/6.21-N-B.E.-AI-ML-sem-III-IV.pdf</code>.</p>
 <p><strong>Course material inspected.</strong></p>
