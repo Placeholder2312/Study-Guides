@@ -475,7 +475,7 @@
       <li><a href="#compare">Comparing the three algorithms</a></li>
       <li><a href="#self-learning">Real-life applications</a></li>
       <li><a href="#practice">Practice questions</a></li>
-      <li><a href="#answer-key">Answer key</a></li>
+      <li><a href="#pyq">Previous-year questions</a></li>
       <li><a href="#mistakes">Common mistakes</a></li>
       <li><a href="#revision">Last-minute revision sheet</a></li>
       <li><a href="#references">References and attribution</a></li>
@@ -489,7 +489,7 @@
     <a href="#kmp">KMP</a>
     <a href="#compare">Comparison</a>
     <a href="#practice">Practice</a>
-    <a href="#answer-key">Answers</a>
+    <a href="#pyq">PYQs</a>
     <a href="#revision">Revision</a>
   </nav>
 <h2 id="syllabus">Syllabus and scope</h2>
@@ -575,7 +575,12 @@
           print &quot;Pattern occurs with shift&quot;, s</code></pre>
 <p>The inner <code>while</code> is the comparison loop. The moment <code>T[s + j] ≠ P[j]</code>, the algorithm abandons that alignment and moves to the next one; it does <strong>not</strong> remember anything about the characters it has already seen.</p>
 <h3 id="2-6-worked-example-p-aab-t-abaabcab">2.6 Worked example — <code>P = aab</code>, <code>T = abaabcab</code></h3>
-<p>Assignment 6 asks for the pattern <code>aab</code> in the text <code>abaabcab</code>. Here <code>n = 8</code>, <code>m = 3</code>, so there are <code>n − m + 1 = 6</code> alignments.</p>
+<div class="example qa">
+<div class="example-title">Worked example</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Find the pattern <code>aab</code> in the text <code>abaabcab</code> with the naïve algorithm and count the character comparisons.</p>
+<p>Assignment 6 asks for the pattern <code>aab</code> in the text <code>abaabcab</code>. Here <code>n = 8</code>, <code>m = 3</code>, so there are <code>n − m + 1 = 6</code> alignments.</p></div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
 <div class="table-scroll"><table>
 <thead><tr><th>Shift <code>s</code></th><th>Window <code>T[s…s+2]</code></th><th>Compared characters</th><th>Result</th></tr></thead>
 <tbody>
@@ -588,8 +593,17 @@
 </tbody></table></div>
 <p><strong>Answer:</strong> the pattern <code>aab</code> occurs exactly once, at <strong>shift 2</strong> (the substring starting at index 2). The total number of character comparisons is <code>2 + 1 + 3 + 2 + 1 + 1 = 10</code>.</p>
 <p>Note the phrasing: there are <strong>6 alignments</strong>, which corresponds to <strong>5 shifts</strong> after the initial alignment <code>s = 0</code>. A question that asks "how many shifts" may mean either; state which convention you use. In general it is <code>n − m + 1</code> alignments.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> <code>aab</code> occurs once, at shift 2, with 10 character comparisons in total.</p></div>
+</div>
 <h3 id="2-7-worked-example-the-slide-example-p-aabc-t-abaaabccb">2.7 Worked example — the slide example <code>P = aabc</code>, <code>T = abaaabccb</code></h3>
-<p>This is the trace drawn across slides 5–11. Here <code>n = 9</code>, <code>m = 4</code>, so there are <code>9 − 4 + 1 = 6</code> alignments (<code>S = 0 … 5</code>).</p>
+<div class="example qa">
+<div class="example-title">Worked example</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Find the valid shifts of <code>P = aabc</code> in <code>T = abaaabccb</code> with the naïve algorithm.</p>
+<p>This is the trace drawn across slides 5–11. Here <code>n = 9</code>, <code>m = 4</code>, so there are <code>9 − 4 + 1 = 6</code> alignments (<code>S = 0 … 5</code>).</p></div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
 <div class="table-scroll"><table>
 <thead><tr><th>Shift <code>S</code></th><th>Window</th><th>Outcome</th></tr></thead>
 <tbody>
@@ -601,8 +615,16 @@
 <tr><td>5</td><td><code>bccb</code></td><td>mismatch at the first character</td></tr>
 </tbody></table></div>
 <p>The slide's line "9 − 4 = 5" counts the moves after the first alignment; there are six alignments in total.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> the only valid shift is 3 (the window <code>aabc</code>); there are six alignments and 13 comparisons.</p></div>
+</div>
 <h3 id="2-8-worked-example-the-comparison-counting-exercise">2.8 Worked example — the comparison-counting exercise</h3>
-<p>Slides 12–13 pose: show the comparisons the naïve matcher makes for <code>P = 0001</code> in <code>T = 000010001010001</code>.</p>
+<div class="example qa">
+<div class="example-title">Worked example</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Slides 12–13 pose: show the comparisons the naïve matcher makes for <code>P = 0001</code> in <code>T = 000010001010001</code>.</p></div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
 <p><code>n = 15</code>, <code>m = 4</code>, <code>n − m + 1 = 12</code> alignments. The verified trace is:</p>
 <div class="table-scroll"><table>
 <thead><tr><th>Shift</th><th>Characters compared</th><th>Match?</th></tr></thead>
@@ -621,6 +643,10 @@
 <tr><td>11</td><td><code>0001</code> vs <code>0001</code></td><td><strong>yes</strong> (4)</td></tr>
 </tbody></table></div>
 <p><strong>Answer:</strong> valid shifts <strong>1, 5 and 11</strong>; <strong>31 comparisons</strong> in total. The varying comparison counts (4,3,2,1) show why the naïve analysis must take the worst case, not the average.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> valid shifts 1, 5 and 11, with 31 comparisons over 12 alignments.</p></div>
+</div>
 <h3 id="2-9-complexity">2.9 Complexity</h3>
 <p>Worst case: every alignment compares <code>m</code> characters, and there are <code>n − m + 1</code> alignments, so</p>
 <pre><code>O((n − m + 1) · m) = O(nm)</code></pre>
@@ -671,9 +697,14 @@
           hT = ROLL(hT, T[s], T[s+m], q) // constant-time update</code></pre>
 <p><code>ROLL</code> implements the rolling-hash formula above. Verification is essential: the hash equality is necessary but not sufficient.</p>
 <h3 id="3-6-worked-example-q-13">3.6 Worked example — <code>q = 13</code></h3>
+<div class="example qa">
+<div class="example-title">Worked example</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Use the Rabin–Karp method to find all valid shifts and spurious hits.</p>
 <p>Slide 16 gives:</p>
 <pre><code>T = 2 3 5 9 0 2 3 1 4 1 5 2 6 7 3 9 9 2 1
-P = 3 1 4 1 5          q = 13</code></pre>
+P = 3 1 4 1 5          q = 13</code></pre></div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
 <p>Pattern hash: <code>31415 mod 13 = 7</code>. Every 5-digit window (slides show them in an interleaved order; the table below is in text order):</p>
 <div class="table-scroll"><table>
 <thead><tr><th>Shift <code>s</code></th><th>Window</th><th>Value mod 13</th><th>Status</th></tr></thead>
@@ -695,10 +726,19 @@ P = 3 1 4 1 5          q = 13</code></pre>
 <tr><td>14</td><td>39921</td><td>11</td><td>—</td></tr>
 </tbody></table></div>
 <p>The only valid shift is <strong>6</strong>. Shift 12 is a spurious hit: the hash agrees but the characters do not.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> the only valid shift is 6; shift 12 is a spurious hit (hash 7, different digits).</p></div>
+</div>
 <h3 id="3-7-worked-example-q-11">3.7 Worked example — <code>q = 11</code></h3>
+<div class="example qa">
+<div class="example-title">Worked example</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Use the Rabin–Karp method to find all valid shifts and spurious hits.</p>
 <p>Slide 17 gives:</p>
 <pre><code>T = 3 1 4 1 5 9 2 6 5 3 5 8 9 7 9 3
-P = 2 6          q = 11</code></pre>
+P = 2 6          q = 11</code></pre></div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
 <p>Pattern hash: <code>26 mod 11 = 4</code>. The 2-digit windows and their hashes:</p>
 <div class="table-scroll"><table>
 <thead><tr><th>Shift</th><th>Window</th><th>mod 11</th><th>Status</th></tr></thead>
@@ -720,6 +760,10 @@ P = 2 6          q = 11</code></pre>
 <tr><td>14</td><td>93</td><td>5</td><td>—</td></tr>
 </tbody></table></div>
 <p>The valid shift is <strong>6</strong>. This example shows that a small modulus produces many spurious hits, which erode the speed advantage.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> the valid shift is 6; shifts 3, 4 and 5 are spurious hits (hash 4, different digits).</p></div>
+</div>
 <h3 id="3-8-spurious-hits">3.8 Spurious hits</h3>
 <p>A <strong>spurious hit</strong> is a window whose hash equals the pattern hash but whose characters differ. It costs a full <code>m</code>-character verification and is therefore the main performance risk. The expected number of spurious hits is about <code>(n − m + 1) / q</code> if the hashes behave randomly; choosing a large prime <code>q</code> reduces them. In the worst case every window collides, and Rabin–Karp degenerates to <code>O(nm)</code>, exactly like the naïve algorithm.</p>
 <h3 id="3-9-complexity">3.9 Complexity</h3>
@@ -791,6 +835,12 @@ P = 2 6          q = 11</code></pre>
           print &quot;Pattern occurs with shift&quot;, i - m + 1
           q = pi[q - 1]                  // continue searching for the next match</code></pre>
 <h3 id="4-6-worked-example-p-ababaca-t-abababacaba">4.6 Worked example — <code>P = ababaca</code>, <code>T = abababacaba</code></h3>
+<div class="example qa">
+<div class="example-title">Worked example</div>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p>Compute the prefix function of <code>P = ababaca</code> and use KMP to search for it in <code>T = abababacaba</code>.</p>
+</div>
+<div class="qa-solution"><div class="qa-label">Solution</div>
 <p>Prefix function: <code>π = [0, 0, 1, 2, 3, 0, 1]</code>.</p>
 <p>The verified search trace (<code>i</code> is the text index, <code>q</code> the matched length before comparing):</p>
 <div class="table-scroll"><table>
@@ -810,6 +860,10 @@ P = 2 6          q = 11</code></pre>
 <tr><td>12</td><td>10</td><td>a</td><td>2</td><td>a</td><td>match, <code>q = 3</code></td></tr>
 </tbody></table></div>
 <p><strong>Answer:</strong> the pattern occurs once, at <strong>shift 2</strong> (the window <code>ababaca</code>). The text index advanced 11 times and never moved backwards; step 6 is the crucial fallback, where the pattern shifts from its <code>ababa</code> border without re-reading <code>T[0…4]</code>.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> <code>π = [0, 0, 1, 2, 3, 0, 1]</code>, and the pattern occurs once, at shift 2.</p></div>
+</div>
 <h3 id="4-7-complexity">4.7 Complexity</h3>
 <div class="table-scroll"><table>
 <thead><tr><th>Phase</th><th>Time</th><th>Space</th></tr></thead>
@@ -866,49 +920,14 @@ P = 2 6          q = 11</code></pre>
 </tbody></table></div>
 <p>The syllabus lists "real life applications of all algorithms" as the self-learning topic for Module VI. Two or three concrete examples per algorithm are enough for an examination answer; always name the property that makes the algorithm suitable (hashing, linear time, streaming).</p>
 </div>
-<h2 id="practice">7 — Practice questions</h2>
+<h2 id="practice">7 — Practice questions with solutions</h2>
 <div class="practice">
-<p>Attempt these on paper; the worked key follows in Section 8. Provenance is stated for each question.</p>
+<p>Attempt each question on paper first, then check it against the worked solution and final answer directly below it. Provenance is stated for each question.</p>
 <section class="exam-q">
 <h3 id="q1-na-ve-matching">Q1 — Naïve matching</h3>
 <div class="qa-question"><div class="qa-label">Question</div>
 <p><em>Assignment 6, Q1 (course assignment — not a University paper).</em> Explain the naïve string-matching algorithm. Show the steps and find the number of shifts needed to find the pattern <code>aab</code> in the text <code>abaabcab</code>.</p></div>
-</section>
-<section class="exam-q">
-<h3 id="q2-kmp-advantages">Q2 — KMP advantages</h3>
-<div class="qa-question"><div class="qa-label">Question</div>
-<p><em>Assignment 6, Q2 (course assignment — not a University paper).</em> List any four advantages of KMP over other string-matching algorithms.</p></div>
-</section>
-<section class="exam-q">
-<h3 id="q3-comparison-counting">Q3 — Comparison counting</h3>
-<div class="qa-question"><div class="qa-label">Question</div>
-<p><em>Module 6 slide deck, slides 12–13 (class exercise).</em> Show the comparisons the naïve matcher makes for <code>P = 0001</code> in <code>T = 000010001010001</code>. State all valid shifts and the total number of character comparisons.</p></div>
-</section>
-<section class="exam-q">
-<h3 id="q4-rabin-karp">Q4 — Rabin–Karp</h3>
-<div class="qa-question"><div class="qa-label">Question</div>
-<p><em>Module 6 slide deck, slide 16 (class example).</em> For <code>T = 2359023141526739921</code>, <code>P = 31415</code>, <code>q = 13</code>, compute the pattern hash, the hash of every window, and identify the valid hits and the spurious hits.</p></div>
-</section>
-<section class="exam-q">
-<h3 id="q5-rabin-karp-with-a-small-modulus">Q5 — Rabin–Karp with a small modulus</h3>
-<div class="qa-question"><div class="qa-label">Question</div>
-<p><em>Module 6 slide deck, slide 17 (class example).</em> Repeat Q4 for <code>T = 3141592653589793</code>, <code>P = 26</code>, <code>q = 11</code>. Why are there so many spurious hits?</p></div>
-</section>
-<section class="exam-q">
-<h3 id="q6-prefix-function">Q6 — Prefix function</h3>
-<div class="qa-question"><div class="qa-label">Question</div>
-<p><em>Standard textbook exercise (supplementary).</em> Compute the prefix function for <code>P = aabaabaaa</code> and use it to search <code>T = aabaabaabaabaaa</code>. Give every match position.</p></div>
-</section>
-<section class="exam-q">
-<h3 id="q7-conceptual">Q7 — Conceptual</h3>
-<div class="qa-question"><div class="qa-label">Question</div>
-<p><em>IAT-style theory question — not a University paper.</em> (a) Why is the naïve algorithm <code>O(nm)</code> in the worst case? (b) What is a spurious hit? (c) State the three phases of KMP and their costs.</p></div>
-</section>
-</div>
-<h2 id="answer-key">8 — Answer key</h2>
-<div class="answer-key">
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
-<h3 id="a1-na-ve-matching-aab-in-abaabcab">A1 — Naïve matching, <code>aab</code> in <code>abaabcab</code></h3>
 <p><code>n = 8</code>, <code>m = 3</code>, so there are <code>n − m + 1 = 6</code> alignments (<code>s = 0 … 5</code>). The trace is in Section 2.6.</p>
 <div class="table-scroll"><table>
 <thead><tr><th>Shift</th><th>Window</th><th>Result</th></tr></thead>
@@ -920,11 +939,15 @@ P = 2 6          q = 11</code></pre>
 <tr><td>4</td><td><code>bca</code></td><td>reject (1)</td></tr>
 <tr><td>5</td><td><code>cab</code></td><td>reject (1)</td></tr>
 </tbody></table></div>
+</div>
 <div class="qa-final"><div class="qa-label">Final answer</div>
 <p class="qa-final-text"><strong>Answer:</strong> one occurrence at <strong>shift 2</strong>, 10 comparisons, 6 alignments (5 shifts after the first).</p></div>
-</div>
+</section>
+<section class="exam-q">
+<h3 id="q2-kmp-advantages">Q2 — KMP advantages</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>Assignment 6, Q2 (course assignment — not a University paper).</em> List any four advantages of KMP over other string-matching algorithms.</p></div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
-<h3 id="a2-four-advantages-of-kmp">A2 — Four advantages of KMP</h3>
 <ol>
 <li>Worst-case <strong><code>O(n + m)</code></strong> time, against the naïve <code>O(nm)</code> and Rabin–Karp's worst case.</li>
 <li>The text pointer <strong>never moves backwards</strong>, so the text can be streamed or read once.</li>
@@ -932,17 +955,25 @@ P = 2 6          q = 11</code></pre>
 <li><strong>Deterministic</strong> — no hash collisions or spurious hits, unlike Rabin–Karp.</li>
 </ol>
 <p>(Also acceptable: no preprocessing of the text; predictable performance; well suited to large files.)</p>
+</div>
 <div class="qa-final"><div class="qa-label">Final answer</div>
 <p class="qa-final-text"><strong>Answer:</strong> KMP runs in <code>O(n + m)</code> worst-case time, never moves the text pointer backwards, reuses one prefix function across texts, and is deterministic.</p></div>
-</div>
+</section>
+<section class="exam-q">
+<h3 id="q3-comparison-counting">Q3 — Comparison counting</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>Module 6 slide deck, slides 12–13 (class exercise).</em> Show the comparisons the naïve matcher makes for <code>P = 0001</code> in <code>T = 000010001010001</code>. State all valid shifts and the total number of character comparisons.</p></div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
-<h3 id="a3-comparisons-for-0001-in-000010001010001">A3 — Comparisons for <code>0001</code> in <code>000010001010001</code></h3>
 <p>12 alignments, <strong>31 comparisons</strong>, valid shifts <strong>1, 5, 11</strong>. The per-shift table is in Section 2.8.</p>
+</div>
 <div class="qa-final"><div class="qa-label">Final answer</div>
 <p class="qa-final-text"><strong>Answer:</strong> valid shifts <strong>1, 5 and 11</strong>; <strong>31 character comparisons</strong> over 12 alignments.</p></div>
-</div>
+</section>
+<section class="exam-q">
+<h3 id="q4-rabin-karp">Q4 — Rabin–Karp</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>Module 6 slide deck, slide 16 (class example).</em> For <code>T = 2359023141526739921</code>, <code>P = 31415</code>, <code>q = 13</code>, compute the pattern hash, the hash of every window, and identify the valid hits and the spurious hits.</p></div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
-<h3 id="a4-rabin-karp-q-13">A4 — Rabin–Karp, <code>q = 13</code></h3>
 <p>Pattern hash: <code>31415 mod 13 = 7</code>.</p>
 <div class="table-scroll"><table>
 <thead><tr><th>Shift</th><th>Window</th><th>mod 13</th><th>Status</th></tr></thead>
@@ -963,31 +994,124 @@ P = 2 6          q = 11</code></pre>
 <tr><td>13</td><td>73992</td><td>9</td><td>—</td></tr>
 <tr><td>14</td><td>39921</td><td>11</td><td>—</td></tr>
 </tbody></table></div>
+</div>
 <div class="qa-final"><div class="qa-label">Final answer</div>
 <p class="qa-final-text"><strong>Answer:</strong> valid shift <strong>6</strong>; one spurious hit at shift 12.</p></div>
-</div>
+</section>
+<section class="exam-q">
+<h3 id="q5-rabin-karp-with-a-small-modulus">Q5 — Rabin–Karp with a small modulus</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>Module 6 slide deck, slide 17 (class example).</em> Repeat Q4 for <code>T = 3141592653589793</code>, <code>P = 26</code>, <code>q = 11</code>. Why are there so many spurious hits?</p></div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
-<h3 id="a5-rabin-karp-q-11">A5 — Rabin–Karp, <code>q = 11</code></h3>
 <p>Pattern hash: <code>26 mod 11 = 4</code>. Windows: <code>31→9, 14→3, 41→8, 15→4, 59→4, 92→4, 26→4, 65→10, 53→9, 35→2, 58→3, 89→1, 97→9, 79→2, 93→5</code>.</p>
+</div>
 <div class="qa-final"><div class="qa-label">Final answer</div>
 <p class="qa-final-text"><strong>Answer:</strong> valid shift <strong>6</strong>; spurious hits at shifts <strong>3, 4, 5</strong>. With only 11 possible hash values and 15 windows, collisions are expected: about <code>15/11 ≈ 1.4</code>, and three occurred.</p></div>
-</div>
+</section>
+<section class="exam-q">
+<h3 id="q6-prefix-function">Q6 — Prefix function</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>Standard textbook exercise (supplementary).</em> Compute the prefix function for <code>P = aabaabaaa</code> and use it to search <code>T = aabaabaabaabaaa</code>. Give every match position.</p></div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
-<h3 id="a6-prefix-function-for-aabaabaaa">A6 — Prefix function for <code>aabaabaaa</code></h3>
 <p><code>π = [0, 1, 0, 1, 2, 3, 4, 5, 2]</code>.</p>
 <p>Searching <code>T = aabaabaabaabaaa</code> finds the pattern at shift <strong>6</strong> only. Working: the first nine characters <code>aabaabaab</code> fail at the last position (<code>b</code> where the pattern has <code>a</code>); the prefix function allows the scan to resume without re-reading the text. At shift 6 the window <code>aabaabaaa</code> matches completely; the fallback <code>q = π[8] = 2</code> then lets the scan continue, but no further full match exists.</p>
+</div>
 <div class="qa-final"><div class="qa-label">Final answer</div>
 <p class="qa-final-text"><strong>Answer:</strong> <code>π = [0, 1, 0, 1, 2, 3, 4, 5, 2]</code>; the pattern occurs once, at shift <strong>6</strong>.</p></div>
-</div>
+</section>
+<section class="exam-q">
+<h3 id="q7-conceptual">Q7 — Conceptual</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>IAT-style theory question — not a University paper.</em> (a) Why is the naïve algorithm <code>O(nm)</code> in the worst case? (b) What is a spurious hit? (c) State the three phases of KMP and their costs.</p></div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
-<h3 id="a7-conceptual">A7 — Conceptual</h3>
 <p><strong>(a)</strong> There are <code>n − m + 1</code> alignments and each can compare up to <code>m</code> characters, giving <code>O((n−m+1)m) = O(nm)</code>. The worst case is <code>T = aaaaa…a</code>, <code>P = aaaa…ab</code>, where every alignment matches <code>m − 1</code> characters before failing.</p>
 <p><strong>(b)</strong> A spurious hit is a window whose hash equals the pattern hash but whose characters differ. It must be verified and rejected; too many of them destroy the speed advantage of Rabin–Karp.</p>
 <p><strong>(c)</strong> Preprocessing (<code>O(m)</code>, prefix function), matching (<code>O(n)</code>), total <code>O(n + m)</code>; space <code>O(m)</code>.</p>
+</div>
 <div class="qa-final"><div class="qa-label">Final answer</div>
 <p class="qa-final-text"><strong>Answer:</strong> (a) <code>n − m + 1</code> alignments with up to <code>m</code> comparisons each gives <code>O(nm)</code>; (b) a hash match whose characters differ; (c) <code>O(m)</code> preprocessing, <code>O(n)</code> matching, <code>O(n + m)</code> total, <code>O(m)</code> space.</p></div>
+</section>
 </div>
+
+<h2 id="pyq">8 — Previous-year questions (University of Mumbai)</h2>
+<div class="practice">
+<p>Questions from University of Mumbai and Mumbai-University-affiliated college papers on this module, each with its source, a worked solution and a final answer. Where a paper gives no data, the example from this module is used and the question says so.</p>
+<section class="exam-q">
+<h3 id="pyq1-mu-2021-rk-mcq">PYQ1 — Rabin–Karp spurious hit (MCQ)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>University of Mumbai, SE Sem IV (Rev 2019), CSC402 Analysis of Algorithm, June 2021, Q1(20).</em> Given a pattern with a 5-digit window, find the spurious hit in the text. Pattern <code>7 3 9 9 2</code>, modulus 13, text <code>2 3 5 9 0 2 3 1 4 1 5 2 6 7 3 9 9 2 1 3 9</code> (indices 0 to 20). Options: (a) 6–10, (b) 12–16, (c) 3–7, (d) 13–17.</p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<p>Pattern hash: <code>73992 mod 13 = 9</code>. Slide the 5-digit window and compare hashes. Only two windows have hash 9: indices <strong>1–5</strong> (<code>35902</code>, hash 9, digits differ, so a spurious hit) and indices <strong>13–17</strong> (<code>73992</code>, a true match).</p>
+<p>None of the four options is 1–5, so the item has no correct option as printed. The options look like they were written for the textbook pattern <code>3 1 4 1 5</code> (hash 7), whose valid shift is at 6–10 and whose spurious hit is at 12–16, option (b).</p>
 </div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> for the pattern as printed, the spurious hit is at indices 1–5, which is not offered; option (d) 13–17 is the true match. If the pattern is <code>3 1 4 1 5</code>, the answer is (b) 12–16.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="pyq2-mu-2021-rk-note">PYQ2 — Rabin–Karp short note (5 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>University of Mumbai, SE Sem IV (Rev 2019), CSC402 Analysis of Algorithm, June 2021, Q2(F).</em> Write a short note on the Rabin–Karp algorithm.</p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<ul>
+<li><strong>Idea:</strong> compare a hash of the pattern with the hash of each length-m window of the text, and compare characters only when the hashes agree.</li>
+<li><strong>Hash:</strong> treat a window as a base-d number reduced mod q. The next window is a rolling update: <code>t(s+1) = (d·(t(s) − T[s+1]·h) + T[s+m+1]) mod q</code> with <code>h = d^(m−1) mod q</code>, so each hash costs O(1).</li>
+<li><strong>Spurious hits:</strong> equal hashes do not guarantee equal strings, so every hit is verified character by character.</li>
+<li><strong>Time:</strong> average and expected O(n + m); worst case O((n − m + 1)·m) when many spurious hits occur.</li>
+<li><strong>Use:</strong> multiple-pattern search and plagiarism detection.</li>
+</ul>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> hash the pattern and every window with a rolling hash mod q, verify only on hash matches; expected O(n + m), worst case O(nm).</p></div>
+</section>
+<section class="exam-q">
+<h3 id="pyq3-kjsit-aug25-naive">PYQ3 — Naïve matching (10 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>K. J. Somaiya Institute of Technology (autonomous, affiliated to University of Mumbai), SY Sem IV CEC402, Aug 2025, Q3(a). The text in the scan is garbled and has been read as <code>THIS IS A STRING MATCHING ALGORITHM</code>, spaces counted as characters.</em> Discuss the time complexity of the naïve string-matching algorithm, and search for <code>P = "STRING"</code> in the text using it.</p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<p><strong>Complexity.</strong> There are <code>n − m + 1</code> alignments, and each may compare up to m characters, so the worst case is <code>O((n − m + 1)·m) = O(nm)</code>, for example <code>T = aaaa…a</code> and <code>P = aa…ab</code>. The best case is O(n − m + 1) comparisons when the first pattern character never matches. No preprocessing or extra space is used.</p>
+<p><strong>Search.</strong> n = 35, m = 6, so there are 30 alignments (shifts 0 to 29). Most alignments fail at the first character. Shifts 3 and 6 match the first letter S and fail at the second (2 comparisons each), and shift 10 matches all six letters.</p>
+<ul>
+<li>30 alignments, 37 comparisons in total.</li>
+<li>The text <code>THIS IS A STRING…</code> has <code>STRING</code> starting at index 10.</li>
+</ul>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> worst case O(nm), best case O(n − m + 1); <code>STRING</code> is found at shift 10 after 37 comparisons.</p></div>
+</section>
+<section class="exam-q">
+<h3 id="pyq4-kjsit-may26-naive">PYQ4 — Naïve shifts (5 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>K. J. Somaiya Institute of Technology (autonomous, affiliated to University of Mumbai), SY Sem IV CEC402, May–June 2026, Q2(b). The scan shows the marks unclearly.</em> Find the number of shifts needed to find the pattern <code>aabc</code> in the text <code>abaaabccb</code> using the naïve method.</p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<p>n = 9, m = 4, so there are <code>9 − 4 + 1 = 6</code> alignments, shifts 0 to 5.</p>
+<div class="table-scroll"><table>
+<thead><tr><th>Shift</th><th>Window</th><th>Comparisons</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>abaa</td><td>2</td><td>mismatch at 2nd character</td></tr>
+<tr><td>1</td><td>baaa</td><td>1</td><td>mismatch at 1st character</td></tr>
+<tr><td>2</td><td>aaab</td><td>3</td><td>mismatch at 3rd character</td></tr>
+<tr><td>3</td><td>aabc</td><td>4</td><td>valid shift</td></tr>
+<tr><td>4</td><td>abcc</td><td>2</td><td>mismatch at 2nd character</td></tr>
+<tr><td>5</td><td>bccb</td><td>1</td><td>mismatch at 1st character</td></tr>
+</tbody></table></div>
+<p>The pattern is found at shift 3 after trying shifts 0, 1, 2 first. State your convention: shift 3 is reached after 3 moves from the first alignment, and the full scan has 6 alignments.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> the pattern is found at shift 3 (13 comparisons over all 6 alignments).</p></div>
+</section>
+<section class="exam-q">
+<h3 id="pyq5-sies-2026-kmp">PYQ5 — KMP with an example (10 marks)</h3>
+<div class="qa-question"><div class="qa-label">Question</div>
+<p><em>SIES GST (affiliated to University of Mumbai), SE Sem IV CEC403 Analysis of Algorithm, End Semester Exam (R-24) FH 2026, Q2(F). The paper gives no data, so the example of Worked example 4.6 is used.</em> Explain the Knuth–Morris–Pratt algorithm with an example (4 marks for the algorithm, 6 for the example).</p></div>
+<div class="qa-solution"><div class="qa-label">Worked solution</div>
+<p><strong>Algorithm.</strong> KMP never moves backwards in the text. It first builds the prefix function <code>π[q]</code>, the length of the longest proper prefix of <code>P[0…q]</code> that is also a suffix of it. During the search, after matching q characters, a mismatch sets <code>q = π[q − 1]</code> instead of restarting. Time is O(n + m) and extra space O(m).</p>
+<p><strong>Example.</strong> <code>P = ababaca</code> has <code>π = [0, 0, 1, 2, 3, 0, 1]</code>. Searching <code>T = abababacaba</code>: the first five characters match (q = 5), then <code>T[5] = b</code> against <code>P[5] = c</code> mismatches, so q falls to <code>π[4] = 3</code> and the text index does not move. Matching resumes and the full pattern is found, ending at text index 8.</p>
+</div>
+<div class="qa-final"><div class="qa-label">Final answer</div>
+<p class="qa-final-text"><strong>Answer:</strong> KMP precomputes π and falls back inside the pattern on a mismatch; for the example, <code>π = [0, 0, 1, 2, 3, 0, 1]</code> and the match is at shift 2, in O(n + m) time.</p></div>
+</section>
+</div>
+
 <h2 id="mistakes">9 — Common mistakes across the module</h2>
 <div class="common-mistakes">
 <div class="table-scroll"><table>
