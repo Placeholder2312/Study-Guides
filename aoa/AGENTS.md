@@ -13,7 +13,7 @@ Project instructions for OpenCode sessions working on the AOA study guides.
 - **Subject:** Analysis of Algorithm
 - **Official course code:** 2023113
 - **Published page:** `aoa/index.html`
-- **Guide status:** 0 of 6 modules ready
+- **Guide status:** 3 of 6 modules ready
 
 ## 2. Modules
 
