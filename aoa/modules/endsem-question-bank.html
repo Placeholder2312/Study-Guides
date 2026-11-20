@@ -272,6 +272,10 @@
   .qa-question > p:first-of-type, .qa-final > p:first-of-type { margin-top: 0; }
   .qa-final .eq { margin: 0.25rem 0 0; background: transparent; border: 0; padding: 0; text-align: left; }
   .qa-final-text { margin: 0; font-weight: 600; }
+  .qa-plain { margin: 0.9rem 0; padding: 0.75rem 1rem; border-left: 4px solid var(--accent); background: var(--accent-soft); }
+  .qa-plain .qa-label { color: var(--accent); }
+  .qa-plain > :last-child { margin-bottom: 0; }
+  .qa-plain > p:first-of-type { margin-top: 0; }
   .qa-list { margin:.3rem 0 0; padding-left:1.2rem; }
   .qa-list li { margin-bottom:.2rem; }
   figure { max-width:100%; margin:1rem auto; }
@@ -329,7 +333,7 @@
     h2 { margin: 2rem 0 0.75rem; border-bottom: 1px solid #000; padding-bottom: 0.3rem; }
     h3 { margin: 1.5rem 0 0.4rem; }
     .toc, .nav, .progress, .topbar { display: none; }
-    .example, .practice, .answer-key, .revision-sheet, .steps, .theory, .common-mistakes, .references, .exam-q, .qa-question, .qa-solution, .qa-final {
+    .example, .practice, .answer-key, .revision-sheet, .steps, .theory, .common-mistakes, .references, .exam-q, .qa-question, .qa-plain, .qa-solution, .qa-final {
       border: 1px solid #999;
       background: #fff !important;
       page-break-inside: avoid;
@@ -470,6 +474,9 @@
 <h3 id="q-asym">Q1 — Asymptotic notations (5 marks)</h3>
 <div class="qa-question"><div class="qa-label">Question</div>
 <p>Explain Big Oh, Big Omega and Theta notation.<br><em>MUSA QB Q1</em></p></div>
+<div class="qa-plain"><div class="qa-label">In plain words</div>
+<p>The time an algorithm takes depends on the input size n. These three notations say how fast that time grows, ignoring small details.</p><ul><li><strong>Big O</strong> is a ceiling: T(n) never grows faster than g(n).</li><li><strong>Big Ω</strong> is a floor: T(n) never grows slower than g(n).</li><li><strong>Θ</strong> is both at once: T(n) grows at exactly the order of g(n).</li></ul><p>The constants c and n₀ only say: from some starting size n₀ onwards, a fixed multiple of g(n) stays above (O) or below (Ω) T(n). In the exam, write the three definitions with their inequalities.</p>
+</div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
 Asymptotic notations describe how the running time or space of an algorithm grows with input size n, ignoring constants and lower-order terms.<ul><li><strong>Big O, upper bound:</strong> T(n) = O(g(n)) if there are constants c &gt; 0 and n₀ such that 0 ≤ T(n) ≤ c·g(n) for all n ≥ n₀. Used for the worst case.</li><li><strong>Big Omega, lower bound:</strong> T(n) = Ω(g(n)) if 0 ≤ c·g(n) ≤ T(n) for all n ≥ n₀. T grows at least as fast as g.</li><li><strong>Theta, tight bound:</strong> T(n) = Θ(g(n)) if 0 ≤ c₁·g(n) ≤ T(n) ≤ c₂·g(n) for all n ≥ n₀. T grows at the same rate as g.</li><li>Θ holds exactly when both O and Ω hold. Common orders: 1, log n, n, n log n, n², n³, 2ⁿ, n!.</li></ul>
 </div>
@@ -480,6 +487,9 @@ Asymptotic notations describe how the running time or space of an algorithm grow
 <h3 id="q-master">Q2 — Master method (5 marks)</h3>
 <div class="qa-question"><div class="qa-label">Question</div>
 <p>Solve using the master method: (i) T(n) = 8T(n/2) + n<sup>d</sup>  (ii) T(n) = 4T(n/2) + n².<br><em>MUSA Practice Paper Set I, Q1(a)</em></p></div>
+<div class="qa-plain"><div class="qa-label">In plain words</div>
+<p>In T(n) = aT(n/b) + f(n), the algorithm makes a smaller copies of size n/b and spends f(n) to split and combine. Compute n<sup>log<sub>b</sub>a</sup>, which measures the work in the many small subproblems, and compare it with f(n).</p><ul><li>n<sup>log<sub>b</sub>a</sup> is bigger: the answer is Θ(n<sup>log<sub>b</sub>a</sup>).</li><li>Both are equal: multiply by log n, so Θ(n<sup>log<sub>b</sub>a</sup> log n).</li><li>f(n) is bigger: the answer is Θ(f(n)).</li></ul><p>Here a = 8, b = 2 gives n³ in part (i), and a = 4, b = 2 gives n² in part (ii).</p>
+</div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
 <p>For T(n) = aT(n/b) + f(n) compare f(n) with n<sup>log<sub>b</sub>a</sup>.</p><p><strong>(i)</strong> a = 8, b = 2, so n<sup>log₂8</sup> = n³. The paper prints the exponent as d, so all three cases are given:</p><ul><li>d &lt; 3: f(n) is smaller, case 1, T(n) = Θ(n³).</li><li>d = 3: equal, case 2, T(n) = Θ(n³ log n).</li><li>d &gt; 3: f(n) is larger (regularity holds), case 3, T(n) = Θ(n<sup>d</sup>).</li></ul><p><strong>(ii)</strong> a = 4, b = 2, n<sup>log₂4</sup> = n². f(n) = n² equals it, so case 2 applies: T(n) = Θ(n² log n).</p>
 </div>
@@ -490,6 +500,9 @@ Asymptotic notations describe how the running time or space of an algorithm grow
 <h3 id="q-binary">Q3 — Binary search (5 marks)</h3>
 <div class="qa-question"><div class="qa-label">Question</div>
 <p>Write and explain the binary search algorithm and derive its complexity.<br><em>MUSA QB Q13</em></p></div>
+<div class="qa-plain"><div class="qa-label">In plain words</div>
+<p>It works like finding a word in a dictionary: open the middle, see whether the word is before or after, and ignore the other half. The array must already be sorted.</p><p>Every step throws away half of what is left. After k steps about n/2<sup>k</sup> elements remain, and the search ends at 1 element, so k ≈ log₂ n steps. That is why T(n) = T(n/2) + O(1) gives O(log n).</p>
+</div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
 <pre><code>BinarySearch(A, n, key)
  low ← 0; high ← n − 1
@@ -507,6 +520,9 @@ Asymptotic notations describe how the running time or space of an algorithm grow
 <h3 id="q-qsort">Q4 — Quick sort algorithm and complexity (8 marks)</h3>
 <div class="qa-question"><div class="qa-label">Question</div>
 <p>Write an algorithm for quick sort and derive its complexity.<br><em>MUSA QB Q7 and Set I Q3(a)</em></p></div>
+<div class="qa-plain"><div class="qa-label">In plain words</div>
+<p>Pick one element as the pivot. Move smaller elements to its left and larger ones to its right. The pivot is now in its final place. Repeat the same on the left part and the right part.</p><ul><li>Good pivot (near the middle): the array halves each time, so log n levels with n work per level, giving n log n.</li><li>Bad pivot (smallest or largest): only one element is removed per round, so n levels with n work per level, giving n².</li></ul>
+</div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
 <pre><code>QuickSort(A, low, high)
  if low &lt; high then
@@ -526,6 +542,9 @@ Partition(A, low, high)      // pivot = last element
 <h3 id="q-qsort-num">Q5 — Quick sort on 50, 31, 71, 38, 77, 81, 12, 33 (8 marks)</h3>
 <div class="qa-question"><div class="qa-label">Question</div>
 <p>Sort the numbers 50, 31, 71, 38, 77, 81, 12, 33 using quick sort (last element as pivot).<br><em>Set I Q3(a) OR</em></p></div>
+<div class="qa-plain"><div class="qa-label">In plain words</div>
+<p>This is Q4 on real numbers. The pivot is the last element. Scan from the left and move every element ≤ pivot to the left side, then place the pivot in the gap. The bold number in each row is now in its final place. Repeat on the left and right parts until each part has one element.</p>
+</div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
 <table><thead><tr><th>Partition</th><th>Pivot</th><th>Array after partition</th></tr></thead><tbody><tr><td>[50 31 71 38 77 81 12 33]</td><td>33</td><td>31 12 <strong>33</strong> 38 77 81 50 71</td></tr><tr><td>[31 12]</td><td>12</td><td><strong>12</strong> 31</td></tr><tr><td>[38 77 81 50 71]</td><td>71</td><td>38 50 <strong>71</strong> 77 81</td></tr><tr><td>[38 50]</td><td>50</td><td>38 <strong>50</strong></td></tr><tr><td>[77 81]</td><td>81</td><td>77 <strong>81</strong></td></tr></tbody></table><p>Each pivot lands in its final place, the left and right parts are sorted the same way, and no merge is needed. Complexity is as in Q4.</p>
 </div>
@@ -536,6 +555,9 @@ Partition(A, low, high)      // pivot = last element
 <h3 id="q-ins">Q6 — Insertion sort with passes (8 marks)</h3>
 <div class="qa-question"><div class="qa-label">Question</div>
 <p>Write the algorithm for insertion sort and sort 11, 7, 17, 3, 9, 29, 85, 9, showing the output after every pass.<br><em>Set I Q6(a)</em></p></div>
+<div class="qa-plain"><div class="qa-label">In plain words</div>
+<p>It is how you sort playing cards in your hand. Take the next card (the key), shift every bigger card on its left one place to the right, and drop the key into the gap. After each pass the left part of the array is sorted.</p><p>When the key is already at least as big as its left neighbour, nothing moves. That happens in passes 2, 5 and 6 here.</p>
+</div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
 <pre><code>InsertionSort(A, n)
  for i ← 1 to n − 1 do
@@ -550,6 +572,9 @@ Partition(A, low, high)      // pivot = last element
 <h3 id="q-dc">Q7 — Divide and conquer strategy (3 marks)</h3>
 <div class="qa-question"><div class="qa-label">Question</div>
 <p>Explain the concept of the Divide and Conquer strategy.<br><em>MUSA QB Q17(i)</em></p></div>
+<div class="qa-plain"><div class="qa-label">In plain words</div>
+<p>Break a big problem into smaller copies of itself, solve each copy, then join the answers. Sorting a pile of papers is an example: split it into two piles, sort each, then merge. "Independent" means the subproblems share no work. If they overlap, dynamic programming is the better tool (see Q30).</p>
+</div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
 <ul><li><strong>Divide:</strong> split the problem into smaller subproblems of the same type.</li><li><strong>Conquer:</strong> solve each subproblem recursively; a small enough one is solved directly (base case).</li><li><strong>Combine:</strong> merge the sub-solutions into the answer.</li><li>Subproblems are independent. Examples: merge sort, quick sort, binary search.</li></ul>
 </div>
