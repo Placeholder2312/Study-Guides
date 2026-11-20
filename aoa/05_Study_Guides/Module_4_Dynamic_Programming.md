@@ -120,12 +120,21 @@ In the examination, write the bottom-up version: it is shorter, it displays the 
 
 | Question to ask | Greedy | Dynamic programming |
 |---|---|---|
-| Can a locally best choice be wrong later? | No — that is the greedy-choice property. | Yes — so all candidates are compared. |
-| Are subproblems overlapping? | Usually irrelevant. | Yes, and storing them is the point. |
-| Typical complexity | O(n log n) after sorting. | Polynomial in the table size, e.g. O(nM) or O(n²2ⁿ). |
-| Example | Fractional knapsack. | 0/1 knapsack. |
+| **How does it make a decision?** | Choose the best-looking option **right now**, then continue. | Solve smaller cases, save their answers, and use them to compare choices. |
+| **Can a good-looking choice turn out badly?** | It must be safe. Greedy works only when the **greedy-choice property** holds: the local choice is guaranteed to fit an optimal overall answer. | It does not assume one local choice is safe. For each state, it compares the available options (such as **take** or **skip**) using stored results. |
+| **Does it reuse smaller problems?** | Usually no table of repeated subproblems is needed. | Yes. The same smaller cases can appear more than once, so DP stores each answer and reuses it. These are **overlapping subproblems**. |
+| **How long does it take in these examples?** | **Fractional knapsack:** O(n log n), mainly to sort items by value per weight. | **0/1 knapsack:** O(nM) to fill the table, where n = number of items and M = capacity. |
+| **Which knapsack version?** | **Fractional:** you may take part of an item. | **0/1:** take the whole item or leave it; no fractions. |
 
-A one-mark contrast: **greedy commits to one choice without looking ahead; DP compares every choice using the stored answers to subproblems.**
+**How to remember it:** greedy picks one best-looking move at a time. DP works out smaller cases first and compares choices using the answers it has stored.
+
+> **Supplementary clarification — illustrative values, not a class question.** A bag can carry **50 kg**. The items are A (10 kg, value 60, value/kg 6), B (20 kg, value 100, value/kg 5), and C (30 kg, value 120, value/kg 4).
+>
+> - **Greedy with 0/1 items:** take A, then B. That uses 30 kg and gives value 160. The remaining 20 kg cannot fit C.
+> - **Dynamic programming with 0/1 items:** compare the combinations. B + C uses exactly 50 kg and gives value **220**, better than A + B (160).
+> - **Fractional knapsack:** fractions are allowed. Greedy can take A, B, and 20 kg out of C's 30 kg, giving 60 + 100 + 80 = **240**.
+>
+> The same items show why a greedy ratio choice is safe for fractional knapsack but can miss the best combination when every item must be taken whole.
 
 ### 1.9 Common mistakes in the general method
 
