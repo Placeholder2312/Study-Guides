@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AOA End-Sem Question Bank — Study Guide</title>
+<title>AOA Endsem Question Bank — Study Guide</title>
 <style>
   :root {
     --ink: #0a0a0a;
@@ -23,7 +23,8 @@
     --surface-hi: #f0f0f0;
   }}
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; scroll-padding-top: 1rem; }
+  html { scroll-padding-top: 1rem; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
   body {
     font-family: var(--font-sans);
     color: var(--ink);
@@ -457,17 +458,21 @@
   .aoa-fig figcaption { font-size: .85rem; color: var(--muted); line-height: 1.45; margin-top: .6rem; }
   @media (max-width: 600px) { .aoa-fig { padding: .5rem; } }
 </style>
+<link rel="stylesheet" href="/assets/a11y.css">
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <div class="wrap">
-  <div class="topbar"><a class="back" href="/aoa">&#8592; All modules</a><button class="theme-toggle" type="button" id="themeToggle"></button></div>
+  <nav class="topbar" aria-label="Site"><a class="back" href="/aoa">← All modules</a><button class="theme-toggle" type="button" id="themeToggle" hidden></button></nav>
   <header>
-    <h1>AOA End-Sem Question Bank</h1>
+    <h1>AOA Endsem Question Bank</h1>
     <p class="subtitle">Winter 2026 · every question as Question → Solution → Final answer</p>
     <div class="meta">B.E. CSE (AI &amp; ML) · Semester III · Course 2023113 · NEP 2020<br>Built from the MUSA question bank (2026) and MUSA Practice Paper Set I · 6 topic groups, 30 questions</div>
   </header>
-  <div class="toc"><ol><li><a href="#basics">Analysis basics and divide and conquer</a></li><li><a href="#greedy">Greedy method</a></li><li><a href="#dp">Dynamic programming</a></li><li><a href="#bt">Backtracking and branch and bound</a></li><li><a href="#strings">String matching</a></li><li><a href="#diff">Differentiate between</a></li></ol></div>
-  <nav class="nav" aria-label="Sections"><a href="#basics">Analysis</a><a href="#greedy">Greedy</a><a href="#dp">Dynamic</a><a href="#bt">Backtracking</a><a href="#strings">String</a><a href="#diff">Differentiate</a></nav>
+
+  <main id="main" tabindex="-1">
+  <nav class="toc" aria-label="Table of contents"><ol><li><a href="#basics">Analysis basics and divide and conquer</a></li><li><a href="#greedy">Greedy method</a></li><li><a href="#dp">Dynamic programming</a></li><li><a href="#bt">Backtracking and branch and bound</a></li><li><a href="#strings">String matching</a></li><li><a href="#diff">Differentiate between</a></li></ol></nav>
+  <nav class="nav" aria-label="Jump to section"><a href="#basics">Analysis</a><a href="#greedy">Greedy</a><a href="#dp">Dynamic</a><a href="#bt">Backtracking</a><a href="#strings">String</a><a href="#diff">Differentiate</a></nav>
 <h2 id="basics">1 — Analysis basics and divide and conquer</h2>
 <div class="practice">
 <section class="exam-q">
@@ -546,7 +551,7 @@ Partition(A, low, high)      // pivot = last element
 <p>This is Q4 on real numbers. The pivot is the last element. Scan from the left and move every element ≤ pivot to the left side, then place the pivot in the gap. The bold number in each row is now in its final place. Repeat on the left and right parts until each part has one element.</p>
 </div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
-<table><thead><tr><th>Partition</th><th>Pivot</th><th>Array after partition</th></tr></thead><tbody><tr><td>[50 31 71 38 77 81 12 33]</td><td>33</td><td>31 12 <strong>33</strong> 38 77 81 50 71</td></tr><tr><td>[31 12]</td><td>12</td><td><strong>12</strong> 31</td></tr><tr><td>[38 77 81 50 71]</td><td>71</td><td>38 50 <strong>71</strong> 77 81</td></tr><tr><td>[38 50]</td><td>50</td><td>38 <strong>50</strong></td></tr><tr><td>[77 81]</td><td>81</td><td>77 <strong>81</strong></td></tr></tbody></table><p>Each pivot lands in its final place, the left and right parts are sorted the same way, and no merge is needed. Complexity is as in Q4.</p>
+<table><thead><tr><th scope="col">Partition</th><th scope="col">Pivot</th><th scope="col">Array after partition</th></tr></thead><tbody><tr><td>[50 31 71 38 77 81 12 33]</td><td>33</td><td>31 12 <strong>33</strong> 38 77 81 50 71</td></tr><tr><td>[31 12]</td><td>12</td><td><strong>12</strong> 31</td></tr><tr><td>[38 77 81 50 71]</td><td>71</td><td>38 50 <strong>71</strong> 77 81</td></tr><tr><td>[38 50]</td><td>50</td><td>38 <strong>50</strong></td></tr><tr><td>[77 81]</td><td>81</td><td>77 <strong>81</strong></td></tr></tbody></table><p>Each pivot lands in its final place, the left and right parts are sorted the same way, and no merge is needed. Complexity is as in Q4.</p>
 </div>
 <div class="qa-final"><div class="qa-label">Final answer</div>
 <p class="qa-final-text">Sorted array: <strong>12, 31, 33, 38, 50, 71, 77, 81</strong>.</p></div>
@@ -563,7 +568,7 @@ Partition(A, low, high)      // pivot = last element
  for i ← 1 to n − 1 do
    key ← A[i]; j ← i − 1
    while j ≥ 0 and A[j] &gt; key do A[j+1] ← A[j]; j ← j − 1
-   A[j+1] ← key</code></pre><table><thead><tr><th>Pass</th><th>Key</th><th>Array</th></tr></thead><tbody><tr><td>1</td><td>7</td><td>7 11 17 3 9 29 85 9</td></tr><tr><td>2</td><td>17</td><td>7 11 17 3 9 29 85 9</td></tr><tr><td>3</td><td>3</td><td>3 7 11 17 9 29 85 9</td></tr><tr><td>4</td><td>9</td><td>3 7 9 11 17 29 85 9</td></tr><tr><td>5</td><td>29</td><td>3 7 9 11 17 29 85 9</td></tr><tr><td>6</td><td>85</td><td>3 7 9 11 17 29 85 9</td></tr><tr><td>7</td><td>9</td><td>3 7 9 9 11 17 29 85</td></tr></tbody></table><p>Best case O(n) (already sorted), worst and average O(n²).</p>
+   A[j+1] ← key</code></pre><table><thead><tr><th scope="col">Pass</th><th scope="col">Key</th><th scope="col">Array</th></tr></thead><tbody><tr><td>1</td><td>7</td><td>7 11 17 3 9 29 85 9</td></tr><tr><td>2</td><td>17</td><td>7 11 17 3 9 29 85 9</td></tr><tr><td>3</td><td>3</td><td>3 7 11 17 9 29 85 9</td></tr><tr><td>4</td><td>9</td><td>3 7 9 11 17 29 85 9</td></tr><tr><td>5</td><td>29</td><td>3 7 9 11 17 29 85 9</td></tr><tr><td>6</td><td>85</td><td>3 7 9 11 17 29 85 9</td></tr><tr><td>7</td><td>9</td><td>3 7 9 9 11 17 29 85</td></tr></tbody></table><p>Best case O(n) (already sorted), worst and average O(n²).</p>
 </div>
 <div class="qa-final"><div class="qa-label">Final answer</div>
 <p class="qa-final-text">Sorted: <strong>3, 7, 9, 9, 11, 17, 29, 85</strong>.</p></div>
@@ -604,7 +609,7 @@ Partition(A, low, high)      // pivot = last element
 <div class="qa-question"><div class="qa-label">Question</div>
 <p>Write the greedy knapsack algorithm and solve: n = 5, m = 100, P = (10, 20, 30, 40, 50), W = (20, 30, 66, 40, 60).<br><em>Set I Q3(b)</em></p></div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
-<p>Algorithm: compute P/W for each item, sort in decreasing order, add whole items while they fit, then add the fraction of the next item that fills the remaining capacity.</p><table><thead><tr><th>Item</th><th>P</th><th>W</th><th>P/W</th></tr></thead><tbody><tr><td>1</td><td>10</td><td>20</td><td>0.50</td></tr><tr><td>2</td><td>20</td><td>30</td><td>0.67</td></tr><tr><td>3</td><td>30</td><td>66</td><td>0.45</td></tr><tr><td>4</td><td>40</td><td>40</td><td>1.00</td></tr><tr><td>5</td><td>50</td><td>60</td><td>0.83</td></tr></tbody></table><p>Order: 4, 5, 2, 1, 3. Take item 4 (W 40, capacity left 60, profit 40). Take item 5 (W 60, capacity left 0, profit 90). The knapsack is full. Complexity is O(n log n) for the sort.</p>
+<p>Algorithm: compute P/W for each item, sort in decreasing order, add whole items while they fit, then add the fraction of the next item that fills the remaining capacity.</p><table><thead><tr><th scope="col">Item</th><th scope="col">P</th><th scope="col">W</th><th scope="col">P/W</th></tr></thead><tbody><tr><td>1</td><td>10</td><td>20</td><td>0.50</td></tr><tr><td>2</td><td>20</td><td>30</td><td>0.67</td></tr><tr><td>3</td><td>30</td><td>66</td><td>0.45</td></tr><tr><td>4</td><td>40</td><td>40</td><td>1.00</td></tr><tr><td>5</td><td>50</td><td>60</td><td>0.83</td></tr></tbody></table><p>Order: 4, 5, 2, 1, 3. Take item 4 (W 40, capacity left 60, profit 40). Take item 5 (W 60, capacity left 0, profit 90). The knapsack is full. Complexity is O(n log n) for the sort.</p>
 </div>
 <div class="qa-final"><div class="qa-label">Final answer</div>
 <p class="qa-final-text">Select items 4 and 5 fully: x = (0, 0, 0, 1, 1), weight 100, <strong>maximum profit = 90</strong>.</p></div>
@@ -664,7 +669,7 @@ Partition(A, low, high)      // pivot = last element
 <div class="qa-question"><div class="qa-label">Question</div>
 <p>Find the longest common subsequence of String 1 = xyzytxy and String 2 = ytzxyx.<br><em>Set I Q4(a)</em></p></div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
-<p>Rows are x, y, z, y, t, x, y; columns are y, t, z, x, y, x.</p><table><thead><tr><th></th><th>∅</th><th>y</th><th>t</th><th>z</th><th>x</th><th>y</th><th>x</th></tr></thead><tbody><tr><td>∅</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>x</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td></tr><tr><td>y</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td></tr><tr><td>z</td><td>0</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td><td>2</td></tr><tr><td>y</td><td>0</td><td>1</td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td></tr><tr><td>t</td><td>0</td><td>1</td><td>2</td><td>2</td><td>2</td><td>3</td><td>3</td></tr><tr><td>x</td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td><td>4</td></tr><tr><td>y</td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td><td>4</td><td>4</td></tr></tbody></table><p>L[7][6] = 4. Tracing back from the bottom-right (diagonal on a match, otherwise toward the larger neighbour) picks y, z, y, x.</p>
+<p>Rows are x, y, z, y, t, x, y; columns are y, t, z, x, y, x.</p><table><thead><tr><th scope="col"></th><th scope="col">∅</th><th scope="col">y</th><th scope="col">t</th><th scope="col">z</th><th scope="col">x</th><th scope="col">y</th><th scope="col">x</th></tr></thead><tbody><tr><td>∅</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>x</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td></tr><tr><td>y</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td></tr><tr><td>z</td><td>0</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td><td>2</td></tr><tr><td>y</td><td>0</td><td>1</td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td></tr><tr><td>t</td><td>0</td><td>1</td><td>2</td><td>2</td><td>2</td><td>3</td><td>3</td></tr><tr><td>x</td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td><td>4</td></tr><tr><td>y</td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td><td>4</td><td>4</td></tr></tbody></table><p>L[7][6] = 4. Tracing back from the bottom-right (diagonal on a match, otherwise toward the larger neighbour) picks y, z, y, x.</p>
 </div>
 <div class="qa-final"><div class="qa-label">Final answer</div>
 <p class="qa-final-text">LCS length = <strong>4</strong>; one LCS is <strong>yzyx</strong> (ytxy is another of length 4).</p></div>
@@ -691,7 +696,7 @@ Partition(A, low, high)      // pivot = last element
 <div class="qa-question"><div class="qa-label">Question</div>
 <p>Solve M = 21, n = 4, (p₁, p₂, p₃, p₄) = (2, 5, 8, 1), (w₁, w₂, w₃, w₄) = (10, 15, 6, 9).<br><em>Set I Q5(b) OR</em></p></div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
-<p>Fill K[i][w] for w = 0 to 21. Key rows at w = 21:</p><table><thead><tr><th>i</th><th>K[i][21]</th><th>Reason</th></tr></thead><tbody><tr><td>1</td><td>2</td><td>item 1 fits (10 ≤ 21)</td></tr><tr><td>2</td><td>5</td><td>items 1 and 2 weigh 25 &gt; 21, so take the better one</td></tr><tr><td>3</td><td>13</td><td>item 3 (6) + item 2 (15) = 21, profit 8 + 5</td></tr><tr><td>4</td><td>13</td><td>item 4 adds nothing better</td></tr></tbody></table><p>Trace back: K[4][21] = K[3][21], so item 4 is out. K[3][21] ≠ K[2][21], so item 3 is in (capacity 15). K[2][15] = 5 ≠ K[1][15] = 2, so item 2 is in (capacity 0).</p>
+<p>Fill K[i][w] for w = 0 to 21. Key rows at w = 21:</p><table><thead><tr><th scope="col">i</th><th scope="col">K[i][21]</th><th scope="col">Reason</th></tr></thead><tbody><tr><td>1</td><td>2</td><td>item 1 fits (10 ≤ 21)</td></tr><tr><td>2</td><td>5</td><td>items 1 and 2 weigh 25 &gt; 21, so take the better one</td></tr><tr><td>3</td><td>13</td><td>item 3 (6) + item 2 (15) = 21, profit 8 + 5</td></tr><tr><td>4</td><td>13</td><td>item 4 adds nothing better</td></tr></tbody></table><p>Trace back: K[4][21] = K[3][21], so item 4 is out. K[3][21] ≠ K[2][21], so item 3 is in (capacity 15). K[2][15] = 5 ≠ K[1][15] = 2, so item 2 is in (capacity 0).</p>
 </div>
 <div class="qa-final"><div class="qa-label">Final answer</div>
 <p class="qa-final-text">Select items 2 and 3: x = (0, 1, 1, 0), weight 21, <strong>maximum profit = 13</strong>.</p></div>
@@ -820,7 +825,7 @@ Partition(A, low, high)      // pivot = last element
 <div class="qa-question"><div class="qa-label">Question</div>
 <p>Differentiate between Greedy method and Dynamic programming.<br><em>MUSA QB Q16</em></p></div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
-<table><thead><tr><th>Point</th><th>Greedy method</th><th>Dynamic programming</th></tr></thead><tbody><tr><td>Choice</td><td>Locally best choice, never reconsidered</td><td>Considers all subproblem results and combines them</td></tr><tr><td>Stores results</td><td>No</td><td>Yes (table)</td></tr><tr><td>Optimality</td><td>Not always optimal</td><td>Optimal when correctly formulated</td></tr><tr><td>Needs</td><td>Greedy-choice property and optimal substructure</td><td>Optimal substructure and overlapping subproblems</td></tr><tr><td>Cost</td><td>Faster, less memory</td><td>More computation and memory</td></tr><tr><td>Examples</td><td>Prim, Kruskal, Dijkstra, fractional knapsack</td><td>0/1 knapsack, LCS, matrix chain, Floyd–Warshall</td></tr></tbody></table>
+<table><thead><tr><th scope="col">Point</th><th scope="col">Greedy method</th><th scope="col">Dynamic programming</th></tr></thead><tbody><tr><td>Choice</td><td>Locally best choice, never reconsidered</td><td>Considers all subproblem results and combines them</td></tr><tr><td>Stores results</td><td>No</td><td>Yes (table)</td></tr><tr><td>Optimality</td><td>Not always optimal</td><td>Optimal when correctly formulated</td></tr><tr><td>Needs</td><td>Greedy-choice property and optimal substructure</td><td>Optimal substructure and overlapping subproblems</td></tr><tr><td>Cost</td><td>Faster, less memory</td><td>More computation and memory</td></tr><tr><td>Examples</td><td>Prim, Kruskal, Dijkstra, fractional knapsack</td><td>0/1 knapsack, LCS, matrix chain, Floyd–Warshall</td></tr></tbody></table>
 </div>
 <div class="qa-final"><div class="qa-label">Final answer</div>
 <p class="qa-final-text">See the table above.</p></div>
@@ -830,7 +835,7 @@ Partition(A, low, high)      // pivot = last element
 <div class="qa-question"><div class="qa-label">Question</div>
 <p>Differentiate between Fractional knapsack and 0/1 knapsack.<br><em>MUSA QB Q16</em></p></div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
-<table><thead><tr><th>Point</th><th>Fractional knapsack</th><th>0/1 knapsack</th></tr></thead><tbody><tr><td>Items</td><td>Can be divided</td><td>Taken whole or not at all</td></tr><tr><td>Method</td><td>Greedy (by profit/weight)</td><td>Dynamic programming</td></tr><tr><td>Decision</td><td>Value between 0 and 1</td><td>0 or 1</td></tr><tr><td>Greedy optimal?</td><td>Yes</td><td>No</td></tr><tr><td>Time</td><td>O(n log n)</td><td>O(nW)</td></tr></tbody></table>
+<table><thead><tr><th scope="col">Point</th><th scope="col">Fractional knapsack</th><th scope="col">0/1 knapsack</th></tr></thead><tbody><tr><td>Items</td><td>Can be divided</td><td>Taken whole or not at all</td></tr><tr><td>Method</td><td>Greedy (by profit/weight)</td><td>Dynamic programming</td></tr><tr><td>Decision</td><td>Value between 0 and 1</td><td>0 or 1</td></tr><tr><td>Greedy optimal?</td><td>Yes</td><td>No</td></tr><tr><td>Time</td><td>O(n log n)</td><td>O(nW)</td></tr></tbody></table>
 </div>
 <div class="qa-final"><div class="qa-label">Final answer</div>
 <p class="qa-final-text">See the table above.</p></div>
@@ -840,7 +845,7 @@ Partition(A, low, high)      // pivot = last element
 <div class="qa-question"><div class="qa-label">Question</div>
 <p>Differentiate between Backtracking and Branch and bound.<br><em>MUSA QB Q16</em></p></div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
-<table><thead><tr><th>Point</th><th>Backtracking</th><th>Branch and bound</th></tr></thead><tbody><tr><td>Used for</td><td>Constraint-satisfaction and decision problems</td><td>Optimisation problems</td></tr><tr><td>Prunes</td><td>Branches that violate constraints</td><td>Branches whose bound cannot beat the best solution</td></tr><tr><td>Search</td><td>Depth-first</td><td>FIFO, LIFO or least-cost</td></tr><tr><td>Objective function and bounds</td><td>Not required</td><td>Required</td></tr><tr><td>Examples</td><td>N-queen, graph colouring, sum of subsets</td><td>0/1 knapsack, TSP, 15-puzzle</td></tr></tbody></table>
+<table><thead><tr><th scope="col">Point</th><th scope="col">Backtracking</th><th scope="col">Branch and bound</th></tr></thead><tbody><tr><td>Used for</td><td>Constraint-satisfaction and decision problems</td><td>Optimisation problems</td></tr><tr><td>Prunes</td><td>Branches that violate constraints</td><td>Branches whose bound cannot beat the best solution</td></tr><tr><td>Search</td><td>Depth-first</td><td>FIFO, LIFO or least-cost</td></tr><tr><td>Objective function and bounds</td><td>Not required</td><td>Required</td></tr><tr><td>Examples</td><td>N-queen, graph colouring, sum of subsets</td><td>0/1 knapsack, TSP, 15-puzzle</td></tr></tbody></table>
 </div>
 <div class="qa-final"><div class="qa-label">Final answer</div>
 <p class="qa-final-text">See the table above.</p></div>
@@ -850,12 +855,14 @@ Partition(A, low, high)      // pivot = last element
 <div class="qa-question"><div class="qa-label">Question</div>
 <p>Differentiate between Divide and conquer and Dynamic programming.<br><em>MUSA QB Q16</em></p></div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
-<table><thead><tr><th>Point</th><th>Divide and conquer</th><th>Dynamic programming</th></tr></thead><tbody><tr><td>Subproblems</td><td>Independent</td><td>Overlapping</td></tr><tr><td>Approach</td><td>Divide, conquer, combine</td><td>Solve, store, reuse</td></tr><tr><td>Repeated work</td><td>May repeat</td><td>Avoided by storing results</td></tr><tr><td>Storage</td><td>Recursion stack</td><td>Table or memo</td></tr><tr><td>Examples</td><td>Merge sort, quick sort, binary search</td><td>Fibonacci, 0/1 knapsack, matrix chain</td></tr></tbody></table>
+<table><thead><tr><th scope="col">Point</th><th scope="col">Divide and conquer</th><th scope="col">Dynamic programming</th></tr></thead><tbody><tr><td>Subproblems</td><td>Independent</td><td>Overlapping</td></tr><tr><td>Approach</td><td>Divide, conquer, combine</td><td>Solve, store, reuse</td></tr><tr><td>Repeated work</td><td>May repeat</td><td>Avoided by storing results</td></tr><tr><td>Storage</td><td>Recursion stack</td><td>Table or memo</td></tr><tr><td>Examples</td><td>Merge sort, quick sort, binary search</td><td>Fibonacci, 0/1 knapsack, matrix chain</td></tr></tbody></table>
 </div>
 <div class="qa-final"><div class="qa-label">Final answer</div>
 <p class="qa-final-text">See the table above.</p></div>
 </section>
 </div>
+
+</main>
 
 <footer>Study guide compiled from MUSA practice material, not a University publication · <a href="/aoa">Back to all modules</a></footer>
 </div>
@@ -863,7 +870,7 @@ Partition(A, low, high)      // pivot = last element
 (function(){
   var b=document.getElementById('themeToggle'),r=document.documentElement;
   function dark(){return r.getAttribute('data-theme')==='dark';}
-  function paint(){var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
+  function paint(){b.hidden=false;var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
   b.addEventListener('click',function(){var n=dark()?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('sg-theme',n);}catch(e){}paint();});
   paint();
   var links=[].slice.call(document.querySelectorAll('.nav a'));

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DSGT Module 4 — Study Guide</title>
+<title>DSGT Module 4 — Counting — Study Guide</title>
 <style>
   :root {
     --ink: #0a0a0a;
@@ -20,7 +20,7 @@
   }
   * { box-sizing: border-box; }
   sub, sup { font-size: 0.75em; line-height: 0; }
-  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
   body {
     font-family: var(--font-sans);
     color: var(--ink);
@@ -90,7 +90,7 @@
     margin: 0 0 1rem;
     line-height: 1.6;
   }
-  .wrap > div { line-height: 1.6; }
+  .wrap > div, .wrap > main > div { line-height: 1.6; }
   ul, ol, blockquote, pre, figure { line-height: 1.6; }
   td { line-height: 1.5; }
   strong, em, span, b, i { line-height: 1.6; }
@@ -482,20 +482,24 @@
 
 </style>
 <style id="d4-mobile-venn">.d4-venn-mobile{display:none}@media(max-width:600px){.d4-venn-desktop{display:none!important}.d4-venn-mobile{display:block!important;width:100%;max-width:100%;height:auto;margin:.5rem auto;padding:0;border:0;background:transparent}}</style>
+<link rel="stylesheet" href="/assets/a11y.css">
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <div class="wrap">
-  <div class="topbar"><a class="back" href="/dsgt">← All modules</a><button class="theme-toggle" type="button" id="themeToggle"></button></div>
+  <nav class="topbar" aria-label="Site"><a class="back" href="/dsgt">← All modules</a><button class="theme-toggle" type="button" id="themeToggle" hidden></button></nav>
 
 
   <header>
-    <h1>DSGT Module 4</h1>
-    <p class="subtitle">Counting: Pigeonhole Principle · Inclusion-Exclusion · Recurrence Relations</p>
+    <h1>DSGT Module 4 — Counting</h1>
+    <p class="subtitle">Pigeonhole Principle · Inclusion-Exclusion · Recurrence Relations</p>
     <div class="meta">CSE AIML · Sem III · End Sem Preparation · Source: Mrs. Shamal Bagal PPTs + DSGT Syllabus + Mumbai University Question Papers</div>
   </header>
 
-  <div class="toc">
+  <main id="main" tabindex="-1">
+
+  <nav class="toc" aria-label="Table of contents">
     <ol>
       <li><a href="#syllabus">Module 4 — Syllabus</a></li>
       <li><a href="#php">1 · Pigeonhole Principle (4.1)</a></li>
@@ -508,9 +512,9 @@
       <li><a href="#revision">Last-Minute Revision Sheet</a></li>
       <li><a href="#references">References &amp; Attribution</a></li>
     </ol>
-  </div>
+  </nav>
 
-  <nav class="nav">
+  <nav class="nav" aria-label="Jump to section">
     <a href="#php">Pigeonhole</a>
     <a href="#iep">Inclusion-Exclusion</a>
     <a href="#recurrence">Recurrences</a>
@@ -525,7 +529,7 @@
   <div class="eq">Pigeonhole Principle, Inclusion-Exclusion Principle. Recurrence relations, Solving recurrence relations.</div>
 
   <table>
-    <tr><th>Section</th><th>Topic</th><th>What it covers</th></tr>
+    <tr><th scope="col">Section</th><th scope="col">Topic</th><th scope="col">What it covers</th></tr>
     <tr><td><strong>4.1</strong></td><td>Pigeonhole Principle</td><td>More items than containers → at least one container holds multiples. An existence proof.</td></tr>
     <tr><td><strong>4.2</strong></td><td>Inclusion-Exclusion Principle</td><td>Counting overlapping groups without double-counting shared elements.</td></tr>
     <tr><td><strong>4.3</strong></td><td>Recurrence Relations</td><td>Defining a sequence from previous terms, then finding a closed-form formula.</td></tr>
@@ -647,7 +651,7 @@
 </div>
 
   <table>
-    <tr><th>Exam pattern</th><th>Method</th></tr>
+    <tr><th scope="col">Exam pattern</th><th scope="col">Method</th></tr>
     <tr><td>“Guarantee” questions</td><td>Use n = m(k − 1) + 1.</td></tr>
     <tr><td>“Show that at least…”</td><td>Count items and containers. Apply ⌈n/m⌉.</td></tr>
     <tr><td>Money or items distributed among people</td><td>Money = pigeons; people = holes.</td></tr>
@@ -811,7 +815,7 @@
 </div>
 
   <table>
-    <tr><th>Exam pattern</th><th>Method</th></tr>
+    <tr><th scope="col">Exam pattern</th><th scope="col">Method</th></tr>
     <tr><td>“How many take at least one?”</td><td>Direct IEP formula (the union).</td></tr>
     <tr><td>“How many are in none?”</td><td>Total minus the union.</td></tr>
     <tr><td>“How many do both?” (union given)</td><td>Rearrange: |A ∩ B| = |A| + |B| − |A ∪ B|</td></tr>
@@ -929,7 +933,7 @@
   </ol>
 
   <table>
-    <tr><th>Form of <span class="kbd">f(n)</span></th><th>Guess for <span class="kbd">a<sub>n</sub><sup>(p)</sup></span></th></tr>
+    <tr><th scope="col">Form of <span class="kbd">f(n)</span></th><th scope="col">Guess for <span class="kbd">a<sub>n</sub><sup>(p)</sup></span></th></tr>
     <tr><td>Constant <span class="kbd">k</span></td><td><span class="kbd">C</span></td></tr>
     <tr><td>Linear <span class="kbd">an + b</span></td><td><span class="kbd">Cn + D</span></td></tr>
     <tr><td><span class="kbd">k<sup>n</sup></span> (k is not a characteristic root)</td><td><span class="kbd">C · k<sup>n</sup></span></td></tr>
@@ -1030,7 +1034,7 @@
 <div class="qa-question"><div class="qa-label">Question</div>
 <p>A campus event app records students who use three app sections:</p>
 <table>
-        <tr><th>Category</th><th>Count</th></tr>
+        <tr><th scope="col">Category</th><th scope="col">Count</th></tr>
         <tr><td>E (Event Announcements)</td><td>140</td></tr>
         <tr><td>C (Clubs &amp; Communities)</td><td>110</td></tr>
         <tr><td>R (Reels / Short videos)</td><td>120</td></tr>
@@ -1120,7 +1124,7 @@
 <div class="qa-question"><div class="qa-label">Question</div>
 <p>A pharmaceutical company conducts a drug trial on 1000 people:</p>
 <table>
-        <tr><th>Symptom</th><th>Count</th></tr>
+        <tr><th scope="col">Symptom</th><th scope="col">Count</th></tr>
         <tr><td>A</td><td>122</td></tr>
         <tr><td>B</td><td>88</td></tr>
         <tr><td>C</td><td>112</td></tr>
@@ -1320,7 +1324,7 @@
   <div class="revision-sheet">
     <h3>Pigeonhole</h3>
     <table>
-      <tr><th>Situation</th><th>Use</th></tr>
+      <tr><th scope="col">Situation</th><th scope="col">Use</th></tr>
       <tr><td>Basic: k + 1 objects, k boxes</td><td>Some box has at least 2</td></tr>
       <tr><td>Generalized: n objects, m boxes</td><td>Some box has at least ⌈n / m⌉</td></tr>
       <tr><td>“Guarantee k in one box” (m boxes)</td><td>n = m(k − 1) + 1</td></tr>
@@ -1331,7 +1335,7 @@
     <div class="eq">|A ∪ B| = |A| + |B| − |A ∩ B|</div>
     <div class="eq">|A ∪ B ∪ C| = |A| + |B| + |C| − |A ∩ B| − |A ∩ C| − |B ∩ C| + |A ∩ B ∩ C|</div>
     <table>
-      <tr><th>Asked</th><th>Compute</th></tr>
+      <tr><th scope="col">Asked</th><th scope="col">Compute</th></tr>
       <tr><td>None of the sets</td><td>Total − |A ∪ B ∪ C|</td></tr>
       <tr><td>Only A</td><td>|A| − |A ∩ B| − |A ∩ C| + |A ∩ B ∩ C|</td></tr>
       <tr><td>A and B only</td><td>|A ∩ B| − |A ∩ B ∩ C|</td></tr>
@@ -1342,13 +1346,13 @@
 
     <h3>Recurrence Relations</h3>
     <table>
-      <tr><th>Characteristic roots</th><th>General solution</th></tr>
+      <tr><th scope="col">Characteristic roots</th><th scope="col">General solution</th></tr>
       <tr><td>Distinct r<sub>1</sub>, r<sub>2</sub></td><td>a<sub>n</sub> = A·r<sub>1</sub><sup>n</sup> + B·r<sub>2</sub><sup>n</sup></td></tr>
       <tr><td>Repeated r</td><td>a<sub>n</sub> = (A + Bn)·r<sup>n</sup></td></tr>
       <tr><td>Non-homogeneous</td><td>a<sub>n</sub> = homogeneous solution + particular solution</td></tr>
     </table>
     <table>
-      <tr><th>Right-hand side f(n)</th><th>Guess</th></tr>
+      <tr><th scope="col">Right-hand side f(n)</th><th scope="col">Guess</th></tr>
       <tr><td>Constant</td><td>C</td></tr>
       <tr><td>Linear</td><td>Cn + D</td></tr>
       <tr><td>k<sup>n</sup>, k not a root</td><td>C·k<sup>n</sup></td></tr>
@@ -1388,7 +1392,9 @@
     <p><strong>Previous examination questions:</strong> Questions marked with <span class="mu-badge">MUMBAI UNIVERSITY</span> are from NEP DSGT Winter 2025 and NEP DSGT Summer 2026 end-semester examination papers. Question-bank questions are from Prelim Question Bank.doc and Prelim Question Bank(1).doc. IAT sample questions are from IAT1 sample questions.doc and IAT2 sample questions.doc.</p>
   </div>
 
-  <footer>
+  </main>
+
+<footer>
     DSGT Module 4 Study Guide · Built from Mrs. Shamal Bagal’s PPTs, the official DSGT portion syllabus,<br>
     theory from Oscar Levin’s <em>Discrete Mathematics: An Open Introduction</em> and LibreTexts (Joy Morris),<br>
     and previous examination questions from NEP DSGT Winter 2025 and Summer 2026.
@@ -1399,7 +1405,7 @@
 (function(){
   var b=document.getElementById('themeToggle'),r=document.documentElement;
   function dark(){var t=r.getAttribute('data-theme');return t==='dark';}
-  function paint(){var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
+  function paint(){b.hidden=false;var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
   b.addEventListener('click',function(){var n=dark()?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('sg-theme',n);}catch(e){}paint();});
   paint();
 })();

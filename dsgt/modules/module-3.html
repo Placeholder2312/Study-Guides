@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DSGT Module 3 — Functions (Exam Essentials)</title>
+<title>DSGT Module 3 — Functions — Study Guide</title>
 <style>
   :root {
     --ink: #0a0a0a;
@@ -20,7 +20,7 @@
   }
   * { box-sizing: border-box; }
   sub, sup { font-size: 0.75em; line-height: 0; }
-  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
   body {
     font-family: var(--font-sans);
     color: var(--ink);
@@ -90,7 +90,7 @@
     margin: 0 0 1rem;
     line-height: 1.6;
   }
-  .wrap > div { line-height: 1.6; }
+  .wrap > div, .wrap > main > div { line-height: 1.6; }
   ul, ol, blockquote, pre, figure { line-height: 1.6; }
   td { line-height: 1.5; }
   strong, em, span, b, i { line-height: 1.6; }
@@ -479,16 +479,20 @@
   @media print { .rail, .rm-bar, .rm-tab, .rm-back, .rm-sheet { display:none !important; } }
 
 </style>
+<link rel="stylesheet" href="/assets/a11y.css">
 </head><body>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <div class="wrap">
-  <div class="topbar"><a class="back" href="/dsgt">← All modules</a><button class="theme-toggle" type="button" id="themeToggle"></button></div>
+  <nav class="topbar" aria-label="Site"><a class="back" href="/dsgt">← All modules</a><button class="theme-toggle" type="button" id="themeToggle" hidden></button></nav>
 
   <header>
-    <h1>DSGT Module 3</h1>
-    <p class="subtitle">Functions — selective exam essentials</p>
+    <h1>DSGT Module 3 — Functions</h1>
+    <p class="subtitle">Selective exam essentials</p>
     <div class="meta">CSE AIML · Sem III · 3 teaching hours · CO3 · Source: Mrs. Shamal Bagal's Module 3 PPT, the official DSGT syllabus, the Summer 2026 paper and the IAT sample questions</div>
   </header>
+
+  <main id="main" tabindex="-1">
 
   <div class="theory">
     <span class="source">READ THIS FIRST — LIMITED TOPIC COVERAGE</span>
@@ -498,7 +502,7 @@
     <p>Every method below is followed by a worked example and a short practice question. Answers are separate, at the end.</p>
   </div>
 
-  <div class="toc">
+  <nav class="toc" aria-label="Table of contents">
     <ol>
       <li><a href="#s1">Functions: definition and vocabulary</a></li>
       <li><a href="#s2">Injective, surjective, bijective</a></li>
@@ -509,9 +513,9 @@
       <li><a href="#revision">Last-minute revision sheet</a></li>
       <li><a href="#sources">Sources, verification and coverage</a></li>
     </ol>
-  </div>
+  </nav>
 
-  <nav class="nav">
+  <nav class="nav" aria-label="Jump to section">
     <a href="#s1">Fundamentals</a>
     <a href="#s2">Types</a>
     <a href="#s3">Composition</a>
@@ -538,7 +542,7 @@
   <p>Different inputs are allowed to share an output. That is still a function. "Unique output" does not mean "different output".</p>
 
   <table>
-    <tr><th>Term</th><th>Meaning</th><th>How to find it</th></tr>
+    <tr><th scope="col">Term</th><th scope="col">Meaning</th><th scope="col">How to find it</th></tr>
     <tr><td>Domain</td><td>The set you start from, A</td><td>Given, or the set of all first coordinates</td></tr>
     <tr><td>Codomain</td><td>The set you are mapping into, B</td><td>Given in the question</td></tr>
     <tr><td>Range</td><td>The outputs that actually occur</td><td>Collect all f(a) values; range ⊆ codomain</td></tr>
@@ -643,7 +647,7 @@
   </div>
 
   <table>
-    <tr><th>Type</th><th>Question it answers</th><th>Disprove it by finding</th><th>Prove it by</th></tr>
+    <tr><th scope="col">Type</th><th scope="col">Question it answers</th><th scope="col">Disprove it by finding</th><th scope="col">Prove it by</th></tr>
     <tr><td><strong>Injective</strong></td><td>Do different inputs give different outputs?</td><td>Two different inputs with the same output</td><td>Assuming f(a<sub>1</sub>) = f(a<sub>2</sub>) and deriving a<sub>1</sub> = a<sub>2</sub></td></tr>
     <tr><td><strong>Surjective</strong></td><td>Does every codomain element get hit?</td><td>One codomain element with no pre-image</td><td>Taking arbitrary b ∈ B and producing an a ∈ A with f(a) = b</td></tr>
     <tr><td><strong>Bijective</strong></td><td>Both at once?</td><td>Either failure above</td><td>Proving both separately</td></tr>
@@ -1122,7 +1126,9 @@
     <p>Neural-network theory, insurance and taxation case studies, vending machines, advanced abstract function theory, and large sets of composition variations. These are self-learning or extension topics. Deliberate omissions, not oversights.</p>
   </div>
 
-  <footer>
+  </main>
+
+<footer>
     DSGT Module 3 — Selective Exam Essentials · Built from Mrs. Shamal Bagal's Module 3 PPT, the official DSGT syllabus,<br>
     the Summer 2026 paper and the IAT sample questions. Not a complete module guide.
   </footer>
@@ -1134,7 +1140,7 @@
 (function(){
   var b=document.getElementById('themeToggle'),r=document.documentElement;
   function dark(){var t=r.getAttribute('data-theme');return t==='dark';}
-  function paint(){var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
+  function paint(){b.hidden=false;var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
   b.addEventListener('click',function(){var n=dark()?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('sg-theme',n);}catch(e){}paint();});
   paint();
 })();

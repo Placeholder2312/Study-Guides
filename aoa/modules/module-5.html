@@ -14,7 +14,8 @@
     --font-mono:"Courier New",Courier,monospace;
   }
   * { box-sizing:border-box; }
-  html { scroll-behavior:smooth; scroll-padding-top:1rem; }
+  html { scroll-padding-top:1rem; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
   body { font-family:var(--font-sans); color:var(--ink); background:var(--bg); line-height:1.6;
          margin:0; padding:0; font-size:17px; font-weight:500; text-wrap:pretty; }
   .wrap { max-width:68ch; margin:0 auto; padding:2.5rem 1rem 4rem; }
@@ -244,10 +245,12 @@
   .aoa-fig figcaption { font-size: .85rem; color: var(--muted); line-height: 1.45; margin-top: .6rem; }
   @media (max-width: 600px) { .aoa-fig { padding: .5rem; } }
 </style>
+<link rel="stylesheet" href="/assets/a11y.css">
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <div class="wrap">
-  <div class="topbar"><a class="back" href="/aoa">&#8592; All modules</a><button class="theme-toggle" type="button" id="themeToggle"></button></div>
+  <nav class="topbar" aria-label="Site"><a class="back" href="/aoa">← All modules</a><button class="theme-toggle" type="button" id="themeToggle" hidden></button></nav>
 
   <header>
     <h1>AOA Module 5 — Backtracking and Branch and Bound</h1>
@@ -256,7 +259,9 @@
     Module V · 7 teaching hours · End-semester paper: 6 questions of 20 marks, Q1 compulsory, answer any 3</div>
   </header>
 
-  <div class="toc">
+  <main id="main" tabindex="-1">
+
+  <nav class="toc" aria-label="Table of contents">
     <ol>
       <li><a href="#syllabus">Syllabus and scope</a></li>
       <li><a href="#method">The general method of backtracking</a></li>
@@ -273,9 +278,9 @@
       <li><a href="#revision">Last-minute revision sheet</a></li>
       <li><a href="#references">References and attribution</a></li>
     </ol>
-  </div>
+  </nav>
 
-  <nav class="nav" aria-label="Sections">
+  <nav class="nav" aria-label="Jump to section">
     <a href="#method">General method</a>
     <a href="#nqueens">N-queens</a>
     <a href="#subsets">Sum of subsets</a>
@@ -293,7 +298,7 @@
 <p><strong>A note on the CO number.</strong> The syllabus table prints CO1 for Module V, while CO5 is the outcome that describes "Backtracking and Branch and Bound". This guide follows the printed module content and does not silently change the syllabus. If an examination question asks for the CO mapping, quote the printed table and add the discrepancy.</p>
 </div>
 <div class="table-scroll"><table>
-<thead><tr><th>Prescribed topic</th><th>What you must be able to do</th><th>Section</th></tr></thead>
+<thead><tr><th scope="col">Prescribed topic</th><th scope="col">What you must be able to do</th><th scope="col">Section</th></tr></thead>
 <tbody>
 <tr><td>General method (backtracking)</td><td>Draw a state-space tree, define promising and non-promising nodes, write the control abstraction.</td><td>1</td></tr>
 <tr><td>N-queens</td><td>Place queens row by row, write the bounding test, trace 4-queens and 8-queens.</td><td>2</td></tr>
@@ -420,7 +425,7 @@ PLACE(k, j)
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <p>Rows are 1–4, columns 1–4. The trace below is the actual depth-first search.</p>
 <div class="table-scroll"><table>
-<thead><tr><th>Step</th><th>Action</th><th>Reason</th><th>Result</th></tr></thead>
+<thead><tr><th scope="col">Step</th><th scope="col">Action</th><th scope="col">Reason</th><th scope="col">Result</th></tr></thead>
 <tbody>
 <tr><td>1</td><td>Q1 = 1</td><td>first column</td><td>promising</td></tr>
 <tr><td>2</td><td>Q2 = 1</td><td>same column as Q1</td><td>rejected</td></tr>
@@ -529,7 +534,7 @@ s + r ≥ m             (the remaining weights can still reach m)</code></pre>
 </figure>
 <p>Total <code>r = 32</code>. The trace below is the complete depth-first search.</p>
 <div class="table-scroll"><table>
-<thead><tr><th>Step</th><th>Level</th><th>Decision</th><th>s</th><th>r after</th><th>Test</th><th>Result</th></tr></thead>
+<thead><tr><th scope="col">Step</th><th scope="col">Level</th><th scope="col">Decision</th><th scope="col">s</th><th scope="col">r after</th><th scope="col">Test</th><th scope="col">Result</th></tr></thead>
 <tbody>
 <tr><td>1</td><td>1</td><td>include 2</td><td>2</td><td>30</td><td>2 + 30 ≥ 17</td><td>promising</td></tr>
 <tr><td>2</td><td>2</td><td>include 7</td><td>9</td><td>23</td><td>9 + 23 ≥ 17</td><td>promising</td></tr>
@@ -625,7 +630,7 @@ SAFE(k, c)
 </figure>
 <p>Trace:</p>
 <div class="table-scroll"><table>
-<thead><tr><th>Step</th><th>Vertex</th><th>Try colour</th><th>Conflict</th><th>Result</th></tr></thead>
+<thead><tr><th scope="col">Step</th><th scope="col">Vertex</th><th scope="col">Try colour</th><th scope="col">Conflict</th><th scope="col">Result</th></tr></thead>
 <tbody>
 <tr><td>1</td><td>1</td><td>1</td><td>none</td><td>x1 = 1, promising</td></tr>
 <tr><td>2</td><td>2</td><td>1</td><td>adjacent to 1 (colour 1)</td><td>reject</td></tr>
@@ -677,7 +682,7 @@ SAFE(k, c)
 </ul>
 <p>The <strong>expansion strategy</strong> decides which live node to expand next:</p>
 <div class="table-scroll"><table>
-<thead><tr><th>Strategy</th><th>Live set</th><th>Order</th><th>Also called</th></tr></thead>
+<thead><tr><th scope="col">Strategy</th><th scope="col">Live set</th><th scope="col">Order</th><th scope="col">Also called</th></tr></thead>
 <tbody>
 <tr><td><strong>FIFO</strong></td><td>queue</td><td>breadth-first</td><td>BFS branch and bound</td></tr>
 <tr><td><strong>LIFO</strong></td><td>stack</td><td>depth-first</td><td>DFS branch and bound</td></tr>
@@ -806,7 +811,7 @@ TSP-BB(C, n)
 <p>Solve this travelling salesperson problem by branch and bound using reduced cost matrices.</p>
 <p>Cost matrix:</p>
 <div class="table-scroll"><table>
-<thead><tr><th>from \ to</th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead>
+<thead><tr><th scope="col">from \ to</th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th></tr></thead>
 <tbody>
 <tr><td><strong>A</strong></td><td>∞</td><td>4</td><td>2</td><td>1</td></tr>
 <tr><td><strong>B</strong></td><td>4</td><td>∞</td><td>13</td><td>9</td></tr>
@@ -816,7 +821,7 @@ TSP-BB(C, n)
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <p><strong>Root reduction.</strong> Row minima: A = 1, B = 4, C = 2, D = 1; subtract them, total 8. Column minima of the reduced matrix: column B has 3, column C has 1; subtract, total 4. Root bound = 8 + 4 = <strong>12</strong>. Reduced matrix:</p>
 <div class="table-scroll"><table>
-<thead><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead>
+<thead><tr><th scope="col"></th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th></tr></thead>
 <tbody>
 <tr><td><strong>A</strong></td><td>∞</td><td>0</td><td>0</td><td>0</td></tr>
 <tr><td><strong>B</strong></td><td>0</td><td>∞</td><td>8</td><td>5</td></tr>
@@ -832,7 +837,7 @@ TSP-BB(C, n)
 <p>Live set: <code>{AD:18, AB:20, AC:23}</code>. LC search expands <strong>AD</strong> first.</p>
 <p><strong>Expand AD (bound 18).</strong> Reduced matrix:</p>
 <div class="table-scroll"><table>
-<thead><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead>
+<thead><tr><th scope="col"></th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th></tr></thead>
 <tbody>
 <tr><td><strong>B</strong></td><td>0</td><td>∞</td><td>7</td><td>∞</td></tr>
 <tr><td><strong>C</strong></td><td>0</td><td>8</td><td>∞</td><td>∞</td></tr>
@@ -845,7 +850,7 @@ TSP-BB(C, n)
 <p>Both children are worse than the current best live bound (20), so they wait.</p>
 <p><strong>Expand AB (bound 20).</strong> Reduced matrix (after the A→B reduction):</p>
 <div class="table-scroll"><table>
-<thead><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead>
+<thead><tr><th scope="col"></th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th></tr></thead>
 <tbody>
 <tr><td><strong>B</strong></td><td>∞</td><td>∞</td><td>0</td><td>0</td></tr>
 <tr><td><strong>C</strong></td><td>0</td><td>∞</td><td>∞</td><td>6</td></tr>
@@ -869,7 +874,7 @@ TSP-BB(C, n)
 </div>
 <h3 id="6-7-full-trace">6.7 Full trace</h3>
 <div class="table-scroll"><table>
-<thead><tr><th>Step</th><th>Live node popped</th><th>Bound</th><th>Action</th><th>New live nodes</th></tr></thead>
+<thead><tr><th scope="col">Step</th><th scope="col">Live node popped</th><th scope="col">Bound</th><th scope="col">Action</th><th scope="col">New live nodes</th></tr></thead>
 <tbody>
 <tr><td>1</td><td>root</td><td>12</td><td>expand</td><td>AD 18, AB 20, AC 23</td></tr>
 <tr><td>2</td><td>AD</td><td>18</td><td>expand</td><td>ADB 25, ADC 26</td></tr>
@@ -952,7 +957,7 @@ TSP-BB(C, n)
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <p><strong>Start.</strong> Misplaced tiles: 12, 11, 15 → <code>g = 3</code>; <code>f = 0</code>; <code>c = 3</code>. The blank is at row 3, column 4. Legal moves: Left (swap 12), Up (swap 8), Down (swap 15).</p>
 <div class="table-scroll"><table>
-<thead><tr><th>Child</th><th>Move</th><th>Misplaced tiles</th><th>g</th><th>f</th><th>c</th></tr></thead>
+<thead><tr><th scope="col">Child</th><th scope="col">Move</th><th scope="col">Misplaced tiles</th><th scope="col">g</th><th scope="col">f</th><th scope="col">c</th></tr></thead>
 <tbody>
 <tr><td>1</td><td>Left</td><td>11, 15</td><td>2</td><td>1</td><td><strong>3</strong></td></tr>
 <tr><td>2</td><td>Down</td><td>11, 12, 15</td><td>3</td><td>1</td><td><strong>4</strong></td></tr>
@@ -965,7 +970,7 @@ TSP-BB(C, n)
 13 14 11 15</code></pre>
 <p>From <code>S1</code>, the blank is at row 3, column 3. Legal moves: Left (swap 10), Up (swap 7), Down (swap 11), Right (back to start).</p>
 <div class="table-scroll"><table>
-<thead><tr><th>Child</th><th>Move</th><th>g</th><th>f</th><th>c</th></tr></thead>
+<thead><tr><th scope="col">Child</th><th scope="col">Move</th><th scope="col">g</th><th scope="col">f</th><th scope="col">c</th></tr></thead>
 <tbody>
 <tr><td>S1a</td><td>Down (swap 11)</td><td>1</td><td>2</td><td><strong>3</strong></td></tr>
 <tr><td>S1b</td><td>Up (swap 7)</td><td>4</td><td>2</td><td>6</td></tr>
@@ -990,7 +995,7 @@ TSP-BB(C, n)
 </div>
 <h3 id="7-7-full-trace">7.7 Full trace</h3>
 <div class="table-scroll"><table>
-<thead><tr><th>Step</th><th>Node popped</th><th>f</th><th>g</th><th>c</th><th>Action</th></tr></thead>
+<thead><tr><th scope="col">Step</th><th scope="col">Node popped</th><th scope="col">f</th><th scope="col">g</th><th scope="col">c</th><th scope="col">Action</th></tr></thead>
 <tbody>
 <tr><td>1</td><td>start</td><td>0</td><td>3</td><td>3</td><td>expand: Left, Down, Up</td></tr>
 <tr><td>2</td><td>S1 (Left)</td><td>1</td><td>2</td><td>3</td><td>expand: Down, Up, Left</td></tr>
@@ -1012,7 +1017,7 @@ TSP-BB(C, n)
 </ul>
 <h2 id="compare">8 — Backtracking, branch and bound, and dynamic programming</h2>
 <div class="table-scroll"><table>
-<thead><tr><th></th><th>Backtracking</th><th>Branch and bound</th><th>Dynamic programming</th></tr></thead>
+<thead><tr><th scope="col"></th><th scope="col">Backtracking</th><th scope="col">Branch and bound</th><th scope="col">Dynamic programming</th></tr></thead>
 <tbody>
 <tr><td>Goal</td><td>Any or all feasible solutions</td><td>Optimal solution</td><td>Optimal solution</td></tr>
 <tr><td>Tree</td><td>State-space tree, DFS</td><td>State-space tree, any strategy</td><td>Table of states, no tree</td></tr>
@@ -1065,7 +1070,7 @@ TSP-BB(C, n)
 </ul>
 <p>Trace of the promising branches (s = running sum, r = remaining):</p>
 <div class="table-scroll"><table>
-<thead><tr><th>Decision</th><th>s</th><th>r</th><th>s + r</th><th>Result</th></tr></thead>
+<thead><tr><th scope="col">Decision</th><th scope="col">s</th><th scope="col">r</th><th scope="col">s + r</th><th scope="col">Result</th></tr></thead>
 <tbody>
 <tr><td>include 2</td><td>2</td><td>21</td><td>23</td><td>promising</td></tr>
 <tr><td>include 3</td><td>5</td><td>18</td><td>23</td><td>promising</td></tr>
@@ -1207,7 +1212,7 @@ D     1    9    8    ∞</code></pre>
 <p><em>K. J. Somaiya Institute of Technology (autonomous, affiliated to University of Mumbai), SY Sem IV CEC402, Aug 2025, Q2.</em> Compare the backtracking approach with the branch and bound technique.</p></div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
 <div class="table-scroll"><table>
-<thead><tr><th>Point</th><th>Backtracking</th><th>Branch and bound</th></tr></thead>
+<thead><tr><th scope="col">Point</th><th scope="col">Backtracking</th><th scope="col">Branch and bound</th></tr></thead>
 <tbody>
 <tr><td>Problems</td><td>Decision and enumeration problems (N-queens, sum of subsets, graph colouring)</td><td>Optimisation problems (TSP, 15-puzzle, assignment)</td></tr>
 <tr><td>Search order</td><td>Depth first</td><td>FIFO, LIFO or least-cost</td></tr>
@@ -1228,7 +1233,7 @@ D     1    9    8    ∞</code></pre>
 <p>Place N queens on an N × N board so that no two attack each other. Rules: no two queens in the same row, none in the same column, and none on the same diagonal, that is <code>|Qᵢ − Qⱼ| ≠ |i − j|</code>. Backtracking places one queen per row, so the row rule is automatic, and it abandons a partial placement as soon as a new queen breaks a column or diagonal rule.</p>
 <p>For N = 4 the search tries <code>Q₁ = 1</code> first and fails (<code>Q₂ = 3</code> and <code>Q₂ = 4</code> both lead to dead ends), then <code>Q₁ = 2</code>, <code>Q₂ = 4</code>, <code>Q₃ = 1</code>, <code>Q₄ = 3</code> succeeds (see Figure 2).</p>
 <div class="table-scroll"><table>
-<thead><tr><th></th><th>col 1</th><th>col 2</th><th>col 3</th><th>col 4</th></tr></thead>
+<thead><tr><th scope="col"></th><th scope="col">col 1</th><th scope="col">col 2</th><th scope="col">col 3</th><th scope="col">col 4</th></tr></thead>
 <tbody>
 <tr><td>row 1</td><td></td><td>Q</td><td></td><td></td></tr>
 <tr><td>row 2</td><td></td><td></td><td></td><td>Q</td></tr>
@@ -1290,7 +1295,7 @@ D     1    9    8    ∞</code></pre>
 <h2 id="mistakes">11 — Common mistakes across the module</h2>
 <div class="common-mistakes">
 <div class="table-scroll"><table>
-<thead><tr><th>Trap</th><th>What the examiner expects</th></tr></thead>
+<thead><tr><th scope="col">Trap</th><th scope="col">What the examiner expects</th></tr></thead>
 <tbody>
 <tr><td>Calling enumeration "backtracking"</td><td>A pruning test applied to partial solutions</td></tr>
 <tr><td>Forgetting to undo a choice</td><td>The sibling branch must see the parent's state</td></tr>
@@ -1338,13 +1343,15 @@ D     1    9    8    ∞</code></pre>
 </ul>
 <p><strong>Attribution.</strong> All explanations, tables, pseudocode, traces and diagrams were written for this guide. Practice questions state their provenance at the question; none is presented as a University examination paper. The CO-number discrepancy is reported, not resolved silently.</p>
 </div>
+</main>
+
 <footer>Prepared for the 2025–26 AOA syllabus · Study guide, not a University publication · <a href="/aoa">Back to all modules</a></footer>
 </div>
 <script>
 (function(){
   var b=document.getElementById('themeToggle'),r=document.documentElement;
   function dark(){return r.getAttribute('data-theme')==='dark';}
-  function paint(){var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
+  function paint(){b.hidden=false;var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
   b.addEventListener('click',function(){var n=dark()?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('sg-theme',n);}catch(e){}paint();});
   paint();
   var links=[].slice.call(document.querySelectorAll('.nav a'));

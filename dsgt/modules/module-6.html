@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DSGT Module 6 — Graph Theory Study Guide</title>
+<title>DSGT Module 6 — Graph Theory — Study Guide</title>
 <style>
   :root {
     --ink: #0a0a0a;
@@ -20,7 +20,7 @@
   }
   * { box-sizing: border-box; }
   sub, sup { font-size: 0.75em; line-height: 0; }
-  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
   body {
     font-family: var(--font-sans);
     color: var(--ink);
@@ -90,7 +90,7 @@
     margin: 0 0 1rem;
     line-height: 1.6;
   }
-  .wrap > div { line-height: 1.6; }
+  .wrap > div, .wrap > main > div { line-height: 1.6; }
   ul, ol, blockquote, pre, figure { line-height: 1.6; }
   td { line-height: 1.5; }
   strong, em, span, b, i { line-height: 1.6; }
@@ -492,20 +492,24 @@
     .eq { white-space: normal; overflow: visible; }
   }
 </style>
+<link rel="stylesheet" href="/assets/a11y.css">
 </head>
 
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <div class="wrap">
-  <div class="topbar"><a class="back" href="/dsgt">← All modules</a><button class="theme-toggle" type="button" id="themeToggle"></button></div>
+  <nav class="topbar" aria-label="Site"><a class="back" href="/dsgt">← All modules</a><button class="theme-toggle" type="button" id="themeToggle" hidden></button></nav>
 
   <header>
-    <h1>DSGT Module 6</h1>
-    <p class="subtitle">Graph Theory · Types of Graphs · Isomorphism · Euler &amp; Hamiltonian · Planar Graphs · Cut Sets</p>
+    <h1>DSGT Module 6 — Graph Theory</h1>
+    <p class="subtitle">Types of Graphs · Isomorphism · Euler &amp; Hamiltonian · Planar Graphs · Cut Sets</p>
     <div class="meta">CSE AIML · Sem III · End Sem Preparation · Source: Mrs. Shamal Bagal PPTs + DSGT Syllabus + Mumbai University Question Papers</div>
   </header>
 
-  <div class="toc">
+  <main id="main" tabindex="-1">
+
+  <nav class="toc" aria-label="Table of contents">
     <ol>
       <li><a href="#syllabus">Module 6 — Syllabus</a></li>
       <li><a href="#graphs">1 · Graphs and Types of Graphs (6.1)</a></li>
@@ -525,9 +529,9 @@
       <li><a href="#revision">Last-Minute Revision Sheet</a></li>
       <li><a href="#references">References &amp; Attribution</a></li>
     </ol>
-  </div>
+  </nav>
 
-  <nav class="nav">
+  <nav class="nav" aria-label="Jump to section">
     <a href="#graphs">Types</a>
     <a href="#representation">Representation</a>
     <a href="#subgraphs">Subgraphs</a>
@@ -546,7 +550,7 @@
   <div class="eq prose">Types of graphs, Graph Representation, Sub graphs, Operations on Graphs, Walk, Path, Circuit, Connected Graphs, Disconnected Graph, Components, Homomorphism and Isomorphism of Graphs, Euler and Hamiltonian Graphs, Planar Graph, Cut Set, Cut Vertex, Real life applications of Graph Theory.</div>
 
   <table>
-    <tr><th>Section</th><th>Topic</th><th>What it covers</th></tr>
+    <tr><th scope="col">Section</th><th scope="col">Topic</th><th scope="col">What it covers</th></tr>
     <tr><td><strong>6.1</strong></td><td>Types of Graphs</td><td>Vertices, edges, degree, loops, multiple edges, simple and other standard graph families.</td></tr>
     <tr><td><strong>6.2</strong></td><td>Graph Representation</td><td>Adjacency list, adjacency matrix and incidence matrix for the same graph.</td></tr>
     <tr><td><strong>6.3</strong></td><td>Subgraphs and Operations</td><td>Subgraphs, induced subgraphs, and union, intersection and ring sum.</td></tr>
@@ -661,7 +665,7 @@
 
   <h3 id="graph-families" data-rail-subsection data-rail-label="Standard Families">Standard Graph Families</h3>
   <table>
-    <tr><th>Name</th><th>Definition</th><th>Example</th></tr>
+    <tr><th scope="col">Name</th><th scope="col">Definition</th><th scope="col">Example</th></tr>
     <tr><td><strong>Simple graph</strong></td><td>No loops and no multiple edges.</td><td>A triangle.</td></tr>
     <tr><td><strong>Multigraph</strong></td><td>Multiple edges allowed; loops usually excluded.</td><td>Two cities joined by two roads.</td></tr>
     <tr><td><strong>Pseudograph</strong></td><td>Both loops and multiple edges allowed.</td><td>Figure 1.</td></tr>
@@ -757,7 +761,7 @@
   <h3 id="adjacency-list" data-rail-subsection>Adjacency List</h3>
   <p>For each vertex, list its neighbours. The total length of all lists is <span class="kbd">2|E|</span> in an undirected graph, so the storage is proportional to the number of edges.</p>
   <table>
-    <tr><th>Vertex</th><th>Neighbours</th><th>Degree</th></tr>
+    <tr><th scope="col">Vertex</th><th scope="col">Neighbours</th><th scope="col">Degree</th></tr>
     <tr><td>1</td><td>2, 3</td><td>2</td></tr>
     <tr><td>2</td><td>1, 4</td><td>2</td></tr>
     <tr><td>3</td><td>1, 4</td><td>2</td></tr>
@@ -767,7 +771,7 @@
   <h3 id="adjacency-matrix" data-rail-subsection>Adjacency Matrix</h3>
   <p><span class="kbd">A</span> is a <span class="kbd">|V| × |V|</span> matrix. For a simple graph, <span class="kbd">aᵢⱼ = 1</span> when <span class="kbd">i</span> and <span class="kbd">j</span> are adjacent, and 0 otherwise. The row sum is the degree, and the matrix is symmetric about the main diagonal.</p>
   <table>
-    <tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th></tr>
+    <tr><th scope="col"></th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th></tr>
     <tr><td><strong>1</strong></td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
     <tr><td><strong>2</strong></td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
     <tr><td><strong>3</strong></td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
@@ -777,7 +781,7 @@
   <h3 id="incidence-matrix" data-rail-subsection>Incidence Matrix</h3>
   <p><span class="kbd">B</span> is a <span class="kbd">|V| × |E|</span> matrix with one column per edge. For an undirected graph, put 1 in the two rows of the edge’s endpoints and 0 elsewhere. Every column therefore contains exactly two 1s.</p>
   <table>
-    <tr><th></th><th>e₁ = 12</th><th>e₂ = 13</th><th>e₃ = 24</th><th>e₄ = 34</th></tr>
+    <tr><th scope="col"></th><th scope="col">e₁ = 12</th><th scope="col">e₂ = 13</th><th scope="col">e₃ = 24</th><th scope="col">e₄ = 34</th></tr>
     <tr><td><strong>1</strong></td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
     <tr><td><strong>2</strong></td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
     <tr><td><strong>3</strong></td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
@@ -798,7 +802,7 @@
     <div class="qa-solution"><div class="qa-label">Solution</div>
       <p>The edges are <span class="kbd">AB</span> twice, <span class="kbd">BC</span>, <span class="kbd">CD</span>, <span class="kbd">DA</span> and a loop at <span class="kbd">C</span>. Order the vertices A, B, C, D.</p>
       <table>
-        <tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>Row sum</th></tr>
+        <tr><th scope="col"></th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th><th scope="col">Row sum</th></tr>
         <tr><td><strong>A</strong></td><td>0</td><td>2</td><td>0</td><td>1</td><td>3</td></tr>
         <tr><td><strong>B</strong></td><td>2</td><td>0</td><td>1</td><td>0</td><td>3</td></tr>
         <tr><td><strong>C</strong></td><td>0</td><td>1</td><td>2</td><td>1</td><td>4</td></tr>
@@ -858,7 +862,7 @@
 
   <h3 id="graph-operations" data-rail-subsection>Operations on Graphs</h3>
   <table>
-    <tr><th>Operation</th><th>Vertex set</th><th>Edge set</th></tr>
+    <tr><th scope="col">Operation</th><th scope="col">Vertex set</th><th scope="col">Edge set</th></tr>
     <tr><td><strong>Union</strong> <span class="kbd">G₁ ∪ G₂</span></td><td><span class="kbd">V₁ ∪ V₂</span></td><td><span class="kbd">E₁ ∪ E₂</span></td></tr>
     <tr><td><strong>Intersection</strong> <span class="kbd">G₁ ∩ G₂</span></td><td><span class="kbd">V₁ ∩ V₂</span></td><td><span class="kbd">E₁ ∩ E₂</span></td></tr>
     <tr><td><strong>Ring sum</strong> <span class="kbd">G₁ ⊕ G₂</span></td><td><span class="kbd">V₁ ∪ V₂</span></td><td>Edges in exactly one of <span class="kbd">E₁, E₂</span></td></tr>
@@ -958,7 +962,7 @@
     </div>
     <div class="qa-solution"><div class="qa-label">Solution</div>
       <table>
-        <tr><th>Sequence</th><th>Check</th><th>Type</th></tr>
+        <tr><th scope="col">Sequence</th><th scope="col">Check</th><th scope="col">Type</th></tr>
         <tr><td>(i)</td><td>No vertex repeats; open. Length 4.</td><td>Path</td></tr>
         <tr><td>(ii)</td><td>Edges <span class="kbd">ac, cd, de, ea, ab</span> are all distinct, but <span class="kbd">a</span> appears twice.</td><td>Trail, not a path</td></tr>
         <tr><td>(iii)</td><td>Edge <span class="kbd">ac</span> is used twice (as <span class="kbd">c–a</span> and <span class="kbd">a–c</span>).</td><td>Walk, not a trail</td></tr>
@@ -1002,7 +1006,7 @@
   </div>
 
   <table>
-    <tr><th>Invariant</th><th>Why it must match</th></tr>
+    <tr><th scope="col">Invariant</th><th scope="col">Why it must match</th></tr>
     <tr><td><span class="kbd">|V|</span> and <span class="kbd">|E|</span></td><td>A bijection pairs vertices one-to-one and edges one-to-one.</td></tr>
     <tr><td>Sorted degree sequence</td><td>Adjacency is preserved, so each vertex keeps its number of neighbours.</td></tr>
     <tr><td>Number of components</td><td>A path between two vertices maps to a path between their images.</td></tr>
@@ -1021,7 +1025,7 @@
       <div class="eq">a → 2 &nbsp; b → 4 &nbsp; c → 1 &nbsp; d → 3 &nbsp; e → 5</div>
       <p>Check every edge of <span class="kbd">G</span> against the edge set of <span class="kbd">H</span>:</p>
       <table>
-        <tr><th>Edge of G</th><th>Image</th><th>In H?</th></tr>
+        <tr><th scope="col">Edge of G</th><th scope="col">Image</th><th scope="col">In H?</th></tr>
         <tr><td><span class="kbd">ab</span></td><td><span class="kbd">24</span></td><td>Yes</td></tr>
         <tr><td><span class="kbd">bc</span></td><td><span class="kbd">41</span></td><td>Yes</td></tr>
         <tr><td><span class="kbd">cd</span></td><td><span class="kbd">13</span></td><td>Yes</td></tr>
@@ -1198,7 +1202,7 @@
     <div class="qa-solution"><div class="qa-label">Solution</div>
       <p>Count degrees at each vertex:</p>
       <table>
-        <tr><th>Vertex</th><th>Incident edges</th><th>Degree</th></tr>
+        <tr><th scope="col">Vertex</th><th scope="col">Incident edges</th><th scope="col">Degree</th></tr>
         <tr><td>a</td><td>1, 7</td><td>2</td></tr>
         <tr><td>b</td><td>1, 2</td><td>2</td></tr>
         <tr><td>c</td><td>2, 3, 5, 6</td><td>4</td></tr>
@@ -1551,7 +1555,7 @@
       <p><strong>(ii) Build the mapping.</strong> The cycle in G₁ is <span class="kbd">B–A–C–D–B</span>. The cycle in G₂ is <span class="kbd">Q–P–R–S–Q</span>. Match them in order:</p>
       <div class="eq">A → P &nbsp; B → Q &nbsp; C → R &nbsp; D → S</div>
       <table>
-        <tr><th>Edge of G₁</th><th>Image in G₂</th><th>Present?</th></tr>
+        <tr><th scope="col">Edge of G₁</th><th scope="col">Image in G₂</th><th scope="col">Present?</th></tr>
         <tr><td><span class="kbd">AB</span></td><td><span class="kbd">PQ</span></td><td>Yes</td></tr>
         <tr><td><span class="kbd">AC</span></td><td><span class="kbd">PR</span></td><td>Yes</td></tr>
         <tr><td><span class="kbd">BD</span></td><td><span class="kbd">QS</span></td><td>Yes</td></tr>
@@ -1581,7 +1585,7 @@
     <div class="qa-solution"><div class="qa-label">Solution</div>
       <p><strong>Degrees first.</strong></p>
       <table>
-        <tr><th>Vertex</th><th>Incident edges</th><th>Degree</th></tr>
+        <tr><th scope="col">Vertex</th><th scope="col">Incident edges</th><th scope="col">Degree</th></tr>
         <tr><td>A</td><td>AB, AC</td><td>2</td></tr>
         <tr><td>B</td><td>AB, BC, BD</td><td>3</td></tr>
         <tr><td>C</td><td>AC, BC, CE</td><td>3</td></tr>
@@ -1624,7 +1628,7 @@
       <p><strong>1. Definition.</strong> An isomorphism is a bijection <span class="kbd">f : V(G₁) → V(G₂)</span> such that <span class="kbd">uv ∈ E(G₁) ⇔ f(u)f(v) ∈ E(G₂)</span>. It renames vertices while preserving both adjacency and non-adjacency.</p>
       <p><strong>2. Degree sequences.</strong></p>
       <table>
-        <tr><th>G₁ vertex</th><th>Degree</th><th>G₂ vertex</th><th>Degree</th></tr>
+        <tr><th scope="col">G₁ vertex</th><th scope="col">Degree</th><th scope="col">G₂ vertex</th><th scope="col">Degree</th></tr>
         <tr><td>A</td><td>2 (X, Y)</td><td>1</td><td>2 (4, 5)</td></tr>
         <tr><td>B</td><td>2 (X, Y)</td><td>2</td><td>2 (4, 5)</td></tr>
         <tr><td>C</td><td>1 (Y)</td><td>3</td><td>1 (5)</td></tr>
@@ -1637,7 +1641,7 @@
       <div class="eq">A → 1 &nbsp; B → 2 &nbsp; C → 3 &nbsp; X → 4 &nbsp; Y → 5 &nbsp; Z → 6</div>
       <p><strong>4. Adjacency preservation.</strong></p>
       <table>
-        <tr><th>Edge of G₁</th><th>Image in G₂</th><th>Present?</th></tr>
+        <tr><th scope="col">Edge of G₁</th><th scope="col">Image in G₂</th><th scope="col">Present?</th></tr>
         <tr><td><span class="kbd">AX</span></td><td><span class="kbd">14</span></td><td>Yes</td></tr>
         <tr><td><span class="kbd">AY</span></td><td><span class="kbd">15</span></td><td>Yes</td></tr>
         <tr><td><span class="kbd">BX</span></td><td><span class="kbd">24</span></td><td>Yes</td></tr>
@@ -1729,7 +1733,7 @@
     <h3>P3 · Two matrix representations</h3>
     <p>(a) Adjacency matrix of <span class="kbd">P₄</span>:</p>
     <table>
-      <tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th></tr>
+      <tr><th scope="col"></th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th></tr>
       <tr><td><strong>1</strong></td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
       <tr><td><strong>2</strong></td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
       <tr><td><strong>3</strong></td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
@@ -1737,7 +1741,7 @@
     </table>
     <p>(b) Incidence matrix, with columns <span class="kbd">e₁ = 12</span>, <span class="kbd">e₂ = 23</span>, <span class="kbd">e₃ = 34</span>:</p>
     <table>
-      <tr><th></th><th>e₁</th><th>e₂</th><th>e₃</th></tr>
+      <tr><th scope="col"></th><th scope="col">e₁</th><th scope="col">e₂</th><th scope="col">e₃</th></tr>
       <tr><td><strong>1</strong></td><td>1</td><td>0</td><td>0</td></tr>
       <tr><td><strong>2</strong></td><td>1</td><td>1</td><td>0</td></tr>
       <tr><td><strong>3</strong></td><td>0</td><td>1</td><td>1</td></tr>
@@ -1747,7 +1751,7 @@
 
     <h3>P4 · Classify the walks</h3>
     <table>
-      <tr><th>Sequence</th><th>Reason</th><th>Type</th></tr>
+      <tr><th scope="col">Sequence</th><th scope="col">Reason</th><th scope="col">Type</th></tr>
       <tr><td>(i) <span class="kbd">p–q–r–s–t</span></td><td>No repeated vertex; open; length 4.</td><td>Path</td></tr>
       <tr><td>(ii) <span class="kbd">p–r–q–p–t</span></td><td>Edges <span class="kbd">pr, rq, qp, pt</span> are distinct; vertex <span class="kbd">p</span> repeats.</td><td>Trail, not a path</td></tr>
       <tr><td>(iii) <span class="kbd">p–q–r–p–q</span></td><td>Edge <span class="kbd">pq</span> is used twice; open.</td><td>Walk, not a trail</td></tr>
@@ -1818,7 +1822,7 @@
   <div class="revision-sheet">
     <h3>Definitions and formulas</h3>
     <table>
-      <tr><th>Item</th><th>Statement</th></tr>
+      <tr><th scope="col">Item</th><th scope="col">Statement</th></tr>
       <tr><td>Handshaking lemma</td><td><span class="kbd">Σ deg(v) = 2|E|</span>; odd-degree vertices occur in pairs.</td></tr>
       <tr><td>Complete graph</td><td><span class="kbd">|E(Kₙ)| = n(n − 1)/2</span>.</td></tr>
       <tr><td>Complete bipartite</td><td><span class="kbd">|E(Kₘ,ₙ)| = mn</span>.</td></tr>
@@ -1875,7 +1879,9 @@
     <p><strong>Practice questions:</strong> P1–P12 were written for this guide. They are not university questions and should not be cited as such.</p>
   </div>
 
-  <footer>
+  </main>
+
+<footer>
     DSGT Module 6 Study Guide · Built from Mrs. Shamal Bagal’s Module 6 PPT, the official DSGT syllabus,<br>
     and verified NEP DSGT Winter 2025 and Summer 2026 examination questions.<br>
     Diagrams hand-authored as inline SVG for this guide.
@@ -1885,7 +1891,7 @@
 (function(){
   var b=document.getElementById('themeToggle'),r=document.documentElement;
   function dark(){var t=r.getAttribute('data-theme');return t==='dark';}
-  function paint(){var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
+  function paint(){b.hidden=false;var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
   b.addEventListener('click',function(){var n=dark()?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('sg-theme',n);}catch(e){}paint();});
   paint();
 })();

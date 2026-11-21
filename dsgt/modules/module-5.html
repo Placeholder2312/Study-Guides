@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DSGT Module 5 — Study Guide</title>
+<title>DSGT Module 5 — Algebraic Structures — Study Guide</title>
 <style>
   :root {
     --ink: #0a0a0a;
@@ -18,7 +18,7 @@
     --font-mono: "Courier New", Courier, monospace;
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
   body {
     font-family: var(--font-sans);
     color: var(--ink);
@@ -472,20 +472,24 @@
   @media print { .rail, .rm-bar, .rm-tab, .rm-back, .rm-sheet { display:none !important; } }
 
 </style>
+<link rel="stylesheet" href="/assets/a11y.css">
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <div class="wrap">
-  <div class="topbar"><a class="back" href="/dsgt">← All modules</a><button class="theme-toggle" type="button" id="themeToggle"></button></div>
+  <nav class="topbar" aria-label="Site"><a class="back" href="/dsgt">← All modules</a><button class="theme-toggle" type="button" id="themeToggle" hidden></button></nav>
 
 
   <header>
-    <h1>DSGT Module 5</h1>
-    <p class="subtitle">Algebraic Structures: Groups, Rings, and Related Systems</p>
+    <h1>DSGT Module 5 — Algebraic Structures</h1>
+    <p class="subtitle">Groups, Rings, and Related Systems</p>
     <div class="meta">CSE AIML · Sem III · End Sem Preparation · Source: Mrs. Shamal Bagal PPTs + DSGT Syllabus + DSGT Questions Bank</div>
   </header>
 
-  <div class="toc">
+  <main id="main" tabindex="-1">
+
+  <nav class="toc" aria-label="Table of contents">
     <ol>
       <li><a href="#syllabus">Module 5 — Syllabus</a></li>
       <li><a href="#intro">Section 1 — Introduction to Algebraic Structures</a></li>
@@ -503,9 +507,9 @@
       <li><a href="#revision">Last-Minute Revision Sheet</a></li>
       <li><a href="#references">References &amp; Attribution</a></li>
     </ol>
-  </div>
+  </nav>
 
-  <nav class="nav">
+  <nav class="nav" aria-label="Jump to section">
     <a href="#intro">Intro</a>
     <a href="#semigroup">Semigroup</a>
     <a href="#monoid">Monoid</a>
@@ -525,7 +529,7 @@
   <div class="eq">Algebraic structures with one binary operation: Semi group, Monoid, Groups, Subgroups, Abelian Group, and Cyclic group. Algebraic structures with two binary operations: Ring.</div>
 
   <table>
-    <tr><th>Section</th><th>Topic</th><th>What it covers</th></tr>
+    <tr><th scope="col">Section</th><th scope="col">Topic</th><th scope="col">What it covers</th></tr>
     <tr><td><strong>5.1</strong></td><td>Algebraic Structures (one operation)</td><td>Semi group, Monoid, Groups, Subgroups, Abelian group, Cyclic group</td></tr>
     <tr><td><strong>5.2</strong></td><td>Algebraic Structures (two operations)</td><td>Ring</td></tr>
     <tr><td><strong>Self-learning</strong></td><td>Error Correcting Codes</td><td>Applications of algebraic structures in coding theory</td></tr>
@@ -588,7 +592,7 @@
   </div>
 
   <table>
-    <tr><th>Property</th><th>Meaning</th><th>Example</th></tr>
+    <tr><th scope="col">Property</th><th scope="col">Meaning</th><th scope="col">Example</th></tr>
     <tr><td>Closure</td><td>a * b stays in the set</td><td>Addition on N: 3 + 5 = 8 ∈ N</td></tr>
     <tr><td>Associativity</td><td>(a * b) * c = a * (b * c)</td><td>Multiplication on Z: (−2 × 6) × (−5) = −2 × (6 × −5)</td></tr>
     <tr><td>Commutativity</td><td>a * b = b * a</td><td>Addition on N: 5 + 9 = 9 + 5</td></tr>
@@ -968,7 +972,7 @@
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <p>Composition table for (G, +₆):</p>
 <table>
-      <tr><th>+₆</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+      <tr><th scope="col">+₆</th><th scope="col">0</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th></tr>
       <tr><td>0</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
       <tr><td>1</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>0</td></tr>
       <tr><td>2</td><td>2</td><td>3</td><td>4</td><td>5</td><td>0</td><td>1</td></tr>
@@ -997,7 +1001,7 @@
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <p>Composition table for (G, ×₇):</p>
 <table>
-      <tr><th>×₇</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr>
+      <tr><th scope="col">×₇</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th><th scope="col">6</th></tr>
       <tr><td>1</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
       <tr><td>2</td><td>2</td><td>4</td><td>6</td><td>1</td><td>3</td><td>5</td></tr>
       <tr><td>3</td><td>3</td><td>6</td><td>2</td><td>5</td><td>1</td><td>4</td></tr>
@@ -1078,7 +1082,7 @@
   </div>
 
   <table>
-    <tr><th>Structure</th><th>Operations</th><th>Key Properties</th></tr>
+    <tr><th scope="col">Structure</th><th scope="col">Operations</th><th scope="col">Key Properties</th></tr>
     <tr><td>Group</td><td>One (*)</td><td>Closure, associativity, identity, inverse</td></tr>
     <tr><td>Abelian group</td><td>One (*)</td><td>Group + commutativity</td></tr>
     <tr><td>Ring</td><td>Two (+, ·)</td><td>Abelian group under +, associative ·, distributive laws</td></tr>
@@ -1100,7 +1104,7 @@
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <p>Addition table (+₁₀):</p>
 <table>
-      <tr><th>+₁₀</th><th>0</th><th>2</th><th>4</th><th>6</th><th>8</th></tr>
+      <tr><th scope="col">+₁₀</th><th scope="col">0</th><th scope="col">2</th><th scope="col">4</th><th scope="col">6</th><th scope="col">8</th></tr>
       <tr><td>0</td><td>0</td><td>2</td><td>4</td><td>6</td><td>8</td></tr>
       <tr><td>2</td><td>2</td><td>4</td><td>6</td><td>8</td><td>0</td></tr>
       <tr><td>4</td><td>4</td><td>6</td><td>8</td><td>0</td><td>2</td></tr>
@@ -1109,7 +1113,7 @@
     </table>
 <p>Multiplication table (·₁₀):</p>
 <table>
-      <tr><th>·₁₀</th><th>0</th><th>2</th><th>4</th><th>6</th><th>8</th></tr>
+      <tr><th scope="col">·₁₀</th><th scope="col">0</th><th scope="col">2</th><th scope="col">4</th><th scope="col">6</th><th scope="col">8</th></tr>
       <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
       <tr><td>2</td><td>0</td><td>4</td><td>8</td><td>2</td><td>6</td></tr>
       <tr><td>4</td><td>0</td><td>8</td><td>6</td><td>4</td><td>2</td></tr>
@@ -1149,7 +1153,7 @@
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <p>Addition table (+₁₂):</p>
 <table>
-      <tr><th>+₁₂</th><th>0</th><th>3</th><th>6</th><th>9</th></tr>
+      <tr><th scope="col">+₁₂</th><th scope="col">0</th><th scope="col">3</th><th scope="col">6</th><th scope="col">9</th></tr>
       <tr><td>0</td><td>0</td><td>3</td><td>6</td><td>9</td></tr>
       <tr><td>3</td><td>3</td><td>6</td><td>9</td><td>0</td></tr>
       <tr><td>6</td><td>6</td><td>9</td><td>0</td><td>3</td></tr>
@@ -1157,7 +1161,7 @@
     </table>
 <p>Multiplication table (·₁₂):</p>
 <table>
-      <tr><th>·₁₂</th><th>0</th><th>3</th><th>6</th><th>9</th></tr>
+      <tr><th scope="col">·₁₂</th><th scope="col">0</th><th scope="col">3</th><th scope="col">6</th><th scope="col">9</th></tr>
       <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
       <tr><td>3</td><td>0</td><td>9</td><td>6</td><td>3</td></tr>
       <tr><td>6</td><td>0</td><td>6</td><td>0</td><td>6</td></tr>
@@ -1223,7 +1227,7 @@
         <li>Multiplication table modulo 7:</li>
       </ol>
 <table>
-        <tr><th>×₇</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr>
+        <tr><th scope="col">×₇</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th><th scope="col">6</th></tr>
         <tr><td>1</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
         <tr><td>2</td><td>2</td><td>4</td><td>6</td><td>1</td><td>3</td><td>5</td></tr>
         <tr><td>3</td><td>3</td><td>6</td><td>2</td><td>5</td><td>1</td><td>4</td></tr>
@@ -1257,7 +1261,7 @@
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <p><strong>Multiplication table (·₆):</strong></p>
 <table>
-        <tr><th>·₆</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+        <tr><th scope="col">·₆</th><th scope="col">0</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th></tr>
         <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
         <tr><td>1</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
         <tr><td>2</td><td>0</td><td>2</td><td>4</td><td>0</td><td>2</td><td>4</td></tr>
@@ -1317,7 +1321,7 @@
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <p><strong>Addition table (+₄):</strong></p>
 <table>
-        <tr><th>+₄</th><th>0</th><th>1</th><th>2</th><th>3</th></tr>
+        <tr><th scope="col">+₄</th><th scope="col">0</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th></tr>
         <tr><td>0</td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
         <tr><td>1</td><td>1</td><td>2</td><td>3</td><td>0</td></tr>
         <tr><td>2</td><td>2</td><td>3</td><td>0</td><td>1</td></tr>
@@ -1325,7 +1329,7 @@
       </table>
 <p><strong>Multiplication table (·₄):</strong></p>
 <table>
-        <tr><th>·₄</th><th>0</th><th>1</th><th>2</th><th>3</th></tr>
+        <tr><th scope="col">·₄</th><th scope="col">0</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th></tr>
         <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
         <tr><td>1</td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
         <tr><td>2</td><td>0</td><td>2</td><td>0</td><td>2</td></tr>
@@ -1437,7 +1441,7 @@
   <div class="revision-sheet">
     <h3>Definitions</h3>
     <table>
-      <tr><th>Structure</th><th>Required Properties</th></tr>
+      <tr><th scope="col">Structure</th><th scope="col">Required Properties</th></tr>
       <tr><td>Semigroup</td><td>Closure, associativity</td></tr>
       <tr><td>Monoid</td><td>Closure, associativity, identity</td></tr>
       <tr><td>Group</td><td>Closure, associativity, identity, inverse</td></tr>
@@ -1452,7 +1456,7 @@
 
     <h3>Verification Checklist</h3>
     <table>
-      <tr><th>To prove it is a…</th><th>Check these conditions</th></tr>
+      <tr><th scope="col">To prove it is a…</th><th scope="col">Check these conditions</th></tr>
       <tr><td>Semigroup</td><td>Closed? Associative?</td></tr>
       <tr><td>Monoid</td><td>Semigroup + identity?</td></tr>
       <tr><td>Group</td><td>Monoid + inverses?</td></tr>
@@ -1492,7 +1496,9 @@
     <p><strong>Question bank material:</strong> Questions incorporated from the DSGT Questions question bank: Prelim Question Bank.doc, Prelim Question Bank(1).doc, IAT1 sample questions.doc, IAT2 sample questions.doc, NEP DSGT Winter 2025.pdf, NEP DSGT Summer 2026.pdf. Where questions appear in multiple documents, they are included once with all source labels noted.</p>
   </div>
 
-  <footer>
+  </main>
+
+<footer>
     DSGT Module 5 Study Guide · Built from Mrs. Shamal Bagal’s PPTs, the official DSGT portion syllabus,<br>
     and external reference from Oscar Levin’s <em>Discrete Mathematics: An Open Introduction</em> (cyclic groups).
   </footer>
@@ -1503,7 +1509,7 @@
 (function(){
   var b=document.getElementById('themeToggle'),r=document.documentElement;
   function dark(){var t=r.getAttribute('data-theme');return t==='dark';}
-  function paint(){var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
+  function paint(){b.hidden=false;var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
   b.addEventListener('click',function(){var n=dark()?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('sg-theme',n);}catch(e){}paint();});
   paint();
 })();

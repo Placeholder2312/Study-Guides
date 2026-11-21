@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DSGT Module 2 — Mathematical Relations (Exam Essentials)</title>
+<title>DSGT Module 2 — Mathematical Relations — Study Guide</title>
 <style>
   :root {
     --ink: #0a0a0a;
@@ -20,7 +20,7 @@
   }
   * { box-sizing: border-box; }
   sub, sup { font-size: 0.75em; line-height: 0; }
-  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
   body {
     font-family: var(--font-sans);
     color: var(--ink);
@@ -90,7 +90,7 @@
     margin: 0 0 1rem;
     line-height: 1.6;
   }
-  .wrap > div { line-height: 1.6; }
+  .wrap > div, .wrap > main > div { line-height: 1.6; }
   ul, ol, blockquote, pre, figure { line-height: 1.6; }
   td { line-height: 1.5; }
   strong, em, span, b, i { line-height: 1.6; }
@@ -479,16 +479,20 @@
   @media print { .rail, .rm-bar, .rm-tab, .rm-back, .rm-sheet { display:none !important; } }
 
 </style>
+<link rel="stylesheet" href="/assets/a11y.css">
 </head><body>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <div class="wrap">
-  <div class="topbar"><a class="back" href="/dsgt">← All modules</a><button class="theme-toggle" type="button" id="themeToggle"></button></div>
+  <nav class="topbar" aria-label="Site"><a class="back" href="/dsgt">← All modules</a><button class="theme-toggle" type="button" id="themeToggle" hidden></button></nav>
 
   <header>
-    <h1>DSGT Module 2</h1>
-    <p class="subtitle">Mathematical Relations — selective exam essentials</p>
+    <h1>DSGT Module 2 — Mathematical Relations</h1>
+    <p class="subtitle">Selective exam essentials</p>
     <div class="meta">CSE AIML · Sem III · 8 teaching hours · CO2 · Source: Mrs. Shamal Bagal's Module 2 PPT, the official DSGT syllabus, and the Summer 2026 / Winter 2025 question papers</div>
   </header>
+
+  <main id="main" tabindex="-1">
 
   <div class="theory">
     <span class="source">READ THIS FIRST — LIMITED TOPIC COVERAGE</span>
@@ -498,7 +502,7 @@
     <p>Each section ends with the exact shape of answer you should write in the answer sheet. Practice questions come first; answers are in a separate section at the end.</p>
   </div>
 
-  <div class="toc">
+  <nav class="toc" aria-label="Table of contents">
     <ol>
       <li><a href="#s1">Relations: definition, notation, representation</a></li>
       <li><a href="#s2">Properties of relations</a></li>
@@ -510,9 +514,9 @@
       <li><a href="#revision">Last-minute revision sheet</a></li>
       <li><a href="#sources">Sources, verification and coverage</a></li>
     </ol>
-  </div>
+  </nav>
 
-  <nav class="nav">
+  <nav class="nav" aria-label="Jump to section">
     <a href="#s1">Fundamentals</a>
     <a href="#s2">Properties</a>
     <a href="#s3">Equivalence</a>
@@ -535,7 +539,7 @@
 
   <p><strong>Notation — every symbol.</strong></p>
   <table>
-    <tr><th>Symbol</th><th>Read as</th><th>Meaning</th></tr>
+    <tr><th scope="col">Symbol</th><th scope="col">Read as</th><th scope="col">Meaning</th></tr>
     <tr><td>A × B</td><td>A cross B</td><td>All ordered pairs (a, b) with a ∈ A and b ∈ B</td></tr>
     <tr><td>(a, b) ∈ R</td><td>the pair a b belongs to R</td><td>The link from a to b is part of the relation</td></tr>
     <tr><td>a R b</td><td>a is related to b</td><td>Same statement, written in infix form</td></tr>
@@ -570,7 +574,7 @@
       <div class="eq">R<sup>−1</sup> = {(2, 1), (4, 2), (6, 3)}</div>
       <p><strong>Step 4 — matrix.</strong> Rows = 1, 2, 3; columns = 2, 4, 6. The pair (1, 2) puts a 1 in row 1, column 2; (2, 4) puts a 1 in row 2, column 4; (3, 6) puts a 1 in row 3, column 6.</p>
       <table>
-        <tr><th>M<sub>R</sub></th><th>2</th><th>4</th><th>6</th></tr>
+        <tr><th scope="col">M<sub>R</sub></th><th scope="col">2</th><th scope="col">4</th><th scope="col">6</th></tr>
         <tr><td><strong>1</strong></td><td>1</td><td>0</td><td>0</td></tr>
         <tr><td><strong>2</strong></td><td>0</td><td>1</td><td>0</td></tr>
         <tr><td><strong>3</strong></td><td>0</td><td>0</td><td>1</td></tr>
@@ -647,7 +651,7 @@
   </div>
 
   <table>
-    <tr><th>Property</th><th>Formal statement</th><th>How to test it</th><th>Typical example</th></tr>
+    <tr><th scope="col">Property</th><th scope="col">Formal statement</th><th scope="col">How to test it</th><th scope="col">Typical example</th></tr>
     <tr><td><strong>Reflexive</strong></td><td>(a, a) ∈ R for every a ∈ A</td><td>Every element of A must appear as (a, a). One missing loop is enough to fail.</td><td>"is equal to", "≤", "divides"</td></tr>
     <tr><td><strong>Symmetric</strong></td><td>(a, b) ∈ R ⇒ (b, a) ∈ R</td><td>For every pair, look for its reverse. One one-way pair is enough to fail.</td><td>"is a sibling of", "is the same age as"</td></tr>
     <tr><td><strong>Antisymmetric</strong></td><td>(a, b) ∈ R and (b, a) ∈ R ⇒ a = b</td><td>Look for a pair with a ≠ b where both directions occur. One such pair is enough to fail.</td><td>"≤", "divides", "is a subset of"</td></tr>
@@ -857,7 +861,7 @@
   <p><strong>Simple meaning.</strong> A direct edge tells you one flight. The closure tells you every city you can eventually reach, including by changing planes and including by going round a loop.</p>
 
   <table>
-    <tr><th>Term</th><th>Meaning in plain words</th></tr>
+    <tr><th scope="col">Term</th><th scope="col">Meaning in plain words</th></tr>
     <tr><td>Path of length 1</td><td>A direct pair (a, b) already in R</td></tr>
     <tr><td>Path of length 2</td><td>a → x → b for some intermediate x</td></tr>
     <tr><td>Reachability</td><td>There is a path of some length ≥ 1 from a to b</td></tr>
@@ -895,7 +899,7 @@
 <div class="qa-solution"><div class="qa-label">Solution</div>
     <p><strong>Step 0 — initial matrix.</strong> Rows and columns in the order a, b, c, d. A 1 means a direct flight.</p>
     <table>
-      <tr><th>W<sup>(0)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><th scope="col">W<sup>(0)</sup></th><th scope="col">a</th><th scope="col">b</th><th scope="col">c</th><th scope="col">d</th></tr>
       <tr><td><strong>a</strong></td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
       <tr><td><strong>b</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
       <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
@@ -904,7 +908,7 @@
 
     <p><strong>Round k = a.</strong> Column a has a 1 in row d, so d reaches a. Row a has a 1 in column b, so a reaches b. Therefore d reaches b. Add (d, b).</p>
     <table>
-      <tr><th>W<sup>(a)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><th scope="col">W<sup>(a)</sup></th><th scope="col">a</th><th scope="col">b</th><th scope="col">c</th><th scope="col">d</th></tr>
       <tr><td><strong>a</strong></td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
       <tr><td><strong>b</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
       <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
@@ -914,7 +918,7 @@
 
     <p><strong>Round k = b.</strong> Column b has 1s in rows a and d. Row b has a 1 in column d. Therefore a reaches d and d reaches d. Add (a, d) and (d, d).</p>
     <table>
-      <tr><th>W<sup>(b)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><th scope="col">W<sup>(b)</sup></th><th scope="col">a</th><th scope="col">b</th><th scope="col">c</th><th scope="col">d</th></tr>
       <tr><td><strong>a</strong></td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
       <tr><td><strong>b</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
       <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
@@ -924,7 +928,7 @@
 
     <p><strong>Round k = c.</strong> Column c has a 1 only in row d, and row c has no 1s at all. Nothing can be added.</p>
     <table>
-      <tr><th>W<sup>(c)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><th scope="col">W<sup>(c)</sup></th><th scope="col">a</th><th scope="col">b</th><th scope="col">c</th><th scope="col">d</th></tr>
       <tr><td><strong>a</strong></td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
       <tr><td><strong>b</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
       <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
@@ -934,7 +938,7 @@
 
     <p><strong>Round k = d.</strong> Column d has 1s in rows a, b and d. Row d has 1s in columns a, b, c and d. So rows a, b and d all become 1 in every column.</p>
     <table>
-      <tr><th>W<sup>(d)</sup> = closure</th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><th scope="col">W<sup>(d)</sup> = closure</th><th scope="col">a</th><th scope="col">b</th><th scope="col">c</th><th scope="col">d</th></tr>
       <tr><td><strong>a</strong></td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
       <tr><td><strong>b</strong></td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
       <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
@@ -961,7 +965,7 @@
 <div class="qa-solution"><div class="qa-label">Solution</div>
     <p><strong>Step 0 — initial matrix.</strong> Rows and columns in the order a, b, c, d. A 1 means a direct flight.</p>
     <table>
-      <tr><th>W<sup>(0)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><th scope="col">W<sup>(0)</sup></th><th scope="col">a</th><th scope="col">b</th><th scope="col">c</th><th scope="col">d</th></tr>
       <tr><td><strong>a</strong></td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
       <tr><td><strong>b</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
       <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
@@ -970,7 +974,7 @@
 
     <p><strong>Round k = a.</strong> Column a has a 1 in row d, so d reaches a. Row a has a 1 in column b, so a reaches b. Therefore d reaches b. Add (d, b).</p>
     <table>
-      <tr><th>W<sup>(a)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><th scope="col">W<sup>(a)</sup></th><th scope="col">a</th><th scope="col">b</th><th scope="col">c</th><th scope="col">d</th></tr>
       <tr><td><strong>a</strong></td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
       <tr><td><strong>b</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
       <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
@@ -980,7 +984,7 @@
 
     <p><strong>Round k = b.</strong> Column b has 1s in rows a and d. Row b has a 1 in column d. Therefore a reaches d and d reaches d. Add (a, d) and (d, d).</p>
     <table>
-      <tr><th>W<sup>(b)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><th scope="col">W<sup>(b)</sup></th><th scope="col">a</th><th scope="col">b</th><th scope="col">c</th><th scope="col">d</th></tr>
       <tr><td><strong>a</strong></td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
       <tr><td><strong>b</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
       <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
@@ -990,7 +994,7 @@
 
     <p><strong>Round k = c.</strong> Column c has a 1 only in row d, and row c has no 1s at all. Nothing can be added.</p>
     <table>
-      <tr><th>W<sup>(c)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><th scope="col">W<sup>(c)</sup></th><th scope="col">a</th><th scope="col">b</th><th scope="col">c</th><th scope="col">d</th></tr>
       <tr><td><strong>a</strong></td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
       <tr><td><strong>b</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
       <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
@@ -1000,7 +1004,7 @@
 
     <p><strong>Round k = d.</strong> Column d has 1s in rows a, b and d. Row d has 1s in columns a, b, c and d. So rows a, b and d all become 1 in every column.</p>
     <table>
-      <tr><th>W<sup>(d)</sup> = closure</th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><th scope="col">W<sup>(d)</sup> = closure</th><th scope="col">a</th><th scope="col">b</th><th scope="col">c</th><th scope="col">d</th></tr>
       <tr><td><strong>a</strong></td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
       <tr><td><strong>b</strong></td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
       <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
@@ -1095,7 +1099,7 @@
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <p>For each element x, list the elements of A that x divides. Working systematically prevents omissions:</p>
 <table>
-      <tr><th>x</th><th>Elements of A divisible by x</th><th>Number</th></tr>
+      <tr><th scope="col">x</th><th scope="col">Elements of A divisible by x</th><th scope="col">Number</th></tr>
       <tr><td>1</td><td>1, 2, 3, 6, 12, 24, 36, 72</td><td>8</td></tr>
       <tr><td>2</td><td>2, 6, 12, 24, 36, 72</td><td>6</td></tr>
       <tr><td>3</td><td>3, 6, 12, 24, 36, 72</td><td>6</td></tr>
@@ -1116,7 +1120,7 @@
 <p><strong>Part 3 — is it a lattice? Meet and join for every kind of pair</strong></p>
 <p>The test is: for every pair, does gcd lie in A, and does lcm lie in A? Work through representative pairs, including the awkward ones.</p>
 <table>
-      <tr><th>Pair (a, b)</th><th>gcd — meet</th><th>In A?</th><th>lcm — join</th><th>In A?</th></tr>
+      <tr><th scope="col">Pair (a, b)</th><th scope="col">gcd — meet</th><th scope="col">In A?</th><th scope="col">lcm — join</th><th scope="col">In A?</th></tr>
       <tr><td>(2, 3)</td><td>1</td><td>Yes</td><td>6</td><td>Yes</td></tr>
       <tr><td>(6, 12)</td><td>6</td><td>Yes</td><td>12</td><td>Yes</td></tr>
       <tr><td>(12, 24)</td><td>12</td><td>Yes</td><td>24</td><td>Yes</td></tr>
@@ -1142,7 +1146,7 @@
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <p>For each element x, list the elements of A that x divides. Working systematically prevents omissions:</p>
 <table>
-      <tr><th>x</th><th>Elements of A divisible by x</th><th>Number</th></tr>
+      <tr><th scope="col">x</th><th scope="col">Elements of A divisible by x</th><th scope="col">Number</th></tr>
       <tr><td>1</td><td>1, 2, 3, 6, 12, 24, 36, 72</td><td>8</td></tr>
       <tr><td>2</td><td>2, 6, 12, 24, 36, 72</td><td>6</td></tr>
       <tr><td>3</td><td>3, 6, 12, 24, 36, 72</td><td>6</td></tr>
@@ -1163,7 +1167,7 @@
 <p><strong>Part 3 — is it a lattice? Meet and join for every kind of pair</strong></p>
 <p>The test is: for every pair, does gcd lie in A, and does lcm lie in A? Work through representative pairs, including the awkward ones.</p>
 <table>
-      <tr><th>Pair (a, b)</th><th>gcd — meet</th><th>In A?</th><th>lcm — join</th><th>In A?</th></tr>
+      <tr><th scope="col">Pair (a, b)</th><th scope="col">gcd — meet</th><th scope="col">In A?</th><th scope="col">lcm — join</th><th scope="col">In A?</th></tr>
       <tr><td>(2, 3)</td><td>1</td><td>Yes</td><td>6</td><td>Yes</td></tr>
       <tr><td>(6, 12)</td><td>6</td><td>Yes</td><td>12</td><td>Yes</td></tr>
       <tr><td>(12, 24)</td><td>12</td><td>Yes</td><td>24</td><td>Yes</td></tr>
@@ -1257,7 +1261,7 @@
     <h3>Q1</h3>
     <p>R = {(2, 4), (3, 6), (4, 8)}. Domain = {2, 3, 4}. Range = {4, 6, 8}. R<sup>−1</sup> = {(4, 2), (6, 3), (8, 4)}. Matrix (rows 2,3,4; columns 4,6,8):</p>
     <table>
-      <tr><th>M<sub>R</sub></th><th>4</th><th>6</th><th>8</th></tr>
+      <tr><th scope="col">M<sub>R</sub></th><th scope="col">4</th><th scope="col">6</th><th scope="col">8</th></tr>
       <tr><td><strong>2</strong></td><td>1</td><td>0</td><td>0</td></tr>
       <tr><td><strong>3</strong></td><td>0</td><td>1</td><td>0</td></tr>
       <tr><td><strong>4</strong></td><td>0</td><td>0</td><td>1</td></tr>
@@ -1281,7 +1285,7 @@
     <h3>Q4 — Warshall, all four rounds</h3>
     <p>Initial matrix (rows and columns a, b, c, d):</p>
     <table>
-      <tr><th>W<sup>(0)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><th scope="col">W<sup>(0)</sup></th><th scope="col">a</th><th scope="col">b</th><th scope="col">c</th><th scope="col">d</th></tr>
       <tr><td><strong>a</strong></td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
       <tr><td><strong>b</strong></td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
       <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
@@ -1289,7 +1293,7 @@
     </table>
     <p><strong>k = a:</strong> column a has 1s in rows b and d; row a has a 1 at b. Add (b,b) and (d,b).</p>
     <table>
-      <tr><th>W<sup>(a)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><th scope="col">W<sup>(a)</sup></th><th scope="col">a</th><th scope="col">b</th><th scope="col">c</th><th scope="col">d</th></tr>
       <tr><td><strong>a</strong></td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
       <tr><td><strong>b</strong></td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
       <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
@@ -1297,7 +1301,7 @@
     </table>
     <p><strong>k = b:</strong> column b has 1s in rows a, b, d; row b has 1s in columns a, b, c. So add (a,a), (a,c), (d,a), (d,c). The remaining combinations, such as (a,b) and (d,b), were already present.</p>
     <table>
-      <tr><th>W<sup>(b)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><th scope="col">W<sup>(b)</sup></th><th scope="col">a</th><th scope="col">b</th><th scope="col">c</th><th scope="col">d</th></tr>
       <tr><td><strong>a</strong></td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
       <tr><td><strong>b</strong></td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
       <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
@@ -1305,7 +1309,7 @@
     </table>
     <p><strong>k = c:</strong> column c has 1s in rows a, b, d; row c has a 1 at d. Add (a,d), (b,d), (d,d).</p>
     <table>
-      <tr><th>W<sup>(c)</sup></th><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+      <tr><th scope="col">W<sup>(c)</sup></th><th scope="col">a</th><th scope="col">b</th><th scope="col">c</th><th scope="col">d</th></tr>
       <tr><td><strong>a</strong></td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
       <tr><td><strong>b</strong></td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
       <tr><td><strong>c</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
@@ -1325,7 +1329,7 @@
     <h3>Q6 — Winter 2025 modules</h3>
     <p>The chain 1 → 2 → 3 → 4 → 5 plus loops at 1, 3, 5. Running Warshall leaves the following reachability matrix:</p>
     <table>
-      <tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+      <tr><th scope="col"></th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th></tr>
       <tr><td><strong>1</strong></td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
       <tr><td><strong>2</strong></td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td></tr>
       <tr><td><strong>3</strong></td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td></tr>
@@ -1430,7 +1434,9 @@
     <p>Types of lattices (bounded, complemented, distributive) beyond the one-line mention of "bounded"; sublattice proofs; detailed closure theory other than transitive closure; relation composition and paths beyond Warshall; drawing Hasse diagrams and digraphs; application essays. These are deliberate omissions, not oversights.</p>
   </div>
 
-  <footer>
+  </main>
+
+<footer>
     DSGT Module 2 — Selective Exam Essentials · Built from Mrs. Shamal Bagal's Module 2 PPT, the official DSGT syllabus,<br>
     and the Summer 2026 and Winter 2025 question papers. Not a complete module guide.
   </footer>
@@ -1442,7 +1448,7 @@
 (function(){
   var b=document.getElementById('themeToggle'),r=document.documentElement;
   function dark(){var t=r.getAttribute('data-theme');return t==='dark';}
-  function paint(){var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
+  function paint(){b.hidden=false;var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
   b.addEventListener('click',function(){var n=dark()?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('sg-theme',n);}catch(e){}paint();});
   paint();
 })();

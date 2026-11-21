@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BEEE Module 3 — Single Phase Transformer · Study Guide</title>
+<title>BEEE Module 3 — Single Phase Transformer — Study Guide</title>
 <meta name="description" content="Complete source-based study guide for BEEE (ESC102) Module 3: Single Phase Transformer — working principle, types, transformation ratio, ideal and practical transformer, losses, efficiency and applications.">
 <style>
   :root {
@@ -20,7 +20,7 @@
     --font-mono: "Courier New", Courier, monospace;
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
   body {
     font-family: var(--font-sans);
     color: var(--ink);
@@ -228,17 +228,21 @@ a:hover, a:focus-visible {
   }
   @media print { .rail, .rm-bar, .rm-tab, .rm-back, .rm-sheet { display:none !important; } }
 </style>
+<link rel="stylesheet" href="/assets/a11y.css">
 </head>
 <body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
 
 <div class="wrap">
-  <div class="topbar"><a class="back" href="/beee">← All modules</a><button class="theme-toggle" type="button" id="themeToggle"></button></div>
+  <nav class="topbar" aria-label="Site"><a class="back" href="/beee">← All modules</a><button class="theme-toggle" type="button" id="themeToggle" hidden></button></nav>
 
   <header>
     <h1>BEEE Module 3 — Single Phase Transformer</h1>
     <p class="subtitle">Working principle · Types · Transformation ratio · Ideal &amp; practical · Losses · Efficiency · Applications</p>
     <div class="meta">B.E. CSE (AI &amp; ML) · Semester I · ESC102 · NEP 2020 · Module III · 4 teaching hours · CO3<br>Mumbai University · Conceptual study guide — the syllabus says numericals are not expected</div>
   </header>
+
+  <main id="main" tabindex="-1">
 
   <div class="callout">
     <p><strong>How this guide labels evidence.</strong> Every block is marked so you know what you are reading:</p>
@@ -261,7 +265,7 @@ a:hover, a:focus-visible {
   </div>
 
   <table>
-    <tr><th>Prescribed topic</th><th>What you must be able to do</th><th>Section</th></tr>
+    <tr><th scope="col">Prescribed topic</th><th scope="col">What you must be able to do</th><th scope="col">Section</th></tr>
     <tr><td>Working principle</td><td>Explain, step by step, how a changing flux links two windings and transfers energy; state Faraday’s law and the EMF equation.</td><td><a href="#principle">Working principle</a></td></tr>
     <tr><td>Types</td><td>Classify single-phase transformers; explain step-up, step-down, core type, shell type, isolation and autotransformer.</td><td><a href="#types">Types</a></td></tr>
     <tr><td>Transformation ratio</td><td>Define <span class="v">K</span> with consistent symbols and relate turns, voltage and current.</td><td><a href="#ratio">Transformation ratio</a></td></tr>
@@ -304,7 +308,7 @@ a:hover, a:focus-visible {
     <li>Give at least six real applications, with the reason a transformer is used in each.</li>
   </ol>
 
-  <div class="toc">
+  <nav class="toc" aria-label="Table of contents">
     <ol>
       <li><a href="#fundamentals">Fundamentals — what a transformer is and why we need one</a></li>
       <li><a href="#construction">Construction — core, windings and insulation</a></li>
@@ -320,9 +324,9 @@ a:hover, a:focus-visible {
       <li><a href="#answer-key">Answer key</a></li>
       <li><a href="#references">References and attribution</a></li>
     </ol>
-  </div>
+  </nav>
 
-  <nav class="nav">
+  <nav class="nav" aria-label="Jump to section">
     <a href="#fundamentals">Fundamentals</a>
     <a href="#construction">Construction</a>
     <a href="#principle">Principle</a>
@@ -358,7 +362,7 @@ a:hover, a:focus-visible {
   </div>
   <p>Four words in that definition carry the whole chapter:</p>
   <table>
-    <tr><th>Word</th><th>What it rules out</th></tr>
+    <tr><th scope="col">Word</th><th scope="col">What it rules out</th></tr>
     <tr><td><strong>Static</strong></td><td>No rotating parts, no friction or windage loss — a major reason for 97–99% efficiency.</td></tr>
     <tr><td><strong>Alternating</strong></td><td>It does not work on steady DC. It needs a <em>changing</em> flux, and only AC produces one.</td></tr>
     <tr><td><strong>Voltage</strong></td><td>It changes voltage and current levels. It does <em>not</em> change frequency, and it cannot create power.</td></tr>
@@ -551,7 +555,7 @@ a:hover, a:focus-visible {
   <p>“Types” in this module means classification, not one single list. The same transformer can be described by its voltage function, by how its core is built, by how it is cooled, and by what it is used for. Learn one table and you can place any transformer in it.</p>
 
   <table>
-    <tr><th>Basis of classification</th><th>Types</th><th>Key idea</th></tr>
+    <tr><th scope="col">Basis of classification</th><th scope="col">Types</th><th scope="col">Key idea</th></tr>
     <tr><td>Voltage level (function)</td><td>Step-up · Step-down · Isolation (1:1)</td><td>Secondary voltage greater than, less than, or equal to primary voltage.</td></tr>
     <tr><td>Core construction</td><td>Core type · Shell type · Berry (toroidal)</td><td>Whether the windings surround the core, or the core surrounds the windings.</td></tr>
     <tr><td>Cooling</td><td>Dry type (air) · Oil immersed</td><td>How the heat from <span class="v">I</span><sup>2</sup><span class="v">R</span> and core loss is removed.</td></tr>
@@ -611,7 +615,7 @@ a:hover, a:focus-visible {
   <p>In a <strong>core-type</strong> transformer the windings surround the core limbs: the magnetic path is a closed rectangle and the coils sit on it (Figure 1). In a <strong>shell-type</strong> transformer the core surrounds the windings, giving the flux two parallel return paths; the core is effectively a shell around the coils. The teacher’s slides compare them with this table:</p>
 
   <table>
-    <tr><th>Point</th><th>Core type</th><th>Shell type</th></tr>
+    <tr><th scope="col">Point</th><th scope="col">Core type</th><th scope="col">Shell type</th></tr>
     <tr><td>Main use</td><td>Distribution of electrical energy</td><td>Supplying power</td></tr>
     <tr><td>Duty</td><td>In service throughout the day</td><td>Used only when power is required</td></tr>
     <tr><td>Efficiency</td><td>Lower, about 50% at part load in the slide’s wording</td><td>High, about 90% to 98%</td></tr>
@@ -659,7 +663,7 @@ a:hover, a:focus-visible {
   </ul>
 
   <table>
-    <tr><th>Value of <span class="v">K</span> = <span class="v">N</span><sub>2</sub>/<span class="v">N</span><sub>1</sub></th><th>Name</th><th>Voltage</th><th>Current</th><th>Typical use</th></tr>
+    <tr><th scope="col">Value of <span class="v">K</span> = <span class="v">N</span><sub>2</sub>/<span class="v">N</span><sub>1</sub></th><th scope="col">Name</th><th scope="col">Voltage</th><th scope="col">Current</th><th scope="col">Typical use</th></tr>
     <tr><td><span class="v">K</span> &gt; 1</td><td>Step-up</td><td><span class="v">V</span><sub>2</sub> &gt; <span class="v">V</span><sub>1</sub></td><td><span class="v">I</span><sub>2</sub> &lt; <span class="v">I</span><sub>1</sub></td><td>At the generating station, before transmission</td></tr>
     <tr><td><span class="v">K</span> &lt; 1</td><td>Step-down</td><td><span class="v">V</span><sub>2</sub> &lt; <span class="v">V</span><sub>1</sub></td><td><span class="v">I</span><sub>2</sub> &gt; <span class="v">I</span><sub>1</sub></td><td>Substation and local distribution, chargers, adaptors</td></tr>
     <tr><td><span class="v">K</span> = 1</td><td>Isolation (1:1)</td><td><span class="v">V</span><sub>2</sub> = <span class="v">V</span><sub>1</sub></td><td><span class="v">I</span><sub>2</sub> = <span class="v">I</span><sub>1</sub></td><td>Safety isolation, test benches, medical equipment</td></tr>
@@ -697,7 +701,7 @@ a:hover, a:focus-visible {
 
   <h3>3 · Side-by-side comparison</h3>
   <table>
-    <tr><th>Feature</th><th>Ideal transformer</th><th>Practical transformer</th></tr>
+    <tr><th scope="col">Feature</th><th scope="col">Ideal transformer</th><th scope="col">Practical transformer</th></tr>
     <tr><td>Winding resistance</td><td>Zero</td><td>Small but finite; causes copper loss and voltage drop</td></tr>
     <tr><td>Leakage flux</td><td>None — all flux links both windings</td><td>Some flux links only one winding</td></tr>
     <tr><td>Core</td><td>Lossless, infinitely permeable</td><td>Hysteresis and eddy-current loss; finite permeability</td></tr>
@@ -719,7 +723,7 @@ a:hover, a:focus-visible {
   <p>Losses are the energy that enters the primary but never reaches the load. They all end up as heat, and they are grouped into two families by one question: <em>does the loss depend on the load?</em></p>
 
   <table>
-    <tr><th>Family</th><th>What causes it</th><th>Where</th><th>Depends on load?</th><th>Reduced by</th></tr>
+    <tr><th scope="col">Family</th><th scope="col">What causes it</th><th scope="col">Where</th><th scope="col">Depends on load?</th><th scope="col">Reduced by</th></tr>
     <tr><td><strong>Iron loss</strong> (core loss) <span class="v">P</span><sub>i</sub></td><td>Hysteresis + eddy currents</td><td>Magnetic core</td><td><strong>No</strong> — practically constant at a given voltage and frequency</td><td>Silicon-steel alloy, thin insulated laminations, low flux density</td></tr>
     <tr><td><strong>Copper loss</strong> <span class="v">P</span><sub>cu</sub></td><td><span class="v">I</span><sup>2</sup><span class="v">R</span> heating in the windings</td><td>Primary and secondary coils</td><td><strong>Yes</strong> — rises with the square of the load current</td><td>Thicker wire, fewer turns, good joints, adequate cooling</td></tr>
   </table>
@@ -805,7 +809,7 @@ a:hover, a:focus-visible {
   <p>The teacher’s slides list eight applications. They are reproduced here, with the reason each one needs a transformer.</p>
 
   <table>
-    <tr><th>#</th><th>Application</th><th>Transformer role</th><th>Why it matters</th></tr>
+    <tr><th scope="col">#</th><th scope="col">Application</th><th scope="col">Transformer role</th><th scope="col">Why it matters</th></tr>
     <tr><td>1</td><td>Transmission of power over long distances</td><td>Step-up at the generating station</td><td>Raises voltage and lowers current, so <span class="v">I</span><sup>2</sup><span class="v">R</span> line loss falls sharply.</td></tr>
     <tr><td>2</td><td>Distribution of power</td><td>Step-down at substations and local transformers</td><td>Brings the voltage down to safe, usable levels (e.g. 230 V).</td></tr>
     <tr><td>3</td><td>Current regulation</td><td>Step-up or step-down</td><td>Changes the current level in a circuit without changing frequency.</td></tr>
@@ -835,7 +839,7 @@ a:hover, a:focus-visible {
   <div class="revision-sheet">
     <h3>Definitions in one line each</h3>
     <table>
-      <tr><th>Term</th><th>Definition</th></tr>
+      <tr><th scope="col">Term</th><th scope="col">Definition</th></tr>
       <tr><td>Transformer</td><td>A static AC device that changes voltage (and current) without changing frequency, transferring power magnetically between two windings.</td></tr>
       <tr><td>Primary / secondary</td><td>The winding connected to the supply / the winding connected to the load.</td></tr>
       <tr><td>Mutual induction</td><td>Induction of an EMF in one coil because of a changing current (and therefore flux) in another coil.</td></tr>
@@ -849,7 +853,7 @@ a:hover, a:focus-visible {
 
     <h3>Relationships to be able to write</h3>
     <table>
-      <tr><th>Idea</th><th>Expression</th><th>Remember</th></tr>
+      <tr><th scope="col">Idea</th><th scope="col">Expression</th><th scope="col">Remember</th></tr>
       <tr><td>Faraday’s law</td><td><span class="v">e</span> = −<span class="v">N</span> <span class="v">dΦ</span>/<span class="v">dt</span></td><td>Needs <em>changing</em> flux; hence AC only.</td></tr>
       <tr><td>EMF equation</td><td><span class="v">E</span> = 4.44 <span class="v">f</span> <span class="v">N</span> <span class="v">Φ</span><sub>m</sub></td><td>Same volts per turn in both windings.</td></tr>
       <tr><td>Voltage ratio</td><td><span class="v">V</span><sub>2</sub>/<span class="v">V</span><sub>1</sub> = <span class="v">N</span><sub>2</sub>/<span class="v">N</span><sub>1</sub></td><td>Voltage follows turns.</td></tr>
@@ -862,7 +866,7 @@ a:hover, a:focus-visible {
 
     <h3>Comparisons in one glance</h3>
     <table>
-      <tr><th>Step-up</th><th>Step-down</th></tr>
+      <tr><th scope="col">Step-up</th><th scope="col">Step-down</th></tr>
       <tr><td><span class="v">N</span><sub>2</sub> &gt; <span class="v">N</span><sub>1</sub>, <span class="v">K</span> &gt; 1</td><td><span class="v">N</span><sub>2</sub> &lt; <span class="v">N</span><sub>1</sub>, <span class="v">K</span> &lt; 1</td></tr>
       <tr><td><span class="v">V</span><sub>2</sub> &gt; <span class="v">V</span><sub>1</sub>; <span class="v">I</span><sub>2</sub> &lt; <span class="v">I</span><sub>1</sub></td><td><span class="v">V</span><sub>2</sub> &lt; <span class="v">V</span><sub>1</sub>; <span class="v">I</span><sub>2</sub> &gt; <span class="v">I</span><sub>1</sub></td></tr>
       <tr><td>Used before transmission</td><td>Used in distribution and electronics</td></tr>
@@ -1028,7 +1032,9 @@ a:hover, a:focus-visible {
     <p class="small">Compiled for study use. This page is not an official University of Mumbai publication and is not endorsed by the university or by Dr. Nirmala K. If your department issues a revised syllabus or additional notes, follow those.</p>
   </div>
 
-  <footer>
+  </main>
+
+<footer>
     <p><strong>BEEE Module 3 — Single Phase Transformer</strong> · ESC102 · B.E. CSE (AI &amp; ML) · Semester I · NEP 2020</p>
     <p><a href="/beee">All BEEE modules</a> · <a href="/">Study Guides home</a> · <a href="#top">Back to top</a></p>
     <p>Conceptual study guide with source excerpts, comparisons and a separate answer key. Not an official university publication.</p>
@@ -1040,7 +1046,7 @@ a:hover, a:focus-visible {
 (function(){
   var b=document.getElementById('themeToggle'),r=document.documentElement;
   function dark(){var t=r.getAttribute('data-theme');return t==='dark';}
-  function paint(){var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
+  function paint(){b.hidden=false;var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
   b.addEventListener('click',function(){var n=dark()?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('sg-theme',n);}catch(e){}paint();});
   paint();
 })();

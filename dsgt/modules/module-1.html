@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DSGT Module 1 — Crisp Set Theory and Logic (Exam Essentials)</title>
+<title>DSGT Module 1 — Crisp Set Theory and Logic — Study Guide</title>
 <style>
   :root {
     --ink: #0a0a0a;
@@ -20,7 +20,7 @@
   }
   * { box-sizing: border-box; }
   sub, sup { font-size: 0.75em; line-height: 0; }
-  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
   body {
     font-family: var(--font-sans);
     color: var(--ink);
@@ -90,7 +90,7 @@
     margin: 0 0 1rem;
     line-height: 1.6;
   }
-  .wrap > div { line-height: 1.6; }
+  .wrap > div, .wrap > main > div { line-height: 1.6; }
   ul, ol, blockquote, pre, figure { line-height: 1.6; }
   td { line-height: 1.5; }
   strong, em, span, b, i { line-height: 1.6; }
@@ -482,16 +482,20 @@
   @media print { .rail, .rm-bar, .rm-tab, .rm-back, .rm-sheet { display:none !important; } }
 
 </style>
+<link rel="stylesheet" href="/assets/a11y.css">
 </head><body>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <div class="wrap">
-  <div class="topbar"><a class="back" href="/dsgt">← All modules</a><button class="theme-toggle" type="button" id="themeToggle"></button></div>
+  <nav class="topbar" aria-label="Site"><a class="back" href="/dsgt">← All modules</a><button class="theme-toggle" type="button" id="themeToggle" hidden></button></nav>
 
   <header>
-    <h1>DSGT Module 1</h1>
-    <p class="subtitle">Crisp Set Theory and Logic — selective exam essentials</p>
+    <h1>DSGT Module 1 — Crisp Set Theory and Logic</h1>
+    <p class="subtitle">Selective exam essentials</p>
     <div class="meta">CSE AIML · Sem III · 7 teaching hours · CO1 · Source: Mrs. Shamal Bagal's Module 1 PPT (108 slides), the official DSGT syllabus, the Summer 2026 and Winter 2025 papers, and the IAT and prelim question banks</div>
   </header>
+
+  <main id="main" tabindex="-1">
 
   <div class="theory">
     <span class="source">READ THIS FIRST — SELECTIVE COVERAGE</span>
@@ -501,7 +505,7 @@
     <p>Every method below gets a worked example, a note on how to lay it out in the answer sheet, the mistake that costs the most marks, and a short practice question. Answers are separate, at the end.</p>
   </div>
 
-  <div class="toc">
+  <nav class="toc" aria-label="Table of contents">
     <ol>
       <li><a href="#s1">Sets: the vocabulary you must have</a></li>
       <li><a href="#s2">Set operations and the laws of sets</a></li>
@@ -519,9 +523,9 @@
       <li><a href="#revision">Last-minute revision sheet</a></li>
       <li><a href="#sources">Sources, verification and coverage</a></li>
     </ol>
-  </div>
+  </nav>
 
-  <nav class="nav">
+  <nav class="nav" aria-label="Jump to section">
     <a href="#s1">Sets</a>
     <a href="#s2">Operations</a>
     <a href="#s3">Products</a>
@@ -549,7 +553,7 @@
   <h3 id="m1-three-ways" data-rail-subsection>The three ways to write a set</h3>
 
   <table>
-    <tr><th>Form</th><th>What it is</th><th>Example (whole numbers below 8)</th></tr>
+    <tr><th scope="col">Form</th><th scope="col">What it is</th><th scope="col">Example (whole numbers below 8)</th></tr>
     <tr><td><strong>Statement / semantic</strong></td><td>A sentence describing the members</td><td>{the set of whole numbers less than 8}</td></tr>
     <tr><td><strong>Roster</strong></td><td>The members listed inside { }</td><td>{0, 1, 2, 3, 4, 5, 6, 7}</td></tr>
     <tr><td><strong>Set-builder</strong></td><td>A rule that every member satisfies</td><td>{x | x is a whole number and x &lt; 8}</td></tr>
@@ -558,7 +562,7 @@
   <p>The vertical bar in set-builder form is read "such that". Everything before it is the element being described; everything after it is the condition. Many textbooks write a colon instead of the bar: {x : x is even}.</p>
 
   <table>
-    <tr><th>Symbol</th><th>Read as</th><th>Meaning</th></tr>
+    <tr><th scope="col">Symbol</th><th scope="col">Read as</th><th scope="col">Meaning</th></tr>
     <tr><td>∈ / ∉</td><td>belongs to / does not belong</td><td>a ∈ A: a is an element of A</td></tr>
     <tr><td>|A| or n(A)</td><td>cardinality of A</td><td>the number of distinct elements</td></tr>
     <tr><td>∅</td><td>empty set</td><td>the set with no elements, ∅ = { }</td></tr>
@@ -658,7 +662,7 @@
   </div>
 
   <table>
-    <tr><th>Operation</th><th>Set-builder definition</th><th>A = {1,2,3,4}, B = {3,4,5,6}</th></tr>
+    <tr><th scope="col">Operation</th><th scope="col">Set-builder definition</th><th scope="col">A = {1,2,3,4}, B = {3,4,5,6}</th></tr>
     <tr><td>A ∪ B</td><td>{x | x ∈ A or x ∈ B}</td><td>{1, 2, 3, 4, 5, 6}</td></tr>
     <tr><td>A ∩ B</td><td>{x | x ∈ A and x ∈ B}</td><td>{3, 4}</td></tr>
     <tr><td>A − B</td><td>{x | x ∈ A and x ∉ B}</td><td>{1, 2}</td></tr>
@@ -693,7 +697,7 @@
   <p>These are the identities you are allowed to quote. Learn them as pairs; each law has a union version and a dual intersection version obtained by swapping ∪ with ∩ and ∅ with U.</p>
 
   <table>
-    <tr><th>Law</th><th>Union form</th><th>Intersection form</th></tr>
+    <tr><th scope="col">Law</th><th scope="col">Union form</th><th scope="col">Intersection form</th></tr>
     <tr><td>Idempotent</td><td>A ∪ A = A</td><td>A ∩ A = A</td></tr>
     <tr><td>Commutative</td><td>A ∪ B = B ∪ A</td><td>A ∩ B = B ∩ A</td></tr>
     <tr><td>Associative</td><td>(A ∪ B) ∪ C = A ∪ (B ∪ C)</td><td>(A ∩ B) ∩ C = A ∩ (B ∩ C)</td></tr>
@@ -719,7 +723,7 @@
 </div>
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <table>
-      <tr><th>A</th><th>B</th><th>A ∪ B</th><th>(A ∪ B)′</th><th>A′</th><th>B′</th><th>A′ ∩ B′</th></tr>
+      <tr><th scope="col">A</th><th scope="col">B</th><th scope="col">A ∪ B</th><th scope="col">(A ∪ B)′</th><th scope="col">A′</th><th scope="col">B′</th><th scope="col">A′ ∩ B′</th></tr>
       <tr><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
       <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
       <tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
@@ -905,7 +909,7 @@
   <p>Three methods prove a claimed identity A = B. Use whichever the question hints at; if it does not hint, the element argument is always acceptable and the algebraic one is fastest.</p>
 
   <table>
-    <tr><th>Method</th><th>What you do</th><th>Best when</th></tr>
+    <tr><th scope="col">Method</th><th scope="col">What you do</th><th scope="col">Best when</th></tr>
     <tr><td><strong>Element argument</strong></td><td>Take an arbitrary x, show x ∈ A ⟺ x ∈ B. Often split into A ⊆ B and B ⊆ A.</td><td>The question says "prove", or the identity is not in the law table</td></tr>
     <tr><td><strong>Membership table</strong></td><td>List all 2<sup>n</sup> cases for n sets and compare columns</td><td>Two or three sets, and the question says "verify" or "using a table"</td></tr>
     <tr><td><strong>Algebraic proof</strong></td><td>Rewrite one side using the laws in section 2, one law per line</td><td>The result is a standard law, or time is short</td></tr>
@@ -934,7 +938,7 @@
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <p>Claim: A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C). Three sets give 2<sup>3</sup> = 8 rows.</p>
 <table>
-      <tr><th>A</th><th>B</th><th>C</th><th>B ∪ C</th><th>A ∩ (B ∪ C)</th><th>A ∩ B</th><th>A ∩ C</th><th>(A ∩ B) ∪ (A ∩ C)</th></tr>
+      <tr><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">B ∪ C</th><th scope="col">A ∩ (B ∪ C)</th><th scope="col">A ∩ B</th><th scope="col">A ∩ C</th><th scope="col">(A ∩ B) ∪ (A ∩ C)</th></tr>
       <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
       <tr><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
       <tr><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
@@ -997,7 +1001,7 @@
   <p><strong>Simple meaning.</strong> Logic is arithmetic on truth values. Two values, T and F; five operations; and a fixed rule for each combination. Everything else in this module is bookkeeping over those rules.</p>
 
   <table>
-    <tr><th>p</th><th>q</th><th>¬p</th><th>p ∧ q</th><th>p ∨ q</th><th>p ⊕ q</th><th>p → q</th><th>p ↔ q</th></tr>
+    <tr><th scope="col">p</th><th scope="col">q</th><th scope="col">¬p</th><th scope="col">p ∧ q</th><th scope="col">p ∨ q</th><th scope="col">p ⊕ q</th><th scope="col">p → q</th><th scope="col">p ↔ q</th></tr>
     <tr><td>T</td><td>T</td><td>F</td><td>T</td><td>T</td><td>F</td><td>T</td><td>T</td></tr>
     <tr><td>T</td><td>F</td><td>F</td><td>F</td><td>T</td><td>T</td><td>F</td><td>F</td></tr>
     <tr><td>F</td><td>T</td><td>T</td><td>F</td><td>T</td><td>T</td><td>T</td><td>F</td></tr>
@@ -1018,7 +1022,7 @@
   <p><strong>Implication is the one that trips everyone up.</strong> From a false hypothesis, anything follows. "If 1 + 1 = 3, then your grandmother wears combat boots" is a true implication, because the hypothesis is false. The connective records only the truth-value relationship; it does not claim that p causes q, and it does not require the two statements to be about the same subject.</p>
 
   <table>
-    <tr><th>English sentence</th><th>Symbolic form</th><th>Why</th></tr>
+    <tr><th scope="col">English sentence</th><th scope="col">Symbolic form</th><th scope="col">Why</th></tr>
     <tr><td>if p, then q</td><td>p → q</td><td>the standard reading</td></tr>
     <tr><td>q if p</td><td>p → q</td><td>"if" introduces the hypothesis</td></tr>
     <tr><td>p only if q</td><td>p → q</td><td>"only if" marks the conclusion, not the hypothesis</td></tr>
@@ -1035,7 +1039,7 @@
   <p>From p → q you can build three related statements. Only one of them is equivalent to the original.</p>
 
   <table>
-    <tr><th>Name</th><th>Form</th><th>Equivalent to p → q?</th></tr>
+    <tr><th scope="col">Name</th><th scope="col">Form</th><th scope="col">Equivalent to p → q?</th></tr>
     <tr><td>Converse</td><td>q → p</td><td>No</td></tr>
     <tr><td>Inverse</td><td>¬p → ¬q</td><td>No</td></tr>
     <tr><td>Contrapositive</td><td>¬q → ¬p</td><td><strong>Yes</strong></td></tr>
@@ -1069,7 +1073,7 @@
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <p>Three atoms, so eight rows. Build the columns left to right, one connective at a time.</p>
 <table>
-      <tr><th>p</th><th>q</th><th>r</th><th>p ∨ q</th><th>¬r</th><th>(p ∨ q) → ¬r</th></tr>
+      <tr><th scope="col">p</th><th scope="col">q</th><th scope="col">r</th><th scope="col">p ∨ q</th><th scope="col">¬r</th><th scope="col">(p ∨ q) → ¬r</th></tr>
       <tr><td>T</td><td>T</td><td>T</td><td>T</td><td>F</td><td>F</td></tr>
       <tr><td>T</td><td>T</td><td>F</td><td>T</td><td>T</td><td>T</td></tr>
       <tr><td>T</td><td>F</td><td>T</td><td>T</td><td>F</td><td>F</td></tr>
@@ -1116,7 +1120,7 @@
   <p><strong>Two ways to prove it, and how to choose.</strong> A truth table proves equivalence by exhaustion: fill in every row and show the two columns match. A chain of laws proves it by derivation: rewrite one side until it looks like the other. Use the table when the expression has at most three atoms and the question says "using truth tables"; use the laws when the question says "using logical equivalences", which the university papers usually do. The derivation is faster and shorter, but every step must be justified.</p>
 
   <table>
-    <tr><th>Law</th><th>Form</th></tr>
+    <tr><th scope="col">Law</th><th scope="col">Form</th></tr>
     <tr><td>Identity</td><td>p ∧ T ≡ p &nbsp;&nbsp; p ∨ F ≡ p</td></tr>
     <tr><td>Domination</td><td>p ∨ T ≡ T &nbsp;&nbsp; p ∧ F ≡ F</td></tr>
     <tr><td>Idempotent</td><td>p ∨ p ≡ p &nbsp;&nbsp; p ∧ p ≡ p</td></tr>
@@ -1146,7 +1150,7 @@
 <p>That is the right-hand expression, so the two are logically equivalent. ∎</p>
 <p><strong>Truth-table confirmation.</strong> The derivation is the answer, but the table below shows the claim really holds in every row — useful if you have time to add a check.</p>
 <table>
-      <tr><th>p</th><th>q</th><th>r</th><th>p → q</th><th>(p → q) → r</th><th>p ∧ ¬q</th><th>(p ∧ ¬q) ∨ r</th></tr>
+      <tr><th scope="col">p</th><th scope="col">q</th><th scope="col">r</th><th scope="col">p → q</th><th scope="col">(p → q) → r</th><th scope="col">p ∧ ¬q</th><th scope="col">(p ∧ ¬q) ∨ r</th></tr>
       <tr><td>T</td><td>T</td><td>T</td><td>T</td><td>T</td><td>F</td><td>T</td></tr>
       <tr><td>T</td><td>T</td><td>F</td><td>T</td><td>F</td><td>F</td><td>F</td></tr>
       <tr><td>T</td><td>F</td><td>T</td><td>F</td><td>T</td><td>T</td><td>T</td></tr>
@@ -1176,7 +1180,7 @@
 <p>That is the right-hand expression, so the two are logically equivalent. ∎</p>
 <p><strong>Truth-table confirmation.</strong> The derivation is the answer, but the table below shows the claim really holds in every row — useful if you have time to add a check.</p>
 <table>
-      <tr><th>p</th><th>q</th><th>r</th><th>p → q</th><th>(p → q) → r</th><th>p ∧ ¬q</th><th>(p ∧ ¬q) ∨ r</th></tr>
+      <tr><th scope="col">p</th><th scope="col">q</th><th scope="col">r</th><th scope="col">p → q</th><th scope="col">(p → q) → r</th><th scope="col">p ∧ ¬q</th><th scope="col">(p ∧ ¬q) ∨ r</th></tr>
       <tr><td>T</td><td>T</td><td>T</td><td>T</td><td>T</td><td>F</td><td>T</td></tr>
       <tr><td>T</td><td>T</td><td>F</td><td>T</td><td>F</td><td>F</td><td>F</td></tr>
       <tr><td>T</td><td>F</td><td>T</td><td>F</td><td>T</td><td>T</td><td>T</td></tr>
@@ -1276,7 +1280,7 @@
   </div>
 
   <table>
-    <tr><th>Type</th><th>Final column of the truth table</th><th>How to answer "classify this"</th></tr>
+    <tr><th scope="col">Type</th><th scope="col">Final column of the truth table</th><th scope="col">How to answer "classify this"</th></tr>
     <tr><td>Tautology</td><td>All T</td><td>Say "tautology" and show the column is all T</td></tr>
     <tr><td>Contradiction</td><td>All F</td><td>Say "contradiction" and show the column is all F</td></tr>
     <tr><td>Contingency</td><td>Mixed</td><td>Say "contingency" and give one T row and one F row</td></tr>
@@ -1341,7 +1345,7 @@
   <p>Both university question banks ask for CNF or DNF, so learn the vocabulary precisely. It is easy marks once the names are straight.</p>
 
   <table>
-    <tr><th>Term</th><th>Meaning</th><th>Example</th></tr>
+    <tr><th scope="col">Term</th><th scope="col">Meaning</th><th scope="col">Example</th></tr>
     <tr><td>Literal</td><td>A variable or its negation</td><td>p, ¬q</td></tr>
     <tr><td>Clause</td><td>Literals joined by ∨</td><td>p ∨ ¬q ∨ r</td></tr>
     <tr><td>Term (minterm)</td><td>Literals joined by ∧, one per variable</td><td>p ∧ ¬q ∧ r</td></tr>
@@ -1375,7 +1379,7 @@
 <p>Four clauses, each a disjunction, joined by ∧.</p>
 <p><strong>For the DNF, use the truth table.</strong> Distributing the four clauses into an OR of ANDs is long and error-prone; reading the true rows is reliable.</p>
 <table>
-      <tr><th>P</th><th>Q</th><th>R</th><th>P → (Q ∧ R)</th><th>¬P → (¬Q ∧ ¬R)</th><th>Whole</th></tr>
+      <tr><th scope="col">P</th><th scope="col">Q</th><th scope="col">R</th><th scope="col">P → (Q ∧ R)</th><th scope="col">¬P → (¬Q ∧ ¬R)</th><th scope="col">Whole</th></tr>
       <tr><td>T</td><td>T</td><td>T</td><td>T</td><td>T</td><td>1</td></tr>
       <tr><td>T</td><td>T</td><td>F</td><td>F</td><td>T</td><td>0</td></tr>
       <tr><td>T</td><td>F</td><td>T</td><td>F</td><td>T</td><td>0</td></tr>
@@ -1429,7 +1433,7 @@
   </div>
 
   <table>
-    <tr><th>Predicate</th><th>Read as</th><th>Name</th></tr>
+    <tr><th scope="col">Predicate</th><th scope="col">Read as</th><th scope="col">Name</th></tr>
     <tr><td>Father(x)</td><td>x is a father</td><td>unary (one argument)</td></tr>
     <tr><td>Brother(x, y)</td><td>x is a brother of y</td><td>binary</td></tr>
     <tr><td>Sum(x, y, z)</td><td>x + y = z</td><td>ternary</td></tr>
@@ -1439,7 +1443,7 @@
   <p>With P(x) meaning "x &gt; 5" and U the integers, P(8) is true and P(5) is false. With P(x, y, z) meaning x + y = z, P(−4, 6, 2) is true and P(5, 2, 10) is false. But P(5, x, 7) is still a predicate, not a proposition, because x is free.</p>
 
   <table>
-    <tr><th>Quantifier</th><th>Symbol</th><th>Read as</th><th>True when</th></tr>
+    <tr><th scope="col">Quantifier</th><th scope="col">Symbol</th><th scope="col">Read as</th><th scope="col">True when</th></tr>
     <tr><td>Universal</td><td>∀x P(x)</td><td>for all x, P(x)</td><td>every element of U satisfies P</td></tr>
     <tr><td>Existential</td><td>∃x P(x)</td><td>there exists x such that P(x)</td><td>at least one element of U satisfies P</td></tr>
   </table>
@@ -1453,7 +1457,7 @@
   <h3 id="m1-quantifier-translation" data-rail-subsection>Translating English into quantifiers</h3>
 
   <table>
-    <tr><th>English shape</th><th>Symbolic form</th><th>Note</th></tr>
+    <tr><th scope="col">English shape</th><th scope="col">Symbolic form</th><th scope="col">Note</th></tr>
     <tr><td>All S are P</td><td>∀x (S(x) → P(x))</td><td>implication, never ∧</td></tr>
     <tr><td>Some S are P</td><td>∃x (S(x) ∧ P(x))</td><td>conjunction, never →</td></tr>
     <tr><td>No S are P</td><td>∀x (S(x) → ¬P(x))</td><td>same as "all S are not P"</td></tr>
@@ -1689,7 +1693,7 @@
   <p>The syllabus lists seven proof techniques. Induction got its own section; the rest are compared here, with one short worked example each. Expect a definition-plus-example question rather than a long proof, so the important thing is to know which method starts from what.</p>
 
   <table>
-    <tr><th>Method</th><th>To prove</th><th>You assume</th><th>You must reach</th></tr>
+    <tr><th scope="col">Method</th><th scope="col">To prove</th><th scope="col">You assume</th><th scope="col">You must reach</th></tr>
     <tr><td>Direct</td><td>P → Q</td><td>P</td><td>Q</td></tr>
     <tr><td>Contrapositive</td><td>P → Q</td><td>¬Q</td><td>¬P</td></tr>
     <tr><td>Contradiction</td><td>S</td><td>¬S</td><td>any contradiction</td></tr>
@@ -1856,7 +1860,7 @@
     If x ∈ A, the disjunction holds. If the second disjunct holds, then x ∈ A ∩ B, so x ∈ A. In both cases x ∈ A. Conversely, if x ∈ A then x satisfies the first disjunct, so x is in the union. Hence the two sets have the same elements. ∎</p>
     <p><strong>(b)</strong> Four rows:</p>
     <table>
-      <tr><th>A</th><th>B</th><th>A ∩ B</th><th>(A ∩ B)′</th><th>A′</th><th>B′</th><th>A′ ∪ B′</th></tr>
+      <tr><th scope="col">A</th><th scope="col">B</th><th scope="col">A ∩ B</th><th scope="col">(A ∩ B)′</th><th scope="col">A′</th><th scope="col">B′</th><th scope="col">A′ ∪ B′</th></tr>
       <tr><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
       <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
       <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
@@ -2008,7 +2012,9 @@
     <p>PROLOG and LISP expert systems, non-classical logics (modal, fuzzy, intuitionistic), cardinality of infinite sets, Cantor's theorem, Venn diagrams and set-operation diagrams, Karnaugh maps, and proof by exhaustion beyond the definition. These are self-learning or extension topics. Deliberate omissions, not oversights.</p>
   </div>
 
-  <footer>
+  </main>
+
+<footer>
     DSGT Module 1 — Selective Exam Essentials · Built from Mrs. Shamal Bagal's Module 1 PPT, the official DSGT syllabus,<br>
     the Summer 2026 and Winter 2025 papers, and the IAT and prelim question banks. Not a complete module guide.
   </footer>
@@ -2020,7 +2026,7 @@
 (function(){
   var b=document.getElementById('themeToggle'),r=document.documentElement;
   function dark(){var t=r.getAttribute('data-theme');return t==='dark';}
-  function paint(){var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
+  function paint(){b.hidden=false;var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
   b.addEventListener('click',function(){var n=dark()?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('sg-theme',n);}catch(e){}paint();});
   paint();
 })();

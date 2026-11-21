@@ -14,7 +14,8 @@
     --font-mono:"Courier New",Courier,monospace;
   }
   * { box-sizing:border-box; }
-  html { scroll-behavior:smooth; scroll-padding-top:1rem; }
+  html { scroll-padding-top:1rem; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
   body { font-family:var(--font-sans); color:var(--ink); background:var(--bg); line-height:1.6;
          margin:0; padding:0; font-size:17px; font-weight:500; text-wrap:pretty; }
   .wrap { max-width:68ch; margin:0 auto; padding:2.5rem 1rem 4rem; }
@@ -244,10 +245,12 @@
   .aoa-fig figcaption { font-size: .85rem; color: var(--muted); line-height: 1.45; margin-top: .6rem; }
   @media (max-width: 600px) { .aoa-fig { padding: .5rem; } }
 </style>
+<link rel="stylesheet" href="/assets/a11y.css">
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <div class="wrap">
-  <div class="topbar"><a class="back" href="/aoa">&#8592; All modules</a><button class="theme-toggle" type="button" id="themeToggle"></button></div>
+  <nav class="topbar" aria-label="Site"><a class="back" href="/aoa">← All modules</a><button class="theme-toggle" type="button" id="themeToggle" hidden></button></nav>
 
   <header>
     <h1>AOA Module 4 — Dynamic Programming</h1>
@@ -256,7 +259,9 @@
     Module IV · 8 teaching hours · Course outcome CO4 · End-semester paper: 6 questions of 20 marks, Q1 compulsory, answer any 3</div>
   </header>
 
-  <div class="toc">
+  <main id="main" tabindex="-1">
+
+  <nav class="toc" aria-label="Table of contents">
     <ol>
       <li><a href="#syllabus">Syllabus and scope</a></li>
       <li><a href="#method">The general method</a></li>
@@ -273,9 +278,9 @@
       <li><a href="#revision">Last-minute revision sheet</a></li>
       <li><a href="#references">References and attribution</a></li>
     </ol>
-  </div>
+  </nav>
 
-  <nav class="nav" aria-label="Sections">
+  <nav class="nav" aria-label="Jump to section">
     <a href="#method">General method</a>
     <a href="#multistage">Multistage</a>
     <a href="#floyd">Floyd–Warshall</a>
@@ -293,7 +298,7 @@
 <p><strong>Official syllabus — University of Mumbai, 6.21 (N) B.E. AI &amp; ML, Sem III &amp; IV, 2025–26, page 23.</strong> <strong>Module IV — Dynamic Programming Approach:</strong> General Method, Multistage graphs, All pair shortest path: Floyd Warshall Algorithm, 0/1 knapsack Problem, Travelling Salesperson problem, Longest common subsequence. <strong>Self-learning Topics:</strong> Bellman Ford Algorithm, real life applications of all algorithms. <strong>Hours:</strong> 8 · <strong>CO mapping:</strong> CO4 — "Develop solutions using Dynamic Programming and examine its complexity."</p>
 </div>
 <div class="table-scroll"><table>
-<thead><tr><th>Prescribed topic</th><th>What you must be able to do</th><th>Section</th></tr></thead>
+<thead><tr><th scope="col">Prescribed topic</th><th scope="col">What you must be able to do</th><th scope="col">Section</th></tr></thead>
 <tbody>
 <tr><td>General method</td><td>State the two DP properties, write the four-step method, compare DP with greedy and divide-and-conquer.</td><td>1</td></tr>
 <tr><td>Multistage graphs</td><td>Write the backward recurrence and compute the cost and decision tables for a staged graph.</td><td>2</td></tr>
@@ -309,7 +314,7 @@
 <h3 id="1-2-the-idea">1.2 The idea</h3>
 <p>Break the problem into smaller versions of itself, solve each distinct smaller version <strong>once</strong>, store the answer, and reuse it. The two properties that make this legal are:</p>
 <div class="table-scroll"><table>
-<thead><tr><th>Property</th><th>Meaning</th><th>Test question</th></tr></thead>
+<thead><tr><th scope="col">Property</th><th scope="col">Meaning</th><th scope="col">Test question</th></tr></thead>
 <tbody>
 <tr><td><strong>Optimal substructure</strong></td><td>An optimal solution to the whole problem can be built from optimal solutions to its subproblems.</td><td>If I knew the best answer for the smaller problem, could I combine it into the best answer for the bigger one?</td></tr>
 <tr><td><strong>Overlapping subproblems</strong></td><td>The same subproblem is needed again and again by different branches of the recursion.</td><td>Does a plain recursive solution recompute the same argument more than once?</td></tr>
@@ -362,7 +367,7 @@
        = ...</code></pre>
 <p><code>fib(2)</code> is computed three times and <code>fib(3)</code> twice. The DP table removes the repetition:</p>
 <div class="table-scroll"><table>
-<thead><tr><th>n</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+<thead><tr><th scope="col">n</th><th scope="col">0</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th></tr></thead>
 <tbody>
 <tr><td>fib(n)</td><td>0</td><td>1</td><td>1</td><td>2</td><td>3</td><td>5</td></tr>
 </tbody></table></div>
@@ -373,7 +378,7 @@
 </div>
 <h3 id="1-7-top-down-and-bottom-up">1.7 Top-down and bottom-up</h3>
 <div class="table-scroll"><table>
-<thead><tr><th>Style</th><th>How it works</th><th>Use</th></tr></thead>
+<thead><tr><th scope="col">Style</th><th scope="col">How it works</th><th scope="col">Use</th></tr></thead>
 <tbody>
 <tr><td><strong>Top-down (memoisation)</strong></td><td>Write the natural recursion; before computing a state, check a table; store the result after computing it.</td><td>Useful for TSP's <code>g(i,S)</code> while learning.</td></tr>
 <tr><td><strong>Bottom-up (tabulation)</strong></td><td>Fill the table from the smallest states upwards with loops; no recursion.</td><td>All five exam algorithms in this module.</td></tr>
@@ -384,7 +389,7 @@
 <p><strong>Teacher's slide 16 — comparison table given in class.</strong> <strong>Greedy:</strong> generates only one decision sequence; makes stepwise decisions on local information; does not consider results from subproblems while making locally optimal decisions; determines the first choice before computing any subproblem. Examples: playing cricket, Dijkstra's algorithm, fractional knapsack. <strong>Dynamic programming:</strong> may generate multiple decision sequences; cannot produce stepwise decisions based on local information alone; makes globally optimal decisions that depend on the sub-sequences of decisions obtained by solving subproblems; computes the subproblems before making the first choice. Examples: playing chess, Bellman–Ford, 0/1 knapsack.</p>
 </div>
 <div class="table-scroll"><table>
-<thead><tr><th>Question to ask</th><th>Greedy</th><th>Dynamic programming</th></tr></thead>
+<thead><tr><th scope="col">Question to ask</th><th scope="col">Greedy</th><th scope="col">Dynamic programming</th></tr></thead>
 <tbody>
 <tr><td><strong>How does it make a decision?</strong></td><td>Choose the best-looking option <strong>right now</strong>, then continue.</td><td>Solve smaller cases, save their answers, and use them to compare choices.</td></tr>
 <tr><td><strong>Can a good-looking choice turn out badly?</strong></td><td>It must be safe. Greedy works only when the <strong>greedy-choice property</strong> holds: the local choice is guaranteed to fit an optimal overall answer.</td><td>It does not assume one local choice is safe. For each state, it compares the available options (such as <strong>take</strong> or <strong>skip</strong>) using stored results.</td></tr>
@@ -398,7 +403,7 @@
 <span class="source">Supplementary clarification · illustrative values, not a class question</span>
 <p>A bag can carry <strong>50 kg</strong>. There are three items:</p>
 <div class="table-scroll"><table>
-<thead><tr><th>Item</th><th>Weight</th><th>Value</th><th>Value per kg</th></tr></thead>
+<thead><tr><th scope="col">Item</th><th scope="col">Weight</th><th scope="col">Value</th><th scope="col">Value per kg</th></tr></thead>
 <tbody>
 <tr><td>A</td><td>10 kg</td><td>60</td><td>6</td></tr>
 <tr><td>B</td><td>20 kg</td><td>100</td><td>5</td></tr>
@@ -477,7 +482,7 @@ cost(i, j) = min over edges (j, l) with l in stage i+1 of [ c(j, l) + cost(i+1, 
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <p><strong>Stage 4.</strong> Every vertex in stage 4 has one edge to the sink:</p>
 <div class="table-scroll"><table>
-<thead><tr><th>j</th><th>edge</th><th>cost(4, j)</th><th>D[j]</th></tr></thead>
+<thead><tr><th scope="col">j</th><th scope="col">edge</th><th scope="col">cost(4, j)</th><th scope="col">D[j]</th></tr></thead>
 <tbody>
 <tr><td>9</td><td>9→12, 4</td><td>4</td><td>12</td></tr>
 <tr><td>10</td><td>10→12, 2</td><td>2</td><td>12</td></tr>
@@ -485,7 +490,7 @@ cost(i, j) = min over edges (j, l) with l in stage i+1 of [ c(j, l) + cost(i+1, 
 </tbody></table></div>
 <p><strong>Stage 3.</strong> Add the edge cost to the stage-4 cost:</p>
 <div class="table-scroll"><table>
-<thead><tr><th>j</th><th>candidates</th><th>minimum</th><th>D[j]</th></tr></thead>
+<thead><tr><th scope="col">j</th><th scope="col">candidates</th><th scope="col">minimum</th><th scope="col">D[j]</th></tr></thead>
 <tbody>
 <tr><td>6</td><td>6–9: 6+4 = 10; 6–10: 5+2 = 7</td><td><strong>7</strong></td><td>10</td></tr>
 <tr><td>7</td><td>7–9: 4+4 = 8; 7–10: 3+2 = 5</td><td><strong>5</strong></td><td>10</td></tr>
@@ -493,7 +498,7 @@ cost(i, j) = min over edges (j, l) with l in stage i+1 of [ c(j, l) + cost(i+1, 
 </tbody></table></div>
 <p><strong>Stage 2.</strong></p>
 <div class="table-scroll"><table>
-<thead><tr><th>j</th><th>candidates</th><th>minimum</th><th>D[j]</th></tr></thead>
+<thead><tr><th scope="col">j</th><th scope="col">candidates</th><th scope="col">minimum</th><th scope="col">D[j]</th></tr></thead>
 <tbody>
 <tr><td>2</td><td>2–6: 4+7 = 11; 2–7: 2+5 = 7; 2–8: 1+7 = 8</td><td><strong>7</strong></td><td>7</td></tr>
 <tr><td>3</td><td>3–6: 2+7 = 9; 3–7: 7+5 = 12</td><td><strong>9</strong></td><td>6</td></tr>
@@ -502,7 +507,7 @@ cost(i, j) = min over edges (j, l) with l in stage i+1 of [ c(j, l) + cost(i+1, 
 </tbody></table></div>
 <p><strong>Stage 1.</strong></p>
 <div class="table-scroll"><table>
-<thead><tr><th>j</th><th>candidates</th><th>minimum</th><th>D[j]</th></tr></thead>
+<thead><tr><th scope="col">j</th><th scope="col">candidates</th><th scope="col">minimum</th><th scope="col">D[j]</th></tr></thead>
 <tbody>
 <tr><td>1</td><td>1–2: 9+7 = 16; 1–3: 7+9 = 16; 1–4: 3+18 = 21; 1–5: 2+15 = 17</td><td><strong>16</strong></td><td>2</td></tr>
 </tbody></table></div>
@@ -514,7 +519,7 @@ cost(i, j) = min over edges (j, l) with l in stage i+1 of [ c(j, l) + cost(i+1, 
 </div>
 <h3 id="2-7-full-trace">2.7 Full trace</h3>
 <div class="table-scroll"><table>
-<thead><tr><th>Stage</th><th>Vertex</th><th>Computation</th><th>cost</th><th>D</th></tr></thead>
+<thead><tr><th scope="col">Stage</th><th scope="col">Vertex</th><th scope="col">Computation</th><th scope="col">cost</th><th scope="col">D</th></tr></thead>
 <tbody>
 <tr><td>5</td><td>12</td><td>base</td><td>0</td><td>—</td></tr>
 <tr><td>4</td><td>9</td><td>4 + 0</td><td>4</td><td>12</td></tr>
@@ -607,7 +612,7 @@ PRINT-PATH(i, j)
 </figure>
 <p><strong>Initial matrix D⁰</strong></p>
 <div class="table-scroll"><table>
-<thead><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+<thead><tr><th scope="col"></th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th></tr></thead>
 <tbody>
 <tr><td><strong>1</strong></td><td>0</td><td>8</td><td>∞</td><td>1</td></tr>
 <tr><td><strong>2</strong></td><td>∞</td><td>0</td><td>1</td><td>∞</td></tr>
@@ -620,7 +625,7 @@ PRINT-PATH(i, j)
 <li><code>D[3][4] = min(∞, 4 + 1) = 5</code></li>
 </ul>
 <div class="table-scroll"><table>
-<thead><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+<thead><tr><th scope="col"></th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th></tr></thead>
 <tbody>
 <tr><td><strong>1</strong></td><td>0</td><td>8</td><td>∞</td><td>1</td></tr>
 <tr><td><strong>2</strong></td><td>∞</td><td>0</td><td>1</td><td>∞</td></tr>
@@ -633,7 +638,7 @@ PRINT-PATH(i, j)
 <li><code>D[4][3] = min(9, 2 + 1) = 3</code></li>
 </ul>
 <div class="table-scroll"><table>
-<thead><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+<thead><tr><th scope="col"></th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th></tr></thead>
 <tbody>
 <tr><td><strong>1</strong></td><td>0</td><td>8</td><td>9</td><td>1</td></tr>
 <tr><td><strong>2</strong></td><td>∞</td><td>0</td><td>1</td><td>∞</td></tr>
@@ -647,7 +652,7 @@ PRINT-PATH(i, j)
 <li><code>D[4][1] = min(∞, 3 + 4) = 7</code></li>
 </ul>
 <div class="table-scroll"><table>
-<thead><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+<thead><tr><th scope="col"></th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th></tr></thead>
 <tbody>
 <tr><td><strong>1</strong></td><td>0</td><td>8</td><td>9</td><td>1</td></tr>
 <tr><td><strong>2</strong></td><td>5</td><td>0</td><td>1</td><td>6</td></tr>
@@ -663,7 +668,7 @@ PRINT-PATH(i, j)
 </div>
 <div class="qa-final"><div class="qa-label">Final answer</div>
 <div class="table-scroll"><table>
-<thead><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+<thead><tr><th scope="col"></th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th></tr></thead>
 <tbody>
 <tr><td><strong>1</strong></td><td>0</td><td><strong>3</strong></td><td><strong>4</strong></td><td>1</td></tr>
 <tr><td><strong>2</strong></td><td>5</td><td>0</td><td>1</td><td>6</td></tr>
@@ -676,7 +681,7 @@ PRINT-PATH(i, j)
 </div>
 <h3 id="3-7-full-trace">3.7 Full trace</h3>
 <div class="table-scroll"><table>
-<thead><tr><th>Pivot</th><th>Cells improved</th><th>D after the pivot (rows 1–4)</th></tr></thead>
+<thead><tr><th scope="col">Pivot</th><th scope="col">Cells improved</th><th scope="col">D after the pivot (rows 1–4)</th></tr></thead>
 <tbody>
 <tr><td>0</td><td>initial</td><td><code>[0,8,∞,1] [∞,0,1,∞] [4,∞,0,∞] [∞,2,9,0]</code></td></tr>
 <tr><td>1</td><td>D[3][2]=12, D[3][4]=5</td><td><code>[0,8,∞,1] [∞,0,1,∞] [4,12,0,5] [∞,2,9,0]</code></td></tr>
@@ -752,7 +757,7 @@ m[i, w] = max( m[i-1, w],  pᵢ + m[i-1, w - wᵢ] )    if wᵢ ≤ w</code></pr
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <p><strong>Row 1 (item 1: w = 2, p = 3).</strong> For <code>w &lt; 2</code>, copy row 0. For <code>w ≥ 2</code>, compare "leave" (0) with "take" (3 + 0 = 3).</p>
 <div class="table-scroll"><table>
-<thead><tr><th>i \ w</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+<thead><tr><th scope="col">i \ w</th><th scope="col">0</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th></tr></thead>
 <tbody>
 <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
 <tr><td>1</td><td>0</td><td>0</td><td>3</td><td>3</td><td>3</td><td>3</td></tr>
@@ -765,7 +770,7 @@ m[i, w] = max( m[i-1, w],  pᵢ + m[i-1, w - wᵢ] )    if wᵢ ≤ w</code></pr
 <li><code>w = 5</code>: max(3, 4 + m[1][2] = 7) = 7.</li>
 </ul>
 <div class="table-scroll"><table>
-<thead><tr><th>i \ w</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+<thead><tr><th scope="col">i \ w</th><th scope="col">0</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th></tr></thead>
 <tbody>
 <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
 <tr><td>1</td><td>0</td><td>0</td><td>3</td><td>3</td><td>3</td><td>3</td></tr>
@@ -777,7 +782,7 @@ m[i, w] = max( m[i-1, w],  pᵢ + m[i-1, w - wᵢ] )    if wᵢ ≤ w</code></pr
 <li><code>w = 5</code>: max(7, 5 + m[2][1] = 5) = 7.</li>
 </ul>
 <div class="table-scroll"><table>
-<thead><tr><th>i \ w</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+<thead><tr><th scope="col">i \ w</th><th scope="col">0</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th></tr></thead>
 <tbody>
 <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
 <tr><td>1</td><td>0</td><td>0</td><td>3</td><td>3</td><td>3</td><td>3</td></tr>
@@ -789,7 +794,7 @@ m[i, w] = max( m[i-1, w],  pᵢ + m[i-1, w - wᵢ] )    if wᵢ ≤ w</code></pr
 <li><code>w = 5</code>: max(leave 7, 6 + m[3][0] = 6) = 7.</li>
 </ul>
 <div class="table-scroll"><table>
-<thead><tr><th>i \ w</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+<thead><tr><th scope="col">i \ w</th><th scope="col">0</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th></tr></thead>
 <tbody>
 <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
 <tr><td>1</td><td>0</td><td>0</td><td>3</td><td>3</td><td>3</td><td>3</td></tr>
@@ -809,7 +814,7 @@ m[i, w] = max( m[i-1, w],  pᵢ + m[i-1, w - wᵢ] )    if wᵢ ≤ w</code></pr
 </div>
 <h3 id="4-7-full-trace">4.7 Full trace</h3>
 <div class="table-scroll"><table>
-<thead><tr><th>Cell</th><th>Leave</th><th>Take</th><th>m[i][w]</th><th>Decision</th></tr></thead>
+<thead><tr><th scope="col">Cell</th><th scope="col">Leave</th><th scope="col">Take</th><th scope="col">m[i][w]</th><th scope="col">Decision</th></tr></thead>
 <tbody>
 <tr><td>m[1][2]</td><td>0</td><td>3 + 0 = 3</td><td>3</td><td>take</td></tr>
 <tr><td>m[1][5]</td><td>0</td><td>3 + 0 = 3</td><td>3</td><td>take</td></tr>
@@ -897,7 +902,7 @@ g(i, S) = min over j in S of [ c(i, j) + g(j, S − {j}) ]</code></pre>
 <p>Find the minimum-cost tour that starts and ends at A.</p>
 <p>Cost matrix (the matrix used in Assignment 4 and in the IAT-2 question bank):</p>
 <div class="table-scroll"><table>
-<thead><tr><th>from \ to</th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead>
+<thead><tr><th scope="col">from \ to</th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th></tr></thead>
 <tbody>
 <tr><td><strong>A</strong></td><td>0</td><td>4</td><td>2</td><td>1</td></tr>
 <tr><td><strong>B</strong></td><td>4</td><td>0</td><td>13</td><td>9</td></tr>
@@ -908,7 +913,7 @@ g(i, S) = min over j in S of [ c(i, j) + g(j, S − {j}) ]</code></pre>
 <p>Write A = 1, B = 2, C = 3, D = 4, and start at A.</p>
 <p><strong>Base: <code>S = ∅</code>.</strong></p>
 <div class="table-scroll"><table>
-<thead><tr><th>State</th><th>Computation</th><th>Value</th><th>Path</th></tr></thead>
+<thead><tr><th scope="col">State</th><th scope="col">Computation</th><th scope="col">Value</th><th scope="col">Path</th></tr></thead>
 <tbody>
 <tr><td>g(B, ∅)</td><td>c(B, A)</td><td>4</td><td>B–A</td></tr>
 <tr><td>g(C, ∅)</td><td>c(C, A)</td><td>2</td><td>C–A</td></tr>
@@ -916,7 +921,7 @@ g(i, S) = min over j in S of [ c(i, j) + g(j, S − {j}) ]</code></pre>
 </tbody></table></div>
 <p><strong>Size 1.</strong></p>
 <div class="table-scroll"><table>
-<thead><tr><th>State</th><th>Candidates</th><th>Minimum</th><th>Path</th></tr></thead>
+<thead><tr><th scope="col">State</th><th scope="col">Candidates</th><th scope="col">Minimum</th><th scope="col">Path</th></tr></thead>
 <tbody>
 <tr><td>g(B, {C})</td><td>13 + g(C, ∅) = 13 + 2 = 15</td><td><strong>15</strong></td><td>B–C–A</td></tr>
 <tr><td>g(B, {D})</td><td>9 + g(D, ∅) = 9 + 1 = 10</td><td><strong>10</strong></td><td>B–D–A</td></tr>
@@ -927,7 +932,7 @@ g(i, S) = min over j in S of [ c(i, j) + g(j, S − {j}) ]</code></pre>
 </tbody></table></div>
 <p><strong>Size 2.</strong></p>
 <div class="table-scroll"><table>
-<thead><tr><th>State</th><th>Candidates</th><th>Minimum</th><th>Path</th></tr></thead>
+<thead><tr><th scope="col">State</th><th scope="col">Candidates</th><th scope="col">Minimum</th><th scope="col">Path</th></tr></thead>
 <tbody>
 <tr><td>g(B, {C,D})</td><td>via C: 13 + g(C,{D}) = 13 + 9 = 22; via D: 9 + g(D,{C}) = 9 + 10 = 19</td><td><strong>19</strong> via D</td><td>B–D–C–A</td></tr>
 <tr><td>g(C, {B,D})</td><td>via B: 13 + g(B,{D}) = 13 + 10 = 23; via D: 8 + g(D,{B}) = 8 + 13 = 21</td><td><strong>21</strong> via D</td><td>C–D–B–A</td></tr>
@@ -935,7 +940,7 @@ g(i, S) = min over j in S of [ c(i, j) + g(j, S − {j}) ]</code></pre>
 </tbody></table></div>
 <p><strong>Size 3 — the answer.</strong></p>
 <div class="table-scroll"><table>
-<thead><tr><th>First city j</th><th>Candidate</th><th>Value</th></tr></thead>
+<thead><tr><th scope="col">First city j</th><th scope="col">Candidate</th><th scope="col">Value</th></tr></thead>
 <tbody>
 <tr><td>B</td><td>c(A,B) + g(B,{C,D}) = 4 + 19</td><td><strong>23</strong></td></tr>
 <tr><td>C</td><td>c(A,C) + g(C,{B,D}) = 2 + 21</td><td><strong>23</strong></td></tr>
@@ -957,7 +962,7 @@ g(i, S) = min over j in S of [ c(i, j) + g(j, S − {j}) ]</code></pre>
 </div>
 <h3 id="5-7-full-trace">5.7 Full trace</h3>
 <div class="table-scroll"><table>
-<thead><tr><th>Subset size</th><th>States computed</th><th>Values</th></tr></thead>
+<thead><tr><th scope="col">Subset size</th><th scope="col">States computed</th><th scope="col">Values</th></tr></thead>
 <tbody>
 <tr><td>0</td><td>g(B,∅), g(C,∅), g(D,∅)</td><td>4, 2, 1</td></tr>
 <tr><td>1</td><td>g(B,{C}), g(B,{D}), g(C,{B}), g(C,{D}), g(D,{B}), g(D,{C})</td><td>15, 10, 17, 9, 13, 10</td></tr>
@@ -1042,7 +1047,7 @@ PRINT-LCS(b, X, i, j)
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <p>Rows are prefixes of X, columns are prefixes of Y.</p>
 <div class="table-scroll"><table>
-<thead><tr><th>c</th><th>—</th><th>C</th><th>B</th><th>D</th><th>A</th></tr></thead>
+<thead><tr><th scope="col">c</th><th scope="col">—</th><th scope="col">C</th><th scope="col">B</th><th scope="col">D</th><th scope="col">A</th></tr></thead>
 <tbody>
 <tr><td><strong>—</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
 <tr><td><strong>A</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
@@ -1087,7 +1092,7 @@ PRINT-LCS(b, X, i, j)
 </div>
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <div class="table-scroll"><table>
-<thead><tr><th>c</th><th>—</th><th>A</th><th>D</th><th>V</th><th>E</th><th>N</th><th>T</th></tr></thead>
+<thead><tr><th scope="col">c</th><th scope="col">—</th><th scope="col">A</th><th scope="col">D</th><th scope="col">V</th><th scope="col">E</th><th scope="col">N</th><th scope="col">T</th></tr></thead>
 <tbody>
 <tr><td><strong>—</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
 <tr><td><strong>S</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
@@ -1126,7 +1131,7 @@ PRINT-LCS(b, X, i, j)
 </ul>
 <h2 id="compare">7 — Choosing and comparing the five algorithms</h2>
 <div class="table-scroll"><table>
-<thead><tr><th>Algorithm</th><th>Problem</th><th>State</th><th>Recurrence</th><th>Computation order</th><th>Time</th><th>Space</th></tr></thead>
+<thead><tr><th scope="col">Algorithm</th><th scope="col">Problem</th><th scope="col">State</th><th scope="col">Recurrence</th><th scope="col">Computation order</th><th scope="col">Time</th><th scope="col">Space</th></tr></thead>
 <tbody>
 <tr><td>Multistage graph</td><td>Cheapest source-to-sink path in a layered DAG</td><td><code>cost(i,j)</code></td><td><code>min(c(j,l) + cost(i+1,l))</code></td><td>stages backwards</td><td>Θ(V+E)</td><td>Θ(V)</td></tr>
 <tr><td>Floyd–Warshall</td><td>All-pairs shortest paths</td><td><code>D[i][j]</code></td><td><code>min(D[i][j], D[i][k]+D[k][j])</code></td><td>pivot <code>k</code> outermost</td><td>Θ(n³)</td><td>Θ(n²)</td></tr>
@@ -1144,7 +1149,7 @@ PRINT-LCS(b, X, i, j)
 </ul>
 <p><strong>DP, divide and conquer, greedy — one table.</strong></p>
 <div class="table-scroll"><table>
-<thead><tr><th></th><th>Divide and conquer</th><th>Dynamic programming</th><th>Greedy</th></tr></thead>
+<thead><tr><th scope="col"></th><th scope="col">Divide and conquer</th><th scope="col">Dynamic programming</th><th scope="col">Greedy</th></tr></thead>
 <tbody>
 <tr><td>Subproblems</td><td>Independent, non-overlapping</td><td>Overlapping</td><td>Usually one choice at each step</td></tr>
 <tr><td>Direction</td><td>Top-down recursion</td><td>Bottom-up table (or memoised)</td><td>One pass after sorting or a priority rule</td></tr>
@@ -1174,7 +1179,7 @@ PRINT-LCS(b, X, i, j)
 <p>Why <code>|V|−1</code> passes: a shortest path without a cycle has at most <code>|V|−1</code> edges, and one pass guarantees at least one more edge of every shortest path is correct. If an edge can still be relaxed on pass <code>|V|</code>, the improvement must come from a cycle, and that cycle has negative weight.</p>
 <p><strong>Small example.</strong> Vertices 1–4; edges 1→2 (4), 1→3 (5), 2→3 (−3), 3→4 (2). Source 1.</p>
 <div class="table-scroll"><table>
-<thead><tr><th>Pass</th><th>d[1]</th><th>d[2]</th><th>d[3]</th><th>d[4]</th><th>Relaxations</th></tr></thead>
+<thead><tr><th scope="col">Pass</th><th scope="col">d[1]</th><th scope="col">d[2]</th><th scope="col">d[3]</th><th scope="col">d[4]</th><th scope="col">Relaxations</th></tr></thead>
 <tbody>
 <tr><td>0</td><td>0</td><td>∞</td><td>∞</td><td>∞</td><td>initial</td></tr>
 <tr><td>1</td><td>0</td><td>4</td><td>1</td><td>3</td><td>1→2, 2→3 improves 5 to 1, 3→4</td></tr>
@@ -1185,7 +1190,7 @@ PRINT-LCS(b, X, i, j)
 <p><strong>Comparison with Floyd–Warshall.</strong> Bellman–Ford is single-source with negative edges and detects negative cycles; Floyd–Warshall is all-pairs and also assumes no negative cycle. Dijkstra is faster (O(E log V)) but fails on negative edges because it finalises a vertex too early.</p>
 <h3 id="8-2-real-life-applications">8.2 Real-life applications</h3>
 <div class="table-scroll"><table>
-<thead><tr><th>Algorithm</th><th>Real-life use</th></tr></thead>
+<thead><tr><th scope="col">Algorithm</th><th scope="col">Real-life use</th></tr></thead>
 <tbody>
 <tr><td>Multistage graph</td><td>Stage-wise project planning, resource allocation across phases, assembly-line costs</td></tr>
 <tr><td>Floyd–Warshall</td><td>Road-network distance tables, routing tables, transitive closure, game-map all-pairs distances</td></tr>
@@ -1205,7 +1210,7 @@ PRINT-LCS(b, X, i, j)
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
 <p>Base: <code>cost(5,12) = 0</code>.</p>
 <div class="table-scroll"><table>
-<thead><tr><th>Stage</th><th>Vertex</th><th>Computation</th><th>cost</th><th>D</th></tr></thead>
+<thead><tr><th scope="col">Stage</th><th scope="col">Vertex</th><th scope="col">Computation</th><th scope="col">cost</th><th scope="col">D</th></tr></thead>
 <tbody>
 <tr><td>4</td><td>9</td><td>4 + 0</td><td>4</td><td>12</td></tr>
 <tr><td>4</td><td>10</td><td>2 + 0</td><td>2</td><td>12</td></tr>
@@ -1236,7 +1241,7 @@ PRINT-LCS(b, X, i, j)
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
 <p>The four matrices are in Section 3.6. The final matrix is</p>
 <div class="table-scroll"><table>
-<thead><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+<thead><tr><th scope="col"></th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th></tr></thead>
 <tbody>
 <tr><td><strong>1</strong></td><td>0</td><td>3</td><td>4</td><td>1</td></tr>
 <tr><td><strong>2</strong></td><td>5</td><td>0</td><td>1</td><td>6</td></tr>
@@ -1254,7 +1259,7 @@ PRINT-LCS(b, X, i, j)
 <p><em>Assignment 4, Q2 (course assignment — not a University paper).</em> <code>n = 4</code>, <code>M = 5</code>, weights <code>(2, 3, 4, 5)</code>, profits <code>(3, 4, 5, 6)</code>. Build the DP table, give the maximum profit, and reconstruct the chosen items.</p></div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
 <div class="table-scroll"><table>
-<thead><tr><th>i \ w</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+<thead><tr><th scope="col">i \ w</th><th scope="col">0</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th></tr></thead>
 <tbody>
 <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
 <tr><td>1</td><td>0</td><td>0</td><td>3</td><td>3</td><td>3</td><td>3</td></tr>
@@ -1279,7 +1284,7 @@ D     1    9    8    0</code></pre>
 <p>find an optimal tour using the DP recurrence <code>g(i, S)</code>. Show the <code>g</code> table and the tour.</p>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
 <div class="table-scroll"><table>
-<thead><tr><th>State</th><th>Value</th><th>State</th><th>Value</th></tr></thead>
+<thead><tr><th scope="col">State</th><th scope="col">Value</th><th scope="col">State</th><th scope="col">Value</th></tr></thead>
 <tbody>
 <tr><td>g(B,∅)</td><td>4</td><td>g(C,∅)</td><td>2</td></tr>
 <tr><td>g(D,∅)</td><td>1</td><td>g(B,{C})</td><td>15</td></tr>
@@ -1309,7 +1314,7 @@ D     1    9    8    0</code></pre>
 <p><em>IAT-2 question bank (teacher's revision sheet) — not a University paper.</em> Find an LCS of <code>X = AMERICA</code> and <code>Y = ARMENIA</code>, and give its length. Show the <code>c</code> table.</p></div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
 <div class="table-scroll"><table>
-<thead><tr><th>c</th><th>—</th><th>A</th><th>R</th><th>M</th><th>E</th><th>N</th><th>I</th><th>A</th></tr></thead>
+<thead><tr><th scope="col">c</th><th scope="col">—</th><th scope="col">A</th><th scope="col">R</th><th scope="col">M</th><th scope="col">E</th><th scope="col">N</th><th scope="col">I</th><th scope="col">A</th></tr></thead>
 <tbody>
 <tr><td><strong>—</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
 <tr><td><strong>A</strong></td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
@@ -1331,7 +1336,7 @@ D     1    9    8    0</code></pre>
 <p><em>IAT-2 question bank (teacher's revision sheet) — not a University paper.</em> <code>n = 4</code>, <code>M = 8</code>, weights <code>(3, 4, 6, 5)</code>, profits <code>(2, 3, 1, 4)</code>. Build the DP table and give the optimal selection and profit.</p></div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
 <div class="table-scroll"><table>
-<thead><tr><th>i \ w</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th></tr></thead>
+<thead><tr><th scope="col">i \ w</th><th scope="col">0</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th><th scope="col">6</th><th scope="col">7</th><th scope="col">8</th></tr></thead>
 <tbody>
 <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
 <tr><td>1</td><td>0</td><td>0</td><td>0</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td></tr>
@@ -1350,7 +1355,7 @@ D     1    9    8    0</code></pre>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
 <p>The final row of the table (capacity 0 to 15) is</p>
 <div class="table-scroll"><table>
-<thead><tr><th>w</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th></tr></thead>
+<thead><tr><th scope="col">w</th><th scope="col">0</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th><th scope="col">6</th><th scope="col">7</th><th scope="col">8</th><th scope="col">9</th><th scope="col">10</th><th scope="col">11</th><th scope="col">12</th><th scope="col">13</th><th scope="col">14</th><th scope="col">15</th></tr></thead>
 <tbody>
 <tr><td>m[7][w]</td><td>0</td><td>6</td><td>10</td><td>16</td><td>19</td><td>19</td><td>21</td><td>26</td><td>31</td><td>34</td><td>34</td><td>36</td><td>41</td><td>44</td><td>44</td><td><strong>46</strong></td></tr>
 </tbody></table></div>
@@ -1383,7 +1388,7 @@ D     1    9    8    0</code></pre>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
 <p>Initial <code>d = [0, ∞, ∞, ∞]</code>.</p>
 <div class="table-scroll"><table>
-<thead><tr><th>Pass</th><th>Edge relaxations that change a value</th><th>d after the pass</th></tr></thead>
+<thead><tr><th scope="col">Pass</th><th scope="col">Edge relaxations that change a value</th><th scope="col">d after the pass</th></tr></thead>
 <tbody>
 <tr><td>1</td><td>1→2 (d₂ = 4); 2→3 (d₃ = 1, better than 5); 3→4 (d₄ = 3)</td><td>0, 4, 1, 3</td></tr>
 <tr><td>2</td><td>none</td><td>0, 4, 1, 3</td></tr>
@@ -1415,7 +1420,7 @@ D     1    9    8    0</code></pre>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
 <p>Rows are prefixes of X, columns are prefixes of Y. Each cell is <code>c[i-1][j-1] + 1</code> on a match, otherwise <code>max(c[i-1][j], c[i][j-1])</code>.</p>
 <div class="table-scroll"><table>
-<thead><tr><th>c</th><th>—</th><th>G</th><th>B</th><th>S</th><th>T</th><th>R</th></tr></thead>
+<thead><tr><th scope="col">c</th><th scope="col">—</th><th scope="col">G</th><th scope="col">B</th><th scope="col">S</th><th scope="col">T</th><th scope="col">R</th></tr></thead>
 <tbody>
 <tr><td><strong>—</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td><strong>A</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td><strong>B</strong></td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr><tr><td><strong>S</strong></td><td>0</td><td>0</td><td>1</td><td>2</td><td>2</td><td>2</td></tr><tr><td><strong>D</strong></td><td>0</td><td>0</td><td>1</td><td>2</td><td>2</td><td>2</td></tr><tr><td><strong>G</strong></td><td>0</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td></tr>
 </tbody></table></div>
@@ -1441,7 +1446,7 @@ D     1    9    8    0</code></pre>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
 <p>Rows are prefixes of X, columns are prefixes of Y. Each cell is <code>c[i-1][j-1] + 1</code> on a match, otherwise <code>max(c[i-1][j], c[i][j-1])</code>.</p>
 <div class="table-scroll"><table>
-<thead><tr><th>c</th><th>—</th><th>B</th><th>A</th><th>B</th><th>C</th><th>A</th><th>B</th></tr></thead>
+<thead><tr><th scope="col">c</th><th scope="col">—</th><th scope="col">B</th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">A</th><th scope="col">B</th></tr></thead>
 <tbody>
 <tr><td><strong>—</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td><strong>A</strong></td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr><tr><td><strong>B</strong></td><td>0</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td><td>2</td></tr><tr><td><strong>A</strong></td><td>0</td><td>1</td><td>2</td><td>2</td><td>2</td><td>3</td><td>3</td></tr><tr><td><strong>C</strong></td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td><td>3</td></tr><tr><td><strong>A</strong></td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td><td>4</td><td>4</td></tr><tr><td><strong>B</strong></td><td>0</td><td>1</td><td>2</td><td>3</td><td>3</td><td>4</td><td>5</td></tr><tr><td><strong>B</strong></td><td>0</td><td>1</td><td>2</td><td>3</td><td>3</td><td>4</td><td>5</td></tr>
 </tbody></table></div>
@@ -1467,7 +1472,7 @@ D     1    9    8    0</code></pre>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
 <p>Rows are prefixes of X, columns are prefixes of Y. Each cell is <code>c[i-1][j-1] + 1</code> on a match, otherwise <code>max(c[i-1][j], c[i][j-1])</code>.</p>
 <div class="table-scroll"><table>
-<thead><tr><th>c</th><th>—</th><th>M</th><th>N</th><th>O</th><th>M</th></tr></thead>
+<thead><tr><th scope="col">c</th><th scope="col">—</th><th scope="col">M</th><th scope="col">N</th><th scope="col">O</th><th scope="col">M</th></tr></thead>
 <tbody>
 <tr><td><strong>—</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td><strong>M</strong></td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr><tr><td><strong>L</strong></td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr><tr><td><strong>N</strong></td><td>0</td><td>1</td><td>2</td><td>2</td><td>2</td></tr><tr><td><strong>O</strong></td><td>0</td><td>1</td><td>2</td><td>3</td><td>3</td></tr><tr><td><strong>M</strong></td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
 </tbody></table></div>
@@ -1491,7 +1496,7 @@ D     1    9    8    0</code></pre>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
 <p>Rows are prefixes of X, columns are prefixes of Y. Each cell is <code>c[i-1][j-1] + 1</code> on a match, otherwise <code>max(c[i-1][j], c[i][j-1])</code>.</p>
 <div class="table-scroll"><table>
-<thead><tr><th>c</th><th>—</th><th>A</th><th>R</th><th>M</th><th>E</th><th>N</th><th>I</th><th>A</th></tr></thead>
+<thead><tr><th scope="col">c</th><th scope="col">—</th><th scope="col">A</th><th scope="col">R</th><th scope="col">M</th><th scope="col">E</th><th scope="col">N</th><th scope="col">I</th><th scope="col">A</th></tr></thead>
 <tbody>
 <tr><td><strong>—</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td><strong>A</strong></td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr><tr><td><strong>M</strong></td><td>0</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td></tr><tr><td><strong>E</strong></td><td>0</td><td>1</td><td>1</td><td>2</td><td>3</td><td>3</td><td>3</td><td>3</td></tr><tr><td><strong>R</strong></td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td><td>3</td><td>3</td></tr><tr><td><strong>I</strong></td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td><td>4</td><td>4</td></tr><tr><td><strong>C</strong></td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td><td>4</td><td>4</td></tr><tr><td><strong>A</strong></td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td><td>4</td><td>5</td></tr>
 </tbody></table></div>
@@ -1531,7 +1536,7 @@ D     1    9    8    0</code></pre>
 <h2 id="mistakes">11 — Common mistakes across the module</h2>
 <div class="common-mistakes">
 <div class="table-scroll"><table>
-<thead><tr><th>Trap</th><th>What the examiner expects</th></tr></thead>
+<thead><tr><th scope="col">Trap</th><th scope="col">What the examiner expects</th></tr></thead>
 <tbody>
 <tr><td>Writing "DP" without a state definition</td><td>A sentence defining each index and the value stored</td></tr>
 <tr><td>Omitting base cases</td><td>The first row, column or stage written explicitly</td></tr>
@@ -1579,13 +1584,15 @@ D     1    9    8    0</code></pre>
 </ul>
 <p><strong>Attribution.</strong> All explanations, tables, pseudocode, worked traces and diagrams in this guide were written for this study guide. The class examples are attributed above. Passages marked <strong>Supplementary clarification</strong> are added by the guide author and are not claimed to be part of the slide deck. No question in this guide is labelled a University examination question; the provenance of each practice question is stated at the question.</p>
 </div>
+</main>
+
 <footer>Prepared for the 2025–26 AOA syllabus · Study guide, not a University publication · <a href="/aoa">Back to all modules</a></footer>
 </div>
 <script>
 (function(){
   var b=document.getElementById('themeToggle'),r=document.documentElement;
   function dark(){return r.getAttribute('data-theme')==='dark';}
-  function paint(){var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
+  function paint(){b.hidden=false;var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
   b.addEventListener('click',function(){var n=dark()?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('sg-theme',n);}catch(e){}paint();});
   paint();
   var links=[].slice.call(document.querySelectorAll('.nav a'));

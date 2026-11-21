@@ -23,7 +23,8 @@
     --surface-hi: #f0f0f0;
   }}
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; scroll-padding-top: 1rem; }
+  html { scroll-padding-top: 1rem; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
   body {
     font-family: var(--font-sans);
     color: var(--ink);
@@ -453,10 +454,12 @@
   .aoa-fig figcaption { font-size: .85rem; color: var(--muted); line-height: 1.45; margin-top: .6rem; }
   @media (max-width: 600px) { .aoa-fig { padding: .5rem; } }
 </style>
+<link rel="stylesheet" href="/assets/a11y.css">
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <div class="wrap">
-  <div class="topbar"><a class="back" href="/aoa">&#8592; All modules</a><button class="theme-toggle" type="button" id="themeToggle"></button></div>
+  <nav class="topbar" aria-label="Site"><a class="back" href="/aoa">← All modules</a><button class="theme-toggle" type="button" id="themeToggle" hidden></button></nav>
 
   <header>
     <h1>AOA Module 6 — String Matching Algorithms</h1>
@@ -465,7 +468,9 @@
     Module VI · 3 teaching hours · End-semester paper: 6 questions of 20 marks, Q1 compulsory, answer any 3</div>
   </header>
 
-  <div class="toc">
+  <main id="main" tabindex="-1">
+
+  <nav class="toc" aria-label="Table of contents">
     <ol>
       <li><a href="#syllabus">Syllabus and scope</a></li>
       <li><a href="#problem">The string-matching problem</a></li>
@@ -480,9 +485,9 @@
       <li><a href="#revision">Last-minute revision sheet</a></li>
       <li><a href="#references">References and attribution</a></li>
     </ol>
-  </div>
+  </nav>
 
-  <nav class="nav" aria-label="Sections">
+  <nav class="nav" aria-label="Jump to section">
     <a href="#problem">Problem</a>
     <a href="#naive">Naïve</a>
     <a href="#rabin-karp">Rabin–Karp</a>
@@ -497,7 +502,7 @@
 <p><strong>Official syllabus — University of Mumbai, 6.21 (N) B.E. AI &amp; ML, Sem III &amp; IV, 2025–26, page 23.</strong> <strong>Module VI — String Matching Algorithms:</strong> The Naïve string-matching algorithm, The Rabin Karp algorithm, The Knuth-Morris-Pratt algorithm. <strong>Hours:</strong> 3 · <strong>CO mapping as printed:</strong> CO2.</p>
 </div>
 <div class="table-scroll"><table>
-<thead><tr><th>Prescribed topic</th><th>What you must be able to do</th><th>Section</th></tr></thead>
+<thead><tr><th scope="col">Prescribed topic</th><th scope="col">What you must be able to do</th><th scope="col">Section</th></tr></thead>
 <tbody>
 <tr><td>Naïve string matching</td><td>Write the algorithm, trace every alignment, count comparisons, state the worst case.</td><td>2</td></tr>
 <tr><td>Rabin–Karp</td><td>Compute a hash, use the rolling hash, explain spurious hits, give the expected complexity.</td><td>3</td></tr>
@@ -513,7 +518,7 @@
 <p>Such an <code>s</code> is a <strong>valid shift</strong>, and <code>s</code> is a <strong>match</strong>. The set of valid shifts is the answer. Usually <code>m</code> is much smaller than <code>n</code>, and the pattern is fixed while the text is large.</p>
 <p>Notation used throughout:</p>
 <div class="table-scroll"><table>
-<thead><tr><th>Symbol</th><th>Meaning</th></tr></thead>
+<thead><tr><th scope="col">Symbol</th><th scope="col">Meaning</th></tr></thead>
 <tbody>
 <tr><td><code>n</code></td><td>length of the text</td></tr>
 <tr><td><code>m</code></td><td>length of the pattern</td></tr>
@@ -586,7 +591,7 @@
 <figcaption>Figure 1 — naïve matching of <code>aab</code> in <code>abaabcab</code>, shift by shift.</figcaption>
 </figure>
 <div class="table-scroll"><table>
-<thead><tr><th>Shift <code>s</code></th><th>Window <code>T[s…s+2]</code></th><th>Compared characters</th><th>Result</th></tr></thead>
+<thead><tr><th scope="col">Shift <code>s</code></th><th scope="col">Window <code>T[s…s+2]</code></th><th scope="col">Compared characters</th><th scope="col">Result</th></tr></thead>
 <tbody>
 <tr><td>0</td><td><code>aba</code></td><td><code>a</code>=<code>a</code>, <code>a</code>≠<code>b</code></td><td>reject after 2 comparisons</td></tr>
 <tr><td>1</td><td><code>baa</code></td><td><code>b</code>≠<code>a</code></td><td>reject after 1 comparison</td></tr>
@@ -609,7 +614,7 @@
 <p>This is the trace drawn across slides 5–11. Here <code>n = 9</code>, <code>m = 4</code>, so there are <code>9 − 4 + 1 = 6</code> alignments (<code>S = 0 … 5</code>).</p></div>
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <div class="table-scroll"><table>
-<thead><tr><th>Shift <code>S</code></th><th>Window</th><th>Outcome</th></tr></thead>
+<thead><tr><th scope="col">Shift <code>S</code></th><th scope="col">Window</th><th scope="col">Outcome</th></tr></thead>
 <tbody>
 <tr><td>0</td><td><code>abaa</code></td><td>mismatch at the second character</td></tr>
 <tr><td>1</td><td><code>baaa</code></td><td>mismatch at the first character</td></tr>
@@ -631,7 +636,7 @@
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <p><code>n = 15</code>, <code>m = 4</code>, <code>n − m + 1 = 12</code> alignments. The verified trace is:</p>
 <div class="table-scroll"><table>
-<thead><tr><th>Shift</th><th>Characters compared</th><th>Match?</th></tr></thead>
+<thead><tr><th scope="col">Shift</th><th scope="col">Characters compared</th><th scope="col">Match?</th></tr></thead>
 <tbody>
 <tr><td>0</td><td><code>0001</code> vs <code>0000</code></td><td>no (4 comparisons)</td></tr>
 <tr><td>1</td><td><code>0001</code> vs <code>0001</code></td><td><strong>yes</strong> (4 comparisons)</td></tr>
@@ -711,7 +716,7 @@ P = 3 1 4 1 5          q = 13</code></pre></div>
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <p>Pattern hash: <code>31415 mod 13 = 7</code>. Every 5-digit window (slides show them in an interleaved order; the table below is in text order):</p>
 <div class="table-scroll"><table>
-<thead><tr><th>Shift <code>s</code></th><th>Window</th><th>Value mod 13</th><th>Status</th></tr></thead>
+<thead><tr><th scope="col">Shift <code>s</code></th><th scope="col">Window</th><th scope="col">Value mod 13</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td>0</td><td>23590</td><td>8</td><td>—</td></tr>
 <tr><td>1</td><td>35902</td><td>9</td><td>—</td></tr>
@@ -749,7 +754,7 @@ P = 2 6          q = 11</code></pre></div>
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <p>Pattern hash: <code>26 mod 11 = 4</code>. The 2-digit windows and their hashes:</p>
 <div class="table-scroll"><table>
-<thead><tr><th>Shift</th><th>Window</th><th>mod 11</th><th>Status</th></tr></thead>
+<thead><tr><th scope="col">Shift</th><th scope="col">Window</th><th scope="col">mod 11</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td>0</td><td>31</td><td>9</td><td>—</td></tr>
 <tr><td>1</td><td>14</td><td>3</td><td>—</td></tr>
@@ -776,7 +781,7 @@ P = 2 6          q = 11</code></pre></div>
 <p>A <strong>spurious hit</strong> is a window whose hash equals the pattern hash but whose characters differ. It costs a full <code>m</code>-character verification and is therefore the main performance risk. The expected number of spurious hits is about <code>(n − m + 1) / q</code> if the hashes behave randomly; choosing a large prime <code>q</code> reduces them. In the worst case every window collides, and Rabin–Karp degenerates to <code>O(nm)</code>, exactly like the naïve algorithm.</p>
 <h3 id="3-9-complexity">3.9 Complexity</h3>
 <div class="table-scroll"><table>
-<thead><tr><th>Case</th><th>Time</th></tr></thead>
+<thead><tr><th scope="col">Case</th><th scope="col">Time</th></tr></thead>
 <tbody>
 <tr><td>Preprocessing</td><td><code>O(m)</code> to hash the pattern</td></tr>
 <tr><td>Expected matching</td><td><code>O(n + m)</code> for random hashes and a large <code>q</code></td></tr>
@@ -811,7 +816,7 @@ P = 2 6          q = 11</code></pre></div>
 <pre><code>π[i] = max { k : 0 ≤ k &lt; i+1 and P[0…k−1] = P[i−k+1…i] }</code></pre>
 <p><code>π[0] = 0</code> always. For <code>P = ababaca</code>:</p>
 <div class="table-scroll"><table>
-<thead><tr><th><code>i</code></th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr></thead>
+<thead><tr><th scope="col"><code>i</code></th><th scope="col">0</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th><th scope="col">6</th></tr></thead>
 <tbody>
 <tr><td><code>P[i]</code></td><td>a</td><td>b</td><td>a</td><td>b</td><td>a</td><td>c</td><td>a</td></tr>
 <tr><td><code>π[i]</code></td><td>0</td><td>0</td><td>1</td><td>2</td><td>3</td><td>0</td><td>1</td></tr>
@@ -856,7 +861,7 @@ P = 2 6          q = 11</code></pre></div>
 <p>Prefix function: <code>π = [0, 0, 1, 2, 3, 0, 1]</code>.</p>
 <p>The verified search trace (<code>i</code> is the text index, <code>q</code> the matched length before comparing):</p>
 <div class="table-scroll"><table>
-<thead><tr><th>Step</th><th><code>i</code></th><th><code>T[i]</code></th><th><code>q</code> before</th><th><code>P[q]</code></th><th>Action</th></tr></thead>
+<thead><tr><th scope="col">Step</th><th scope="col"><code>i</code></th><th scope="col"><code>T[i]</code></th><th scope="col"><code>q</code> before</th><th scope="col"><code>P[q]</code></th><th scope="col">Action</th></tr></thead>
 <tbody>
 <tr><td>1</td><td>0</td><td>a</td><td>0</td><td>a</td><td>match, <code>q = 1</code></td></tr>
 <tr><td>2</td><td>1</td><td>b</td><td>1</td><td>b</td><td>match, <code>q = 2</code></td></tr>
@@ -882,7 +887,7 @@ P = 2 6          q = 11</code></pre></div>
 </div>
 <h3 id="4-7-complexity">4.7 Complexity</h3>
 <div class="table-scroll"><table>
-<thead><tr><th>Phase</th><th>Time</th><th>Space</th></tr></thead>
+<thead><tr><th scope="col">Phase</th><th scope="col">Time</th><th scope="col">Space</th></tr></thead>
 <tbody>
 <tr><td>Prefix function</td><td><code>Θ(m)</code></td><td><code>Θ(m)</code></td></tr>
 <tr><td>Search</td><td><code>Θ(n)</code></td><td><code>Θ(1)</code> extra</td></tr>
@@ -907,7 +912,7 @@ P = 2 6          q = 11</code></pre></div>
 </ul>
 <h2 id="compare">5 — Comparing the three algorithms</h2>
 <div class="table-scroll"><table>
-<thead><tr><th></th><th>Naïve</th><th>Rabin–Karp</th><th>KMP</th></tr></thead>
+<thead><tr><th scope="col"></th><th scope="col">Naïve</th><th scope="col">Rabin–Karp</th><th scope="col">KMP</th></tr></thead>
 <tbody>
 <tr><td>Preprocessing</td><td>none</td><td><code>O(m)</code> hash of the pattern</td><td><code>O(m)</code> prefix function</td></tr>
 <tr><td>Matching (expected)</td><td><code>O(nm)</code></td><td><code>O(n + m)</code></td><td><code>O(n + m)</code></td></tr>
@@ -928,7 +933,7 @@ P = 2 6          q = 11</code></pre></div>
 <h2 id="self-learning">6 — Self-learning: real-life applications</h2>
 <div class="self-learning">
 <div class="table-scroll"><table>
-<thead><tr><th>Algorithm</th><th>Real-life use</th></tr></thead>
+<thead><tr><th scope="col">Algorithm</th><th scope="col">Real-life use</th></tr></thead>
 <tbody>
 <tr><td>Naïve</td><td>Short searches in a text editor, spreadsheet <code>FIND</code>, teaching the baseline, small configuration files</td></tr>
 <tr><td>Rabin–Karp</td><td>Plagiarism detection (winnowing fingerprints), duplicate detection, DNA substring search, spam and malware signature matching, rsync-style block matching</td></tr>
@@ -946,7 +951,7 @@ P = 2 6          q = 11</code></pre></div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
 <p><code>n = 8</code>, <code>m = 3</code>, so there are <code>n − m + 1 = 6</code> alignments (<code>s = 0 … 5</code>). The trace is in Section 2.6.</p>
 <div class="table-scroll"><table>
-<thead><tr><th>Shift</th><th>Window</th><th>Result</th></tr></thead>
+<thead><tr><th scope="col">Shift</th><th scope="col">Window</th><th scope="col">Result</th></tr></thead>
 <tbody>
 <tr><td>0</td><td><code>aba</code></td><td>reject (2 comparisons)</td></tr>
 <tr><td>1</td><td><code>baa</code></td><td>reject (1)</td></tr>
@@ -992,7 +997,7 @@ P = 2 6          q = 11</code></pre></div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
 <p>Pattern hash: <code>31415 mod 13 = 7</code>.</p>
 <div class="table-scroll"><table>
-<thead><tr><th>Shift</th><th>Window</th><th>mod 13</th><th>Status</th></tr></thead>
+<thead><tr><th scope="col">Shift</th><th scope="col">Window</th><th scope="col">mod 13</th><th scope="col">Status</th></tr></thead>
 <tbody>
 <tr><td>0</td><td>23590</td><td>8</td><td>—</td></tr>
 <tr><td>1</td><td>35902</td><td>9</td><td>—</td></tr>
@@ -1101,7 +1106,7 @@ P = 2 6          q = 11</code></pre></div>
 <div class="qa-solution"><div class="qa-label">Worked solution</div>
 <p>n = 9, m = 4, so there are <code>9 − 4 + 1 = 6</code> alignments, shifts 0 to 5.</p>
 <div class="table-scroll"><table>
-<thead><tr><th>Shift</th><th>Window</th><th>Comparisons</th><th>Result</th></tr></thead>
+<thead><tr><th scope="col">Shift</th><th scope="col">Window</th><th scope="col">Comparisons</th><th scope="col">Result</th></tr></thead>
 <tbody>
 <tr><td>0</td><td>abaa</td><td>2</td><td>mismatch at 2nd character</td></tr>
 <tr><td>1</td><td>baaa</td><td>1</td><td>mismatch at 1st character</td></tr>
@@ -1131,7 +1136,7 @@ P = 2 6          q = 11</code></pre></div>
 <h2 id="mistakes">9 — Common mistakes across the module</h2>
 <div class="common-mistakes">
 <div class="table-scroll"><table>
-<thead><tr><th>Trap</th><th>What the examiner expects</th></tr></thead>
+<thead><tr><th scope="col">Trap</th><th scope="col">What the examiner expects</th></tr></thead>
 <tbody>
 <tr><td>Reporting <code>n − m</code> alignments</td><td><code>n − m + 1</code> alignments; state the convention</td></tr>
 <tr><td>Saying naïve is <code>O(n + m)</code></td><td>Worst case <code>O(nm)</code>; best case <code>O(n)</code></td></tr>
@@ -1172,13 +1177,15 @@ P = 2 6          q = 11</code></pre></div>
 </ul>
 <p><strong>Attribution.</strong> All explanations, tables, pseudocode and traces were written for this guide. Practice questions state their provenance at the question; none is presented as a University examination paper. KMP is marked <strong>Supplementary section</strong> because the provided slide deck does not cover it, although the syllabus prescribes it.</p>
 </div>
+</main>
+
 <footer>Prepared for the 2025–26 AOA syllabus · Study guide, not a University publication · <a href="/aoa">Back to all modules</a></footer>
 </div>
 <script>
 (function(){
   var b=document.getElementById('themeToggle'),r=document.documentElement;
   function dark(){return r.getAttribute('data-theme')==='dark';}
-  function paint(){var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
+  function paint(){b.hidden=false;var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
   b.addEventListener('click',function(){var n=dark()?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('sg-theme',n);}catch(e){}paint();});
   paint();
   var links=[].slice.call(document.querySelectorAll('.nav a'));
