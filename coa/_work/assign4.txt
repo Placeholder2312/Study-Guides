@@ -1,0 +1,21 @@
+
+
+========== source\COA\Assignment 4.docx ==========
+
+  xplain the important memory parameters such as:
+Access time
+Memory cycle time
+Transfer rate
+Capacity
+Cost per bit
+  Classify primary and secondary memory. Explain the characteristics and applications of each.
+  Explain different types of RAM and ROM:
+SRAM
+DRAM
+PROM
+EPROM
+EEPROM
+  Explain virtual memory. Describe:
+Paging
+Segmentation
+  Explain cache memory and its role in improving processor performance. Describe L1, L2 and L3 caches.

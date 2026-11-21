@@ -1,0 +1,207 @@
+
+  <h2 id="practice">13 · Independent practice</h2>
+
+  <p>These questions are <strong>written for this guide</strong>. They are not teacher questions and not University questions. They are ordered by difficulty and they cover every numerical type that the supplied material uses. Attempt them with the book closed, then mark yourself from the separate answer key in Section 14. Give units in every final answer.</p>
+
+  <div class="practice">
+    <h3>Practice Questions</h3>
+
+    <h4 id="practice-basic" data-rail-subsection data-rail-label="Basic">A · Basic (one-step recall and one-formula numericals)</h4>
+    <ol>
+      <li>A memory chip is organised as 8K × 8. Find the number of address lines, the number of data lines and the capacity in KB.</li>
+      <li>How many 8K × 8 chips are needed to build a 32K × 8 memory?</li>
+      <li>A cache takes 10 ns and main memory takes 100 ns. The hit ratio is 0.9. Find the effective access time using hierarchical lookup.</li>
+      <li>A 32-bit virtual address uses 8 KB pages. Find the offset bits, the page-number bits and the number of virtual pages.</li>
+      <li>A segment has base 2000 and limit 600. State whether each logical address is valid, and give the physical address if it is: (a) offset 599; (b) offset 600.</li>
+      <li>A memory has 4 banks with low-order interleaving. Which bank serves address 13?</li>
+    </ol>
+
+    <h4 id="practice-intermediate" data-rail-subsection data-rail-label="Intermediate">B · Intermediate (two or three formulas chained)</h4>
+    <ol start="7">
+      <li>A system has a 16-bit virtual address, 2 KB pages and 512 KB of physical memory. Find the offset bits, the number of virtual pages, the number of frames and the frame-number bits.</li>
+      <li>A direct-mapped cache has a 32-bit address, 32 KB of cache and 32-byte blocks. Find the number of lines, the offset bits, the index bits and the tag bits.</li>
+      <li>The same cache is rebuilt as a 2-way set-associative cache with 64 KB of cache and 16-byte blocks, still with a 32-bit address. Find the number of lines, the number of sets, the set bits, the offset bits and the tag bits.</li>
+      <li>L1 takes 1 ns with hit ratio 0.95. L2 takes 8 ns with hit ratio 0.90 among L1 misses. Main memory takes 60 ns. Find the average memory access time with hierarchical lookup.</li>
+      <li>A direct-mapped cache has 8 KB of cache, 16-byte blocks and 256 KB of main memory. Decode address 2C3A5<sub>16</sub> into tag, cache line and offset.</li>
+      <li>Eight memory banks each take 50 ns per access. Eight consecutive words are read. Find the time without interleaving, the time with ideal 8-way interleaving, and the speed-up.</li>
+      <li>An associative memory has 512 words of 32 bits each. Find its capacity in bits and in KB, and the number of parallel comparisons in one search.</li>
+    </ol>
+
+    <h4 id="practice-advanced" data-rail-subsection data-rail-label="Advanced">C · Advanced (multi-step, or a written justification)</h4>
+    <ol start="14">
+      <li>A 32-bit virtual address uses 4 KB pages and 4-byte page-table entries. Find the number of page-table entries and the size of a single-level page table in MiB.</li>
+      <li>A 4-way set-associative cache has 128 KB of cache, 64-byte blocks and a 40-bit address. Find the number of lines, the number of sets, the set bits, the offset bits and the tag bits.</li>
+      <li>A cache takes 20 ns and main memory takes 200 ns. Hierarchical lookup gives an average access time of 40 ns. Find the hit ratio.</li>
+      <li>Build a 64K × 8 memory from 16K × 8 chips. Find the number of chips and give the address range served by each chip.</li>
+      <li>A 4-bank low-order-interleaved memory is accessed with stride 4: addresses 0, 4, 8 and 12, each taking 100 ns. Explain which bank serves each access and find the total time. Compare with the ideal 4-way interleaved time for four <em>consecutive</em> addresses.</li>
+      <li>Explain why a fully associative cache needs no index bits, and why a TLB is usually built as a fully associative or highly set-associative structure. (Written answer, about 6 marks.)</li>
+      <li>Compare paging and segmentation on size, address structure, table contents, fragmentation, programmer visibility and protection. State one reason real systems combine them. (Written answer, about 8 marks.)</li>
+    </ol>
+  </div>
+
+  <h2 id="answer-key">14 · Answer key</h2>
+
+  <p>Mark your work against the working, not only the final number. A correct final answer with a wrong method will not earn full marks in the exam.</p>
+
+  <div class="answer-key">
+    <h3>Answers</h3>
+
+    <h4>A · Basic</h4>
+    <ol>
+      <li><strong>13 address lines, 8 data lines, 8 KB.</strong><br>
+      8K = 2<sup>3</sup> × 2<sup>10</sup> = 2<sup>13</sup> locations, so 13 address lines. The word is 8 bits, so 8 data lines. Capacity = 2<sup>13</sup> × 8 = 2<sup>16</sup> bits = 2<sup>13</sup> bytes = 8 KB.</li>
+
+      <li><strong>4 chips.</strong><br>
+      Depth factor = 32K ÷ 8K = 4. Width factor = 8 ÷ 8 = 1. Total = 4 × 1 = 4. Check: 4 × 8K × 8 = 32K × 8. Correct.</li>
+
+      <li><strong>20 ns.</strong><br>
+      EAT = 0.9(10) + 0.1(10 + 100) = 9 + 11 = 20 ns. A miss pays the cache lookup and then the memory access.</li>
+
+      <li><strong>13 offset bits, 19 page-number bits, 524,288 pages.</strong><br>
+      8 KB = 2<sup>13</sup>, so offset = 13. Page bits = 32 − 13 = 19. Pages = 2<sup>19</sup> = 524,288. Check: 19 + 13 = 32.</li>
+
+      <li><strong>(a) Valid, physical address 2599. (b) Invalid — segmentation fault.</strong><br>
+      (a) 599 &lt; 600, so physical = 2000 + 599 = 2599. (b) 600 ≥ 600, so the limit check fails; no physical address is produced. Note that the limit is an exclusive upper bound.</li>
+
+      <li><strong>Bank 1.</strong><br>
+      Low-order interleaving: bank = address mod 4 = 13 mod 4 = 1.</li>
+    </ol>
+
+    <h4>B · Intermediate</h4>
+    <ol start="7">
+      <li><strong>11 offset bits, 32 virtual pages, 256 frames, 8 frame-number bits.</strong><br>
+      2 KB = 2<sup>11</sup> ⇒ offset 11. VPN bits = 16 − 11 = 5 ⇒ 2<sup>5</sup> = 32 pages. 512 KB = 2<sup>19</sup> bytes ⇒ frames = 2<sup>19</sup> ÷ 2<sup>11</sup> = 2<sup>8</sup> = 256 ⇒ 8 frame bits. Check: 8 + 11 = 19 physical address bits.</li>
+
+      <li><strong>1024 lines; offset 5, index 10, tag 17.</strong><br>
+      32 KB = 2<sup>15</sup> B, 32 B = 2<sup>5</sup> B. Lines = 2<sup>15</sup> ÷ 2<sup>5</sup> = 2<sup>10</sup> = 1024. Offset = 5. Index = 10. Tag = 32 − 10 − 5 = 17. Check: 17 + 10 + 5 = 32.</li>
+
+      <li><strong>4096 lines, 2048 sets; set 11, offset 4, tag 17.</strong><br>
+      64 KB ÷ 16 B = 2<sup>16</sup> ÷ 2<sup>4</sup> = 2<sup>12</sup> = 4096 lines. Sets = 4096 ÷ 2 = 2048 = 2<sup>11</sup>. Offset = log<sub>2</sub> 16 = 4. Tag = 32 − 11 − 4 = 17. Check: 17 + 11 + 4 = 32.</li>
+
+      <li><strong>1.7 ns.</strong><br>
+      AMAT = 1 + (0.05)(8) + (0.05)(0.10)(60) = 1 + 0.4 + 0.3 = 1.7 ns. The last term is the 0.5% of accesses that miss both caches.</li>
+
+      <li><strong>Tag = 16<sub>16</sub> (22), line = 3A<sub>16</sub> (58), offset = 5.</strong><br>
+      256 KB = 2<sup>18</sup> ⇒ 18 address bits. Offset = log<sub>2</sub> 16 = 4. Lines = 8 KB ÷ 16 B = 512 ⇒ index = 9. Tag = 18 − 9 − 4 = 5.<br>
+      2C3A5<sub>16</sub> = 10 1100 0011 1010 0101<sub>2</sub>. Tag = 10110<sub>2</sub> = 16<sub>16</sub> = 22. Line = 0 0011 1010<sub>2</sub> = 3A<sub>16</sub> = 58. Offset = 0101<sub>2</sub> = 5.<br>
+      Check: 22 × 8192 + 58 × 16 + 5 = 180,224 + 928 + 5 = 181,157 = 2C3A5<sub>16</sub>. Correct.</li>
+
+      <li><strong>400 ns without interleaving, 50 ns with ideal 8-way interleaving, speed-up 8.</strong><br>
+      Serial: 8 × 50 = 400 ns. Parallel: 50 ns. Speed-up = 400 ÷ 50 = 8. Real hardware will be slower because of arbitration and bus transfer time.</li>
+
+      <li><strong>16,384 bits = 2 KB; 512 parallel comparisons.</strong><br>
+      Capacity = 512 × 32 = 16,384 bits. In bytes = 16,384 ÷ 8 = 2048 B = 2 KB. One comparator per word ⇒ 512 comparisons in parallel.</li>
+    </ol>
+
+    <h4>C · Advanced</h4>
+    <ol start="14">
+      <li><strong>2<sup>20</sup> entries; 4 MiB.</strong><br>
+      4 KB = 2<sup>12</sup> ⇒ offset 12; VPN bits = 32 − 12 = 20 ⇒ 2<sup>20</sup> = 1,048,576 entries. Size = 2<sup>20</sup> × 4 B = 2<sup>22</sup> B = 4 MiB. This is per process, which is why multi-level page tables exist.</li>
+
+      <li><strong>2048 lines, 512 sets; set 9, offset 6, tag 25.</strong><br>
+      128 KB ÷ 64 B = 2<sup>17</sup> ÷ 2<sup>6</sup> = 2<sup>11</sup> = 2048 lines. Sets = 2048 ÷ 4 = 512 = 2<sup>9</sup>. Offset = log<sub>2</sub> 64 = 6. Tag = 40 − 9 − 6 = 25. Check: 25 + 9 + 6 = 40.</li>
+
+      <li><strong>h = 0.9 (90%).</strong><br>
+      AMAT = T<sub>c</sub> + (1 − h)T<sub>m</sub> ⇒ 40 = 20 + (1 − h)(200) ⇒ (1 − h) = 20 ÷ 200 = 0.1 ⇒ h = 0.9.</li>
+
+      <li><strong>4 chips.</strong><br>
+      Depth factor = 64K ÷ 16K = 4; width factor = 8 ÷ 8 = 1 ⇒ 4 chips. With 16K = 4000<sub>16</sub> addresses per chip:<br>
+      Chip 0: 0000H–3FFFH &nbsp;·&nbsp; Chip 1: 4000H–7FFFH &nbsp;·&nbsp; Chip 2: 8000H–BFFFH &nbsp;·&nbsp; Chip 3: C000H–FFFFH.<br>
+      A 2-to-4 decoder driven by A14 and A15 selects one chip at a time.</li>
+
+      <li><strong>All four accesses hit bank 0; total 400 ns; ideal consecutive-address time would be 100 ns.</strong><br>
+      Bank = address mod 4: 0 mod 4 = 0, 4 mod 4 = 0, 8 mod 4 = 0, 12 mod 4 = 0. Every access goes to bank 0, so there is no parallelism and the time is 4 × 100 = 400 ns (speed-up 1). Four <em>consecutive</em> addresses 0, 1, 2, 3 would go to banks 0, 1, 2, 3 and finish in one access time, 100 ns. This is the classic stride conflict of low-order interleaving.</li>
+
+      <li><strong>Model written answer.</strong> A fully associative cache allows any block in any line, so the address does not need to name a line; the hardware compares the tag against every line. The index field exists only to select a line or set before comparison, so with no selection there is no index. The tag must therefore carry all the block-number bits, and tag + offset = total address bits. A TLB holds a small number of page-table entries and must answer in one cycle; fully associative or highly set-associative placement removes conflict misses for the few entries it can hold, and the comparator cost is acceptable because the TLB is small. The trade-off is hardware cost per entry, which is why large data caches use lower associativity.</li>
+
+      <li><strong>Model written answer.</strong> Paging divides the address space into fixed-size pages; segmentation divides it into variable-size logical segments. A paging address is page number + offset, and the table entry holds a frame number plus valid, dirty and permission bits. A segmentation address is segment number + offset, and the table entry holds a base and a limit; the hardware checks offset &lt; limit before adding the base. Paging suffers internal fragmentation in the last page; segmentation suffers external fragmentation between segments. Paging is invisible to the programmer; segmentation is visible because segments match logical program units, which makes sharing and protection natural. Real systems combine them (segments that are themselves paged) to get logical protection boundaries with fixed-size allocation.</li>
+    </ol>
+  </div>
+
+  <h2 id="mistakes">15 · Common mistakes</h2>
+
+  <div class="common-mistakes">
+    <h3>Errors that cost marks, and the fix</h3>
+    <table>
+      <tr><th>Mistake</th><th>Why it is wrong</th><th>Correct approach</th></tr>
+      <tr><td>Writing 1 KB = 1000 bytes</td><td>Memory capacity and page size use powers of two.</td><td>1 KB = 2<sup>10</sup> = 1024 bytes; convert to a power of two before taking logarithms.</td></tr>
+      <tr><td>Confusing address lines with data lines</td><td>They answer different questions: which location, and how wide.</td><td>Address lines = log<sub>2</sub>(locations); data lines = bits per location.</td></tr>
+      <tr><td>Adding expansion factors</td><td>Depth and width are independent dimensions.</td><td>Total chips = depth factor × width factor.</td></tr>
+      <tr><td>Using cache size as the number of lines</td><td>A line holds a whole block.</td><td>Lines = cache size ÷ block size.</td></tr>
+      <tr><td>Omitting the offset when computing the tag</td><td>The tag is only the remaining high bits.</td><td>Tag = total address bits − index/set bits − offset bits.</td></tr>
+      <tr><td>Putting an index field in a fully associative cache</td><td>Nothing selects a line before the comparison.</td><td>Tag + offset = total bits; compare the tag with every line.</td></tr>
+      <tr><td>Using lines instead of sets for the index in an N-way cache</td><td>The index chooses a set, not a line.</td><td>Set bits = log<sub>2</sub>(lines ÷ N).</td></tr>
+      <tr><td>Changing the offset during paging translation</td><td>The offset is the position inside the page and does not change.</td><td>Replace only the page number with the frame number; copy the offset unchanged.</td></tr>
+      <tr><td>Using the physical address size to count virtual pages</td><td>Virtual pages come from the virtual address; frames come from physical memory.</td><td>Pages = virtual space ÷ page size; frames = physical space ÷ page size.</td></tr>
+      <tr><td>Skipping the limit check in segmentation</td><td>The check is the protection mechanism.</td><td>If offset ≥ limit, report a segmentation fault; do not compute base + offset.</td></tr>
+      <tr><td>Using address mod n for high-order interleaving</td><td>High-order interleaving uses the high address bits.</td><td>Low-order: bank = address mod n. High-order: bank = address ÷ bank size.</td></tr>
+      <tr><td>Claiming the full speed-up n in every real interleaved system</td><td>Arbitration, bus transfer and bank conflicts add time.</td><td>n is the ideal upper bound; state the assumption when you use it.</td></tr>
+      <tr><td>Mixing the two AMAT conventions</td><td>One counts the cache lookup on a miss; the other does not.</td><td>State the formula first: hT<sub>c</sub> + (1 − h)T<sub>m</sub>, or T<sub>c</sub> + (1 − h)T<sub>m</sub>.</td></tr>
+      <tr><td>Writing a number with no unit</td><td>“13” could be ns, bits or lines.</td><td>Box the answer with its unit: 13 ns, 13 bits, 13 lines.</td></tr>
+      <tr><td>Treating MESI as prescribed core instead of self-study</td><td>The syllabus labels it self-study, although the question bank asks it.</td><td>Learn it, but label it correctly if a question asks about syllabus status.</td></tr>
+    </table>
+  </div>
+
+  <h2 id="revision">16 · Last-minute revision sheet</h2>
+
+  <div class="revision-sheet">
+    <h3>Ten minutes before the paper</h3>
+
+    <p><strong>Capacity and lines.</strong> N × M means N locations of M bits. Address lines = log<sub>2</sub> N. Data lines = M. Capacity = N × M bits; divide by 8 for bytes, by 1024 for KB, by 2<sup>20</sup> for MB.</p>
+
+    <p><strong>Expansion.</strong> Total chips = (target depth ÷ chip depth) × (target width ÷ chip width). Check total bits before and after.</p>
+
+    <p><strong>Paging.</strong> Offset = log<sub>2</sub>(page size). VPN bits = VA bits − offset. Pages = virtual space ÷ page size. Frames = physical space ÷ page size. Frame bits = log<sub>2</sub> frames. The offset never changes. Page-table size = entries × PTE size.</p>
+
+    <p><strong>Segmentation.</strong> Check offset &lt; limit first. If valid, physical = base + offset. If not, segmentation fault.</p>
+
+    <p><strong>Cache fields.</strong> Offset = log<sub>2</sub>(block size). Lines = cache size ÷ block size. Index = log<sub>2</sub> lines (direct) or log<sub>2</sub>(lines ÷ N) (N-way). Tag = total − index − offset. Fully associative has no index.</p>
+
+    <p><strong>Cache performance.</strong> h = hits ÷ accesses. Hierarchical EAT = hT<sub>c</sub> + (1 − h)(T<sub>c</sub> + T<sub>m</sub>) = T<sub>c</sub> + (1 − h)T<sub>m</sub>. Simultaneous EAT = hT<sub>c</sub> + (1 − h)T<sub>m</sub>. Two levels: add (1 − h<sub>1</sub>)T<sub>L2</sub> and (1 − h<sub>1</sub>)(1 − h<sub>2</sub>)T<sub>main</sub>.</p>
+
+    <p><strong>Interleaving.</strong> Low-order: bank = address mod n. High-order: bank = address ÷ bank size. Ideal speed-up = n; real speed-up is lower.</p>
+
+    <p><strong>Associative memory.</strong> Capacity = words × bits per word. Comparisons = one per word, all in parallel. Argument register holds the key; mask/key register selects bits; match register records hits.</p>
+
+    <p><strong>MESI.</strong> Modified (only copy, dirty), Exclusive (only copy, clean), Shared (clean, may be in several caches), Invalid (no valid copy). Write to Shared → invalidate others → Modified. Read of Modified → owner supplies data.</p>
+
+    <p><strong>One-line definitions to have ready:</strong> locality of reference; hit ratio; miss penalty; virtual memory; page fault; TLB; write-through vs write-back; direct vs associative vs set-associative; cache coherence; snooping vs directory.</p>
+
+    <p><strong>Answer discipline.</strong> State the formula, substitute with units, show the arithmetic, box the final answer with its unit, and add one line of interpretation. Draw the diagram first if the question says “with a neat diagram”.</p>
+  </div>
+
+  <h2 id="references">17 · References and verification notes</h2>
+
+  <div class="references">
+    <h3>Sources used</h3>
+    <ul>
+      <li><strong>Official syllabus.</strong> University of Mumbai, Faculty of Science and Technology, B.E. Computer Science and Engineering (Artificial Intelligence and Machine Learning), Semester III and IV, Course 2023114 <em>Computer Organization and Architecture</em>, 2025–26. Module 4 row: “Memory Systems Organization”, 7 hours, CO4. <a href="https://mu.ac.in/old/wp-content/uploads/2025/06/6.21-N-B.E.-AI-ML-sem-III-IV.pdf">mu.ac.in syllabus PDF</a>.</li>
+      <li><strong>Teacher chapter.</strong> <em>chapter 4 coa.docx</em>, supplied in <code>COA.zip</code>. Used for the hierarchy, parameters, RAM/ROM classification, paging vs segmentation table, cache levels, mapping techniques, coherence/MESI, associative memory and interleaving.</li>
+      <li><strong>Teacher problem set.</strong> <em>Unit 4 problems.docx</em>, supplied in <code>COA.zip</code>. Problems 1–24 are reproduced as the worked examples, with full working added. The original answers were checked independently.</li>
+      <li><strong>Teacher assignment.</strong> <em>Assignment 4.docx</em>, supplied in <code>COA.zip</code>. Used to confirm the required topic coverage; it contains no numericals.</li>
+      <li><strong>Teacher question bank.</strong> <em>COA/question bank.docx</em>, Q1–Q10, and <em>Computer Organization 40 questions.docx</em>, Q29–Q36. Wording preserved. These are question-bank documents, not University papers.</li>
+      <li><strong>Student association material.</strong> MUSA question bank and MUSA practice paper (labelled “Winter 2025”, 60 marks, 2 hours). Used only for additional practice and clearly labelled; <strong>not</strong> verified University of Mumbai papers.</li>
+    </ul>
+
+    <h3>What was verified</h3>
+    <ul>
+      <li>Every numerical in Sections 1–11 and Section 14 was recomputed independently in Python. The values in the teacher’s answer key were reproduced: 32 KB, 4 KB, 8 chips, 64 KB, 8 chips, 3.5 ns, 30 ns, 13 ns, 64 pages/6/10, 64 pages/16 frames/2A35H → page A, offset 235H, 12/2<sup>20</sup>/2<sup>18</sup>/18, 6500, 4750/8200/invalid, 4/8/4, 55H/E6H/1EH, 16/4/12, 16 sets/4/5/17/8, 25H/3A5H/7H, 50→75, banks 0–3, 400/100/4, 16,384 bits/2 KB/1024 comparisons, location 1.</li>
+      <li>Problem 10 was expanded because the source writes the page number and the offset compactly. The guide shows both the binary split and the hexadecimal division/modulo so the arithmetic is auditable.</li>
+      <li>Problem 15 in the source asks for the fields of ABCDE<sub>16</sub> but only computes the field widths. The guide completes the split explicitly and verifies it by reconstruction.</li>
+      <li>Problem 6 is shown both in the teacher’s compact form and in the disjoint-outcome form. Both give 3.5 ns. The convention is stated, because the alternative “cache + miss penalty” convention gives a different intermediate breakdown.</li>
+      <li>The syllabus wording, teaching hours (7) and CO4 mapping were read from the official PDF, not inferred.</li>
+    </ul>
+
+    <h3>Notes and limitations</h3>
+    <ul>
+      <li>No verified University of Mumbai end-semester paper for course 2023114 was present in the supplied material. Nothing in this guide is labelled as a verified University question.</li>
+      <li>“Typical” sizes and speeds for L1/L2/L3 and storage are orders of magnitude, not specifications for a named processor.</li>
+      <li>The MESI transition table is the standard simplified version used in textbooks. Real Pentium-family implementations add details that are outside this syllabus.</li>
+      <li>Practice questions in Section 13 and the supplementary worked examples are written for this guide. They are labelled as such and are not attributed to the teacher or the University.</li>
+      <li>Diagrams are hand-authored SVG in this page. No generated images are used.</li>
+    </ul>
+
+    <h3>Attribution</h3>
+    <p>Teaching content adapted from the teacher-supplied chapter, problem set, assignment and question banks listed above. Syllabus text quoted from the official University of Mumbai document. Explanatory prose, additional examples and practice questions are <strong>supplementary clarification</strong> written for this guide. Student-association material is attributed to MUSA and is not presented as University material.</p>
+  </div>
+</div>

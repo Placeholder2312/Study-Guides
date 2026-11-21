@@ -1,0 +1,95 @@
+
+
+========== source\COA\question bank.docx ==========
+
+MODULE IV – Memory Systems Organization
+CO4
+Q1.
+Explain the memory hierarchy with a neat diagram. Discuss the characteristics of each level in terms of speed, capacity and cost per bit.
+Q2.
+Explain the different memory parameters such as access time, memory cycle time, transfer rate and capacity.
+Q3.
+Classify primary and secondary memories. Explain the characteristics and applications of each.
+Q4.
+Explain the following types of RAM and ROM:
+SRAM
+DRAM
+PROM
+EPROM
+EEPROM
+Also compare SRAM and DRAM.
+Q5.
+What is virtual memory? Explain paging and segmentation with suitable diagrams. Compare paging and segmentation.
+Q6.
+Explain cache memory and its importance in improving processor performance. Explain the L1, L2 and L3 cache hierarchy.
+Q7.
+A computer has a 32-bit address, a cache of 16 KB, and a cache block size of 16 bytes. For a direct-mapped cache, determine:
+a) Number of cache lines
+b) Number of bits for block offset
+c) Number of bits for cache index
+d) Number of bits for tag
+Q8.
+Explain and compare the following cache mapping techniques with suitable examples:
+a) Direct mapping
+b) Associative mapping
+c) Set-associative mapping
+Q9.
+A main memory contains 64K blocks, while the cache contains 256 blocks. Each block consists of 8 words. Determine the number of bits required for tag, cache index and word offset using direct mapping.
+Q10.
+What is cache coherency? Explain the MESI protocol and describe the four states:
+Modified
+Exclusive
+Shared
+Invalid
+MODULE V – I/O Organization
+CO5
+Q11.
+Explain the different types of buses used in a computer system. Discuss data bus, address bus and control bus.
+Q12.
+What is bus arbitration? Explain centralized and distributed bus arbitration techniques.
+Q13.
+Explain the following bus standards and compare their important characteristics:
+PCI
+USB
+SATA
+Q14.
+What is an I/O interface? Explain its functions and need in a computer system with a suitable block diagram.
+Q15.
+Differentiate between an I/O module, I/O channel and I/O processor. Explain their roles in I/O organization.
+Q16.
+Explain the following data transfer techniques:
+a) Programmed I/O
+b) Interrupt-driven I/O
+c) Direct Memory Access (DMA)
+Q17.
+Compare Programmed I/O, Interrupt-driven I/O and DMA with respect to CPU involvement, hardware requirement, data-transfer speed and applications.
+Q18.
+Draw and explain the DMA controller architecture. Describe the sequence of operations involved in a DMA transfer.
+Q19.
+A DMA controller transfers data at a rate of 4 MB/s. Calculate the time required to transfer 32 MB of data. Also explain how DMA reduces CPU overhead.
+Q20.
+Explain I/O channels and I/O processors. How do they improve the performance of a computer system?
+MODULE VI – Parallel Processing
+CO5 / CO6
+Q21.
+Explain the 80386DX processor architecture and describe its three operating modes:
+a) Real Mode
+b) Protected Mode
+c) Virtual 8086 Mode
+Q22.
+What is pipelining? Explain a typical five-stage instruction pipeline with a neat diagram.
+Q23.
+What are pipeline hazards? Explain the following with suitable examples:
+a) Structural hazard
+b) Data hazard
+c) Control hazard
+Q24.
+Explain the techniques used for pipeline hazard mitigation:
+a) Data forwarding
+b) Branch prediction
+Give a suitable example for each.
+Q25.
+Answer the following:
+a) Explain superscalar architecture and its advantages.
+b) Using Amdahl's Law, calculate the overall speedup if 60% of a program can be parallelized and the parallel portion is executed using 4 processors.
+c) Explain Flynn's classification of parallel computer architectures: SISD, SIMD, MISD and MIMD, with suitable examples.

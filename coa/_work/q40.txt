@@ -1,0 +1,191 @@
+
+
+========== source\COA\Computer Organization 40 questions.docx ==========
+
+Computer Organization & Architecture – 40 Important Questions
+Module 1 – Computer Fundamentals
+Q1.
+Explain the Von Neumann model of a computer with a neat block diagram. Explain the functions of each unit.
+Q2.
+Convert the following:
+101101.1012to decimal
+753.48to decimal
+3A7.F16to decimal.
+Q3.
+Convert the decimal number 245.62510into:
+Binary
+Octal
+Hexadecimal.
+Q4.
+Represent -3710using 8-bit Sign Magnitude, 1's Complement and 2's Complement representation. Compare the three representations.
+Q5.
+Perform binary addition and subtraction using 2's complement arithmetic:
+25-17
+17-25
+Show all intermediate steps and identify overflow, if any.
+Q6.
+Explain the operation and truth table of the following logic gates:
+AND
+OR
+NOT
+NAND
+NOR
+XOR
+Also explain why NAND and NOR are called universal gates.
+Q7.
+Draw and explain the basic organization of a digital computer. Differentiate between computer architecture and computer organization.
+Module 2 – ALU Operations
+This module should contain a relatively high proportion of numerical questions because MU papers repeatedly use algorithmic/numerical problems such as Booth multiplication, restoring division and IEEE representation.
+Q8.
+Perform the following binary arithmetic operations:
+1011012+1100112
+1101012-1010112
+Show the complete calculation.
+Q9.
+Perform the following:
+7258+3468
+3A716+2F916
+Show all intermediate steps.
+Q10.
+Explain Booth's multiplication algorithm with its flowchart and demonstrate the multiplication of:
+-7×-6
+This type of Booth numerical is directly consistent with MU question-paper patterns.
+Q11.
+Using Booth's algorithm, multiply:
+-15×3
+Show the contents of A, Q, M and Q₋₁ after every iteration.
+Q12.
+Explain the restoring division algorithm with a flowchart. Perform:
+13÷5
+using restoring division.
+Q13.
+Using the restoring division algorithm, divide:
+15÷4
+Show all iterations and determine the quotient and remainder.
+Q14.
+Explain the non-restoring division algorithm with a suitable flowchart. Perform:
+12÷4
+using the non-restoring division algorithm.
+Q15.
+Compare restoring and non-restoring division algorithms with respect to:
+Basic principle
+Number of operations
+Restoration requirement
+Speed
+Hardware complexity.
+Q16.
+Convert the following numbers into IEEE 754 single-precision representation:
+-20.2510
+13.62510
+Show the calculation of sign, exponent and mantissa separately.
+IEEE 754 conversion has appeared as a 5-mark question in recent MU papers.
+Q17.
+Explain IEEE 754 single-precision and double-precision formats. Compare their sign, exponent and fraction fields and discuss their numerical ranges.
+Module 3 – Processor Organization and Control Unit Design
+MU papers frequently ask 8086 addressing modes, instruction cycle, microprogrammed vs hardwired control, and microprograms.
+Q18.
+Draw and explain the architecture of the 8086 microprocessor. Explain the functions of the Execution Unit and Bus Interface Unit.
+Q19.
+Explain the register organization of 8086. Classify and explain:
+General-purpose registers
+Segment registers
+Pointer/index registers
+Flag register
+Instruction pointer.
+Q20.
+Explain the instruction format of 8086. Describe the different fields present in an 8086 instruction.
+Q21.
+Explain the instruction cycle with a neat state diagram. Describe the different stages involved in instruction execution.
+Q22.
+Explain the following 8086 addressing modes with suitable examples:
+Immediate
+Register
+Direct
+Register indirect
+Based
+Indexed
+Based indexed.
+Q23.
+Write an 8086 assembly language program to count the number of 0s and 1s in an 8-bit binary number.
+Questions involving 8086 programs and addressing modes have appeared in MU COA papers.
+Q24.
+Explain instruction interpretation and sequencing in a processor. Describe the steps involved in fetching, decoding and executing an instruction.
+Q25.
+Explain the design of a hardwired control unit. Discuss the major design methods used for implementing hardwired control.
+Q26.
+Explain the design of a microprogrammed control unit. What is a microinstruction? Explain microinstruction sequencing and execution.
+Q27.
+Differentiate between hardwired and microprogrammed control units with respect to:
+Speed
+Flexibility
+Hardware complexity
+Modification
+Applications.
+This comparison is a recurring MU question.
+Q28.
+Explain RISC and CISC architectures. Compare them with respect to instruction set, instruction length, addressing modes, registers, pipelining and control-unit implementation.
+Module 4 – Memory Systems Organization
+Cache mapping, memory characteristics, hierarchy and cache coherence are particularly important based on the MU papers reviewed.
+Q29.
+Explain the memory hierarchy with a neat diagram. Discuss the relationship between speed, capacity and cost at different levels of the hierarchy.
+Q30.
+Explain the important memory parameters such as:
+Access time
+Memory cycle time
+Transfer rate
+Capacity
+Cost per bit.
+Q31.
+Differentiate between RAM and ROM. Explain the following:
+SRAM
+DRAM
+PROM
+EPROM
+EEPROM.
+Q32.
+Explain virtual memory. Describe virtual memory implementation using:
+Paging
+Segmentation
+Compare paging and segmentation.
+Q33.
+Explain cache memory and the principle of locality of reference. Explain the need for cache memory in modern computer systems.
+Q34.
+Explain the following cache mapping techniques with suitable examples:
+Direct mapping
+Associative mapping
+Set-associative mapping.
+Also compare their advantages and disadvantages.
+Cache mapping has repeatedly appeared as a 10-mark MU question.
+Q35.
+A cache memory contains 16 words, each block contains 4 words, and the main memory contains 128 bytes.
+Determine the number of bits required for:
+Address
+Word/offset
+Block
+Tag
+for associative mapping.
+Q36.
+Explain cache coherence. Why is cache coherence required in multiprocessor systems? Explain one technique used to maintain cache coherence.
+Also explain the basic concept of the MESI protocol.
+Module 5 – I/O Organization
+Q37.
+Explain different types of buses used in computer systems. Describe bus arbitration and explain different bus arbitration techniques.
+Q38.
+Explain the need and functions of an I/O module. Differentiate between:
+I/O module
+I/O channel
+I/O processor.
+Q39.
+Explain and compare the following I/O data-transfer techniques:
+Programmed I/O
+Interrupt-driven I/O
+Direct Memory Access (DMA)
+Draw suitable diagrams.
+DMA and I/O techniques are recurring topics in MU papers.
+Module 6 – Parallel Processing
+Q40.
+Answer the following:
+a) Explain the six-stage instruction pipeline with a suitable diagram.
+b) Explain different pipeline hazards with examples.
+c) Explain how branch prediction and data forwarding are used to mitigate pipeline hazards.
+d) Explain Flynn's classification of parallel computer architectures with suitable examples.

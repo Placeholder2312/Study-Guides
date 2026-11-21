@@ -1,0 +1,2104 @@
+<div class="wrap">
+  <div class="topbar"><a class="back" href="/coa">← All modules</a><button class="theme-toggle" type="button" id="themeToggle"></button></div>
+
+  <header>
+    <h1>COA Module 4</h1>
+    <p class="subtitle">Memory Systems Organization</p>
+    <div class="meta">B.E. CSE (AI &amp; ML) · Sem III · Course 2023114 · 7 teaching hours · CO4<br>
+    Built from <em>chapter 4 coa.docx</em>, <em>Unit 4 problems.docx</em>, <em>Assignment 4.docx</em>, the supplied question banks, and the official University of Mumbai syllabus.</div>
+  </header>
+
+  <div class="toc">
+    <ol>
+      <li><a href="#syllabus">Syllabus and scope</a></li>
+      <li><a href="#fundamentals">How memory works: cells, words and addresses</a></li>
+      <li><a href="#hierarchy">Memory hierarchy and performance parameters</a></li>
+      <li><a href="#primary">Primary and secondary memory; RAM and ROM</a></li>
+      <li><a href="#expansion">Memory expansion and chip organization</a></li>
+      <li><a href="#paging">Virtual memory I: paging</a></li>
+      <li><a href="#segmentation">Virtual memory II: segmentation</a></li>
+      <li><a href="#cache">Cache memory: concept and performance</a></li>
+      <li><a href="#mapping">Cache mapping techniques</a></li>
+      <li><a href="#coherence">Cache coherence and the MESI protocol (self-study)</a></li>
+      <li><a href="#interleaving">Interleaved memory</a></li>
+      <li><a href="#associative">Associative memory</a></li>
+      <li><a href="#qbank">Question bank and assignment coverage</a></li>
+      <li><a href="#practice">Independent practice</a></li>
+      <li><a href="#answer-key">Answer key</a></li>
+      <li><a href="#mistakes">Common mistakes</a></li>
+      <li><a href="#revision">Last-minute revision sheet</a></li>
+      <li><a href="#references">References and verification notes</a></li>
+    </ol>
+  </div>
+
+  <nav class="nav">
+    <a href="#fundamentals">Fundamentals</a>
+    <a href="#hierarchy">Hierarchy</a>
+    <a href="#paging">Paging</a>
+    <a href="#segmentation">Segmentation</a>
+    <a href="#cache">Cache</a>
+    <a href="#mapping">Mapping</a>
+    <a href="#coherence">Coherence</a>
+    <a href="#interleaving">Interleaving</a>
+    <a href="#qbank">Question bank</a>
+    <a href="#practice">Practice</a>
+    <a href="#revision">Revision</a>
+  </nav>
+
+  <h2 id="syllabus">Syllabus and scope</h2>
+
+  <p><strong>Official module name:</strong> Memory Systems Organization · <strong>Teaching hours:</strong> 7 · <strong>Course outcome:</strong> CO4 — “Design memory systems with analysis of mapping techniques for cache memory.”</p>
+
+  <div class="theory">
+    <span class="source">Official University of Mumbai syllabus, course 2023114 (Module 4 row)</span>
+    <p>“Introduction to Memory and Memory parameters. Classifications of primary and secondary memories. Types of RAM and ROM, Memory hierarchy and characteristics, Virtual Memory: Segmentation and Paging, Cache memory: Concept, hierarchy (L1, L2, L3), mapping technique to resolve it. Interleaved and Associative memory. Self-Study: Case study of Pentium Processor Cache Memory Model (MESI Protocol).”</p>
+    <p>The syllabus wording is quoted as printed. “Mapping technique to resolve it” means the cache mapping techniques; “Cache Memory Model (MESI Protocol)” is the self-study case study.</p>
+  </div>
+
+  <p>The official syllabus sets the <em>boundary</em> of the module. The teacher’s chapter, the assignment and the supplied problem set decide the <em>depth</em>. This guide keeps those two ideas separate:</p>
+
+  <table>
+    <tr><th>Status</th><th>Content</th><th>Why it is here</th></tr>
+    <tr><td><strong>Prescribed</strong></td><td>Memory parameters; primary/secondary memory; RAM/ROM families; memory hierarchy; paging; segmentation; cache concept and L1/L2/L3; cache mapping; interleaved memory; associative memory.</td><td>Explicitly named in the official Module 4 row.</td></tr>
+    <tr><td><strong>Self-study</strong></td><td>Pentium processor cache and the MESI protocol.</td><td>Officially listed as self-study. The assignment and question bank still ask about MESI, so it is taught here in a clearly marked self-study section.</td></tr>
+    <tr><td><strong>Supplementary</strong></td><td>Memory expansion using chips; RAM/ROM expansion; low-order and high-order interleaving; interleaving speed-up; associative search; TLB and page-table size; write policies.</td><td>These appear in <em>Unit 4 problems.docx</em>, <em>Assignment 4.docx</em> or the question bank, but are not all named in the short syllabus line. They are included so no supplied problem type is silently omitted.</td></tr>
+  </table>
+
+  <p><strong>Exam pattern for this course:</strong> End-semester paper of 60 marks and 2 hours. The paper has six questions of 20 marks. Question 1 is compulsory and covers the widest range of the syllabus. You attempt any three of Questions 2–5 (the official pattern describes six questions in total; follow your college’s final paper instructions). Parts of a question are mixed across modules. Module 4 can therefore appear inside Question 1 or as one part of another question.</p>
+
+  <div class="theory">
+    <span class="source">What this guide does not claim</span>
+    <p>No verified University of Mumbai question paper for course 2023114 was supplied in <code>COA.zip</code>. The MUSA files are <strong>student-association question banks and a practice paper</strong>, not University papers. They are labelled that way throughout. The guide does not predict tomorrow’s paper and does not claim that a topic is “frequent” based on a small sample.</p>
+  </div>
+
+  <h2 id="fundamentals">1 · How memory works: cells, words and addresses</h2>
+
+  <h3>1.1 The plain-language picture</h3>
+
+  <p>A computer memory is a large shelf of numbered boxes. Each box holds a fixed number of bits. To read or write a box, the processor puts the box number on the address lines and either reads the data lines or drives new values onto them. The number of the box is its <strong>address</strong>; the number of bits in the box is the <strong>word size</strong>.</p>
+
+  <div class="theory">
+    <span class="source">Formal vocabulary</span>
+    <p>A <strong>memory cell</strong> stores one bit. A <strong>word</strong> is the group of bits that the memory transfers in one access. A <strong>location</strong> (or addressable unit) is the smallest unit that has its own address. The <strong>address space</strong> is the set of all addresses. If a memory has <span class="kbd">n</span> address lines, it can distinguish <span class="kbd">2<sup>n</sup></span> locations. If each location is <span class="kbd">w</span> bits wide, the total capacity is <span class="kbd">2<sup>n</sup> × w</span> bits.</p>
+  </div>
+
+  <h3>1.2 The four numbers that solve most capacity questions</h3>
+
+  <table>
+    <tr><th>Quantity</th><th>Formula</th><th>Meaning</th></tr>
+    <tr><td>Number of locations</td><td><span class="kbd">2<sup>address-line count</sup></span></td><td>How many separately addressable boxes exist.</td></tr>
+    <tr><td>Address lines</td><td><span class="kbd">log<sub>2</sub>(number of locations)</span></td><td>How many address bits are needed to name every box.</td></tr>
+    <tr><td>Data lines</td><td><span class="kbd">word size in bits</span></td><td>How many bits arrive together in one read or write.</td></tr>
+    <tr><td>Capacity in bits</td><td><span class="kbd">locations × bits per location</span></td><td>Total stored bits.</td></tr>
+    <tr><td>Capacity in bytes</td><td><span class="kbd">capacity in bits ÷ 8</span></td><td>Total stored bytes.</td></tr>
+  </table>
+
+  <p><strong>Memory “K”, “M” and “G” are powers of two.</strong> In memory capacity, <span class="kbd">1 K = 2<sup>10</sup> = 1024</span>, <span class="kbd">1 M = 2<sup>20</sup> = 1,048,576</span>, and <span class="kbd">1 G = 2<sup>30</sup></span>. A 16K memory therefore has 16 × 1024 = 16,384 locations, not 16,000. Data-transfer rates are sometimes quoted in decimal units by device manufacturers; for a ratio such as “32 MB at 4 MB/s”, the same unit cancels, so the answer is 8 seconds either way.</p>
+
+  <div class="example">
+    <div class="example-title">Teacher problem 1 — memory capacity (Unit 4 problems, Problem 1)</div>
+    <p>A computer has a memory consisting of 16K memory locations, with each location storing 16 bits. Find the total capacity in bits, the total capacity in bytes, the number of address lines and the number of data lines.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>16K locations × 16 bits per location. Find capacity in bits, capacity in bytes, address lines and data lines.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <p><strong>Step 1 — Convert 16K to a power of two.</strong></p>
+    <div class="eq">16K = 16 × 1024 = 2<sup>4</sup> × 2<sup>10</sup> = 2<sup>14</sup> = 16,384 locations</div>
+    <p><strong>Step 2 — Address lines.</strong> Fourteen address bits can name 2<sup>14</sup> locations.</p>
+    <div class="eq">address lines = log<sub>2</sub>(2<sup>14</sup>) = 14</div>
+    <p><strong>Step 3 — Data lines.</strong> Each location is 16 bits wide, so one access transfers 16 bits.</p>
+    <div class="eq">data lines = 16</div>
+    <p><strong>Step 4 — Capacity in bits.</strong></p>
+    <div class="eq">capacity = 2<sup>14</sup> × 16 = 2<sup>14</sup> × 2<sup>4</sup> = 2<sup>18</sup> bits = 262,144 bits</div>
+    <p><strong>Step 5 — Capacity in bytes.</strong> Divide by 8 bits per byte.</p>
+    <div class="eq">capacity = 2<sup>18</sup> ÷ 2<sup>3</sup> = 2<sup>15</sup> bytes = 32,768 bytes = 32 KB</div>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>14 address lines, 16 data lines, 2<sup>18</sup> bits = 262,144 bits = 32 KB.</strong></p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Teacher problem 2 — chip organization (Unit 4 problems, Problem 2)</div>
+    <p>A memory chip is organized as 4K × 8. Find the number of locations, bits per location, address lines, data lines and total capacity in bytes.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>A chip is specified as 4K × 8. Interpret the specification and find its capacity.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <p>The notation <span class="kbd">N × M</span> means <span class="kbd">N</span> addressable locations, each <span class="kbd">M</span> bits wide.</p>
+    <div class="eq">4K = 4 × 1024 = 2<sup>2</sup> × 2<sup>10</sup> = 2<sup>12</sup> = 4096 locations</div>
+    <div class="eq">bits per location = 8 &nbsp;&nbsp; data lines = 8</div>
+    <div class="eq">address lines = log<sub>2</sub>(4096) = 12</div>
+    <div class="eq">capacity = 4096 × 8 = 32,768 bits</div>
+    <div class="eq">capacity in bytes = 32,768 ÷ 8 = 4096 bytes = 4 KB</div>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>4096 locations, 8 bits per location, 12 address lines, 8 data lines, 4 KB.</strong></p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Teacher problem 3 — a 2<sup>16</sup>-location RAM (Unit 4 problems, Problem 4)</div>
+    <p>A RAM has 2<sup>16</sup> locations, and each location stores 8 bits. Find the address-line requirement, data-line requirement and total capacity in KB.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>RAM with 2<sup>16</sup> locations × 8 bits. Find address lines, data lines and capacity in KB.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <div class="eq">address lines = log<sub>2</sub>(2<sup>16</sup>) = 16</div>
+    <div class="eq">data lines = 8</div>
+    <div class="eq">capacity = 2<sup>16</sup> × 8 = 2<sup>16</sup> × 2<sup>3</sup> = 2<sup>19</sup> bits</div>
+    <div class="eq">capacity = 2<sup>19</sup> ÷ 2<sup>3</sup> = 2<sup>16</sup> bytes = 65,536 bytes = 64 KB</div>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>16 address lines, 8 data lines, 64 KB.</strong></p>
+  </div>
+
+  <h3>1.3 Why the address/data distinction matters</h3>
+
+  <p>The address lines choose <em>which</em> location; the data lines carry <em>what is inside</em> it. A memory can have many locations but a narrow word, or few locations but a wide word. For example, a 1M × 4 chip and a 512K × 8 chip both hold 4 Mbit, but the first has 20 address lines and 4 data lines, while the second has 19 address lines and 8 data lines. Always read the <span class="kbd">N × M</span> specification before calculating.</p>
+
+  <h3>1.4 Exam answer plan</h3>
+
+  <ol class="steps">
+    <li>Write the given <span class="kbd">N × M</span> specification and convert N to a power of two.</li>
+    <li>State address lines = log<sub>2</sub> N and data lines = M.</li>
+    <li>Compute capacity in bits as N × M.</li>
+    <li>Divide by 8 for bytes, then by 1024 for KB or by 2<sup>20</sup> for MB.</li>
+    <li>Box the answer with units. A number without units is incomplete.</li>
+  </ol>
+
+  <h2 id="hierarchy">2 · Memory hierarchy and performance parameters</h2>
+
+  <h3>2.1 Why a hierarchy exists</h3>
+
+  <p>Fast memory is expensive and small; cheap memory is large and slow. A computer cannot afford to make all of its memory as fast as registers, and it cannot run efficiently if every access waits for a hard disk. The hierarchy is the engineering compromise: put a small amount of very fast memory close to the CPU, a larger but slower main memory behind it, and a very large but much slower secondary store behind that. The goal is to make the <em>average</em> access look fast by keeping the frequently used data near the top.</p>
+
+  <figure>
+    <svg viewBox="0 0 560 330" role="img" aria-labelledby="m4-hier-title m4-hier-desc" style="max-width:560px">
+      <title id="m4-hier-title">Memory hierarchy from registers to secondary storage</title>
+      <desc id="m4-hier-desc">A stack of five levels: registers at the top, then L1 cache, L2/L3 cache, main memory, and secondary storage at the bottom. Speed and cost per bit decrease downwards; capacity increases downwards.</desc>
+      <rect x="170" y="10" width="220" height="42" fill="var(--surface-hi)" stroke="var(--ink)"/>
+      <text x="280" y="36" text-anchor="middle" font-family="Helvetica, Arial" font-size="14" fill="var(--ink)">Registers — fastest, smallest</text>
+      <rect x="145" y="62" width="270" height="42" fill="var(--surface)" stroke="var(--ink)"/>
+      <text x="280" y="88" text-anchor="middle" font-family="Helvetica, Arial" font-size="14" fill="var(--ink)">L1 cache</text>
+      <rect x="115" y="114" width="330" height="42" fill="var(--surface)" stroke="var(--ink)"/>
+      <text x="280" y="140" text-anchor="middle" font-family="Helvetica, Arial" font-size="14" fill="var(--ink)">L2 / L3 cache</text>
+      <rect x="80" y="166" width="400" height="42" fill="var(--surface)" stroke="var(--ink)"/>
+      <text x="280" y="192" text-anchor="middle" font-family="Helvetica, Arial" font-size="14" fill="var(--ink)">Main memory (RAM)</text>
+      <rect x="40" y="218" width="480" height="42" fill="var(--surface)" stroke="var(--ink)"/>
+      <text x="280" y="244" text-anchor="middle" font-family="Helvetica, Arial" font-size="14" fill="var(--ink)">Secondary storage (SSD / HDD / tape)</text>
+      <line x1="20" y1="20" x2="20" y2="250" stroke="var(--muted)" marker-end="url(#m4-arrow-up)"/>
+      <line x1="540" y1="250" x2="540" y2="20" stroke="var(--muted)" marker-end="url(#m4-arrow-up)"/>
+      <text x="28" y="270" font-family="Helvetica, Arial" font-size="11" fill="var(--muted)">capacity and access time increase ↓</text>
+      <text x="532" y="270" text-anchor="end" font-family="Helvetica, Arial" font-size="11" fill="var(--muted)">speed and cost per bit increase ↑</text>
+      <defs>
+        <marker id="m4-arrow-up" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+          <path d="M0,8 L4,0 L8,8" fill="none" stroke="var(--muted)"/>
+        </marker>
+      </defs>
+    </svg>
+    <figcaption>Figure 1. The memory hierarchy. Moving down gives more capacity at lower cost per bit, but longer access time.</figcaption>
+  </figure>
+
+  <table>
+    <tr><th>Level</th><th>Typical role</th><th>Speed</th><th>Capacity</th><th>Cost per bit</th><th>Managed by</th></tr>
+    <tr><td>Registers</td><td>Operands and intermediate results inside the CPU</td><td>Fastest (sub-nanosecond)</td><td>Tens to hundreds of bytes</td><td>Highest</td><td>Compiler / instruction set</td></tr>
+    <tr><td>L1 cache</td><td>Hottest instructions and data, per core</td><td>Very fast (about 1–4 cycles)</td><td>Kilobytes</td><td>Very high</td><td>Hardware</td></tr>
+    <tr><td>L2 / L3 cache</td><td>Backup for L1; L3 often shared by cores</td><td>Fast (several to tens of cycles)</td><td>Hundreds of KB to several MB</td><td>High</td><td>Hardware</td></tr>
+    <tr><td>Main memory</td><td>Running programs and active data</td><td>Tens to hundreds of cycles</td><td>Gigabytes</td><td>Moderate</td><td>Operating system + hardware</td></tr>
+    <tr><td>Secondary storage</td><td>Files, programs, long-term data</td><td>Milliseconds (SSD microseconds)</td><td>Terabytes and beyond</td><td>Lowest</td><td>Operating system</td></tr>
+  </table>
+
+  <p>The numbers above are typical orders of magnitude, not fixed values for every processor. Do not quote a single “correct” size for L1 or L2 in an exam unless the question supplies one.</p>
+
+  <h3>2.2 Locality of reference</h3>
+
+  <p>The hierarchy works because real programs do not access memory uniformly. They show <strong>locality of reference</strong>:</p>
+
+  <ul>
+    <li><strong>Temporal locality:</strong> if an item was used recently, it is likely to be used again soon. A loop counter and a frequently called function are examples.</li>
+    <li><strong>Spatial locality:</strong> if an address was used, nearby addresses are likely to be used soon. Array elements stored next to each other are the standard example.</li>
+  </ul>
+
+  <p>Cache exploits both: it keeps recently used blocks (temporal) and fetches a whole block of neighbouring words on a miss (spatial). Paging exploits temporal locality by keeping recently used pages in memory. Without locality, a small cache would rarely contain the next item, and the hit ratio would collapse.</p>
+
+  <div class="example">
+    <div class="example-title">Everyday analogy</div>
+    <p>Your desk is the cache, the bookshelf is main memory, and the library basement is secondary storage. You keep the books you are using on the desk. When you need a new book, you fetch it once and put it on the desk, hoping you will need it again. The desk is small, so you occasionally remove a book to make room. This is exactly the cache replacement problem.</p>
+  </div>
+
+  <h3>2.3 The performance parameters</h3>
+
+  <table>
+    <tr><th>Parameter</th><th>Definition</th><th>Units / note</th></tr>
+    <tr><td><strong>Access time</strong></td><td>Time from issuing a read/write request to the moment the data is available (read) or stored (write).</td><td>ns, µs, ms. For random-access memory it is roughly constant for any location.</td></tr>
+    <tr><td><strong>Memory cycle time</strong></td><td>Minimum time between two successive memory operations, including any recovery or refresh time.</td><td>Usually slightly larger than access time. Cycle time = access time + recovery time.</td></tr>
+    <tr><td><strong>Transfer rate</strong></td><td>Amount of data moved per unit time.</td><td>B/s, MB/s, GB/s. For a repeated transfer, rate = bytes per transfer ÷ time per transfer.</td></tr>
+    <tr><td><strong>Capacity</strong></td><td>Total number of bits or bytes the memory can hold.</td><td>bits, bytes, KB, MB, GB. Use powers of two for memory capacity.</td></tr>
+    <tr><td><strong>Cost per bit</strong></td><td>Total cost of the memory divided by its capacity in bits.</td><td>Currency per bit. A useful comparison, not a fixed exam value.</td></tr>
+    <tr><td><strong>Latency</strong></td><td>The delay for one request, from start to completion.</td><td>Often used as a synonym for access time; in a pipelined system it is distinct from throughput.</td></tr>
+    <tr><td><strong>Bandwidth</strong></td><td>Maximum rate at which data can be transferred.</td><td>Usually the same idea as transfer rate, but “bandwidth” often refers to the peak capability of the bus or memory.</td></tr>
+  </table>
+
+  <div class="theory">
+    <span class="source">Access time versus cycle time — the distinction examiners look for</span>
+    <p>Access time is how long one operation takes. Cycle time is how soon you may start the <em>next</em> operation. If a memory answers in 50 ns but needs 10 ns to recover before the next request, the access time is 50 ns and the cycle time is 60 ns. DRAM also needs periodic refresh, which is one reason its cycle time is longer than its raw access time.</p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Supplementary worked example — transfer rate</div>
+    <p>A memory transfers one 64-bit word every 10 ns. Find the transfer rate in GB/s.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>64-bit word every 10 ns. Find the transfer rate.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <p>Convert the word to bytes, then divide by the time per word.</p>
+    <div class="eq">word size = 64 bits ÷ 8 = 8 bytes</div>
+    <div class="eq">rate = 8 bytes ÷ 10 × 10<sup>−9</sup> s = 8 × 10<sup>8</sup> B/s</div>
+    <div class="eq">= 0.8 × 10<sup>9</sup> B/s = 0.8 GB/s</div>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>0.8 GB/s (800 MB/s).</strong></p>
+  </div>
+
+  <p class="eq-note">This example is supplementary practice written for this guide, not a teacher problem.</p>
+
+  <h3>2.4 Cost, capacity and speed trade-off</h3>
+
+  <p>Suppose a fast memory costs much more per bit than a slow one. Putting all storage in the fast technology would be unaffordable; putting all storage in the slow technology would be unusably slow. The hierarchy spends the budget where it buys the most performance: a small fast cache, a medium-speed main memory, and a large cheap secondary store. This is why the cost per bit falls as you go down the hierarchy, while capacity rises.</p>
+
+  <h3>2.5 Exam answer plan</h3>
+
+  <ol class="steps">
+    <li>Draw the hierarchy as a triangle or a stack, with registers at the top and secondary storage at the bottom.</li>
+    <li>Label each level with its role, relative speed, relative capacity and relative cost per bit.</li>
+    <li>State the direction of the trends explicitly: speed and cost per bit decrease downwards; capacity and access time increase downwards.</li>
+    <li>Explain locality of reference as the reason the hierarchy works.</li>
+    <li>Define access time, cycle time, transfer rate and capacity in one line each if the question asks for parameters.</li>
+  </ol>
+
+  <h2 id="primary">3 · Primary and secondary memory; RAM and ROM</h2>
+
+  <h3>3.1 The classification</h3>
+
+  <p><strong>Primary memory</strong> is directly accessible to the CPU. It holds the instructions and data that are being executed now. It is fast, relatively expensive, and usually smaller than secondary storage. <strong>Secondary memory</strong> is not directly executed from; data must first be copied into primary memory. It is non-volatile, much larger and cheaper per bit, but slower.</p>
+
+  <table>
+    <tr><th>Feature</th><th>Primary memory</th><th>Secondary memory</th></tr>
+    <tr><td>Direct CPU access</td><td>Yes, through the memory bus</td><td>No; accessed through an I/O interface and copied into primary memory</td></tr>
+    <tr><td>Speed</td><td>Fast (nanoseconds)</td><td>Slow (microseconds to milliseconds)</td></tr>
+    <tr><td>Capacity</td><td>Smaller (MB to GB)</td><td>Larger (GB to TB and beyond)</td></tr>
+    <tr><td>Cost per bit</td><td>Higher</td><td>Lower</td></tr>
+    <tr><td>Volatility</td><td>RAM is volatile; ROM is non-volatile</td><td>Non-volatile</td></tr>
+    <tr><td>Examples</td><td>Registers, cache, RAM, ROM</td><td>HDD, SSD, USB flash drive, optical disc, magnetic tape</td></tr>
+    <tr><td>Typical use</td><td>Currently running programs and active data</td><td>Long-term files, backups, archives</td></tr>
+  </table>
+
+  <h3>3.2 RAM and ROM</h3>
+
+  <p><strong>RAM (Random Access Memory)</strong> is read/write, volatile, and used for programs and data in use. “Random access” means any location takes roughly the same time to reach, not that the contents are random. <strong>ROM (Read-Only Memory)</strong> is non-volatile and normally read-only during normal operation; it stores firmware such as the boot loader or BIOS/UEFI code. Modern ROM families can be programmed or erased under special conditions.</p>
+
+  <table>
+    <tr><th>Feature</th><th>RAM</th><th>ROM</th></tr>
+    <tr><td>Volatility</td><td>Volatile — loses contents when power is removed</td><td>Non-volatile — retains contents without power</td></tr>
+    <tr><td>Normal access</td><td>Read and write</td><td>Read; writing needs a special programming procedure</td></tr>
+    <tr><td>Use</td><td>Running programs, data, stack, heap</td><td>Firmware, boot code, fixed tables, embedded control code</td></tr>
+    <tr><td>Speed</td><td>Faster</td><td>Slower than RAM, but adequate for boot code</td></tr>
+    <tr><td>Examples</td><td>DDR4/DDR5 DIMMs, SRAM cache</td><td>PROM, EPROM, EEPROM, mask ROM, flash firmware</td></tr>
+  </table>
+
+  <h3>3.3 SRAM and DRAM</h3>
+
+  <p><strong>SRAM (Static RAM)</strong> stores a bit in a flip-flop — a small latch made from several transistors. As long as power is present, the bit stays put without refresh. It is fast but takes more area per bit, so it is expensive and has lower density. It is used for cache. <strong>DRAM (Dynamic RAM)</strong> stores a bit as charge on a tiny capacitor. The charge leaks away, so every cell must be refreshed periodically. A DRAM cell is much smaller and cheaper per bit, which is why main memory is DRAM, but it is slower and needs refresh circuitry.</p>
+
+  <table>
+    <tr><th>Feature</th><th>SRAM</th><th>DRAM</th></tr>
+    <tr><td>Storage element</td><td>Flip-flop (typically 4–6 transistors)</td><td>Capacitor + one access transistor</td></tr>
+    <tr><td>Refresh</td><td>Not required</td><td>Required periodically</td></tr>
+    <tr><td>Speed</td><td>Faster</td><td>Slower</td></tr>
+    <tr><td>Density</td><td>Lower (more area per bit)</td><td>Higher (smaller cell)</td></tr>
+    <tr><td>Cost per bit</td><td>Higher</td><td>Lower</td></tr>
+    <tr><td>Power</td><td>Usually higher static power in dense arrays; no refresh power</td><td>Refresh power; low leakage per cell</td></tr>
+    <tr><td>Typical use</td><td>CPU cache, registers, small buffers</td><td>Main memory (DDR4/DDR5), graphics memory</td></tr>
+    <tr><td>Volatility</td><td>Volatile</td><td>Volatile</td></tr>
+  </table>
+
+  <div class="theory">
+    <span class="source">Why “static” and “dynamic”?</span>
+    <p>SRAM is “static” because the stored value does not need to be refreshed while power is on. DRAM is “dynamic” because the charge is constantly leaking and must be restored by refresh cycles. The words describe the storage mechanism, not whether the memory is fast or slow in a particular computer.</p>
+  </div>
+
+  <h3>3.4 The ROM family</h3>
+
+  <table>
+    <tr><th>Type</th><th>How it is programmed</th><th>How it is erased</th><th>Typical use</th></tr>
+    <tr><td><strong>Mask ROM</strong></td><td>Programmed during manufacture by a mask</td><td>Cannot be erased</td><td>Fixed firmware, game cartridges, high-volume fixed code</td></tr>
+    <tr><td><strong>PROM</strong> (Programmable ROM)</td><td>Programmed once by the user with a programmer (fuses blown)</td><td>Cannot be erased</td><td>Small fixed tables, one-off embedded code</td></tr>
+    <tr><td><strong>EPROM</strong> (Erasable PROM)</td><td>Programmed electrically</td><td>Erased by ultraviolet light through a quartz window</td><td>Older BIOS chips, development boards</td></tr>
+    <tr><td><strong>EEPROM</strong> (Electrically Erasable PROM)</td><td>Programmed electrically</td><td>Erased electrically, often byte by byte</td><td>Configuration data, modern BIOS/UEFI, microcontroller settings</td></tr>
+  </table>
+
+  <p><strong>Flash memory</strong> is a close relative of EEPROM. It is electrically erased, but usually in blocks rather than one byte at a time. SSDs and USB drives use flash. In an exam, if the question lists only PROM, EPROM and EEPROM, answer those; flash can be added as a short supplementary note.</p>
+
+  <h3>3.5 Exam answer plan</h3>
+
+  <ol class="steps">
+    <li>Start with a one-line definition of primary and secondary memory.</li>
+    <li>Give a comparison table with speed, capacity, cost per bit, volatility, CPU access and examples.</li>
+    <li>Define RAM and ROM, then classify RAM into SRAM and DRAM.</li>
+    <li>For SRAM and DRAM, state the storage element, refresh requirement, speed, density, cost and use.</li>
+    <li>For PROM, EPROM and EEPROM, state how each is programmed and erased, and give one application.</li>
+    <li>Finish with one sentence on why the hierarchy uses different technologies at different levels.</li>
+  </ol>
+
+  <h2 id="expansion">4 · Memory expansion and chip organization</h2>
+
+  <h3>4.1 Why expansion is needed</h3>
+
+  <p>A single memory chip is usually too small or too narrow for the memory system a processor needs. Engineers combine several chips to get more words (more addresses) or wider words (more bits per access). This is called <strong>memory expansion</strong>. The two directions are independent, and most real designs use both at once.</p>
+
+  <table>
+    <tr><th>Expansion</th><th>Goal</th><th>How chips are connected</th><th>Effect</th></tr>
+    <tr><td><strong>Word-size (width) expansion</strong></td><td>Increase bits per word</td><td>Chips share the same address and control lines; their data lines are connected side by side to different bit slices of the data bus.</td><td>Data bus becomes wider; number of addressable locations stays the same.</td></tr>
+    <tr><td><strong>Address (depth) expansion</strong></td><td>Increase number of locations</td><td>Chips share the data bus; a decoder uses higher address bits to select one chip (chip select).</td><td>More addresses; word width stays the same.</td></tr>
+  </table>
+
+  <div class="eq">total chips = (required locations ÷ chip locations) × (required word size ÷ chip word size)</div>
+  <p class="eq-note">Both factors must be whole numbers. If they are not, the required memory cannot be built exactly from identical chips.</p>
+
+  <div class="example">
+    <div class="example-title">Teacher problem 4 — memory expansion (Unit 4 problems, Problem 3)</div>
+    <p>Using 4K × 8 memory chips, design a memory system of 16K × 16. Find the number of chips required.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>Build 16K × 16 from 4K × 8 chips. How many chips are needed?</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <p><strong>Step 1 — Expand the word size.</strong> The required word is 16 bits; each chip supplies 8 bits.</p>
+    <div class="eq">chips per word = 16 ÷ 8 = 2</div>
+    <p><strong>Step 2 — Expand the number of locations.</strong> The required depth is 16K; each chip supplies 4K.</p>
+    <div class="eq">address groups = 16K ÷ 4K = 4</div>
+    <p><strong>Step 3 — Multiply the two independent expansions.</strong></p>
+    <div class="eq">total chips = 4 × 2 = 8</div>
+    <p><strong>Step 4 — Check.</strong> Eight chips × 4K × 8 bits = 8 × 32K bits = 256K bits. The target is 16K × 16 = 256K bits. The capacities match.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>8 chips: four address groups, each containing two chips in parallel.</strong></p>
+  </div>
+
+  <figure>
+    <svg viewBox="0 0 620 330" role="img" aria-labelledby="m4-exp-title m4-exp-desc" style="max-width:620px">
+      <title id="m4-exp-title">Expanding 4K by 8 chips into a 16K by 16 memory</title>
+      <desc id="m4-exp-desc">Four rows of chips, each row containing two 4K by 8 chips. The low chip in each row drives data bits D0 to D7 and the high chip drives D8 to D15. A 2-to-4 decoder selects one row using address bits A14 and A15. Address bits A0 to A13 go to every chip.</desc>
+      <text x="310" y="18" text-anchor="middle" font-family="Helvetica, Arial" font-size="13" fill="var(--ink)">4 address groups × 2 chips per word = 8 chips</text>
+      <g font-family="Helvetica, Arial" font-size="12" fill="var(--ink)">
+        <rect x="120" y="40" width="150" height="48" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="195" y="60" text-anchor="middle">4K × 8</text><text x="195" y="76" text-anchor="middle">D0–D7</text>
+        <rect x="290" y="40" width="150" height="48" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="365" y="60" text-anchor="middle">4K × 8</text><text x="365" y="76" text-anchor="middle">D8–D15</text>
+        <rect x="120" y="110" width="150" height="48" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="195" y="130" text-anchor="middle">4K × 8</text><text x="195" y="146" text-anchor="middle">D0–D7</text>
+        <rect x="290" y="110" width="150" height="48" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="365" y="130" text-anchor="middle">4K × 8</text><text x="365" y="146" text-anchor="middle">D8–D15</text>
+        <rect x="120" y="180" width="150" height="48" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="195" y="200" text-anchor="middle">4K × 8</text><text x="195" y="216" text-anchor="middle">D0–D7</text>
+        <rect x="290" y="180" width="150" height="48" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="365" y="200" text-anchor="middle">4K × 8</text><text x="365" y="216" text-anchor="middle">D8–D15</text>
+        <rect x="120" y="250" width="150" height="48" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="195" y="270" text-anchor="middle">4K × 8</text><text x="195" y="286" text-anchor="middle">D0–D7</text>
+        <rect x="290" y="250" width="150" height="48" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="365" y="270" text-anchor="middle">4K × 8</text><text x="365" y="286" text-anchor="middle">D8–D15</text>
+        <rect x="20" y="130" width="70" height="70" fill="var(--surface-hi)" stroke="var(--ink)"/>
+        <text x="55" y="155" text-anchor="middle">2-to-4</text><text x="55" y="171" text-anchor="middle">decoder</text>
+        <text x="55" y="190" text-anchor="middle">A14,A15</text>
+        <line x1="90" y1="150" x2="120" y2="64" stroke="var(--muted)"/>
+        <line x1="90" y1="160" x2="120" y2="134" stroke="var(--muted)"/>
+        <line x1="90" y1="175" x2="120" y2="204" stroke="var(--muted)"/>
+        <line x1="90" y1="185" x2="120" y2="274" stroke="var(--muted)"/>
+        <text x="470" y="60" font-size="11" fill="var(--muted)">A0–A13 to all chips</text>
+        <text x="470" y="80" font-size="11" fill="var(--muted)">R/W to all chips</text>
+        <text x="470" y="100" font-size="11" fill="var(--muted)">CS from decoder</text>
+        <text x="470" y="130" font-size="11" fill="var(--muted)">D0–D15 to CPU</text>
+      </g>
+    </svg>
+    <figcaption>Figure 2. A 16K × 16 memory built from eight 4K × 8 chips. Two chips widen each 4K row; four rows are selected by A14 and A15.</figcaption>
+  </figure>
+
+  <div class="example">
+    <div class="example-title">Teacher problem 5 — ROM expansion (Unit 4 problems, Problem 5)</div>
+    <p>You have 2K × 8 ROM chips. Construct an 8K × 16 ROM. Find the number of ROM chips required.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>Build 8K × 16 from 2K × 8 ROM chips. How many chips?</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <div class="eq">word-size expansion = 16 ÷ 8 = 2 chips in parallel</div>
+    <div class="eq">address expansion = 8K ÷ 2K = 4 groups</div>
+    <div class="eq">total = 4 × 2 = 8 ROM chips</div>
+    <p><strong>Check:</strong> 8 × 2K × 8 = 8 × 16K bits = 128K bits. Target 8K × 16 = 128K bits. Correct.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>8 ROM chips.</strong></p>
+  </div>
+
+  <h3>4.2 Reading a chip diagram</h3>
+
+  <p>In a chip diagram, the <strong>address pins</strong> receive A0…A(n−1), the <strong>data pins</strong> connect to the data bus, and the <strong>chip-select (CS)</strong> pin decides whether the chip responds at all. The <strong>read/write (R/W)</strong> pin decides the direction. When several chips share the data bus, only the selected chip may drive it; otherwise two chips would fight over the same wires. That is why a decoder is used: it turns the high-order address bits into exactly one active chip-select signal.</p>
+
+  <div class="theory">
+    <span class="source">Common exam trap</span>
+    <p>Do not add the two expansion factors. They multiply because they are independent: four rows of two chips is eight chips, not six. Also, the number of address lines for the complete memory is log<sub>2</sub>(total locations), not the sum of the chips’ address lines.</p>
+  </div>
+
+  <h3>4.3 Exam answer plan</h3>
+
+  <ol class="steps">
+    <li>Write the target specification and the chip specification in <span class="kbd">N × M</span> form.</li>
+    <li>Compute the width factor (target M ÷ chip M).</li>
+    <li>Compute the depth factor (target N ÷ chip N).</li>
+    <li>Multiply for the total chip count.</li>
+    <li>Describe the connections: common address lines, decoder for chip select, data slices for width.</li>
+    <li>Check total bits before and after expansion.</li>
+  </ol>
+
+  <h2 id="paging">5 · Virtual memory I: paging</h2>
+
+  <h3>5.1 Why virtual memory exists</h3>
+
+  <p>Programs are written as if they own a large, contiguous address space. The physical RAM is smaller than the sum of all running programs, and several programs must coexist without being able to read or overwrite each other. <strong>Virtual memory</strong> solves this by giving each program its own <em>virtual address space</em> and translating every virtual address into a <em>physical address</em> at run time. The translation is done by the <strong>MMU (Memory Management Unit)</strong> using tables prepared by the operating system.</p>
+
+  <p>Virtual memory gives four practical benefits:</p>
+
+  <ul>
+    <li><strong>Large address space:</strong> a program can use more virtual memory than the physical RAM, because inactive pages can live on disk or SSD.</li>
+    <li><strong>Isolation and protection:</strong> one process cannot name another process’s physical memory unless the OS deliberately maps it.</li>
+    <li><strong>Simpler loading:</strong> a program does not need a single contiguous physical region.</li>
+    <li><strong>Sharing:</strong> several processes can map the same physical page read-only, for example a shared library.</li>
+  </ul>
+
+  <h3>5.2 The paging idea</h3>
+
+  <p><strong>Paging</strong> divides the virtual address space into fixed-size <strong>pages</strong> and physical memory into fixed-size <strong>frames</strong>. A page and a frame are the same size. Any page can be placed in any free frame, so physical memory does not need to be contiguous. The OS keeps a <strong>page table</strong> for each process. Each <strong>page-table entry (PTE)</strong> maps a virtual page number to a physical frame number and stores control bits such as valid, dirty and permission bits.</p>
+
+  <table>
+    <tr><th>Term</th><th>Meaning</th></tr>
+    <tr><td>Virtual address (VA)</td><td>The address generated by the CPU before translation.</td></tr>
+    <tr><td>Physical address (PA)</td><td>The address actually sent to main memory.</td></tr>
+    <tr><td>Page</td><td>A fixed-size block of the virtual address space.</td></tr>
+    <tr><td>Frame</td><td>A fixed-size block of physical memory. Same size as a page.</td></tr>
+    <tr><td>Page number (VPN)</td><td>The high-order part of the VA that identifies the page.</td></tr>
+    <tr><td>Offset</td><td>The low-order part of the VA that identifies the byte within the page. It does not change during translation.</td></tr>
+    <tr><td>Page table</td><td>The per-process table mapping VPN to frame number and flags.</td></tr>
+    <tr><td>Page-table entry (PTE)</td><td>One row of the page table.</td></tr>
+    <tr><td>Page fault</td><td>The page is not in physical memory; the OS must fetch it from secondary storage.</td></tr>
+    <tr><td>TLB</td><td>A small, fast cache of recent page-table entries inside the MMU.</td></tr>
+  </table>
+
+  <h3>5.3 Splitting the address</h3>
+
+  <div class="eq">virtual address bits = page-number bits + offset bits</div>
+  <div class="eq">offset bits = log<sub>2</sub>(page size in bytes)</div>
+  <div class="eq">page-number bits = virtual address bits − offset bits</div>
+  <div class="eq">number of virtual pages = 2<sup>page-number bits</sup> = virtual address space ÷ page size</div>
+  <div class="eq">number of frames = physical memory size ÷ page size</div>
+  <div class="eq">frame-number bits = log<sub>2</sub>(number of frames)</div>
+
+  <p>The offset is copied unchanged. Only the page number is translated. This is the single most important idea in paging: <em>the low bits stay, the high bits are replaced</em>.</p>
+
+  <figure>
+    <svg viewBox="0 0 620 300" role="img" aria-labelledby="m4-page-title m4-page-desc" style="max-width:620px">
+      <title id="m4-page-title">Paging address translation</title>
+      <desc id="m4-page-desc">A virtual address is split into a page number and an offset. The page number indexes the page table to produce a frame number. The frame number is concatenated with the unchanged offset to form the physical address.</desc>
+      <g font-family="Helvetica, Arial" font-size="12" fill="var(--ink)">
+        <text x="20" y="24">Virtual address</text>
+        <rect x="20" y="34" width="170" height="34" fill="var(--surface-hi)" stroke="var(--ink)"/>
+        <text x="105" y="56" text-anchor="middle">page number (VPN)</text>
+        <rect x="190" y="34" width="130" height="34" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="255" y="56" text-anchor="middle">offset</text>
+
+        <rect x="20" y="100" width="300" height="120" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="170" y="120" text-anchor="middle" font-weight="700">Page table</text>
+        <line x1="20" y1="130" x2="320" y2="130" stroke="var(--line)"/>
+        <text x="35" y="150">VPN 0 → frame 5</text>
+        <text x="35" y="170">VPN 1 → frame 2</text>
+        <text x="35" y="190">VPN 2 → frame 9</text>
+        <text x="35" y="210">…</text>
+
+        <line x1="105" y1="68" x2="105" y2="100" stroke="var(--muted)" marker-end="url(#m4-page-arrow)"/>
+        <text x="115" y="88" font-size="10" fill="var(--muted)">index</text>
+
+        <line x1="320" y1="160" x2="390" y2="160" stroke="var(--muted)" marker-end="url(#m4-page-arrow)"/>
+        <text x="355" y="150" text-anchor="middle" font-size="10" fill="var(--muted)">lookup</text>
+
+        <text x="390" y="24">Physical address</text>
+        <rect x="390" y="34" width="170" height="34" fill="var(--surface-hi)" stroke="var(--ink)"/>
+        <text x="475" y="56" text-anchor="middle">frame number</text>
+        <rect x="560" y="34" width="50" height="34" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="585" y="56" text-anchor="middle">offset</text>
+        <line x1="475" y1="130" x2="475" y2="68" stroke="var(--muted)" marker-end="url(#m4-page-arrow)"/>
+        <line x1="255" y1="68" x2="585" y2="68" stroke="var(--muted)" stroke-dasharray="4 3"/>
+        <text x="420" y="88" font-size="10" fill="var(--muted)">offset copied unchanged</text>
+
+        <rect x="390" y="120" width="220" height="90" fill="var(--bg)" stroke="var(--line)"/>
+        <text x="400" y="140" font-size="11">page table entry also has:</text>
+        <text x="400" y="160" font-size="11">valid · dirty · referenced</text>
+        <text x="400" y="180" font-size="11">read/write/execute permissions</text>
+        <text x="400" y="200" font-size="11">frame number</text>
+      </g>
+      <defs>
+        <marker id="m4-page-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8" fill="var(--muted)"/>
+        </marker>
+      </defs>
+    </svg>
+    <figcaption>Figure 3. Paging translation. The page number selects a PTE; the frame number from that PTE replaces the page number, while the offset is copied unchanged.</figcaption>
+  </figure>
+
+  <h3>5.4 The translation procedure</h3>
+
+  <ol class="steps">
+    <li>Extract the page number and offset from the virtual address using the page size.</li>
+    <li>Use the page number as an index into the page table.</li>
+    <li>Read the PTE. If the valid bit is 0, a page fault occurs and the OS handles it.</li>
+    <li>Take the frame number from the PTE.</li>
+    <li>Concatenate the frame number with the original offset to form the physical address.</li>
+  </ol>
+
+  <div class="example">
+    <div class="example-title">Teacher problem 6 — page number and offset (Unit 4 problems, Problem 9)</div>
+    <p>A virtual address space contains 2<sup>16</sup> bytes. The page size is 1 KB. Find the number of pages, the number of bits in the page number, and the number of offset bits.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>Virtual space 2<sup>16</sup> bytes, page size 1 KB. Find pages, page-number bits and offset bits.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <p><strong>Step 1 — Convert the page size to a power of two.</strong></p>
+    <div class="eq">1 KB = 2<sup>10</sup> bytes = 1024 bytes</div>
+    <p><strong>Step 2 — Offset bits.</strong></p>
+    <div class="eq">offset bits = log<sub>2</sub>(2<sup>10</sup>) = 10</div>
+    <p><strong>Step 3 — Number of pages.</strong></p>
+    <div class="eq">pages = 2<sup>16</sup> ÷ 2<sup>10</sup> = 2<sup>6</sup> = 64</div>
+    <p><strong>Step 4 — Page-number bits.</strong> Sixty-four pages need six bits.</p>
+    <div class="eq">page-number bits = log<sub>2</sub>(64) = 6</div>
+    <p><strong>Check:</strong> 6 page bits + 10 offset bits = 16 address bits. Correct.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>64 pages, 6 page-number bits, 10 offset bits.</strong></p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Teacher problem 7 — virtual and physical address fields (Unit 4 problems, Problem 10)</div>
+    <p>A system has a 16-bit virtual address, a 14-bit physical address, and a page size of 1 KB. Find the number of virtual pages, the number of physical frames, and the page number and offset for virtual address 2A35H.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>VA = 16 bits, PA = 14 bits, page = 1 KB. Find virtual pages, frames, and the page number and offset of 2A35H.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <p><strong>Step 1 — Offset bits.</strong> 1 KB = 2<sup>10</sup> bytes, so the offset is 10 bits.</p>
+    <div class="eq">offset bits = 10</div>
+    <p><strong>Step 2 — Virtual page-number bits and page count.</strong></p>
+    <div class="eq">VPN bits = 16 − 10 = 6</div>
+    <div class="eq">virtual pages = 2<sup>6</sup> = 64</div>
+    <p><strong>Step 3 — Frame-number bits and frame count.</strong></p>
+    <div class="eq">frame bits = 14 − 10 = 4</div>
+    <div class="eq">frames = 2<sup>4</sup> = 16</div>
+    <p><strong>Step 4 — Split 2A35H.</strong> Each hexadecimal digit is four bits, so 2A35H is 16 bits. The low 10 bits form the offset; the high 6 bits form the page number.</p>
+    <div class="eq">2A35H = 0010 1010 0011 0101<sub>2</sub></div>
+    <div class="eq">page number = high 6 bits = 001010<sub>2</sub> = 0AH = 10</div>
+    <div class="eq">offset = low 10 bits = 10 0011 0101<sub>2</sub> = 235H</div>
+    <p><strong>Alternative arithmetic:</strong> shifting right by 10 bits divides by 1024.</p>
+    <div class="eq">2A35H ÷ 400H = AH (page number)</div>
+    <div class="eq">2A35H mod 400H = 235H (offset)</div>
+    <p><strong>Check:</strong> AH × 400H + 235H = 2800H + 235H = 2A35H. Correct.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>64 virtual pages, 16 frames; for 2A35H: page number AH (10), offset 235H.</strong></p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Teacher problem 8 — page table with a 32-bit address (Unit 4 problems, Problem 11)</div>
+    <p>A system has a 32-bit virtual address, a page size of 4 KB, and 1 GB of physical memory. Find the offset bits, the number of virtual pages, the number of physical frames and the frame-number bits.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>32-bit VA, 4 KB pages, 1 GB physical memory. Find offset bits, virtual pages, frames and frame-number bits.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <p><strong>Step 1 — Offset.</strong></p>
+    <div class="eq">4 KB = 2<sup>12</sup> bytes &nbsp;⇒&nbsp; offset bits = 12</div>
+    <p><strong>Step 2 — Virtual page number and page count.</strong></p>
+    <div class="eq">VPN bits = 32 − 12 = 20</div>
+    <div class="eq">virtual pages = 2<sup>20</sup> = 1,048,576</div>
+    <p><strong>Step 3 — Physical frames.</strong> 1 GB = 2<sup>30</sup> bytes.</p>
+    <div class="eq">frames = 2<sup>30</sup> ÷ 2<sup>12</sup> = 2<sup>18</sup> = 262,144</div>
+    <p><strong>Step 4 — Frame-number bits.</strong></p>
+    <div class="eq">frame bits = log<sub>2</sub>(2<sup>18</sup>) = 18</div>
+    <p><strong>Check:</strong> 18 frame bits + 12 offset bits = 30 physical address bits, which is 1 GB. Correct.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>12 offset bits, 2<sup>20</sup> virtual pages, 2<sup>18</sup> frames, 18 frame-number bits.</strong></p>
+  </div>
+
+  <h3>5.5 Page-table size</h3>
+
+  <p>A single-level page table has one entry per virtual page. If each entry is 4 bytes, the table size is:</p>
+
+  <div class="eq">page-table size = number of virtual pages × size of one PTE</div>
+
+  <p>For the previous example, 2<sup>20</sup> entries × 4 bytes = 4 MiB <em>per process</em>. That is often too much, so real systems use <strong>multi-level page tables</strong>: the upper levels map only the portions of the address space that are actually in use. You do not need to design a multi-level table for this syllabus, but you should be able to explain why a flat table can be large.</p>
+
+  <div class="theory">
+    <span class="source">TLB — a small cache for translations</span>
+    <p>A <strong>TLB (Translation Lookaside Buffer)</strong> stores recent VPN-to-frame mappings. A TLB hit avoids reading the page table from memory; a TLB miss causes a page-table walk. The TLB is a practical application of associative memory (Section 12). The syllabus does not require TLB design, but the term is useful in a virtual-memory answer.</p>
+  </div>
+
+  <h3>5.6 Common paging mistakes</h3>
+
+  <table>
+    <tr><th>Mistake</th><th>Correction</th></tr>
+    <tr><td>Using 1 KB = 1000 bytes</td><td>In memory addressing, 1 KB = 2<sup>10</sup> = 1024 bytes. The offset bits follow from the power of two.</td></tr>
+    <tr><td>Confusing page number with frame number</td><td>The page number is virtual; the frame number is physical. The page table converts one to the other.</td></tr>
+    <tr><td>Changing the offset during translation</td><td>The offset is copied unchanged. Only the high-order page number is translated.</td></tr>
+    <tr><td>Using the physical address size to count virtual pages</td><td>Virtual pages depend on the virtual address size; frames depend on the physical memory size.</td></tr>
+    <tr><td>Forgetting units</td><td>Address bits are dimensionless, but page size and memory size must be in the same unit (bytes) before dividing.</td></tr>
+  </table>
+
+  <h3>5.7 Exam answer plan</h3>
+
+  <ol class="steps">
+    <li>Define virtual memory and state why it is needed (large address space, protection, sharing, non-contiguous allocation).</li>
+    <li>Define page, frame, page table and offset.</li>
+    <li>Draw the VA → page table → PA diagram.</li>
+    <li>Show the address split with the formulas.</li>
+    <li>Solve the supplied numerical: offset bits, page-number bits, page count, frame count.</li>
+    <li>Mention the valid/dirty bits and the page-fault path in one or two sentences.</li>
+  </ol>
+
+  <h2 id="segmentation">6 · Virtual memory II: segmentation</h2>
+
+  <h3>6.1 The segmentation idea</h3>
+
+  <p><strong>Segmentation</strong> divides a program into <em>variable-sized logical units</em>: a code segment, a data segment, a stack segment, a heap segment, a shared library segment. Each segment has a number, a <strong>base</strong> (its starting physical address) and a <strong>limit</strong> (its length). The CPU generates a logical address as a pair <span class="kbd">(segment number, offset)</span>. The MMU looks up the segment table, checks that the offset is within the limit, and adds the base to the offset.</p>
+
+  <div class="eq">physical address = segment base + offset &nbsp;&nbsp; provided offset &lt; limit</div>
+  <div class="eq">if offset ≥ limit → segmentation fault (invalid address)</div>
+
+  <p>The limit check is not optional. It is what stops a program from reading past the end of its segment into another program’s data. This is a protection mechanism, not just arithmetic.</p>
+
+  <figure>
+    <svg viewBox="0 0 620 300" role="img" aria-labelledby="m4-seg-title m4-seg-desc" style="max-width:620px">
+      <title id="m4-seg-title">Segmentation address translation with base and limit</title>
+      <desc id="m4-seg-desc">A logical address contains a segment number and an offset. The segment number indexes a segment table containing base and limit. The offset is compared with the limit; if it is smaller, the base is added to the offset to produce the physical address.</desc>
+      <g font-family="Helvetica, Arial" font-size="12" fill="var(--ink)">
+        <text x="20" y="24">Logical address</text>
+        <rect x="20" y="34" width="120" height="34" fill="var(--surface-hi)" stroke="var(--ink)"/>
+        <text x="80" y="56" text-anchor="middle">segment no.</text>
+        <rect x="140" y="34" width="120" height="34" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="200" y="56" text-anchor="middle">offset</text>
+
+        <rect x="20" y="105" width="270" height="130" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="155" y="125" text-anchor="middle" font-weight="700">Segment table</text>
+        <line x1="20" y1="135" x2="290" y2="135" stroke="var(--line)"/>
+        <text x="32" y="155">seg</text><text x="90" y="155">base</text><text x="190" y="155">limit</text>
+        <text x="32" y="177">0</text><text x="90" y="177">1000</text><text x="190" y="177">500</text>
+        <text x="32" y="199">1</text><text x="90" y="199">4000</text><text x="190" y="199">1000</text>
+        <text x="32" y="221">2</text><text x="90" y="221">7000</text><text x="190" y="221">1500</text>
+
+        <line x1="80" y1="68" x2="80" y2="105" stroke="var(--muted)" marker-end="url(#m4-seg-arrow)"/>
+        <text x="90" y="88" font-size="10" fill="var(--muted)">index</text>
+
+        <rect x="350" y="105" width="120" height="52" fill="var(--bg)" stroke="var(--ink)"/>
+        <text x="410" y="125" text-anchor="middle">offset &lt; limit?</text>
+        <text x="410" y="145" text-anchor="middle" font-size="11">yes → continue</text>
+        <line x1="290" y1="170" x2="350" y2="140" stroke="var(--muted)" marker-end="url(#m4-seg-arrow)"/>
+        <line x1="200" y1="68" x2="350" y2="120" stroke="var(--muted)" stroke-dasharray="4 3"/>
+
+        <rect x="350" y="190" width="240" height="50" fill="var(--surface-hi)" stroke="var(--ink)"/>
+        <text x="470" y="211" text-anchor="middle">physical address</text>
+        <text x="470" y="229" text-anchor="middle">= base + offset</text>
+        <line x1="470" y1="157" x2="470" y2="190" stroke="var(--muted)" marker-end="url(#m4-seg-arrow)"/>
+        <text x="350" y="270" font-size="11" fill="var(--muted)">If offset ≥ limit: trap (segmentation fault), no memory access.</text>
+      </g>
+      <defs>
+        <marker id="m4-seg-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8" fill="var(--muted)"/>
+        </marker>
+      </defs>
+    </svg>
+    <figcaption>Figure 4. Segmentation translation. The segment table supplies a base and a limit; the limit check protects memory before the base is added.</figcaption>
+  </figure>
+
+  <h3>6.2 The translation procedure</h3>
+
+  <ol class="steps">
+    <li>Read the segment number and offset from the logical address.</li>
+    <li>Use the segment number to index the segment table.</li>
+    <li>Read the base and limit for that segment.</li>
+    <li>If offset ≥ limit, raise a segmentation fault and stop.</li>
+    <li>Otherwise compute physical address = base + offset.</li>
+  </ol>
+
+  <div class="example">
+    <div class="example-title">Teacher problem 9 — segmentation address (Unit 4 problems, Problem 12)</div>
+    <p>A segment has base address 5000 and segment limit 2000. A logical address contains segment number 2 and offset 1500. Determine whether the address is valid. If valid, find the physical address.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>Base 5000, limit 2000, segment 2, offset 1500. Valid? Physical address?</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <p><strong>Step 1 — Check the limit.</strong> The offset must be strictly less than the limit.</p>
+    <div class="eq">1500 &lt; 2000 &nbsp;⇒&nbsp; valid</div>
+    <p><strong>Step 2 — Add the base.</strong></p>
+    <div class="eq">physical address = 5000 + 1500 = 6500</div>
+    <p><strong>Step 3 — Interpret.</strong> The offset is measured from the start of the segment, so the address is 1500 bytes into the segment that begins at physical address 5000.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>Valid; physical address 6500.</strong></p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Teacher problem 10 — segment table (Unit 4 problems, Problem 13)</div>
+    <p>Consider the segment table below. Find the physical address for (a) segment 1, offset 750; (b) segment 2, offset 1200; (c) segment 3, offset 900.</p>
+    <table>
+      <tr><th>Segment</th><th>Base</th><th>Limit</th></tr>
+      <tr><td>0</td><td>1000</td><td>500</td></tr>
+      <tr><td>1</td><td>4000</td><td>1000</td></tr>
+      <tr><td>2</td><td>7000</td><td>1500</td></tr>
+      <tr><td>3</td><td>9000</td><td>800</td></tr>
+    </table>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>Use the segment table to translate the three logical addresses, checking each limit.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <p><strong>(a) Segment 1, offset 750.</strong></p>
+    <div class="eq">750 &lt; 1000 &nbsp;⇒&nbsp; valid</div>
+    <div class="eq">physical address = 4000 + 750 = 4750</div>
+    <p><strong>(b) Segment 2, offset 1200.</strong></p>
+    <div class="eq">1200 &lt; 1500 &nbsp;⇒&nbsp; valid</div>
+    <div class="eq">physical address = 7000 + 1200 = 8200</div>
+    <p><strong>(c) Segment 3, offset 900.</strong></p>
+    <div class="eq">900 ≥ 800 &nbsp;⇒&nbsp; invalid</div>
+    <p>The offset is 100 beyond the segment limit, so the MMU raises a segmentation fault. There is no physical address for this access.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>(a) 4750, valid. (b) 8200, valid. (c) Invalid — segmentation fault.</strong></p>
+  </div>
+
+  <h3>6.3 Paging versus segmentation</h3>
+
+  <table>
+    <tr><th>Feature</th><th>Paging</th><th>Segmentation</th></tr>
+    <tr><td>Division unit</td><td>Fixed-size pages</td><td>Variable-size logical segments</td></tr>
+    <tr><td>Size determined by</td><td>Hardware / OS (fixed)</td><td>Programmer / compiler (logical units)</td></tr>
+    <tr><td>Address structure</td><td>Page number + offset</td><td>Segment number + offset</td></tr>
+    <tr><td>Table</td><td>Page table</td><td>Segment table (base + limit)</td></tr>
+    <tr><td>Fragmentation</td><td>Internal fragmentation (last page may be partly unused)</td><td>External fragmentation (variable holes between segments)</td></tr>
+    <tr><td>Programmer visibility</td><td>Invisible; the OS and hardware handle it</td><td>Visible; segments correspond to logical program units</td></tr>
+    <tr><td>Sharing and protection</td><td>Possible, but less natural at logical boundaries</td><td>Natural: a segment can be shared or protected as a unit</td></tr>
+    <tr><td>Address translation</td><td>Page table lookup, then frame + offset</td><td>Limit check, then base + offset</td></tr>
+    <tr><td>Typical use</td><td>Main virtual-memory mechanism in modern general-purpose systems</td><td>Logical organisation and protection; often combined with paging</td></tr>
+  </table>
+
+  <p>Modern systems often combine the two: a program is divided into segments, and each segment is itself paged. That gives logical protection boundaries without giving up the allocation flexibility of fixed-size pages.</p>
+
+  <h3>6.4 Exam answer plan</h3>
+
+  <ol class="steps">
+    <li>Define segmentation as variable-sized logical division, with segment number and offset.</li>
+    <li>Explain base and limit, and why the limit check is required.</li>
+    <li>Draw the segment table and the base + offset translation.</li>
+    <li>Solve the supplied numerical, showing the validity check before the addition.</li>
+    <li>Compare paging and segmentation in a table: size, visibility, table, fragmentation, sharing, protection.</li>
+    <li>End with one sentence on combining paging and segmentation in real systems.</li>
+  </ol>
+
+  <h2 id="cache">7 · Cache memory: concept and performance</h2>
+
+  <h3>7.1 The problem cache solves</h3>
+
+  <p>A modern processor can execute several instructions in the time it takes main memory to answer one request. If every instruction and operand had to come from DRAM, the processor would spend most of its life waiting. Cache memory is a small, fast SRAM array placed between the CPU and main memory. It holds copies of recently used blocks. When the CPU asks for data, the cache checks whether it already has the block. If it does, the access is a <strong>hit</strong> and completes at cache speed. If it does not, a <strong>miss</strong> occurs, the block is fetched from main memory, and the CPU waits for the slower access.</p>
+
+  <div class="theory">
+    <span class="source">Formal definition</span>
+    <p>A <strong>cache</strong> is a small, high-speed memory that stores copies of blocks from a larger, slower memory, together with tags that identify which block each copy came from. It exploits temporal and spatial locality to make the average access time close to the cache access time even though most data still lives in main memory.</p>
+  </div>
+
+  <h3>7.2 Key terms</h3>
+
+  <table>
+    <tr><th>Term</th><th>Meaning</th></tr>
+    <tr><td><strong>Block</strong> (cache line)</td><td>The fixed-size unit moved between main memory and cache. A block contains several words or bytes.</td></tr>
+    <tr><td><strong>Hit</strong></td><td>The requested block is present in the cache.</td></tr>
+    <tr><td><strong>Miss</strong></td><td>The requested block is not present; it must be fetched from the next level.</td></tr>
+    <tr><td><strong>Hit ratio (h)</strong></td><td>Number of hits ÷ total accesses. A decimal between 0 and 1, or a percentage.</td></tr>
+    <tr><td><strong>Miss ratio</strong></td><td>1 − h.</td></tr>
+    <tr><td><strong>Hit time</strong></td><td>Time to access the cache and determine whether the block is present.</td></tr>
+    <tr><td><strong>Miss penalty</strong></td><td>Extra time to fetch the block from the next level and deliver it to the CPU.</td></tr>
+    <tr><td><strong>Tag</strong></td><td>The address bits stored with a block that identify which main-memory block it is.</td></tr>
+    <tr><td><strong>Index / set index</strong></td><td>The address bits that choose a cache line or set.</td></tr>
+    <tr><td><strong>Offset</strong></td><td>The address bits that choose a byte or word inside the block.</td></tr>
+  </table>
+
+  <h3>7.3 L1, L2 and L3</h3>
+
+  <table>
+    <tr><th>Level</th><th>Typical location</th><th>Typical size</th><th>Relative speed</th><th>Sharing</th><th>Role</th></tr>
+    <tr><td><strong>L1</strong></td><td>Inside each CPU core</td><td>2 KB to 64 KB (often split into instruction and data caches)</td><td>Fastest cache; a few cycles</td><td>Private to the core</td><td>Holds the hottest instructions and data.</td></tr>
+    <tr><td><strong>L2</strong></td><td>Inside the core or on the same chip</td><td>256 KB to a few MB</td><td>Slower than L1, faster than L3</td><td>Usually private, sometimes shared by two cores</td><td>Backs up L1 misses.</td></tr>
+    <tr><td><strong>L3</strong></td><td>On the processor chip, outside the cores</td><td>Several MB to tens of MB</td><td>Slower than L2</td><td>Usually shared by all cores</td><td>Last on-chip cache before main memory; reduces traffic to DRAM.</td></tr>
+  </table>
+
+  <p>These sizes are typical, not universal. The important exam point is the ordering: L1 is smallest and fastest, L2 is larger and slower, L3 is larger still and usually shared. A request checks L1 first, then L2, then L3, then main memory.</p>
+
+  <h3>7.4 Hit ratio and average access time</h3>
+
+  <p>Let <span class="kbd">h</span> be the hit ratio, <span class="kbd">T<sub>c</sub></span> the cache access time, and <span class="kbd">T<sub>m</sub></span> the main-memory access time. There are two common conventions. Read the question carefully and state which one you use.</p>
+
+  <div class="theory">
+    <span class="source">Convention A — simultaneous lookup (cache and memory checked together)</span>
+    <p>On a hit, the access takes <span class="kbd">T<sub>c</sub></span>. On a miss, the access takes <span class="kbd">T<sub>m</sub></span> (the memory access replaces the cache access, or the cache lookup is overlapped with it).</p>
+    <div class="eq">T<sub>avg</sub> = h·T<sub>c</sub> + (1 − h)·T<sub>m</sub></div>
+  </div>
+
+  <div class="theory">
+    <span class="source">Convention B — hierarchical lookup (cache first, then memory on a miss)</span>
+    <p>On a miss, the CPU first spends <span class="kbd">T<sub>c</sub></span> discovering the miss, then spends <span class="kbd">T<sub>m</sub></span> fetching the block. The total miss time is <span class="kbd">T<sub>c</sub> + T<sub>m</sub></span>.</p>
+    <div class="eq">T<sub>avg</sub> = h·T<sub>c</sub> + (1 − h)(T<sub>c</sub> + T<sub>m</sub>) = T<sub>c</sub> + (1 − h)·T<sub>m</sub></div>
+  </div>
+
+  <p>For two cache levels plus main memory, the same logic extends. If <span class="kbd">h<sub>1</sub></span> is the L1 hit ratio and <span class="kbd">h<sub>2</sub></span> is the L2 hit ratio <em>among L1 misses</em>, then the fraction of accesses that reach main memory is <span class="kbd">(1 − h<sub>1</sub>)(1 − h<sub>2</sub>)</span>. A hierarchical average is:</p>
+
+  <div class="eq">T<sub>avg</sub> = T<sub>L1</sub> + (1 − h<sub>1</sub>)·T<sub>L2</sub> + (1 − h<sub>1</sub>)(1 − h<sub>2</sub>)·T<sub>main</sub></div>
+
+  <p class="eq-note">This form treats each T as the additional access time at that level. Some textbooks instead use “miss penalty” terms; both are valid if the definition is stated. Do not mix the two conventions in one calculation.</p>
+
+  <div class="example">
+    <div class="example-title">Teacher problem 11 — average memory access time with two cache levels (Unit 4 problems, Problem 6)</div>
+    <p>A computer has L1 cache access time 2 ns, L2 cache access time 10 ns, main memory access time 100 ns, L1 hit ratio 90% and L2 hit ratio 95%. Calculate the average memory access time. Assume sequential lookup.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>L1 = 2 ns, L2 = 10 ns, main = 100 ns, h<sub>1</sub> = 0.90, h<sub>2</sub> = 0.95. Find AMAT.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <p><strong>Step 1 — Identify the three disjoint outcomes.</strong></p>
+    <ul>
+      <li>L1 hit: probability 0.90. Time = 2 ns.</li>
+      <li>L1 miss, then L2 hit: probability 0.10 × 0.95 = 0.095. Time = 2 + 10 = 12 ns (look in L1, then L2).</li>
+      <li>L1 miss, L2 miss, go to main memory: probability 0.10 × 0.05 = 0.005. Time = 2 + 10 + 100 = 112 ns.</li>
+    </ul>
+    <p><strong>Step 2 — Weight each time by its probability.</strong></p>
+    <div class="eq">AMAT = 0.90(2) + 0.095(12) + 0.005(112)</div>
+    <div class="eq">= 1.8 + 1.14 + 0.56</div>
+    <div class="eq">= 3.5 ns</div>
+    <p><strong>Teacher’s compact form.</strong> The source writes the same calculation as:</p>
+    <div class="eq">AMAT = 0.9(2) + 0.1(2 + 10) + 0.1(0.05)(100)</div>
+    <div class="eq">= 1.8 + 1.2 + 0.5 = 3.5 ns</div>
+    <p>The middle term <span class="kbd">0.1(2 + 10)</span> charges the L2 access to every L1 miss, including those that later go to main memory. The final term charges only the main-memory time to the 0.5% of accesses that miss both caches. The numerical result is the same 3.5 ns. In your answer, write the three outcomes explicitly; it is easier to defend and easier to mark.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>AMAT = 3.5 ns.</strong></p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Teacher problem 12 — effective access time (Unit 4 problems, Problem 7)</div>
+    <p>A cache takes 20 ns, main memory takes 200 ns, and the cache hit ratio is 95%. Calculate the effective memory access time.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>Cache 20 ns, memory 200 ns, hit ratio 0.95. Find effective access time.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <p><strong>Step 1 — Convert the hit ratio.</strong></p>
+    <div class="eq">h = 95% = 0.95 &nbsp;&nbsp; miss ratio = 1 − 0.95 = 0.05</div>
+    <p><strong>Step 2 — Use hierarchical lookup.</strong> A miss costs the cache lookup plus the memory access.</p>
+    <div class="eq">EAT = 0.95(20) + 0.05(20 + 200)</div>
+    <div class="eq">= 19 + 0.05(220)</div>
+    <div class="eq">= 19 + 11</div>
+    <div class="eq">= 30 ns</div>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>Effective access time = 30 ns.</strong></p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Teacher problem 13 — effective access time with a 90% hit ratio (Unit 4 problems, Problem 8)</div>
+    <p>A processor has a cache hit ratio of 90%. Cache access time is 5 ns and main memory access time is 80 ns. Find the effective access time.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>h = 0.90, cache = 5 ns, memory = 80 ns. Find EAT.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <div class="eq">EAT = 0.90(5) + 0.10(5 + 80)</div>
+    <div class="eq">= 4.5 + 0.10(85)</div>
+    <div class="eq">= 4.5 + 8.5</div>
+    <div class="eq">= 13 ns</div>
+    <p><strong>Interpretation:</strong> the cache reduces the average from 80 ns (always main memory) to 13 ns. The 10% miss rate still contributes most of the average because a miss is expensive.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>Effective access time = 13 ns.</strong></p>
+  </div>
+
+  <h3>7.5 Cache performance beyond access time</h3>
+
+  <p>Average access time is only one view. A processor also cares about how many cycles it wastes on cache misses. If a program executes <span class="kbd">I</span> instructions, makes <span class="kbd">m</span> memory accesses per instruction, and has a miss rate <span class="kbd">r</span> with miss penalty <span class="kbd">P</span> cycles, the average stall cycles per instruction are:</p>
+
+  <div class="eq">stall cycles per instruction = m × r × P</div>
+
+  <div class="example">
+    <div class="example-title">Supplementary worked example — miss stalls</div>
+    <p>A processor makes 1.5 memory accesses per instruction. The cache miss rate is 2% and the miss penalty is 100 cycles. Find the average stall cycles per instruction.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <div class="eq">stalls = 1.5 × 0.02 × 100 = 3 cycles per instruction</div>
+    <p>If the base CPI is 1, the effective CPI becomes 1 + 3 = 4. This shows why a small miss rate can still dominate performance.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>3 stall cycles per instruction; effective CPI = 4 if base CPI = 1.</strong></p>
+  </div>
+  <p class="eq-note">Supplementary practice written for this guide; not a teacher problem.</p>
+
+  <h3>7.6 Write policies and replacement (brief)</h3>
+
+  <table>
+    <tr><th>Policy</th><th>What happens</th><th>Trade-off</th></tr>
+    <tr><td>Write-through</td><td>Every write goes to both cache and main memory.</td><td>Simple and coherent, but generates more memory traffic.</td></tr>
+    <tr><td>Write-back</td><td>Writes update only the cache; the block is written to memory when evicted (dirty bit set).</td><td>Less traffic, but more complex and requires coherence handling.</td></tr>
+    <tr><td>Write-allocate</td><td>On a write miss, fetch the block into cache, then write.</td><td>Good for repeated writes to the same block.</td></tr>
+    <tr><td>No-write-allocate</td><td>On a write miss, write directly to memory without fetching the block.</td><td>Good for streaming writes that are not reused.</td></tr>
+    <tr><td>LRU replacement</td><td>Evict the least recently used line.</td><td>Good hit rate, more hardware to track recency.</td></tr>
+    <tr><td>FIFO / random</td><td>Evict the oldest line, or a random line.</td><td>Cheaper, but usually a worse hit rate than LRU.</td></tr>
+  </table>
+
+  <p>The syllabus does not require a detailed replacement-policy derivation, but these terms often appear in a cache answer. Keep the definitions short and correct.</p>
+
+  <h3>7.7 Exam answer plan</h3>
+
+  <ol class="steps">
+    <li>Define cache and state the speed gap it bridges.</li>
+    <li>Explain locality of reference (temporal and spatial).</li>
+    <li>Define hit, miss, hit ratio and miss penalty.</li>
+    <li>Describe L1, L2 and L3: size, speed, location and sharing.</li>
+    <li>Write the average-access-time formula you are using and define every symbol.</li>
+    <li>Solve the numerical with a probability for each outcome.</li>
+    <li>Add one sentence on write policy or replacement if the question asks for “working” rather than only a formula.</li>
+  </ol>
+
+  <h2 id="mapping">8 · Cache mapping techniques</h2>
+
+  <h3>8.1 The placement problem</h3>
+
+  <p>Main memory is much larger than cache, so a cache block must be a copy of one of many main-memory blocks. <strong>Cache mapping</strong> is the rule that decides where a main-memory block may be placed in the cache, and how the cache recognises which block it currently holds. There are three standard rules:</p>
+
+  <table>
+    <tr><th>Technique</th><th>Placement rule</th><th>Address fields</th><th>Search</th></tr>
+    <tr><td><strong>Direct mapping</strong></td><td>Block <span class="kbd">B</span> can go to exactly one line: <span class="kbd">B mod L</span>, where L is the number of cache lines.</td><td>Tag | line | offset</td><td>One tag comparison.</td></tr>
+    <tr><td><strong>Fully associative</strong></td><td>Block <span class="kbd">B</span> can go to any cache line.</td><td>Tag | offset</td><td>Compare the tag with every line in parallel.</td></tr>
+    <tr><td><strong>Set associative</strong></td><td>Block <span class="kbd">B</span> can go to any line in exactly one set: <span class="kbd">B mod S</span>, where S is the number of sets.</td><td>Tag | set | offset</td><td>Compare the tag with the N ways of the selected set.</td></tr>
+  </table>
+
+  <h3>8.2 Direct mapping</h3>
+
+  <p>In direct mapping, the cache line is fixed by the block number. The low bits of the block number select the line, and the remaining high bits become the tag. The advantage is simple, cheap hardware: one comparator and one multiplexer. The disadvantage is <strong>conflict misses</strong>: two frequently used blocks that map to the same line keep evicting each other even if the rest of the cache is empty.</p>
+
+  <figure>
+    <svg viewBox="0 0 620 280" role="img" aria-labelledby="m4-direct-title m4-direct-desc" style="max-width:620px">
+      <title id="m4-direct-title">Direct-mapped cache address fields</title>
+      <desc id="m4-direct-desc">A main memory address is split into tag, line number and offset. The line number selects exactly one cache line. The stored tag is compared with the incoming tag; a match is a hit.</desc>
+      <g font-family="Helvetica, Arial" font-size="12" fill="var(--ink)">
+        <text x="20" y="24">Main-memory address</text>
+        <rect x="20" y="34" width="150" height="36" fill="var(--surface-hi)" stroke="var(--ink)"/>
+        <text x="95" y="57" text-anchor="middle">tag</text>
+        <rect x="170" y="34" width="150" height="36" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="245" y="57" text-anchor="middle">line / index</text>
+        <rect x="320" y="34" width="120" height="36" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="380" y="57" text-anchor="middle">offset</text>
+
+        <line x1="245" y1="70" x2="245" y2="105" stroke="var(--muted)" marker-end="url(#m4-map-arrow)"/>
+        <rect x="170" y="105" width="150" height="44" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="245" y="132" text-anchor="middle">select one cache line</text>
+
+        <rect x="20" y="175" width="580" height="70" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="35" y="197" font-weight="700">Selected cache line</text>
+        <text x="35" y="220">valid bit &nbsp;|&nbsp; stored tag &nbsp;|&nbsp; data block</text>
+        <text x="35" y="240">compare stored tag with incoming tag → hit / miss</text>
+        <line x1="245" y1="149" x2="245" y2="175" stroke="var(--muted)" marker-end="url(#m4-map-arrow)"/>
+        <line x1="95" y1="70" x2="95" y2="205" stroke="var(--muted)" stroke-dasharray="4 3"/>
+        <text x="105" y="90" font-size="10" fill="var(--muted)">tag goes to the comparator</text>
+      </g>
+      <defs>
+        <marker id="m4-map-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8" fill="var(--muted)"/>
+        </marker>
+      </defs>
+    </svg>
+    <figcaption>Figure 5. Direct mapping. The line number selects one line; only that line’s tag is compared.</figcaption>
+  </figure>
+
+  <div class="eq">cache line = block number mod number of cache lines</div>
+  <div class="eq">block number = memory address ÷ block size</div>
+  <div class="eq">tag = block number ÷ number of cache lines</div>
+
+  <h3>8.3 Fully associative mapping</h3>
+
+  <p>In fully associative mapping, any block can go into any line. There is no line number in the address, so the address has only a tag and an offset. On every access, the cache compares the incoming tag with the tag of every line in parallel. This removes conflict misses completely, but it needs a comparator per line and a priority encoder to choose the matching line. It is expensive for large caches, which is why it is used for small structures such as TLBs.</p>
+
+  <figure>
+    <svg viewBox="0 0 620 250" role="img" aria-labelledby="m4-fa-title m4-fa-desc" style="max-width:620px">
+      <title id="m4-fa-title">Fully associative cache tag comparison</title>
+      <desc id="m4-fa-desc">The address has a tag and an offset. The tag is compared in parallel with the tags of all cache lines. A match selects the corresponding data block.</desc>
+      <g font-family="Helvetica, Arial" font-size="12" fill="var(--ink)">
+        <text x="20" y="24">Address</text>
+        <rect x="20" y="34" width="150" height="36" fill="var(--surface-hi)" stroke="var(--ink)"/>
+        <text x="95" y="57" text-anchor="middle">tag</text>
+        <rect x="170" y="34" width="100" height="36" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="220" y="57" text-anchor="middle">offset</text>
+        <line x1="95" y1="70" x2="95" y2="100" stroke="var(--muted)"/>
+        <line x1="95" y1="100" x2="530" y2="100" stroke="var(--muted)"/>
+        <g>
+          <rect x="20" y="120" width="120" height="34" fill="var(--surface)" stroke="var(--ink)"/><text x="80" y="142" text-anchor="middle">line 0 tag</text>
+          <rect x="150" y="120" width="120" height="34" fill="var(--surface)" stroke="var(--ink)"/><text x="210" y="142" text-anchor="middle">line 1 tag</text>
+          <rect x="280" y="120" width="120" height="34" fill="var(--surface)" stroke="var(--ink)"/><text x="340" y="142" text-anchor="middle">line 2 tag</text>
+          <rect x="410" y="120" width="120" height="34" fill="var(--surface)" stroke="var(--ink)"/><text x="470" y="142" text-anchor="middle">line 3 tag</text>
+        </g>
+        <line x1="95" y1="100" x2="95" y2="120" stroke="var(--muted)"/>
+        <line x1="95" y1="100" x2="210" y2="120" stroke="var(--muted)"/>
+        <line x1="95" y1="100" x2="340" y2="120" stroke="var(--muted)"/>
+        <line x1="95" y1="100" x2="470" y2="120" stroke="var(--muted)"/>
+        <text x="20" y="190" font-size="11" fill="var(--muted)">All comparisons happen in parallel.</text>
+        <text x="20" y="210" font-size="11" fill="var(--muted)">A match selects that line’s data; no index bits are needed.</text>
+        <rect x="20" y="222" width="510" height="18" fill="var(--bg)" stroke="var(--line)"/>
+        <text x="30" y="235" font-size="11">priority encoder → matching line number</text>
+      </g>
+    </svg>
+    <figcaption>Figure 6. Fully associative mapping. Every line’s tag is compared in parallel; there is no index field.</figcaption>
+  </figure>
+
+  <h3>8.4 Set-associative mapping</h3>
+
+  <p>Set-associative mapping is the compromise. The cache is divided into <span class="kbd">S</span> sets, each containing <span class="kbd">N</span> lines (an “N-way” cache). A block maps to exactly one set, but within that set it can occupy any of the N ways. The hardware compares N tags in parallel, not all lines. A 4-way set-associative cache with 64 lines has 16 sets; a block maps to one of those 16 sets and can sit in any of its 4 lines.</p>
+
+  <figure>
+    <svg viewBox="0 0 620 280" role="img" aria-labelledby="m4-set-title m4-set-desc" style="max-width:620px">
+      <title id="m4-set-title">Set-associative cache organisation</title>
+      <desc id="m4-set-desc">The address is split into tag, set index and offset. The set index selects one set. Within that set, four ways are compared in parallel, and any matching way supplies the data.</desc>
+      <g font-family="Helvetica, Arial" font-size="12" fill="var(--ink)">
+        <text x="20" y="24">Address</text>
+        <rect x="20" y="34" width="150" height="36" fill="var(--surface-hi)" stroke="var(--ink)"/>
+        <text x="95" y="57" text-anchor="middle">tag</text>
+        <rect x="170" y="34" width="120" height="36" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="230" y="57" text-anchor="middle">set index</text>
+        <rect x="290" y="34" width="100" height="36" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="340" y="57" text-anchor="middle">offset</text>
+        <line x1="230" y1="70" x2="230" y2="95" stroke="var(--muted)" marker-end="url(#m4-set-arrow)"/>
+        <rect x="20" y="110" width="580" height="120" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="35" y="130" font-weight="700">Selected set</text>
+        <text x="35" y="150">way 0: valid | tag | data</text>
+        <text x="35" y="170">way 1: valid | tag | data</text>
+        <text x="35" y="190">way 2: valid | tag | data</text>
+        <text x="35" y="210">way 3: valid | tag | data</text>
+        <text x="330" y="150" font-size="11" fill="var(--muted)">compare the incoming tag</text>
+        <text x="330" y="168" font-size="11" fill="var(--muted)">with all 4 ways in parallel</text>
+        <text x="330" y="186" font-size="11" fill="var(--muted)">a match is a hit</text>
+        <text x="330" y="204" font-size="11" fill="var(--muted)">no match is a miss</text>
+        <text x="20" y="260" font-size="11" fill="var(--muted)">Sets = total lines ÷ associativity. For 64 lines and 4-way: 64 ÷ 4 = 16 sets.</text>
+      </g>
+      <defs>
+        <marker id="m4-set-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8" fill="var(--muted)"/>
+        </marker>
+      </defs>
+    </svg>
+    <figcaption>Figure 7. A 4-way set-associative cache. The set index selects one set; the tag is compared with the four ways in that set.</figcaption>
+  </figure>
+
+  <h3>8.5 The universal method for mapping numericals</h3>
+
+  <ol class="steps">
+    <li><strong>Find the total address bits.</strong> If main memory is given in bytes, total bits = log<sub>2</sub>(memory size in bytes). If it is given in blocks, total bits = log<sub>2</sub>(number of blocks) + log<sub>2</sub>(block size).</li>
+    <li><strong>Find the offset bits.</strong> offset = log<sub>2</sub>(block size in bytes or words). Use the same unit as the address.</li>
+    <li><strong>Find the number of lines or sets.</strong> Lines = cache size ÷ block size. Sets = lines ÷ associativity.</li>
+    <li><strong>Find the index/set bits.</strong> index = log<sub>2</sub>(lines) for direct mapping; set = log<sub>2</sub>(sets) for set-associative; no index for fully associative.</li>
+    <li><strong>Find the tag bits.</strong> tag = total address bits − index bits − offset bits.</li>
+    <li><strong>Check.</strong> tag + index + offset must equal the total address bits. For fully associative, tag + offset = total.</li>
+  </ol>
+
+  <div class="theory">
+    <span class="source">The one formula that prevents most errors</span>
+    <div class="eq">tag bits = total address bits − index (or set) bits − offset bits</div>
+    <p>If you remember only this, you can recover the fields in any mapping question. The offset is fixed by the block size; the index is fixed by the number of lines or sets; the tag is whatever remains.</p>
+  </div>
+
+  <h3>8.6 Direct-mapped worked examples</h3>
+
+  <div class="example">
+    <div class="example-title">Teacher problem 14 — direct-mapped fields (Unit 4 problems, Problem 14)</div>
+    <p>Main memory = 64 KB, cache = 4 KB, block size = 16 bytes. For a direct-mapped cache, find the number of main-memory blocks, cache lines, offset bits, index bits and tag bits.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>64 KB main memory, 4 KB cache, 16-byte blocks, direct mapped. Find blocks, lines and address fields.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <p><strong>Step 1 — Convert to powers of two.</strong></p>
+    <div class="eq">64 KB = 2<sup>16</sup> bytes &nbsp;&nbsp; 4 KB = 2<sup>12</sup> bytes &nbsp;&nbsp; 16 B = 2<sup>4</sup> bytes</div>
+    <p><strong>Step 2 — Number of main-memory blocks.</strong></p>
+    <div class="eq">main-memory blocks = 2<sup>16</sup> ÷ 2<sup>4</sup> = 2<sup>12</sup> = 4096</div>
+    <p><strong>Step 3 — Number of cache lines.</strong></p>
+    <div class="eq">cache lines = 2<sup>12</sup> ÷ 2<sup>4</sup> = 2<sup>8</sup> = 256</div>
+    <p><strong>Step 4 — Offset bits.</strong></p>
+    <div class="eq">offset = log<sub>2</sub>(16) = 4</div>
+    <p><strong>Step 5 — Index bits.</strong></p>
+    <div class="eq">index = log<sub>2</sub>(256) = 8</div>
+    <p><strong>Step 6 — Tag bits.</strong></p>
+    <div class="eq">tag = 16 − 8 − 4 = 4</div>
+    <p><strong>Check:</strong> 4 + 8 + 4 = 16 address bits. Correct.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>4096 main-memory blocks, 256 cache lines, tag = 4, index = 8, offset = 4.</strong></p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Teacher problem 15 — decoding a direct-mapped address (Unit 4 problems, Problem 15)</div>
+    <p>A direct-mapped cache has cache size 8 KB, block size 32 bytes, and main memory 1 MB. Find the tag, cache-line number and byte offset for memory address ABCDE<sub>16</sub>.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>8 KB cache, 32-byte blocks, 1 MB main memory, direct mapped. Decode address ABCDEH.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <p><strong>Step 1 — Address size and field widths.</strong></p>
+    <div class="eq">1 MB = 2<sup>20</sup> bytes &nbsp;⇒&nbsp; 20 address bits</div>
+    <div class="eq">block size 32 = 2<sup>5</sup> &nbsp;⇒&nbsp; offset = 5 bits</div>
+    <div class="eq">cache lines = 8 KB ÷ 32 B = 2<sup>13</sup> ÷ 2<sup>5</sup> = 2<sup>8</sup> = 256 &nbsp;⇒&nbsp; index = 8 bits</div>
+    <div class="eq">tag = 20 − 8 − 5 = 7 bits</div>
+    <p><strong>Step 2 — Write the address in binary.</strong> ABCDEH has five hex digits = 20 bits.</p>
+    <div class="eq">ABCDEH = 1010 1011 1100 1101 1110<sub>2</sub></div>
+    <p><strong>Step 3 — Split from the right.</strong> The low 5 bits are the offset; the next 8 bits are the line; the remaining 7 bits are the tag.</p>
+    <div class="eq">tag = 1010101<sub>2</sub> = 55H = 85</div>
+    <div class="eq">line = 11100110<sub>2</sub> = E6H = 230</div>
+    <div class="eq">offset = 11110<sub>2</sub> = 1EH = 30</div>
+    <p><strong>Step 4 — Check by reconstructing.</strong></p>
+    <div class="eq">55H × 2<sup>13</sup> + E6H × 2<sup>5</sup> + 1EH = AA000H + 1CC0H + 1EH = ABCDEH</div>
+    <p><strong>Interpretation:</strong> the address lies in block number <span class="kbd">ABCDEH ÷ 20H = 55E6H</span>. That block maps to line <span class="kbd">55E6H mod 100H = E6H = 230</span>, and its tag is <span class="kbd">55E6H ÷ 100H = 55H = 85</span>.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>Tag = 55H (85), cache line = E6H (230), offset = 1EH (30).</strong></p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Teacher problem 16 — line, block and tag from an address (Unit 4 problems, Problem 18)</div>
+    <p>A direct-mapped cache has 128 lines, each line holds 16 bytes, and main memory is 64 KB. For address 3A5C<sub>16</sub>, find the cache line number, block number and tag.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>128 lines, 16-byte lines, 64 KB main memory, address 3A5CH. Find line, block and tag.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <p><strong>Step 1 — Fields.</strong></p>
+    <div class="eq">64 KB = 2<sup>16</sup> &nbsp;⇒&nbsp; 16 address bits</div>
+    <div class="eq">block size 16 = 2<sup>4</sup> &nbsp;⇒&nbsp; offset = 4 bits</div>
+    <div class="eq">lines = 128 = 2<sup>7</sup> &nbsp;⇒&nbsp; index = 7 bits</div>
+    <div class="eq">tag = 16 − 7 − 4 = 5 bits</div>
+    <p><strong>Step 2 — Block number.</strong> Divide the byte address by the block size (shift right 4).</p>
+    <div class="eq">3A5CH ÷ 10H = 3A5H = 933</div>
+    <p><strong>Step 3 — Cache line.</strong> Take the block number modulo the number of lines (128 = 80H).</p>
+    <div class="eq">3A5H mod 80H = 25H = 37</div>
+    <p><strong>Step 4 — Tag.</strong> Divide the block number by the number of lines.</p>
+    <div class="eq">3A5H ÷ 80H = 7H = 7</div>
+    <p><strong>Check from the address bits:</strong> 3A5CH = 0011 1010 0101 1100<sub>2</sub>. Tag = 00111<sub>2</sub> = 7; line = 0100101<sub>2</sub> = 25H = 37; offset = 1100<sub>2</sub> = CH = 12. Correct.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>Cache line = 25H (37), block number = 3A5H (933), tag = 7.</strong></p>
+  </div>
+
+  <h3>8.7 Fully associative worked example</h3>
+
+  <div class="example">
+    <div class="example-title">Teacher problem 17 — fully associative fields (Unit 4 problems, Problem 16)</div>
+    <p>A fully associative cache contains 64 blocks and main memory contains 4096 blocks. Each block contains 16 words. Find the memory address bits, offset bits and tag bits.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>64 cache blocks, 4096 main-memory blocks, 16 words per block, fully associative. Find address, offset and tag bits.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <p><strong>Step 1 — Total address size.</strong> Main memory has 4096 blocks × 16 words per block.</p>
+    <div class="eq">main memory = 4096 × 16 = 2<sup>12</sup> × 2<sup>4</sup> = 2<sup>16</sup> words</div>
+    <div class="eq">address bits = 16</div>
+    <p><strong>Step 2 — Offset.</strong> A block has 16 words.</p>
+    <div class="eq">offset = log<sub>2</sub>(16) = 4</div>
+    <p><strong>Step 3 — Tag.</strong> Fully associative has no index field.</p>
+    <div class="eq">tag = 16 − 4 = 12</div>
+    <p><strong>Step 4 — Interpret the cache size.</strong> The 64 cache blocks are not addressed by an index; they are all searched in parallel. The cache can hold 64 of the 4096 blocks at a time. The tag identifies which one each line holds.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>16 address bits, 4 offset bits, 12 tag bits.</strong></p>
+  </div>
+
+  <h3>8.8 Set-associative worked examples</h3>
+
+  <div class="example">
+    <div class="example-title">Teacher problem 18 — 4-way set-associative fields (Unit 4 problems, Problem 17)</div>
+    <p>A cache contains 64 blocks arranged as a 4-way set-associative organisation. Main memory contains 4096 blocks. Each block contains 32 bytes. Find the number of sets, set bits, block-offset bits, main-memory address bits and tag bits.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>64 cache blocks, 4-way, 4096 main-memory blocks, 32-byte blocks. Find sets and all address fields.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <p><strong>Step 1 — Number of sets.</strong></p>
+    <div class="eq">sets = 64 ÷ 4 = 16</div>
+    <p><strong>Step 2 — Set bits.</strong></p>
+    <div class="eq">set bits = log<sub>2</sub>(16) = 4</div>
+    <p><strong>Step 3 — Offset bits.</strong></p>
+    <div class="eq">32 bytes = 2<sup>5</sup> &nbsp;⇒&nbsp; offset = 5 bits</div>
+    <p><strong>Step 4 — Main-memory address bits.</strong> 4096 blocks of 32 bytes each.</p>
+    <div class="eq">main memory = 2<sup>12</sup> × 2<sup>5</sup> = 2<sup>17</sup> bytes &nbsp;⇒&nbsp; 17 address bits</div>
+    <p><strong>Step 5 — Tag bits.</strong></p>
+    <div class="eq">tag = 17 − 4 − 5 = 8</div>
+    <p><strong>Check:</strong> 8 + 4 + 5 = 17. Correct. The address format is:</p>
+    <div class="eq">Tag (8 bits) | Set (4 bits) | Offset (5 bits)</div>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>16 sets; set = 4 bits, offset = 5 bits, address = 17 bits, tag = 8 bits.</strong></p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Question-bank problem — direct-mapped cache fields (question bank Q7)</div>
+    <p>A computer has a 32-bit address, a cache of 16 KB and a cache block size of 16 bytes. For a direct-mapped cache, determine the number of cache lines, block-offset bits, cache-index bits and tag bits.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>32-bit address, 16 KB cache, 16-byte block, direct mapped. Find lines, offset, index and tag.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <div class="eq">16 KB = 2<sup>14</sup> bytes &nbsp;&nbsp; 16 B = 2<sup>4</sup> bytes</div>
+    <div class="eq">cache lines = 2<sup>14</sup> ÷ 2<sup>4</sup> = 2<sup>10</sup> = 1024</div>
+    <div class="eq">offset = 4 bits</div>
+    <div class="eq">index = log<sub>2</sub>(1024) = 10 bits</div>
+    <div class="eq">tag = 32 − 10 − 4 = 18 bits</div>
+    <p><strong>Check:</strong> 18 + 10 + 4 = 32. Correct.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>1024 lines; offset = 4, index = 10, tag = 18 bits.</strong></p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Question-bank problem — direct mapping from block counts (question bank Q9)</div>
+    <p>A main memory contains 64K blocks, while the cache contains 256 blocks. Each block consists of 8 words. Determine the number of bits required for tag, cache index and word offset using direct mapping.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>64K main-memory blocks, 256 cache blocks, 8 words per block. Find tag, index and word offset.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <p><strong>Step 1 — Treat the address as a word address.</strong> The question counts blocks and words, not bytes.</p>
+    <div class="eq">main memory = 64K blocks × 8 words = 2<sup>16</sup> × 2<sup>3</sup> = 2<sup>19</sup> words</div>
+    <div class="eq">total address bits = 19</div>
+    <p><strong>Step 2 — Offset.</strong></p>
+    <div class="eq">offset = log<sub>2</sub>(8) = 3 bits</div>
+    <p><strong>Step 3 — Index.</strong></p>
+    <div class="eq">cache blocks = 256 = 2<sup>8</sup> &nbsp;⇒&nbsp; index = 8 bits</div>
+    <p><strong>Step 4 — Tag.</strong></p>
+    <div class="eq">tag = 19 − 8 − 3 = 8 bits</div>
+    <p><strong>Assumption:</strong> a word is the addressable unit. If the machine were byte-addressable with 4-byte words, the total address would be 21 bits and the tag would be 10 bits. The supplied question does not state the word size, so the word-address interpretation is the consistent one.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>Tag = 8 bits, index = 8 bits, word offset = 3 bits (19-bit word address).</strong></p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Question-bank problem — fully associative tag (40 questions, Q35)</div>
+    <p>A cache memory contains 16 words, each block contains 4 words, and the main memory contains 128 bytes. Determine the number of bits required for address, word/offset, block and tag for associative mapping.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>Cache 16 words, block 4 words, main memory 128 bytes, associative mapping. Find address, offset, block and tag bits.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <p><strong>Step 1 — Address size.</strong> Main memory is 128 bytes.</p>
+    <div class="eq">128 = 2<sup>7</sup> &nbsp;⇒&nbsp; 7-bit byte address</div>
+    <p><strong>Step 2 — Offset.</strong> A block is 4 words. Taking one word as one addressable byte for this question:</p>
+    <div class="eq">offset = log<sub>2</sub>(4) = 2 bits</div>
+    <p><strong>Step 3 — Number of blocks in main memory.</strong></p>
+    <div class="eq">main-memory blocks = 128 ÷ 4 = 32 = 2<sup>5</sup></div>
+    <p><strong>Step 4 — Fully associative tag.</strong> There is no index field, so the tag is the remaining address bits.</p>
+    <div class="eq">tag = 7 − 2 = 5 bits</div>
+    <p><strong>Terminology note:</strong> in a fully associative cache, the “block” field and the “tag” field are the same thing: the 5-bit block number is stored as the tag. The cache has 16 ÷ 4 = 4 lines, but those lines are not indexed by the address. If your teacher treats “block” and “tag” as separate fields, write “block number = 5 bits; tag = 5 bits; they are the same field in fully associative mapping” and show the address split. The source question mixes words and bytes, so state your assumption explicitly.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>7-bit address, 2-bit offset, 5-bit block/tag (fully associative, no index).</strong></p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">MUSA practice-paper problem — fully associative tag (Paper Set 1, Q4(a) OR)</div>
+    <p>Consider a fully associative mapped cache with block size 4 KB. The size of main memory is 16 GB. Find the number of bits in the tag.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>Fully associative, block 4 KB, main memory 16 GB. Find tag bits.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <div class="eq">16 GB = 2<sup>4</sup> × 2<sup>30</sup> = 2<sup>34</sup> bytes &nbsp;⇒&nbsp; 34 address bits</div>
+    <div class="eq">4 KB = 2<sup>12</sup> bytes &nbsp;⇒&nbsp; offset = 12 bits</div>
+    <div class="eq">fully associative ⇒ no index bits</div>
+    <div class="eq">tag = 34 − 12 = 22 bits</div>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>22 tag bits.</strong></p>
+  </div>
+  <p class="eq-note">Source: MUSA practice paper set 1 (student association), not a verified University of Mumbai paper. The numerical is reproduced because it is a useful fully-associative exercise.</p>
+
+  <h3>8.9 Comparison of the three techniques</h3>
+
+  <table>
+    <tr><th>Feature</th><th>Direct mapping</th><th>Fully associative</th><th>Set associative</th></tr>
+    <tr><td>Placement</td><td>Exactly one line</td><td>Any line</td><td>Any line within one set</td></tr>
+    <tr><td>Address fields</td><td>Tag + line + offset</td><td>Tag + offset</td><td>Tag + set + offset</td></tr>
+    <tr><td>Tag comparators</td><td>One</td><td>One per line</td><td>One per way</td></tr>
+    <tr><td>Hardware cost</td><td>Lowest</td><td>Highest</td><td>Moderate</td></tr>
+    <tr><td>Search speed</td><td>Fastest (one comparison)</td><td>Slowest for large caches (many comparisons)</td><td>Between the two</td></tr>
+    <tr><td>Conflict misses</td><td>High</td><td>None</td><td>Low</td></tr>
+    <tr><td>Replacement choice</td><td>None; the line is fixed</td><td>Needs a replacement policy</td><td>Needs a replacement policy within the set</td></tr>
+    <tr><td>Typical use</td><td>Simple caches, teaching examples</td><td>Small fully associative structures such as TLBs</td><td>Most modern L1/L2/L3 caches (2-way to 16-way)</td></tr>
+  </table>
+
+  <h3>8.10 Common mapping mistakes</h3>
+
+  <table>
+    <tr><th>Mistake</th><th>Correction</th></tr>
+    <tr><td>Using the cache size as the number of lines</td><td>Lines = cache size ÷ block size. A 16 KB cache with 16-byte blocks has 1024 lines, not 16,384.</td></tr>
+    <tr><td>Forgetting that the offset is part of the address</td><td>Tag = total − index − offset. If you omit the offset, the tag is too large.</td></tr>
+    <tr><td>Using sets instead of lines for the index in a set-associative cache</td><td>The index selects a set. Set bits = log<sub>2</sub>(lines ÷ associativity).</td></tr>
+    <tr><td>Adding an index field in a fully associative cache</td><td>There is no index. Tag + offset = total address bits.</td></tr>
+    <tr><td>Mixing bytes and words</td><td>Convert the main-memory size and block size to the same unit before taking logarithms.</td></tr>
+    <tr><td>Using decimal K = 1000</td><td>Cache and memory sizes use powers of two: 1 KB = 1024 bytes.</td></tr>
+    <tr><td>Confusing block number with cache line</td><td>Block number is the main-memory block index; cache line is block number mod number of lines.</td></tr>
+  </table>
+
+  <h3>8.11 Exam answer plan</h3>
+
+  <ol class="steps">
+    <li>State the mapping rule and draw the address fields.</li>
+    <li>Compute total address bits, offset, lines/sets and index/set bits.</li>
+    <li>Compute the tag as the remainder.</li>
+    <li>For an address-decoding question, convert the address to binary or use division/modulo by the block size and line count.</li>
+    <li>Show the check: tag + index + offset = total bits.</li>
+    <li>Add one line on the advantage and disadvantage of the technique.</li>
+  </ol>
+
+  <h2 id="coherence">9 · Cache coherence and the MESI protocol (self-study)</h2>
+
+  <div class="self-learning">
+    <p><strong>Status:</strong> The official syllabus lists the “Case study of Pentium Processor Cache Memory Model (MESI Protocol)” as a <em>self-study</em> topic. The teacher’s chapter, the assignment and the question bank still discuss cache coherence and MESI, so this section is included for completeness. It is kept separate from the prescribed core above.</p>
+  </div>
+
+  <h3>9.1 The coherence problem</h3>
+
+  <p>In a multiprocessor system, each processor may have its own cache. A shared variable can therefore exist in several places at once: in main memory and in one or more caches. If one processor writes a new value, the other copies become stale. A program running on another processor may then read an old value. <strong>Cache coherence</strong> is the set of rules and mechanisms that prevent this.</p>
+
+  <div class="example">
+    <div class="example-title">Teacher example — two processors and a shared variable (Unit 4 problems, Problem 19)</div>
+    <p>Two processors P1 and P2 have separate caches. Initially X = 50, and both caches contain X = 50. P1 changes X to 75. P2 reads X. What value can P2 incorrectly obtain if cache coherence is not maintained? What should P2 obtain after applying a coherence protocol?</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>Both caches hold X = 50. P1 writes 75. What can P2 read without coherence, and what should it read with coherence?</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <p><strong>Without coherence:</strong> P1’s write updates P1’s cache (and possibly not main memory, if the cache is write-back). P2’s cache still holds 50. P2 can therefore read the stale value 50.</p>
+    <p><strong>With coherence:</strong> P1’s write must either update P2’s copy or invalidate it. If P2’s copy is invalidated, P2’s next read misses and fetches 75 from P1’s cache or from memory after the write-back. P2 must read 75.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>Without coherence: P2 may read 50. With coherence: P2 must read 75.</strong></p>
+  </div>
+
+  <h3>9.2 Two ways to maintain coherence</h3>
+
+  <table>
+    <tr><th>Mechanism</th><th>How it works</th><th>Advantage</th><th>Disadvantage</th></tr>
+    <tr><td><strong>Snooping</strong></td><td>Every cache watches (snoops) the shared bus for writes to blocks it holds. On a write, it invalidates or updates its copy.</td><td>Simple for a small number of processors on a shared bus.</td><td>Bus traffic grows with the number of caches; does not scale well to many processors.</td></tr>
+    <tr><td><strong>Directory-based</strong></td><td>A directory records which caches hold each block. A write sends invalidation messages only to the recorded sharers.</td><td>Scales better; avoids broadcasting to every cache.</td><td>Directory storage and lookup overhead; more complex protocol.</td></tr>
+  </table>
+
+  <h3>9.3 The MESI states</h3>
+
+  <p><strong>MESI</strong> names four states for a cache line: <strong>Modified</strong>, <strong>Exclusive</strong>, <strong>Shared</strong> and <strong>Invalid</strong>. The state records two things: whether the line is valid, and whether the copy is clean (same as memory) or dirty (newer than memory).</p>
+
+  <table>
+    <tr><th>State</th><th>Meaning</th><th>Clean or dirty?</th><th>Other caches may have a copy?</th><th>Memory is up to date?</th></tr>
+    <tr><td><strong>M — Modified</strong></td><td>This cache has the only valid copy and it has been written. It is the owner of the block.</td><td>Dirty</td><td>No</td><td>No; memory is stale until write-back.</td></tr>
+    <tr><td><strong>E — Exclusive</strong></td><td>This cache has the only copy, and it matches memory.</td><td>Clean</td><td>No</td><td>Yes.</td></tr>
+    <tr><td><strong>S — Shared</strong></td><td>One or more caches have a clean copy; memory is up to date.</td><td>Clean</td><td>Yes</td><td>Yes.</td></tr>
+    <tr><td><strong>I — Invalid</strong></td><td>This line does not contain a valid copy.</td><td>Not applicable</td><td>Possibly, in other caches</td><td>Irrelevant for this line.</td></tr>
+  </table>
+
+  <p>The letters are easy to remember as a progression: a line starts <strong>I</strong>nvalid, becomes <strong>E</strong>xclusive when loaded alone, becomes <strong>S</strong>hared when another cache also loads it, and becomes <strong>M</strong>odified when this cache writes it. A write to a shared line must first invalidate the other copies; a read of a modified line must get the data from the owner and write it back or share it.</p>
+
+  <h3>9.4 Typical MESI transitions</h3>
+
+  <table>
+    <tr><th>Current state</th><th>Processor read (PrRd)</th><th>Processor write (PrWr)</th><th>Bus read from another cache (BusRd)</th><th>Bus read-exclusive / invalidate (BusRdX)</th></tr>
+    <tr><td><strong>I</strong></td><td>→ S (or E if no other sharer)</td><td>→ M after BusRdX</td><td>No change (line is invalid)</td><td>No change</td></tr>
+    <tr><td><strong>E</strong></td><td>→ E</td><td>→ M (no bus transaction needed)</td><td>→ S</td><td>→ I</td></tr>
+    <tr><td><strong>S</strong></td><td>→ S</td><td>→ M after BusRdX invalidates others</td><td>→ S</td><td>→ I</td></tr>
+    <tr><td><strong>M</strong></td><td>→ M</td><td>→ M</td><td>→ S after write-back / supplying data</td><td>→ I after write-back</td></tr>
+  </table>
+
+  <p class="eq-note">These are the standard simplified transitions. Real implementations add details such as whether the data is supplied by the owner or by memory, and whether a write-back is needed. For an exam, the table above is the expected level.</p>
+
+  <div class="theory">
+    <span class="source">Why “Exclusive” is useful</span>
+    <p>If a cache loads a block and no other cache has it, the line is marked Exclusive. A later write can then change it to Modified without sending an invalidation on the bus, because there is no other copy to invalidate. This is an optimisation, not a separate coherence mechanism.</p>
+  </div>
+
+  <h3>9.5 Exam answer plan</h3>
+
+  <ol class="steps">
+    <li>Define cache coherence as the property that all processors see a consistent value for each shared location.</li>
+    <li>Give the two-processor example: both cache X, one writes, the other reads a stale copy.</li>
+    <li>Name the two mechanisms: snooping and directory-based.</li>
+    <li>Draw the four MESI states and define each in one line: Modified, Exclusive, Shared, Invalid.</li>
+    <li>Give one transition example, such as E → M on a local write, or S → I when another cache writes.</li>
+    <li>State that MESI is a write-invalidate protocol: a write invalidates other copies rather than updating them.</li>
+  </ol>
+
+  <h2 id="interleaving">10 · Interleaved memory</h2>
+
+  <h3>10.1 Why interleave</h3>
+
+  <p>DRAM is slow relative to the CPU, and one memory bank can serve only one request at a time. <strong>Interleaving</strong> spreads consecutive addresses across several banks so that different banks can serve different requests in parallel. While bank 0 is busy, the memory controller can start a request to bank 1, then bank 2, and so on. The result is higher throughput for sequential accesses.</p>
+
+  <table>
+    <tr><th>Scheme</th><th>Bank selection</th><th>Consecutive addresses go to</th><th>Good for</th><th>Weakness</th></tr>
+    <tr><td><strong>Low-order interleaving</strong></td><td>Low address bits; <span class="kbd">bank = address mod n</span></td><td>Different banks, round-robin</td><td>Sequential access, vector and array processing</td><td>A stride that is a multiple of n hits the same bank repeatedly.</td></tr>
+    <tr><td><strong>High-order interleaving</strong></td><td>High address bits; <span class="kbd">bank = floor(address ÷ bank size)</span></td><td>The same bank until its address range ends</td><td>Large contiguous blocks, simple expansion</td><td>Sequential accesses do not spread across banks, so less parallelism.</td></tr>
+  </table>
+
+  <figure>
+    <svg viewBox="0 0 620 250" role="img" aria-labelledby="m4-il-title m4-il-desc" style="max-width:620px">
+      <title id="m4-il-title">Low-order and high-order interleaving</title>
+      <desc id="m4-il-desc">In low-order interleaving, consecutive addresses 0, 1, 2, 3 go to banks 0, 1, 2, 3. In high-order interleaving, each bank owns a contiguous range of addresses, so consecutive addresses stay in the same bank.</desc>
+      <g font-family="Helvetica, Arial" font-size="12" fill="var(--ink)">
+        <text x="20" y="22" font-weight="700">Low-order interleaving</text>
+        <rect x="20" y="40" width="130" height="40" fill="var(--surface)" stroke="var(--ink)"/><text x="85" y="65" text-anchor="middle">Bank 0: 0, 4, 8…</text>
+        <rect x="160" y="40" width="130" height="40" fill="var(--surface)" stroke="var(--ink)"/><text x="225" y="65" text-anchor="middle">Bank 1: 1, 5, 9…</text>
+        <rect x="300" y="40" width="130" height="40" fill="var(--surface)" stroke="var(--ink)"/><text x="365" y="65" text-anchor="middle">Bank 2: 2, 6, 10…</text>
+        <rect x="440" y="40" width="130" height="40" fill="var(--surface)" stroke="var(--ink)"/><text x="505" y="65" text-anchor="middle">Bank 3: 3, 7, 11…</text>
+        <text x="20" y="115" font-size="11" fill="var(--muted)">Consecutive addresses are in different banks → parallel service.</text>
+
+        <text x="20" y="150" font-weight="700">High-order interleaving</text>
+        <rect x="20" y="168" width="130" height="40" fill="var(--surface)" stroke="var(--ink)"/><text x="85" y="193" text-anchor="middle">Bank 0: 0–1023</text>
+        <rect x="160" y="168" width="130" height="40" fill="var(--surface)" stroke="var(--ink)"/><text x="225" y="193" text-anchor="middle">Bank 1: 1024–2047</text>
+        <rect x="300" y="168" width="130" height="40" fill="var(--surface)" stroke="var(--ink)"/><text x="365" y="193" text-anchor="middle">Bank 2: 2048–3071</text>
+        <rect x="440" y="168" width="130" height="40" fill="var(--surface)" stroke="var(--ink)"/><text x="505" y="193" text-anchor="middle">Bank 3: 3072–4095</text>
+        <text x="20" y="235" font-size="11" fill="var(--muted)">Consecutive addresses stay in one bank → less parallel service for a sequential scan.</text>
+      </g>
+    </svg>
+    <figcaption>Figure 8. Low-order versus high-order interleaving. The difference is which address bits choose the bank.</figcaption>
+  </figure>
+
+  <h3>10.2 Worked examples</h3>
+
+  <div class="example">
+    <div class="example-title">Teacher problem 19 — low-order interleaving (Unit 4 problems, Problem 20)</div>
+    <p>A memory system has 4 banks using low-order interleaving. Consecutive addresses are assigned to consecutive banks. Determine the bank number for addresses 0 to 9.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>4 banks, low-order interleaving. Find the bank for addresses 0–9.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <div class="eq">bank = address mod 4</div>
+    <table>
+      <tr><th>Address</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th></tr>
+      <tr><td>Bank</td><td>0</td><td>1</td><td>2</td><td>3</td><td>0</td><td>1</td><td>2</td><td>3</td><td>0</td><td>1</td></tr>
+    </table>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>Banks: 0, 1, 2, 3, 0, 1, 2, 3, 0, 1 for addresses 0–9.</strong></p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Teacher problem 20 — high-order interleaving (Unit 4 problems, Problem 21)</div>
+    <p>A memory has 4 banks, each containing 1024 words. Using high-order interleaving, determine the bank number for addresses 500, 1500, 2500 and 3500.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>4 banks × 1024 words, high-order interleaving. Find the bank for 500, 1500, 2500, 3500.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <div class="eq">bank = floor(address ÷ 1024)</div>
+    <div class="eq">500 ÷ 1024 = 0 &nbsp;⇒&nbsp; Bank 0</div>
+    <div class="eq">1500 ÷ 1024 = 1 &nbsp;⇒&nbsp; Bank 1</div>
+    <div class="eq">2500 ÷ 1024 = 2 &nbsp;⇒&nbsp; Bank 2</div>
+    <div class="eq">3500 ÷ 1024 = 3 &nbsp;⇒&nbsp; Bank 3</div>
+    <p><strong>Interpretation:</strong> addresses 0–1023 are in bank 0, 1024–2047 in bank 1, 2048–3071 in bank 2 and 3072–4095 in bank 3. Each address falls in a different bank here, but a sequential scan would stay in one bank for 1024 consecutive words.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>500 → Bank 0, 1500 → Bank 1, 2500 → Bank 2, 3500 → Bank 3.</strong></p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Teacher problem 21 — interleaving speed-up (Unit 4 problems, Problem 22)</div>
+    <p>A memory system has 4 banks. Each bank requires 100 ns for one memory access. Four consecutive words are accessed. Assuming accesses can be performed simultaneously using interleaving, calculate the time without interleaving, the time with 4-way interleaving, and the speed-up.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>4 banks, 100 ns per access, 4 consecutive words. Find times and speed-up.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <p><strong>Without interleaving:</strong> the four words are serviced one after another.</p>
+    <div class="eq">T<sub>no</sub> = 4 × 100 = 400 ns</div>
+    <p><strong>With ideal 4-way interleaving:</strong> the four banks work in parallel, so the four words are available after one bank access time.</p>
+    <div class="eq">T<sub>4-way</sub> = 100 ns</div>
+    <p><strong>Speed-up:</strong></p>
+    <div class="eq">S = T<sub>no</sub> ÷ T<sub>4-way</sub> = 400 ÷ 100 = 4</div>
+    <p><strong>Reality check:</strong> this is the ideal case. Real systems add arbitration, bus transfer time and bank conflicts, so the measured speed-up is less than 4. The question says “assuming accesses can be performed simultaneously”, so the ideal value is the expected answer.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>400 ns without interleaving, 100 ns with 4-way interleaving, speed-up = 4.</strong></p>
+  </div>
+
+  <h3>10.3 Common interleaving mistakes</h3>
+
+  <table>
+    <tr><th>Mistake</th><th>Correction</th></tr>
+    <tr><td>Using <span class="kbd">address mod n</span> for high-order interleaving</td><td>High-order uses the high bits: <span class="kbd">floor(address ÷ bank size)</span>.</td></tr>
+    <tr><td>Using <span class="kbd">floor(address ÷ bank size)</span> for low-order interleaving</td><td>Low-order uses the low bits: <span class="kbd">address mod n</span>.</td></tr>
+    <tr><td>Forgetting the bank size in high-order questions</td><td>The bank size is the number of words (or bytes) in one bank, not the number of banks.</td></tr>
+    <tr><td>Claiming a speed-up of exactly n in every real system</td><td>n is the ideal upper bound; arbitration and conflicts reduce it.</td></tr>
+  </table>
+
+  <h2 id="associative">11 · Associative memory</h2>
+
+  <h3>11.1 The idea</h3>
+
+  <p>Ordinary RAM is <strong>address-addressed</strong>: you supply an address and get the word at that address. <strong>Associative memory</strong>, also called <strong>content-addressable memory (CAM)</strong>, is <strong>content-addressed</strong>: you supply a key (a data pattern) and the memory tells you whether that pattern is stored, and where. It is a hardware search engine. Every stored word is compared with the key in parallel, so the search takes one clock cycle regardless of the number of words.</p>
+
+  <div class="theory">
+    <span class="source">Formal definition</span>
+    <p>An associative memory is a memory array with comparison logic attached to every word. The <strong>argument register</strong> holds the search key, the <strong>key register</strong> (mask register) selects which bit positions participate in the comparison, and the <strong>match register</strong> has one bit per stored word. After a search, the match bits of all matching words are set to 1.</p>
+  </div>
+
+  <figure>
+    <svg viewBox="0 0 620 300" role="img" aria-labelledby="m4-cam-title m4-cam-desc" style="max-width:620px">
+      <title id="m4-cam-title">Associative memory block diagram</title>
+      <desc id="m4-cam-desc">An argument register and key register feed a comparator array. The comparator array compares the key with every word in the associative memory array. The match register records which words matched, and a priority encoder produces the matching location.</desc>
+      <g font-family="Helvetica, Arial" font-size="12" fill="var(--ink)">
+        <rect x="20" y="30" width="150" height="40" fill="var(--surface-hi)" stroke="var(--ink)"/>
+        <text x="95" y="55" text-anchor="middle">Argument register</text>
+        <rect x="20" y="90" width="150" height="40" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="95" y="115" text-anchor="middle">Key / mask register</text>
+        <line x1="95" y1="70" x2="95" y2="90" stroke="var(--muted)"/>
+        <line x1="170" y1="50" x2="230" y2="50" stroke="var(--muted)" marker-end="url(#m4-cam-arrow)"/>
+        <line x1="170" y1="110" x2="230" y2="110" stroke="var(--muted)" marker-end="url(#m4-cam-arrow)"/>
+
+        <rect x="230" y="30" width="180" height="100" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="320" y="55" text-anchor="middle" font-weight="700">Comparator array</text>
+        <text x="320" y="75" text-anchor="middle" font-size="11">compare key with</text>
+        <text x="320" y="92" text-anchor="middle" font-size="11">every stored word</text>
+        <text x="320" y="112" text-anchor="middle" font-size="11">in parallel</text>
+
+        <rect x="230" y="160" width="180" height="100" fill="var(--surface-hi)" stroke="var(--ink)"/>
+        <text x="320" y="185" text-anchor="middle" font-weight="700">Associative memory array</text>
+        <text x="320" y="205" text-anchor="middle" font-size="11">word 0, word 1, … word m−1</text>
+        <text x="320" y="225" text-anchor="middle" font-size="11">each word has n bits</text>
+        <text x="320" y="245" text-anchor="middle" font-size="11">plus comparison logic</text>
+        <line x1="320" y1="130" x2="320" y2="160" stroke="var(--muted)"/>
+
+        <rect x="450" y="30" width="150" height="100" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="525" y="55" text-anchor="middle" font-weight="700">Match register</text>
+        <text x="525" y="75" text-anchor="middle" font-size="11">one bit per word</text>
+        <text x="525" y="92" text-anchor="middle" font-size="11">1 = match</text>
+        <text x="525" y="112" text-anchor="middle" font-size="11">0 = no match</text>
+        <line x1="410" y1="80" x2="450" y2="80" stroke="var(--muted)" marker-end="url(#m4-cam-arrow)"/>
+        <line x1="525" y1="130" x2="525" y2="160" stroke="var(--muted)" marker-end="url(#m4-cam-arrow)"/>
+        <rect x="450" y="160" width="150" height="60" fill="var(--bg)" stroke="var(--ink)"/>
+        <text x="525" y="183" text-anchor="middle">Priority encoder</text>
+        <text x="525" y="203" text-anchor="middle" font-size="11">→ matching location</text>
+        <text x="20" y="285" font-size="11" fill="var(--muted)">The search is a single parallel operation; the number of words affects hardware cost, not the number of sequential steps.</text>
+      </g>
+      <defs>
+        <marker id="m4-cam-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8" fill="var(--muted)"/>
+        </marker>
+      </defs>
+    </svg>
+    <figcaption>Figure 9. Associative memory. The key is compared with every word in parallel, and the match register records the results.</figcaption>
+  </figure>
+
+  <h3>11.2 Capacity and search</h3>
+
+  <div class="eq">capacity = number of words × bits per word</div>
+  <div class="eq">number of parallel comparisons = number of words (one comparator per word)</div>
+
+  <p>The number of comparisons is not divided by a clock rate in the ideal model: all words are compared simultaneously. That is why associative memory is fast for search but expensive per bit. Each cell needs storage plus comparison logic, and the match lines need priority resolution.</p>
+
+  <div class="example">
+    <div class="example-title">Teacher problem 22 — associative capacity (Unit 4 problems, Problem 23)</div>
+    <p>An associative memory contains 1024 words, with each word having 16 bits. Find the number of words, bits per word, total storage capacity and number of comparison operations if all words are compared simultaneously.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>1024 words × 16 bits, associative. Find capacity and comparisons.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <div class="eq">words = 1024 = 2<sup>10</sup></div>
+    <div class="eq">bits per word = 16</div>
+    <div class="eq">capacity = 1024 × 16 = 16,384 bits</div>
+    <div class="eq">capacity in bytes = 16,384 ÷ 8 = 2048 bytes = 2 KB</div>
+    <div class="eq">parallel comparisons = 1024 (one per word, all at once)</div>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>1024 words, 16 bits per word, 16,384 bits = 2 KB, 1024 parallel comparisons.</strong></p>
+  </div>
+
+  <div class="example">
+    <div class="example-title">Teacher problem 23 — associative search (Unit 4 problems, Problem 24)</div>
+    <p>An associative memory has 64 words, each of 8 bits. The search key is 10110110. The stored words are: location 0 = 10100110, location 1 = 10110110, location 2 = 11110110, location 3 = 10110100. Find the matching location.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>Search key 10110110. Compare with the four stored words and find the match.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <p>Compare bit by bit:</p>
+    <table>
+      <tr><th>Location</th><th>Stored word</th><th>Comparison with 10110110</th><th>Match?</th></tr>
+      <tr><td>0</td><td>10100110</td><td>differs at bit 4</td><td>No</td></tr>
+      <tr><td>1</td><td>10110110</td><td>identical</td><td>Yes</td></tr>
+      <tr><td>2</td><td>11110110</td><td>differs at bit 6</td><td>No</td></tr>
+      <tr><td>3</td><td>10110100</td><td>differs at bit 1</td><td>No</td></tr>
+    </table>
+    <p>The match register would be <span class="kbd">0100</span> for locations 0–3, and the priority encoder would output location 1.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>Matching location = 1.</strong></p>
+  </div>
+
+  <h3>11.3 Advantages, disadvantages and applications</h3>
+
+  <table>
+    <tr><th>Advantages</th><th>Disadvantages</th></tr>
+    <tr><td>Search in one parallel operation; very fast for lookup.</td><td>Expensive per bit: every cell needs comparison logic.</td></tr>
+    <tr><td>No address calculation; search by content.</td><td>Lower density than ordinary RAM.</td></tr>
+    <tr><td>Useful for parallel searches and pattern matching.</td><td>High power consumption when many comparators switch.</td></tr>
+    <tr><td>Used in TLBs, cache tag arrays, routers and databases.</td><td>Scaling to very large capacities is difficult.</td></tr>
+  </table>
+
+  <p><strong>Applications:</strong> TLB lookup in a virtual-memory system; cache tag comparison; network routing tables; database acceleration; pattern recognition. The teacher’s chapter also discusses auto-associative and hetero-associative <em>neural networks</em>. That is a different use of the word “associative”: it refers to recalling patterns, not to a CAM chip. If an exam question asks for “associative memory” in the memory-hierarchy context, answer the hardware CAM. Mention the neural-network meaning only as a separate note.</p>
+
+  <h3>11.4 Exam answer plan</h3>
+
+  <ol class="steps">
+    <li>Define associative memory as content-addressable memory.</li>
+    <li>Draw the argument register, key/mask register, comparator array, memory array and match register.</li>
+    <li>Explain the parallel comparison and the priority encoder.</li>
+    <li>Give the capacity formula and the number of parallel comparisons.</li>
+    <li>Solve the supplied search example bit by bit.</li>
+    <li>List two advantages, two disadvantages and two applications.</li>
+  </ol>
+
+  <h2 id="qbank">12 · Question bank and assignment coverage</h2>
+
+  <div class="theory">
+    <span class="source">Provenance, stated once and applied throughout</span>
+    <p>The questions below are reproduced from <em>COA/question bank.docx</em> and <em>COA/Computer Organization 40 questions.docx</em>. They are <strong>teacher-supplied question-bank questions</strong>, not verified University of Mumbai papers. The wording is preserved; only the surrounding answer guidance is added. MUSA questions are labelled separately as student-association material. No question is marked with a University badge because no verified University paper for course 2023114 was supplied.</p>
+  </div>
+
+  <h3>12.1 Coverage map</h3>
+
+  <table>
+    <tr><th>Question</th><th>Topic</th><th>Where it is taught / answered</th></tr>
+    <tr><td>QB Q1</td><td>Memory hierarchy, speed/capacity/cost</td><td>Section 2; model answer 12.2</td></tr>
+    <tr><td>QB Q2</td><td>Memory parameters</td><td>Section 2.3; model answer 12.2</td></tr>
+    <tr><td>QB Q3</td><td>Primary vs secondary memory</td><td>Section 3.1; model answer 12.2</td></tr>
+    <tr><td>QB Q4</td><td>SRAM, DRAM, PROM, EPROM, EEPROM; SRAM vs DRAM</td><td>Sections 3.3–3.4; model answer 12.2</td></tr>
+    <tr><td>QB Q5</td><td>Virtual memory; paging and segmentation</td><td>Sections 5–6; model answer 12.2</td></tr>
+    <tr><td>QB Q6</td><td>Cache and L1/L2/L3</td><td>Section 7; model answer 12.2</td></tr>
+    <tr><td>QB Q7</td><td>Direct-mapped fields</td><td>Worked example 8.8; model answer 12.2</td></tr>
+    <tr><td>QB Q8</td><td>Compare three mapping techniques</td><td>Section 8.9; model answer 12.2</td></tr>
+    <tr><td>QB Q9</td><td>Direct mapping from block counts</td><td>Worked example 8.8; model answer 12.2</td></tr>
+    <tr><td>QB Q10</td><td>Cache coherence and MESI</td><td>Section 9; model answer 12.2</td></tr>
+    <tr><td>40Q Q29</td><td>Memory hierarchy and trade-offs</td><td>Section 2; model answer 12.3</td></tr>
+    <tr><td>40Q Q30</td><td>Memory parameters</td><td>Section 2.3; model answer 12.3</td></tr>
+    <tr><td>40Q Q31</td><td>RAM vs ROM; SRAM/DRAM/PROM/EPROM/EEPROM</td><td>Section 3; model answer 12.3</td></tr>
+    <tr><td>40Q Q32</td><td>Virtual memory; paging and segmentation</td><td>Sections 5–6; model answer 12.3</td></tr>
+    <tr><td>40Q Q33</td><td>Cache and locality</td><td>Section 7; model answer 12.3</td></tr>
+    <tr><td>40Q Q34</td><td>Mapping techniques and trade-offs</td><td>Section 8; model answer 12.3</td></tr>
+    <tr><td>40Q Q35</td><td>Fully associative tag bits</td><td>Worked example 8.8; model answer 12.3</td></tr>
+    <tr><td>40Q Q36</td><td>Cache coherence; MESI</td><td>Section 9; model answer 12.3</td></tr>
+  </table>
+
+  <h3>12.2 Question bank Q1–Q10 — model answers</h3>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Question bank Q1 · CO4</div>
+    <div class="exam-source">Teacher question bank — not a University paper</div>
+    <p>Explain the memory hierarchy with a neat diagram. Discuss the characteristics of each level in terms of speed, capacity and cost per bit.</p>
+  </div>
+  <p><strong>Model answer.</strong> Draw the stack: registers → L1 → L2/L3 → main memory → secondary storage. State that speed and cost per bit decrease downwards while capacity and access time increase downwards. Registers are inside the CPU and hold operands; L1/L2/L3 are SRAM caches; main memory is DRAM; secondary storage is non-volatile and accessed through I/O. The hierarchy works because of locality of reference. Add one sentence on the goal: give the CPU the illusion of a large, fast memory at the cost of a small fast memory plus a large cheap one. (Full treatment: Section 2.)</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Question bank Q2 · CO4</div>
+    <div class="exam-source">Teacher question bank — not a University paper</div>
+    <p>Explain the different memory parameters such as access time, memory cycle time, transfer rate and capacity.</p>
+  </div>
+  <p><strong>Model answer.</strong> Define each term and give its unit. Access time = delay to one read/write. Cycle time = minimum interval between successive operations, usually access time plus recovery. Transfer rate = bytes moved per second. Capacity = total bits/bytes stored. Add latency and bandwidth as related terms: latency is the delay for one request; bandwidth is the peak data rate. Use the 64-bit word every 10 ns example to show rate = 8 B ÷ 10 ns = 0.8 GB/s. (Full treatment: Section 2.3.)</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Question bank Q3 · CO4</div>
+    <div class="exam-source">Teacher question bank — not a University paper</div>
+    <p>Classify primary and secondary memories. Explain the characteristics and applications of each.</p>
+  </div>
+  <p><strong>Model answer.</strong> Primary memory is directly accessible to the CPU, fast and expensive; it includes registers, cache, RAM and ROM. Secondary memory is non-volatile, large and cheap per bit, but accessed through I/O; it includes HDD, SSD, USB flash and optical discs. Compare speed, capacity, cost per bit, volatility, CPU access and typical use. Primary holds running programs and active data; secondary holds files, backups and archives. (Full treatment: Section 3.1.)</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Question bank Q4 · CO4</div>
+    <div class="exam-source">Teacher question bank — not a University paper</div>
+    <p>Explain the following types of RAM and ROM: SRAM, DRAM, PROM, EPROM, EEPROM. Also compare SRAM and DRAM.</p>
+  </div>
+  <p><strong>Model answer.</strong> SRAM uses a flip-flop, needs no refresh, is fast but low-density and expensive; it is used for cache. DRAM uses a capacitor, needs refresh, is slower but dense and cheap; it is used for main memory. PROM is programmed once; EPROM is erased by UV light; EEPROM is erased electrically. Give one application for each. Compare SRAM and DRAM in a table: storage element, refresh, speed, density, cost and use. (Full treatment: Sections 3.3–3.4.)</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Question bank Q5 · CO4</div>
+    <div class="exam-source">Teacher question bank — not a University paper</div>
+    <p>What is virtual memory? Explain paging and segmentation with suitable diagrams. Compare paging and segmentation.</p>
+  </div>
+  <p><strong>Model answer.</strong> Define virtual memory and its benefits: large address space, protection, sharing and non-contiguous allocation. For paging, define page, frame, page table, page number and offset; draw VA → page table → PA. For segmentation, define segment number, base and limit; draw the limit check and base + offset. Compare fixed vs variable size, page table vs segment table, internal vs external fragmentation, programmer visibility and sharing. End by noting that real systems often combine both. (Full treatment: Sections 5–6.)</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Question bank Q6 · CO4</div>
+    <div class="exam-source">Teacher question bank — not a University paper</div>
+    <p>Explain cache memory and its importance in improving processor performance. Explain the L1, L2 and L3 cache hierarchy.</p>
+  </div>
+  <p><strong>Model answer.</strong> Define cache as a small fast SRAM that holds copies of recently used blocks. Explain hit, miss, hit ratio and miss penalty. Locality of reference is the reason it works: temporal locality keeps recently used items; spatial locality makes a whole block worth fetching. L1 is smallest, fastest and private; L2 is larger and slower; L3 is larger still and usually shared. Give the average-access-time formula and one numerical. (Full treatment: Section 7.)</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Question bank Q7 · CO4</div>
+    <div class="exam-source">Teacher question bank — not a University paper</div>
+    <p>A computer has a 32-bit address, a cache of 16 KB, and a cache block size of 16 bytes. For a direct-mapped cache, determine: (a) number of cache lines; (b) number of bits for block offset; (c) number of bits for cache index; (d) number of bits for tag.</p>
+  </div>
+  <p><strong>Model answer.</strong> 16 KB ÷ 16 B = 1024 lines. Offset = log<sub>2</sub> 16 = 4 bits. Index = log<sub>2</sub> 1024 = 10 bits. Tag = 32 − 10 − 4 = 18 bits. Check: 18 + 10 + 4 = 32. <strong>Final: 1024 lines; offset 4, index 10, tag 18.</strong> (Full working: Worked example 8.8.)</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Question bank Q8 · CO4</div>
+    <div class="exam-source">Teacher question bank — not a University paper</div>
+    <p>Explain and compare the following cache mapping techniques with suitable examples: (a) direct mapping; (b) associative mapping; (c) set-associative mapping.</p>
+  </div>
+  <p><strong>Model answer.</strong> For each technique, state the placement rule and the address fields. Direct: line = block mod lines; tag | line | offset; one comparator; conflict misses. Fully associative: any line; tag | offset; one comparator per line; no conflict misses but expensive. Set associative: set = block mod sets; tag | set | offset; N comparators; compromise. Give a small numerical for each, then a comparison table covering hardware cost, search speed, conflict misses and typical use. (Full treatment: Section 8.)</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Question bank Q9 · CO4</div>
+    <div class="exam-source">Teacher question bank — not a University paper</div>
+    <p>A main memory contains 64K blocks, while the cache contains 256 blocks. Each block consists of 8 words. Determine the number of bits required for tag, cache index and word offset using direct mapping.</p>
+  </div>
+  <p><strong>Model answer.</strong> Treat the address as a word address: 64K blocks × 8 words = 2<sup>19</sup> words, so 19 address bits. Offset = log<sub>2</sub> 8 = 3. Index = log<sub>2</sub> 256 = 8. Tag = 19 − 8 − 3 = 8. <strong>Final: tag 8, index 8, offset 3.</strong> State the word-address assumption, because the question does not give a byte width. (Full working: Worked example 8.8.)</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Question bank Q10 · CO4 (MESI is self-study)</div>
+    <div class="exam-source">Teacher question bank — not a University paper</div>
+    <p>What is cache coherency? Explain the MESI protocol and describe the four states: Modified, Exclusive, Shared, Invalid.</p>
+  </div>
+  <p><strong>Model answer.</strong> Define coherence: all processors see a consistent value for each shared location. Give the two-cache example: both hold X = 50; one writes 75; the other can read a stale 50 without coherence. MESI states: Modified (only valid copy, dirty), Exclusive (only copy, clean), Shared (clean, possibly in several caches), Invalid (no valid copy). Explain that a write to a shared line invalidates the other copies, and a read of a modified line gets the data from the owner. Mention snooping and directory-based mechanisms. (Full treatment: Section 9.)</p>
+
+  <h3>12.3 Forty-question document Q29–Q36 — model answers</h3>
+
+  <div class="exam-q">
+    <div class="exam-q-title">40 questions Q29 · Module 4</div>
+    <div class="exam-source">Teacher-supplied 40-question document — not a University paper</div>
+    <p>Explain the memory hierarchy with a neat diagram. Discuss the relationship between speed, capacity and cost at different levels of the hierarchy.</p>
+  </div>
+  <p><strong>Model answer.</strong> Same structure as QB Q1. Emphasise the inverse relationship: as capacity increases downwards, speed decreases and cost per bit decreases. Registers are fastest and most expensive per bit; secondary storage is slowest and cheapest. The hierarchy is a cost-performance compromise, not a physical single memory. (Full treatment: Section 2.)</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">40 questions Q30 · Module 4</div>
+    <div class="exam-source">Teacher-supplied 40-question document — not a University paper</div>
+    <p>Explain the important memory parameters such as access time, memory cycle time, transfer rate, capacity and cost per bit.</p>
+  </div>
+  <p><strong>Model answer.</strong> Same as QB Q2, plus cost per bit = total cost ÷ capacity in bits. Distinguish access time from cycle time; give the transfer-rate formula; state that capacity uses powers of two. Add a one-line example for each parameter. (Full treatment: Section 2.3.)</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">40 questions Q31 · Module 4</div>
+    <div class="exam-source">Teacher-supplied 40-question document — not a University paper</div>
+    <p>Differentiate between RAM and ROM. Explain the following: SRAM, DRAM, PROM, EPROM, EEPROM.</p>
+  </div>
+  <p><strong>Model answer.</strong> RAM is volatile and read/write; ROM is non-volatile and normally read-only. Then use the SRAM/DRAM table and the PROM/EPROM/EEPROM table from Section 3. Give one application per technology. End with the reason both RAM and ROM exist: RAM for active work, ROM for fixed boot code. (Full treatment: Section 3.)</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">40 questions Q32 · Module 4</div>
+    <div class="exam-source">Teacher-supplied 40-question document — not a University paper</div>
+    <p>Explain virtual memory. Describe virtual memory implementation using paging and segmentation. Compare paging and segmentation.</p>
+  </div>
+  <p><strong>Model answer.</strong> Same as QB Q5. Add the translation formulas: offset = log<sub>2</sub>(page size); page number = VA bits − offset; frames = physical memory ÷ page size. For segmentation, show the limit check before base + offset. (Full treatment: Sections 5–6.)</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">40 questions Q33 · Module 4</div>
+    <div class="exam-source">Teacher-supplied 40-question document — not a University paper</div>
+    <p>Explain cache memory and the principle of locality of reference. Explain the need for cache memory in modern computer systems.</p>
+  </div>
+  <p><strong>Model answer.</strong> Define cache; explain the processor-memory speed gap. Locality: temporal (recently used items are reused) and spatial (nearby addresses are used). The cache keeps a small set of blocks close to the CPU, so most accesses hit and the average access time approaches the cache time. Give the hit-ratio formula and one numerical. (Full treatment: Section 7.)</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">40 questions Q34 · Module 4</div>
+    <div class="exam-source">Teacher-supplied 40-question document — not a University paper</div>
+    <p>Explain the following cache mapping techniques with suitable examples: direct mapping, associative mapping, set-associative mapping. Also compare their advantages and disadvantages.</p>
+  </div>
+  <p><strong>Model answer.</strong> Same as QB Q8. Make the comparison explicit: direct is cheap but has conflict misses; fully associative has no conflict misses but is expensive; set associative balances both. Give the address fields and one numerical for each. (Full treatment: Section 8.)</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">40 questions Q35 · Module 4</div>
+    <div class="exam-source">Teacher-supplied 40-question document — not a University paper</div>
+    <p>A cache memory contains 16 words, each block contains 4 words, and the main memory contains 128 bytes. Determine the number of bits required for address, word/offset, block and tag for associative mapping.</p>
+  </div>
+  <p><strong>Model answer.</strong> 128 bytes → 7-bit address. Block = 4 words → offset 2 bits. Fully associative → no index; tag = 7 − 2 = 5 bits. The block number is 5 bits and is the same field as the tag in fully associative mapping. State the word/byte assumption because the question mixes units. <strong>Final: address 7, offset 2, block/tag 5.</strong> (Full discussion: Worked example 8.8.)</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">40 questions Q36 · Module 4</div>
+    <div class="exam-source">Teacher-supplied 40-question document — not a University paper</div>
+    <p>Explain cache coherence. Why is cache coherence required in multiprocessor systems? Explain one technique used to maintain cache coherence. Also explain the basic concept of the MESI protocol.</p>
+  </div>
+  <p><strong>Model answer.</strong> Coherence is required because each processor may cache a shared variable; a write in one cache can leave stale copies elsewhere. Choose one technique: snooping (caches watch the bus and invalidate/update their copies) or directory-based (a directory records sharers and sends targeted invalidations). Then define the four MESI states and give one transition. (Full treatment: Section 9.)</p>
+
+  <h3>12.4 Additional MUSA questions</h3>
+
+  <p>The MUSA question bank and practice paper contain Module 4 questions that overlap the material above. They are <strong>student-association material</strong>, not verified University papers. The table maps them to the relevant section rather than duplicating the same answer.</p>
+
+  <table>
+    <tr><th>MUSA question</th><th>Topic</th><th>Where covered</th></tr>
+    <tr><td>MUSA QB Q4</td><td>Characteristics of memory</td><td>Section 2.3</td></tr>
+    <tr><td>MUSA QB Q6</td><td>Cache mapping techniques, advantages and disadvantages</td><td>Section 8</td></tr>
+    <tr><td>MUSA QB Q10</td><td>Virtual memory; paging and segmentation with diagrams</td><td>Sections 5–6</td></tr>
+    <tr><td>MUSA QB Q11</td><td>Interleaved and associative memory; differences</td><td>Sections 10–11</td></tr>
+    <tr><td>MUSA QB Q23(iv)</td><td>SRAM vs DRAM</td><td>Section 3.3</td></tr>
+    <tr><td>MUSA QB Q24(ii)</td><td>Memory hierarchy</td><td>Section 2</td></tr>
+    <tr><td>MUSA QB Q24(iii)</td><td>Cache memory and cache coherency</td><td>Sections 7 and 9</td></tr>
+    <tr><td>MUSA Paper Set 1 Q4(a)</td><td>Fully associative tag bits (4 KB block, 16 GB memory)</td><td>Worked example 8.8</td></tr>
+  </table>
+
+  <h3>12.5 Assignment 4 coverage</h3>
+
+  <p><em>Assignment 4.docx</em> asks for: memory parameters (access time, cycle time, transfer rate, capacity, cost per bit); classification of primary and secondary memory; SRAM, DRAM, PROM, EPROM, EEPROM; virtual memory with paging and segmentation; and cache memory with L1/L2/L3. Every one of these is taught in Sections 2–9. The assignment does not contain numericals, so the numerical practice comes from <em>Unit 4 problems.docx</em> and the question bank.</p>
+
+  <h2 id="practice">13 · Independent practice</h2>
+
+  <p>These questions are <strong>written for this guide</strong>. They are not teacher questions and not University questions. They are ordered by difficulty and they cover every numerical type that the supplied material uses. Attempt them with the book closed, then mark yourself from the separate answer key in Section 14. Give units in every final answer.</p>
+
+  <div class="practice">
+    <h3>Practice Questions</h3>
+
+    <h4 id="practice-basic" data-rail-subsection data-rail-label="Basic">A · Basic (one-step recall and one-formula numericals)</h4>
+    <ol>
+      <li>A memory chip is organised as 8K × 8. Find the number of address lines, the number of data lines and the capacity in KB.</li>
+      <li>How many 8K × 8 chips are needed to build a 32K × 8 memory?</li>
+      <li>A cache takes 10 ns and main memory takes 100 ns. The hit ratio is 0.9. Find the effective access time using hierarchical lookup.</li>
+      <li>A 32-bit virtual address uses 8 KB pages. Find the offset bits, the page-number bits and the number of virtual pages.</li>
+      <li>A segment has base 2000 and limit 600. State whether each logical address is valid, and give the physical address if it is: (a) offset 599; (b) offset 600.</li>
+      <li>A memory has 4 banks with low-order interleaving. Which bank serves address 13?</li>
+    </ol>
+
+    <h4 id="practice-intermediate" data-rail-subsection data-rail-label="Intermediate">B · Intermediate (two or three formulas chained)</h4>
+    <ol start="7">
+      <li>A system has a 16-bit virtual address, 2 KB pages and 512 KB of physical memory. Find the offset bits, the number of virtual pages, the number of frames and the frame-number bits.</li>
+      <li>A direct-mapped cache has a 32-bit address, 32 KB of cache and 32-byte blocks. Find the number of lines, the offset bits, the index bits and the tag bits.</li>
+      <li>The same cache is rebuilt as a 2-way set-associative cache with 64 KB of cache and 16-byte blocks, still with a 32-bit address. Find the number of lines, the number of sets, the set bits, the offset bits and the tag bits.</li>
+      <li>L1 takes 1 ns with hit ratio 0.95. L2 takes 8 ns with hit ratio 0.90 among L1 misses. Main memory takes 60 ns. Find the average memory access time with hierarchical lookup.</li>
+      <li>A direct-mapped cache has 8 KB of cache, 16-byte blocks and 256 KB of main memory. Decode address 2C3A5<sub>16</sub> into tag, cache line and offset.</li>
+      <li>Eight memory banks each take 50 ns per access. Eight consecutive words are read. Find the time without interleaving, the time with ideal 8-way interleaving, and the speed-up.</li>
+      <li>An associative memory has 512 words of 32 bits each. Find its capacity in bits and in KB, and the number of parallel comparisons in one search.</li>
+    </ol>
+
+    <h4 id="practice-advanced" data-rail-subsection data-rail-label="Advanced">C · Advanced (multi-step, or a written justification)</h4>
+    <ol start="14">
+      <li>A 32-bit virtual address uses 4 KB pages and 4-byte page-table entries. Find the number of page-table entries and the size of a single-level page table in MiB.</li>
+      <li>A 4-way set-associative cache has 128 KB of cache, 64-byte blocks and a 40-bit address. Find the number of lines, the number of sets, the set bits, the offset bits and the tag bits.</li>
+      <li>A cache takes 20 ns and main memory takes 200 ns. Hierarchical lookup gives an average access time of 40 ns. Find the hit ratio.</li>
+      <li>Build a 64K × 8 memory from 16K × 8 chips. Find the number of chips and give the address range served by each chip.</li>
+      <li>A 4-bank low-order-interleaved memory is accessed with stride 4: addresses 0, 4, 8 and 12, each taking 100 ns. Explain which bank serves each access and find the total time. Compare with the ideal 4-way interleaved time for four <em>consecutive</em> addresses.</li>
+      <li>Explain why a fully associative cache needs no index bits, and why a TLB is usually built as a fully associative or highly set-associative structure. (Written answer, about 6 marks.)</li>
+      <li>Compare paging and segmentation on size, address structure, table contents, fragmentation, programmer visibility and protection. State one reason real systems combine them. (Written answer, about 8 marks.)</li>
+    </ol>
+  </div>
+
+  <h2 id="answer-key">14 · Answer key</h2>
+
+  <p>Mark your work against the working, not only the final number. A correct final answer with a wrong method will not earn full marks in the exam.</p>
+
+  <div class="answer-key">
+    <h3>Answers</h3>
+
+    <h4>A · Basic</h4>
+    <ol>
+      <li><strong>13 address lines, 8 data lines, 8 KB.</strong><br>
+      8K = 2<sup>3</sup> × 2<sup>10</sup> = 2<sup>13</sup> locations, so 13 address lines. The word is 8 bits, so 8 data lines. Capacity = 2<sup>13</sup> × 8 = 2<sup>16</sup> bits = 2<sup>13</sup> bytes = 8 KB.</li>
+
+      <li><strong>4 chips.</strong><br>
+      Depth factor = 32K ÷ 8K = 4. Width factor = 8 ÷ 8 = 1. Total = 4 × 1 = 4. Check: 4 × 8K × 8 = 32K × 8. Correct.</li>
+
+      <li><strong>20 ns.</strong><br>
+      EAT = 0.9(10) + 0.1(10 + 100) = 9 + 11 = 20 ns. A miss pays the cache lookup and then the memory access.</li>
+
+      <li><strong>13 offset bits, 19 page-number bits, 524,288 pages.</strong><br>
+      8 KB = 2<sup>13</sup>, so offset = 13. Page bits = 32 − 13 = 19. Pages = 2<sup>19</sup> = 524,288. Check: 19 + 13 = 32.</li>
+
+      <li><strong>(a) Valid, physical address 2599. (b) Invalid — segmentation fault.</strong><br>
+      (a) 599 &lt; 600, so physical = 2000 + 599 = 2599. (b) 600 ≥ 600, so the limit check fails; no physical address is produced. Note that the limit is an exclusive upper bound.</li>
+
+      <li><strong>Bank 1.</strong><br>
+      Low-order interleaving: bank = address mod 4 = 13 mod 4 = 1.</li>
+    </ol>
+
+    <h4>B · Intermediate</h4>
+    <ol start="7">
+      <li><strong>11 offset bits, 32 virtual pages, 256 frames, 8 frame-number bits.</strong><br>
+      2 KB = 2<sup>11</sup> ⇒ offset 11. VPN bits = 16 − 11 = 5 ⇒ 2<sup>5</sup> = 32 pages. 512 KB = 2<sup>19</sup> bytes ⇒ frames = 2<sup>19</sup> ÷ 2<sup>11</sup> = 2<sup>8</sup> = 256 ⇒ 8 frame bits. Check: 8 + 11 = 19 physical address bits.</li>
+
+      <li><strong>1024 lines; offset 5, index 10, tag 17.</strong><br>
+      32 KB = 2<sup>15</sup> B, 32 B = 2<sup>5</sup> B. Lines = 2<sup>15</sup> ÷ 2<sup>5</sup> = 2<sup>10</sup> = 1024. Offset = 5. Index = 10. Tag = 32 − 10 − 5 = 17. Check: 17 + 10 + 5 = 32.</li>
+
+      <li><strong>4096 lines, 2048 sets; set 11, offset 4, tag 17.</strong><br>
+      64 KB ÷ 16 B = 2<sup>16</sup> ÷ 2<sup>4</sup> = 2<sup>12</sup> = 4096 lines. Sets = 4096 ÷ 2 = 2048 = 2<sup>11</sup>. Offset = log<sub>2</sub> 16 = 4. Tag = 32 − 11 − 4 = 17. Check: 17 + 11 + 4 = 32.</li>
+
+      <li><strong>1.7 ns.</strong><br>
+      AMAT = 1 + (0.05)(8) + (0.05)(0.10)(60) = 1 + 0.4 + 0.3 = 1.7 ns. The last term is the 0.5% of accesses that miss both caches.</li>
+
+      <li><strong>Tag = 16<sub>16</sub> (22), line = 3A<sub>16</sub> (58), offset = 5.</strong><br>
+      256 KB = 2<sup>18</sup> ⇒ 18 address bits. Offset = log<sub>2</sub> 16 = 4. Lines = 8 KB ÷ 16 B = 512 ⇒ index = 9. Tag = 18 − 9 − 4 = 5.<br>
+      2C3A5<sub>16</sub> = 10 1100 0011 1010 0101<sub>2</sub>. Tag = 10110<sub>2</sub> = 16<sub>16</sub> = 22. Line = 0 0011 1010<sub>2</sub> = 3A<sub>16</sub> = 58. Offset = 0101<sub>2</sub> = 5.<br>
+      Check: 22 × 8192 + 58 × 16 + 5 = 180,224 + 928 + 5 = 181,157 = 2C3A5<sub>16</sub>. Correct.</li>
+
+      <li><strong>400 ns without interleaving, 50 ns with ideal 8-way interleaving, speed-up 8.</strong><br>
+      Serial: 8 × 50 = 400 ns. Parallel: 50 ns. Speed-up = 400 ÷ 50 = 8. Real hardware will be slower because of arbitration and bus transfer time.</li>
+
+      <li><strong>16,384 bits = 2 KB; 512 parallel comparisons.</strong><br>
+      Capacity = 512 × 32 = 16,384 bits. In bytes = 16,384 ÷ 8 = 2048 B = 2 KB. One comparator per word ⇒ 512 comparisons in parallel.</li>
+    </ol>
+
+    <h4>C · Advanced</h4>
+    <ol start="14">
+      <li><strong>2<sup>20</sup> entries; 4 MiB.</strong><br>
+      4 KB = 2<sup>12</sup> ⇒ offset 12; VPN bits = 32 − 12 = 20 ⇒ 2<sup>20</sup> = 1,048,576 entries. Size = 2<sup>20</sup> × 4 B = 2<sup>22</sup> B = 4 MiB. This is per process, which is why multi-level page tables exist.</li>
+
+      <li><strong>2048 lines, 512 sets; set 9, offset 6, tag 25.</strong><br>
+      128 KB ÷ 64 B = 2<sup>17</sup> ÷ 2<sup>6</sup> = 2<sup>11</sup> = 2048 lines. Sets = 2048 ÷ 4 = 512 = 2<sup>9</sup>. Offset = log<sub>2</sub> 64 = 6. Tag = 40 − 9 − 6 = 25. Check: 25 + 9 + 6 = 40.</li>
+
+      <li><strong>h = 0.9 (90%).</strong><br>
+      AMAT = T<sub>c</sub> + (1 − h)T<sub>m</sub> ⇒ 40 = 20 + (1 − h)(200) ⇒ (1 − h) = 20 ÷ 200 = 0.1 ⇒ h = 0.9.</li>
+
+      <li><strong>4 chips.</strong><br>
+      Depth factor = 64K ÷ 16K = 4; width factor = 8 ÷ 8 = 1 ⇒ 4 chips. With 16K = 4000<sub>16</sub> addresses per chip:<br>
+      Chip 0: 0000H–3FFFH &nbsp;·&nbsp; Chip 1: 4000H–7FFFH &nbsp;·&nbsp; Chip 2: 8000H–BFFFH &nbsp;·&nbsp; Chip 3: C000H–FFFFH.<br>
+      A 2-to-4 decoder driven by A14 and A15 selects one chip at a time.</li>
+
+      <li><strong>All four accesses hit bank 0; total 400 ns; ideal consecutive-address time would be 100 ns.</strong><br>
+      Bank = address mod 4: 0 mod 4 = 0, 4 mod 4 = 0, 8 mod 4 = 0, 12 mod 4 = 0. Every access goes to bank 0, so there is no parallelism and the time is 4 × 100 = 400 ns (speed-up 1). Four <em>consecutive</em> addresses 0, 1, 2, 3 would go to banks 0, 1, 2, 3 and finish in one access time, 100 ns. This is the classic stride conflict of low-order interleaving.</li>
+
+      <li><strong>Model written answer.</strong> A fully associative cache allows any block in any line, so the address does not need to name a line; the hardware compares the tag against every line. The index field exists only to select a line or set before comparison, so with no selection there is no index. The tag must therefore carry all the block-number bits, and tag + offset = total address bits. A TLB holds a small number of page-table entries and must answer in one cycle; fully associative or highly set-associative placement removes conflict misses for the few entries it can hold, and the comparator cost is acceptable because the TLB is small. The trade-off is hardware cost per entry, which is why large data caches use lower associativity.</li>
+
+      <li><strong>Model written answer.</strong> Paging divides the address space into fixed-size pages; segmentation divides it into variable-size logical segments. A paging address is page number + offset, and the table entry holds a frame number plus valid, dirty and permission bits. A segmentation address is segment number + offset, and the table entry holds a base and a limit; the hardware checks offset &lt; limit before adding the base. Paging suffers internal fragmentation in the last page; segmentation suffers external fragmentation between segments. Paging is invisible to the programmer; segmentation is visible because segments match logical program units, which makes sharing and protection natural. Real systems combine them (segments that are themselves paged) to get logical protection boundaries with fixed-size allocation.</li>
+    </ol>
+  </div>
+
+  <h2 id="mistakes">15 · Common mistakes</h2>
+
+  <div class="common-mistakes">
+    <h3>Errors that cost marks, and the fix</h3>
+    <table>
+      <tr><th>Mistake</th><th>Why it is wrong</th><th>Correct approach</th></tr>
+      <tr><td>Writing 1 KB = 1000 bytes</td><td>Memory capacity and page size use powers of two.</td><td>1 KB = 2<sup>10</sup> = 1024 bytes; convert to a power of two before taking logarithms.</td></tr>
+      <tr><td>Confusing address lines with data lines</td><td>They answer different questions: which location, and how wide.</td><td>Address lines = log<sub>2</sub>(locations); data lines = bits per location.</td></tr>
+      <tr><td>Adding expansion factors</td><td>Depth and width are independent dimensions.</td><td>Total chips = depth factor × width factor.</td></tr>
+      <tr><td>Using cache size as the number of lines</td><td>A line holds a whole block.</td><td>Lines = cache size ÷ block size.</td></tr>
+      <tr><td>Omitting the offset when computing the tag</td><td>The tag is only the remaining high bits.</td><td>Tag = total address bits − index/set bits − offset bits.</td></tr>
+      <tr><td>Putting an index field in a fully associative cache</td><td>Nothing selects a line before the comparison.</td><td>Tag + offset = total bits; compare the tag with every line.</td></tr>
+      <tr><td>Using lines instead of sets for the index in an N-way cache</td><td>The index chooses a set, not a line.</td><td>Set bits = log<sub>2</sub>(lines ÷ N).</td></tr>
+      <tr><td>Changing the offset during paging translation</td><td>The offset is the position inside the page and does not change.</td><td>Replace only the page number with the frame number; copy the offset unchanged.</td></tr>
+      <tr><td>Using the physical address size to count virtual pages</td><td>Virtual pages come from the virtual address; frames come from physical memory.</td><td>Pages = virtual space ÷ page size; frames = physical space ÷ page size.</td></tr>
+      <tr><td>Skipping the limit check in segmentation</td><td>The check is the protection mechanism.</td><td>If offset ≥ limit, report a segmentation fault; do not compute base + offset.</td></tr>
+      <tr><td>Using address mod n for high-order interleaving</td><td>High-order interleaving uses the high address bits.</td><td>Low-order: bank = address mod n. High-order: bank = address ÷ bank size.</td></tr>
+      <tr><td>Claiming the full speed-up n in every real interleaved system</td><td>Arbitration, bus transfer and bank conflicts add time.</td><td>n is the ideal upper bound; state the assumption when you use it.</td></tr>
+      <tr><td>Mixing the two AMAT conventions</td><td>One counts the cache lookup on a miss; the other does not.</td><td>State the formula first: hT<sub>c</sub> + (1 − h)T<sub>m</sub>, or T<sub>c</sub> + (1 − h)T<sub>m</sub>.</td></tr>
+      <tr><td>Writing a number with no unit</td><td>“13” could be ns, bits or lines.</td><td>Box the answer with its unit: 13 ns, 13 bits, 13 lines.</td></tr>
+      <tr><td>Treating MESI as prescribed core instead of self-study</td><td>The syllabus labels it self-study, although the question bank asks it.</td><td>Learn it, but label it correctly if a question asks about syllabus status.</td></tr>
+    </table>
+  </div>
+
+  <h2 id="revision">16 · Last-minute revision sheet</h2>
+
+  <div class="revision-sheet">
+    <h3>Ten minutes before the paper</h3>
+
+    <p><strong>Capacity and lines.</strong> N × M means N locations of M bits. Address lines = log<sub>2</sub> N. Data lines = M. Capacity = N × M bits; divide by 8 for bytes, by 1024 for KB, by 2<sup>20</sup> for MB.</p>
+
+    <p><strong>Expansion.</strong> Total chips = (target depth ÷ chip depth) × (target width ÷ chip width). Check total bits before and after.</p>
+
+    <p><strong>Paging.</strong> Offset = log<sub>2</sub>(page size). VPN bits = VA bits − offset. Pages = virtual space ÷ page size. Frames = physical space ÷ page size. Frame bits = log<sub>2</sub> frames. The offset never changes. Page-table size = entries × PTE size.</p>
+
+    <p><strong>Segmentation.</strong> Check offset &lt; limit first. If valid, physical = base + offset. If not, segmentation fault.</p>
+
+    <p><strong>Cache fields.</strong> Offset = log<sub>2</sub>(block size). Lines = cache size ÷ block size. Index = log<sub>2</sub> lines (direct) or log<sub>2</sub>(lines ÷ N) (N-way). Tag = total − index − offset. Fully associative has no index.</p>
+
+    <p><strong>Cache performance.</strong> h = hits ÷ accesses. Hierarchical EAT = hT<sub>c</sub> + (1 − h)(T<sub>c</sub> + T<sub>m</sub>) = T<sub>c</sub> + (1 − h)T<sub>m</sub>. Simultaneous EAT = hT<sub>c</sub> + (1 − h)T<sub>m</sub>. Two levels: add (1 − h<sub>1</sub>)T<sub>L2</sub> and (1 − h<sub>1</sub>)(1 − h<sub>2</sub>)T<sub>main</sub>.</p>
+
+    <p><strong>Interleaving.</strong> Low-order: bank = address mod n. High-order: bank = address ÷ bank size. Ideal speed-up = n; real speed-up is lower.</p>
+
+    <p><strong>Associative memory.</strong> Capacity = words × bits per word. Comparisons = one per word, all in parallel. Argument register holds the key; mask/key register selects bits; match register records hits.</p>
+
+    <p><strong>MESI.</strong> Modified (only copy, dirty), Exclusive (only copy, clean), Shared (clean, may be in several caches), Invalid (no valid copy). Write to Shared → invalidate others → Modified. Read of Modified → owner supplies data.</p>
+
+    <p><strong>One-line definitions to have ready:</strong> locality of reference; hit ratio; miss penalty; virtual memory; page fault; TLB; write-through vs write-back; direct vs associative vs set-associative; cache coherence; snooping vs directory.</p>
+
+    <p><strong>Answer discipline.</strong> State the formula, substitute with units, show the arithmetic, box the final answer with its unit, and add one line of interpretation. Draw the diagram first if the question says “with a neat diagram”.</p>
+  </div>
+
+  <h2 id="references">17 · References and verification notes</h2>
+
+  <div class="references">
+    <h3>Sources used</h3>
+    <ul>
+      <li><strong>Official syllabus.</strong> University of Mumbai, Faculty of Science and Technology, B.E. Computer Science and Engineering (Artificial Intelligence and Machine Learning), Semester III and IV, Course 2023114 <em>Computer Organization and Architecture</em>, 2025–26. Module 4 row: “Memory Systems Organization”, 7 hours, CO4. <a href="https://mu.ac.in/old/wp-content/uploads/2025/06/6.21-N-B.E.-AI-ML-sem-III-IV.pdf">mu.ac.in syllabus PDF</a>.</li>
+      <li><strong>Teacher chapter.</strong> <em>chapter 4 coa.docx</em>, supplied in <code>COA.zip</code>. Used for the hierarchy, parameters, RAM/ROM classification, paging vs segmentation table, cache levels, mapping techniques, coherence/MESI, associative memory and interleaving.</li>
+      <li><strong>Teacher problem set.</strong> <em>Unit 4 problems.docx</em>, supplied in <code>COA.zip</code>. Problems 1–24 are reproduced as the worked examples, with full working added. The original answers were checked independently.</li>
+      <li><strong>Teacher assignment.</strong> <em>Assignment 4.docx</em>, supplied in <code>COA.zip</code>. Used to confirm the required topic coverage; it contains no numericals.</li>
+      <li><strong>Teacher question bank.</strong> <em>COA/question bank.docx</em>, Q1–Q10, and <em>Computer Organization 40 questions.docx</em>, Q29–Q36. Wording preserved. These are question-bank documents, not University papers.</li>
+      <li><strong>Student association material.</strong> MUSA question bank and MUSA practice paper (labelled “Winter 2025”, 60 marks, 2 hours). Used only for additional practice and clearly labelled; <strong>not</strong> verified University of Mumbai papers.</li>
+    </ul>
+
+    <h3>What was verified</h3>
+    <ul>
+      <li>Every numerical in Sections 1–11 and Section 14 was recomputed independently in Python. The values in the teacher’s answer key were reproduced: 32 KB, 4 KB, 8 chips, 64 KB, 8 chips, 3.5 ns, 30 ns, 13 ns, 64 pages/6/10, 64 pages/16 frames/2A35H → page A, offset 235H, 12/2<sup>20</sup>/2<sup>18</sup>/18, 6500, 4750/8200/invalid, 4/8/4, 55H/E6H/1EH, 16/4/12, 16 sets/4/5/17/8, 25H/3A5H/7H, 50→75, banks 0–3, 400/100/4, 16,384 bits/2 KB/1024 comparisons, location 1.</li>
+      <li>Problem 10 was expanded because the source writes the page number and the offset compactly. The guide shows both the binary split and the hexadecimal division/modulo so the arithmetic is auditable.</li>
+      <li>Problem 15 in the source asks for the fields of ABCDE<sub>16</sub> but only computes the field widths. The guide completes the split explicitly and verifies it by reconstruction.</li>
+      <li>Problem 6 is shown both in the teacher’s compact form and in the disjoint-outcome form. Both give 3.5 ns. The convention is stated, because the alternative “cache + miss penalty” convention gives a different intermediate breakdown.</li>
+      <li>The syllabus wording, teaching hours (7) and CO4 mapping were read from the official PDF, not inferred.</li>
+    </ul>
+
+    <h3>Notes and limitations</h3>
+    <ul>
+      <li>No verified University of Mumbai end-semester paper for course 2023114 was present in the supplied material. Nothing in this guide is labelled as a verified University question.</li>
+      <li>“Typical” sizes and speeds for L1/L2/L3 and storage are orders of magnitude, not specifications for a named processor.</li>
+      <li>The MESI transition table is the standard simplified version used in textbooks. Real Pentium-family implementations add details that are outside this syllabus.</li>
+      <li>Practice questions in Section 13 and the supplementary worked examples are written for this guide. They are labelled as such and are not attributed to the teacher or the University.</li>
+      <li>Diagrams are hand-authored SVG in this page. No generated images are used.</li>
+    </ul>
+
+    <h3>Attribution</h3>
+    <p>Teaching content adapted from the teacher-supplied chapter, problem set, assignment and question banks listed above. Syllabus text quoted from the official University of Mumbai document. Explanatory prose, additional examples and practice questions are <strong>supplementary clarification</strong> written for this guide. Student-association material is attributed to MUSA and is not presented as University material.</p>
+  </div>
+</div>

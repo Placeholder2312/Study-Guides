@@ -1,0 +1,436 @@
+
+
+========== source\COA\Unit 4 problems.docx ==========
+
+Unit: Memory Organization — Numerical Problems
+A. Introduction to Memory & Memory Parameters
+Problem 1 — Memory Capacity
+A computer has a memory consisting of 16K memory locations, with each location storing 16 bits.
+Find:
+Total memory capacity in bits
+Total memory capacity in bytes
+Number of address lines
+Number of data lines
+Answer:
+16K=214
+Address lines:
+14
+Data lines:
+16
+Capacity:
+214×16=218 bits
+32 KB
+Problem 2 — Memory Chip Organization
+A memory chip is organized as 4K × 8.
+Determine:
+Number of memory locations
+Number of bits per location
+Number of address lines
+Number of data lines
+Total capacity in bytes.
+Answer:
+4K=4096=212
+Therefore:
+Address lines = 12
+Data lines = 8
+Capacity = 4096×8=32768bits
+4096 bytes=4KB
+Problem 3 — Memory Expansion
+Using 4K × 8 memory chips, design a memory system of 16K × 16.
+Find the number of chips required.
+Solution:
+For word-size expansion:
+16/8=2 chips
+For address expansion:
+16K/4K=4
+Total chips:
+4×2=8 chips
+B. RAM and ROM — Numerical Problems
+Problem 4
+A RAM has 216locations, and each location stores 8 bits.
+Find:
+Address-line requirement
+Data-line requirement
+Total memory capacity in KB.
+Answer:
+Address lines:
+16
+Data lines:
+8
+Capacity:
+216×8=219 bits
+64KB
+Problem 5 — ROM Expansion
+You have 2K × 8 ROM chips. Construct a 8K × 16 ROM.
+Find the number of ROM chips required.
+Answer:
+Word-size expansion:
+16/8=2
+Number of address groups:
+8K/2K=4
+Total:
+2×4=8 ROM chips
+C. Memory Hierarchy & Performance
+Problem 6 — Average Memory Access Time
+A computer has:
+L1 cache access time = 2 ns
+L2 cache access time = 10 ns
+Main memory access time = 100 ns
+L1 hit ratio = 90%
+L2 hit ratio = 95%
+Calculate the average memory access time.
+Solution:
+Assume sequential lookup.
+Probability of:
+L1 hit = 0.90
+L1 miss = 0.10
+L2 hit after L1 miss = 0.10×0.95
+Main memory access = 0.10×0.05
+Thus:
+AMAT=0.92+0.12+10+0.10.05100
+=1.8+1.2+0.5
+3.5 ns
+Problem 7 — Effective Access Time
+A cache memory takes 20 ns, while main memory takes 200 ns. The cache hit ratio is 95%.
+Calculate the effective memory access time.
+Answer:
+EAT=0.9520+0.0520+200
+=19+11
+30 ns
+Problem 8
+A processor has a cache hit ratio of 90%. Cache access time is 5 ns, while main memory access time is 80 ns.
+Find the effective access time.
+Answer:
+EAT=0.95+0.15+80
+=4.5+8.5
+13 ns
+D. Virtual Memory — Paging
+Problem 9 — Page Number and Offset
+A virtual address space contains 216bytes. The page size is 1 KB.
+Find:
+Number of pages
+Number of bits in page number
+Number of offset bits.
+Solution:
+Virtual address:
+216
+Page size:
+1KB=210
+Number of pages:
+216210=26
+64 pages
+Page-number bits:
+6
+Offset bits:
+10
+Problem 10 — Physical Address
+A system has:
+Virtual address = 16 bits
+Physical address = 14 bits
+Page size = 1 KB
+Find:
+Number of virtual pages
+Number of physical frames
+Page number and offset for virtual address 2A35H.
+Solution:
+Page size:
+1KB=210
+Virtual page number bits:
+16-10=6
+Therefore:
+64 virtual pages
+Physical frame bits:
+14-10=4
+Therefore:
+16 physical frames
+For address 2A35H:
+Page number:
+2A35H>>10=AH
+Offset:
+235H
+Problem 11 — Page Table
+A system has a 32-bit virtual address, with a page size of 4 KB. Physical memory is 1 GB.
+Find:
+Number of bits in page offset
+Number of virtual pages
+Number of physical frames
+Number of bits required for the frame number.
+Solution:
+4KB=212
+Offset:
+12 bits
+Virtual page number:
+32-12=20
+Virtual pages:
+220
+Physical memory:
+1GB=230
+Frames:
+230/212=218
+Frame-number bits:
+18
+E. Virtual Memory — Segmentation
+Problem 12 — Segmentation Address
+A segment has:
+Base address = 5000
+Segment limit = 2000
+A logical address contains:
+Segment number = 2
+Offset = 1500
+Determine whether the address is valid. If valid, find the physical address.
+Solution:
+Since:
+Offset=1500<Limit=2000
+the address is valid.
+Physical address:
+Base+Offset
+=5000+1500
+6500
+Problem 13
+Consider the following segment table:
+
+[TABLE]
+Segment | Base | Limit
+0 | 1000 | 500
+1 | 4000 | 1000
+2 | 7000 | 1500
+3 | 9000 | 800
+[/TABLE]
+
+Find the physical address for:
+Segment 1, offset 750
+Segment 2, offset 1200
+Segment 3, offset 900
+Answers:
+4000+750=4750— Valid
+7000+1200=8200— Valid
+900>800— Invalid address
+F. Cache Memory — Mapping Techniques
+1. Direct Mapping
+Problem 14 — Direct-Mapped Cache
+A computer has:
+Main memory = 64 KB
+Cache = 4 KB
+Block size = 16 bytes
+For a direct-mapped cache, find:
+Number of blocks in main memory
+Number of cache lines
+Offset bits
+Index bits
+Tag bits.
+Solution:
+Main-memory size:
+64KB=216
+Block size:
+16=24
+Main-memory blocks:
+216/24=212
+4096
+Cache lines:
+212/24=28
+256
+Offset:
+4 bits
+Index:
+8 bits
+Tag:
+16-8-4
+4 bits
+Therefore:
+Tag = 4, Index = 8, Offset = 4
+Problem 15 — Direct Mapping Address
+A direct-mapped cache has:
+Cache size = 8 KB
+Block size = 32 bytes
+Main memory = 1 MB.
+Find the tag, cache-line number and word/byte offset for memory address:
+ABCDE16
+Answer:
+Main memory address size:
+1MB=220
+Block size:
+32=25
+Cache lines:
+8KB/32=256=28
+Therefore:
+Offset = 5bits
+Line = 8bits
+Tag = 20-8-5=7bits
+G. Associative / Fully Associative Cache
+Problem 16
+A fully associative cache contains 64 blocks, and main memory contains 4096 blocks. Each block contains 16 words.
+Find:
+Number of bits in the memory address
+Number of offset bits
+Number of tag bits.
+Solution:
+Main memory:
+4096×16=212×24=216
+Address bits:
+16
+Offset:
+4
+Since there is no index field in fully associative mapping:
+Tag=16-4
+12 bits
+H. Set-Associative Mapping
+Problem 17 — Very Important
+A cache contains 64 blocks, arranged into 4-way set associative organization. Main memory contains 4096 blocks. Each block contains 32 bytes.
+Find:
+Number of sets
+Number of set bits
+Number of block-offset bits
+Number of main-memory address bits
+Number of tag bits.
+Solution:
+Number of sets:
+64/4=16
+Set bits:
+log216=4
+Block offset:
+32=25
+5
+Main memory blocks:
+4096=212
+Total address bits:
+12+5=17
+Tag:
+17-4-5=8
+Final address format:
+Tag (8 bits) | Set (4 bits) | Offset (5 bits)
+I. Cache Mapping — Address Identification
+Problem 18
+A direct-mapped cache contains 128 lines, with each line containing 16 bytes. Main memory is 64 KB.
+For memory address:
+3A5C16
+find:
+Cache line number
+Block number
+Tag.
+Solution:
+Cache lines:
+128=27
+Block size:
+16=24
+Address size:
+64KB=216
+Therefore:
+Offset = 4 bits
+Index = 7 bits
+Tag = 16-7-4=5bits
+Address:
+3A5CH
+Block number:
+3A5CH10H
+=3A5H
+Cache line:
+3A5H  mod  80H
+=25H
+Tag:
+7H
+J. Cache Coherency
+Cache coherency questions are generally more conceptual, but numerical situations can be created around multiple caches.
+Problem 19 — Cache Coherency
+Two processors P1and P2have separate caches.
+Initially:
+X=50
+Both caches contain:
+X=50
+Now:
+P1changes Xto 75.
+P2reads X.
+What value can P2incorrectly obtain if cache coherence is not maintained?
+What should P2obtain after applying a coherence protocol?
+Answer:
+Without coherence:
+P2 may read 50
+With coherence:
+P2 must read 75
+This can be extended into a MESI protocol state-transition problem if MESI is included in your detailed syllabus.
+K. Interleaved Memory
+Problem 20 — Low-Order Interleaving
+A memory system has 4 memory banks using low-order interleaving. Consecutive memory addresses are assigned to consecutive banks.
+Determine the bank number for addresses:
+0,1,2,3,4,5,6,7,8,9
+Solution:
+Bank=Address  mod  4
+
+[TABLE]
+Address | Bank
+0 | 0
+1 | 1
+2 | 2
+3 | 3
+4 | 0
+5 | 1
+6 | 2
+7 | 3
+8 | 0
+9 | 1
+[/TABLE]
+
+Problem 21 — High-Order Interleaving
+A memory has 4 banks, each containing 1024 words. Using high-order interleaving, determine the bank number for memory addresses:
+500, 1500, 2500, 3500
+Solution:
+Each bank contains 1024 words.
+
+[TABLE]
+Address | Bank
+500 | 0
+1500 | 1
+2500 | 2
+3500 | 3
+[/TABLE]
+
+Thus:
+500→B0
+1500→B1
+2500→B2
+3500→B3
+Problem 22 — Interleaved Memory Performance
+A memory system has 4 banks. Each bank requires 100 ns for one memory access. Four consecutive words are accessed.
+Assuming accesses can be performed simultaneously using interleaving, calculate:
+Time without interleaving
+Time with 4-way interleaving
+Speedup.
+Answer:
+Without interleaving:
+4×100=400 ns
+With ideal 4-way interleaving:
+100 ns
+Speedup:
+400/100=4
+L. Associative Memory
+Problem 23
+An associative memory contains 1024 words, with each word having 16 bits.
+Find:
+Number of words
+Number of bits per word
+Total storage capacity
+Number of comparison operations required if all words are compared simultaneously.
+Answer:
+Capacity:
+1024×16=16384 bits
+=2KB
+Since associative memory compares all words simultaneously:
+1024 comparisons in parallel
+Problem 24 — Associative Search
+An associative memory has 64 words, each of 8 bits. Search key is:
+10110110
+The stored words are:
+
+[TABLE]
+Location | Data
+0 | 10100110
+1 | 10110110
+2 | 11110110
+3 | 10110100
+[/TABLE]
+
+Find the matching location.
+Answer:
+Search key:
+10110110
+Matching word:
+Location 1

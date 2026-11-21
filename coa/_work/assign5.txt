@@ -1,0 +1,19 @@
+
+
+========== source\COA\Assignment 5.docx ==========
+
+  Explain the different types of computer buses:
+Data bus
+Address bus
+Control bus
+  Explain bus arbitration. Compare centralized and distributed bus arbitration.
+  Explain different bus standards and discuss their characteristics and applications.
+  What is an I/O interface? Explain its functions and need in a computer system.
+  Differentiate between:
+I/O module
+I/O channel
+I/O processor
+  Explain the following I/O data transfer techniques:
+Programmed I/O
+Interrupt-driven I/O
+Direct Memory Access (DMA)
