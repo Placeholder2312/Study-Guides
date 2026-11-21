@@ -488,6 +488,27 @@
   .eq { white-space: normal; }
   svg, figure svg { max-width: 100%; }
 </style>
+<style id="coa-diagrams">
+  .cfig { margin: 1.1rem 0; padding: .6rem .5rem; border: 1px solid var(--line); background: var(--surface); }
+  .cfig svg { width: 100%; max-width: 420px; height: auto; display: block; margin: 0 auto; padding: 0; border: 0; background: transparent; }
+  .cfig figcaption { font-size: .85rem; color: var(--muted); line-height: 1.45; margin: .5rem .35rem 0; }
+  .cfig .bx { fill: var(--bg); stroke: var(--ink); stroke-width: 1.5; }
+  .cfig .bs { fill: var(--surface-hi); stroke: var(--ink); stroke-width: 1.5; }
+  .cfig .bh { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.5; }
+  .cfig .bd { fill: var(--bg); stroke: var(--danger); stroke-width: 1.5; }
+  .cfig .bg { fill: none; stroke: var(--rule); stroke-width: 1.2; stroke-dasharray: 5 4; }
+  .cfig .t  { font: 600 14px Helvetica, Arial, sans-serif; fill: var(--ink); }
+  .cfig .s  { font: 13px Helvetica, Arial, sans-serif; fill: var(--muted); }
+  .cfig .a  { font: 600 13px Helvetica, Arial, sans-serif; fill: var(--accent); }
+  .cfig .r  { font: 600 13px Helvetica, Arial, sans-serif; fill: var(--danger); }
+  .cfig .m  { font: 600 13px "Courier New", Courier, monospace; fill: var(--ink); }
+  .cfig .ln { stroke: var(--ink); stroke-width: 1.5; fill: none; }
+  .cfig .lm { stroke: var(--muted); stroke-width: 1.3; fill: none; }
+  .cfig .la { stroke: var(--accent); stroke-width: 1.8; fill: none; }
+  .cfig .lr { stroke: var(--danger); stroke-width: 1.8; fill: none; }
+  .cfig .fi { fill: var(--ink); } .cfig .fa { fill: var(--accent); } .cfig .fr { fill: var(--danger); }
+  @media print { .cfig { background: #fff; break-inside: avoid; } }
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -568,6 +589,40 @@
   <h3>1.1 The plain-language picture</h3>
 
   <p>A computer memory is a large shelf of numbered boxes. Each box holds a fixed number of bits. To read or write a box, the processor puts the box number on the address lines and either reads the data lines or drives new values onto them. The number of the box is its <strong>address</strong>; the number of bits in the box is the <strong>word size</strong>.</p>
+
+  <figure class="cfig" data-fig="c4-cell">
+<svg viewBox="0 0 420 180" role="img" aria-labelledby="c4-cell-t c4-cell-d">
+<title id="c4-cell-t">A memory as numbered words</title><desc id="c4-cell-d">n address lines enter a decoder that selects one of 2 to the n words. Each word holds m bits, which travel on m data lines.</desc><defs><marker id="c4-cell-i" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path class="fi" d="M0,0 L9,4.5 L0,9 z"/></marker><marker id="c4-cell-a" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path class="fa" d="M0,0 L9,4.5 L0,9 z"/></marker><marker id="c4-cell-r" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path class="fr" d="M0,0 L9,4.5 L0,9 z"/></marker></defs>
+<rect class="bs" x="96" y="24" width="70" height="144"/>
+<text class="t" x="131.0" y="88.0" text-anchor="middle" dominant-baseline="central">Address</text>
+<text class="t" x="131.0" y="104.0" text-anchor="middle" dominant-baseline="central">decoder</text>
+<line class="ln" x1="10" y1="96" x2="96" y2="96" marker-end="url(#c4-cell-i)"/>
+<text class="s" x="52" y="58.0" text-anchor="middle" dominant-baseline="central">n address</text>
+<text class="s" x="52" y="74.0" text-anchor="middle" dominant-baseline="central">lines</text>
+<rect class="bx" x="206" y="24" width="120" height="24"/>
+<text class="t" x="266.0" y="36.0" text-anchor="middle" dominant-baseline="central">address 0</text>
+<line class="ln" x1="166" y1="36" x2="206" y2="36" marker-end="url(#c4-cell-i)"/>
+<line class="ln" x1="326" y1="36" x2="346" y2="36"/>
+<rect class="bx" x="206" y="54" width="120" height="24"/>
+<text class="t" x="266.0" y="66.0" text-anchor="middle" dominant-baseline="central">address 1</text>
+<line class="ln" x1="166" y1="66" x2="206" y2="66" marker-end="url(#c4-cell-i)"/>
+<line class="ln" x1="326" y1="66" x2="346" y2="66"/>
+<rect class="bx" x="206" y="84" width="120" height="24"/>
+<text class="t" x="266.0" y="96.0" text-anchor="middle" dominant-baseline="central">address 2</text>
+<line class="ln" x1="166" y1="96" x2="206" y2="96" marker-end="url(#c4-cell-i)"/>
+<line class="ln" x1="326" y1="96" x2="346" y2="96"/>
+<text class="t" x="266" y="126" text-anchor="middle" dominant-baseline="central">⋮</text>
+<rect class="bx" x="206" y="144" width="120" height="24"/>
+<text class="t" x="266.0" y="156.0" text-anchor="middle" dominant-baseline="central">address 2ⁿ−1</text>
+<line class="ln" x1="166" y1="156" x2="206" y2="156" marker-end="url(#c4-cell-i)"/>
+<line class="ln" x1="326" y1="156" x2="346" y2="156"/>
+<line class="ln" x1="346" y1="36" x2="346" y2="156"/>
+<line class="la" x1="346" y1="96" x2="408" y2="96" marker-end="url(#c4-cell-a)" marker-start="url(#c4-cell-a)"/>
+<text class="s" x="378" y="60.0" text-anchor="middle" dominant-baseline="central">m data</text>
+<text class="s" x="378" y="76.0" text-anchor="middle" dominant-baseline="central">lines</text>
+</svg>
+<figcaption>Figure 1. A memory as numbered boxes. The n address lines pick one of the 2<sup>n</sup> words; the m data lines carry that word’s m bits.</figcaption>
+</figure>
 
   <div class="theory">
     <span class="source">Formal vocabulary</span>
@@ -669,32 +724,26 @@
 
   <p>Fast memory is expensive and small; cheap memory is large and slow. A computer cannot afford to make all of its memory as fast as registers, and it cannot run efficiently if every access waits for a hard disk. The hierarchy is the engineering compromise: put a small amount of very fast memory close to the CPU, a larger but slower main memory behind it, and a very large but much slower secondary store behind that. The goal is to make the <em>average</em> access look fast by keeping the frequently used data near the top.</p>
 
-  <figure>
-    <svg viewBox="0 0 560 330" role="img" aria-labelledby="m4-hier-title m4-hier-desc" style="max-width:560px">
-      <title id="m4-hier-title">Memory hierarchy from registers to secondary storage</title>
-      <desc id="m4-hier-desc">A stack of five levels: registers at the top, then L1 cache, L2/L3 cache, main memory, and secondary storage at the bottom. Speed and cost per bit decrease downwards; capacity increases downwards.</desc>
-      <rect x="170" y="10" width="220" height="42" fill="var(--surface-hi)" stroke="var(--ink)"/>
-      <text x="280" y="36" text-anchor="middle" font-family="Helvetica, Arial" font-size="14" fill="var(--ink)">Registers — fastest, smallest</text>
-      <rect x="145" y="62" width="270" height="42" fill="var(--surface)" stroke="var(--ink)"/>
-      <text x="280" y="88" text-anchor="middle" font-family="Helvetica, Arial" font-size="14" fill="var(--ink)">L1 cache</text>
-      <rect x="115" y="114" width="330" height="42" fill="var(--surface)" stroke="var(--ink)"/>
-      <text x="280" y="140" text-anchor="middle" font-family="Helvetica, Arial" font-size="14" fill="var(--ink)">L2 / L3 cache</text>
-      <rect x="80" y="166" width="400" height="42" fill="var(--surface)" stroke="var(--ink)"/>
-      <text x="280" y="192" text-anchor="middle" font-family="Helvetica, Arial" font-size="14" fill="var(--ink)">Main memory (RAM)</text>
-      <rect x="40" y="218" width="480" height="42" fill="var(--surface)" stroke="var(--ink)"/>
-      <text x="280" y="244" text-anchor="middle" font-family="Helvetica, Arial" font-size="14" fill="var(--ink)">Secondary storage (SSD / HDD / tape)</text>
-      <line x1="20" y1="20" x2="20" y2="250" stroke="var(--muted)" marker-end="url(#m4-arrow-up)"/>
-      <line x1="540" y1="250" x2="540" y2="20" stroke="var(--muted)" marker-end="url(#m4-arrow-up)"/>
-      <text x="28" y="270" font-family="Helvetica, Arial" font-size="11" fill="var(--muted)">capacity and access time increase ↓</text>
-      <text x="532" y="270" text-anchor="end" font-family="Helvetica, Arial" font-size="11" fill="var(--muted)">speed and cost per bit increase ↑</text>
-      <defs>
-        <marker id="m4-arrow-up" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
-          <path d="M0,8 L4,0 L8,8" fill="none" stroke="var(--muted)"/>
-        </marker>
-      </defs>
-    </svg>
-    <figcaption>Figure 1. The memory hierarchy. Moving down gives more capacity at lower cost per bit, but longer access time.</figcaption>
-  </figure>
+  <figure class="cfig" data-fig="c4-hier">
+<svg viewBox="0 0 420 228" role="img" aria-labelledby="c4-hier-t c4-hier-d">
+<title id="c4-hier-t">Memory hierarchy</title><desc id="c4-hier-d">Five levels from registers at the top to secondary storage at the bottom. Going down, capacity and access time increase while speed and cost per bit fall.</desc><defs><marker id="c4-hier-i" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path class="fi" d="M0,0 L9,4.5 L0,9 z"/></marker><marker id="c4-hier-a" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path class="fa" d="M0,0 L9,4.5 L0,9 z"/></marker><marker id="c4-hier-r" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path class="fr" d="M0,0 L9,4.5 L0,9 z"/></marker></defs>
+<rect class="bh" x="135.0" y="8" width="150" height="36"/>
+<text class="t" x="210.0" y="26.0" text-anchor="middle" dominant-baseline="central">Registers</text>
+<rect class="bx" x="115.0" y="52" width="190" height="36"/>
+<text class="t" x="210.0" y="70.0" text-anchor="middle" dominant-baseline="central">L1 cache</text>
+<rect class="bx" x="95.0" y="96" width="230" height="36"/>
+<text class="t" x="210.0" y="114.0" text-anchor="middle" dominant-baseline="central">L2 / L3 cache</text>
+<rect class="bx" x="75.0" y="140" width="270" height="36"/>
+<text class="t" x="210.0" y="158.0" text-anchor="middle" dominant-baseline="central">Main memory (RAM)</text>
+<rect class="bx" x="55.0" y="184" width="310" height="36"/>
+<text class="t" x="210.0" y="202.0" text-anchor="middle" dominant-baseline="central">Secondary storage</text>
+<line class="lm" x1="26" y1="214" x2="26" y2="14" marker-end="url(#c4-hier-i)"/>
+<text class="s" x="10" y="114" text-anchor="middle" dominant-baseline="central" transform="rotate(-90 10 114)">faster · higher cost per bit</text>
+<line class="lm" x1="394" y1="14" x2="394" y2="214" marker-end="url(#c4-hier-i)"/>
+<text class="s" x="410" y="114" text-anchor="middle" dominant-baseline="central" transform="rotate(90 410 114)">larger · slower</text>
+</svg>
+<figcaption>Figure 2. The memory hierarchy. Going down gives more capacity at a lower cost per bit, but a longer access time.</figcaption>
+</figure>
 
   <table>
     <tr><th>Level</th><th>Typical role</th><th>Speed</th><th>Capacity</th><th>Cost per bit</th><th>Managed by</th></tr>
@@ -715,6 +764,37 @@
     <li><strong>Temporal locality:</strong> if an item was used recently, it is likely to be used again soon. A loop counter and a frequently called function are examples.</li>
     <li><strong>Spatial locality:</strong> if an address was used, nearby addresses are likely to be used soon. Array elements stored next to each other are the standard example.</li>
   </ul>
+
+  <figure class="cfig" data-fig="c4-loc">
+<svg viewBox="0 0 420 190" role="img" aria-labelledby="c4-loc-t c4-loc-d">
+<title id="c4-loc-t">Temporal and spatial locality</title><desc id="c4-loc-d">Top: the same address X is used again after a short time. Bottom: after array element a[0] is used, the neighbouring elements a[1] to a[3] are likely to be used soon.</desc><defs><marker id="c4-loc-i" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path class="fi" d="M0,0 L9,4.5 L0,9 z"/></marker><marker id="c4-loc-a" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path class="fa" d="M0,0 L9,4.5 L0,9 z"/></marker><marker id="c4-loc-r" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path class="fr" d="M0,0 L9,4.5 L0,9 z"/></marker></defs>
+<text class="t" x="8" y="12" text-anchor="start" dominant-baseline="central">Temporal: the same item again soon</text>
+<line class="lm" x1="14" y1="70" x2="404" y2="70" marker-end="url(#c4-loc-i)"/>
+<text class="s" x="404" y="86" text-anchor="end" dominant-baseline="central">time</text>
+<rect class="bh" x="45" y="28" width="30" height="26"/>
+<text class="a" x="60.0" y="41.0" text-anchor="middle" dominant-baseline="central">X</text>
+<rect class="bh" x="125" y="28" width="30" height="26"/>
+<text class="a" x="140.0" y="41.0" text-anchor="middle" dominant-baseline="central">X</text>
+<rect class="bh" x="315" y="28" width="30" height="26"/>
+<text class="a" x="330.0" y="41.0" text-anchor="middle" dominant-baseline="central">X</text>
+<text class="t" x="236" y="41" text-anchor="middle" dominant-baseline="central">…</text>
+<text class="t" x="8" y="112" text-anchor="start" dominant-baseline="central">Spatial: neighbouring items soon</text>
+<rect class="bh" x="14" y="128" width="56" height="28"/>
+<text class="m" x="42.0" y="142.0" text-anchor="middle" dominant-baseline="central">a[0]</text>
+<rect class="bx" x="78" y="128" width="56" height="28"/>
+<text class="m" x="106.0" y="142.0" text-anchor="middle" dominant-baseline="central">a[1]</text>
+<rect class="bx" x="142" y="128" width="56" height="28"/>
+<text class="m" x="170.0" y="142.0" text-anchor="middle" dominant-baseline="central">a[2]</text>
+<rect class="bx" x="206" y="128" width="56" height="28"/>
+<text class="m" x="234.0" y="142.0" text-anchor="middle" dominant-baseline="central">a[3]</text>
+<text class="a" x="42" y="172" text-anchor="middle" dominant-baseline="central">used now</text>
+<line class="la" x1="78" y1="164" x2="262" y2="164"/>
+<text class="a" x="170" y="180" text-anchor="middle" dominant-baseline="central">likely used soon</text>
+<text class="s" x="342" y="134.0" text-anchor="middle" dominant-baseline="central">adjacent</text>
+<text class="s" x="342" y="150.0" text-anchor="middle" dominant-baseline="central">in memory</text>
+</svg>
+<figcaption>Figure 3. Locality of reference. Temporal: an item used now is likely to be used again soon. Spatial: items next to it in memory are likely to be used soon.</figcaption>
+</figure>
 
   <p>Cache exploits both: it keeps recently used blocks (temporal) and fetches a whole block of neighbouring words on a miss (spatial). Paging exploits temporal locality by keeping recently used pages in memory. Without locality, a small cache would rarely contain the next item, and the hit ratio would collapse.</p>
 
@@ -780,6 +860,40 @@
   <h3>3.1 The classification</h3>
 
   <p><strong>Primary memory</strong> is directly accessible to the CPU. It holds the instructions and data that are being executed now. It is fast, relatively expensive, and usually smaller than secondary storage. <strong>Secondary memory</strong> is not directly executed from; data must first be copied into primary memory. It is non-volatile, much larger and cheaper per bit, but slower.</p>
+
+  <figure class="cfig" data-fig="c4-class">
+<svg viewBox="0 0 420 246" role="img" aria-labelledby="c4-class-t c4-class-d">
+<title id="c4-class-t">Classification of memory</title><desc id="c4-class-d">Memory splits into primary and secondary. Primary is RAM (SRAM, DRAM) and ROM (mask ROM, PROM, EPROM, EEPROM). Secondary is HDD, SSD, USB flash, optical disc and tape.</desc><defs><marker id="c4-class-i" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path class="fi" d="M0,0 L9,4.5 L0,9 z"/></marker><marker id="c4-class-a" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path class="fa" d="M0,0 L9,4.5 L0,9 z"/></marker><marker id="c4-class-r" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path class="fr" d="M0,0 L9,4.5 L0,9 z"/></marker></defs>
+<rect class="bh" x="165" y="8" width="90" height="28"/>
+<text class="t" x="210.0" y="22.0" text-anchor="middle" dominant-baseline="central">Memory</text>
+<path class="ln" d="M210,36 V50 M130,50 H345 M130,50 V64 M345,50 V64"/>
+<rect class="bx" x="55" y="64" width="150" height="28"/>
+<text class="t" x="130.0" y="78.0" text-anchor="middle" dominant-baseline="central">Primary memory</text>
+<rect class="bx" x="270" y="64" width="150" height="28"/>
+<text class="t" x="345.0" y="78.0" text-anchor="middle" dominant-baseline="central">Secondary memory</text>
+<path class="ln" d="M130,92 V108 M65,108 H195 M65,108 V124 M195,108 V124"/>
+<rect class="bs" x="25" y="124" width="80" height="28"/>
+<text class="t" x="65.0" y="138.0" text-anchor="middle" dominant-baseline="central">RAM</text>
+<rect class="bs" x="155" y="124" width="80" height="28"/>
+<text class="t" x="195.0" y="138.0" text-anchor="middle" dominant-baseline="central">ROM</text>
+<path class="ln" d="M345,92 V124"/>
+<rect class="bx" x="275" y="124" width="140" height="62"/>
+<text class="s" x="345.0" y="139.0" text-anchor="middle" dominant-baseline="central">HDD · SSD</text>
+<text class="s" x="345.0" y="155.0" text-anchor="middle" dominant-baseline="central">USB flash</text>
+<text class="s" x="345.0" y="171.0" text-anchor="middle" dominant-baseline="central">optical · tape</text>
+<path class="ln" d="M65,152 V170 M34,170 H98 M34,170 V186 M98,170 V186"/>
+<rect class="bx" x="5" y="186" width="58" height="28"/>
+<text class="t" x="34.0" y="200.0" text-anchor="middle" dominant-baseline="central">SRAM</text>
+<rect class="bx" x="69" y="186" width="58" height="28"/>
+<text class="t" x="98.0" y="200.0" text-anchor="middle" dominant-baseline="central">DRAM</text>
+<path class="ln" d="M195,152 V186"/>
+<rect class="bx" x="140" y="186" width="110" height="52"/>
+<text class="s" x="195.0" y="196.0" text-anchor="middle" dominant-baseline="central">Mask ROM</text>
+<text class="s" x="195.0" y="212.0" text-anchor="middle" dominant-baseline="central">PROM · EPROM</text>
+<text class="s" x="195.0" y="228.0" text-anchor="middle" dominant-baseline="central">EEPROM</text>
+</svg>
+<figcaption>Figure 4. Classification of memory. Flash is a close relative of EEPROM and is used in SSDs and USB drives.</figcaption>
+</figure>
 
   <table>
     <tr><th>Feature</th><th>Primary memory</th><th>Secondary memory</th></tr>
@@ -885,43 +999,55 @@
     <p class="qa-final-text"><strong>8 chips: four address groups, each containing two chips in parallel.</strong></p>
   </div>
 
-  <figure>
-    <svg viewBox="0 0 620 330" role="img" aria-labelledby="m4-exp-title m4-exp-desc" style="max-width:620px">
-      <title id="m4-exp-title">Expanding 4K by 8 chips into a 16K by 16 memory</title>
-      <desc id="m4-exp-desc">Four rows of chips, each row containing two 4K by 8 chips. The low chip in each row drives data bits D0 to D7 and the high chip drives D8 to D15. A 2-to-4 decoder selects one row using address bits A14 and A15. Address bits A0 to A13 go to every chip.</desc>
-      <text x="310" y="18" text-anchor="middle" font-family="Helvetica, Arial" font-size="13" fill="var(--ink)">4 address groups × 2 chips per word = 8 chips</text>
-      <g font-family="Helvetica, Arial" font-size="12" fill="var(--ink)">
-        <rect x="120" y="40" width="150" height="48" fill="var(--surface)" stroke="var(--ink)"/>
-        <text x="195" y="60" text-anchor="middle">4K × 8</text><text x="195" y="76" text-anchor="middle">D0–D7</text>
-        <rect x="290" y="40" width="150" height="48" fill="var(--surface)" stroke="var(--ink)"/>
-        <text x="365" y="60" text-anchor="middle">4K × 8</text><text x="365" y="76" text-anchor="middle">D8–D15</text>
-        <rect x="120" y="110" width="150" height="48" fill="var(--surface)" stroke="var(--ink)"/>
-        <text x="195" y="130" text-anchor="middle">4K × 8</text><text x="195" y="146" text-anchor="middle">D0–D7</text>
-        <rect x="290" y="110" width="150" height="48" fill="var(--surface)" stroke="var(--ink)"/>
-        <text x="365" y="130" text-anchor="middle">4K × 8</text><text x="365" y="146" text-anchor="middle">D8–D15</text>
-        <rect x="120" y="180" width="150" height="48" fill="var(--surface)" stroke="var(--ink)"/>
-        <text x="195" y="200" text-anchor="middle">4K × 8</text><text x="195" y="216" text-anchor="middle">D0–D7</text>
-        <rect x="290" y="180" width="150" height="48" fill="var(--surface)" stroke="var(--ink)"/>
-        <text x="365" y="200" text-anchor="middle">4K × 8</text><text x="365" y="216" text-anchor="middle">D8–D15</text>
-        <rect x="120" y="250" width="150" height="48" fill="var(--surface)" stroke="var(--ink)"/>
-        <text x="195" y="270" text-anchor="middle">4K × 8</text><text x="195" y="286" text-anchor="middle">D0–D7</text>
-        <rect x="290" y="250" width="150" height="48" fill="var(--surface)" stroke="var(--ink)"/>
-        <text x="365" y="270" text-anchor="middle">4K × 8</text><text x="365" y="286" text-anchor="middle">D8–D15</text>
-        <rect x="20" y="130" width="70" height="70" fill="var(--surface-hi)" stroke="var(--ink)"/>
-        <text x="55" y="155" text-anchor="middle">2-to-4</text><text x="55" y="171" text-anchor="middle">decoder</text>
-        <text x="55" y="190" text-anchor="middle">A14,A15</text>
-        <line x1="90" y1="150" x2="120" y2="64" stroke="var(--muted)"/>
-        <line x1="90" y1="160" x2="120" y2="134" stroke="var(--muted)"/>
-        <line x1="90" y1="175" x2="120" y2="204" stroke="var(--muted)"/>
-        <line x1="90" y1="185" x2="120" y2="274" stroke="var(--muted)"/>
-        <text x="470" y="60" font-size="11" fill="var(--muted)">A0–A13 to all chips</text>
-        <text x="470" y="80" font-size="11" fill="var(--muted)">R/W to all chips</text>
-        <text x="470" y="100" font-size="11" fill="var(--muted)">CS from decoder</text>
-        <text x="470" y="130" font-size="11" fill="var(--muted)">D0–D15 to CPU</text>
-      </g>
-    </svg>
-    <figcaption>Figure 2. A 16K × 16 memory built from eight 4K × 8 chips. Two chips widen each 4K row; four rows are selected by A14 and A15.</figcaption>
-  </figure>
+  <figure class="cfig" data-fig="c4-exp">
+<svg viewBox="0 0 420 276" role="img" aria-labelledby="c4-exp-t c4-exp-d">
+<title id="c4-exp-t">Memory expansion: 16K × 16 from eight 4K × 8 chips</title><desc id="c4-exp-d">Four dashed rows, each with two 4K by 8 chips side by side. A 2-to-4 decoder on A12 and A13 enables one row. A0 to A11 and read/write go to every chip. The two chips in a row supply D0 to D7 and D8 to D15.</desc><defs><marker id="c4-exp-i" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path class="fi" d="M0,0 L9,4.5 L0,9 z"/></marker><marker id="c4-exp-a" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path class="fa" d="M0,0 L9,4.5 L0,9 z"/></marker><marker id="c4-exp-r" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path class="fr" d="M0,0 L9,4.5 L0,9 z"/></marker></defs>
+<rect class="bs" x="6" y="40" width="82" height="186"/>
+<text class="t" x="47.0" y="125.0" text-anchor="middle" dominant-baseline="central">2-to-4</text>
+<text class="t" x="47.0" y="141.0" text-anchor="middle" dominant-baseline="central">decoder</text>
+<line class="la" x1="47" y1="8" x2="47" y2="40" marker-end="url(#c4-exp-a)"/>
+<text class="a" x="56" y="22" text-anchor="start" dominant-baseline="central">A12, A13</text>
+<rect class="bg" x="122" y="40" width="288" height="42"/>
+<rect class="bx" x="128" y="44" width="134" height="34"/>
+<text class="t" x="195.0" y="53.0" text-anchor="middle" dominant-baseline="central">4K × 8</text>
+<text class="s" x="195.0" y="69.0" text-anchor="middle" dominant-baseline="central">D0–D7</text>
+<rect class="bx" x="268" y="44" width="134" height="34"/>
+<text class="t" x="335.0" y="53.0" text-anchor="middle" dominant-baseline="central">4K × 8</text>
+<text class="s" x="335.0" y="69.0" text-anchor="middle" dominant-baseline="central">D8–D15</text>
+<line class="la" x1="88" y1="61" x2="122" y2="61" marker-end="url(#c4-exp-a)"/>
+<text class="a" x="105" y="49" text-anchor="middle" dominant-baseline="central">CS0</text>
+<rect class="bg" x="122" y="88" width="288" height="42"/>
+<rect class="bx" x="128" y="92" width="134" height="34"/>
+<text class="t" x="195.0" y="101.0" text-anchor="middle" dominant-baseline="central">4K × 8</text>
+<text class="s" x="195.0" y="117.0" text-anchor="middle" dominant-baseline="central">D0–D7</text>
+<rect class="bx" x="268" y="92" width="134" height="34"/>
+<text class="t" x="335.0" y="101.0" text-anchor="middle" dominant-baseline="central">4K × 8</text>
+<text class="s" x="335.0" y="117.0" text-anchor="middle" dominant-baseline="central">D8–D15</text>
+<line class="la" x1="88" y1="109" x2="122" y2="109" marker-end="url(#c4-exp-a)"/>
+<text class="a" x="105" y="97" text-anchor="middle" dominant-baseline="central">CS1</text>
+<rect class="bg" x="122" y="136" width="288" height="42"/>
+<rect class="bx" x="128" y="140" width="134" height="34"/>
+<text class="t" x="195.0" y="149.0" text-anchor="middle" dominant-baseline="central">4K × 8</text>
+<text class="s" x="195.0" y="165.0" text-anchor="middle" dominant-baseline="central">D0–D7</text>
+<rect class="bx" x="268" y="140" width="134" height="34"/>
+<text class="t" x="335.0" y="149.0" text-anchor="middle" dominant-baseline="central">4K × 8</text>
+<text class="s" x="335.0" y="165.0" text-anchor="middle" dominant-baseline="central">D8–D15</text>
+<line class="la" x1="88" y1="157" x2="122" y2="157" marker-end="url(#c4-exp-a)"/>
+<text class="a" x="105" y="145" text-anchor="middle" dominant-baseline="central">CS2</text>
+<rect class="bg" x="122" y="184" width="288" height="42"/>
+<rect class="bx" x="128" y="188" width="134" height="34"/>
+<text class="t" x="195.0" y="197.0" text-anchor="middle" dominant-baseline="central">4K × 8</text>
+<text class="s" x="195.0" y="213.0" text-anchor="middle" dominant-baseline="central">D0–D7</text>
+<rect class="bx" x="268" y="188" width="134" height="34"/>
+<text class="t" x="335.0" y="197.0" text-anchor="middle" dominant-baseline="central">4K × 8</text>
+<text class="s" x="335.0" y="213.0" text-anchor="middle" dominant-baseline="central">D8–D15</text>
+<line class="la" x1="88" y1="205" x2="122" y2="205" marker-end="url(#c4-exp-a)"/>
+<text class="a" x="105" y="193" text-anchor="middle" dominant-baseline="central">CS3</text>
+<text class="s" x="210" y="246" text-anchor="middle" dominant-baseline="central">A0–A11 and R/W → all 8 chips</text>
+<text class="s" x="210" y="264" text-anchor="middle" dominant-baseline="central">D0–D7 and D8–D15 → 16-bit data bus</text>
+</svg>
+<figcaption>Figure 5. A 16K × 16 memory from eight 4K × 8 chips. Each dashed row is one 4K address group with two chips side by side. A12 and A13 pick the row; A0–A11 go to every chip.</figcaption>
+</figure>
 
   <div class="example">
     <div class="example-title">Teacher problem 5 — ROM expansion (Unit 4 problems, Problem 5)</div>
@@ -1051,7 +1177,7 @@
         </marker>
       </defs>
     </svg>
-    <figcaption>Figure 3. Paging translation. The page number selects a PTE; the frame number from that PTE replaces the page number, while the offset is copied unchanged.</figcaption>
+    <figcaption>Figure 6. Paging translation. The page number selects a PTE; the frame number from that PTE replaces the page number, while the offset is copied unchanged.</figcaption>
   </figure>
 
   <h3>5.4 The translation procedure</h3>
@@ -1227,7 +1353,7 @@
         </marker>
       </defs>
     </svg>
-    <figcaption>Figure 4. Segmentation translation. The segment table supplies a base and a limit; the limit check protects memory before the base is added.</figcaption>
+    <figcaption>Figure 7. Segmentation translation. The segment table supplies a base and a limit; the limit check protects memory before the base is added.</figcaption>
   </figure>
 
   <h3>6.2 The translation procedure</h3>
@@ -1538,7 +1664,7 @@
         </marker>
       </defs>
     </svg>
-    <figcaption>Figure 5. Direct mapping. The line number selects one line; only that line’s tag is compared.</figcaption>
+    <figcaption>Figure 8. Direct mapping. The line number selects one line; only that line’s tag is compared.</figcaption>
   </figure>
 
   <div class="eq">cache line = block number mod number of cache lines</div>
@@ -1577,7 +1703,7 @@
         <text x="30" y="235" font-size="11">priority encoder → matching line number</text>
       </g>
     </svg>
-    <figcaption>Figure 6. Fully associative mapping. Every line’s tag is compared in parallel; there is no index field.</figcaption>
+    <figcaption>Figure 9. Fully associative mapping. Every line’s tag is compared in parallel; there is no index field.</figcaption>
   </figure>
 
   <h3>8.4 Set-associative mapping</h3>
@@ -1615,7 +1741,7 @@
         </marker>
       </defs>
     </svg>
-    <figcaption>Figure 7. A 4-way set-associative cache. The set index selects one set; the tag is compared with the four ways in that set.</figcaption>
+    <figcaption>Figure 10. A 4-way set-associative cache. The set index selects one set; the tag is compared with the four ways in that set.</figcaption>
   </figure>
 
   <h3>8.5 The universal method for mapping numericals</h3>
@@ -2002,7 +2128,7 @@
         <text x="20" y="235" font-size="11" fill="var(--muted)">Consecutive addresses stay in one bank → less parallel service for a sequential scan.</text>
       </g>
     </svg>
-    <figcaption>Figure 8. Low-order versus high-order interleaving. The difference is which address bits choose the bank.</figcaption>
+    <figcaption>Figure 11. Low-order versus high-order interleaving. The difference is which address bits choose the bank.</figcaption>
   </figure>
 
   <h3>10.2 Worked examples</h3>
@@ -2132,7 +2258,7 @@
         </marker>
       </defs>
     </svg>
-    <figcaption>Figure 9. Associative memory. The key is compared with every word in parallel, and the match register records the results.</figcaption>
+    <figcaption>Figure 12. Associative memory. The key is compared with every word in parallel, and the match register records the results.</figcaption>
   </figure>
 
   <h3>11.2 Capacity and search</h3>
