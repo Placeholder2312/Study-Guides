@@ -519,7 +519,7 @@
       <li><a href="#answer-key">Answer key</a></li>
       <li><a href="#mistakes">Common mistakes</a></li>
       <li><a href="#revision">Last-minute revision sheet</a></li>
-      <li><a href="#references">References and verification notes</a></li>
+      <li><a href="#references">References and attribution</a></li>
     </ol>
   </div>
 
@@ -2384,9 +2384,6 @@
     <tr><td>MUSA Paper Set 1 Q4(a)</td><td>Fully associative tag bits (4 KB block, 16 GB memory)</td><td>Worked example 8.8</td></tr>
   </table>
 
-  <h3>12.5 Assignment 4 coverage</h3>
-
-  <p><em>Assignment 4.docx</em> asks for: memory parameters (access time, cycle time, transfer rate, capacity, cost per bit); classification of primary and secondary memory; SRAM, DRAM, PROM, EPROM, EEPROM; virtual memory with paging and segmentation; and cache memory with L1/L2/L3. Every one of these is taught in Sections 2–9. The assignment does not contain numericals, so the numerical practice comes from <em>Unit 4 problems.docx</em> and the question bank.</p>
 
   <h2 id="practice">13 · Independent practice</h2>
 
@@ -2559,7 +2556,7 @@
     <p><strong>Answer discipline.</strong> State the formula, substitute with units, show the arithmetic, box the final answer with its unit, and add one line of interpretation. Draw the diagram first if the question says “with a neat diagram”.</p>
   </div>
 
-  <h2 id="references">17 · References and verification notes</h2>
+  <h2 id="references">17 · References and attribution</h2>
 
   <div class="references">
     <h3>Sources used</h3>
@@ -2570,24 +2567,6 @@
       <li><strong>Teacher assignment.</strong> <em>Assignment 4.docx</em>, supplied in <code>COA.zip</code>. Used to confirm the required topic coverage; it contains no numericals.</li>
       <li><strong>Teacher question bank.</strong> <em>COA/question bank.docx</em>, Q1–Q10, and <em>Computer Organization 40 questions.docx</em>, Q29–Q36. Wording preserved. These are question-bank documents, not University papers.</li>
       <li><strong>Student association material.</strong> MUSA question bank and MUSA practice paper (labelled “Winter 2025”, 60 marks, 2 hours). Used only for additional practice and clearly labelled; <strong>not</strong> verified University of Mumbai papers.</li>
-    </ul>
-
-    <h3>What was verified</h3>
-    <ul>
-      <li>Every numerical in Sections 1–11 and Section 14 was recomputed independently in Python. The values in the teacher’s answer key were reproduced: 32 KB, 4 KB, 8 chips, 64 KB, 8 chips, 3.5 ns, 30 ns, 13 ns, 64 pages/6/10, 64 pages/16 frames/2A35H → page A, offset 235H, 12/2<sup>20</sup>/2<sup>18</sup>/18, 6500, 4750/8200/invalid, 4/8/4, 55H/E6H/1EH, 16/4/12, 16 sets/4/5/17/8, 25H/3A5H/7H, 50→75, banks 0–3, 400/100/4, 16,384 bits/2 KB/1024 comparisons, location 1.</li>
-      <li>Problem 10 was expanded because the source writes the page number and the offset compactly. The guide shows both the binary split and the hexadecimal division/modulo so the arithmetic is auditable.</li>
-      <li>Problem 15 in the source asks for the fields of ABCDE<sub>16</sub> but only computes the field widths. The guide completes the split explicitly and verifies it by reconstruction.</li>
-      <li>Problem 6 is shown both in the teacher’s compact form and in the disjoint-outcome form. Both give 3.5 ns. The convention is stated, because the alternative “cache + miss penalty” convention gives a different intermediate breakdown.</li>
-      <li>The syllabus wording, teaching hours (7) and CO4 mapping were read from the official PDF, not inferred.</li>
-    </ul>
-
-    <h3>Notes and limitations</h3>
-    <ul>
-      <li>No verified University of Mumbai end-semester paper for course 2023114 was present in the supplied material. Nothing in this guide is labelled as a verified University question.</li>
-      <li>“Typical” sizes and speeds for L1/L2/L3 and storage are orders of magnitude, not specifications for a named processor.</li>
-      <li>The MESI transition table is the standard simplified version used in textbooks. Real Pentium-family implementations add details that are outside this syllabus.</li>
-      <li>Practice questions in Section 13 and the supplementary worked examples are written for this guide. They are labelled as such and are not attributed to the teacher or the University.</li>
-      <li>Diagrams are hand-authored SVG in this page. No generated images are used.</li>
     </ul>
 
     <h3>Attribution</h3>
