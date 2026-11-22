@@ -1,0 +1,314 @@
+
+  <h2 id="module-channel">6 · I/O module, channel and processor</h2>
+
+  <h3>6.1 The I/O module</h3>
+
+  <p>An <strong>I/O module</strong> is the hardware that connects one or more devices to the system bus. It contains the interface logic described in Section 5, plus whatever device-specific control is needed. A simple module might serve a single serial port; a more complex one might control a disk, a keyboard and a timer. The CPU sees the module as a set of registers. The module sees the device as a set of electrical signals. Its job is to translate between the two, buffer data, report status and, when asked, raise an interrupt or request the bus for DMA.</p>
+
+  <p>The module is the unit that makes a device <em>look like</em> memory or like a set of ports. That is why the CPU can use the same load/store or IN/OUT instructions for devices from different manufacturers.</p>
+
+  <h3>6.2 The I/O channel</h3>
+
+  <p>An <strong>I/O channel</strong> is a step up in intelligence. It is a specialised processor that sits between the CPU and a group of I/O modules, with its own channel bus and its own small instruction set. The CPU does not issue one command per word. Instead it builds a <strong>channel program</strong> in memory — a sequence of <strong>channel command words (CCWs)</strong> — and tells the channel to execute it. Each CCW says something like “read 512 bytes from device 3 into memory address X” or “write this block to device 7”. The channel fetches the CCWs, drives the I/O modules, and interrupts the CPU only when the whole program finishes or an error occurs.</p>
+
+  <p>Channels come in a few flavours. A <strong>selector channel</strong> controls one high-speed device at a time and runs it at full speed. A <strong>multiplexor channel</strong> interleaves byte-by-byte transfers from several slow devices, so they appear to run together. A <strong>block multiplexor channel</strong> interleaves blocks from several high-speed devices. The terminology comes from mainframe I/O, but the idea — offload the per-word work to a small dedicated engine — is general.</p>
+
+  <h3>6.3 The I/O processor</h3>
+
+  <p>An <strong>I/O processor</strong> is a full processor dedicated to I/O. It has its own instruction set, its own local memory and the ability to run programs that manage many devices, perform protocol handling, buffer data and recover from errors. A front-end processor in a mainframe, a network processor on a router line card, or the controller inside a modern NVMe SSD are all examples of the same idea: put a processor where the I/O work is, so the main CPU does not have to do it.</p>
+
+  <p>The boundary between a channel and an I/O processor is not sharp. A channel is usually a limited, special-purpose engine that executes channel programs; an I/O processor is more general and can run arbitrary code. For an exam, the safe distinction is: <em>module</em> connects a device, <em>channel</em> executes a channel program for several modules, <em>processor</em> is a general-purpose computer dedicated to I/O.</p>
+
+  <table>
+    <tr><th>Feature</th><th>I/O module</th><th>I/O channel</th><th>I/O processor</th></tr>
+    <tr><td>What it is</td><td>Interface and controller for one or a few devices</td><td>Special-purpose processor for a group of modules</td><td>General-purpose processor dedicated to I/O</td></tr>
+    <tr><td>Programmability</td><td>Fixed logic or simple registers</td><td>Executes a channel program of CCWs</td><td>Runs arbitrary programs</td></tr>
+    <tr><td>CPU involvement</td><td>Per transfer or per interrupt</td><td>Per channel program</td><td>Per job or per high-level command</td></tr>
+    <tr><td>Devices managed</td><td>One or a few</td><td>Several modules</td><td>Many devices or a whole I/O subsystem</td></tr>
+    <tr><td>Cost and complexity</td><td>Low</td><td>Moderate</td><td>High</td></tr>
+    <tr><td>Typical example</td><td>UART, disk controller, USB host controller</td><td>Mainframe selector or multiplexor channel</td><td>Front-end processor, network processor, SSD controller</td></tr>
+  </table>
+
+  <h3>6.4 Why the hierarchy improves performance</h3>
+
+  <p>Each step moves more of the I/O work away from the CPU. With a module, the CPU still moves every word but is freed from device-level signalling. With a channel, the CPU issues one channel program and the channel moves the words. With an I/O processor, the CPU can hand over an entire job and go back to computation. The result is less CPU overhead, more overlap between computation and I/O, and better use of the memory bus because the channel or processor can schedule transfers efficiently. The cost is extra hardware and more complex software.</p>
+
+  <h3>6.5 Exam answer plan</h3>
+
+  <ol class="steps">
+    <li>Define an I/O module and list its functions.</li>
+    <li>Define a channel and explain the channel program and CCW.</li>
+    <li>Define an I/O processor and give one example.</li>
+    <li>Compare the three in a table: programmability, devices, CPU involvement, cost.</li>
+    <li>Explain the performance benefit: offloading, overlap and fewer interrupts.</li>
+  </ol>
+
+  <h2 id="programmed">7 · Programmed I/O</h2>
+
+  <h3>7.1 The idea</h3>
+
+  <p><strong>Programmed I/O</strong> is the simplest transfer method. The CPU does all the work: it issues the command, waits for the device, moves each word and checks for errors. Waiting is done by <strong>polling</strong> — reading the status register in a loop until the ready bit is set. This is also called <strong>busy-waiting</strong>, because the CPU is busy doing nothing useful while it waits.</p>
+
+  <p>The method is easy to understand and needs almost no extra hardware: a data register, a status register and a control register are enough. That is why it survives in small microcontrollers and in situations where the CPU has nothing else to do.</p>
+
+  <h3>7.2 The sequence</h3>
+
+  <ol class="steps">
+    <li>The CPU writes a command to the interface’s control register: direction, device address, maybe a count.</li>
+    <li>The CPU reads the status register.</li>
+    <li>If the ready bit is 0, the CPU jumps back to step 2. This is the polling loop.</li>
+    <li>When ready is 1, the CPU reads the data register (input) or writes it (output).</li>
+    <li>The interface clears ready and starts the next device operation.</li>
+    <li>The CPU updates its count and address, then repeats from step 2 until the block is finished.</li>
+  </ol>
+
+  <p>The loop is the weakness. Every iteration costs several instructions, and the CPU cannot do anything else while it is inside the loop. If the device takes 1 ms to produce a byte and the polling loop takes 1 µs, the CPU wastes roughly 999 µs per byte.</p>
+
+  <h3>7.3 A numerical view of the waste</h3>
+
+  <div class="example">
+    <div class="example-title">Supplementary worked example — programmed I/O time</div>
+    <p>A device supplies one byte every 2 µs. The CPU polls the status register and moves one byte in 2 µs of its own time per byte. How long does it take to transfer 1 KB, and how much CPU time is consumed?</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <div class="eq">1 KB = 1024 bytes</div>
+    <div class="eq">time = 1024 × 2 µs = 2048 µs = 2.048 ms</div>
+    <p>Because the CPU is in the polling loop for the whole transfer, it also consumes 2.048 ms of CPU time. No other program can run on that CPU during the transfer unless the loop is interrupted.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>2.048 ms, essentially all of it CPU time.</strong></p>
+  </div>
+  <p class="eq-note">Supplementary example written for this guide.</p>
+
+  <h3>7.4 Advantages, disadvantages and use</h3>
+
+  <table>
+    <tr><th>Advantages</th><th>Disadvantages</th></tr>
+    <tr><td>Very simple hardware and software.</td><td>The CPU busy-waits and cannot do useful work.</td></tr>
+    <tr><td>No interrupt controller or DMA controller needed.</td><td>Throughput is limited by the polling loop and the CPU’s instruction rate.</td></tr>
+    <tr><td>Easy to debug: the CPU is in full control at every step.</td><td>Wasteful for slow devices and unacceptable for high-speed block transfers.</td></tr>
+    <tr><td>Fine for a single dedicated device or a microcontroller with nothing else to do.</td><td>Response time depends on how often the loop checks the status.</td></tr>
+  </table>
+
+  <p><strong>Typical uses:</strong> reading a keypad or a set of switches, bit-banging a simple sensor, a boot loader polling a UART, or a small embedded system where simplicity matters more than throughput.</p>
+
+  <h3>7.5 Exam answer plan</h3>
+
+  <ol class="steps">
+    <li>Define programmed I/O and polling/busy-waiting.</li>
+    <li>Give the sequence: command → status → wait → transfer → repeat.</li>
+    <li>Explain why the CPU is wasted and give the time calculation.</li>
+    <li>List advantages, disadvantages and typical uses.</li>
+    <li>Contrast it in one sentence with interrupt-driven I/O and DMA.</li>
+  </ol>
+
+  <h2 id="interrupt">8 · Interrupt-driven I/O</h2>
+
+  <h3>8.1 The idea</h3>
+
+  <p>Interrupt-driven I/O removes the polling loop. The CPU starts the device and then goes away to execute other instructions. When the device is ready, the interface asserts an <strong>interrupt request</strong>. The CPU finishes the current instruction, saves enough state to resume later, and jumps to an <strong>interrupt service routine (ISR)</strong> that moves the data. When the ISR returns, the CPU continues the interrupted program as if nothing had happened.</p>
+
+  <p>The gain is obvious: the CPU spends time on the ISR only when there is data to move, not while the device is idle. The cost is the overhead of entering and leaving the ISR — saving registers, identifying the source, restoring state — which is significant if interrupts arrive very often.</p>
+
+  <h3>8.2 The interrupt sequence</h3>
+
+  <ol class="steps">
+    <li>The device becomes ready and the interface sets its interrupt-request line.</li>
+    <li>The CPU finishes the current instruction (interrupts are checked at instruction boundaries, not in the middle of one).</li>
+    <li>If interrupts are enabled and the new request has higher priority than the current mask level, the CPU acknowledges the request.</li>
+    <li>The CPU saves the program counter and status flags (and often some registers) on the stack.</li>
+    <li>The CPU obtains the ISR address. In a <strong>vectored</strong> system the interface supplies a vector number and the CPU looks up the address in a vector table; in a <strong>non-vectored</strong> system a fixed address is used.</li>
+    <li>The ISR identifies the device if necessary, reads or writes the data register, clears the interrupt flag and updates the count.</li>
+    <li>The ISR returns with a special instruction that restores the saved state.</li>
+    <li>The CPU resumes the interrupted program.</li>
+  </ol>
+
+  <h3>8.3 The vocabulary of interrupts</h3>
+
+  <table>
+    <tr><th>Term</th><th>Meaning</th></tr>
+    <tr><td><strong>Maskable interrupt</strong></td><td>Can be disabled by the CPU when it is in a critical section.</td></tr>
+    <tr><td><strong>Non-maskable interrupt (NMI)</strong></td><td>Cannot be disabled; reserved for catastrophic events such as power failure or a hardware fault.</td></tr>
+    <tr><td><strong>Vectored interrupt</strong></td><td>The device supplies an identifier that points to its ISR.</td></tr>
+    <tr><td><strong>Non-vectored interrupt</strong></td><td>All devices share one fixed ISR address; the ISR must poll to find the source.</td></tr>
+    <tr><td><strong>Priority</strong></td><td>Determines which request is served first when several arrive together.</td></tr>
+    <tr><td><strong>Nested interrupt</strong></td><td>A higher-priority interrupt is allowed to interrupt a lower-priority ISR.</td></tr>
+    <tr><td><strong>Interrupt latency</strong></td><td>Time from the request to the first instruction of the ISR.</td></tr>
+  </table>
+
+  <h3>8.4 Overhead and latency</h3>
+
+  <p>Interrupt overhead has two parts: the fixed cost of entering and leaving the ISR (save, vector, restore) and the work done inside the ISR. If a device needs service every <span class="kbd">T</span> seconds and the ISR takes <span class="kbd">S</span> seconds, the fraction of CPU time consumed is <span class="kbd">S ÷ T</span>.</p>
+
+  <div class="eq">CPU overhead fraction = ISR time ÷ interrupt period</div>
+
+  <div class="example">
+    <div class="example-title">Supplementary worked example — interrupt overhead</div>
+    <p>A device requests an interrupt every 20 µs. The ISR, including entry and exit, takes 4 µs. What fraction of the CPU is consumed by this device?</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <div class="eq">overhead = 4 µs ÷ 20 µs = 0.20 = 20%</div>
+    <p>The device alone consumes one fifth of the CPU. Two such devices would consume 40%, and the system would soon run out of time. This is why very high-rate devices use DMA rather than one interrupt per word.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>20% of CPU time.</strong></p>
+  </div>
+  <p class="eq-note">Supplementary example written for this guide.</p>
+
+  <h3>8.5 Advantages, disadvantages and use</h3>
+
+  <table>
+    <tr><th>Advantages</th><th>Disadvantages</th></tr>
+    <tr><td>The CPU does useful work while the device is idle.</td><td>Each interrupt has entry/exit overhead.</td></tr>
+    <tr><td>Responds quickly to an event, without waiting for a poll cycle.</td><td>Frequent interrupts can consume most of the CPU.</td></tr>
+    <tr><td>Handles unpredictable devices well: a key press or a packet can arrive at any time.</td><td>Needs an interrupt controller, priority logic and careful ISR design.</td></tr>
+    <tr><td>Supports priority and nesting for urgent events.</td><td>Shared data between ISR and main program needs protection (critical sections).</td></tr>
+  </table>
+
+  <p><strong>Typical uses:</strong> keyboards and mice, serial ports, network packets at moderate rates, timers, and any device that needs a timely response without a dedicated DMA engine.</p>
+
+  <h3>8.6 Exam answer plan</h3>
+
+  <ol class="steps">
+    <li>Define interrupt-driven I/O and contrast it with polling.</li>
+    <li>Give the sequence from device request to ISR return.</li>
+    <li>Explain vectored versus non-vectored, maskable versus NMI, and priority.</li>
+    <li>Give the overhead formula and one numerical.</li>
+    <li>List advantages, disadvantages and typical uses.</li>
+  </ol>
+
+  <h2 id="dma">9 · Direct Memory Access</h2>
+
+  <h3>9.1 The idea</h3>
+
+  <p>Interrupt-driven I/O still moves every word through the CPU. For a disk or a network card that produces megabytes per second, the interrupt rate would be enormous and the CPU would spend all its time copying. <strong>Direct Memory Access (DMA)</strong> removes the CPU from the data path. A <strong>DMA controller</strong> becomes a bus master, reads or writes memory directly, and moves a whole block between the device and memory. The CPU only programs the controller at the start and is interrupted once at the end.</p>
+
+  <p>This is the key sentence for an exam: <em>in DMA, the CPU initiates the transfer but does not execute the per-word transfer instructions.</em></p>
+
+  <h3>9.2 The DMA controller</h3>
+
+  <figure>
+    <svg viewBox="0 0 620 330" role="img" aria-labelledby="m5-dma-title m5-dma-desc" style="max-width:620px">
+      <title id="m5-dma-title">DMA controller connecting a device and main memory</title>
+      <desc id="m5-dma-desc">The CPU programs the DMA controller through the bus. The controller contains an address register, a count register, a control and status register, and control logic. It drives address, data and control lines to memory and data, status and control lines to the device, and uses bus request and bus grant to take over the bus.</desc>
+      <g font-family="Helvetica, Arial" font-size="12" fill="var(--ink)">
+        <rect x="240" y="12" width="140" height="46" fill="var(--surface-hi)" stroke="var(--ink)"/>
+        <text x="310" y="41" text-anchor="middle">CPU</text>
+
+        <line x1="310" y1="58" x2="310" y2="92" stroke="var(--muted)" marker-end="url(#m5-dma-arrow)"/>
+        <text x="300" y="76" font-size="10" fill="var(--muted)" text-anchor="end">program registers</text>
+        <line x1="360" y1="92" x2="360" y2="58" stroke="var(--muted)" marker-end="url(#m5-dma-arrow)"/>
+        <text x="368" y="76" font-size="10" fill="var(--muted)">BRQ / BG</text>
+
+        <rect x="205" y="92" width="210" height="160" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="310" y="112" text-anchor="middle" font-weight="700">DMA controller</text>
+        <rect x="220" y="122" width="180" height="24" fill="var(--bg)" stroke="var(--line)"/>
+        <text x="310" y="139" text-anchor="middle" font-size="11">address register</text>
+        <rect x="220" y="150" width="180" height="24" fill="var(--bg)" stroke="var(--line)"/>
+        <text x="310" y="167" text-anchor="middle" font-size="11">count register</text>
+        <rect x="220" y="178" width="180" height="24" fill="var(--bg)" stroke="var(--line)"/>
+        <text x="310" y="195" text-anchor="middle" font-size="11">control / status register</text>
+        <rect x="220" y="206" width="180" height="30" fill="var(--bg)" stroke="var(--line)"/>
+        <text x="310" y="226" text-anchor="middle" font-size="11">control logic</text>
+
+        <rect x="20" y="140" width="120" height="64" fill="var(--surface-hi)" stroke="var(--ink)"/>
+        <text x="80" y="166" text-anchor="middle">I/O device</text>
+        <text x="80" y="184" text-anchor="middle" font-size="10">(disk, NIC …)</text>
+
+        <rect x="470" y="140" width="130" height="64" fill="var(--surface-hi)" stroke="var(--ink)"/>
+        <text x="535" y="166" text-anchor="middle">Main memory</text>
+        <text x="535" y="184" text-anchor="middle" font-size="10">data buffer</text>
+
+        <line x1="140" y1="160" x2="205" y2="160" stroke="var(--muted)" marker-end="url(#m5-dma-arrow)"/>
+        <text x="172" y="152" text-anchor="middle" font-size="10" fill="var(--muted)">data</text>
+        <line x1="140" y1="184" x2="205" y2="184" stroke="var(--muted)" marker-end="url(#m5-dma-arrow)"/>
+        <text x="172" y="199" text-anchor="middle" font-size="10" fill="var(--muted)">status / control</text>
+
+        <line x1="415" y1="160" x2="470" y2="160" stroke="var(--muted)" marker-end="url(#m5-dma-arrow)"/>
+        <text x="442" y="152" text-anchor="middle" font-size="10" fill="var(--muted)">address</text>
+        <line x1="415" y1="184" x2="470" y2="184" stroke="var(--muted)" marker-end="url(#m5-dma-arrow)"/>
+        <text x="442" y="199" text-anchor="middle" font-size="10" fill="var(--muted)">data</text>
+
+        <text x="20" y="292" font-size="11" fill="var(--muted)">The CPU programs the start address, the word count and the direction.</text>
+        <text x="20" y="310" font-size="11" fill="var(--muted)">The controller then requests the bus and moves the block itself.</text>
+      </g>
+      <defs>
+        <marker id="m5-dma-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8" fill="var(--muted)"/>
+        </marker>
+      </defs>
+    </svg>
+    <figcaption>Figure 2. A DMA controller sits between the device and memory. It holds the address, count and control information, and uses bus request/grant to become the bus master.</figcaption>
+  </figure>
+
+  <p>The controller has four things to remember. The <strong>address register</strong> holds the next memory address. The <strong>count register</strong> holds how many words or bytes remain. The <strong>control/status register</strong> holds the direction, the transfer mode, interrupt enable and error flags. The <strong>control logic</strong> sequences the bus cycles and updates the address and count after each transfer.</p>
+
+  <h3>9.3 The sequence of a DMA transfer</h3>
+
+  <ol class="steps">
+    <li>The CPU programs the DMA controller: start address, word count, direction (device → memory or memory → device), mode and interrupt enable.</li>
+    <li>The CPU starts the device and continues with other work.</li>
+    <li>The device asserts a DMA request when it has data (or needs data).</li>
+    <li>The controller asserts the bus-request (BRQ) line to the CPU.</li>
+    <li>The CPU finishes its current bus cycle and asserts bus-grant (BG). The CPU’s address, data and control outputs go to high impedance so the controller can drive the bus.</li>
+    <li>The controller places the memory address on the address bus, transfers one word or a burst, and asserts the appropriate read/write and device strobes.</li>
+    <li>The controller increments the address and decrements the count. If the count is not zero, it repeats from step 3 or continues the burst.</li>
+    <li>When the count reaches zero, the controller releases the bus and raises an interrupt (or sets a done bit) to tell the CPU that the block is complete.</li>
+  </ol>
+
+  <h3>9.4 Transfer modes</h3>
+
+  <table>
+    <tr><th>Mode</th><th>How it uses the bus</th><th>Effect</th></tr>
+    <tr><td><strong>Burst (block) transfer</strong></td><td>The controller keeps the bus for the whole block.</td><td>Fastest DMA, but the CPU cannot use the bus until the block ends.</td></tr>
+    <tr><td><strong>Cycle stealing</strong></td><td>The controller takes one bus cycle at a time, between CPU cycles.</td><td>The CPU slows down slightly, but it keeps running. Most common for moderate-speed devices.</td></tr>
+    <tr><td><strong>Transparent DMA</strong></td><td>The controller uses only cycles when the CPU does not need the bus (for example during refresh).</td><td>No CPU slowdown, but the transfer takes longer and is harder to schedule.</td></tr>
+  </table>
+
+  <h3>9.5 The DMA numerical</h3>
+
+  <div class="example">
+    <div class="example-title">Teacher problem — DMA transfer time (question bank Q19)</div>
+    <p>A DMA controller transfers data at a rate of 4 MB/s. Calculate the time required to transfer 32 MB of data. Also explain how DMA reduces CPU overhead.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>Rate = 4 MB/s, size = 32 MB. Find the time and explain the CPU benefit.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <p><strong>Step 1 — Write the relation with units.</strong></p>
+    <div class="eq">time = amount of data ÷ transfer rate</div>
+    <p><strong>Step 2 — Substitute.</strong> The data and the rate are both in MB, so the unit cancels and the answer is in seconds.</p>
+    <div class="eq">T = 32 MB ÷ 4 MB/s = 8 s</div>
+    <p><strong>Step 3 — Check.</strong> In one second the controller moves 4 MB; in eight seconds it moves 8 × 4 = 32 MB. Correct.</p>
+    <p><strong>Why this reduces CPU overhead.</strong> Without DMA, the CPU would execute a load/store sequence for every word, and at 4 MB/s that is millions of instructions per second spent copying. With DMA, the CPU writes a few registers once, starts the device, and is interrupted once at the end. During the 8 seconds it can execute other programs. The CPU still shares the memory bus with the controller, so its memory accesses may be delayed by cycle stealing, but it is not spending instructions on the copy.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>T = 32 MB ÷ 4 MB/s = 8 seconds.</strong></p>
+  </div>
+
+  <h3>9.6 DMA and cache coherence</h3>
+
+  <p>DMA introduces a subtle problem. If the CPU has cached a memory block and the DMA controller writes new data directly to memory, the cached copy becomes stale. The CPU may then read the old value. Real systems handle this in one of three ways: mark DMA buffers as uncached (non-cacheable memory), invalidate the relevant cache lines after the DMA write, or use hardware that snoops DMA transfers and keeps the cache coherent. A short paragraph on this is often worth a mark in a DMA answer.</p>
+
+  <h3>9.7 Advantages, disadvantages and use</h3>
+
+  <table>
+    <tr><th>Advantages</th><th>Disadvantages</th></tr>
+    <tr><td>High throughput: the controller moves a block without per-word CPU instructions.</td><td>Extra hardware: a DMA controller and arbitration logic.</td></tr>
+    <tr><td>The CPU is free to do other work during the transfer.</td><td>The controller competes with the CPU for memory bus cycles.</td></tr>
+    <tr><td>Fewer interrupts: one per block instead of one per word.</td><td>Cache coherence must be managed.</td></tr>
+    <tr><td>Well suited to disks, SSDs, network cards, audio and video.</td><td>More complex to program and debug than polling.</td></tr>
+  </table>
+
+  <h3>9.8 Exam answer plan</h3>
+
+  <ol class="steps">
+    <li>Define DMA and state the key idea: the CPU initiates, the controller moves.</li>
+    <li>Draw the CPU, DMA controller, device and memory block diagram with BRQ/BG.</li>
+    <li>List the registers: address, count, control/status.</li>
+    <li>Give the sequence from programming to final interrupt.</li>
+    <li>Explain burst, cycle stealing and transparent modes.</li>
+    <li>Solve T = size ÷ rate with units and explain the CPU benefit.</li>
+    <li>Add one sentence on cache coherence.</li>
+  </ol>

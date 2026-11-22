@@ -1,0 +1,178 @@
+
+  <h2 id="arbitration">3 · Bus arbitration</h2>
+
+  <h3>3.1 Why arbitration is needed</h3>
+
+  <p>A bus is a shared resource, and only one master can drive it at a time. The CPU is the usual master, but a DMA controller, a network card or a second processor may also want the bus. If two masters drive the address or data lines together, the signals collide and the transfer is garbage. <strong>Bus arbitration</strong> is the process that decides which requesting master gets the bus next, and it must do so without corrupting a transfer that is already in progress.</p>
+
+  <p>A good arbitration scheme has to answer three questions: who asks, who decides, and how the decision reaches the winner. The first two separate centralized from distributed schemes.</p>
+
+  <h3>3.2 Centralized arbitration</h3>
+
+  <p>In <strong>centralized arbitration</strong>, one <strong>bus arbiter</strong> — often part of the CPU or the chipset — receives all requests and issues one grant. The arbiter can apply a fixed priority, a rotating priority (round-robin) or a programmable priority. There are three standard wiring methods.</p>
+
+  <p><strong>(a) Daisy chaining.</strong> Every master shares one bus-request line. The grant line does not go to all masters at once; it passes from the arbiter through device 1 to device 2 and so on. A device that wants the bus asserts the request line. When the arbiter grants, the grant propagates along the chain and stops at the first requesting device. That device takes the bus and does not pass the grant further. The device nearest the arbiter therefore has the highest priority, and priority is fixed by physical position. Daisy chaining needs very few wires and is cheap, but a device far down the chain waits while the grant passes through every earlier device, and a faulty device can break the chain for everyone after it.</p>
+
+  <p><strong>(b) Polling.</strong> The arbiter does not wait for a request line from every device. Instead it sends a poll signal — usually a device number on a set of poll lines — and asks, in effect, “Do you want the bus?” Each device answers only when its number appears. The first device that says yes gets the grant. Priority is set by the polling order, which can be changed in software. Polling uses fewer request lines than independent requests, but it spends time asking devices that do not want the bus, so the worst-case delay grows with the number of devices.</p>
+
+  <p><strong>(c) Independent requests.</strong> Each master has its own request line and its own grant line to the arbiter. All requests arrive at once, and the arbiter chooses immediately using its priority logic. This is the fastest of the three because there is no chain propagation and no polling sequence. It is also the most expensive in pins and wiring, and it does not scale well to a large number of masters.</p>
+
+  <table>
+    <tr><th>Method</th><th>Lines</th><th>Priority</th><th>Speed</th><th>Weak point</th></tr>
+    <tr><td>Daisy chaining</td><td>One request, one grant that passes through devices</td><td>Fixed by position; nearest is highest</td><td>Moderate; grant propagation delay</td><td>One faulty device can block later devices.</td></tr>
+    <tr><td>Polling</td><td>Poll lines plus a response</td><td>Set by polling order; can be changed</td><td>Slower as device count grows</td><td>Time wasted polling idle devices.</td></tr>
+    <tr><td>Independent request</td><td>One request and one grant per master</td><td>Fully programmable</td><td>Fastest</td><td>Many pins and wires; poor scaling.</td></tr>
+  </table>
+
+  <h3>3.3 Distributed arbitration</h3>
+
+  <p>In <strong>distributed arbitration</strong>, there is no central arbiter. Every master contains the logic needed to compete for the bus, and the decision emerges from the group. Two common ideas appear in textbooks.</p>
+
+  <p><strong>Self-selection.</strong> Each master has a unique priority code and drives it onto a set of shared arbitration lines when it wants the bus. The lines use wired-OR or wired-AND logic, so the highest-priority code dominates. Each master compares the code on the lines with its own; if it sees a higher code, it withdraws, and the winner proceeds. There is no central point of failure, and the decision is fast, but the priority codes and the arbitration logic must be designed carefully.</p>
+
+  <p><strong>Collision detection.</strong> A master listens to the bus while it transmits. If two masters start together, the resulting signal differs from what either sent, and both detect a collision. They stop, wait for a random or priority-based back-off, and try again. This is the method used by Ethernet (CSMA/CD). It is simple and needs no arbiter, but collisions waste time and the worst-case delay is not bounded unless the protocol adds priorities.</p>
+
+  <table>
+    <tr><th>Feature</th><th>Centralized</th><th>Distributed</th></tr>
+    <tr><td>Decision maker</td><td>One arbiter</td><td>The masters themselves</td></tr>
+    <tr><td>Wiring</td><td>More centralized control lines; fewer per-device lines in daisy chain</td><td>Shared arbitration lines; no central unit</td></tr>
+    <tr><td>Speed</td><td>Fast with independent requests; slower with daisy chain or polling</td><td>Fast self-selection; collision detection loses time on conflicts</td></tr>
+    <tr><td>Fault tolerance</td><td>The arbiter is a single point of failure</td><td>No single arbiter, but a faulty master can still disturb the bus</td></tr>
+    <tr><td>Scalability</td><td>Independent requests need many pins; polling slows with size</td><td>Better for larger systems, at the cost of more complex logic</td></tr>
+    <tr><td>Typical use</td><td>Processor buses, PCI, DMA arbitration</td><td>Multiprocessor backplanes, some network and industrial buses</td></tr>
+  </table>
+
+  <h3>3.4 What the examiner wants</h3>
+
+  <p>A full answer defines arbitration, names the two families, draws or describes at least two centralized methods, explains distributed arbitration, and compares them on wiring, priority, speed and fault tolerance. A numerical is unlikely here; the marks are for the mechanism and the comparison. If the question says “with a diagram”, a simple chain of boxes with REQ and GRANT arrows is enough — do not spend ten minutes on artwork.</p>
+
+  <h2 id="standards">4 · Bus standards: PCI, USB and SATA</h2>
+
+  <h3>4.1 What a bus standard fixes</h3>
+
+  <p>A <strong>bus standard</strong> is an agreed specification for connectors, signal levels, timing, protocol and mechanical dimensions, so that devices from different manufacturers can work together. Without standards, every card would need its own slot and its own driver. The syllabus asks for a comparative study, and the question bank names PCI, USB and SATA. They are not competitors in one market: PCI (and its successor PCIe) connects expansion cards inside the box, USB connects external peripherals, and SATA connects storage devices.</p>
+
+  <h3>4.2 PCI — Peripheral Component Interconnect</h3>
+
+  <p>PCI is a parallel, synchronous, shared bus introduced in the early 1990s to replace several proprietary expansion buses. A 32-bit PCI slot has 32 multiplexed address/data lines, so the address and data phases share the same wires. It runs at 33 MHz or 66 MHz and supports 32-bit or 64-bit widths. Because the bus is shared, only one card can transfer at a time, and the chipset arbitrates between the cards and the CPU. PCI supports burst transfers, parity checking and plug-and-play configuration: the operating system can read a card’s configuration space and assign its address and interrupt automatically.</p>
+
+  <div class="eq">32-bit PCI at 33 MHz: 4 B × 33.33 × 10<sup>6</sup> ≈ 133 MB/s</div>
+  <div class="eq">64-bit PCI at 66 MHz: 8 B × 66.66 × 10<sup>6</sup> ≈ 533 MB/s</div>
+
+  <p>Those are peak values. Real PCI transfers lose cycles to arbitration, address phases and wait states. PCI’s shared parallel wires also become hard to route at higher speeds, which is why it was replaced by PCI Express. <strong>PCIe</strong> is not a wider PCI; it is a completely different serial, point-to-point, packet-based interconnect. Each lane carries data in both directions, and a slot may use 1, 4, 8 or 16 lanes. A PCIe 3.0 lane carries about 985 MB/s per direction, a 4.0 lane about 1.97 GB/s, and a 5.0 lane about 3.94 GB/s. The important comparison for an exam is that PCI is a shared parallel bus while PCIe is a switched serial fabric.</p>
+
+  <h3>4.3 USB — Universal Serial Bus</h3>
+
+  <p>USB was designed for external peripherals: keyboards, mice, printers, cameras, storage and charging. It is a serial bus with a strict <strong>host-controlled</strong> model. The host controller polls devices; a device never starts a transfer on its own. The physical topology is a tiered star: the host controller connects to hubs, and hubs connect to devices or more hubs, allowing up to 127 devices per host controller. USB supports hot-plugging and provides power over the cable, which is why it replaced separate power adapters for many small devices.</p>
+
+  <table>
+    <tr><th>Version</th><th>Signalling rate</th><th>Approximate theoretical payload</th><th>Note</th></tr>
+    <tr><td>USB 1.1</td><td>12 Mb/s (full speed)</td><td>1.5 MB/s</td><td>Keyboards, mice, old printers.</td></tr>
+    <tr><td>USB 2.0</td><td>480 Mb/s (high speed)</td><td>60 MB/s</td><td>Still common for low-cost devices.</td></tr>
+    <tr><td>USB 3.2 Gen 1</td><td>5 Gb/s</td><td>625 MB/s</td><td>Formerly USB 3.0; 8b/10b encoding.</td></tr>
+    <tr><td>USB 3.2 Gen 2</td><td>10 Gb/s</td><td>1.21 GB/s</td><td>128b/132b encoding.</td></tr>
+    <tr><td>USB4</td><td>up to 40 Gb/s</td><td>up to about 5 GB/s</td><td>Tunneled PCIe and DisplayPort; USB-C connector.</td></tr>
+  </table>
+
+  <p>USB defines four transfer types: <strong>control</strong> for configuration, <strong>bulk</strong> for large data with no timing guarantee, <strong>interrupt</strong> for small periodic data such as a mouse, and <strong>isochronous</strong> for audio and video that need a steady rate but can tolerate an occasional lost sample. A USB answer that mentions host control, hot-plug, power and the four transfer types is usually enough.</p>
+
+  <h3>4.4 SATA — Serial ATA</h3>
+
+  <p>SATA connects storage devices. It replaced the wide parallel ATA ribbon cable with a thin serial cable and, more importantly, changed the topology from a shared bus to a <strong>point-to-point link</strong>: each SATA port serves one device. That removes the master/slave jumper problem of PATA and allows hot-swapping on controllers that support it. SATA uses 8b/10b encoding, so ten bits are transmitted for every eight bits of payload; the useful rate is therefore 80% of the signalling rate.</p>
+
+  <div class="eq">SATA 1.5 Gb/s → 150 MB/s &nbsp;·&nbsp; SATA 3 Gb/s → 300 MB/s &nbsp;·&nbsp; SATA 6 Gb/s → 600 MB/s</div>
+
+  <p>SATA also supports Native Command Queuing (NCQ), which lets a drive reorder outstanding requests to reduce seek and rotational delay. It is a storage interconnect, not a general-purpose expansion bus: it carries disk commands and data, not arbitrary device registers.</p>
+
+  <h3>4.5 Comparing the standards</h3>
+
+  <table>
+    <tr><th>Feature</th><th>PCI</th><th>USB</th><th>SATA</th></tr>
+    <tr><td>Type</td><td>Parallel, shared, synchronous</td><td>Serial, host-controlled, tiered star</td><td>Serial, point-to-point</td></tr>
+    <tr><td>Typical use</td><td>Expansion cards inside a computer</td><td>External peripherals and charging</td><td>Hard disks and SSDs</td></tr>
+    <tr><td>Data width</td><td>32 or 64 bits</td><td>1 bit per direction (serial)</td><td>1 bit per direction (serial)</td></tr>
+    <tr><td>Nominal rate</td><td>133–533 MB/s</td><td>1.5 MB/s to several GB/s depending on version</td><td>150 / 300 / 600 MB/s</td></tr>
+    <tr><td>Hot-plug</td><td>Generally no</td><td>Yes</td><td>Yes on supported controllers</td></tr>
+    <tr><td>Topology</td><td>Shared bus with arbitration</td><td>Host + hubs + devices</td><td>One host port to one drive</td></tr>
+    <tr><td>Successor</td><td>PCI Express (serial, switched)</td><td>USB 3.x / USB4</td><td>SATA Express / NVMe over PCIe</td></tr>
+  </table>
+
+  <div class="example">
+    <div class="example-title">Supplementary worked example — comparing nominal rates</div>
+    <p>A 32-bit PCI bus runs at 33 MHz and completes one transfer per cycle. A SATA III link runs at 6 Gb/s with 8b/10b encoding. A USB 2.0 link runs at 480 Mb/s. Compare their nominal payload rates in MB/s.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <div class="eq">PCI: 32 ÷ 8 = 4 B per transfer; 4 × 33.33 × 10<sup>6</sup> ≈ 133 MB/s</div>
+    <div class="eq">SATA III: 6 Gb/s × (8/10) = 4.8 Gb/s; 4.8 ÷ 8 = 0.6 GB/s = 600 MB/s</div>
+    <div class="eq">USB 2.0: 480 Mb/s ÷ 8 = 60 MB/s</div>
+    <p><strong>Interpretation:</strong> these are peak signalling rates. PCI loses cycles to arbitration and address phases; SATA loses 20% to encoding; USB 2.0 loses protocol overhead and rarely exceeds about 40 MB/s in practice. Never quote a peak as a guaranteed throughput.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>PCI ≈ 133 MB/s, SATA III = 600 MB/s, USB 2.0 = 60 MB/s (all nominal).</strong></p>
+  </div>
+  <p class="eq-note">Supplementary example written for this guide. It is not a teacher problem.</p>
+
+  <h3>4.6 Exam answer plan</h3>
+
+  <ol class="steps">
+    <li>Say what a bus standard is and why standards matter.</li>
+    <li>For each of PCI, USB and SATA: state whether it is parallel or serial, shared or point-to-point, and its typical use.</li>
+    <li>Give the nominal rates and one sentence on encoding or overhead.</li>
+    <li>Compare them in a table: topology, width, speed, hot-plug, use.</li>
+    <li>Add one sentence on the successor technology (PCIe, USB4, NVMe).</li>
+  </ol>
+
+  <h2 id="interface">5 · The I/O interface</h2>
+
+  <h3>5.1 Why a device cannot sit directly on the bus</h3>
+
+  <p>A disk, a keyboard and a temperature sensor do not speak the processor’s bus protocol. Their signals may be serial while the bus is parallel, their voltages may differ, and their timing is often much slower or completely unpredictable. An <strong>I/O interface</strong> (also called an I/O controller or adapter) sits between the system bus and the device. On the bus side it behaves like a well-behaved slave with addressable registers. On the device side it does whatever the device needs. The CPU therefore programs a standard set of registers and never has to know how the device actually works.</p>
+
+  <h3>5.2 The functions of an interface</h3>
+
+  <table>
+    <tr><th>Function</th><th>What it does</th><th>Why it matters</th></tr>
+    <tr><td><strong>Address decoding</strong></td><td>Recognises when the CPU has selected one of its registers.</td><td>Lets several interfaces share the bus without responding to each other’s addresses.</td></tr>
+    <tr><td><strong>Data buffering</strong></td><td>Holds a word or a small FIFO between bus and device.</td><td>Absorbs the speed difference and lets the device take data when ready.</td></tr>
+    <tr><td><strong>Format conversion</strong></td><td>Serial ↔ parallel, bit-width conversion, sometimes analog ↔ digital at the device.</td><td>Matches the device’s signalling to the bus.</td></tr>
+    <tr><td><strong>Control and status</strong></td><td>Provides control and status registers to the CPU.</td><td>Gives the CPU a standard way to start an operation and ask whether it finished.</td></tr>
+    <tr><td><strong>Timing and handshaking</strong></td><td>Generates the strobes and waits for ready/acknowledge signals.</td><td>Makes a slow device work with a fast bus without corrupting data.</td></tr>
+    <tr><td><strong>Error detection</strong></td><td>Parity, checksum or protocol checks.</td><td>Reports a bad transfer instead of silently delivering wrong data.</td></tr>
+    <tr><td><strong>Interrupt generation</strong></td><td>Raises an interrupt when the device becomes ready or finishes.</td><td>Enables interrupt-driven I/O instead of polling.</td></tr>
+    <tr><td><strong>DMA handshaking</strong></td><td>Requests the bus and transfers data directly to memory when configured for DMA.</td><td>Removes the CPU from the per-word data path.</td></tr>
+    <tr><td><strong>Electrical isolation</strong></td><td>Drives the correct voltages and protects the bus from the device.</td><td>Prevents a faulty peripheral from damaging the system.</td></tr>
+  </table>
+
+  <h3>5.3 The three registers the CPU sees</h3>
+
+  <p>Almost every interface can be understood through three registers. The <strong>data register</strong> is the doorway: the CPU writes a byte or word here for output, or reads one here for input. The <strong>status register</strong> answers questions: is the device ready, is a transfer in progress, has an error occurred? The <strong>control register</strong> receives commands: start, stop, reset, set the transfer mode, enable interrupts. The interface’s control logic connects these registers to the device’s own signals.</p>
+
+  <table>
+    <tr><th>Register</th><th>Direction from CPU</th><th>Typical bits</th></tr>
+    <tr><td>Data</td><td>Write (output) or read (input)</td><td>8/16/32-bit data word</td></tr>
+    <tr><td>Status</td><td>Read</td><td>READY, BUSY, ERROR, INTERRUPT-PENDING</td></tr>
+    <tr><td>Control</td><td>Write</td><td>START, MODE, INTERRUPT-ENABLE, RESET</td></tr>
+  </table>
+
+  <h3>5.4 A read and a write, step by step</h3>
+
+  <p><strong>Output (CPU → device).</strong> The CPU writes a word to the data register. It then sets the START bit in the control register. The interface asserts the device’s write strobe and waits for the device to accept the word. When the device acknowledges, the interface clears BUSY and sets READY (or raises an interrupt). If the CPU is polling, it sees READY and sends the next word.</p>
+
+  <p><strong>Input (device → CPU).</strong> The interface waits for the device to present a word and assert its data-valid signal. It latches the word into the data register and sets READY. The CPU reads the status register, sees READY, reads the data register, and the interface clears READY so the next word can arrive. If interrupts are enabled, the interface raises an interrupt instead of making the CPU poll.</p>
+
+  <p>This handshake is the reason an interface is more than a connector. It converts an unpredictable device event into a bus transaction that the CPU can handle in a fixed way.</p>
+
+  <h3>5.5 Where the registers live</h3>
+
+  <p>The registers can be <strong>memory-mapped</strong>, in which case they occupy addresses in the normal memory space and the CPU uses ordinary load/store instructions, or <strong>isolated</strong>, in which case they live in a separate I/O space and the CPU uses special instructions such as <code>IN</code> and <code>OUT</code>. Section 1.3 compares the two. The choice affects the instruction set and the address decoder, not the internal structure of the interface.</p>
+
+  <h3>5.6 Exam answer plan</h3>
+
+  <ol class="steps">
+    <li>Define an I/O interface and state the problem it solves (speed, format, voltage, protocol).</li>
+    <li>Draw the CPU — system bus — interface — device block diagram, labelling data, status and control paths.</li>
+    <li>List the functions: decoding, buffering, conversion, control/status, timing, error detection, interrupt and DMA support.</li>
+    <li>Explain the data, status and control registers.</li>
+    <li>Walk through one input and one output handshake.</li>
+    <li>Mention memory-mapped versus isolated I/O in one sentence.</li>
+  </ol>

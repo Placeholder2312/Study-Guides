@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSGT Module 4 — Counting — Study Guide</title>
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --muted: #444444;
+    --bg: #ffffff;
+    --line: #cccccc;
+    --rule: #999999;
+    --accent: #1d4ed8;
+    --space: 1.5rem;
+    --radius: 0;
+    --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+    --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-mono: "Courier New", Courier, monospace;
+  }
+  * { box-sizing: border-box; }
+  sub, sup { font-size: 0.75em; line-height: 0; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  body {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    font-size: 17px;
+    font-weight: 500;
+    text-wrap: pretty;
+  }
+  .wrap {
+    max-width: 62ch;
+    margin: 0 auto;
+    padding: 2.5rem 1rem 4rem;
+  }
+  header {
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+  }
+  h1 {
+    font-family: var(--font-serif);
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0;
+  }
+  .meta {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    font-weight: 500;
+    color: var(--muted);
+    margin-top: 1rem;
+  }
+  h2 {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 3rem 0 1rem;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.4rem;
+  }
+  h2 > a { text-decoration: none; color: inherit; }
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 2rem 0 0.5rem;
+  }
+  h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 1.5rem 0 0.5rem;
+  }
+  p {
+    margin: 0 0 1rem;
+    line-height: 1.6;
+  }
+  .wrap > div, .wrap > main > div { line-height: 1.6; }
+  ul, ol, blockquote, pre, figure { line-height: 1.6; }
+  td { line-height: 1.5; }
+  strong, em, span, b, i { line-height: 1.6; }
+  .theory {
+    border-left: 3px solid var(--ink);
+    padding: 1rem 1.25rem;
+    margin: 1.75rem 0;
+    font-size: 0.98rem;
+  }
+  .theory p:first-child { margin-top: 0; }
+  .theory p:last-child { margin-bottom: 0; }
+  .source {
+    display: block;
+    font-size: 0.78rem;
+    line-height: 1.4;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+  }
+  .eq {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 1.25rem 0;
+    padding: 0.75rem 1rem;
+    background: var(--surface-eq);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .eq-note {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--muted);
+    text-align: center;
+    margin-top: -0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .example {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+    font-size: 0.95rem;
+    background: var(--surface);
+  }
+  .example-title {
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0;
+    color: var(--muted);
+  }
+  .example .eq { margin: 0.75rem 0; background: var(--bg); border: 1px solid var(--line); }
+  .qa-question, .qa-solution, .qa-final { margin: 0.9rem 0; padding: 0.75rem 1rem; }
+  .qa-question { border-left: 4px solid var(--ink); background: var(--bg); }
+  .qa-solution { border-left: 4px solid var(--line); }
+  .qa-final { border: 2px solid var(--accent); background: var(--accent-soft); }
+  .qa-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+  .qa-final .qa-label { color: var(--accent); }
+  .qa-question > :last-child, .qa-solution > :last-child, .qa-final > :last-child { margin-bottom: 0; }
+  .qa-question > p:first-of-type, .qa-final > p:first-of-type { margin-top: 0; }
+  .qa-final .eq { margin: 0.25rem 0 0; background: transparent; border: 0; padding: 0; text-align: left; }
+  .qa-final-list { margin: 0; padding-left: 1.25rem; }
+  .qa-final-text { margin: 0; font-weight: 600; }
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    padding: 1rem 1.25rem;
+  }
+  .steps li {
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+  .steps li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.1rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    background: var(--ink);
+    border-radius: 50%;
+  }
+  .steps li:last-child { margin-bottom: 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.75rem 0;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 0.625rem 0.875rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--surface-hi);
+    font-weight: 700;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+  }
+  tr:nth-child(even) td { background: var(--surface-alt); }
+  .kbd {
+    display: inline-block;
+    max-width: 100%;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    white-space: nowrap;
+    word-break: normal;
+    overflow-wrap: normal;
+    overflow-x: auto;
+    vertical-align: baseline;
+    background: var(--surface-hi);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 0.1rem 0.4rem;
+  }
+  .toc {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 2rem 0;
+    background: var(--surface);
+  }
+  .toc ol { margin: 0; padding-left: 1.25rem; }
+  .toc li { margin-bottom: 0.35rem; font-size: 0.95rem; }
+  .toc a { color: var(--ink); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .nav {
+    margin: 1.5rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .nav a {
+    padding: 0.25rem 0.6rem;
+    border: 1px solid var(--line);
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.85rem;
+    border-radius: 3px;
+  }
+  .nav a:hover { background: var(--surface-hi); }
+  .practice {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: var(--surface);
+  }
+  .practice > h3:first-of-type { margin-top: 0; }
+  .answer-key {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: var(--surface);
+  }
+  .answer-key > h3:first-of-type { margin-top: 0; }
+  .common-mistakes {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: var(--surface);
+  }
+  .common-mistakes > h3:first-of-type { margin-top: 0; }
+  .self-learning {
+    border-left: 3px solid var(--muted);
+    padding: 1rem 1.25rem;
+    margin: 1.75rem 0;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+  .self-learning p { margin-bottom: 0.75rem; }
+  .revision-sheet {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: var(--surface);
+  }
+  .revision-sheet > h3:first-of-type { margin-top: 0; }
+  .warning {
+    color: var(--danger);
+    font-weight: 700;
+  }
+  .mu-badge {
+    display: inline-block;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+    margin-left: 0.5rem;
+  }
+  .exam-q {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+    background: var(--surface);
+  }
+  .exam-q-title {
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    letter-spacing: 0;
+    color: var(--muted);
+  }
+  .exam-source {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  svg { width: 100%; max-width: 440px; height: auto; display: block; margin: 1rem auto; padding: 0.5rem; background: var(--bg); border: 1px solid var(--line); }
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+  .references {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 2rem 0;
+    background: var(--surface);
+  }
+  .references > h3:first-of-type { margin-top: 0; }
+  .references p { margin: 0.5rem 0; }
+  .references ul { margin: 0.5rem 0; padding-left: 1.5rem; }
+  ::selection { background: var(--ink); color: var(--bg); }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  @media (max-width: 600px) {
+    .wrap { padding: 1.5rem 1rem 3rem; }
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.4rem; }
+    .eq { font-size: 1.15rem; }
+  }
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    .wrap { padding: 1rem 0.75rem 3rem; }
+    h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.3rem; margin-top: 2.25rem; }
+    table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; font-size: 0.85rem; }
+    th, td { padding: 0.45rem 0.55rem; }
+    .theory, .example, .practice, .answer-key, .common-mistakes, .revision-sheet, .references, .exam-q, .steps, .toc, .self-learning { padding: 0.75rem; }
+    .eq { font-size: 1rem; padding: 0.6rem 0.5rem; text-align: left; }
+    /* Keep mathematical tokens intact on narrow screens; long chips scroll horizontally. */
+    .nav a { padding: 0.4rem 0.7rem; }
+    svg { max-width: 100%; padding: 0.25rem; }
+  }
+  @media print {
+    body { font-size: 12pt; line-height: 1.4; color: #000; background: #fff; }
+    .wrap { max-width: 100%; padding: 0; }
+    header { border-bottom: 1px solid #000; margin-bottom: 1.5rem; padding-bottom: 0.75rem; }
+    h2 { margin: 2rem 0 0.75rem; border-bottom: 1px solid #000; padding-bottom: 0.3rem; }
+    h3 { margin: 1.5rem 0 0.4rem; }
+    .toc, .nav { display: none; }
+    .example, .practice, .answer-key, .revision-sheet, .steps, .theory, .common-mistakes, .references, .exam-q {
+      border: 1px solid #999;
+      background: #fff !important;
+      page-break-inside: avoid;
+    }
+    .eq { background: #fff; border: 1px solid #999; page-break-inside: avoid; }
+    .eq-note { display: none; }
+    a { text-decoration: none; color: #000; }
+    svg { border: 1px solid #000; }
+    footer { margin-top: 2rem; border-top: 1px solid #000; }
+  }
+</style>
+<script>(function(){try{var t=localStorage.getItem('sg-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<style id="theme">
+  :root { color-scheme: light; --ink:#0a0a0a;--muted:#444444;--bg:#ffffff;--line:#cccccc;--rule:#999999;--accent:#1d4ed8;--accent-soft:#eef2ff;--danger:#b00020;--surface:#fafafa;--surface-alt:#f9f9f9;--surface-eq:#f5f5f5;--surface-hi:#f0f0f0; }
+  :root[data-theme="dark"] { color-scheme: dark; --ink:#ececec;--muted:#a8a8ad;--bg:#0f0f11;--line:#34343a;--rule:#5a5a62;--accent:#8ab0ff;--accent-soft:#1b2540;--danger:#ff7b8f;--surface:#17171a;--surface-alt:#1b1b1f;--surface-eq:#1e1e23;--surface-hi:#26262c; }
+  :root[data-theme="dark"] svg circle[fill-opacity] { fill-opacity: .3; }
+  :root[data-theme="dark"] svg text[fill="var(--muted)"] { fill: var(--ink); }
+  .topbar { display:flex; align-items:center; justify-content:space-between; gap:.5rem; margin:0 0 1rem; }
+  .topbar .back { display:inline-flex; align-items:center; min-height:44px; font-size:.85rem; font-weight:600; color:var(--ink); }
+  .theme-toggle { font:inherit; font-size:.85rem; font-weight:600; color:var(--ink); background:var(--bg); border:1px solid var(--ink); border-radius:0; padding:.4rem .8rem; min-height:44px; min-width:44px; cursor:pointer; margin-left:auto; }
+  .theme-toggle:hover { background:var(--surface-hi); }
+  .theme-toggle:focus-visible { outline:2px solid var(--ink); outline-offset:2px; }
+  @media print {
+    :root, :root[data-theme="dark"], :root:not([data-theme="light"]) { color-scheme: light; --ink:#0a0a0a;--muted:#444444;--bg:#ffffff;--line:#cccccc;--rule:#999999;--accent:#1d4ed8;--accent-soft:#eef2ff;--danger:#b00020;--surface:#fafafa;--surface-alt:#f9f9f9;--surface-eq:#f5f5f5;--surface-hi:#f0f0f0; }
+    .topbar { display:none; }
+  }
+</style>
+
+<style id="rail-style">
+  /* Section progress. Phone UI by default (top line + edge tab + bottom sheet);
+     margin rail on wide screens with a mouse. Colours come from the theme variables. */
+  .rail { display:none; }
+  .rm-bar { position:fixed; top:0; left:0; height:3px; width:var(--w,0%); background:var(--accent); z-index:30; pointer-events:none; }
+  .rm-tab { position:fixed; left:env(safe-area-inset-left,0px); bottom:calc(14px + env(safe-area-inset-bottom,0px)); z-index:30; display:flex; align-items:center; width:44px; height:44px; padding:0; border:0; background:transparent; font:inherit; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+  .rm-tab span { display:flex; align-items:center; justify-content:center; min-width:26px; height:28px; padding:0 .35rem; font:700 .66rem/1 var(--font-mono); letter-spacing:.04em; font-variant-numeric:tabular-nums; color:var(--ink); background:var(--bg); border:1px solid var(--rule); border-left:0; opacity:.5; transition:opacity .25s; }
+  body.rm-moving .rm-tab span { opacity:.15; }
+  .rm-tab:hover span, .rm-tab:focus-visible span, .rm-tab[aria-expanded="true"] span { opacity:1; }
+  .rm-tab:focus-visible { outline:2px solid var(--ink); outline-offset:-2px; }
+  .rm-back { position:fixed; inset:0; z-index:40; background:rgba(0,0,0,.4); opacity:0; pointer-events:none; transition:opacity .2s; }
+  .rm-sheet { position:fixed; left:0; right:0; bottom:0; z-index:50; max-height:68vh; overflow-y:auto; background:var(--bg); border-top:1px solid var(--ink); padding-bottom:env(safe-area-inset-bottom,0px); transform:translateY(102%); visibility:hidden; transition:transform .22s ease, visibility 0s .22s; }
+  body.rm-open .rm-back { opacity:1; pointer-events:auto; }
+  body.rm-open .rm-sheet { transform:none; visibility:visible; transition-delay:0s; }
+  .rm-head { position:sticky; top:0; z-index:2; display:flex; align-items:center; justify-content:space-between; padding:.7rem 1rem; background:var(--bg); border-bottom:1px solid var(--line); font:600 .65rem/1 var(--font-mono); letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  .rm-head b { color:var(--ink); }
+  .rm-sheet ol { list-style:none; margin:0; padding:.3rem 0 .6rem; }
+  .rm-sheet a { display:grid; grid-template-columns:1.9rem 1fr; align-items:center; min-height:44px; padding:0 1rem; color:var(--muted); text-decoration:none; font-size:.92rem; font-weight:600; border-left:3px solid transparent; }
+  .rm-sheet a .rm-k { font:600 .7rem/1 var(--font-mono); letter-spacing:.04em; }
+  .rm-sheet a.is-done { color:var(--ink); }
+  .rm-sheet a.is-done .rm-k { color:var(--muted); }
+  .rm-sheet a[aria-current="true"] { color:var(--ink); border-left-color:var(--accent); background:var(--accent-soft); font-family:var(--font-serif); font-weight:700; }
+  .rm-sheet a[aria-current="true"] .rm-k { color:var(--accent); }
+  .rm-sheet a:focus-visible { outline:2px solid var(--ink); outline-offset:-2px; }
+
+  .rail { position:fixed; left:14px; top:50%; transform:translateY(-50%); z-index:20; font-family:var(--font-sans); color:var(--muted); }
+  .rail-in { position:relative; padding:.5rem .6rem .6rem .5rem; border:1px solid transparent; background:transparent; transition:background .15s, border-color .15s; }
+  .rail:hover .rail-in, .rail:focus-within .rail-in { background:var(--bg); border-color:var(--line); }
+  .rail-top { display:flex; align-items:flex-end; gap:.5rem; margin:0 0 .7rem; min-height:2.1rem; }
+  .rail-sec { font-family:var(--font-serif); font-size:1.7rem; line-height:.9; color:var(--ink); font-variant-numeric:tabular-nums; letter-spacing:-.02em; }
+  .rail-meta { display:flex; flex-direction:column; gap:.1rem; font:600 .6rem/1.1 var(--font-mono); letter-spacing:.08em; text-transform:uppercase; padding-bottom:.1rem; }
+  .rail-meta b { font-weight:700; color:var(--ink); }
+  .rail-toggle { margin-left:auto; align-self:flex-start; font:inherit; font-size:.8rem; line-height:1; width:1.3rem; height:1.3rem; padding:0; color:var(--muted); background:var(--bg); border:1px solid var(--line); border-radius:0; cursor:pointer; opacity:.55; transition:opacity .15s; }
+  .rail:hover .rail-toggle, .rail-toggle:focus-visible { opacity:1; }
+  .rail-toggle:hover { color:var(--ink); border-color:var(--ink); }
+  .rail-toggle:focus-visible, .rail a:focus-visible { outline:2px solid var(--ink); outline-offset:2px; }
+  .rail-list { position:relative; list-style:none; margin:0; padding:0; max-height:calc(100vh - 11rem); overflow-y:auto; overflow-x:hidden; scrollbar-width:none; }
+  .rail-list::-webkit-scrollbar { display:none; }
+  .rail-list::before { content:""; position:absolute; left:4px; top:0; bottom:0; width:1px; background:var(--rule); opacity:.55; }
+  .rail-fill { position:absolute; left:3.5px; top:0; width:2px; height:var(--fill,0px); background:var(--accent); }
+  .rail a { position:relative; display:grid; grid-template-columns:9px 1.55rem auto; align-items:center; column-gap:.55rem; height:1.45rem; color:inherit; text-decoration:none; }
+  .rail .node { width:7px; height:7px; box-sizing:border-box; border:1px solid var(--rule); background:var(--bg); justify-self:center; }
+  .rail a.is-done .node { background:var(--muted); border-color:var(--muted); }
+  .rail .num { font:600 .62rem/1 var(--font-mono); letter-spacing:.04em; font-variant-numeric:tabular-nums; }
+  .rail .lbl { display:none; font-size:.74rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:14rem; }
+  .rail-sublist { list-style:none; margin:0 0 .3rem 1.65rem; padding:0 0 0 .55rem; border-left:1px solid var(--line); }
+  .rail-sublist a { grid-template-columns:1rem minmax(0,1fr); column-gap:.3rem; height:1.2rem; padding-left:.1rem; }
+  .rail-sublist .sub-lbl { display:block; font-size:.68rem; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .rail-sublist .sub-num { font:600 .62rem/1 var(--font-mono); color:var(--accent); }
+  .rail-sublist a[aria-current="location"] { color:var(--accent); font-weight:700; }
+  .rail.is-collapsed .rail-sublist { display:none; }
+  .rm-sublist { margin:0 0 .35rem 2.65rem !important; padding:.15rem 0 .25rem .65rem !important; border-left:1px solid var(--line); }
+  .rm-sublist a { grid-template-columns:1.1rem minmax(0,1fr); min-height:34px; padding:.25rem .5rem; border-left:0; font-size:.84rem; }
+  .rm-sublist a[aria-current="location"] { color:var(--accent); background:var(--accent-soft); }
+
+  .rail a:hover { color:var(--ink); }
+  .rail a:hover .node { border-color:var(--ink); }
+  .rail a[aria-current="true"] { color:var(--ink); }
+  .rail a[aria-current="true"] .node { width:9px; height:9px; border-color:var(--accent); background:linear-gradient(to top, var(--accent) calc(var(--p,0) * 100%), var(--bg) 0); box-shadow:0 0 0 3px var(--accent-soft); }
+  .rail a[aria-current="true"] .num { color:var(--accent); }
+  .rail a[aria-current="true"] .lbl { display:block; font-family:var(--font-serif); font-size:.82rem; font-weight:700; max-width:clamp(0px, calc(50vw - 25.5rem), 14rem); }
+  .rail:hover .lbl, .rail:focus-within .lbl, .rail:hover a[aria-current="true"] .lbl, .rail:focus-within a[aria-current="true"] .lbl { display:block; max-width:14rem; }
+  .rail.is-collapsed .rail-in { padding:.5rem .4rem; background:transparent !important; border-color:transparent !important; }
+  .rail.is-collapsed .rail-top { flex-direction:column; align-items:flex-start; gap:.4rem; margin-bottom:.5rem; min-height:0; }
+  .rail.is-collapsed .rail-sec, .rail.is-collapsed .rail-meta, .rail.is-collapsed .num, .rail.is-collapsed .lbl { display:none !important; }
+  .rail.is-collapsed .rail-toggle { margin:0 0 0 -.25rem; }
+  .rail.is-collapsed a { grid-template-columns:9px; height:1.15rem; }
+  .rail.is-collapsed .node { width:5px; height:5px; }
+  .rail.is-collapsed a[aria-current="true"] .node { width:7px; height:7px; box-shadow:0 0 0 2px var(--accent-soft); }
+  .rail.is-collapsed .rail-list { max-height:calc(100vh - 8rem); }
+
+  @media (min-width:900px) and (pointer:fine) {
+    .rm-tab, .rm-back, .rm-sheet { display:none; }
+    .rm-bar { display:block; }
+    .rail { display:block; }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    .rm-sheet, .rm-back, .rm-tab span, .rail-in { transition:none; }
+  }
+  /* Show children only for the section currently being read. */
+  .rail-list > li > .rail-sublist { display:none; }
+  .rail-list > li > a[aria-current="true"] ~ .rail-sublist { display:block; }
+  .rail.is-collapsed .rail-list > li > .rail-sublist { display:none; }
+  .rm-sheet > ol > li > .rm-sublist { display:none; }
+  .rm-sheet > ol > li > a[aria-current="true"] ~ .rm-sublist { display:block; }
+  @media print { .rail, .rm-bar, .rm-tab, .rm-back, .rm-sheet { display:none !important; } }
+
+</style>
+<style id="d4-mobile-venn">.d4-venn-mobile{display:none}@media(max-width:600px){.d4-venn-desktop{display:none!important}.d4-venn-mobile{display:block!important;width:100%;max-width:100%;height:auto;margin:.5rem auto;padding:0;border:0;background:transparent}}</style>
+<link rel="stylesheet" href="/assets/a11y.css">
+<meta name="description" content="COA Module 5 study guide: buses, arbitration, bus standards, I/O interface, channels and processors, programmed I/O, interrupts and DMA, with worked numericals and question-bank coverage.">
+<style>
+  /* COA overrides: long worked-example equations may wrap, and wide diagrams use the full column. */
+  .eq { white-space: normal; }
+  svg, figure svg { max-width: 100%; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><a class="back" href="/coa">← All modules</a><button class="theme-toggle" type="button" id="themeToggle"></button></div>
+
+  <header>
+    <h1>COA Module 5</h1>
+    <p class="subtitle">I/O Organization</p>
+    <div class="meta">B.E. CSE (AI &amp; ML) · Sem III · Course 2023114 · 4 teaching hours · CO5<br>
+    Built from <em>Assignment 5.docx</em>, the supplied question banks, the MUSA practice material and the official University of Mumbai syllabus.</div>
+  </header>
+
+  <div class="toc">
+    <ol>
+      <li><a href="#syllabus">Syllabus and scope</a></li>
+      <li><a href="#problem">The I/O problem</a></li>
+      <li><a href="#buses">Buses: structure and types</a></li>
+      <li><a href="#arbitration">Bus arbitration</a></li>
+      <li><a href="#standards">Bus standards: PCI, USB and SATA</a></li>
+      <li><a href="#interface">The I/O interface</a></li>
+      <li><a href="#module-channel">I/O module, channel and processor</a></li>
+      <li><a href="#programmed">Programmed I/O</a></li>
+      <li><a href="#interrupt">Interrupt-driven I/O</a></li>
+      <li><a href="#dma">Direct Memory Access</a></li>
+      <li><a href="#compare">Comparing the three techniques</a></li>
+      <li><a href="#qbank">Question bank and assignment coverage</a></li>
+      <li><a href="#practice">Independent practice</a></li>
+      <li><a href="#answer-key">Answer key</a></li>
+      <li><a href="#mistakes">Common mistakes</a></li>
+      <li><a href="#revision">Last-minute revision sheet</a></li>
+      <li><a href="#references">References and verification notes</a></li>
+    </ol>
+  </div>
+
+  <nav class="nav">
+    <a href="#buses">Buses</a>
+    <a href="#arbitration">Arbitration</a>
+    <a href="#standards">Standards</a>
+    <a href="#interface">Interface</a>
+    <a href="#module-channel">Module / channel</a>
+    <a href="#programmed">Programmed I/O</a>
+    <a href="#interrupt">Interrupts</a>
+    <a href="#dma">DMA</a>
+    <a href="#qbank">Question bank</a>
+    <a href="#practice">Practice</a>
+    <a href="#revision">Revision</a>
+  </nav>
+
+  <h2 id="syllabus">Syllabus and scope</h2>
+
+  <p><strong>Official module name:</strong> I/O Organization · <strong>Teaching hours:</strong> 4 · <strong>Course outcome:</strong> CO5.</p>
+
+  <div class="theory">
+    <span class="source">Official University of Mumbai syllabus, course 2023114 (Module 5 row)</span>
+    <p>“Introduction to Bus, Types of Buses and Bus Standards: Comparative study of bus standards. Bus Arbitration. I/O interface, I/O channels, I/O modules and I/O processors. Programmed I/O, Interrupt driven I/O, DMA.”</p>
+    <p>The official row lists no self-study topic for this module.</p>
+  </div>
+
+  <p>The syllabus is short but the question bank is specific. This guide follows the syllabus boundary and then teaches every term that the supplied questions name.</p>
+
+  <table>
+    <tr><th>Status</th><th>Content</th><th>Why it is here</th></tr>
+    <tr><td><strong>Prescribed</strong></td><td>Bus introduction; types of buses; comparative study of bus standards; bus arbitration; I/O interface; I/O channels, modules and processors; programmed I/O; interrupt-driven I/O; DMA.</td><td>Named in the official Module 5 row.</td></tr>
+    <tr><td><strong>Supplementary</strong></td><td>Memory-mapped vs isolated I/O; synchronous vs asynchronous buses; bus bandwidth calculations; interrupt latency and overhead; DMA cycle stealing and cache coherence; PCIe as the successor to PCI.</td><td>Needed to answer the numericals and the “compare / explain” parts of the question bank. These are clearly marked as supplementary where they go beyond the syllabus line.</td></tr>
+  </table>
+
+  <p><strong>Exam pattern.</strong> The end-semester paper is 60 marks in 2 hours, with six 20-mark questions. Question 1 is compulsory and mixes modules; you attempt any three of the remaining questions. Module 5 is only 4 teaching hours, so it usually appears as one part of a larger question (often 5–10 marks) rather than as a full 20-mark question. The DMA numerical is the most likely numerical from this module.</p>
+
+  <div class="theory">
+    <span class="source">What this guide does not claim</span>
+    <p>No verified University of Mumbai question paper for course 2023114 was supplied. The questions reproduced in Section 11 are from the teacher’s question bank and the 40-question document. MUSA questions are student-association material. Nothing here is labelled as a verified University question.</p>
+  </div>
+
+  <h2 id="problem">1 · The I/O problem</h2>
+
+  <h3>1.1 Why I/O needs its own organization</h3>
+
+  <p>A processor can execute an instruction in a fraction of a nanosecond, while a keyboard produces a character when a human presses a key and a disk may take milliseconds to reach a block. Peripherals also differ wildly: a mouse sends a few bytes per second, a camera sends hundreds of megabytes per second, and each device uses its own voltage levels, connectors and protocol. The processor cannot connect to every device directly. <strong>I/O organization</strong> is the set of buses, interfaces, controllers and transfer methods that let the CPU communicate with many different devices without knowing their electrical details.</p>
+
+  <p>Three problems must be solved:</p>
+
+  <table>
+    <tr><th>Problem</th><th>Why it is hard</th><th>Typical solution</th></tr>
+    <tr><td><strong>Speed mismatch</strong></td><td>The CPU is orders of magnitude faster than most peripherals. Waiting for a device wastes processor time.</td><td>Buffering, interrupts and DMA let the CPU start a transfer and do other work.</td></tr>
+    <tr><td><strong>Device variety</strong></td><td>Different connectors, voltages, data formats (serial/parallel, analog/digital) and protocols.</td><td>An I/O interface or module hides the device details behind a standard bus interface.</td></tr>
+    <tr><td><strong>Addressing and control</strong></td><td>The CPU must select one device, state the operation, move data and learn when the operation finished.</td><td>Address decoding, control registers, status registers and interrupt or DMA handshaking.</td></tr>
+  </table>
+
+  <h3>1.2 The I/O subsystem at a glance</h3>
+
+  <p>At the top, the CPU and memory sit on the system bus. Below it, one or more <strong>I/O modules</strong> (also called controllers or interfaces) connect devices. A module may serve one device or several. In larger systems, a <strong>channel</strong> or <strong>I/O processor</strong> sits between the CPU and the modules and runs its own I/O program.</p>
+
+  <div class="eq">CPU ↔ system bus ↔ I/O module ↔ device</div>
+
+  <p>The CPU never sees the device’s internal signals. It sees a small set of registers inside the module: a <strong>data register</strong> to move a word, a <strong>status register</strong> to ask “ready / busy / error?”, and a <strong>control register</strong> to start an operation or set a mode.</p>
+
+  <h3>1.3 Memory-mapped and isolated I/O</h3>
+
+  <p>There are two ways to give the CPU access to those registers.</p>
+
+  <table>
+    <tr><th>Feature</th><th>Memory-mapped I/O</th><th>Isolated (port-mapped) I/O</th></tr>
+    <tr><td>Address space</td><td>Device registers occupy addresses in the normal memory space.</td><td>A separate I/O address space is used.</td></tr>
+    <tr><td>Instructions</td><td>Ordinary load and store instructions work on device registers.</td><td>Special instructions such as <code>IN</code> and <code>OUT</code>.</td></tr>
+    <tr><td>Control lines</td><td>Normal memory read/write lines.</td><td>Separate I/O read/write lines, plus a line that distinguishes memory from I/O.</td></tr>
+    <tr><td>Address space cost</td><td>Consumes part of the memory address range.</td><td>Does not reduce the memory address range.</td></tr>
+    <tr><td>Programming</td><td>Flexible: any instruction that can address memory can address a register.</td><td>Restricted to the I/O instructions, but keeps I/O separate from memory.</td></tr>
+    <tr><td>Typical use</td><td>Microcontrollers, memory-mapped peripherals, modern SoCs.</td><td>Intel-style processors with an I/O address space (for example the 8086 family).</td></tr>
+  </table>
+
+  <p>In an exam, a single sentence is enough: memory-mapped I/O uses normal memory instructions and addresses, while isolated I/O uses a separate port space and special instructions. The 8086 supports both.</p>
+
+  <h3>1.4 The three transfer techniques, previewed</h3>
+
+  <table>
+    <tr><th>Technique</th><th>Who moves each word?</th><th>CPU involvement</th></tr>
+    <tr><td><strong>Programmed I/O</strong></td><td>The CPU, one word at a time, after polling the status register.</td><td>Continuous; the CPU busy-waits.</td></tr>
+    <tr><td><strong>Interrupt-driven I/O</strong></td><td>The CPU, one word at a time, inside an interrupt service routine.</td><td>Per word, but only when the device is ready.</td></tr>
+    <tr><td><strong>DMA</strong></td><td>The DMA controller, directly between device and memory.</td><td>Only at setup and completion.</td></tr>
+  </table>
+
+  <p>The rest of this module explains the buses that carry these transfers, the arbitration that decides who may use a bus, the interface that connects a device, and then each transfer technique in detail.</p>
+
+  <h2 id="buses">2 · Buses: structure and types</h2>
+
+  <h3>2.1 What a bus is</h3>
+
+  <p>A <strong>bus</strong> is a set of shared electrical lines with a defined protocol that lets several units communicate. A unit that can start a transfer is a <strong>bus master</strong>; a unit that responds is a <strong>bus slave</strong>. The CPU is normally the master, but a DMA controller or another processor can also become master. Because the lines are shared, only one master may drive them at a time; this is why bus arbitration (Section 3) is needed.</p>
+
+  <figure>
+    <svg viewBox="0 0 620 300" role="img" aria-labelledby="m5-bus-title m5-bus-desc" style="max-width:620px">
+      <title id="m5-bus-title">The three groups of system bus lines</title>
+      <desc id="m5-bus-desc">The CPU, memory and I/O modules are connected by three buses: a bidirectional data bus, a unidirectional address bus, and a control bus carrying read, write, interrupt and bus-grant signals.</desc>
+      <g font-family="Helvetica, Arial" font-size="12" fill="var(--ink)">
+        <rect x="30" y="20" width="120" height="50" fill="var(--surface-hi)" stroke="var(--ink)"/>
+        <text x="90" y="50" text-anchor="middle">CPU</text>
+        <rect x="250" y="20" width="120" height="50" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="310" y="50" text-anchor="middle">Memory</text>
+        <rect x="470" y="20" width="120" height="50" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="530" y="50" text-anchor="middle">I/O modules</text>
+
+        <line x1="30" y1="110" x2="590" y2="110" stroke="var(--ink)" stroke-width="2"/>
+        <text x="30" y="103" font-weight="700">Address bus (unidirectional)</text>
+        <text x="30" y="128" font-size="11" fill="var(--muted)">n lines → 2ⁿ addressable locations; master drives, slaves decode</text>
+
+        <line x1="30" y1="170" x2="590" y2="170" stroke="var(--ink)" stroke-width="4"/>
+        <text x="30" y="163" font-weight="700">Data bus (bidirectional)</text>
+        <text x="30" y="188" font-size="11" fill="var(--muted)">m lines → m bits per transfer; width sets the word size</text>
+
+        <line x1="30" y1="230" x2="590" y2="230" stroke="var(--ink)" stroke-width="2" stroke-dasharray="6 4"/>
+        <text x="30" y="223" font-weight="700">Control bus (individual lines, both directions)</text>
+        <text x="30" y="248" font-size="11" fill="var(--muted)">read / write · memory or I/O select · interrupt request / acknowledge · bus request / grant · clock · reset</text>
+
+        <line x1="90" y1="70" x2="90" y2="110" stroke="var(--muted)"/>
+        <line x1="310" y1="70" x2="310" y2="110" stroke="var(--muted)"/>
+        <line x1="530" y1="70" x2="530" y2="110" stroke="var(--muted)"/>
+        <line x1="90" y1="110" x2="90" y2="170" stroke="var(--muted)"/>
+        <line x1="310" y1="110" x2="310" y2="170" stroke="var(--muted)"/>
+        <line x1="530" y1="110" x2="530" y2="170" stroke="var(--muted)"/>
+        <line x1="90" y1="170" x2="90" y2="230" stroke="var(--muted)"/>
+        <line x1="310" y1="170" x2="310" y2="230" stroke="var(--muted)"/>
+        <line x1="530" y1="170" x2="530" y2="230" stroke="var(--muted)"/>
+      </g>
+    </svg>
+    <figcaption>Figure 1. A system bus has three functional groups. The address bus selects, the data bus carries, and the control bus coordinates.</figcaption>
+  </figure>
+
+  <h3>2.2 Data bus, address bus and control bus</h3>
+
+  <table>
+    <tr><th>Bus</th><th>Direction</th><th>What it carries</th><th>Width determines</th></tr>
+    <tr><td><strong>Data bus</strong></td><td>Bidirectional</td><td>The actual data word between CPU, memory and I/O.</td><td>How many bits move in one transfer (8, 16, 32, 64 …).</td></tr>
+    <tr><td><strong>Address bus</strong></td><td>Unidirectional (master → slaves)</td><td>The address of the memory location or I/O register being selected.</td><td>The size of the address space: n lines → 2<sup>n</sup> locations.</td></tr>
+    <tr><td><strong>Control bus</strong></td><td>Individual lines, both directions</td><td>Read/write, memory or I/O select, interrupt request and acknowledge, bus request and grant, clock, reset.</td><td>Which operation is performed and how the transfer is synchronised.</td></tr>
+  </table>
+
+  <p>The address bus is unidirectional because the master always names the target. The data bus is bidirectional because a read moves data towards the CPU and a write moves it away. The control bus is not one wire but a collection of single-purpose lines, each with its own direction and timing.</p>
+
+  <h3>2.3 Bus width, bandwidth and transfer time</h3>
+
+  <div class="eq">address space = 2<sup>address lines</sup> locations</div>
+  <div class="eq">bytes per transfer = data lines ÷ 8</div>
+  <div class="eq">bandwidth = bytes per transfer × transfers per second</div>
+  <div class="eq">transfer time = amount of data ÷ bandwidth</div>
+
+  <p>For a bus that completes one transfer per clock cycle, the nominal bandwidth is:</p>
+
+  <div class="eq">bandwidth = (data lines ÷ 8) × clock frequency</div>
+
+  <p class="eq-note">This is the <em>nominal</em> or peak value. Real bandwidth is lower because of wait states, arbitration, address phases, refresh and protocol overhead. Say “nominal” when you use the formula.</p>
+
+  <div class="example">
+    <div class="example-title">Supplementary worked example — bus bandwidth</div>
+    <p>A system bus has 32 data lines and runs at 66 MHz. One transfer is completed per clock cycle. Find the address space if the address bus has 24 lines, and the nominal data bandwidth.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>32 data lines, 24 address lines, 66 MHz, one transfer per cycle. Find the address space and the nominal bandwidth.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <div class="eq">address space = 2<sup>24</sup> bytes = 16,777,216 bytes = 16 MB</div>
+    <div class="eq">bytes per transfer = 32 ÷ 8 = 4 bytes</div>
+    <div class="eq">bandwidth = 4 × 66 × 10<sup>6</sup> = 264 × 10<sup>6</sup> B/s = 264 MB/s</div>
+    <p><strong>Interpretation:</strong> 264 MB/s is the peak. If the bus needs two clock cycles per transfer (an address phase and a data phase), the sustained value falls to 132 MB/s.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>16 MB address space; nominal bandwidth 264 MB/s.</strong></p>
+  </div>
+  <p class="eq-note">Supplementary example written for this guide, not a teacher problem.</p>
+
+  <h3>2.4 Synchronous and asynchronous buses</h3>
+
+  <table>
+    <tr><th>Feature</th><th>Synchronous bus</th><th>Asynchronous bus</th></tr>
+    <tr><td>Timing</td><td>All transfers are tied to a common clock.</td><td>Transfers use handshake signals (request / acknowledge).</td></tr>
+    <tr><td>Speed</td><td>Fast for devices that can meet the clock.</td><td>Adapts to each device; a slow device simply takes longer.</td></tr>
+    <tr><td>Design</td><td>Simpler protocol, but the bus must be short enough that signals arrive within one clock.</td><td>More control lines and logic, but tolerant of distance and mixed device speeds.</td></tr>
+    <tr><td>Typical use</td><td>Processor-local buses, memory buses, PCI.</td><td>Legacy peripheral buses, handshaked device interfaces, some on-chip buses.</td></tr>
+  </table>
+
+  <h3>2.5 Single-bus and multiple-bus organisation</h3>
+
+  <p>A <strong>single-bus</strong> system connects CPU, memory and all I/O to one shared bus. It is cheap and simple, but every transfer competes for the same lines, so the bus becomes a bottleneck. A <strong>multiple-bus</strong> or hierarchical system uses several buses: a fast processor-local bus, a memory bus, and one or more I/O buses connected by bridges. This lets the CPU and memory exchange data while I/O traffic proceeds on a separate bus, and it lets each bus run at a speed suited to its devices. Modern systems are hierarchical: CPU ↔ cache ↔ memory bus ↔ PCIe root complex ↔ USB/SATA controllers.</p>
+
+  <h3>2.6 The bus transaction</h3>
+
+  <ol class="steps">
+    <li><strong>Request and arbitration:</strong> a master asks for the bus; the arbiter grants it.</li>
+    <li><strong>Address phase:</strong> the master puts the target address on the address bus and asserts the memory or I/O select line.</li>
+    <li><strong>Data phase:</strong> for a write, the master drives data; for a read, the slave drives data. The read/write line states the direction.</li>
+    <li><strong>Acknowledgment:</strong> the slave asserts ready or acknowledge when the transfer is complete; wait states may extend the cycle.</li>
+    <li><strong>Release:</strong> the master releases the bus, and the arbiter may grant it to another master.</li>
+  </ol>
+
+  <h3>2.7 Exam answer plan</h3>
+
+  <ol class="steps">
+    <li>Define a bus and distinguish master from slave.</li>
+    <li>Draw the CPU–memory–I/O block diagram with the three buses.</li>
+    <li>Explain data, address and control buses: direction, function, and what the width determines.</li>
+    <li>Give the bandwidth formula and one numerical.</li>
+    <li>Contrast synchronous and asynchronous buses, and single-bus with multiple-bus organisation.</li>
+    <li>List the phases of a bus transaction.</li>
+  </ol>
+
+
+  <h2 id="arbitration">3 · Bus arbitration</h2>
+
+  <h3>3.1 Why arbitration is needed</h3>
+
+  <p>A bus is a shared resource, and only one master can drive it at a time. The CPU is the usual master, but a DMA controller, a network card or a second processor may also want the bus. If two masters drive the address or data lines together, the signals collide and the transfer is garbage. <strong>Bus arbitration</strong> is the process that decides which requesting master gets the bus next, and it must do so without corrupting a transfer that is already in progress.</p>
+
+  <p>A good arbitration scheme has to answer three questions: who asks, who decides, and how the decision reaches the winner. The first two separate centralized from distributed schemes.</p>
+
+  <h3>3.2 Centralized arbitration</h3>
+
+  <p>In <strong>centralized arbitration</strong>, one <strong>bus arbiter</strong> — often part of the CPU or the chipset — receives all requests and issues one grant. The arbiter can apply a fixed priority, a rotating priority (round-robin) or a programmable priority. There are three standard wiring methods.</p>
+
+  <p><strong>(a) Daisy chaining.</strong> Every master shares one bus-request line. The grant line does not go to all masters at once; it passes from the arbiter through device 1 to device 2 and so on. A device that wants the bus asserts the request line. When the arbiter grants, the grant propagates along the chain and stops at the first requesting device. That device takes the bus and does not pass the grant further. The device nearest the arbiter therefore has the highest priority, and priority is fixed by physical position. Daisy chaining needs very few wires and is cheap, but a device far down the chain waits while the grant passes through every earlier device, and a faulty device can break the chain for everyone after it.</p>
+
+  <p><strong>(b) Polling.</strong> The arbiter does not wait for a request line from every device. Instead it sends a poll signal — usually a device number on a set of poll lines — and asks, in effect, “Do you want the bus?” Each device answers only when its number appears. The first device that says yes gets the grant. Priority is set by the polling order, which can be changed in software. Polling uses fewer request lines than independent requests, but it spends time asking devices that do not want the bus, so the worst-case delay grows with the number of devices.</p>
+
+  <p><strong>(c) Independent requests.</strong> Each master has its own request line and its own grant line to the arbiter. All requests arrive at once, and the arbiter chooses immediately using its priority logic. This is the fastest of the three because there is no chain propagation and no polling sequence. It is also the most expensive in pins and wiring, and it does not scale well to a large number of masters.</p>
+
+  <table>
+    <tr><th>Method</th><th>Lines</th><th>Priority</th><th>Speed</th><th>Weak point</th></tr>
+    <tr><td>Daisy chaining</td><td>One request, one grant that passes through devices</td><td>Fixed by position; nearest is highest</td><td>Moderate; grant propagation delay</td><td>One faulty device can block later devices.</td></tr>
+    <tr><td>Polling</td><td>Poll lines plus a response</td><td>Set by polling order; can be changed</td><td>Slower as device count grows</td><td>Time wasted polling idle devices.</td></tr>
+    <tr><td>Independent request</td><td>One request and one grant per master</td><td>Fully programmable</td><td>Fastest</td><td>Many pins and wires; poor scaling.</td></tr>
+  </table>
+
+  <h3>3.3 Distributed arbitration</h3>
+
+  <p>In <strong>distributed arbitration</strong>, there is no central arbiter. Every master contains the logic needed to compete for the bus, and the decision emerges from the group. Two common ideas appear in textbooks.</p>
+
+  <p><strong>Self-selection.</strong> Each master has a unique priority code and drives it onto a set of shared arbitration lines when it wants the bus. The lines use wired-OR or wired-AND logic, so the highest-priority code dominates. Each master compares the code on the lines with its own; if it sees a higher code, it withdraws, and the winner proceeds. There is no central point of failure, and the decision is fast, but the priority codes and the arbitration logic must be designed carefully.</p>
+
+  <p><strong>Collision detection.</strong> A master listens to the bus while it transmits. If two masters start together, the resulting signal differs from what either sent, and both detect a collision. They stop, wait for a random or priority-based back-off, and try again. This is the method used by Ethernet (CSMA/CD). It is simple and needs no arbiter, but collisions waste time and the worst-case delay is not bounded unless the protocol adds priorities.</p>
+
+  <table>
+    <tr><th>Feature</th><th>Centralized</th><th>Distributed</th></tr>
+    <tr><td>Decision maker</td><td>One arbiter</td><td>The masters themselves</td></tr>
+    <tr><td>Wiring</td><td>More centralized control lines; fewer per-device lines in daisy chain</td><td>Shared arbitration lines; no central unit</td></tr>
+    <tr><td>Speed</td><td>Fast with independent requests; slower with daisy chain or polling</td><td>Fast self-selection; collision detection loses time on conflicts</td></tr>
+    <tr><td>Fault tolerance</td><td>The arbiter is a single point of failure</td><td>No single arbiter, but a faulty master can still disturb the bus</td></tr>
+    <tr><td>Scalability</td><td>Independent requests need many pins; polling slows with size</td><td>Better for larger systems, at the cost of more complex logic</td></tr>
+    <tr><td>Typical use</td><td>Processor buses, PCI, DMA arbitration</td><td>Multiprocessor backplanes, some network and industrial buses</td></tr>
+  </table>
+
+  <h3>3.4 What the examiner wants</h3>
+
+  <p>A full answer defines arbitration, names the two families, draws or describes at least two centralized methods, explains distributed arbitration, and compares them on wiring, priority, speed and fault tolerance. A numerical is unlikely here; the marks are for the mechanism and the comparison. If the question says “with a diagram”, a simple chain of boxes with REQ and GRANT arrows is enough — do not spend ten minutes on artwork.</p>
+
+  <h2 id="standards">4 · Bus standards: PCI, USB and SATA</h2>
+
+  <h3>4.1 What a bus standard fixes</h3>
+
+  <p>A <strong>bus standard</strong> is an agreed specification for connectors, signal levels, timing, protocol and mechanical dimensions, so that devices from different manufacturers can work together. Without standards, every card would need its own slot and its own driver. The syllabus asks for a comparative study, and the question bank names PCI, USB and SATA. They are not competitors in one market: PCI (and its successor PCIe) connects expansion cards inside the box, USB connects external peripherals, and SATA connects storage devices.</p>
+
+  <h3>4.2 PCI — Peripheral Component Interconnect</h3>
+
+  <p>PCI is a parallel, synchronous, shared bus introduced in the early 1990s to replace several proprietary expansion buses. A 32-bit PCI slot has 32 multiplexed address/data lines, so the address and data phases share the same wires. It runs at 33 MHz or 66 MHz and supports 32-bit or 64-bit widths. Because the bus is shared, only one card can transfer at a time, and the chipset arbitrates between the cards and the CPU. PCI supports burst transfers, parity checking and plug-and-play configuration: the operating system can read a card’s configuration space and assign its address and interrupt automatically.</p>
+
+  <div class="eq">32-bit PCI at 33 MHz: 4 B × 33.33 × 10<sup>6</sup> ≈ 133 MB/s</div>
+  <div class="eq">64-bit PCI at 66 MHz: 8 B × 66.66 × 10<sup>6</sup> ≈ 533 MB/s</div>
+
+  <p>Those are peak values. Real PCI transfers lose cycles to arbitration, address phases and wait states. PCI’s shared parallel wires also become hard to route at higher speeds, which is why it was replaced by PCI Express. <strong>PCIe</strong> is not a wider PCI; it is a completely different serial, point-to-point, packet-based interconnect. Each lane carries data in both directions, and a slot may use 1, 4, 8 or 16 lanes. A PCIe 3.0 lane carries about 985 MB/s per direction, a 4.0 lane about 1.97 GB/s, and a 5.0 lane about 3.94 GB/s. The important comparison for an exam is that PCI is a shared parallel bus while PCIe is a switched serial fabric.</p>
+
+  <h3>4.3 USB — Universal Serial Bus</h3>
+
+  <p>USB was designed for external peripherals: keyboards, mice, printers, cameras, storage and charging. It is a serial bus with a strict <strong>host-controlled</strong> model. The host controller polls devices; a device never starts a transfer on its own. The physical topology is a tiered star: the host controller connects to hubs, and hubs connect to devices or more hubs, allowing up to 127 devices per host controller. USB supports hot-plugging and provides power over the cable, which is why it replaced separate power adapters for many small devices.</p>
+
+  <table>
+    <tr><th>Version</th><th>Signalling rate</th><th>Approximate theoretical payload</th><th>Note</th></tr>
+    <tr><td>USB 1.1</td><td>12 Mb/s (full speed)</td><td>1.5 MB/s</td><td>Keyboards, mice, old printers.</td></tr>
+    <tr><td>USB 2.0</td><td>480 Mb/s (high speed)</td><td>60 MB/s</td><td>Still common for low-cost devices.</td></tr>
+    <tr><td>USB 3.2 Gen 1</td><td>5 Gb/s</td><td>625 MB/s</td><td>Formerly USB 3.0; 8b/10b encoding.</td></tr>
+    <tr><td>USB 3.2 Gen 2</td><td>10 Gb/s</td><td>1.21 GB/s</td><td>128b/132b encoding.</td></tr>
+    <tr><td>USB4</td><td>up to 40 Gb/s</td><td>up to about 5 GB/s</td><td>Tunneled PCIe and DisplayPort; USB-C connector.</td></tr>
+  </table>
+
+  <p>USB defines four transfer types: <strong>control</strong> for configuration, <strong>bulk</strong> for large data with no timing guarantee, <strong>interrupt</strong> for small periodic data such as a mouse, and <strong>isochronous</strong> for audio and video that need a steady rate but can tolerate an occasional lost sample. A USB answer that mentions host control, hot-plug, power and the four transfer types is usually enough.</p>
+
+  <h3>4.4 SATA — Serial ATA</h3>
+
+  <p>SATA connects storage devices. It replaced the wide parallel ATA ribbon cable with a thin serial cable and, more importantly, changed the topology from a shared bus to a <strong>point-to-point link</strong>: each SATA port serves one device. That removes the master/slave jumper problem of PATA and allows hot-swapping on controllers that support it. SATA uses 8b/10b encoding, so ten bits are transmitted for every eight bits of payload; the useful rate is therefore 80% of the signalling rate.</p>
+
+  <div class="eq">SATA 1.5 Gb/s → 150 MB/s &nbsp;·&nbsp; SATA 3 Gb/s → 300 MB/s &nbsp;·&nbsp; SATA 6 Gb/s → 600 MB/s</div>
+
+  <p>SATA also supports Native Command Queuing (NCQ), which lets a drive reorder outstanding requests to reduce seek and rotational delay. It is a storage interconnect, not a general-purpose expansion bus: it carries disk commands and data, not arbitrary device registers.</p>
+
+  <h3>4.5 Comparing the standards</h3>
+
+  <table>
+    <tr><th>Feature</th><th>PCI</th><th>USB</th><th>SATA</th></tr>
+    <tr><td>Type</td><td>Parallel, shared, synchronous</td><td>Serial, host-controlled, tiered star</td><td>Serial, point-to-point</td></tr>
+    <tr><td>Typical use</td><td>Expansion cards inside a computer</td><td>External peripherals and charging</td><td>Hard disks and SSDs</td></tr>
+    <tr><td>Data width</td><td>32 or 64 bits</td><td>1 bit per direction (serial)</td><td>1 bit per direction (serial)</td></tr>
+    <tr><td>Nominal rate</td><td>133–533 MB/s</td><td>1.5 MB/s to several GB/s depending on version</td><td>150 / 300 / 600 MB/s</td></tr>
+    <tr><td>Hot-plug</td><td>Generally no</td><td>Yes</td><td>Yes on supported controllers</td></tr>
+    <tr><td>Topology</td><td>Shared bus with arbitration</td><td>Host + hubs + devices</td><td>One host port to one drive</td></tr>
+    <tr><td>Successor</td><td>PCI Express (serial, switched)</td><td>USB 3.x / USB4</td><td>SATA Express / NVMe over PCIe</td></tr>
+  </table>
+
+  <div class="example">
+    <div class="example-title">Supplementary worked example — comparing nominal rates</div>
+    <p>A 32-bit PCI bus runs at 33 MHz and completes one transfer per cycle. A SATA III link runs at 6 Gb/s with 8b/10b encoding. A USB 2.0 link runs at 480 Mb/s. Compare their nominal payload rates in MB/s.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <div class="eq">PCI: 32 ÷ 8 = 4 B per transfer; 4 × 33.33 × 10<sup>6</sup> ≈ 133 MB/s</div>
+    <div class="eq">SATA III: 6 Gb/s × (8/10) = 4.8 Gb/s; 4.8 ÷ 8 = 0.6 GB/s = 600 MB/s</div>
+    <div class="eq">USB 2.0: 480 Mb/s ÷ 8 = 60 MB/s</div>
+    <p><strong>Interpretation:</strong> these are peak signalling rates. PCI loses cycles to arbitration and address phases; SATA loses 20% to encoding; USB 2.0 loses protocol overhead and rarely exceeds about 40 MB/s in practice. Never quote a peak as a guaranteed throughput.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>PCI ≈ 133 MB/s, SATA III = 600 MB/s, USB 2.0 = 60 MB/s (all nominal).</strong></p>
+  </div>
+  <p class="eq-note">Supplementary example written for this guide. It is not a teacher problem.</p>
+
+  <h3>4.6 Exam answer plan</h3>
+
+  <ol class="steps">
+    <li>Say what a bus standard is and why standards matter.</li>
+    <li>For each of PCI, USB and SATA: state whether it is parallel or serial, shared or point-to-point, and its typical use.</li>
+    <li>Give the nominal rates and one sentence on encoding or overhead.</li>
+    <li>Compare them in a table: topology, width, speed, hot-plug, use.</li>
+    <li>Add one sentence on the successor technology (PCIe, USB4, NVMe).</li>
+  </ol>
+
+  <h2 id="interface">5 · The I/O interface</h2>
+
+  <h3>5.1 Why a device cannot sit directly on the bus</h3>
+
+  <p>A disk, a keyboard and a temperature sensor do not speak the processor’s bus protocol. Their signals may be serial while the bus is parallel, their voltages may differ, and their timing is often much slower or completely unpredictable. An <strong>I/O interface</strong> (also called an I/O controller or adapter) sits between the system bus and the device. On the bus side it behaves like a well-behaved slave with addressable registers. On the device side it does whatever the device needs. The CPU therefore programs a standard set of registers and never has to know how the device actually works.</p>
+
+  <h3>5.2 The functions of an interface</h3>
+
+  <table>
+    <tr><th>Function</th><th>What it does</th><th>Why it matters</th></tr>
+    <tr><td><strong>Address decoding</strong></td><td>Recognises when the CPU has selected one of its registers.</td><td>Lets several interfaces share the bus without responding to each other’s addresses.</td></tr>
+    <tr><td><strong>Data buffering</strong></td><td>Holds a word or a small FIFO between bus and device.</td><td>Absorbs the speed difference and lets the device take data when ready.</td></tr>
+    <tr><td><strong>Format conversion</strong></td><td>Serial ↔ parallel, bit-width conversion, sometimes analog ↔ digital at the device.</td><td>Matches the device’s signalling to the bus.</td></tr>
+    <tr><td><strong>Control and status</strong></td><td>Provides control and status registers to the CPU.</td><td>Gives the CPU a standard way to start an operation and ask whether it finished.</td></tr>
+    <tr><td><strong>Timing and handshaking</strong></td><td>Generates the strobes and waits for ready/acknowledge signals.</td><td>Makes a slow device work with a fast bus without corrupting data.</td></tr>
+    <tr><td><strong>Error detection</strong></td><td>Parity, checksum or protocol checks.</td><td>Reports a bad transfer instead of silently delivering wrong data.</td></tr>
+    <tr><td><strong>Interrupt generation</strong></td><td>Raises an interrupt when the device becomes ready or finishes.</td><td>Enables interrupt-driven I/O instead of polling.</td></tr>
+    <tr><td><strong>DMA handshaking</strong></td><td>Requests the bus and transfers data directly to memory when configured for DMA.</td><td>Removes the CPU from the per-word data path.</td></tr>
+    <tr><td><strong>Electrical isolation</strong></td><td>Drives the correct voltages and protects the bus from the device.</td><td>Prevents a faulty peripheral from damaging the system.</td></tr>
+  </table>
+
+  <h3>5.3 The three registers the CPU sees</h3>
+
+  <p>Almost every interface can be understood through three registers. The <strong>data register</strong> is the doorway: the CPU writes a byte or word here for output, or reads one here for input. The <strong>status register</strong> answers questions: is the device ready, is a transfer in progress, has an error occurred? The <strong>control register</strong> receives commands: start, stop, reset, set the transfer mode, enable interrupts. The interface’s control logic connects these registers to the device’s own signals.</p>
+
+  <table>
+    <tr><th>Register</th><th>Direction from CPU</th><th>Typical bits</th></tr>
+    <tr><td>Data</td><td>Write (output) or read (input)</td><td>8/16/32-bit data word</td></tr>
+    <tr><td>Status</td><td>Read</td><td>READY, BUSY, ERROR, INTERRUPT-PENDING</td></tr>
+    <tr><td>Control</td><td>Write</td><td>START, MODE, INTERRUPT-ENABLE, RESET</td></tr>
+  </table>
+
+  <h3>5.4 A read and a write, step by step</h3>
+
+  <p><strong>Output (CPU → device).</strong> The CPU writes a word to the data register. It then sets the START bit in the control register. The interface asserts the device’s write strobe and waits for the device to accept the word. When the device acknowledges, the interface clears BUSY and sets READY (or raises an interrupt). If the CPU is polling, it sees READY and sends the next word.</p>
+
+  <p><strong>Input (device → CPU).</strong> The interface waits for the device to present a word and assert its data-valid signal. It latches the word into the data register and sets READY. The CPU reads the status register, sees READY, reads the data register, and the interface clears READY so the next word can arrive. If interrupts are enabled, the interface raises an interrupt instead of making the CPU poll.</p>
+
+  <p>This handshake is the reason an interface is more than a connector. It converts an unpredictable device event into a bus transaction that the CPU can handle in a fixed way.</p>
+
+  <h3>5.5 Where the registers live</h3>
+
+  <p>The registers can be <strong>memory-mapped</strong>, in which case they occupy addresses in the normal memory space and the CPU uses ordinary load/store instructions, or <strong>isolated</strong>, in which case they live in a separate I/O space and the CPU uses special instructions such as <code>IN</code> and <code>OUT</code>. Section 1.3 compares the two. The choice affects the instruction set and the address decoder, not the internal structure of the interface.</p>
+
+  <h3>5.6 Exam answer plan</h3>
+
+  <ol class="steps">
+    <li>Define an I/O interface and state the problem it solves (speed, format, voltage, protocol).</li>
+    <li>Draw the CPU — system bus — interface — device block diagram, labelling data, status and control paths.</li>
+    <li>List the functions: decoding, buffering, conversion, control/status, timing, error detection, interrupt and DMA support.</li>
+    <li>Explain the data, status and control registers.</li>
+    <li>Walk through one input and one output handshake.</li>
+    <li>Mention memory-mapped versus isolated I/O in one sentence.</li>
+  </ol>
+
+
+  <h2 id="module-channel">6 · I/O module, channel and processor</h2>
+
+  <h3>6.1 The I/O module</h3>
+
+  <p>An <strong>I/O module</strong> is the hardware that connects one or more devices to the system bus. It contains the interface logic described in Section 5, plus whatever device-specific control is needed. A simple module might serve a single serial port; a more complex one might control a disk, a keyboard and a timer. The CPU sees the module as a set of registers. The module sees the device as a set of electrical signals. Its job is to translate between the two, buffer data, report status and, when asked, raise an interrupt or request the bus for DMA.</p>
+
+  <p>The module is the unit that makes a device <em>look like</em> memory or like a set of ports. That is why the CPU can use the same load/store or IN/OUT instructions for devices from different manufacturers.</p>
+
+  <h3>6.2 The I/O channel</h3>
+
+  <p>An <strong>I/O channel</strong> is a step up in intelligence. It is a specialised processor that sits between the CPU and a group of I/O modules, with its own channel bus and its own small instruction set. The CPU does not issue one command per word. Instead it builds a <strong>channel program</strong> in memory — a sequence of <strong>channel command words (CCWs)</strong> — and tells the channel to execute it. Each CCW says something like “read 512 bytes from device 3 into memory address X” or “write this block to device 7”. The channel fetches the CCWs, drives the I/O modules, and interrupts the CPU only when the whole program finishes or an error occurs.</p>
+
+  <p>Channels come in a few flavours. A <strong>selector channel</strong> controls one high-speed device at a time and runs it at full speed. A <strong>multiplexor channel</strong> interleaves byte-by-byte transfers from several slow devices, so they appear to run together. A <strong>block multiplexor channel</strong> interleaves blocks from several high-speed devices. The terminology comes from mainframe I/O, but the idea — offload the per-word work to a small dedicated engine — is general.</p>
+
+  <h3>6.3 The I/O processor</h3>
+
+  <p>An <strong>I/O processor</strong> is a full processor dedicated to I/O. It has its own instruction set, its own local memory and the ability to run programs that manage many devices, perform protocol handling, buffer data and recover from errors. A front-end processor in a mainframe, a network processor on a router line card, or the controller inside a modern NVMe SSD are all examples of the same idea: put a processor where the I/O work is, so the main CPU does not have to do it.</p>
+
+  <p>The boundary between a channel and an I/O processor is not sharp. A channel is usually a limited, special-purpose engine that executes channel programs; an I/O processor is more general and can run arbitrary code. For an exam, the safe distinction is: <em>module</em> connects a device, <em>channel</em> executes a channel program for several modules, <em>processor</em> is a general-purpose computer dedicated to I/O.</p>
+
+  <table>
+    <tr><th>Feature</th><th>I/O module</th><th>I/O channel</th><th>I/O processor</th></tr>
+    <tr><td>What it is</td><td>Interface and controller for one or a few devices</td><td>Special-purpose processor for a group of modules</td><td>General-purpose processor dedicated to I/O</td></tr>
+    <tr><td>Programmability</td><td>Fixed logic or simple registers</td><td>Executes a channel program of CCWs</td><td>Runs arbitrary programs</td></tr>
+    <tr><td>CPU involvement</td><td>Per transfer or per interrupt</td><td>Per channel program</td><td>Per job or per high-level command</td></tr>
+    <tr><td>Devices managed</td><td>One or a few</td><td>Several modules</td><td>Many devices or a whole I/O subsystem</td></tr>
+    <tr><td>Cost and complexity</td><td>Low</td><td>Moderate</td><td>High</td></tr>
+    <tr><td>Typical example</td><td>UART, disk controller, USB host controller</td><td>Mainframe selector or multiplexor channel</td><td>Front-end processor, network processor, SSD controller</td></tr>
+  </table>
+
+  <h3>6.4 Why the hierarchy improves performance</h3>
+
+  <p>Each step moves more of the I/O work away from the CPU. With a module, the CPU still moves every word but is freed from device-level signalling. With a channel, the CPU issues one channel program and the channel moves the words. With an I/O processor, the CPU can hand over an entire job and go back to computation. The result is less CPU overhead, more overlap between computation and I/O, and better use of the memory bus because the channel or processor can schedule transfers efficiently. The cost is extra hardware and more complex software.</p>
+
+  <h3>6.5 Exam answer plan</h3>
+
+  <ol class="steps">
+    <li>Define an I/O module and list its functions.</li>
+    <li>Define a channel and explain the channel program and CCW.</li>
+    <li>Define an I/O processor and give one example.</li>
+    <li>Compare the three in a table: programmability, devices, CPU involvement, cost.</li>
+    <li>Explain the performance benefit: offloading, overlap and fewer interrupts.</li>
+  </ol>
+
+  <h2 id="programmed">7 · Programmed I/O</h2>
+
+  <h3>7.1 The idea</h3>
+
+  <p><strong>Programmed I/O</strong> is the simplest transfer method. The CPU does all the work: it issues the command, waits for the device, moves each word and checks for errors. Waiting is done by <strong>polling</strong> — reading the status register in a loop until the ready bit is set. This is also called <strong>busy-waiting</strong>, because the CPU is busy doing nothing useful while it waits.</p>
+
+  <p>The method is easy to understand and needs almost no extra hardware: a data register, a status register and a control register are enough. That is why it survives in small microcontrollers and in situations where the CPU has nothing else to do.</p>
+
+  <h3>7.2 The sequence</h3>
+
+  <ol class="steps">
+    <li>The CPU writes a command to the interface’s control register: direction, device address, maybe a count.</li>
+    <li>The CPU reads the status register.</li>
+    <li>If the ready bit is 0, the CPU jumps back to step 2. This is the polling loop.</li>
+    <li>When ready is 1, the CPU reads the data register (input) or writes it (output).</li>
+    <li>The interface clears ready and starts the next device operation.</li>
+    <li>The CPU updates its count and address, then repeats from step 2 until the block is finished.</li>
+  </ol>
+
+  <p>The loop is the weakness. Every iteration costs several instructions, and the CPU cannot do anything else while it is inside the loop. If the device takes 1 ms to produce a byte and the polling loop takes 1 µs, the CPU wastes roughly 999 µs per byte.</p>
+
+  <h3>7.3 A numerical view of the waste</h3>
+
+  <div class="example">
+    <div class="example-title">Supplementary worked example — programmed I/O time</div>
+    <p>A device supplies one byte every 2 µs. The CPU polls the status register and moves one byte in 2 µs of its own time per byte. How long does it take to transfer 1 KB, and how much CPU time is consumed?</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <div class="eq">1 KB = 1024 bytes</div>
+    <div class="eq">time = 1024 × 2 µs = 2048 µs = 2.048 ms</div>
+    <p>Because the CPU is in the polling loop for the whole transfer, it also consumes 2.048 ms of CPU time. No other program can run on that CPU during the transfer unless the loop is interrupted.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>2.048 ms, essentially all of it CPU time.</strong></p>
+  </div>
+  <p class="eq-note">Supplementary example written for this guide.</p>
+
+  <h3>7.4 Advantages, disadvantages and use</h3>
+
+  <table>
+    <tr><th>Advantages</th><th>Disadvantages</th></tr>
+    <tr><td>Very simple hardware and software.</td><td>The CPU busy-waits and cannot do useful work.</td></tr>
+    <tr><td>No interrupt controller or DMA controller needed.</td><td>Throughput is limited by the polling loop and the CPU’s instruction rate.</td></tr>
+    <tr><td>Easy to debug: the CPU is in full control at every step.</td><td>Wasteful for slow devices and unacceptable for high-speed block transfers.</td></tr>
+    <tr><td>Fine for a single dedicated device or a microcontroller with nothing else to do.</td><td>Response time depends on how often the loop checks the status.</td></tr>
+  </table>
+
+  <p><strong>Typical uses:</strong> reading a keypad or a set of switches, bit-banging a simple sensor, a boot loader polling a UART, or a small embedded system where simplicity matters more than throughput.</p>
+
+  <h3>7.5 Exam answer plan</h3>
+
+  <ol class="steps">
+    <li>Define programmed I/O and polling/busy-waiting.</li>
+    <li>Give the sequence: command → status → wait → transfer → repeat.</li>
+    <li>Explain why the CPU is wasted and give the time calculation.</li>
+    <li>List advantages, disadvantages and typical uses.</li>
+    <li>Contrast it in one sentence with interrupt-driven I/O and DMA.</li>
+  </ol>
+
+  <h2 id="interrupt">8 · Interrupt-driven I/O</h2>
+
+  <h3>8.1 The idea</h3>
+
+  <p>Interrupt-driven I/O removes the polling loop. The CPU starts the device and then goes away to execute other instructions. When the device is ready, the interface asserts an <strong>interrupt request</strong>. The CPU finishes the current instruction, saves enough state to resume later, and jumps to an <strong>interrupt service routine (ISR)</strong> that moves the data. When the ISR returns, the CPU continues the interrupted program as if nothing had happened.</p>
+
+  <p>The gain is obvious: the CPU spends time on the ISR only when there is data to move, not while the device is idle. The cost is the overhead of entering and leaving the ISR — saving registers, identifying the source, restoring state — which is significant if interrupts arrive very often.</p>
+
+  <h3>8.2 The interrupt sequence</h3>
+
+  <ol class="steps">
+    <li>The device becomes ready and the interface sets its interrupt-request line.</li>
+    <li>The CPU finishes the current instruction (interrupts are checked at instruction boundaries, not in the middle of one).</li>
+    <li>If interrupts are enabled and the new request has higher priority than the current mask level, the CPU acknowledges the request.</li>
+    <li>The CPU saves the program counter and status flags (and often some registers) on the stack.</li>
+    <li>The CPU obtains the ISR address. In a <strong>vectored</strong> system the interface supplies a vector number and the CPU looks up the address in a vector table; in a <strong>non-vectored</strong> system a fixed address is used.</li>
+    <li>The ISR identifies the device if necessary, reads or writes the data register, clears the interrupt flag and updates the count.</li>
+    <li>The ISR returns with a special instruction that restores the saved state.</li>
+    <li>The CPU resumes the interrupted program.</li>
+  </ol>
+
+  <h3>8.3 The vocabulary of interrupts</h3>
+
+  <table>
+    <tr><th>Term</th><th>Meaning</th></tr>
+    <tr><td><strong>Maskable interrupt</strong></td><td>Can be disabled by the CPU when it is in a critical section.</td></tr>
+    <tr><td><strong>Non-maskable interrupt (NMI)</strong></td><td>Cannot be disabled; reserved for catastrophic events such as power failure or a hardware fault.</td></tr>
+    <tr><td><strong>Vectored interrupt</strong></td><td>The device supplies an identifier that points to its ISR.</td></tr>
+    <tr><td><strong>Non-vectored interrupt</strong></td><td>All devices share one fixed ISR address; the ISR must poll to find the source.</td></tr>
+    <tr><td><strong>Priority</strong></td><td>Determines which request is served first when several arrive together.</td></tr>
+    <tr><td><strong>Nested interrupt</strong></td><td>A higher-priority interrupt is allowed to interrupt a lower-priority ISR.</td></tr>
+    <tr><td><strong>Interrupt latency</strong></td><td>Time from the request to the first instruction of the ISR.</td></tr>
+  </table>
+
+  <h3>8.4 Overhead and latency</h3>
+
+  <p>Interrupt overhead has two parts: the fixed cost of entering and leaving the ISR (save, vector, restore) and the work done inside the ISR. If a device needs service every <span class="kbd">T</span> seconds and the ISR takes <span class="kbd">S</span> seconds, the fraction of CPU time consumed is <span class="kbd">S ÷ T</span>.</p>
+
+  <div class="eq">CPU overhead fraction = ISR time ÷ interrupt period</div>
+
+  <div class="example">
+    <div class="example-title">Supplementary worked example — interrupt overhead</div>
+    <p>A device requests an interrupt every 20 µs. The ISR, including entry and exit, takes 4 µs. What fraction of the CPU is consumed by this device?</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <div class="eq">overhead = 4 µs ÷ 20 µs = 0.20 = 20%</div>
+    <p>The device alone consumes one fifth of the CPU. Two such devices would consume 40%, and the system would soon run out of time. This is why very high-rate devices use DMA rather than one interrupt per word.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>20% of CPU time.</strong></p>
+  </div>
+  <p class="eq-note">Supplementary example written for this guide.</p>
+
+  <h3>8.5 Advantages, disadvantages and use</h3>
+
+  <table>
+    <tr><th>Advantages</th><th>Disadvantages</th></tr>
+    <tr><td>The CPU does useful work while the device is idle.</td><td>Each interrupt has entry/exit overhead.</td></tr>
+    <tr><td>Responds quickly to an event, without waiting for a poll cycle.</td><td>Frequent interrupts can consume most of the CPU.</td></tr>
+    <tr><td>Handles unpredictable devices well: a key press or a packet can arrive at any time.</td><td>Needs an interrupt controller, priority logic and careful ISR design.</td></tr>
+    <tr><td>Supports priority and nesting for urgent events.</td><td>Shared data between ISR and main program needs protection (critical sections).</td></tr>
+  </table>
+
+  <p><strong>Typical uses:</strong> keyboards and mice, serial ports, network packets at moderate rates, timers, and any device that needs a timely response without a dedicated DMA engine.</p>
+
+  <h3>8.6 Exam answer plan</h3>
+
+  <ol class="steps">
+    <li>Define interrupt-driven I/O and contrast it with polling.</li>
+    <li>Give the sequence from device request to ISR return.</li>
+    <li>Explain vectored versus non-vectored, maskable versus NMI, and priority.</li>
+    <li>Give the overhead formula and one numerical.</li>
+    <li>List advantages, disadvantages and typical uses.</li>
+  </ol>
+
+  <h2 id="dma">9 · Direct Memory Access</h2>
+
+  <h3>9.1 The idea</h3>
+
+  <p>Interrupt-driven I/O still moves every word through the CPU. For a disk or a network card that produces megabytes per second, the interrupt rate would be enormous and the CPU would spend all its time copying. <strong>Direct Memory Access (DMA)</strong> removes the CPU from the data path. A <strong>DMA controller</strong> becomes a bus master, reads or writes memory directly, and moves a whole block between the device and memory. The CPU only programs the controller at the start and is interrupted once at the end.</p>
+
+  <p>This is the key sentence for an exam: <em>in DMA, the CPU initiates the transfer but does not execute the per-word transfer instructions.</em></p>
+
+  <h3>9.2 The DMA controller</h3>
+
+  <figure>
+    <svg viewBox="0 0 620 330" role="img" aria-labelledby="m5-dma-title m5-dma-desc" style="max-width:620px">
+      <title id="m5-dma-title">DMA controller connecting a device and main memory</title>
+      <desc id="m5-dma-desc">The CPU programs the DMA controller through the bus. The controller contains an address register, a count register, a control and status register, and control logic. It drives address, data and control lines to memory and data, status and control lines to the device, and uses bus request and bus grant to take over the bus.</desc>
+      <g font-family="Helvetica, Arial" font-size="12" fill="var(--ink)">
+        <rect x="240" y="12" width="140" height="46" fill="var(--surface-hi)" stroke="var(--ink)"/>
+        <text x="310" y="41" text-anchor="middle">CPU</text>
+
+        <line x1="310" y1="58" x2="310" y2="92" stroke="var(--muted)" marker-end="url(#m5-dma-arrow)"/>
+        <text x="300" y="76" font-size="10" fill="var(--muted)" text-anchor="end">program registers</text>
+        <line x1="360" y1="92" x2="360" y2="58" stroke="var(--muted)" marker-end="url(#m5-dma-arrow)"/>
+        <text x="368" y="76" font-size="10" fill="var(--muted)">BRQ / BG</text>
+
+        <rect x="205" y="92" width="210" height="160" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="310" y="112" text-anchor="middle" font-weight="700">DMA controller</text>
+        <rect x="220" y="122" width="180" height="24" fill="var(--bg)" stroke="var(--line)"/>
+        <text x="310" y="139" text-anchor="middle" font-size="11">address register</text>
+        <rect x="220" y="150" width="180" height="24" fill="var(--bg)" stroke="var(--line)"/>
+        <text x="310" y="167" text-anchor="middle" font-size="11">count register</text>
+        <rect x="220" y="178" width="180" height="24" fill="var(--bg)" stroke="var(--line)"/>
+        <text x="310" y="195" text-anchor="middle" font-size="11">control / status register</text>
+        <rect x="220" y="206" width="180" height="30" fill="var(--bg)" stroke="var(--line)"/>
+        <text x="310" y="226" text-anchor="middle" font-size="11">control logic</text>
+
+        <rect x="20" y="140" width="120" height="64" fill="var(--surface-hi)" stroke="var(--ink)"/>
+        <text x="80" y="166" text-anchor="middle">I/O device</text>
+        <text x="80" y="184" text-anchor="middle" font-size="10">(disk, NIC …)</text>
+
+        <rect x="470" y="140" width="130" height="64" fill="var(--surface-hi)" stroke="var(--ink)"/>
+        <text x="535" y="166" text-anchor="middle">Main memory</text>
+        <text x="535" y="184" text-anchor="middle" font-size="10">data buffer</text>
+
+        <line x1="140" y1="160" x2="205" y2="160" stroke="var(--muted)" marker-end="url(#m5-dma-arrow)"/>
+        <text x="172" y="152" text-anchor="middle" font-size="10" fill="var(--muted)">data</text>
+        <line x1="140" y1="184" x2="205" y2="184" stroke="var(--muted)" marker-end="url(#m5-dma-arrow)"/>
+        <text x="172" y="199" text-anchor="middle" font-size="10" fill="var(--muted)">status / control</text>
+
+        <line x1="415" y1="160" x2="470" y2="160" stroke="var(--muted)" marker-end="url(#m5-dma-arrow)"/>
+        <text x="442" y="152" text-anchor="middle" font-size="10" fill="var(--muted)">address</text>
+        <line x1="415" y1="184" x2="470" y2="184" stroke="var(--muted)" marker-end="url(#m5-dma-arrow)"/>
+        <text x="442" y="199" text-anchor="middle" font-size="10" fill="var(--muted)">data</text>
+
+        <text x="20" y="292" font-size="11" fill="var(--muted)">The CPU programs the start address, the word count and the direction.</text>
+        <text x="20" y="310" font-size="11" fill="var(--muted)">The controller then requests the bus and moves the block itself.</text>
+      </g>
+      <defs>
+        <marker id="m5-dma-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8" fill="var(--muted)"/>
+        </marker>
+      </defs>
+    </svg>
+    <figcaption>Figure 2. A DMA controller sits between the device and memory. It holds the address, count and control information, and uses bus request/grant to become the bus master.</figcaption>
+  </figure>
+
+  <p>The controller has four things to remember. The <strong>address register</strong> holds the next memory address. The <strong>count register</strong> holds how many words or bytes remain. The <strong>control/status register</strong> holds the direction, the transfer mode, interrupt enable and error flags. The <strong>control logic</strong> sequences the bus cycles and updates the address and count after each transfer.</p>
+
+  <h3>9.3 The sequence of a DMA transfer</h3>
+
+  <ol class="steps">
+    <li>The CPU programs the DMA controller: start address, word count, direction (device → memory or memory → device), mode and interrupt enable.</li>
+    <li>The CPU starts the device and continues with other work.</li>
+    <li>The device asserts a DMA request when it has data (or needs data).</li>
+    <li>The controller asserts the bus-request (BRQ) line to the CPU.</li>
+    <li>The CPU finishes its current bus cycle and asserts bus-grant (BG). The CPU’s address, data and control outputs go to high impedance so the controller can drive the bus.</li>
+    <li>The controller places the memory address on the address bus, transfers one word or a burst, and asserts the appropriate read/write and device strobes.</li>
+    <li>The controller increments the address and decrements the count. If the count is not zero, it repeats from step 3 or continues the burst.</li>
+    <li>When the count reaches zero, the controller releases the bus and raises an interrupt (or sets a done bit) to tell the CPU that the block is complete.</li>
+  </ol>
+
+  <h3>9.4 Transfer modes</h3>
+
+  <table>
+    <tr><th>Mode</th><th>How it uses the bus</th><th>Effect</th></tr>
+    <tr><td><strong>Burst (block) transfer</strong></td><td>The controller keeps the bus for the whole block.</td><td>Fastest DMA, but the CPU cannot use the bus until the block ends.</td></tr>
+    <tr><td><strong>Cycle stealing</strong></td><td>The controller takes one bus cycle at a time, between CPU cycles.</td><td>The CPU slows down slightly, but it keeps running. Most common for moderate-speed devices.</td></tr>
+    <tr><td><strong>Transparent DMA</strong></td><td>The controller uses only cycles when the CPU does not need the bus (for example during refresh).</td><td>No CPU slowdown, but the transfer takes longer and is harder to schedule.</td></tr>
+  </table>
+
+  <h3>9.5 The DMA numerical</h3>
+
+  <div class="example">
+    <div class="example-title">Teacher problem — DMA transfer time (question bank Q19)</div>
+    <p>A DMA controller transfers data at a rate of 4 MB/s. Calculate the time required to transfer 32 MB of data. Also explain how DMA reduces CPU overhead.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>Rate = 4 MB/s, size = 32 MB. Find the time and explain the CPU benefit.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <p><strong>Step 1 — Write the relation with units.</strong></p>
+    <div class="eq">time = amount of data ÷ transfer rate</div>
+    <p><strong>Step 2 — Substitute.</strong> The data and the rate are both in MB, so the unit cancels and the answer is in seconds.</p>
+    <div class="eq">T = 32 MB ÷ 4 MB/s = 8 s</div>
+    <p><strong>Step 3 — Check.</strong> In one second the controller moves 4 MB; in eight seconds it moves 8 × 4 = 32 MB. Correct.</p>
+    <p><strong>Why this reduces CPU overhead.</strong> Without DMA, the CPU would execute a load/store sequence for every word, and at 4 MB/s that is millions of instructions per second spent copying. With DMA, the CPU writes a few registers once, starts the device, and is interrupted once at the end. During the 8 seconds it can execute other programs. The CPU still shares the memory bus with the controller, so its memory accesses may be delayed by cycle stealing, but it is not spending instructions on the copy.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>T = 32 MB ÷ 4 MB/s = 8 seconds.</strong></p>
+  </div>
+
+  <h3>9.6 DMA and cache coherence</h3>
+
+  <p>DMA introduces a subtle problem. If the CPU has cached a memory block and the DMA controller writes new data directly to memory, the cached copy becomes stale. The CPU may then read the old value. Real systems handle this in one of three ways: mark DMA buffers as uncached (non-cacheable memory), invalidate the relevant cache lines after the DMA write, or use hardware that snoops DMA transfers and keeps the cache coherent. A short paragraph on this is often worth a mark in a DMA answer.</p>
+
+  <h3>9.7 Advantages, disadvantages and use</h3>
+
+  <table>
+    <tr><th>Advantages</th><th>Disadvantages</th></tr>
+    <tr><td>High throughput: the controller moves a block without per-word CPU instructions.</td><td>Extra hardware: a DMA controller and arbitration logic.</td></tr>
+    <tr><td>The CPU is free to do other work during the transfer.</td><td>The controller competes with the CPU for memory bus cycles.</td></tr>
+    <tr><td>Fewer interrupts: one per block instead of one per word.</td><td>Cache coherence must be managed.</td></tr>
+    <tr><td>Well suited to disks, SSDs, network cards, audio and video.</td><td>More complex to program and debug than polling.</td></tr>
+  </table>
+
+  <h3>9.8 Exam answer plan</h3>
+
+  <ol class="steps">
+    <li>Define DMA and state the key idea: the CPU initiates, the controller moves.</li>
+    <li>Draw the CPU, DMA controller, device and memory block diagram with BRQ/BG.</li>
+    <li>List the registers: address, count, control/status.</li>
+    <li>Give the sequence from programming to final interrupt.</li>
+    <li>Explain burst, cycle stealing and transparent modes.</li>
+    <li>Solve T = size ÷ rate with units and explain the CPU benefit.</li>
+    <li>Add one sentence on cache coherence.</li>
+  </ol>
+
+
+  <h2 id="compare">10 · Comparing the three techniques</h2>
+
+  <h3>10.1 The one-table answer</h3>
+
+  <p>Most Module 5 questions end with a comparison. The three techniques differ in exactly one fundamental way: <em>who moves each word</em>. Everything else — hardware cost, speed, CPU load, typical use — follows from that.</p>
+
+  <table>
+    <tr><th>Point of comparison</th><th>Programmed I/O</th><th>Interrupt-driven I/O</th><th>DMA</th></tr>
+    <tr><td><strong>Who moves the data</strong></td><td>The CPU, one word at a time</td><td>The CPU, one word at a time, inside the ISR</td><td>The DMA controller, directly between device and memory</td></tr>
+    <tr><td><strong>CPU involvement</strong></td><td>Continuous — the CPU busy-waits in a polling loop</td><td>Per word — the CPU stops, services, and resumes</td><td>Only at setup and at block completion</td></tr>
+    <tr><td><strong>How the CPU learns the device is ready</strong></td><td>It repeatedly reads the status register</td><td>The device raises an interrupt</td><td>The controller requests the bus; the CPU is interrupted once per block</td></tr>
+    <tr><td><strong>Extra hardware</strong></td><td>None beyond the interface registers</td><td>Interrupt controller, priority logic, vector table</td><td>DMA controller plus bus-arbitration logic</td></tr>
+    <tr><td><strong>Data-transfer speed</strong></td><td>Lowest — limited by the polling loop and instruction rate</td><td>Moderate — limited by interrupt overhead per word</td><td>Highest — the controller moves blocks at bus speed</td></tr>
+    <tr><td><strong>CPU time wasted</strong></td><td>Very high; the CPU can do nothing else during the wait</td><td>Moderate; overhead is paid per word, not while idle</td><td>Low; only setup and one final interrupt</td></tr>
+    <tr><td><strong>Best suited to</strong></td><td>Slow, simple devices: keypad, switches, a boot-time UART</td><td>Unpredictable, moderate-rate devices: keyboard, mouse, serial port, network packets</td><td>High-speed block devices: disk, SSD, network card, audio, video</td></tr>
+    <tr><td><strong>Main weakness</strong></td><td>Busy-waiting wastes the processor</td><td>Frequent interrupts can consume the whole CPU</td><td>Controller competes for the memory bus; cache coherence must be managed</td></tr>
+  </table>
+
+  <h3>10.2 How to choose, in plain words</h3>
+
+  <p>Ask three questions in order. <strong>How much data is there?</strong> A few bytes from a keypad does not justify a DMA controller; a 4 MB video frame does. <strong>How often does the device need attention?</strong> If it is idle most of the time, polling wastes the CPU and an interrupt is better. If it needs attention every few microseconds, even interrupts become too expensive, and DMA is the only sensible choice. <strong>What can the system afford?</strong> Polling needs almost no hardware, interrupts need a controller, DMA needs a controller and arbitration. In a tiny microcontroller, simplicity often wins; in a general-purpose computer, the memory bus is the scarce resource, so DMA wins for every high-rate device.</p>
+
+  <p>The three techniques are not mutually exclusive. A real system uses all of them: the keyboard is interrupt-driven, the disk uses DMA, and a temperature sensor on an I²C bus may be polled once a second. The exam answer should say this, because it shows that you understand the trade-off rather than memorising a ranking.</p>
+
+  <h3>10.3 A quantitative comparison on the same block</h3>
+
+  <p>Take a 4 MB block and a system where the CPU needs 1 µs to move one 4-byte word by programmed I/O, and where the DMA controller sustains 8 MB/s.</p>
+
+  <div class="eq">words = 4 MB ÷ 4 B = 1,048,576 words</div>
+  <div class="eq">programmed I/O time = 1,048,576 × 1 µs ≈ 1.05 s of pure CPU time</div>
+  <div class="eq">DMA time = 4 MB ÷ 8 MB/s = 0.5 s, with the CPU free during almost all of it</div>
+
+  <p>DMA is about twice as fast here, but the more important difference is that the 0.5 s is not CPU time. The CPU programs three registers and is interrupted once. With programmed I/O, the CPU is unavailable for the whole 1.05 s. That is the argument to write in an exam, not just the speed ratio.</p>
+
+  <p class="eq-note">Supplementary comparison written for this guide. The numbers are chosen to make the arithmetic clean, not taken from a datasheet.</p>
+
+  <h3>10.4 Exam answer plan</h3>
+
+  <ol class="steps">
+    <li>State the fundamental difference: who moves each word.</li>
+    <li>Draw the comparison table with CPU involvement, hardware, speed and applications.</li>
+    <li>Explain each row in one sentence — do not just leave the table.</li>
+    <li>Give one numerical or one realistic example to show the scale of the difference.</li>
+    <li>Finish with the trade-off: simplicity versus CPU time versus throughput.</li>
+  </ol>
+
+  <h2 id="qbank">11 · Question bank coverage: Q11–Q20 and Q37–Q39</h2>
+
+  <div class="theory">
+    <span class="source">Source and status</span>
+    <p>The questions below are reproduced from the teacher-supplied <em>question bank.docx</em> (Module V, Q11–Q20) and <em>Computer Organization 40 questions.docx</em> (Module 5, Q37–Q39). The wording is preserved. These are <strong>question-bank documents</strong>, not verified University of Mumbai papers. Each model answer is a condensed exam version; the full treatment is in the section named after it.</p>
+  </div>
+
+  <h3>11.1 Teacher question bank — Q11 to Q20</h3>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Q11</div>
+    <div class="exam-source">Teacher question bank, Module V — not a University paper</div>
+    <p>Explain the different types of buses used in a computer system. Discuss data bus, address bus and control bus.</p>
+  </div>
+  <p><strong>Model answer.</strong> A bus is a shared set of lines with a protocol that lets several units communicate; a unit that starts a transfer is a master and the responder is a slave. The system bus has three functional groups. The <strong>data bus</strong> is bidirectional and carries the actual word; its width (8, 16, 32, 64 bits) sets how much moves per transfer. The <strong>address bus</strong> is unidirectional from master to slave and selects the location; n lines give 2<sup>n</sup> addresses. The <strong>control bus</strong> is a collection of single-purpose lines — read/write, memory or I/O select, interrupt request/acknowledge, bus request/grant, clock and reset — that state the operation and synchronise it. Buses may also be classified as synchronous (clocked) or asynchronous (handshaked), and as a single shared bus or a hierarchy of processor, memory and I/O buses. Section 2 gives the diagram, the bandwidth formula and a numerical.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Q12</div>
+    <div class="exam-source">Teacher question bank, Module V — not a University paper</div>
+    <p>What is bus arbitration? Explain centralized and distributed bus arbitration techniques.</p>
+  </div>
+  <p><strong>Model answer.</strong> Bus arbitration decides which of several requesting masters gets the shared bus, so that two masters never drive it at once. In <strong>centralized arbitration</strong> one arbiter receives the requests and issues the grant. It can use <em>daisy chaining</em> (one request line, and a grant that passes through devices in order, so the nearest device has the highest priority), <em>polling</em> (the arbiter asks devices in turn and the first requester wins), or <em>independent requests</em> (a separate request and grant per master, giving the fastest decision at the highest pin cost). In <strong>distributed arbitration</strong> there is no central arbiter: masters either drive priority codes onto shared lines and the highest code wins by wired-OR/AND self-selection, or they transmit and detect collisions, then back off. Centralized schemes are simple and predictable but the arbiter is a single point of failure; distributed schemes scale better but need more complex logic. Section 3 has the comparison table.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Q13</div>
+    <div class="exam-source">Teacher question bank, Module V — not a University paper</div>
+    <p>Explain the following bus standards and compare their important characteristics: PCI, USB, SATA.</p>
+  </div>
+  <p><strong>Model answer.</strong> A bus standard fixes connectors, signals, timing and protocol so devices from different makers interoperate. <strong>PCI</strong> is a parallel, synchronous, shared expansion bus: 32 or 64 bits, 33 or 66 MHz, with multiplexed address/data and plug-and-play configuration; peak rates are about 133 MB/s (32-bit, 33 MHz) and 533 MB/s (64-bit, 66 MHz), and it has been replaced by the serial, switched PCI Express. <strong>USB</strong> is a serial, host-controlled, tiered-star bus for external peripherals: hot-pluggable, supplies power, supports up to 127 devices per controller, and defines control, bulk, interrupt and isochronous transfers; rates run from 1.5 MB/s (USB 1.1) to several GB/s (USB4). <strong>SATA</strong> is a serial, point-to-point storage link: one device per port, 8b/10b encoding, 150/300/600 MB/s for the three generations, with native command queuing. The comparison is parallel-shared (PCI) versus serial-external (USB) versus serial-storage (SATA); Section 4 gives the full table.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Q14</div>
+    <div class="exam-source">Teacher question bank, Module V — not a University paper</div>
+    <p>What is an I/O interface? Explain its functions and need in a computer system with a suitable block diagram.</p>
+  </div>
+  <p><strong>Model answer.</strong> An I/O interface (controller or adapter) sits between the system bus and a device and translates between them. It is needed because devices differ in speed, signal format (serial or parallel), voltage and protocol, and the CPU must not have to know those details. On the bus side it behaves as a slave with addressable registers; on the device side it drives whatever the device needs. Its functions are address decoding, data buffering, format conversion, control and status reporting, timing and handshaking, error detection, interrupt generation, DMA handshaking and electrical isolation. The CPU sees three registers: <strong>data</strong> (move a word), <strong>status</strong> (ready, busy, error) and <strong>control</strong> (start, mode, interrupt enable, reset). A transfer is a handshake: the CPU writes a command, the interface asserts the device strobe, the device acknowledges, and the interface sets ready or raises an interrupt. Section 5 has the block diagram and the step-by-step read and write.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Q15</div>
+    <div class="exam-source">Teacher question bank, Module V — not a University paper</div>
+    <p>Differentiate between an I/O module, I/O channel and I/O processor. Explain their roles in I/O organization.</p>
+  </div>
+  <p><strong>Model answer.</strong> An <strong>I/O module</strong> is the hardware that connects one or a few devices to the bus; it contains the interface registers and the device-specific control, and the CPU still moves each word or services each interrupt. An <strong>I/O channel</strong> is a special-purpose processor between the CPU and several modules. The CPU builds a channel program of channel command words (CCWs) in memory and the channel executes it, so the CPU is involved once per program rather than once per word. A <strong>selector</strong> channel runs one high-speed device at a time; a <strong>multiplexor</strong> channel interleaves bytes from several slow devices; a <strong>block multiplexor</strong> interleaves blocks. An <strong>I/O processor</strong> is a general-purpose processor dedicated to I/O, with its own instruction set and memory, able to run arbitrary programs and manage many devices — a front-end processor or an SSD controller. The progression is: module connects, channel executes a channel program, processor runs a whole I/O job. Section 6 has the comparison table.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Q16</div>
+    <div class="exam-source">Teacher question bank, Module V — not a University paper</div>
+    <p>Explain the following data transfer techniques: a) Programmed I/O b) Interrupt-driven I/O c) Direct Memory Access (DMA).</p>
+  </div>
+  <p><strong>Model answer.</strong> <strong>Programmed I/O</strong>: the CPU issues the command and then polls the status register in a loop until the device is ready, moves one word, and repeats. It needs minimal hardware but busy-waits, so the CPU is unavailable for the whole transfer. <strong>Interrupt-driven I/O</strong>: the CPU starts the device and continues other work; when the device is ready it raises an interrupt, the CPU saves its state, jumps to the interrupt service routine, moves the word, and returns. It removes the polling waste but pays entry/exit overhead per word. <strong>DMA</strong>: the CPU programs a DMA controller with the start address, word count and direction, then the controller becomes bus master and moves the whole block directly between device and memory, interrupting the CPU once at the end. It gives the highest throughput and the lowest CPU load, at the cost of extra hardware and bus contention. Sections 7, 8 and 9 treat each in full.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Q17</div>
+    <div class="exam-source">Teacher question bank, Module V — not a University paper</div>
+    <p>Compare Programmed I/O, Interrupt-driven I/O and DMA with respect to CPU involvement, hardware requirement, data-transfer speed and applications.</p>
+  </div>
+  <p><strong>Model answer.</strong> <strong>CPU involvement:</strong> continuous busy-waiting (programmed), per word inside an ISR (interrupt), setup and one completion interrupt (DMA). <strong>Hardware:</strong> only interface registers (programmed), plus an interrupt controller and priority logic (interrupt), plus a DMA controller and arbitration logic (DMA). <strong>Speed:</strong> lowest, limited by the polling loop; moderate, limited by interrupt overhead; highest, limited by bus bandwidth. <strong>Applications:</strong> keypad, switches and simple sensors; keyboard, mouse, serial ports and moderate-rate network traffic; disks, SSDs, network cards, audio and video. The underlying reason is who moves each word — the CPU in the first two, the controller in DMA. Section 10 has the full table and a worked comparison on a 4 MB block.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Q18</div>
+    <div class="exam-source">Teacher question bank, Module V — not a University paper</div>
+    <p>Draw and explain the DMA controller architecture. Describe the sequence of operations involved in a DMA transfer.</p>
+  </div>
+  <p><strong>Model answer.</strong> The controller contains an <strong>address register</strong> (next memory address), a <strong>count register</strong> (words remaining), a <strong>control/status register</strong> (direction, mode, interrupt enable, error flags) and <strong>control logic</strong> that sequences the bus cycles. It connects to the CPU through the bus for programming and through bus-request/bus-grant lines for ownership, to memory through address, data and control lines, and to the device through data, status and control lines. <strong>Sequence:</strong> the CPU programs address, count, direction and mode; starts the device; the device asserts a DMA request; the controller asserts bus-request; the CPU finishes its current cycle, asserts bus-grant and floats its bus outputs; the controller drives the address and moves a word or burst; it increments the address and decrements the count; it repeats until the count is zero; then it releases the bus and interrupts the CPU. Section 9.2 has the diagram and Section 9.3 the numbered sequence.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Q19</div>
+    <div class="exam-source">Teacher question bank, Module V — not a University paper</div>
+    <p>A DMA controller transfers data at a rate of 4 MB/s. Calculate the time required to transfer 32 MB of data. Also explain how DMA reduces CPU overhead.</p>
+  </div>
+  <p><strong>Model answer.</strong> Time = amount of data ÷ transfer rate. Both quantities are in MB, so the unit cancels:</p>
+  <div class="eq">T = 32 MB ÷ 4 MB/s = 8 s</div>
+  <p><strong>Check:</strong> at 4 MB per second, eight seconds move 8 × 4 = 32 MB. <strong>CPU benefit:</strong> without DMA the CPU would execute a load/store sequence for every word, so at 4 MB/s it would spend millions of instructions per second copying. With DMA it writes a few registers once, starts the device, and is interrupted once at the end; during the 8 s it executes other programs. The controller still competes for memory cycles (cycle stealing), but the CPU does not spend instructions on the copy. Section 9.5 repeats the working with the full explanation.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Q20</div>
+    <div class="exam-source">Teacher question bank, Module V — not a University paper</div>
+    <p>Explain I/O channels and I/O processors. How do they improve the performance of a computer system?</p>
+  </div>
+  <p><strong>Model answer.</strong> An <strong>I/O channel</strong> is a special-purpose processor that executes a channel program of CCWs stored in memory, driving several I/O modules without per-word CPU help. A selector channel serves one high-speed device at a time; a multiplexor channel interleaves bytes from several slow devices; a block multiplexor interleaves blocks from high-speed devices. An <strong>I/O processor</strong> is a general-purpose processor dedicated to I/O, with its own instruction set and local memory, able to run arbitrary programs and manage many devices — for example a front-end processor or an SSD controller. Both improve performance by moving I/O work off the main CPU: fewer interrupts, fewer per-word instructions, and overlap between computation and I/O. The channel or processor can also schedule transfers to use the memory bus efficiently. The cost is extra hardware and more complex software. Section 6.4 explains the performance argument.</p>
+
+  <h3>11.2 Forty-question document — Q37 to Q39</h3>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Q37</div>
+    <div class="exam-source">Computer Organization 40 questions, Module 5 — not a University paper</div>
+    <p>Explain different types of buses used in computer systems. Describe bus arbitration and explain different bus arbitration techniques.</p>
+  </div>
+  <p><strong>Model answer.</strong> This combines Q11 and Q12, so write it in two halves. <em>Buses:</em> define a bus and master/slave; describe the data bus (bidirectional, width sets bits per transfer), the address bus (unidirectional, n lines → 2<sup>n</sup> locations) and the control bus (read/write, memory or I/O select, interrupt, bus request/grant, clock, reset); mention synchronous versus asynchronous and single versus multiple buses. <em>Arbitration:</em> explain that only one master may drive the bus, then describe centralized arbitration (daisy chaining, polling, independent requests) and distributed arbitration (self-selection by priority code, collision detection with back-off). Compare them on wiring, priority, speed, fault tolerance and scalability. Sections 2 and 3 together answer this question; a labelled CPU–memory–I/O diagram plus a simple REQ/GRANT chain earns the diagram marks.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Q38</div>
+    <div class="exam-source">Computer Organization 40 questions, Module 5 — not a University paper</div>
+    <p>Explain the need and functions of an I/O module. Differentiate between: I/O module, I/O channel, I/O processor.</p>
+  </div>
+  <p><strong>Model answer.</strong> <em>Need:</em> peripherals differ in speed, data format, voltage and protocol, and the CPU cannot connect to each directly or spend its time on device-level signalling. <em>Functions of a module:</em> address decoding, buffering, format conversion, control and status registers, timing and handshaking, error detection, interrupt generation, DMA support and electrical isolation. <em>Difference:</em> a module connects one or a few devices and leaves per-word work with the CPU; a channel is a special-purpose processor that executes a channel program of CCWs for several modules, so the CPU is involved once per program; an I/O processor is a general-purpose processor dedicated to I/O that runs arbitrary programs and can manage a whole I/O subsystem. In one line: module connects, channel executes a channel program, processor runs the I/O job. Sections 5 and 6 cover both halves.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Q39</div>
+    <div class="exam-source">Computer Organization 40 questions, Module 5 — not a University paper</div>
+    <p>Explain and compare the following I/O data-transfer techniques: Programmed I/O, Interrupt-driven I/O, Direct Memory Access (DMA). Draw suitable diagrams.</p>
+  </div>
+  <p><strong>Model answer.</strong> Use the same three-part structure as Q16 and finish with the comparison table from Q17. <em>Programmed I/O:</em> CPU polls status, moves each word, busy-waits. <em>Interrupt-driven:</em> device interrupts, CPU saves state, runs the ISR, moves the word, returns. <em>DMA:</em> CPU programs the controller, the controller becomes bus master and moves the block, one interrupt at the end. For diagrams, draw three simple flows: CPU → status loop → data register; device → interrupt line → CPU → ISR → data register; and CPU → DMA controller → memory/device with BRQ/BG. Then compare on who moves the data, CPU involvement, hardware, speed and applications. The examiner is looking for the phrase “the CPU initiates but does not execute the per-word transfer” in the DMA part. Sections 7–10 supply everything.</p>
+
+  <h3>11.3 Assignment 5 coverage</h3>
+
+  <p>The teacher’s <em>Assignment 5.docx</em> lists six topic groups. All six are covered, and none of them contains a numerical, so the assignment is a writing exercise.</p>
+
+  <table>
+    <tr><th>Assignment 5 topic</th><th>Where it is covered</th></tr>
+    <tr><td>Types of computer buses: data, address, control</td><td>Section 2.2, with the bus diagram and the width/bandwidth formulas</td></tr>
+    <tr><td>Bus arbitration; compare centralized and distributed</td><td>Section 3, with daisy chain, polling, independent requests, self-selection and collision detection</td></tr>
+    <tr><td>Bus standards, characteristics and applications</td><td>Section 4, with the PCI/USB/SATA comparison table and nominal-rate calculations</td></tr>
+    <tr><td>I/O interface: functions and need</td><td>Section 5, with the register model and the input/output handshakes</td></tr>
+    <tr><td>I/O module vs I/O channel vs I/O processor</td><td>Section 6, with the three-way comparison table</td></tr>
+    <tr><td>Programmed I/O, interrupt-driven I/O, DMA</td><td>Sections 7, 8 and 9, plus the comparison in Section 10</td></tr>
+  </table>
+
+  <h3>11.4 MUSA question bank (student association)</h3>
+
+  <div class="theory">
+    <span class="source">Source and status</span>
+    <p>These questions are reproduced from the <strong>MUSA (Mumbai University Students Association) Question Bank of Computer Organization and Architecture, Winter 2026</strong> and the <strong>MUSA Practice Paper Set-1, Winter 2025</strong>. MUSA is a student association. Its material is <strong>not</strong> a University of Mumbai paper, and its wording is not evidence that a question will appear in your exam. The wording is preserved exactly, including the original “interrupt-driver” typo, because you may meet the same phrasing in a practice paper.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">MUSA QB Q5</div>
+    <div class="exam-source">MUSA question bank (student association) — not a University paper</div>
+    <p>Explain and compare programmed I/O, interrupt-driver I/O and DMA.</p>
+  </div>
+  <p><strong>Answer.</strong> Programmed I/O is the CPU polling the status register and moving each word itself; it needs almost no hardware but the CPU busy-waits for the whole transfer. Interrupt-driven I/O lets the CPU work until the device raises an interrupt, then the ISR moves the word; it removes the polling waste but pays entry and exit overhead per word. DMA hands the block to a controller that becomes bus master and moves data directly between device and memory; the CPU programs it once and is interrupted at the end. Compare them on who moves the data, CPU involvement, extra hardware, speed and applications, and finish with the trade-off: simplicity versus CPU time versus throughput. The full table is in Section 10 and the individual treatments in Sections 7–9.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">MUSA QB Q7</div>
+    <div class="exam-source">MUSA question bank (student association) — not a University paper</div>
+    <p>What is bus arbitration? Describe various Bus arbitration methods.</p>
+  </div>
+  <p><strong>Answer.</strong> Arbitration decides which master gets a shared bus. Centralized methods use one arbiter: daisy chaining passes a grant through devices so priority follows physical position; polling asks devices in turn; independent requests give each master its own request and grant lines and are the fastest but need the most pins. Distributed methods have no arbiter: masters drive priority codes onto shared lines and the highest wins by self-selection, or they transmit and detect collisions and back off, as Ethernet does. Compare on wiring, priority, speed, fault tolerance and scalability. Section 3 has the mechanisms and the comparison table.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">MUSA QB Q19</div>
+    <div class="exam-source">MUSA question bank (student association) — not a University paper</div>
+    <p>Explain buses in I/O organization and explain different types of Buses.</p>
+  </div>
+  <p><strong>Answer.</strong> In I/O organization the bus is the shared path between the CPU, memory and I/O modules. The data bus carries the word and is bidirectional; its width sets bits per transfer. The address bus selects the target and is unidirectional; n lines give 2<sup>n</sup> locations. The control bus carries read/write, memory or I/O select, interrupt request and acknowledge, bus request and grant, clock and reset. Buses can also be classified as synchronous or asynchronous, and as a single shared bus or a hierarchy of processor, memory and I/O buses joined by bridges. Section 2 has the diagram, the bandwidth formulas and a worked numerical.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">MUSA QB Q22</div>
+    <div class="exam-source">MUSA question bank (student association) — not a University paper</div>
+    <p>Explain the concept of an I/O Interface, I/O modules and I/O channels.</p>
+  </div>
+  <p><strong>Answer.</strong> An I/O interface is the circuit between the bus and a device; it decodes addresses, buffers data, converts formats, provides control and status registers, handles timing and handshaking, detects errors and can raise interrupts or request DMA. An I/O module is the package that contains one or more such interfaces plus device-specific control, connecting one or a few devices to the bus. An I/O channel is a more intelligent unit: a special-purpose processor that executes a channel program of CCWs for several modules, so the CPU is involved once per program instead of once per word. The progression is interface → module → channel, with the I/O processor as the most general form. Sections 5 and 6 cover all three.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">MUSA Practice Paper Set-1, Q3(b)</div>
+    <div class="exam-source">MUSA practice paper (student association) — not a University paper</div>
+    <p>What is bus arbitration? Describe various Bus arbitration methods.</p>
+  </div>
+  <p><strong>Answer.</strong> This is the same question as MUSA QB Q7. Write the definition, the two families, at least two centralized methods with their priority behaviour, one distributed method, and a short comparison. Section 3 is the reference answer.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">MUSA Practice Paper Set-1, Q5(b)</div>
+    <div class="exam-source">MUSA practice paper (student association) — not a University paper</div>
+    <p>Explain the concept of DMA in detail with diagram. <em>OR</em> Explain in detail Programmed I/O and Interrupt driven I/O of data transfer techniques.</p>
+  </div>
+  <p><strong>Answer.</strong> For the DMA option: define DMA, draw CPU–controller–device–memory with BRQ/BG, list the address, count and control/status registers, give the eight-step sequence, explain burst, cycle stealing and transparent modes, and add one sentence on cache coherence. For the other option: explain the polling loop and its waste for programmed I/O, then the interrupt sequence, vectored versus non-vectored interrupts and the overhead formula for interrupt-driven I/O, and compare the two. Sections 7, 8 and 9 have the full answers and diagrams.</p>
+
+  <h3>11.5 Which question is most likely?</h3>
+
+  <p>The DMA numerical (Q19) is the only numerical in the Module V question bank, and it is short enough to appear as a 3–5 mark part. The comparison of the three techniques (Q16, Q17, Q39) is the most repeated written question across all three documents, so it is the safest large answer to prepare. Bus arbitration appears in the teacher bank, the 40-question document, the MUSA bank and the MUSA practice paper — four independent sources — which makes it the most likely single written topic after the comparison. Prepare the table in Section 10 and the arbitration comparison in Section 3 until you can reproduce them from memory.</p>
+
+
+  <h2 id="practice">12 · Independent practice</h2>
+
+  <p>These questions are <strong>written for this guide</strong>. They are not teacher questions and not University questions. They are ordered by difficulty and cover every calculation that Module 5 can reasonably ask. Attempt them with the book closed, then mark yourself from the separate answer key in Section 13. Give units in every final answer, and state any assumption you make about cycles per transfer or encoding overhead.</p>
+
+  <div class="practice">
+    <h3>Practice Questions</h3>
+
+    <h4 id="practice-basic" data-rail-subsection data-rail-label="Basic">A · Basic (one definition or one formula)</h4>
+    <ol>
+      <li>A bus has 20 address lines and 16 data lines. Find the address space and the number of bytes moved per transfer.</li>
+      <li>A 64-bit data bus runs at 400 MHz and completes one transfer per clock cycle. Find the nominal bandwidth in GB/s.</li>
+      <li>A DMA controller transfers data at 8 MB/s. How long does it take to transfer 64 MB?</li>
+      <li>A device requests an interrupt every 50 µs. The interrupt service routine, including entry and exit, takes 5 µs. What fraction of the CPU does this device consume?</li>
+      <li>How many 8-bit words are there in 4 KB?</li>
+      <li>A bus has 32 data lines and runs at 100 MHz, but each transfer needs two clock cycles (an address phase and a data phase). Find the sustained bandwidth.</li>
+    </ol>
+
+    <h4 id="practice-intermediate" data-rail-subsection data-rail-label="Intermediate">B · Intermediate (two or three steps, with unit conversion)</h4>
+    <ol start="7">
+      <li>A 32-bit PCI bus runs at 33 MHz and needs two cycles per transfer. Find its sustained bandwidth in MB/s.</li>
+      <li>A SATA III link signals at 6 Gb/s and uses 8b/10b encoding. Find the payload rate in MB/s.</li>
+      <li>A USB 2.0 link signals at 480 Mb/s. Protocol overhead consumes 10% of the payload. Find the effective rate in MB/s.</li>
+      <li>A DMA controller moves 1 MB in 0.25 s. Find its transfer rate in MB/s.</li>
+      <li>A device becomes ready every 4 µs. Under programmed I/O the CPU needs 1 µs per byte to poll the status register and move the byte. Find the wall-clock time, the CPU time and the CPU fraction for a 1 KB transfer.</li>
+      <li>Under interrupt-driven I/O, a device interrupts every 10 µs and the ISR takes 2 µs. Find the CPU overhead fraction. Would this device be better served by DMA? Explain in one sentence.</li>
+    </ol>
+
+    <h4 id="practice-advanced" data-rail-subsection data-rail-label="Advanced">C · Advanced (comparison, multi-step, or a written justification)</h4>
+    <ol start="13">
+      <li>A 4 MB block must be transferred. Programmed I/O needs 1 µs of CPU time per 4-byte word. A DMA controller sustains 8 MB/s. Find both transfer times, the ratio, and state the more important difference between them.</li>
+      <li>A disk generates one interrupt for every 512-byte block. With DMA, the controller interrupts once per 64 KB block. By what factor does the number of interrupts fall?</li>
+      <li>Explain why daisy-chain arbitration gives the highest priority to the device nearest the arbiter. Your answer should mention what happens to the grant signal at each device. (Written answer, about 4 marks.)</li>
+    </ol>
+  </div>
+
+  <h2 id="answer-key">13 · Answer key</h2>
+
+  <p>Mark your work against the working, not only the final number. A correct final answer with a wrong method will not earn full marks in the exam.</p>
+
+  <div class="answer-key">
+    <h3>Answers</h3>
+
+    <h4>A · Basic</h4>
+    <ol>
+      <li><strong>Address space 1 MB; 2 bytes per transfer.</strong><br>
+      2<sup>20</sup> = 1,048,576 locations = 1 MB. Data lines ÷ 8 = 16 ÷ 8 = 2 bytes. Check: 20 address lines can name 1,048,576 locations, and each transfer carries 16 bits.</li>
+
+      <li><strong>3.2 GB/s.</strong><br>
+      64 bits ÷ 8 = 8 bytes per transfer. 8 B × 400 × 10<sup>6</sup> transfers/s = 3.2 × 10<sup>9</sup> B/s = 3.2 GB/s. This is the peak; real transfers lose cycles to arbitration and wait states.</li>
+
+      <li><strong>8 s.</strong><br>
+      T = 64 MB ÷ 8 MB/s = 8 s. Check: 8 s × 8 MB/s = 64 MB.</li>
+
+      <li><strong>10%.</strong><br>
+      overhead = 5 µs ÷ 50 µs = 0.10 = 10%. The other 90% is available to the main program, minus the time the CPU takes to enter and leave the ISR (already included in the 5 µs).</li>
+
+      <li><strong>4096 words.</strong><br>
+      4 KB = 4 × 1024 = 4096 bytes. Each word is 8 bits = 1 byte, so 4096 words.</li>
+
+      <li><strong>200 MB/s.</strong><br>
+      32 bits ÷ 8 = 4 B per transfer. Two cycles per transfer ⇒ 100 MHz ÷ 2 = 50 × 10<sup>6</sup> transfers/s. Bandwidth = 4 × 50 × 10<sup>6</sup> = 200 × 10<sup>6</sup> B/s = 200 MB/s. If you used one cycle per transfer you would get 400 MB/s; the two-cycle assumption halves it.</li>
+    </ol>
+
+    <h4>B · Intermediate</h4>
+    <ol start="7">
+      <li><strong>66.66 MB/s.</strong><br>
+      32 bits ÷ 8 = 4 B. Two cycles per transfer ⇒ 33.33 MHz ÷ 2 = 16.665 × 10<sup>6</sup> transfers/s. Bandwidth = 4 × 16.665 × 10<sup>6</sup> ≈ 66.66 × 10<sup>6</sup> B/s. The often-quoted 133 MB/s is the one-cycle peak; the sustained value is half that.</li>
+
+      <li><strong>600 MB/s.</strong><br>
+      8b/10b sends 8 payload bits for every 10 line bits, so payload = 6 Gb/s × (8/10) = 4.8 Gb/s. Divide by 8: 4.8 ÷ 8 = 0.6 GB/s = 600 MB/s. Forgetting the 20% encoding loss gives 750 MB/s, which is wrong.</li>
+
+      <li><strong>54 MB/s.</strong><br>
+      480 Mb/s ÷ 8 = 60 MB/s raw. With 10% overhead, 60 × 0.9 = 54 MB/s. USB also loses bandwidth to packet headers and polling, so real throughput is lower still.</li>
+
+      <li><strong>4 MB/s.</strong><br>
+      rate = amount ÷ time = 1 MB ÷ 0.25 s = 4 MB/s. Check: 0.25 s × 4 MB/s = 1 MB.</li>
+
+      <li><strong>Wall time 4.096 ms; CPU time 1.024 ms; CPU fraction 25%.</strong><br>
+      1 KB = 1024 bytes. The device supplies one byte every 4 µs, so the transfer cannot finish faster than 1024 × 4 µs = 4096 µs = 4.096 ms. The CPU spends 1 µs per byte, so its own time is 1024 × 1 µs = 1024 µs = 1.024 ms. Fraction = 1.024 ÷ 4.096 = 0.25 = 25%. The other 75% is spent waiting for the device inside the polling loop — it is not available to other programs.</li>
+
+      <li><strong>20%; yes, DMA would be better if the device moves blocks.</strong><br>
+      overhead = 2 µs ÷ 10 µs = 0.20 = 20%. One device already takes a fifth of the CPU, and several such devices would saturate it. DMA moves the block with one interrupt instead of one per word, so the CPU load falls sharply. DMA is worth its hardware cost whenever the device transfers more than a few bytes per interrupt.</li>
+    </ol>
+
+    <h4>C · Advanced</h4>
+    <ol start="13">
+      <li><strong>Programmed ≈ 1.05 s; DMA = 0.5 s; ratio ≈ 2.1; the important difference is that the programmed time is CPU time.</strong><br>
+      Words = 4 MB ÷ 4 B = 1,048,576. Programmed time = 1,048,576 × 1 µs = 1.048576 s ≈ 1.05 s. DMA time = 4 MB ÷ 8 MB/s = 0.5 s. Ratio = 1.048576 ÷ 0.5 ≈ 2.1. DMA is about twice as fast, but the decisive point is that during the 0.5 s the CPU is free, whereas during the 1.05 s it is executing the copy loop and cannot run anything else.</li>
+
+      <li><strong>The interrupt count falls by a factor of 128.</strong><br>
+      64 KB ÷ 512 B = 65,536 ÷ 512 = 128. One interrupt now covers 128 blocks, so the rate is 1/128 of the old rate. This is the main reason DMA exists: it reduces interrupt overhead, not just data-copy instructions.</li>
+
+      <li><strong>Model written answer.</strong> In a daisy chain every master shares one bus-request line, but the grant line is wired in series: the arbiter’s grant output goes to device 1, device 1’s grant output goes to device 2, and so on. When the arbiter grants the bus, the signal arrives at device 1 first. If device 1 is requesting, it takes the bus and does <em>not</em> pass the grant on, so devices 2, 3 … never see it. If device 1 is not requesting, it forwards the grant to device 2, and the same test repeats. The first requesting device in the physical order therefore wins, which makes priority a function of position rather than of software. The cost is propagation delay: a device far down the chain waits while the grant passes through every earlier device, and a faulty device that fails to forward the grant blocks everyone after it.</li>
+    </ol>
+  </div>
+
+  <h2 id="mistakes">14 · Common mistakes</h2>
+
+  <div class="common-mistakes">
+    <h3>Errors that cost marks, and the fix</h3>
+    <table>
+      <tr><th>Mistake</th><th>Why it is wrong</th><th>Correct approach</th></tr>
+      <tr><td>Saying the address bus is bidirectional</td><td>The master always names the target; slaves only decode.</td><td>Address bus: unidirectional, master → slaves. Data bus: bidirectional.</td></tr>
+      <tr><td>Confusing bus width with bus bandwidth</td><td>Width is bits per transfer; bandwidth is bytes per second.</td><td>Bandwidth = (data lines ÷ 8) × transfers per second.</td></tr>
+      <tr><td>Ignoring cycles per transfer</td><td>A real bus may need an address phase and a data phase.</td><td>Divide the clock by the number of cycles per transfer, and say that you are doing so.</td></tr>
+      <tr><td>Treating Mb/s and MB/s as the same</td><td>One is bits, the other is bytes; the factor is 8.</td><td>Divide Mb/s by 8 to get MB/s, then apply encoding or protocol overhead.</td></tr>
+      <tr><td>Forgetting 8b/10b encoding for SATA</td><td>Only 8 of every 10 line bits are payload.</td><td>Multiply the signalling rate by 0.8 before dividing by 8.</td></tr>
+      <tr><td>Saying DMA means the CPU is not involved at all</td><td>The CPU programs the controller and receives the completion interrupt.</td><td>“The CPU initiates the transfer but does not execute the per-word transfer instructions.”</td></tr>
+      <tr><td>Saying DMA removes all interrupts</td><td>DMA reduces interrupts from one per word to one per block.</td><td>One completion interrupt per block, plus error interrupts.</td></tr>
+      <tr><td>Confusing cycle stealing with burst mode</td><td>Cycle stealing takes one cycle at a time; burst keeps the bus for the block.</td><td>Cycle stealing slows the CPU slightly; burst locks the CPU out for the block duration.</td></tr>
+      <tr><td>Saying daisy-chain priority is programmable</td><td>It is fixed by physical position.</td><td>Polling order or independent-request priority logic can be programmable; daisy chain cannot.</td></tr>
+      <tr><td>Calling polling “interrupt-driven”</td><td>Polling is the CPU asking; interrupts are the device telling.</td><td>Programmed I/O polls; interrupt-driven I/O waits for a request.</td></tr>
+      <tr><td>Saying USB is peer-to-peer</td><td>USB is strictly host-controlled; devices never start transfers.</td><td>The host controller polls devices; the topology is a tiered star.</td></tr>
+      <tr><td>Saying PCIe is just a faster PCI</td><td>PCI is a shared parallel bus; PCIe is a switched serial fabric.</td><td>Describe PCIe as point-to-point, packet-based and lane-scalable.</td></tr>
+      <tr><td>Mixing up module, channel and processor</td><td>They differ in programmability and how much work they take from the CPU.</td><td>Module connects; channel executes a channel program; processor runs an I/O job.</td></tr>
+      <tr><td>Confusing vectored and non-vectored interrupts</td><td>In a vectored system the device supplies the ISR identifier.</td><td>Vectored: device supplies a vector. Non-vectored: one fixed address, and the ISR polls for the source.</td></tr>
+      <tr><td>Writing a DMA time with no unit</td><td>“8” could be seconds, milliseconds or megabytes.</td><td>Box the answer with its unit: 8 s.</td></tr>
+      <tr><td>Using 1 KB = 1000 bytes in these calculations</td><td>Memory and block sizes use powers of two.</td><td>1 KB = 1024 bytes unless the question explicitly uses decimal units.</td></tr>
+    </table>
+  </div>
+
+  <h2 id="revision">15 · Last-minute revision sheet</h2>
+
+  <div class="revision-sheet">
+    <h3>Ten minutes before the paper</h3>
+
+    <p><strong>Bus.</strong> Shared lines plus a protocol. Master starts, slave responds. Data bus bidirectional, width = bits per transfer. Address bus unidirectional, n lines → 2<sup>n</sup> locations. Control bus: read/write, memory or I/O select, interrupt request/acknowledge, bus request/grant, clock, reset.</p>
+
+    <p><strong>Bandwidth.</strong> bytes per transfer = data lines ÷ 8. Nominal bandwidth = bytes per transfer × transfers per second. If a transfer takes k cycles, divide the clock by k. State “nominal” or “peak” every time.</p>
+
+    <p><strong>Arbitration.</strong> Centralized: daisy chain (priority by position, few wires, propagation delay), polling (priority by polling order, wastes time on idle devices), independent requests (separate REQ/GRANT per master, fastest, most pins). Distributed: self-selection by priority code, or collision detection with back-off.</p>
+
+    <p><strong>Standards.</strong> PCI: parallel, shared, 32/64-bit, 33/66 MHz, ≈133/533 MB/s peak, succeeded by PCIe (serial, switched). USB: serial, host-controlled, tiered star, hot-plug, four transfer types. SATA: serial, point-to-point, 8b/10b, 150/300/600 MB/s.</p>
+
+    <p><strong>Interface.</strong> Decode, buffer, convert format, control/status registers, timing and handshake, error detection, interrupt and DMA support, electrical isolation. Three registers: data, status, control.</p>
+
+    <p><strong>Module vs channel vs processor.</strong> Module connects a device; channel executes a channel program of CCWs for several modules; processor is a general-purpose computer dedicated to I/O.</p>
+
+    <p><strong>Programmed I/O.</strong> CPU polls status, moves each word, busy-waits. Simple, slow, wastes CPU. Time = words × time per word.</p>
+
+    <p><strong>Interrupt-driven I/O.</strong> Device raises IRQ; CPU saves state, runs ISR, returns. Vectored vs non-vectored; maskable vs NMI; priority and nesting. Overhead fraction = ISR time ÷ interrupt period.</p>
+
+    <p><strong>DMA.</strong> CPU programs address, count, direction, mode. Controller asserts BRQ, receives BG, becomes master, moves the block, increments address, decrements count, interrupts at zero. Modes: burst, cycle stealing, transparent. Time = size ÷ rate. Cache coherence must be handled.</p>
+
+    <p><strong>The comparison in one line.</strong> Programmed: CPU moves every word and waits. Interrupt: CPU moves every word but only when asked. DMA: the controller moves the block and the CPU is free.</p>
+
+    <p><strong>Answer discipline.</strong> State the formula, substitute with units, show the arithmetic, box the final answer with its unit, and add one line of interpretation. Draw the diagram first if the question says “with a neat diagram”.</p>
+  </div>
+
+  <h2 id="references">16 · References and verification notes</h2>
+
+  <div class="references">
+    <h3>Sources used</h3>
+    <ul>
+      <li><strong>Official syllabus.</strong> University of Mumbai, Faculty of Science and Technology, B.E. Computer Science and Engineering (Artificial Intelligence and Machine Learning), Semester III and IV, Course 2023114 <em>Computer Organization and Architecture</em>, 2025–26. Module 5 row: “I/O Organization”, 4 hours, CO5. <a href="https://mu.ac.in/old/wp-content/uploads/2025/06/6.21-N-B.E.-AI-ML-sem-III-IV.pdf">mu.ac.in syllabus PDF</a>.</li>
+      <li><strong>Teacher assignment.</strong> <em>Assignment 5.docx</em>, supplied in <code>COA.zip</code>. Used to confirm the six required topic groups: bus types, arbitration, bus standards, I/O interface, module/channel/processor, and the three transfer techniques.</li>
+      <li><strong>Teacher question bank.</strong> <em>COA/question bank.docx</em>, Module V, Q11–Q20. Wording preserved. This is a question-bank document, not a University paper.</li>
+      <li><strong>Forty-question document.</strong> <em>Computer Organization 40 questions.docx</em>, Module 5, Q37–Q39. Wording preserved. Also a question-bank document, not a University paper.</li>
+      <li><strong>Student association material.</strong> MUSA <em>Question Bank of Computer Organization and Architecture</em> (Winter 2026) and MUSA <em>Practice Paper Set-1</em> (Winter 2025, 60 marks, 2 hours). Used for additional practice and clearly labelled; <strong>not</strong> verified University of Mumbai papers.</li>
+      <li><strong>Background references for the supplementary explanations.</strong> Patterson and Hennessy, <em>Computer Organization and Design</em>; Stallings, <em>Computer Organization and Architecture</em>; Hamacher, Vranesic and Zaky, <em>Computer Organization</em>; Tanenbaum, <em>Structured Computer Organization</em>. These were not supplied with the course and are listed only as standard sources for the general explanations; no page numbers are claimed.</li>
+    </ul>
+
+    <h3>What was verified</h3>
+    <ul>
+      <li>Every numerical in Sections 2–13 was recomputed independently in Python: the 16 MB address space and 264 MB/s bus, 133/600/60 MB/s standards comparison, 2.048 ms programmed-I/O example, 20% interrupt overhead, and the DMA answer of <strong>8 s</strong>.</li>
+      <li>The practice answers were checked the same way: 1 MB/2 B, 3.2 GB/s, 8 s, 10%, 4096 words, 200 MB/s, 66.66 MB/s, 600 MB/s, 54 MB/s, 4 MB/s, 4.096 ms/1.024 ms/25%, 20%, 1.048576 s/0.5 s/≈2.1, and a factor of 128.</li>
+      <li>The syllabus wording, the 4 teaching hours and the CO5 mapping were read from the official PDF, not inferred.</li>
+      <li>The question wording in Sections 11 and the MUSA block was copied from the supplied documents, including the original “interrupt-driver” typo in MUSA QB Q5.</li>
+    </ul>
+
+    <h3>Notes and limitations</h3>
+    <ul>
+      <li>No verified University of Mumbai end-semester paper for course 2023114 was present in the supplied material. Nothing in this guide is labelled as a verified University question.</li>
+      <li>The Module 5 syllabus row lists <strong>no self-study topic</strong>, unlike Module 4. Nothing here is marked self-study.</li>
+      <li>Bus speeds and standards figures are nominal or peak values for the named generations. They are not measurements of a specific machine, and real throughput is lower because of arbitration, encoding, protocol overhead and wait states.</li>
+      <li>“Typical” device speeds and interrupt rates are orders of magnitude, not specifications for a named device.</li>
+      <li>Practice questions in Section 12 and the supplementary worked examples are written for this guide. They are labelled as such and are not attributed to the teacher or the University.</li>
+      <li>Diagrams are hand-authored SVG in this page. No generated images are used.</li>
+    </ul>
+
+    <h3>Attribution</h3>
+    <p>Teaching content adapted from the teacher-supplied assignment and question banks listed above. Syllabus text quoted from the official University of Mumbai document. Explanatory prose, additional examples and practice questions are <strong>supplementary clarification</strong> written for this guide. Student-association material is attributed to MUSA and is not presented as University material.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var b=document.getElementById('themeToggle'),r=document.documentElement;
+  function dark(){var t=r.getAttribute('data-theme');return t==='dark';}
+  function paint(){b.hidden=false;var d=dark();b.textContent=d?'\u2600 Light':'\u263E Dark';b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');}
+  b.addEventListener('click',function(){var n=dark()?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('sg-theme',n);}catch(e){}paint();});
+  paint();
+})();
+</script>
+
+<script>
+(function(){
+  var hs=[].slice.call(document.querySelectorAll('.wrap h2[id]'));
+  var subHeads=[].slice.call(document.querySelectorAll('.wrap [data-rail-subsection][id]'));
+  if(!hs.length)return;
+  function pad(n){return (n<10?'0':'')+n;}
+  function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
+  var names=hs.map(function(h){return h.textContent.trim();});
+  var subGroups=hs.map(function(){return [];});
+  var sectionIndex=-1;
+  Array.prototype.forEach.call(document.querySelectorAll('.wrap h2[id], .wrap [data-rail-subsection][id]'),function(h){
+    if(h.tagName==='H2'){sectionIndex=hs.indexOf(h);}
+    else if(sectionIndex>=0)subGroups[sectionIndex].push(h);
+  });
+
+  function makeSublist(parentLi,mobile,headings){
+    if(!headings.length)return [];
+    var list=el('ol',mobile?'rm-sublist':'rail-sublist');
+    var children=headings.map(function(h,i){
+      var li=el('li'),a=el('a',mobile?'rm-sub-link':'rail-sub-link');
+      var label=h.getAttribute('data-rail-label')||h.textContent.trim();
+      a.href='#'+h.id;a.title=label;
+      a.appendChild(el('span',mobile?'rm-k':'sub-num',String.fromCharCode(65+i)));
+      a.appendChild(el('span',mobile?'rm-sub-label':'sub-lbl',label));
+      li.appendChild(a);list.appendChild(li);
+      return {a:a,heading:h,done:false,top:0,mobile:null};
+    });
+    parentLi.appendChild(list);return children;
+  }
+
+  /* Wide screens: nested subsection links below their parent sections. */
+  var nav=el('nav','rail');nav.setAttribute('aria-label','Section progress');
+  var inn=el('div','rail-in'),top=el('div','rail-top'),sec=el('span','rail-sec','01'),meta=el('span','rail-meta');
+  var pct=el('b',null,'0%');meta.appendChild(el('span',null,'of '+pad(hs.length)));meta.appendChild(pct);
+  var tg=el('button','rail-toggle');tg.type='button';tg.setAttribute('aria-controls','railList');
+  top.appendChild(sec);top.appendChild(meta);top.appendChild(tg);
+  var ol=el('ol','rail-list');ol.id='railList';
+  var fill=el('span','rail-fill');fill.setAttribute('aria-hidden','true');ol.appendChild(fill);
+  var items=hs.map(function(h,i){
+    var li=el('li'),a=el('a'),nd=el('span','node');
+    a.href='#'+h.id;a.title=names[i];nd.setAttribute('aria-hidden','true');
+    a.appendChild(nd);a.appendChild(el('span','num',pad(i+1)));a.appendChild(el('span','lbl',names[i]));
+    li.appendChild(a);var children=makeSublist(li,false,subGroups[i]);
+    ol.appendChild(li);return {a:a,nd:nd,p:-1,done:false,subs:children};
+  });
+  inn.appendChild(top);inn.appendChild(ol);nav.appendChild(inn);document.body.appendChild(nav);
+
+  /* Phones and tablets: keep the same nested tree in the section sheet. */
+  var bar=el('div','rm-bar');bar.setAttribute('aria-hidden','true');
+  var tab=el('button','rm-tab');tab.type='button';tab.setAttribute('aria-haspopup','dialog');tab.setAttribute('aria-expanded','false');
+  var tn=el('span',null,'01');tab.appendChild(tn);
+  var back=el('div','rm-back'),sheet=el('div','rm-sheet');sheet.setAttribute('role','dialog');sheet.setAttribute('aria-label','Sections');
+  var sh=el('div','rm-head'),shp=el('b',null,'0%');sh.appendChild(el('span',null,'Sections'));sh.appendChild(shp);
+  var sol=el('ol');
+  var mitems=hs.map(function(h,i){
+    var li=el('li'),a=el('a');a.href='#'+h.id;a.appendChild(el('span','rm-k',pad(i+1)));a.appendChild(el('span',null,names[i]));
+    li.appendChild(a);var children=makeSublist(li,true,subGroups[i]);
+    sol.appendChild(li);a.addEventListener('click',function(){setSheet(false);});
+    children.forEach(function(child){child.mobile=child.a;child.a.addEventListener('click',function(){setSheet(false);});});
+    return {a:a,subs:children};
+  });
+  items.forEach(function(item,i){item.subs.forEach(function(child,j){child.mobile=mitems[i].subs[j].a;});});
+  sheet.appendChild(sh);sheet.appendChild(sol);
+  [bar,tab,back,sheet].forEach(function(n){document.body.appendChild(n);});
+  var moveT,cur=-2,currentSubItem=null,tick=false,centers=null,tops=[],end=0;
+
+  function setSheet(o,refocus){
+    document.body.classList.toggle('rm-open',o);tab.setAttribute('aria-expanded',String(o));
+    if(o){
+      var target=currentSubItem?currentSubItem.mobile:mitems[cur>=0?cur:0].a;
+      sheet.scrollTop+=target.getBoundingClientRect().top-sheet.getBoundingClientRect().top-sheet.clientHeight/3;
+      try{target.focus({preventScroll:true});}catch(e){}
+    }else if(refocus){tab.focus();}
+  }
+  tab.addEventListener('click',function(){setSheet(!document.body.classList.contains('rm-open'));});
+  back.addEventListener('click',function(){setSheet(false);});
+  addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('rm-open'))setSheet(false,true);});
+
+  var open;
+  try{var sv=localStorage.getItem('sg-rail');open=sv?sv==='o':innerWidth>=1100;}catch(e){open=innerWidth>=1100;}
+  function paintToggle(){
+    nav.classList.toggle('is-collapsed',!open);
+    tg.textContent=open?'\u2039':'\u203A';
+    tg.setAttribute('aria-expanded',String(open));
+    tg.setAttribute('aria-label',open?'Collapse section progress':'Expand section progress');
+    centers=null;req();
+  }
+  tg.addEventListener('click',function(){open=!open;try{localStorage.setItem('sg-rail',open?'o':'c');}catch(e){}paintToggle();});
+
+  function measure(){
+    var y=scrollY;
+    tops=hs.map(function(h){return h.getBoundingClientRect().top+y;});
+    items.forEach(function(item){item.subs.forEach(function(child){child.top=child.heading.getBoundingClientRect().top+y;});});
+    end=document.querySelector('.wrap').getBoundingClientRect().bottom+y;
+  }
+  function measureCenters(){centers=items.map(function(it){return it.a.offsetTop+it.a.offsetHeight/2;});}
+  function update(){
+    tick=false;
+    if(!centers)measureCenters();
+    var y=scrollY+innerHeight*.25,c=-1,max=document.documentElement.scrollHeight-innerHeight;
+    var pv=Math.round(Math.max(0,Math.min(1,max>0?scrollY/max:0))*100);pct.textContent=pv+'%';shp.textContent=pv+'%';
+    items.forEach(function(it,i){
+      var nx=i+1<tops.length?tops[i+1]:end,p=Math.max(0,Math.min(1,(y-tops[i])/Math.max(1,nx-tops[i])));
+      if(y>=tops[i])c=i;
+      p=Math.round(p*100)/100;
+      if(p!==it.p){it.p=p;it.nd.style.setProperty('--p',p);}
+      var d=y>=nx;if(d!==it.done){it.done=d;it.a.classList.toggle('is-done',d);mitems[i].a.classList.toggle('is-done',d);}
+    });
+    if(c<0)c=0;
+    bar.style.setProperty('--w',Math.round(items[c].p*100)+'%');
+    var fillPosition=centers[c]+(c+1<centers.length?(centers[c+1]-centers[c])*items[c].p:0);
+    if(y<tops[0])fillPosition=centers[0]*Math.max(0,Math.min(1,y/Math.max(1,tops[0])));
+    ol.style.setProperty('--fill',fillPosition.toFixed(1)+'px');
+    var sectionChanged=c!==cur;
+    if(sectionChanged){
+      if(cur>=0){items[cur].a.removeAttribute('aria-current');mitems[cur].a.removeAttribute('aria-current');}
+      cur=c;sec.textContent=pad(c+1);tn.textContent=pad(c+1);
+      tab.setAttribute('aria-label','Sections. Now reading '+pad(c+1)+', '+names[c]);
+      items[c].a.setAttribute('aria-current','true');mitems[c].a.setAttribute('aria-current','true');
+    }
+
+    var activeSub=null;
+    items[c].subs.forEach(function(child,j){
+      var nx=j+1<items[c].subs.length?items[c].subs[j+1].top:(c+1<tops.length?tops[c+1]:end);
+      var done=y>=nx,active=y>=child.top&&y<nx;
+      if(done!==child.done){child.done=done;child.a.classList.toggle('is-done',done);child.mobile.classList.toggle('is-done',done);}
+      if(active)activeSub=child;
+    });
+    if(activeSub!==currentSubItem){
+      if(currentSubItem){currentSubItem.a.removeAttribute('aria-current');currentSubItem.mobile.removeAttribute('aria-current');}
+      currentSubItem=activeSub;
+      if(currentSubItem){
+        currentSubItem.a.setAttribute('aria-current','location');currentSubItem.mobile.setAttribute('aria-current','location');
+        var childRect=currentSubItem.a.getBoundingClientRect(),listRect=ol.getBoundingClientRect();
+        if(childRect.top<listRect.top||childRect.bottom>listRect.bottom)ol.scrollTop+=childRect.top-listRect.top-listRect.height/2;
+      }
+    }
+    if(sectionChanged&&!activeSub){
+      var a=items[c].a,r=a.getBoundingClientRect(),lr=ol.getBoundingClientRect();
+      if(r.top<lr.top||r.bottom>lr.bottom)ol.scrollTop+=r.top-lr.top-lr.height/2;
+    }
+  }
+  function req(){if(!tick){tick=true;requestAnimationFrame(update);}}
+  addEventListener('scroll',function(){
+    document.body.classList.add('rm-moving');clearTimeout(moveT);moveT=setTimeout(function(){document.body.classList.remove('rm-moving');},700);req();
+  },{passive:true});
+  addEventListener('resize',function(){measure();centers=null;req();});
+  addEventListener('load',function(){measure();centers=null;req();});
+  paintToggle();measure();update();
+})();
+</script>
+</body>
+</html>

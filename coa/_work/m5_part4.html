@@ -1,0 +1,217 @@
+
+  <h2 id="compare">10 · Comparing the three techniques</h2>
+
+  <h3>10.1 The one-table answer</h3>
+
+  <p>Most Module 5 questions end with a comparison. The three techniques differ in exactly one fundamental way: <em>who moves each word</em>. Everything else — hardware cost, speed, CPU load, typical use — follows from that.</p>
+
+  <table>
+    <tr><th>Point of comparison</th><th>Programmed I/O</th><th>Interrupt-driven I/O</th><th>DMA</th></tr>
+    <tr><td><strong>Who moves the data</strong></td><td>The CPU, one word at a time</td><td>The CPU, one word at a time, inside the ISR</td><td>The DMA controller, directly between device and memory</td></tr>
+    <tr><td><strong>CPU involvement</strong></td><td>Continuous — the CPU busy-waits in a polling loop</td><td>Per word — the CPU stops, services, and resumes</td><td>Only at setup and at block completion</td></tr>
+    <tr><td><strong>How the CPU learns the device is ready</strong></td><td>It repeatedly reads the status register</td><td>The device raises an interrupt</td><td>The controller requests the bus; the CPU is interrupted once per block</td></tr>
+    <tr><td><strong>Extra hardware</strong></td><td>None beyond the interface registers</td><td>Interrupt controller, priority logic, vector table</td><td>DMA controller plus bus-arbitration logic</td></tr>
+    <tr><td><strong>Data-transfer speed</strong></td><td>Lowest — limited by the polling loop and instruction rate</td><td>Moderate — limited by interrupt overhead per word</td><td>Highest — the controller moves blocks at bus speed</td></tr>
+    <tr><td><strong>CPU time wasted</strong></td><td>Very high; the CPU can do nothing else during the wait</td><td>Moderate; overhead is paid per word, not while idle</td><td>Low; only setup and one final interrupt</td></tr>
+    <tr><td><strong>Best suited to</strong></td><td>Slow, simple devices: keypad, switches, a boot-time UART</td><td>Unpredictable, moderate-rate devices: keyboard, mouse, serial port, network packets</td><td>High-speed block devices: disk, SSD, network card, audio, video</td></tr>
+    <tr><td><strong>Main weakness</strong></td><td>Busy-waiting wastes the processor</td><td>Frequent interrupts can consume the whole CPU</td><td>Controller competes for the memory bus; cache coherence must be managed</td></tr>
+  </table>
+
+  <h3>10.2 How to choose, in plain words</h3>
+
+  <p>Ask three questions in order. <strong>How much data is there?</strong> A few bytes from a keypad does not justify a DMA controller; a 4 MB video frame does. <strong>How often does the device need attention?</strong> If it is idle most of the time, polling wastes the CPU and an interrupt is better. If it needs attention every few microseconds, even interrupts become too expensive, and DMA is the only sensible choice. <strong>What can the system afford?</strong> Polling needs almost no hardware, interrupts need a controller, DMA needs a controller and arbitration. In a tiny microcontroller, simplicity often wins; in a general-purpose computer, the memory bus is the scarce resource, so DMA wins for every high-rate device.</p>
+
+  <p>The three techniques are not mutually exclusive. A real system uses all of them: the keyboard is interrupt-driven, the disk uses DMA, and a temperature sensor on an I²C bus may be polled once a second. The exam answer should say this, because it shows that you understand the trade-off rather than memorising a ranking.</p>
+
+  <h3>10.3 A quantitative comparison on the same block</h3>
+
+  <p>Take a 4 MB block and a system where the CPU needs 1 µs to move one 4-byte word by programmed I/O, and where the DMA controller sustains 8 MB/s.</p>
+
+  <div class="eq">words = 4 MB ÷ 4 B = 1,048,576 words</div>
+  <div class="eq">programmed I/O time = 1,048,576 × 1 µs ≈ 1.05 s of pure CPU time</div>
+  <div class="eq">DMA time = 4 MB ÷ 8 MB/s = 0.5 s, with the CPU free during almost all of it</div>
+
+  <p>DMA is about twice as fast here, but the more important difference is that the 0.5 s is not CPU time. The CPU programs three registers and is interrupted once. With programmed I/O, the CPU is unavailable for the whole 1.05 s. That is the argument to write in an exam, not just the speed ratio.</p>
+
+  <p class="eq-note">Supplementary comparison written for this guide. The numbers are chosen to make the arithmetic clean, not taken from a datasheet.</p>
+
+  <h3>10.4 Exam answer plan</h3>
+
+  <ol class="steps">
+    <li>State the fundamental difference: who moves each word.</li>
+    <li>Draw the comparison table with CPU involvement, hardware, speed and applications.</li>
+    <li>Explain each row in one sentence — do not just leave the table.</li>
+    <li>Give one numerical or one realistic example to show the scale of the difference.</li>
+    <li>Finish with the trade-off: simplicity versus CPU time versus throughput.</li>
+  </ol>
+
+  <h2 id="qbank">11 · Question bank coverage: Q11–Q20 and Q37–Q39</h2>
+
+  <div class="theory">
+    <span class="source">Source and status</span>
+    <p>The questions below are reproduced from the teacher-supplied <em>question bank.docx</em> (Module V, Q11–Q20) and <em>Computer Organization 40 questions.docx</em> (Module 5, Q37–Q39). The wording is preserved. These are <strong>question-bank documents</strong>, not verified University of Mumbai papers. Each model answer is a condensed exam version; the full treatment is in the section named after it.</p>
+  </div>
+
+  <h3>11.1 Teacher question bank — Q11 to Q20</h3>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Q11</div>
+    <div class="exam-source">Teacher question bank, Module V — not a University paper</div>
+    <p>Explain the different types of buses used in a computer system. Discuss data bus, address bus and control bus.</p>
+  </div>
+  <p><strong>Model answer.</strong> A bus is a shared set of lines with a protocol that lets several units communicate; a unit that starts a transfer is a master and the responder is a slave. The system bus has three functional groups. The <strong>data bus</strong> is bidirectional and carries the actual word; its width (8, 16, 32, 64 bits) sets how much moves per transfer. The <strong>address bus</strong> is unidirectional from master to slave and selects the location; n lines give 2<sup>n</sup> addresses. The <strong>control bus</strong> is a collection of single-purpose lines — read/write, memory or I/O select, interrupt request/acknowledge, bus request/grant, clock and reset — that state the operation and synchronise it. Buses may also be classified as synchronous (clocked) or asynchronous (handshaked), and as a single shared bus or a hierarchy of processor, memory and I/O buses. Section 2 gives the diagram, the bandwidth formula and a numerical.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Q12</div>
+    <div class="exam-source">Teacher question bank, Module V — not a University paper</div>
+    <p>What is bus arbitration? Explain centralized and distributed bus arbitration techniques.</p>
+  </div>
+  <p><strong>Model answer.</strong> Bus arbitration decides which of several requesting masters gets the shared bus, so that two masters never drive it at once. In <strong>centralized arbitration</strong> one arbiter receives the requests and issues the grant. It can use <em>daisy chaining</em> (one request line, and a grant that passes through devices in order, so the nearest device has the highest priority), <em>polling</em> (the arbiter asks devices in turn and the first requester wins), or <em>independent requests</em> (a separate request and grant per master, giving the fastest decision at the highest pin cost). In <strong>distributed arbitration</strong> there is no central arbiter: masters either drive priority codes onto shared lines and the highest code wins by wired-OR/AND self-selection, or they transmit and detect collisions, then back off. Centralized schemes are simple and predictable but the arbiter is a single point of failure; distributed schemes scale better but need more complex logic. Section 3 has the comparison table.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Q13</div>
+    <div class="exam-source">Teacher question bank, Module V — not a University paper</div>
+    <p>Explain the following bus standards and compare their important characteristics: PCI, USB, SATA.</p>
+  </div>
+  <p><strong>Model answer.</strong> A bus standard fixes connectors, signals, timing and protocol so devices from different makers interoperate. <strong>PCI</strong> is a parallel, synchronous, shared expansion bus: 32 or 64 bits, 33 or 66 MHz, with multiplexed address/data and plug-and-play configuration; peak rates are about 133 MB/s (32-bit, 33 MHz) and 533 MB/s (64-bit, 66 MHz), and it has been replaced by the serial, switched PCI Express. <strong>USB</strong> is a serial, host-controlled, tiered-star bus for external peripherals: hot-pluggable, supplies power, supports up to 127 devices per controller, and defines control, bulk, interrupt and isochronous transfers; rates run from 1.5 MB/s (USB 1.1) to several GB/s (USB4). <strong>SATA</strong> is a serial, point-to-point storage link: one device per port, 8b/10b encoding, 150/300/600 MB/s for the three generations, with native command queuing. The comparison is parallel-shared (PCI) versus serial-external (USB) versus serial-storage (SATA); Section 4 gives the full table.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Q14</div>
+    <div class="exam-source">Teacher question bank, Module V — not a University paper</div>
+    <p>What is an I/O interface? Explain its functions and need in a computer system with a suitable block diagram.</p>
+  </div>
+  <p><strong>Model answer.</strong> An I/O interface (controller or adapter) sits between the system bus and a device and translates between them. It is needed because devices differ in speed, signal format (serial or parallel), voltage and protocol, and the CPU must not have to know those details. On the bus side it behaves as a slave with addressable registers; on the device side it drives whatever the device needs. Its functions are address decoding, data buffering, format conversion, control and status reporting, timing and handshaking, error detection, interrupt generation, DMA handshaking and electrical isolation. The CPU sees three registers: <strong>data</strong> (move a word), <strong>status</strong> (ready, busy, error) and <strong>control</strong> (start, mode, interrupt enable, reset). A transfer is a handshake: the CPU writes a command, the interface asserts the device strobe, the device acknowledges, and the interface sets ready or raises an interrupt. Section 5 has the block diagram and the step-by-step read and write.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Q15</div>
+    <div class="exam-source">Teacher question bank, Module V — not a University paper</div>
+    <p>Differentiate between an I/O module, I/O channel and I/O processor. Explain their roles in I/O organization.</p>
+  </div>
+  <p><strong>Model answer.</strong> An <strong>I/O module</strong> is the hardware that connects one or a few devices to the bus; it contains the interface registers and the device-specific control, and the CPU still moves each word or services each interrupt. An <strong>I/O channel</strong> is a special-purpose processor between the CPU and several modules. The CPU builds a channel program of channel command words (CCWs) in memory and the channel executes it, so the CPU is involved once per program rather than once per word. A <strong>selector</strong> channel runs one high-speed device at a time; a <strong>multiplexor</strong> channel interleaves bytes from several slow devices; a <strong>block multiplexor</strong> interleaves blocks. An <strong>I/O processor</strong> is a general-purpose processor dedicated to I/O, with its own instruction set and memory, able to run arbitrary programs and manage many devices — a front-end processor or an SSD controller. The progression is: module connects, channel executes a channel program, processor runs a whole I/O job. Section 6 has the comparison table.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Q16</div>
+    <div class="exam-source">Teacher question bank, Module V — not a University paper</div>
+    <p>Explain the following data transfer techniques: a) Programmed I/O b) Interrupt-driven I/O c) Direct Memory Access (DMA).</p>
+  </div>
+  <p><strong>Model answer.</strong> <strong>Programmed I/O</strong>: the CPU issues the command and then polls the status register in a loop until the device is ready, moves one word, and repeats. It needs minimal hardware but busy-waits, so the CPU is unavailable for the whole transfer. <strong>Interrupt-driven I/O</strong>: the CPU starts the device and continues other work; when the device is ready it raises an interrupt, the CPU saves its state, jumps to the interrupt service routine, moves the word, and returns. It removes the polling waste but pays entry/exit overhead per word. <strong>DMA</strong>: the CPU programs a DMA controller with the start address, word count and direction, then the controller becomes bus master and moves the whole block directly between device and memory, interrupting the CPU once at the end. It gives the highest throughput and the lowest CPU load, at the cost of extra hardware and bus contention. Sections 7, 8 and 9 treat each in full.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Q17</div>
+    <div class="exam-source">Teacher question bank, Module V — not a University paper</div>
+    <p>Compare Programmed I/O, Interrupt-driven I/O and DMA with respect to CPU involvement, hardware requirement, data-transfer speed and applications.</p>
+  </div>
+  <p><strong>Model answer.</strong> <strong>CPU involvement:</strong> continuous busy-waiting (programmed), per word inside an ISR (interrupt), setup and one completion interrupt (DMA). <strong>Hardware:</strong> only interface registers (programmed), plus an interrupt controller and priority logic (interrupt), plus a DMA controller and arbitration logic (DMA). <strong>Speed:</strong> lowest, limited by the polling loop; moderate, limited by interrupt overhead; highest, limited by bus bandwidth. <strong>Applications:</strong> keypad, switches and simple sensors; keyboard, mouse, serial ports and moderate-rate network traffic; disks, SSDs, network cards, audio and video. The underlying reason is who moves each word — the CPU in the first two, the controller in DMA. Section 10 has the full table and a worked comparison on a 4 MB block.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Q18</div>
+    <div class="exam-source">Teacher question bank, Module V — not a University paper</div>
+    <p>Draw and explain the DMA controller architecture. Describe the sequence of operations involved in a DMA transfer.</p>
+  </div>
+  <p><strong>Model answer.</strong> The controller contains an <strong>address register</strong> (next memory address), a <strong>count register</strong> (words remaining), a <strong>control/status register</strong> (direction, mode, interrupt enable, error flags) and <strong>control logic</strong> that sequences the bus cycles. It connects to the CPU through the bus for programming and through bus-request/bus-grant lines for ownership, to memory through address, data and control lines, and to the device through data, status and control lines. <strong>Sequence:</strong> the CPU programs address, count, direction and mode; starts the device; the device asserts a DMA request; the controller asserts bus-request; the CPU finishes its current cycle, asserts bus-grant and floats its bus outputs; the controller drives the address and moves a word or burst; it increments the address and decrements the count; it repeats until the count is zero; then it releases the bus and interrupts the CPU. Section 9.2 has the diagram and Section 9.3 the numbered sequence.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Q19</div>
+    <div class="exam-source">Teacher question bank, Module V — not a University paper</div>
+    <p>A DMA controller transfers data at a rate of 4 MB/s. Calculate the time required to transfer 32 MB of data. Also explain how DMA reduces CPU overhead.</p>
+  </div>
+  <p><strong>Model answer.</strong> Time = amount of data ÷ transfer rate. Both quantities are in MB, so the unit cancels:</p>
+  <div class="eq">T = 32 MB ÷ 4 MB/s = 8 s</div>
+  <p><strong>Check:</strong> at 4 MB per second, eight seconds move 8 × 4 = 32 MB. <strong>CPU benefit:</strong> without DMA the CPU would execute a load/store sequence for every word, so at 4 MB/s it would spend millions of instructions per second copying. With DMA it writes a few registers once, starts the device, and is interrupted once at the end; during the 8 s it executes other programs. The controller still competes for memory cycles (cycle stealing), but the CPU does not spend instructions on the copy. Section 9.5 repeats the working with the full explanation.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Q20</div>
+    <div class="exam-source">Teacher question bank, Module V — not a University paper</div>
+    <p>Explain I/O channels and I/O processors. How do they improve the performance of a computer system?</p>
+  </div>
+  <p><strong>Model answer.</strong> An <strong>I/O channel</strong> is a special-purpose processor that executes a channel program of CCWs stored in memory, driving several I/O modules without per-word CPU help. A selector channel serves one high-speed device at a time; a multiplexor channel interleaves bytes from several slow devices; a block multiplexor interleaves blocks from high-speed devices. An <strong>I/O processor</strong> is a general-purpose processor dedicated to I/O, with its own instruction set and local memory, able to run arbitrary programs and manage many devices — for example a front-end processor or an SSD controller. Both improve performance by moving I/O work off the main CPU: fewer interrupts, fewer per-word instructions, and overlap between computation and I/O. The channel or processor can also schedule transfers to use the memory bus efficiently. The cost is extra hardware and more complex software. Section 6.4 explains the performance argument.</p>
+
+  <h3>11.2 Forty-question document — Q37 to Q39</h3>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Q37</div>
+    <div class="exam-source">Computer Organization 40 questions, Module 5 — not a University paper</div>
+    <p>Explain different types of buses used in computer systems. Describe bus arbitration and explain different bus arbitration techniques.</p>
+  </div>
+  <p><strong>Model answer.</strong> This combines Q11 and Q12, so write it in two halves. <em>Buses:</em> define a bus and master/slave; describe the data bus (bidirectional, width sets bits per transfer), the address bus (unidirectional, n lines → 2<sup>n</sup> locations) and the control bus (read/write, memory or I/O select, interrupt, bus request/grant, clock, reset); mention synchronous versus asynchronous and single versus multiple buses. <em>Arbitration:</em> explain that only one master may drive the bus, then describe centralized arbitration (daisy chaining, polling, independent requests) and distributed arbitration (self-selection by priority code, collision detection with back-off). Compare them on wiring, priority, speed, fault tolerance and scalability. Sections 2 and 3 together answer this question; a labelled CPU–memory–I/O diagram plus a simple REQ/GRANT chain earns the diagram marks.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Q38</div>
+    <div class="exam-source">Computer Organization 40 questions, Module 5 — not a University paper</div>
+    <p>Explain the need and functions of an I/O module. Differentiate between: I/O module, I/O channel, I/O processor.</p>
+  </div>
+  <p><strong>Model answer.</strong> <em>Need:</em> peripherals differ in speed, data format, voltage and protocol, and the CPU cannot connect to each directly or spend its time on device-level signalling. <em>Functions of a module:</em> address decoding, buffering, format conversion, control and status registers, timing and handshaking, error detection, interrupt generation, DMA support and electrical isolation. <em>Difference:</em> a module connects one or a few devices and leaves per-word work with the CPU; a channel is a special-purpose processor that executes a channel program of CCWs for several modules, so the CPU is involved once per program; an I/O processor is a general-purpose processor dedicated to I/O that runs arbitrary programs and can manage a whole I/O subsystem. In one line: module connects, channel executes a channel program, processor runs the I/O job. Sections 5 and 6 cover both halves.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">Q39</div>
+    <div class="exam-source">Computer Organization 40 questions, Module 5 — not a University paper</div>
+    <p>Explain and compare the following I/O data-transfer techniques: Programmed I/O, Interrupt-driven I/O, Direct Memory Access (DMA). Draw suitable diagrams.</p>
+  </div>
+  <p><strong>Model answer.</strong> Use the same three-part structure as Q16 and finish with the comparison table from Q17. <em>Programmed I/O:</em> CPU polls status, moves each word, busy-waits. <em>Interrupt-driven:</em> device interrupts, CPU saves state, runs the ISR, moves the word, returns. <em>DMA:</em> CPU programs the controller, the controller becomes bus master and moves the block, one interrupt at the end. For diagrams, draw three simple flows: CPU → status loop → data register; device → interrupt line → CPU → ISR → data register; and CPU → DMA controller → memory/device with BRQ/BG. Then compare on who moves the data, CPU involvement, hardware, speed and applications. The examiner is looking for the phrase “the CPU initiates but does not execute the per-word transfer” in the DMA part. Sections 7–10 supply everything.</p>
+
+  <h3>11.3 Assignment 5 coverage</h3>
+
+  <p>The teacher’s <em>Assignment 5.docx</em> lists six topic groups. All six are covered, and none of them contains a numerical, so the assignment is a writing exercise.</p>
+
+  <table>
+    <tr><th>Assignment 5 topic</th><th>Where it is covered</th></tr>
+    <tr><td>Types of computer buses: data, address, control</td><td>Section 2.2, with the bus diagram and the width/bandwidth formulas</td></tr>
+    <tr><td>Bus arbitration; compare centralized and distributed</td><td>Section 3, with daisy chain, polling, independent requests, self-selection and collision detection</td></tr>
+    <tr><td>Bus standards, characteristics and applications</td><td>Section 4, with the PCI/USB/SATA comparison table and nominal-rate calculations</td></tr>
+    <tr><td>I/O interface: functions and need</td><td>Section 5, with the register model and the input/output handshakes</td></tr>
+    <tr><td>I/O module vs I/O channel vs I/O processor</td><td>Section 6, with the three-way comparison table</td></tr>
+    <tr><td>Programmed I/O, interrupt-driven I/O, DMA</td><td>Sections 7, 8 and 9, plus the comparison in Section 10</td></tr>
+  </table>
+
+  <h3>11.4 MUSA question bank (student association)</h3>
+
+  <div class="theory">
+    <span class="source">Source and status</span>
+    <p>These questions are reproduced from the <strong>MUSA (Mumbai University Students Association) Question Bank of Computer Organization and Architecture, Winter 2026</strong> and the <strong>MUSA Practice Paper Set-1, Winter 2025</strong>. MUSA is a student association. Its material is <strong>not</strong> a University of Mumbai paper, and its wording is not evidence that a question will appear in your exam. The wording is preserved exactly, including the original “interrupt-driver” typo, because you may meet the same phrasing in a practice paper.</p>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-title">MUSA QB Q5</div>
+    <div class="exam-source">MUSA question bank (student association) — not a University paper</div>
+    <p>Explain and compare programmed I/O, interrupt-driver I/O and DMA.</p>
+  </div>
+  <p><strong>Answer.</strong> Programmed I/O is the CPU polling the status register and moving each word itself; it needs almost no hardware but the CPU busy-waits for the whole transfer. Interrupt-driven I/O lets the CPU work until the device raises an interrupt, then the ISR moves the word; it removes the polling waste but pays entry and exit overhead per word. DMA hands the block to a controller that becomes bus master and moves data directly between device and memory; the CPU programs it once and is interrupted at the end. Compare them on who moves the data, CPU involvement, extra hardware, speed and applications, and finish with the trade-off: simplicity versus CPU time versus throughput. The full table is in Section 10 and the individual treatments in Sections 7–9.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">MUSA QB Q7</div>
+    <div class="exam-source">MUSA question bank (student association) — not a University paper</div>
+    <p>What is bus arbitration? Describe various Bus arbitration methods.</p>
+  </div>
+  <p><strong>Answer.</strong> Arbitration decides which master gets a shared bus. Centralized methods use one arbiter: daisy chaining passes a grant through devices so priority follows physical position; polling asks devices in turn; independent requests give each master its own request and grant lines and are the fastest but need the most pins. Distributed methods have no arbiter: masters drive priority codes onto shared lines and the highest wins by self-selection, or they transmit and detect collisions and back off, as Ethernet does. Compare on wiring, priority, speed, fault tolerance and scalability. Section 3 has the mechanisms and the comparison table.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">MUSA QB Q19</div>
+    <div class="exam-source">MUSA question bank (student association) — not a University paper</div>
+    <p>Explain buses in I/O organization and explain different types of Buses.</p>
+  </div>
+  <p><strong>Answer.</strong> In I/O organization the bus is the shared path between the CPU, memory and I/O modules. The data bus carries the word and is bidirectional; its width sets bits per transfer. The address bus selects the target and is unidirectional; n lines give 2<sup>n</sup> locations. The control bus carries read/write, memory or I/O select, interrupt request and acknowledge, bus request and grant, clock and reset. Buses can also be classified as synchronous or asynchronous, and as a single shared bus or a hierarchy of processor, memory and I/O buses joined by bridges. Section 2 has the diagram, the bandwidth formulas and a worked numerical.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">MUSA QB Q22</div>
+    <div class="exam-source">MUSA question bank (student association) — not a University paper</div>
+    <p>Explain the concept of an I/O Interface, I/O modules and I/O channels.</p>
+  </div>
+  <p><strong>Answer.</strong> An I/O interface is the circuit between the bus and a device; it decodes addresses, buffers data, converts formats, provides control and status registers, handles timing and handshaking, detects errors and can raise interrupts or request DMA. An I/O module is the package that contains one or more such interfaces plus device-specific control, connecting one or a few devices to the bus. An I/O channel is a more intelligent unit: a special-purpose processor that executes a channel program of CCWs for several modules, so the CPU is involved once per program instead of once per word. The progression is interface → module → channel, with the I/O processor as the most general form. Sections 5 and 6 cover all three.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">MUSA Practice Paper Set-1, Q3(b)</div>
+    <div class="exam-source">MUSA practice paper (student association) — not a University paper</div>
+    <p>What is bus arbitration? Describe various Bus arbitration methods.</p>
+  </div>
+  <p><strong>Answer.</strong> This is the same question as MUSA QB Q7. Write the definition, the two families, at least two centralized methods with their priority behaviour, one distributed method, and a short comparison. Section 3 is the reference answer.</p>
+
+  <div class="exam-q">
+    <div class="exam-q-title">MUSA Practice Paper Set-1, Q5(b)</div>
+    <div class="exam-source">MUSA practice paper (student association) — not a University paper</div>
+    <p>Explain the concept of DMA in detail with diagram. <em>OR</em> Explain in detail Programmed I/O and Interrupt driven I/O of data transfer techniques.</p>
+  </div>
+  <p><strong>Answer.</strong> For the DMA option: define DMA, draw CPU–controller–device–memory with BRQ/BG, list the address, count and control/status registers, give the eight-step sequence, explain burst, cycle stealing and transparent modes, and add one sentence on cache coherence. For the other option: explain the polling loop and its waste for programmed I/O, then the interrupt sequence, vectored versus non-vectored interrupts and the overhead formula for interrupt-driven I/O, and compare the two. Sections 7, 8 and 9 have the full answers and diagrams.</p>
+
+  <h3>11.5 Which question is most likely?</h3>
+
+  <p>The DMA numerical (Q19) is the only numerical in the Module V question bank, and it is short enough to appear as a 3–5 mark part. The comparison of the three techniques (Q16, Q17, Q39) is the most repeated written question across all three documents, so it is the safest large answer to prepare. Bus arbitration appears in the teacher bank, the 40-question document, the MUSA bank and the MUSA practice paper — four independent sources — which makes it the most likely single written topic after the comparison. Prepare the table in Section 10 and the arbitration comparison in Section 3 until you can reproduce them from memory.</p>

@@ -1,0 +1,185 @@
+
+  <h2 id="practice">12 · Independent practice</h2>
+
+  <p>These questions are <strong>written for this guide</strong>. They are not teacher questions and not University questions. They are ordered by difficulty and cover every calculation that Module 5 can reasonably ask. Attempt them with the book closed, then mark yourself from the separate answer key in Section 13. Give units in every final answer, and state any assumption you make about cycles per transfer or encoding overhead.</p>
+
+  <div class="practice">
+    <h3>Practice Questions</h3>
+
+    <h4 id="practice-basic" data-rail-subsection data-rail-label="Basic">A · Basic (one definition or one formula)</h4>
+    <ol>
+      <li>A bus has 20 address lines and 16 data lines. Find the address space and the number of bytes moved per transfer.</li>
+      <li>A 64-bit data bus runs at 400 MHz and completes one transfer per clock cycle. Find the nominal bandwidth in GB/s.</li>
+      <li>A DMA controller transfers data at 8 MB/s. How long does it take to transfer 64 MB?</li>
+      <li>A device requests an interrupt every 50 µs. The interrupt service routine, including entry and exit, takes 5 µs. What fraction of the CPU does this device consume?</li>
+      <li>How many 8-bit words are there in 4 KB?</li>
+      <li>A bus has 32 data lines and runs at 100 MHz, but each transfer needs two clock cycles (an address phase and a data phase). Find the sustained bandwidth.</li>
+    </ol>
+
+    <h4 id="practice-intermediate" data-rail-subsection data-rail-label="Intermediate">B · Intermediate (two or three steps, with unit conversion)</h4>
+    <ol start="7">
+      <li>A 32-bit PCI bus runs at 33 MHz and needs two cycles per transfer. Find its sustained bandwidth in MB/s.</li>
+      <li>A SATA III link signals at 6 Gb/s and uses 8b/10b encoding. Find the payload rate in MB/s.</li>
+      <li>A USB 2.0 link signals at 480 Mb/s. Protocol overhead consumes 10% of the payload. Find the effective rate in MB/s.</li>
+      <li>A DMA controller moves 1 MB in 0.25 s. Find its transfer rate in MB/s.</li>
+      <li>A device becomes ready every 4 µs. Under programmed I/O the CPU needs 1 µs per byte to poll the status register and move the byte. Find the wall-clock time, the CPU time and the CPU fraction for a 1 KB transfer.</li>
+      <li>Under interrupt-driven I/O, a device interrupts every 10 µs and the ISR takes 2 µs. Find the CPU overhead fraction. Would this device be better served by DMA? Explain in one sentence.</li>
+    </ol>
+
+    <h4 id="practice-advanced" data-rail-subsection data-rail-label="Advanced">C · Advanced (comparison, multi-step, or a written justification)</h4>
+    <ol start="13">
+      <li>A 4 MB block must be transferred. Programmed I/O needs 1 µs of CPU time per 4-byte word. A DMA controller sustains 8 MB/s. Find both transfer times, the ratio, and state the more important difference between them.</li>
+      <li>A disk generates one interrupt for every 512-byte block. With DMA, the controller interrupts once per 64 KB block. By what factor does the number of interrupts fall?</li>
+      <li>Explain why daisy-chain arbitration gives the highest priority to the device nearest the arbiter. Your answer should mention what happens to the grant signal at each device. (Written answer, about 4 marks.)</li>
+    </ol>
+  </div>
+
+  <h2 id="answer-key">13 · Answer key</h2>
+
+  <p>Mark your work against the working, not only the final number. A correct final answer with a wrong method will not earn full marks in the exam.</p>
+
+  <div class="answer-key">
+    <h3>Answers</h3>
+
+    <h4>A · Basic</h4>
+    <ol>
+      <li><strong>Address space 1 MB; 2 bytes per transfer.</strong><br>
+      2<sup>20</sup> = 1,048,576 locations = 1 MB. Data lines ÷ 8 = 16 ÷ 8 = 2 bytes. Check: 20 address lines can name 1,048,576 locations, and each transfer carries 16 bits.</li>
+
+      <li><strong>3.2 GB/s.</strong><br>
+      64 bits ÷ 8 = 8 bytes per transfer. 8 B × 400 × 10<sup>6</sup> transfers/s = 3.2 × 10<sup>9</sup> B/s = 3.2 GB/s. This is the peak; real transfers lose cycles to arbitration and wait states.</li>
+
+      <li><strong>8 s.</strong><br>
+      T = 64 MB ÷ 8 MB/s = 8 s. Check: 8 s × 8 MB/s = 64 MB.</li>
+
+      <li><strong>10%.</strong><br>
+      overhead = 5 µs ÷ 50 µs = 0.10 = 10%. The other 90% is available to the main program, minus the time the CPU takes to enter and leave the ISR (already included in the 5 µs).</li>
+
+      <li><strong>4096 words.</strong><br>
+      4 KB = 4 × 1024 = 4096 bytes. Each word is 8 bits = 1 byte, so 4096 words.</li>
+
+      <li><strong>200 MB/s.</strong><br>
+      32 bits ÷ 8 = 4 B per transfer. Two cycles per transfer ⇒ 100 MHz ÷ 2 = 50 × 10<sup>6</sup> transfers/s. Bandwidth = 4 × 50 × 10<sup>6</sup> = 200 × 10<sup>6</sup> B/s = 200 MB/s. If you used one cycle per transfer you would get 400 MB/s; the two-cycle assumption halves it.</li>
+    </ol>
+
+    <h4>B · Intermediate</h4>
+    <ol start="7">
+      <li><strong>66.66 MB/s.</strong><br>
+      32 bits ÷ 8 = 4 B. Two cycles per transfer ⇒ 33.33 MHz ÷ 2 = 16.665 × 10<sup>6</sup> transfers/s. Bandwidth = 4 × 16.665 × 10<sup>6</sup> ≈ 66.66 × 10<sup>6</sup> B/s. The often-quoted 133 MB/s is the one-cycle peak; the sustained value is half that.</li>
+
+      <li><strong>600 MB/s.</strong><br>
+      8b/10b sends 8 payload bits for every 10 line bits, so payload = 6 Gb/s × (8/10) = 4.8 Gb/s. Divide by 8: 4.8 ÷ 8 = 0.6 GB/s = 600 MB/s. Forgetting the 20% encoding loss gives 750 MB/s, which is wrong.</li>
+
+      <li><strong>54 MB/s.</strong><br>
+      480 Mb/s ÷ 8 = 60 MB/s raw. With 10% overhead, 60 × 0.9 = 54 MB/s. USB also loses bandwidth to packet headers and polling, so real throughput is lower still.</li>
+
+      <li><strong>4 MB/s.</strong><br>
+      rate = amount ÷ time = 1 MB ÷ 0.25 s = 4 MB/s. Check: 0.25 s × 4 MB/s = 1 MB.</li>
+
+      <li><strong>Wall time 4.096 ms; CPU time 1.024 ms; CPU fraction 25%.</strong><br>
+      1 KB = 1024 bytes. The device supplies one byte every 4 µs, so the transfer cannot finish faster than 1024 × 4 µs = 4096 µs = 4.096 ms. The CPU spends 1 µs per byte, so its own time is 1024 × 1 µs = 1024 µs = 1.024 ms. Fraction = 1.024 ÷ 4.096 = 0.25 = 25%. The other 75% is spent waiting for the device inside the polling loop — it is not available to other programs.</li>
+
+      <li><strong>20%; yes, DMA would be better if the device moves blocks.</strong><br>
+      overhead = 2 µs ÷ 10 µs = 0.20 = 20%. One device already takes a fifth of the CPU, and several such devices would saturate it. DMA moves the block with one interrupt instead of one per word, so the CPU load falls sharply. DMA is worth its hardware cost whenever the device transfers more than a few bytes per interrupt.</li>
+    </ol>
+
+    <h4>C · Advanced</h4>
+    <ol start="13">
+      <li><strong>Programmed ≈ 1.05 s; DMA = 0.5 s; ratio ≈ 2.1; the important difference is that the programmed time is CPU time.</strong><br>
+      Words = 4 MB ÷ 4 B = 1,048,576. Programmed time = 1,048,576 × 1 µs = 1.048576 s ≈ 1.05 s. DMA time = 4 MB ÷ 8 MB/s = 0.5 s. Ratio = 1.048576 ÷ 0.5 ≈ 2.1. DMA is about twice as fast, but the decisive point is that during the 0.5 s the CPU is free, whereas during the 1.05 s it is executing the copy loop and cannot run anything else.</li>
+
+      <li><strong>The interrupt count falls by a factor of 128.</strong><br>
+      64 KB ÷ 512 B = 65,536 ÷ 512 = 128. One interrupt now covers 128 blocks, so the rate is 1/128 of the old rate. This is the main reason DMA exists: it reduces interrupt overhead, not just data-copy instructions.</li>
+
+      <li><strong>Model written answer.</strong> In a daisy chain every master shares one bus-request line, but the grant line is wired in series: the arbiter’s grant output goes to device 1, device 1’s grant output goes to device 2, and so on. When the arbiter grants the bus, the signal arrives at device 1 first. If device 1 is requesting, it takes the bus and does <em>not</em> pass the grant on, so devices 2, 3 … never see it. If device 1 is not requesting, it forwards the grant to device 2, and the same test repeats. The first requesting device in the physical order therefore wins, which makes priority a function of position rather than of software. The cost is propagation delay: a device far down the chain waits while the grant passes through every earlier device, and a faulty device that fails to forward the grant blocks everyone after it.</li>
+    </ol>
+  </div>
+
+  <h2 id="mistakes">14 · Common mistakes</h2>
+
+  <div class="common-mistakes">
+    <h3>Errors that cost marks, and the fix</h3>
+    <table>
+      <tr><th>Mistake</th><th>Why it is wrong</th><th>Correct approach</th></tr>
+      <tr><td>Saying the address bus is bidirectional</td><td>The master always names the target; slaves only decode.</td><td>Address bus: unidirectional, master → slaves. Data bus: bidirectional.</td></tr>
+      <tr><td>Confusing bus width with bus bandwidth</td><td>Width is bits per transfer; bandwidth is bytes per second.</td><td>Bandwidth = (data lines ÷ 8) × transfers per second.</td></tr>
+      <tr><td>Ignoring cycles per transfer</td><td>A real bus may need an address phase and a data phase.</td><td>Divide the clock by the number of cycles per transfer, and say that you are doing so.</td></tr>
+      <tr><td>Treating Mb/s and MB/s as the same</td><td>One is bits, the other is bytes; the factor is 8.</td><td>Divide Mb/s by 8 to get MB/s, then apply encoding or protocol overhead.</td></tr>
+      <tr><td>Forgetting 8b/10b encoding for SATA</td><td>Only 8 of every 10 line bits are payload.</td><td>Multiply the signalling rate by 0.8 before dividing by 8.</td></tr>
+      <tr><td>Saying DMA means the CPU is not involved at all</td><td>The CPU programs the controller and receives the completion interrupt.</td><td>“The CPU initiates the transfer but does not execute the per-word transfer instructions.”</td></tr>
+      <tr><td>Saying DMA removes all interrupts</td><td>DMA reduces interrupts from one per word to one per block.</td><td>One completion interrupt per block, plus error interrupts.</td></tr>
+      <tr><td>Confusing cycle stealing with burst mode</td><td>Cycle stealing takes one cycle at a time; burst keeps the bus for the block.</td><td>Cycle stealing slows the CPU slightly; burst locks the CPU out for the block duration.</td></tr>
+      <tr><td>Saying daisy-chain priority is programmable</td><td>It is fixed by physical position.</td><td>Polling order or independent-request priority logic can be programmable; daisy chain cannot.</td></tr>
+      <tr><td>Calling polling “interrupt-driven”</td><td>Polling is the CPU asking; interrupts are the device telling.</td><td>Programmed I/O polls; interrupt-driven I/O waits for a request.</td></tr>
+      <tr><td>Saying USB is peer-to-peer</td><td>USB is strictly host-controlled; devices never start transfers.</td><td>The host controller polls devices; the topology is a tiered star.</td></tr>
+      <tr><td>Saying PCIe is just a faster PCI</td><td>PCI is a shared parallel bus; PCIe is a switched serial fabric.</td><td>Describe PCIe as point-to-point, packet-based and lane-scalable.</td></tr>
+      <tr><td>Mixing up module, channel and processor</td><td>They differ in programmability and how much work they take from the CPU.</td><td>Module connects; channel executes a channel program; processor runs an I/O job.</td></tr>
+      <tr><td>Confusing vectored and non-vectored interrupts</td><td>In a vectored system the device supplies the ISR identifier.</td><td>Vectored: device supplies a vector. Non-vectored: one fixed address, and the ISR polls for the source.</td></tr>
+      <tr><td>Writing a DMA time with no unit</td><td>“8” could be seconds, milliseconds or megabytes.</td><td>Box the answer with its unit: 8 s.</td></tr>
+      <tr><td>Using 1 KB = 1000 bytes in these calculations</td><td>Memory and block sizes use powers of two.</td><td>1 KB = 1024 bytes unless the question explicitly uses decimal units.</td></tr>
+    </table>
+  </div>
+
+  <h2 id="revision">15 · Last-minute revision sheet</h2>
+
+  <div class="revision-sheet">
+    <h3>Ten minutes before the paper</h3>
+
+    <p><strong>Bus.</strong> Shared lines plus a protocol. Master starts, slave responds. Data bus bidirectional, width = bits per transfer. Address bus unidirectional, n lines → 2<sup>n</sup> locations. Control bus: read/write, memory or I/O select, interrupt request/acknowledge, bus request/grant, clock, reset.</p>
+
+    <p><strong>Bandwidth.</strong> bytes per transfer = data lines ÷ 8. Nominal bandwidth = bytes per transfer × transfers per second. If a transfer takes k cycles, divide the clock by k. State “nominal” or “peak” every time.</p>
+
+    <p><strong>Arbitration.</strong> Centralized: daisy chain (priority by position, few wires, propagation delay), polling (priority by polling order, wastes time on idle devices), independent requests (separate REQ/GRANT per master, fastest, most pins). Distributed: self-selection by priority code, or collision detection with back-off.</p>
+
+    <p><strong>Standards.</strong> PCI: parallel, shared, 32/64-bit, 33/66 MHz, ≈133/533 MB/s peak, succeeded by PCIe (serial, switched). USB: serial, host-controlled, tiered star, hot-plug, four transfer types. SATA: serial, point-to-point, 8b/10b, 150/300/600 MB/s.</p>
+
+    <p><strong>Interface.</strong> Decode, buffer, convert format, control/status registers, timing and handshake, error detection, interrupt and DMA support, electrical isolation. Three registers: data, status, control.</p>
+
+    <p><strong>Module vs channel vs processor.</strong> Module connects a device; channel executes a channel program of CCWs for several modules; processor is a general-purpose computer dedicated to I/O.</p>
+
+    <p><strong>Programmed I/O.</strong> CPU polls status, moves each word, busy-waits. Simple, slow, wastes CPU. Time = words × time per word.</p>
+
+    <p><strong>Interrupt-driven I/O.</strong> Device raises IRQ; CPU saves state, runs ISR, returns. Vectored vs non-vectored; maskable vs NMI; priority and nesting. Overhead fraction = ISR time ÷ interrupt period.</p>
+
+    <p><strong>DMA.</strong> CPU programs address, count, direction, mode. Controller asserts BRQ, receives BG, becomes master, moves the block, increments address, decrements count, interrupts at zero. Modes: burst, cycle stealing, transparent. Time = size ÷ rate. Cache coherence must be handled.</p>
+
+    <p><strong>The comparison in one line.</strong> Programmed: CPU moves every word and waits. Interrupt: CPU moves every word but only when asked. DMA: the controller moves the block and the CPU is free.</p>
+
+    <p><strong>Answer discipline.</strong> State the formula, substitute with units, show the arithmetic, box the final answer with its unit, and add one line of interpretation. Draw the diagram first if the question says “with a neat diagram”.</p>
+  </div>
+
+  <h2 id="references">16 · References and verification notes</h2>
+
+  <div class="references">
+    <h3>Sources used</h3>
+    <ul>
+      <li><strong>Official syllabus.</strong> University of Mumbai, Faculty of Science and Technology, B.E. Computer Science and Engineering (Artificial Intelligence and Machine Learning), Semester III and IV, Course 2023114 <em>Computer Organization and Architecture</em>, 2025–26. Module 5 row: “I/O Organization”, 4 hours, CO5. <a href="https://mu.ac.in/old/wp-content/uploads/2025/06/6.21-N-B.E.-AI-ML-sem-III-IV.pdf">mu.ac.in syllabus PDF</a>.</li>
+      <li><strong>Teacher assignment.</strong> <em>Assignment 5.docx</em>, supplied in <code>COA.zip</code>. Used to confirm the six required topic groups: bus types, arbitration, bus standards, I/O interface, module/channel/processor, and the three transfer techniques.</li>
+      <li><strong>Teacher question bank.</strong> <em>COA/question bank.docx</em>, Module V, Q11–Q20. Wording preserved. This is a question-bank document, not a University paper.</li>
+      <li><strong>Forty-question document.</strong> <em>Computer Organization 40 questions.docx</em>, Module 5, Q37–Q39. Wording preserved. Also a question-bank document, not a University paper.</li>
+      <li><strong>Student association material.</strong> MUSA <em>Question Bank of Computer Organization and Architecture</em> (Winter 2026) and MUSA <em>Practice Paper Set-1</em> (Winter 2025, 60 marks, 2 hours). Used for additional practice and clearly labelled; <strong>not</strong> verified University of Mumbai papers.</li>
+      <li><strong>Background references for the supplementary explanations.</strong> Patterson and Hennessy, <em>Computer Organization and Design</em>; Stallings, <em>Computer Organization and Architecture</em>; Hamacher, Vranesic and Zaky, <em>Computer Organization</em>; Tanenbaum, <em>Structured Computer Organization</em>. These were not supplied with the course and are listed only as standard sources for the general explanations; no page numbers are claimed.</li>
+    </ul>
+
+    <h3>What was verified</h3>
+    <ul>
+      <li>Every numerical in Sections 2–13 was recomputed independently in Python: the 16 MB address space and 264 MB/s bus, 133/600/60 MB/s standards comparison, 2.048 ms programmed-I/O example, 20% interrupt overhead, and the DMA answer of <strong>8 s</strong>.</li>
+      <li>The practice answers were checked the same way: 1 MB/2 B, 3.2 GB/s, 8 s, 10%, 4096 words, 200 MB/s, 66.66 MB/s, 600 MB/s, 54 MB/s, 4 MB/s, 4.096 ms/1.024 ms/25%, 20%, 1.048576 s/0.5 s/≈2.1, and a factor of 128.</li>
+      <li>The syllabus wording, the 4 teaching hours and the CO5 mapping were read from the official PDF, not inferred.</li>
+      <li>The question wording in Sections 11 and the MUSA block was copied from the supplied documents, including the original “interrupt-driver” typo in MUSA QB Q5.</li>
+    </ul>
+
+    <h3>Notes and limitations</h3>
+    <ul>
+      <li>No verified University of Mumbai end-semester paper for course 2023114 was present in the supplied material. Nothing in this guide is labelled as a verified University question.</li>
+      <li>The Module 5 syllabus row lists <strong>no self-study topic</strong>, unlike Module 4. Nothing here is marked self-study.</li>
+      <li>Bus speeds and standards figures are nominal or peak values for the named generations. They are not measurements of a specific machine, and real throughput is lower because of arbitration, encoding, protocol overhead and wait states.</li>
+      <li>“Typical” device speeds and interrupt rates are orders of magnitude, not specifications for a named device.</li>
+      <li>Practice questions in Section 12 and the supplementary worked examples are written for this guide. They are labelled as such and are not attributed to the teacher or the University.</li>
+      <li>Diagrams are hand-authored SVG in this page. No generated images are used.</li>
+    </ul>
+
+    <h3>Attribution</h3>
+    <p>Teaching content adapted from the teacher-supplied assignment and question banks listed above. Syllabus text quoted from the official University of Mumbai document. Explanatory prose, additional examples and practice questions are <strong>supplementary clarification</strong> written for this guide. Student-association material is attributed to MUSA and is not presented as University material.</p>
+  </div>
+</div>

@@ -1,0 +1,242 @@
+<div class="wrap">
+  <div class="topbar"><a class="back" href="/coa">← All modules</a><button class="theme-toggle" type="button" id="themeToggle"></button></div>
+
+  <header>
+    <h1>COA Module 5</h1>
+    <p class="subtitle">I/O Organization</p>
+    <div class="meta">B.E. CSE (AI &amp; ML) · Sem III · Course 2023114 · 4 teaching hours · CO5<br>
+    Built from <em>Assignment 5.docx</em>, the supplied question banks, the MUSA practice material and the official University of Mumbai syllabus.</div>
+  </header>
+
+  <div class="toc">
+    <ol>
+      <li><a href="#syllabus">Syllabus and scope</a></li>
+      <li><a href="#problem">The I/O problem</a></li>
+      <li><a href="#buses">Buses: structure and types</a></li>
+      <li><a href="#arbitration">Bus arbitration</a></li>
+      <li><a href="#standards">Bus standards: PCI, USB and SATA</a></li>
+      <li><a href="#interface">The I/O interface</a></li>
+      <li><a href="#module-channel">I/O module, channel and processor</a></li>
+      <li><a href="#programmed">Programmed I/O</a></li>
+      <li><a href="#interrupt">Interrupt-driven I/O</a></li>
+      <li><a href="#dma">Direct Memory Access</a></li>
+      <li><a href="#compare">Comparing the three techniques</a></li>
+      <li><a href="#qbank">Question bank and assignment coverage</a></li>
+      <li><a href="#practice">Independent practice</a></li>
+      <li><a href="#answer-key">Answer key</a></li>
+      <li><a href="#mistakes">Common mistakes</a></li>
+      <li><a href="#revision">Last-minute revision sheet</a></li>
+      <li><a href="#references">References and verification notes</a></li>
+    </ol>
+  </div>
+
+  <nav class="nav">
+    <a href="#buses">Buses</a>
+    <a href="#arbitration">Arbitration</a>
+    <a href="#standards">Standards</a>
+    <a href="#interface">Interface</a>
+    <a href="#module-channel">Module / channel</a>
+    <a href="#programmed">Programmed I/O</a>
+    <a href="#interrupt">Interrupts</a>
+    <a href="#dma">DMA</a>
+    <a href="#qbank">Question bank</a>
+    <a href="#practice">Practice</a>
+    <a href="#revision">Revision</a>
+  </nav>
+
+  <h2 id="syllabus">Syllabus and scope</h2>
+
+  <p><strong>Official module name:</strong> I/O Organization · <strong>Teaching hours:</strong> 4 · <strong>Course outcome:</strong> CO5.</p>
+
+  <div class="theory">
+    <span class="source">Official University of Mumbai syllabus, course 2023114 (Module 5 row)</span>
+    <p>“Introduction to Bus, Types of Buses and Bus Standards: Comparative study of bus standards. Bus Arbitration. I/O interface, I/O channels, I/O modules and I/O processors. Programmed I/O, Interrupt driven I/O, DMA.”</p>
+    <p>The official row lists no self-study topic for this module.</p>
+  </div>
+
+  <p>The syllabus is short but the question bank is specific. This guide follows the syllabus boundary and then teaches every term that the supplied questions name.</p>
+
+  <table>
+    <tr><th>Status</th><th>Content</th><th>Why it is here</th></tr>
+    <tr><td><strong>Prescribed</strong></td><td>Bus introduction; types of buses; comparative study of bus standards; bus arbitration; I/O interface; I/O channels, modules and processors; programmed I/O; interrupt-driven I/O; DMA.</td><td>Named in the official Module 5 row.</td></tr>
+    <tr><td><strong>Supplementary</strong></td><td>Memory-mapped vs isolated I/O; synchronous vs asynchronous buses; bus bandwidth calculations; interrupt latency and overhead; DMA cycle stealing and cache coherence; PCIe as the successor to PCI.</td><td>Needed to answer the numericals and the “compare / explain” parts of the question bank. These are clearly marked as supplementary where they go beyond the syllabus line.</td></tr>
+  </table>
+
+  <p><strong>Exam pattern.</strong> The end-semester paper is 60 marks in 2 hours, with six 20-mark questions. Question 1 is compulsory and mixes modules; you attempt any three of the remaining questions. Module 5 is only 4 teaching hours, so it usually appears as one part of a larger question (often 5–10 marks) rather than as a full 20-mark question. The DMA numerical is the most likely numerical from this module.</p>
+
+  <div class="theory">
+    <span class="source">What this guide does not claim</span>
+    <p>No verified University of Mumbai question paper for course 2023114 was supplied. The questions reproduced in Section 11 are from the teacher’s question bank and the 40-question document. MUSA questions are student-association material. Nothing here is labelled as a verified University question.</p>
+  </div>
+
+  <h2 id="problem">1 · The I/O problem</h2>
+
+  <h3>1.1 Why I/O needs its own organization</h3>
+
+  <p>A processor can execute an instruction in a fraction of a nanosecond, while a keyboard produces a character when a human presses a key and a disk may take milliseconds to reach a block. Peripherals also differ wildly: a mouse sends a few bytes per second, a camera sends hundreds of megabytes per second, and each device uses its own voltage levels, connectors and protocol. The processor cannot connect to every device directly. <strong>I/O organization</strong> is the set of buses, interfaces, controllers and transfer methods that let the CPU communicate with many different devices without knowing their electrical details.</p>
+
+  <p>Three problems must be solved:</p>
+
+  <table>
+    <tr><th>Problem</th><th>Why it is hard</th><th>Typical solution</th></tr>
+    <tr><td><strong>Speed mismatch</strong></td><td>The CPU is orders of magnitude faster than most peripherals. Waiting for a device wastes processor time.</td><td>Buffering, interrupts and DMA let the CPU start a transfer and do other work.</td></tr>
+    <tr><td><strong>Device variety</strong></td><td>Different connectors, voltages, data formats (serial/parallel, analog/digital) and protocols.</td><td>An I/O interface or module hides the device details behind a standard bus interface.</td></tr>
+    <tr><td><strong>Addressing and control</strong></td><td>The CPU must select one device, state the operation, move data and learn when the operation finished.</td><td>Address decoding, control registers, status registers and interrupt or DMA handshaking.</td></tr>
+  </table>
+
+  <h3>1.2 The I/O subsystem at a glance</h3>
+
+  <p>At the top, the CPU and memory sit on the system bus. Below it, one or more <strong>I/O modules</strong> (also called controllers or interfaces) connect devices. A module may serve one device or several. In larger systems, a <strong>channel</strong> or <strong>I/O processor</strong> sits between the CPU and the modules and runs its own I/O program.</p>
+
+  <div class="eq">CPU ↔ system bus ↔ I/O module ↔ device</div>
+
+  <p>The CPU never sees the device’s internal signals. It sees a small set of registers inside the module: a <strong>data register</strong> to move a word, a <strong>status register</strong> to ask “ready / busy / error?”, and a <strong>control register</strong> to start an operation or set a mode.</p>
+
+  <h3>1.3 Memory-mapped and isolated I/O</h3>
+
+  <p>There are two ways to give the CPU access to those registers.</p>
+
+  <table>
+    <tr><th>Feature</th><th>Memory-mapped I/O</th><th>Isolated (port-mapped) I/O</th></tr>
+    <tr><td>Address space</td><td>Device registers occupy addresses in the normal memory space.</td><td>A separate I/O address space is used.</td></tr>
+    <tr><td>Instructions</td><td>Ordinary load and store instructions work on device registers.</td><td>Special instructions such as <code>IN</code> and <code>OUT</code>.</td></tr>
+    <tr><td>Control lines</td><td>Normal memory read/write lines.</td><td>Separate I/O read/write lines, plus a line that distinguishes memory from I/O.</td></tr>
+    <tr><td>Address space cost</td><td>Consumes part of the memory address range.</td><td>Does not reduce the memory address range.</td></tr>
+    <tr><td>Programming</td><td>Flexible: any instruction that can address memory can address a register.</td><td>Restricted to the I/O instructions, but keeps I/O separate from memory.</td></tr>
+    <tr><td>Typical use</td><td>Microcontrollers, memory-mapped peripherals, modern SoCs.</td><td>Intel-style processors with an I/O address space (for example the 8086 family).</td></tr>
+  </table>
+
+  <p>In an exam, a single sentence is enough: memory-mapped I/O uses normal memory instructions and addresses, while isolated I/O uses a separate port space and special instructions. The 8086 supports both.</p>
+
+  <h3>1.4 The three transfer techniques, previewed</h3>
+
+  <table>
+    <tr><th>Technique</th><th>Who moves each word?</th><th>CPU involvement</th></tr>
+    <tr><td><strong>Programmed I/O</strong></td><td>The CPU, one word at a time, after polling the status register.</td><td>Continuous; the CPU busy-waits.</td></tr>
+    <tr><td><strong>Interrupt-driven I/O</strong></td><td>The CPU, one word at a time, inside an interrupt service routine.</td><td>Per word, but only when the device is ready.</td></tr>
+    <tr><td><strong>DMA</strong></td><td>The DMA controller, directly between device and memory.</td><td>Only at setup and completion.</td></tr>
+  </table>
+
+  <p>The rest of this module explains the buses that carry these transfers, the arbitration that decides who may use a bus, the interface that connects a device, and then each transfer technique in detail.</p>
+
+  <h2 id="buses">2 · Buses: structure and types</h2>
+
+  <h3>2.1 What a bus is</h3>
+
+  <p>A <strong>bus</strong> is a set of shared electrical lines with a defined protocol that lets several units communicate. A unit that can start a transfer is a <strong>bus master</strong>; a unit that responds is a <strong>bus slave</strong>. The CPU is normally the master, but a DMA controller or another processor can also become master. Because the lines are shared, only one master may drive them at a time; this is why bus arbitration (Section 3) is needed.</p>
+
+  <figure>
+    <svg viewBox="0 0 620 300" role="img" aria-labelledby="m5-bus-title m5-bus-desc" style="max-width:620px">
+      <title id="m5-bus-title">The three groups of system bus lines</title>
+      <desc id="m5-bus-desc">The CPU, memory and I/O modules are connected by three buses: a bidirectional data bus, a unidirectional address bus, and a control bus carrying read, write, interrupt and bus-grant signals.</desc>
+      <g font-family="Helvetica, Arial" font-size="12" fill="var(--ink)">
+        <rect x="30" y="20" width="120" height="50" fill="var(--surface-hi)" stroke="var(--ink)"/>
+        <text x="90" y="50" text-anchor="middle">CPU</text>
+        <rect x="250" y="20" width="120" height="50" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="310" y="50" text-anchor="middle">Memory</text>
+        <rect x="470" y="20" width="120" height="50" fill="var(--surface)" stroke="var(--ink)"/>
+        <text x="530" y="50" text-anchor="middle">I/O modules</text>
+
+        <line x1="30" y1="110" x2="590" y2="110" stroke="var(--ink)" stroke-width="2"/>
+        <text x="30" y="103" font-weight="700">Address bus (unidirectional)</text>
+        <text x="30" y="128" font-size="11" fill="var(--muted)">n lines → 2ⁿ addressable locations; master drives, slaves decode</text>
+
+        <line x1="30" y1="170" x2="590" y2="170" stroke="var(--ink)" stroke-width="4"/>
+        <text x="30" y="163" font-weight="700">Data bus (bidirectional)</text>
+        <text x="30" y="188" font-size="11" fill="var(--muted)">m lines → m bits per transfer; width sets the word size</text>
+
+        <line x1="30" y1="230" x2="590" y2="230" stroke="var(--ink)" stroke-width="2" stroke-dasharray="6 4"/>
+        <text x="30" y="223" font-weight="700">Control bus (individual lines, both directions)</text>
+        <text x="30" y="248" font-size="11" fill="var(--muted)">read / write · memory or I/O select · interrupt request / acknowledge · bus request / grant · clock · reset</text>
+
+        <line x1="90" y1="70" x2="90" y2="110" stroke="var(--muted)"/>
+        <line x1="310" y1="70" x2="310" y2="110" stroke="var(--muted)"/>
+        <line x1="530" y1="70" x2="530" y2="110" stroke="var(--muted)"/>
+        <line x1="90" y1="110" x2="90" y2="170" stroke="var(--muted)"/>
+        <line x1="310" y1="110" x2="310" y2="170" stroke="var(--muted)"/>
+        <line x1="530" y1="110" x2="530" y2="170" stroke="var(--muted)"/>
+        <line x1="90" y1="170" x2="90" y2="230" stroke="var(--muted)"/>
+        <line x1="310" y1="170" x2="310" y2="230" stroke="var(--muted)"/>
+        <line x1="530" y1="170" x2="530" y2="230" stroke="var(--muted)"/>
+      </g>
+    </svg>
+    <figcaption>Figure 1. A system bus has three functional groups. The address bus selects, the data bus carries, and the control bus coordinates.</figcaption>
+  </figure>
+
+  <h3>2.2 Data bus, address bus and control bus</h3>
+
+  <table>
+    <tr><th>Bus</th><th>Direction</th><th>What it carries</th><th>Width determines</th></tr>
+    <tr><td><strong>Data bus</strong></td><td>Bidirectional</td><td>The actual data word between CPU, memory and I/O.</td><td>How many bits move in one transfer (8, 16, 32, 64 …).</td></tr>
+    <tr><td><strong>Address bus</strong></td><td>Unidirectional (master → slaves)</td><td>The address of the memory location or I/O register being selected.</td><td>The size of the address space: n lines → 2<sup>n</sup> locations.</td></tr>
+    <tr><td><strong>Control bus</strong></td><td>Individual lines, both directions</td><td>Read/write, memory or I/O select, interrupt request and acknowledge, bus request and grant, clock, reset.</td><td>Which operation is performed and how the transfer is synchronised.</td></tr>
+  </table>
+
+  <p>The address bus is unidirectional because the master always names the target. The data bus is bidirectional because a read moves data towards the CPU and a write moves it away. The control bus is not one wire but a collection of single-purpose lines, each with its own direction and timing.</p>
+
+  <h3>2.3 Bus width, bandwidth and transfer time</h3>
+
+  <div class="eq">address space = 2<sup>address lines</sup> locations</div>
+  <div class="eq">bytes per transfer = data lines ÷ 8</div>
+  <div class="eq">bandwidth = bytes per transfer × transfers per second</div>
+  <div class="eq">transfer time = amount of data ÷ bandwidth</div>
+
+  <p>For a bus that completes one transfer per clock cycle, the nominal bandwidth is:</p>
+
+  <div class="eq">bandwidth = (data lines ÷ 8) × clock frequency</div>
+
+  <p class="eq-note">This is the <em>nominal</em> or peak value. Real bandwidth is lower because of wait states, arbitration, address phases, refresh and protocol overhead. Say “nominal” when you use the formula.</p>
+
+  <div class="example">
+    <div class="example-title">Supplementary worked example — bus bandwidth</div>
+    <p>A system bus has 32 data lines and runs at 66 MHz. One transfer is completed per clock cycle. Find the address space if the address bus has 24 lines, and the nominal data bandwidth.</p>
+  </div>
+
+  <div class="qa-question"><div class="qa-label">Question</div>
+    <p>32 data lines, 24 address lines, 66 MHz, one transfer per cycle. Find the address space and the nominal bandwidth.</p>
+  </div>
+  <div class="qa-solution"><div class="qa-label">Solution</div>
+    <div class="eq">address space = 2<sup>24</sup> bytes = 16,777,216 bytes = 16 MB</div>
+    <div class="eq">bytes per transfer = 32 ÷ 8 = 4 bytes</div>
+    <div class="eq">bandwidth = 4 × 66 × 10<sup>6</sup> = 264 × 10<sup>6</sup> B/s = 264 MB/s</div>
+    <p><strong>Interpretation:</strong> 264 MB/s is the peak. If the bus needs two clock cycles per transfer (an address phase and a data phase), the sustained value falls to 132 MB/s.</p>
+  </div>
+  <div class="qa-final"><div class="qa-label">Final Answer</div>
+    <p class="qa-final-text"><strong>16 MB address space; nominal bandwidth 264 MB/s.</strong></p>
+  </div>
+  <p class="eq-note">Supplementary example written for this guide, not a teacher problem.</p>
+
+  <h3>2.4 Synchronous and asynchronous buses</h3>
+
+  <table>
+    <tr><th>Feature</th><th>Synchronous bus</th><th>Asynchronous bus</th></tr>
+    <tr><td>Timing</td><td>All transfers are tied to a common clock.</td><td>Transfers use handshake signals (request / acknowledge).</td></tr>
+    <tr><td>Speed</td><td>Fast for devices that can meet the clock.</td><td>Adapts to each device; a slow device simply takes longer.</td></tr>
+    <tr><td>Design</td><td>Simpler protocol, but the bus must be short enough that signals arrive within one clock.</td><td>More control lines and logic, but tolerant of distance and mixed device speeds.</td></tr>
+    <tr><td>Typical use</td><td>Processor-local buses, memory buses, PCI.</td><td>Legacy peripheral buses, handshaked device interfaces, some on-chip buses.</td></tr>
+  </table>
+
+  <h3>2.5 Single-bus and multiple-bus organisation</h3>
+
+  <p>A <strong>single-bus</strong> system connects CPU, memory and all I/O to one shared bus. It is cheap and simple, but every transfer competes for the same lines, so the bus becomes a bottleneck. A <strong>multiple-bus</strong> or hierarchical system uses several buses: a fast processor-local bus, a memory bus, and one or more I/O buses connected by bridges. This lets the CPU and memory exchange data while I/O traffic proceeds on a separate bus, and it lets each bus run at a speed suited to its devices. Modern systems are hierarchical: CPU ↔ cache ↔ memory bus ↔ PCIe root complex ↔ USB/SATA controllers.</p>
+
+  <h3>2.6 The bus transaction</h3>
+
+  <ol class="steps">
+    <li><strong>Request and arbitration:</strong> a master asks for the bus; the arbiter grants it.</li>
+    <li><strong>Address phase:</strong> the master puts the target address on the address bus and asserts the memory or I/O select line.</li>
+    <li><strong>Data phase:</strong> for a write, the master drives data; for a read, the slave drives data. The read/write line states the direction.</li>
+    <li><strong>Acknowledgment:</strong> the slave asserts ready or acknowledge when the transfer is complete; wait states may extend the cycle.</li>
+    <li><strong>Release:</strong> the master releases the bus, and the arbiter may grant it to another master.</li>
+  </ol>
+
+  <h3>2.7 Exam answer plan</h3>
+
+  <ol class="steps">
+    <li>Define a bus and distinguish master from slave.</li>
+    <li>Draw the CPU–memory–I/O block diagram with the three buses.</li>
+    <li>Explain data, address and control buses: direction, function, and what the width determines.</li>
+    <li>Give the bandwidth formula and one numerical.</li>
+    <li>Contrast synchronous and asynchronous buses, and single-bus with multiple-bus organisation.</li>
+    <li>List the phases of a bus transaction.</li>
+  </ol>
