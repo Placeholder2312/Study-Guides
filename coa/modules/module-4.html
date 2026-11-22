@@ -536,6 +536,7 @@
       <li><a href="#interleaving">Interleaved memory</a></li>
       <li><a href="#associative">Associative memory</a></li>
       <li><a href="#qbank">Question bank and assignment coverage</a></li>
+      <li><a href="#pyq">Previous-year questions</a></li>
       <li><a href="#practice">Independent practice</a></li>
       <li><a href="#answer-key">Answer key</a></li>
       <li><a href="#mistakes">Common mistakes</a></li>
@@ -554,6 +555,7 @@
     <a href="#coherence">Coherence</a>
     <a href="#interleaving">Interleaving</a>
     <a href="#qbank">Question bank</a>
+    <a href="#pyq">PYQs</a>
     <a href="#practice">Practice</a>
     <a href="#revision">Revision</a>
   </nav>
@@ -2584,9 +2586,114 @@
   </table>
 
 
-  <h2 id="practice">13 · Independent practice</h2>
+  <h2 id="pyq">13 · Previous-year questions (MUSA practice paper and question bank)</h2>
 
-  <p>These questions are <strong>written for this guide</strong>. They are not teacher questions and not University questions. They are ordered by difficulty and they cover every numerical type that the supplied material uses. Attempt them with the book closed, then mark yourself from the separate answer key in Section 14. Give units in every final answer.</p>
+  <div class="theory">
+    <span class="source">Provenance</span>
+    <p>These are the Module 4 questions from the MUSA practice paper (Set I, winter 2025) and the MUSA question bank (winter 2026). They are student-association material in University of Mumbai pattern, <strong>not verified University papers</strong>. Each one has a worked solution and a final answer.</p>
+  </div>
+
+  <section class="exam-q" id="pyq1">
+    <div class="exam-q-title">PYQ 1 · Memory characteristics and hierarchy · 3–5 marks</div>
+    <div class="exam-source">MUSA Paper Set I Q1(d); MUSA QB Q4, Q24(ii) — MUSA practice material, not a verified University paper</div>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>List and describe the key characteristics of memory. OR Explain the memory hierarchy with a diagram.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Characteristics of memory.</strong></p><ul><li><strong>Capacity:</strong> total bits or bytes stored.</li><li><strong>Access time:</strong> delay between a request and the data being available.</li><li><strong>Cycle time:</strong> minimum gap between two successive operations (access time plus recovery).</li><li><strong>Transfer rate:</strong> bytes moved per second.</li><li><strong>Access method:</strong> sequential, direct, random or associative.</li><li><strong>Volatility:</strong> whether contents survive power loss.</li><li><strong>Physical type and cost per bit:</strong> semiconductor, magnetic, optical; cost falls as capacity rises.</li></ul><p><strong>Memory hierarchy.</strong> Levels from top to bottom: registers, L1 cache, L2/L3 cache, main memory (DRAM), secondary storage (SSD/HDD). Going down, capacity and access time increase while cost per bit and speed fall.</p><table><tr><th>Level</th><th>Technology</th><th>Speed</th><th>Capacity</th><th>Cost per bit</th></tr><tr><td>Registers</td><td>Flip-flops in CPU</td><td>Fastest</td><td>Bytes</td><td>Highest</td></tr><tr><td>Cache L1–L3</td><td>SRAM</td><td>Very fast</td><td>KB–MB</td><td>High</td></tr><tr><td>Main memory</td><td>DRAM</td><td>Fast</td><td>GB</td><td>Medium</td></tr><tr><td>Secondary</td><td>SSD / HDD</td><td>Slow</td><td>TB</td><td>Lowest</td></tr></table><p>The hierarchy works because of locality of reference: programs reuse recent data (temporal) and nearby data (spatial), so most accesses are served by the small fast levels and the average access time stays close to that of the fastest level.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">Characteristics: capacity, access time, cycle time, transfer rate, access method, volatility, cost. Hierarchy: registers → cache → main memory → secondary storage; speed and cost per bit fall, capacity rises, and locality makes it effective.</p>
+    </div>
+  </section>
+
+  <section class="exam-q" id="pyq2">
+    <div class="exam-q-title">PYQ 2 · SRAM vs DRAM · 3 marks</div>
+    <div class="exam-source">MUSA Paper Set I Q1(e); MUSA QB Q23(iv) — MUSA practice material, not a verified University paper</div>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>Compare SRAM and DRAM.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <table><tr><th>Point</th><th>SRAM</th><th>DRAM</th></tr><tr><td>Storage element</td><td>Flip-flop (about 6 transistors)</td><td>One transistor and one capacitor</td></tr><tr><td>Refresh</td><td>Not needed</td><td>Needed every few milliseconds</td></tr><tr><td>Speed</td><td>Faster</td><td>Slower</td></tr><tr><td>Density</td><td>Low</td><td>High</td></tr><tr><td>Cost per bit</td><td>Higher</td><td>Lower</td></tr><tr><td>Power</td><td>Low when idle, higher at speed</td><td>Higher because of refresh</td></tr><tr><td>Typical use</td><td>Cache memory</td><td>Main memory</td></tr></table>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">SRAM is fast, costly and refresh-free (cache); DRAM is dense, cheap and needs refresh (main memory).</p>
+    </div>
+  </section>
+
+  <section class="exam-q" id="pyq3">
+    <div class="exam-q-title">PYQ 3 · Virtual memory, paging and segmentation · 8 marks</div>
+    <div class="exam-source">MUSA Paper Set I Q4(a); MUSA QB Q10 — MUSA practice material, not a verified University paper</div>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>Explain virtual memory in detail. Describe paging and segmentation with neat diagrams.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Virtual memory</strong> lets a program use a larger address space than the physical RAM. The program works with virtual addresses, and the memory management unit (MMU) translates them to physical addresses using tables. Only the parts in use are kept in RAM; the rest stays on disk, and a missing part is fetched on a page fault. Benefits: programs larger than RAM, isolation between processes, and simple memory allocation.</p><p><strong>Paging.</strong> Virtual memory is split into equal fixed-size <em>pages</em> and physical memory into frames of the same size. A virtual address is <code>page number | offset</code>. The page table maps each page number to a frame number, and the physical address is <code>frame number | offset</code>. There is no external fragmentation, only a little internal fragmentation in the last page. A TLB caches recent translations.</p><p><strong>Segmentation.</strong> The program is split into variable-size logical <em>segments</em> (code, data, stack). A virtual address is <code>segment number | offset</code>. The segment table stores each segment's base and limit; the offset is checked against the limit and added to the base. It matches the programmer's view and eases sharing and protection, but causes external fragmentation.</p><table><tr><th>Point</th><th>Paging</th><th>Segmentation</th></tr><tr><td>Unit size</td><td>Fixed (page)</td><td>Variable (segment)</td></tr><tr><td>View</td><td>Physical, invisible to user</td><td>Logical, visible to user</td></tr><tr><td>Fragmentation</td><td>Internal</td><td>External</td></tr><tr><td>Table entry</td><td>Frame number</td><td>Base and limit</td></tr></table><p>The diagrams of the page-table lookup and the segment-table lookup are in Sections 5 and 6 of this guide.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">Virtual memory maps virtual to physical addresses; paging uses fixed pages and a page table (page + offset), segmentation uses variable segments with base and limit (segment + offset).</p>
+    </div>
+  </section>
+
+  <section class="exam-q" id="pyq4">
+    <div class="exam-q-title">PYQ 4 · Fully associative cache: tag bits · 8 marks</div>
+    <div class="exam-source">MUSA Paper Set I Q4(a) OR — MUSA practice material, not a verified University paper</div>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>What is cache memory? Consider a fully associative mapped cache with block size 4 KB. The size of main memory is 16 GB. Find the number of bits in the tag.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Cache memory</strong> is a small, fast SRAM between the CPU and main memory that holds copies of recently used blocks, so most accesses avoid the slow main memory.</p><p><strong>Step 1 — Address bits.</strong> 16 GB = 2<sup>4</sup> × 2<sup>30</sup> = 2<sup>34</sup> bytes, so the physical address has 34 bits.</p><p><strong>Step 2 — Offset bits.</strong> Block size 4 KB = 2<sup>12</sup> bytes, so offset = 12 bits.</p><p><strong>Step 3 — Tag.</strong> In a fully associative cache a block can go in any line, so there is no index field. Address = tag | offset.</p><div class="eq">tag = 34 − 12 = 22 bits</div><p>Check: 22 + 12 = 34.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text"><strong>Tag = 22 bits</strong> (address 34 bits, offset 12 bits, no index).</p>
+    </div>
+  </section>
+
+  <section class="exam-q" id="pyq5">
+    <div class="exam-q-title">PYQ 5 · Cache mapping techniques · 5–8 marks</div>
+    <div class="exam-source">MUSA Paper Set I Q6(d); MUSA QB Q6 — MUSA practice material, not a verified University paper</div>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>Explain the different cache memory mapping techniques with diagrams, and state their advantages and disadvantages.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <table><tr><th>Technique</th><th>Placement rule</th><th>Address fields</th><th>Advantage</th><th>Disadvantage</th></tr><tr><td>Direct</td><td>Block j goes to line j mod N</td><td>tag | line | offset</td><td>Simple, one comparator, cheap</td><td>Conflict misses when blocks share a line</td></tr><tr><td>Fully associative</td><td>Any line</td><td>tag | offset</td><td>No conflict misses, best hit ratio</td><td>One comparator per line; costly and slow</td></tr><tr><td>Set associative (k-way)</td><td>Block j goes to set j mod S, any line in it</td><td>tag | set | offset</td><td>Good compromise, fewer conflicts</td><td>k comparators; more complex than direct</td></tr></table><p>Example (direct): 32-bit address, 16 KB cache, 16-byte blocks gives 1024 lines, offset 4 bits, index 10 bits and tag 18 bits. Replacement is needed in the associative forms (LRU, FIFO, random). Block diagrams of each mapping are in Section 8.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">Direct: tag | line | offset; associative: tag | offset; k-way set associative: tag | set | offset. Direct is cheapest but conflicts; associative is best but costliest; set-associative balances both.</p>
+    </div>
+  </section>
+
+  <section class="exam-q" id="pyq6">
+    <div class="exam-q-title">PYQ 6 · Interleaved and associative memory · 5 marks</div>
+    <div class="exam-source">MUSA Paper Set I Q6(a); MUSA QB Q11 — MUSA practice material, not a verified University paper</div>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>Describe interleaved and associative memory. (The question may also ask for a comparison.)</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Interleaved memory.</strong> Main memory is divided into several independent modules (banks). Consecutive addresses are spread across the modules (low-order interleaving: module = address mod M), so while one module is busy, the next can start. Several words are fetched in parallel, which raises bandwidth and hides the memory cycle time. It suits sequential access and pipelines. Drawback: extra hardware, and a gain only when accesses fall in different modules.</p><p><strong>Associative memory (content-addressable memory).</strong> A word is found by its <em>content</em>, not by an address. The key is compared with every stored word at the same time; matching words are flagged by the match register, and the mask register selects which bits take part. Search is very fast (one cycle) but each cell needs comparison logic, so it is expensive and small. Used in TLBs and cache tag lookup.</p><table><tr><th>Point</th><th>Interleaved</th><th>Associative</th></tr><tr><td>Access by</td><td>Address</td><td>Content</td></tr><tr><td>Purpose</td><td>Raise bandwidth</td><td>Fast search</td></tr><tr><td>Cost</td><td>Moderate</td><td>High (logic per cell)</td></tr><tr><td>Use</td><td>Main memory</td><td>TLB, cache tags</td></tr></table>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">Interleaved memory spreads consecutive addresses over parallel modules to raise bandwidth; associative memory is searched by content in parallel, at higher cost.</p>
+    </div>
+  </section>
+
+  <section class="exam-q" id="pyq7">
+    <div class="exam-q-title">PYQ 7 · Cache memory and cache coherency · 5 marks</div>
+    <div class="exam-source">MUSA Paper Set I Q6(b); MUSA QB Q24(iii) — MUSA practice material, not a verified University paper</div>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>Write a short note on cache memory and on cache coherency, and the techniques to resolve it.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Cache memory.</strong> A small, fast SRAM holding recently used blocks. Hit ratio h and miss penalty give the average access time: <code>t<sub>avg</sub> = h·t<sub>cache</sub> + (1 − h)·t<sub>memory</sub></code>. It works because of temporal and spatial locality. Levels L1, L2 and L3 trade speed for size.</p><p><strong>Cache coherency.</strong> In a multiprocessor each CPU has its own cache. If two caches hold X = 50 and one writes 75, the other still reads the stale 50. Coherence means every processor sees a consistent value for each shared location.</p><ul><li><strong>Write policies:</strong> write-through updates memory on every write; write-back delays it until eviction.</li><li><strong>Snooping:</strong> every cache watches the shared bus; on a write, other copies are invalidated (write-invalidate) or updated (write-update).</li><li><strong>MESI protocol:</strong> each line is Modified, Exclusive, Shared or Invalid; a write to a Shared line invalidates other copies.</li><li><strong>Directory-based:</strong> a directory records which caches hold each block (for large systems).</li></ul>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">Cache memory speeds up access using locality; coherency keeps shared copies consistent using snooping with write-invalidate or update, MESI, or a directory.</p>
+    </div>
+  </section>
+
+  <h2 id="practice">14 · Independent practice</h2>
+
+  <p>These questions are <strong>written for this guide</strong>. They are not teacher questions and not University questions. They are ordered by difficulty and they cover every numerical type that the supplied material uses. Attempt them with the book closed, then mark yourself from the separate answer key in Section 15. Give units in every final answer.</p>
 
   <div class="practice">
     <h3>Practice Questions</h3>
@@ -2624,7 +2731,7 @@
     </ol>
   </div>
 
-  <h2 id="answer-key">14 · Answer key</h2>
+  <h2 id="answer-key">15 · Answer key</h2>
 
   <p>Mark your work against the working, not only the final number. A correct final answer with a wrong method will not earn full marks in the exam.</p>
 
@@ -2703,7 +2810,7 @@
     </ol>
   </div>
 
-  <h2 id="mistakes">15 · Common mistakes</h2>
+  <h2 id="mistakes">16 · Common mistakes</h2>
 
   <div class="common-mistakes">
     <h3>Errors that cost marks, and the fix</h3>
@@ -2727,7 +2834,7 @@
     </table>
   </div>
 
-  <h2 id="revision">16 · Last-minute revision sheet</h2>
+  <h2 id="revision">17 · Last-minute revision sheet</h2>
 
   <div class="revision-sheet">
     <h3>Ten minutes before the paper</h3>
@@ -2755,7 +2862,7 @@
     <p><strong>Answer discipline.</strong> State the formula, substitute with units, show the arithmetic, box the final answer with its unit, and add one line of interpretation. Draw the diagram first if the question says “with a neat diagram”.</p>
   </div>
 
-  <h2 id="references">17 · References and attribution</h2>
+  <h2 id="references">18 · References and attribution</h2>
 
   <div class="references">
     <h3>Sources used</h3>
