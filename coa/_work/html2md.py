@@ -135,6 +135,9 @@ def blocks(el):
                 out.append("*" + text_of(srcs[0]) + "*")
             for p in ch.xpath("./p"):
                 out.append("> " + text_of(p))
+        elif tag == "pre":
+            code = ch.text_content().rstrip("\n")
+            out.append("```asm\n" + code + "\n```")
         elif tag == "table":
             out.append(table_md(ch))
         elif tag in ("ol", "ul"):
@@ -171,7 +174,7 @@ for el in wrap:
     cls = el.get("class", "")
     if tag == "header" or "topbar" in cls.split() or "toc" in cls.split() or cls == "nav":
         continue
-    if tag in ("h2", "h3", "h4", "p", "table", "figure", "ol", "ul", "div"):
+    if tag in ("h2", "h3", "h4", "p", "table", "figure", "ol", "ul", "pre", "div"):
         holder = LH.Element("div")
         holder.append(el)
         body.extend(blocks(holder))
