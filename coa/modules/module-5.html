@@ -515,6 +515,7 @@
       <li><a href="#dma">Direct Memory Access</a></li>
       <li><a href="#compare">Comparing the three techniques</a></li>
       <li><a href="#qbank">Question bank and assignment coverage</a></li>
+      <li><a href="#pyq">Previous-year questions</a></li>
       <li><a href="#practice">Independent practice</a></li>
       <li><a href="#answer-key">Answer key</a></li>
       <li><a href="#mistakes">Common mistakes</a></li>
@@ -533,6 +534,7 @@
     <a href="#interrupt">Interrupts</a>
     <a href="#dma">DMA</a>
     <a href="#qbank">Question bank</a>
+    <a href="#pyq">PYQs</a>
     <a href="#practice">Practice</a>
     <a href="#revision">Revision</a>
   </nav>
@@ -1447,9 +1449,100 @@
   <p>The DMA numerical (Q19) is the only numerical in the Module V question bank, and it is short enough to appear as a 3–5 mark part. The comparison of the three techniques (Q16, Q17, Q39) is the most repeated written question across all three documents, so it is the safest large answer to prepare. Bus arbitration appears in the teacher bank, the 40-question document, the MUSA bank and the MUSA practice paper — four independent sources — which makes it the most likely single written topic after the comparison. Prepare the table in Section 10 and the arbitration comparison in Section 3 until you can reproduce them from memory.</p>
 
 
-  <h2 id="practice">12 · Independent practice</h2>
+  <h2 id="pyq">12 · Previous-year questions (MUSA practice paper and question bank)</h2>
 
-  <p>These questions are <strong>written for this guide</strong>. They are not teacher questions and not University questions. They are ordered by difficulty and cover every calculation that Module 5 can reasonably ask. Attempt them with the book closed, then mark yourself from the separate answer key in Section 13. Give units in every final answer, and state any assumption you make about cycles per transfer or encoding overhead.</p>
+  <div class="theory">
+    <span class="source">Provenance</span>
+    <p>These are the Module 5 questions from the MUSA practice paper (Set I, winter 2025) and the MUSA question bank (winter 2026). They are student-association material in University of Mumbai pattern, <strong>not verified University papers</strong>. Each has a worked solution and a final answer.</p>
+  </div>
+
+  <section class="exam-q" id="pyq1">
+    <div class="exam-q-title">PYQ 1 · Bus arbitration · 7 marks</div>
+    <div class="exam-source">MUSA Paper Set I Q3(b); MUSA QB Q7 — MUSA practice material, not a verified University paper</div>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>What is bus arbitration? Describe the various bus arbitration methods.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Bus arbitration</strong> is the process of deciding which of several bus masters (CPU, DMA controller, I/O processor) may use the shared bus when more than one asks for it at the same time. It prevents two masters from driving the lines together and gives each master a fair or prioritised turn.</p><p><strong>A. Centralized arbitration</strong> (one arbiter decides):</p><ul><li><strong>Daisy chaining.</strong> All masters share one bus-request line. The arbiter sends a bus-grant signal that passes through the masters in series; the first master that wants the bus keeps the grant and the others never see it. Priority is fixed by position: the master nearest the arbiter wins. Simple and few lines, but a far master can starve and one broken link stops the chain.</li><li><strong>Polling.</strong> On a request, the arbiter polls the masters by placing a counter value on poll lines until the requester recognises its code. Priority can be changed by changing the counting order. More lines than daisy chaining, and slower.</li><li><strong>Independent request.</strong> Each master has its own request and grant pair, so the arbiter sees all requests and grants any one immediately. Fastest and fully flexible priority, but needs the most lines and the most arbiter logic.</li></ul><p><strong>B. Distributed arbitration</strong> (no central arbiter):</p><ul><li><strong>Self-selection.</strong> Each requesting device places its own priority code on shared lines; the device with the highest code recognises that it won.</li><li><strong>Collision detection.</strong> Devices transmit when the bus is free and back off and retry if a collision is detected (as in Ethernet).</li></ul><table><tr><th>Method</th><th>Lines needed</th><th>Speed</th><th>Priority</th></tr><tr><td>Daisy chain</td><td>Fewest</td><td>Slowest</td><td>Fixed by position</td></tr><tr><td>Polling</td><td>Moderate</td><td>Moderate</td><td>Programmable</td></tr><tr><td>Independent request</td><td>Most</td><td>Fastest</td><td>Flexible</td></tr><tr><td>Distributed</td><td>Shared lines</td><td>Depends on codes</td><td>By code</td></tr></table><p>The daisy-chain wiring is drawn in Figure 3.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">Arbitration chooses one bus master at a time. Centralized methods are daisy chaining, polling and independent request; distributed methods are self-selection and collision detection.</p>
+    </div>
+  </section>
+
+  <section class="exam-q" id="pyq2">
+    <div class="exam-q-title">PYQ 2 · DMA with diagram · 7 marks</div>
+    <div class="exam-source">MUSA Paper Set I Q5(b) — MUSA practice material, not a verified University paper</div>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>Explain the concept of DMA in detail with a diagram.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Concept.</strong> Direct Memory Access lets an I/O device move a block of data to or from main memory <em>without the CPU handling each word</em>. A DMA controller takes over the bus for the transfer, so the CPU is free for other work and only deals with the start and the end. It suits fast devices such as disks and network cards.</p><p><strong>Diagram.</strong> The DMA controller sits between the device and memory and shares the system bus with the CPU; see Figure 2. It holds an <em>address register</em> (where in memory the next word goes), a <em>word-count register</em> (how many words are left) and a <em>control/status register</em> (direction, mode, start).</p><p><strong>Steps of a transfer.</strong></p><ol><li>The CPU programs the controller: memory address, word count, direction. Then it carries on with other work.</li><li>The device raises DMA request (DREQ) when it has data.</li><li>The controller sends a bus request (HOLD) to the CPU.</li><li>The CPU finishes its current bus cycle and replies bus grant (HLDA); the controller is now bus master.</li><li>The controller puts the address on the address bus and moves the word between device and memory. It increments the address and decrements the count.</li><li>Steps 2–5 repeat. When the count reaches zero the controller releases the bus and interrupts the CPU to signal completion.</li></ol><ul><li><strong>Burst mode:</strong> the controller keeps the bus for the whole block.</li><li><strong>Cycle stealing:</strong> it takes the bus for one word at a time and gives it back.</li><li><strong>Transparent mode:</strong> it transfers only when the CPU is not using the bus.</li></ul><p><strong>Advantages:</strong> fast block transfer, CPU mostly free, low per-word overhead. <strong>Disadvantages:</strong> extra hardware, the bus is shared (CPU may stall), and cache coherence must be handled.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">DMA moves blocks directly between device and memory under a DMA controller (address, count, control registers); the CPU only starts the transfer and receives one completion interrupt.</p>
+    </div>
+  </section>
+
+  <section class="exam-q" id="pyq3">
+    <div class="exam-q-title">PYQ 3 · Programmed I/O and interrupt-driven I/O · 7 marks</div>
+    <div class="exam-source">MUSA Paper Set I Q5(b) OR — MUSA practice material, not a verified University paper</div>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>Explain in detail programmed I/O and interrupt-driven I/O data transfer techniques.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>Programmed I/O.</strong> The CPU controls the whole transfer by executing I/O instructions. For each word it reads the device status register in a loop (<em>polling</em>) until the device is ready, then reads or writes the data register. The CPU is busy-waiting the whole time, so no other work gets done.</p><p><strong>Interrupt-driven I/O.</strong> The CPU starts the operation and goes back to other work. When the device is ready it raises an interrupt request. The CPU finishes the current instruction, saves the program counter and flags, finds the interrupt service routine (ISR) through the vector, runs it to move one word, and then returns to the interrupted program.</p><table><tr><th>Point</th><th>Programmed I/O</th><th>Interrupt-driven I/O</th></tr><tr><td>Who notices readiness</td><td>CPU, by polling</td><td>Device, by interrupt</td></tr><tr><td>CPU while waiting</td><td>Busy-waits</td><td>Runs other programs</td></tr><tr><td>Hardware</td><td>Simplest</td><td>Interrupt line and controller</td></tr><tr><td>Overhead per word</td><td>Polling loop</td><td>Context save/restore</td></tr><tr><td>Response time</td><td>Fixed by loop</td><td>Interrupt latency</td></tr><tr><td>Use</td><td>Slow devices, simple systems</td><td>Keyboards, printers, medium-speed devices</td></tr></table><p>Both move every word through the CPU. The interrupt sequence is drawn in Figure 4.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">Programmed I/O: CPU polls and moves each word, wasting time. Interrupt-driven I/O: the device interrupts when ready, the ISR moves the word, and the CPU does useful work in between.</p>
+    </div>
+  </section>
+
+  <section class="exam-q" id="pyq4">
+    <div class="exam-q-title">PYQ 4 · Compare programmed I/O, interrupt-driven I/O and DMA · 5–7 marks</div>
+    <div class="exam-source">MUSA QB Q5, Q23(v) — MUSA practice material, not a verified University paper</div>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>Explain and compare programmed I/O, interrupt-driven I/O and DMA.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <table><tr><th>Point</th><th>Programmed I/O</th><th>Interrupt-driven I/O</th><th>DMA</th></tr><tr><td>Who starts each transfer</td><td>CPU</td><td>Device interrupts CPU</td><td>DMA controller</td></tr><tr><td>Data path</td><td>Device → CPU → memory</td><td>Device → CPU → memory</td><td>Device → memory directly</td></tr><tr><td>CPU involvement</td><td>Total (busy-wait)</td><td>One ISR per word</td><td>Setup and one final interrupt</td></tr><tr><td>Extra hardware</td><td>None</td><td>Interrupt logic</td><td>DMA controller</td></tr><tr><td>Speed for blocks</td><td>Slowest</td><td>Medium</td><td>Fastest</td></tr><tr><td>CPU overhead</td><td>Highest</td><td>Medium</td><td>Lowest</td></tr><tr><td>Best for</td><td>Slow, simple devices</td><td>Keyboard, mouse, printer</td><td>Disk, network, graphics</td></tr></table><p>Figure 5 shows how the CPU time is spent in each method for the same transfer. Programmed I/O keeps the CPU occupied throughout, interrupt-driven I/O interrupts it once per word, and DMA takes only a short setup and one completion interrupt. A worked numerical comparison is in Section 10.3.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">Programmed I/O is simplest but wastes the CPU; interrupt-driven I/O frees the CPU between words; DMA moves whole blocks without the CPU and is best for fast devices.</p>
+    </div>
+  </section>
+
+  <section class="exam-q" id="pyq5">
+    <div class="exam-q-title">PYQ 5 · Buses and types of buses · 5 marks</div>
+    <div class="exam-source">MUSA QB Q19 — MUSA practice material, not a verified University paper</div>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>Explain buses in I/O organization and explain the different types of buses.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p>A <strong>bus</strong> is a shared set of lines with a protocol that lets the CPU, memory and I/O modules exchange data. A unit that starts a transfer is the <em>master</em>; the unit that answers is the <em>slave</em>.</p><ul><li><strong>By function:</strong> <em>address bus</em> (one-way, selects the location; n lines address 2<sup>n</sup> locations), <em>data bus</em> (two-way, carries the data; its width sets the bits per transfer) and <em>control bus</em> (read/write, interrupt, bus request/grant, clock).</li><li><strong>By timing:</strong> <em>synchronous</em> (a common clock times every transfer; fast but all devices must keep up) and <em>asynchronous</em> (handshaking with request and acknowledge; suits devices of different speeds).</li><li><strong>By organisation:</strong> <em>single bus</em> (all units share one bus; cheap but a bottleneck) and <em>multiple bus</em> (separate CPU–memory, I/O and expansion buses; faster).</li><li><strong>By standard:</strong> PCI (parallel expansion bus), USB (serial, hot-pluggable peripherals) and SATA (serial storage).</li></ul><p>Bandwidth = bus width × clock rate; for a 32-bit bus at 100 MHz this is 4 bytes × 100 MHz = 400 MB/s. Figure 1 shows the three groups of bus lines.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">A bus is a shared communication path made of address, data and control lines; it can be synchronous or asynchronous, single or multiple, and follows standards such as PCI, USB and SATA.</p>
+    </div>
+  </section>
+
+  <section class="exam-q" id="pyq6">
+    <div class="exam-q-title">PYQ 6 · I/O interface, I/O modules and I/O channels · 7 marks</div>
+    <div class="exam-source">MUSA QB Q22 — MUSA practice material, not a verified University paper</div>
+    <div class="qa-question"><div class="qa-label">Question</div>
+      <p>Explain the concept of an I/O interface, I/O modules and I/O channels.</p>
+    </div>
+    <div class="qa-solution"><div class="qa-label">Solution</div>
+      <p><strong>I/O interface.</strong> A device cannot connect straight to the system bus because its speed, data format and signals differ from the CPU's. The interface sits between them and provides: address decoding, data buffering, conversion of signals and data format, status and control registers (the CPU reads status and writes commands), error detection, and interrupt or DMA signalling.</p><p><strong>I/O module.</strong> A unit that contains the interface plus the control logic for one or more devices. The CPU sends it high-level commands (read, write, status) and the module hides device details, buffers data and reports completion by interrupt.</p><p><strong>I/O channel.</strong> A specialised processor that runs a <em>channel program</em> to control several devices, so the CPU only starts the program and receives a final interrupt. <em>Selector channel:</em> serves one device at a time at high speed. <em>Multiplexer channel:</em> interleaves several slow devices. An <em>I/O processor</em> is a channel with its own local memory and a fuller instruction set.</p><table><tr><th>Unit</th><th>What it does</th><th>CPU involvement</th></tr><tr><td>Interface</td><td>Adapts one device to the bus</td><td>Per command</td></tr><tr><td>I/O module</td><td>Interface plus device control</td><td>Command and interrupt</td></tr><tr><td>I/O channel / IOP</td><td>Runs I/O programs for many devices</td><td>Start and finish only</td></tr></table><p>The CPU, channel and device hierarchy is shown in Figure 6.</p>
+    </div>
+    <div class="qa-final"><div class="qa-label">Final Answer</div>
+      <p class="qa-final-text">The interface adapts a device to the bus; the I/O module adds device control and buffering; the channel is a small processor that runs I/O programs, leaving the CPU free.</p>
+    </div>
+  </section>
+
+  <h2 id="practice">13 · Independent practice</h2>
+
+  <p>These questions are <strong>written for this guide</strong>. They are not teacher questions and not University questions. They are ordered by difficulty and cover every calculation that Module 5 can reasonably ask. Attempt them with the book closed, then mark yourself from the separate answer key in Section 14. Give units in every final answer, and state any assumption you make about cycles per transfer or encoding overhead.</p>
 
   <div class="practice">
     <h3>Practice Questions</h3>
@@ -1482,7 +1575,7 @@
     </ol>
   </div>
 
-  <h2 id="answer-key">13 · Answer key</h2>
+  <h2 id="answer-key">14 · Answer key</h2>
 
   <p>Mark your work against the working, not only the final number. A correct final answer with a wrong method will not earn full marks in the exam.</p>
 
@@ -1543,7 +1636,7 @@
     </ol>
   </div>
 
-  <h2 id="mistakes">14 · Common mistakes</h2>
+  <h2 id="mistakes">15 · Common mistakes</h2>
 
   <div class="common-mistakes">
     <h3>Errors that cost marks, and the fix</h3>
@@ -1568,7 +1661,7 @@
     </table>
   </div>
 
-  <h2 id="revision">15 · Last-minute revision sheet</h2>
+  <h2 id="revision">16 · Last-minute revision sheet</h2>
 
   <div class="revision-sheet">
     <h3>Ten minutes before the paper</h3>
@@ -1596,7 +1689,7 @@
     <p><strong>Answer discipline.</strong> State the formula, substitute with units, show the arithmetic, box the final answer with its unit, and add one line of interpretation. Draw the diagram first if the question says “with a neat diagram”.</p>
   </div>
 
-  <h2 id="references">16 · References and verification notes</h2>
+  <h2 id="references">17 · References and verification notes</h2>
 
   <div class="references">
     <h3>Sources used</h3>
@@ -1623,7 +1716,7 @@
       <li>The Module 5 syllabus row lists <strong>no self-study topic</strong>, unlike Module 4. Nothing here is marked self-study.</li>
       <li>Bus speeds and standards figures are nominal or peak values for the named generations. They are not measurements of a specific machine, and real throughput is lower because of arbitration, encoding, protocol overhead and wait states.</li>
       <li>“Typical” device speeds and interrupt rates are orders of magnitude, not specifications for a named device.</li>
-      <li>Practice questions in Section 12 and the supplementary worked examples are written for this guide. They are labelled as such and are not attributed to the teacher or the University.</li>
+      <li>Practice questions in Section 13 and the supplementary worked examples are written for this guide. They are labelled as such and are not attributed to the teacher or the University.</li>
       <li>Diagrams are hand-authored SVG in this page. No generated images are used.</li>
     </ul>
 
