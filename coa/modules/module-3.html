@@ -794,6 +794,16 @@
   </div>
   <div class="qa-final"><div class="qa-label">Final Answer</div>
     <p class="qa-final-text"><strong>(a) 3FFFEH &nbsp; (b) FFFF0H.</strong></p>
+
+  <figure>
+    <svg viewBox="0 0 620 186" role="img" aria-labelledby="m3-segov-t m3-segov-d" style="max-width:100%">
+      <title id="m3-segov-t">Segment overlap</title>
+      <desc id="m3-segov-d">1000:0020 and 1002:0000 both add up to physical address 10020H.</desc>
+      <defs><marker id="s1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 z" fill="var(--ink)"/></marker></defs>
+      <g font-family="Helvetica, Arial, sans-serif"><rect x="20" y="30" width="100" height="36" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="70.0" y="48.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">seg 1000H</text><line x1="120" y1="48" x2="168" y2="48" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#s1)"/><text x="144" y="34" font-size="13" font-weight="700" fill="var(--accent)" text-anchor="middle" dominant-baseline="central">×10H</text><rect x="170" y="30" width="110" height="36" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="225.0" y="48.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">10000H</text><text x="300" y="48" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">+</text><rect x="320" y="30" width="100" height="36" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="370.0" y="48.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">off 0020H</text><text x="440" y="48" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">=</text><rect x="460" y="30" width="130" height="36" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="525.0" y="48.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">10020H</text><rect x="20" y="100" width="100" height="36" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="70.0" y="118.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">seg 1002H</text><line x1="120" y1="118" x2="168" y2="118" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#s1)"/><text x="144" y="104" font-size="13" font-weight="700" fill="var(--accent)" text-anchor="middle" dominant-baseline="central">×10H</text><rect x="170" y="100" width="110" height="36" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="225.0" y="118.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">10020H</text><text x="300" y="118" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">+</text><rect x="320" y="100" width="100" height="36" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="370.0" y="118.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">off 0000H</text><text x="440" y="118" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">=</text><rect x="460" y="100" width="130" height="36" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="525.0" y="118.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">10020H</text><text x="310" y="172" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">two different segment:offset pairs, the same physical byte</text></g>
+    </svg>
+    <figcaption>Figure 2. Segments overlap. The segment is shifted left by four bits, then the offset is added; different pairs can reach the same byte.</figcaption>
+  </figure>
   </div>
 
   <h3>2.6 Word alignment on the 16-bit bus</h3>
@@ -803,6 +813,16 @@
   <div class="eq">aligned word (even address): 1 bus cycle &nbsp;·&nbsp; misaligned word (odd address): 2 bus cycles</div>
 
   <p>This is why compilers and assemblers align 16-bit data on even addresses. A 100-word array that starts at an odd address therefore costs 200 bus cycles instead of 100, which is a 100% penalty for a one-byte misalignment.</p>
+
+  <figure>
+    <svg viewBox="0 0 620 184" role="img" aria-labelledby="m3-align-t m3-align-d" style="max-width:100%">
+      <title id="m3-align-t">Aligned and misaligned words</title>
+      <desc id="m3-align-d">A word at an even address uses both banks in one cycle; a word at an odd address spans two rows and needs two cycles.</desc>
+      <defs></defs>
+      <g font-family="Helvetica, Arial, sans-serif"><text x="115" y="14" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">Aligned word at 2</text><text x="67" y="40" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">even bank</text><text x="162" y="40" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">odd bank</text><rect x="20" y="54" width="95" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="67.5" y="71.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">addr 0</text><rect x="115" y="54" width="95" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="162.5" y="71.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">addr 1</text><rect x="20" y="88" width="95" height="34" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="67.5" y="105.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">addr 2</text><rect x="115" y="88" width="95" height="34" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="162.5" y="105.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">addr 3</text><rect x="20" y="122" width="95" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="67.5" y="139.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">addr 4</text><rect x="115" y="122" width="95" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="162.5" y="139.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">addr 5</text><text x="425" y="14" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">Misaligned word at 3</text><text x="377" y="40" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">even bank</text><text x="472" y="40" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">odd bank</text><rect x="330" y="54" width="95" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="377.5" y="71.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">addr 0</text><rect x="425" y="54" width="95" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="472.5" y="71.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">addr 1</text><rect x="330" y="88" width="95" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="377.5" y="105.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">addr 2</text><rect x="425" y="88" width="95" height="34" fill="var(--accent-soft)" stroke="var(--danger)" stroke-width="1.5"/><text x="472.5" y="105.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">addr 3</text><rect x="330" y="122" width="95" height="34" fill="var(--accent-soft)" stroke="var(--danger)" stroke-width="1.5"/><text x="377.5" y="139.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">addr 4</text><rect x="425" y="122" width="95" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="472.5" y="139.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">addr 5</text><text x="115" y="168" font-size="13" font-weight="700" fill="var(--accent)" text-anchor="middle" dominant-baseline="central">1 bus cycle</text><text x="425" y="168" font-size="13" font-weight="700" fill="var(--danger)" text-anchor="middle" dominant-baseline="central">2 bus cycles</text></g>
+    </svg>
+    <figcaption>Figure 3. Word alignment. At an even address both bytes sit in the same row; at an odd address they sit in two rows.</figcaption>
+  </figure>
 
   <h3>2.7 Exam answer plan — architecture of the 8086</h3>
 
@@ -945,7 +965,7 @@
         <text x="16" y="190" font-size="9" fill="var(--muted)">Bits 1, 3, 5 and 12–15 are undefined on the 8086. Do not assume they hold a fixed value.</text>
       </g>
     </svg>
-    <figcaption>Figure 2. The nine defined flags. The shaded bits are the control flags.</figcaption>
+    <figcaption>Figure 4. The nine defined flags. The shaded bits are the control flags.</figcaption>
   </figure>
 
   <h3>3.6 Worked example — reading the register state</h3>
@@ -1051,7 +1071,7 @@
         <text x="34" y="182" font-size="9" fill="var(--muted)">The immediate comes last, so a 16-bit immediate costs two extra bytes after the displacement.</text>
       </g>
     </svg>
-    <figcaption>Figure 3. The general format. Not every instruction uses every field; the opcode determines which optional fields follow.</figcaption>
+    <figcaption>Figure 5. The general format. Not every instruction uses every field; the opcode determines which optional fields follow.</figcaption>
   </figure>
 
   <h3>4.3 Worked example — decoding a real instruction</h3>
@@ -1080,6 +1100,16 @@
   <div class="qa-final"><div class="qa-label">Final Answer</div>
     <p class="qa-final-text"><strong>89H D8H = <code>MOV AX, BX</code> (AX ← BX).</strong></p>
   </div>
+
+    <figure>
+    <svg viewBox="0 0 620 196" role="img" aria-labelledby="m3-dec-t m3-dec-d" style="max-width:100%">
+      <title id="m3-dec-t">Decoding 89 D8</title>
+      <desc id="m3-dec-d">Byte 89H splits into opcode 100010, D 0, W 1. Byte D8H splits into mod 11, reg 011, r/m 000. Together they mean MOV AX, BX.</desc>
+      <defs></defs>
+      <g font-family="Helvetica, Arial, sans-serif"><text x="20" y="14" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="start" dominant-baseline="central">89H = 1000 1001</text><rect x="20" y="28" width="240" height="34" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="140.0" y="45.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">100010</text><rect x="260" y="28" width="60" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="290.0" y="45.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">0</text><rect x="320" y="28" width="60" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="350.0" y="45.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">1</text><text x="145" y="80" font-size="13" font-weight="400" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">opcode = MOV</text><text x="290" y="80" font-size="13" font-weight="400" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">D = 0</text><text x="350" y="80" font-size="13" font-weight="400" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">W = 1</text><text x="20" y="112" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="start" dominant-baseline="central">D8H = 1101 1000</text><rect x="20" y="126" width="90" height="34" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="65.0" y="143.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">11</text><rect x="110" y="126" width="135" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="177.5" y="143.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">011</text><rect x="245" y="126" width="135" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="312.5" y="143.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">000</text><text x="65" y="178" font-size="13" font-weight="400" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">mod</text><text x="177" y="178" font-size="13" font-weight="400" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">reg = BX</text><text x="312" y="178" font-size="13" font-weight="400" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">r/m = AX</text><rect x="410" y="70" width="190" height="44" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="505.0" y="92.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">MOV AX, BX</text><text x="505" y="134" font-size="13" font-weight="400" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">D = 0: r/m is the</text><text x="505" y="152" font-size="13" font-weight="400" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">destination</text></g>
+    </svg>
+    <figcaption>Figure 6. Decoding 89H D8H field by field: both operands are 16-bit registers, giving MOV AX, BX.</figcaption>
+  </figure>
 
   <h3>4.4 Worked example — maximum instruction length</h3>
 
@@ -1206,7 +1236,7 @@
         <text x="310" y="14" text-anchor="middle" font-size="9" fill="var(--muted)">return from interrupt service routine</text>
       </g>
     </svg>
-    <figcaption>Figure 4. The instruction cycle. The interrupt check sits between execute and the next fetch.</figcaption>
+    <figcaption>Figure 7. The instruction cycle. The interrupt check sits between execute and the next fetch.</figcaption>
   </figure>
 
   <h3>5.5 Clock, machine cycle and instruction cycle</h3>
@@ -1344,7 +1374,7 @@
         <text x="410" y="34" font-size="9" fill="var(--muted)">result wraps inside 1 MB</text>
       </g>
     </svg>
-    <figcaption>Figure 5. Two additions produce the physical address. The segment is shifted, not merely added, because it is a 16-bit base for a 20-bit space.</figcaption>
+    <figcaption>Figure 8. Two additions produce the physical address. The segment is shifted, not merely added, because it is a 16-bit base for a 20-bit space.</figcaption>
   </figure>
 
   <div class="example">
@@ -1534,7 +1564,7 @@
         <line x1="502" y1="196" x2="502" y2="228" stroke="var(--ink)" marker-end="url(#m3-hw-arrow)"/>
       </g>
     </svg>
-    <figcaption>Figure 6. A hardwired control unit. The timing state and the decoded opcode are combined in fixed logic.</figcaption>
+    <figcaption>Figure 9. A hardwired control unit. The timing state and the decoded opcode are combined in fixed logic.</figcaption>
   </figure>
 
   <h3>8.2 The parts</h3>
@@ -1668,7 +1698,7 @@
         <line x1="300" y1="258" x2="300" y2="228" stroke="var(--ink)" marker-end="url(#m3-mc-arrow)"/>
       </g>
     </svg>
-    <figcaption>Figure 7. A microprogrammed control unit. The control memory holds the microprogram; the sequencer chooses the next microinstruction.</figcaption>
+    <figcaption>Figure 10. A microprogrammed control unit. The control memory holds the microprogram; the sequencer chooses the next microinstruction.</figcaption>
   </figure>
 
   <h3>9.2 The parts</h3>
@@ -1696,6 +1726,16 @@
     <tr><td>Decoding</td><td>Little or none</td><td>Needs a decoder and therefore delay</td></tr>
     <tr><td>Typical use</td><td>Fast machines, wide control words</td><td>Cost-sensitive machines, compact firmware</td></tr>
   </table>
+
+  <figure>
+    <svg viewBox="0 0 620 204" role="img" aria-labelledby="m3-hv-t m3-hv-d" style="max-width:100%">
+      <title id="m3-hv-t">Horizontal and vertical microinstructions</title>
+      <desc id="m3-hv-d">A horizontal microinstruction has one control bit per signal. A vertical microinstruction holds a coded field that a decoder expands into one signal.</desc>
+      <defs><marker id="s2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 z" fill="var(--ink)"/></marker></defs>
+      <g font-family="Helvetica, Arial, sans-serif"><text x="20" y="14" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="start" dominant-baseline="central">Horizontal: one bit per signal</text><rect x="20" y="28" width="40" height="30" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="40.0" y="43.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">1</text><text x="40" y="74" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">c1</text><rect x="60" y="28" width="40" height="30" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="80.0" y="43.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">0</text><text x="80" y="74" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">c2</text><rect x="100" y="28" width="40" height="30" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="120.0" y="43.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">1</text><text x="120" y="74" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">c3</text><rect x="140" y="28" width="40" height="30" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="160.0" y="43.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">0</text><text x="160" y="74" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">c4</text><rect x="180" y="28" width="40" height="30" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="200.0" y="43.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">0</text><text x="200" y="74" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">c5</text><rect x="220" y="28" width="40" height="30" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="240.0" y="43.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">1</text><text x="240" y="74" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">c6</text><rect x="260" y="28" width="40" height="30" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="280.0" y="43.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">0</text><text x="280" y="74" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">c7</text><rect x="300" y="28" width="40" height="30" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="320.0" y="43.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">0</text><text x="320" y="74" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">c8</text><rect x="340" y="28" width="40" height="30" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="360.0" y="43.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">0</text><text x="360" y="74" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">c9</text><rect x="380" y="28" width="40" height="30" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="400.0" y="43.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">1</text><text x="400" y="74" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">c10</text><rect x="420" y="28" width="40" height="30" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="440.0" y="43.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">0</text><text x="440" y="74" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">c11</text><rect x="460" y="28" width="40" height="30" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="480.0" y="43.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">0</text><text x="480" y="74" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">c12</text><text x="510" y="43" font-size="13" font-weight="400" fill="var(--ink)" text-anchor="start" dominant-baseline="central">12 bits, 3 on</text><text x="20" y="112" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="start" dominant-baseline="central">Vertical: a coded field</text><rect x="20" y="128" width="140" height="36" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="90.0" y="146.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">field 0110</text><line x1="160" y1="146" x2="208" y2="146" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#s2)"/><rect x="210" y="128" width="110" height="36" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="265.0" y="146.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">decoder</text><line x1="320" y1="146" x2="368" y2="146" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#s2)"/><rect x="370" y="128" width="220" height="36" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="480.0" y="146.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">one signal asserted</text><text x="20" y="190" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="start" dominant-baseline="central">Horizontal is wide and parallel; vertical is narrow but pays a decoder delay.</text></g>
+    </svg>
+    <figcaption>Figure 11. Horizontal against vertical. Horizontal words are wide and fast; vertical words are compact but need a decoder.</figcaption>
+  </figure>
 
   <div class="example">
     <div class="example-title">Worked example — control-memory size</div>
@@ -1852,7 +1892,7 @@
         <line x1="390" y1="170" x2="340" y2="140" stroke="var(--ink)" marker-end="url(#m3-seq-arrow)"/>
       </g>
     </svg>
-    <figcaption>Figure 8. The sequencer chooses among four next-address sources. Only one passes through the multiplexer at a time.</figcaption>
+    <figcaption>Figure 12. The sequencer chooses among four next-address sources. Only one passes through the multiplexer at a time.</figcaption>
   </figure>
 
   <h3>10.2 Addressing fields and branching</h3>
@@ -2058,14 +2098,14 @@
     <div class="exam-source">Teacher 40-question document — not a University paper</div>
     <p>Explain the instruction format of 8086. Describe the different fields present in an 8086 instruction.</p>
   </div>
-  <p><strong>Model answer.</strong> The format is variable-length, 1 to 6 bytes. Draw Figure 3 and define each field: a 6-bit opcode; D (direction) choosing whether <code>reg</code> or <code>r/m</code> is the destination; W (word) choosing 8- or 16-bit operation; a 2-bit <code>mod</code>; a 3-bit <code>reg</code>; a 3-bit <code>r/m</code>; an optional 8- or 16-bit displacement; an optional 8- or 16-bit immediate. Explain <code>mod = 11</code> as register-direct and the other values as memory forms. Decode 89H D8H: opcode 100010 (MOV), D = 0, W = 1; mod = 11, reg = 011 (BX), r/m = 000 (AX); therefore <code>MOV AX, BX</code>. State the 6-byte maximum: 1 + 1 + 2 + 2. <strong>Final:</strong> 1–6 bytes, with opcode, D/W, ModR/M, displacement and immediate fields.</p>
+  <p><strong>Model answer.</strong> The format is variable-length, 1 to 6 bytes. Draw Figure 5 and define each field: a 6-bit opcode; D (direction) choosing whether <code>reg</code> or <code>r/m</code> is the destination; W (word) choosing 8- or 16-bit operation; a 2-bit <code>mod</code>; a 3-bit <code>reg</code>; a 3-bit <code>r/m</code>; an optional 8- or 16-bit displacement; an optional 8- or 16-bit immediate. Explain <code>mod = 11</code> as register-direct and the other values as memory forms. Decode 89H D8H: opcode 100010 (MOV), D = 0, W = 1; mod = 11, reg = 011 (BX), r/m = 000 (AX); therefore <code>MOV AX, BX</code>. State the 6-byte maximum: 1 + 1 + 2 + 2. <strong>Final:</strong> 1–6 bytes, with opcode, D/W, ModR/M, displacement and immediate fields.</p>
 
   <div class="exam-q">
     <div class="exam-q-title">40Q Q21</div>
     <div class="exam-source">Teacher 40-question document — not a University paper</div>
     <p>Explain the instruction cycle with a neat state diagram. Describe the different stages involved in instruction execution.</p>
   </div>
-  <p><strong>Model answer.</strong> Draw Figure 4: fetch → decode → execute → interrupt check → back to fetch, with an interrupt branch to the interrupt cycle. <strong>Fetch:</strong> MAR ← PC, MDR ← M[MAR], IR ← MDR, PC ← PC + length. <strong>Decode:</strong> split the opcode from the operands; compute the effective address if the operand is in memory. <strong>Execute:</strong> perform the ALU operation, memory transfer or branch. <strong>Interrupt check:</strong> if IF = 1 and a request is pending, save flags, CS and IP and load the vector. Distinguish clock cycle, machine cycle and instruction cycle; the 8086 minimum bus cycle is four T-states. <strong>Final:</strong> three phases plus an interrupt check, repeated for every instruction.</p>
+  <p><strong>Model answer.</strong> Draw Figure 7: fetch → decode → execute → interrupt check → back to fetch, with an interrupt branch to the interrupt cycle. <strong>Fetch:</strong> MAR ← PC, MDR ← M[MAR], IR ← MDR, PC ← PC + length. <strong>Decode:</strong> split the opcode from the operands; compute the effective address if the operand is in memory. <strong>Execute:</strong> perform the ALU operation, memory transfer or branch. <strong>Interrupt check:</strong> if IF = 1 and a request is pending, save flags, CS and IP and load the vector. Distinguish clock cycle, machine cycle and instruction cycle; the 8086 minimum bus cycle is four T-states. <strong>Final:</strong> three phases plus an interrupt check, repeated for every instruction.</p>
 
   <div class="exam-q">
     <div class="exam-q-title">40Q Q22</div>
@@ -2108,14 +2148,14 @@ SKIP:   DEC     CL
     <div class="exam-source">Teacher 40-question document — not a University paper</div>
     <p>Explain the design of a hardwired control unit. Discuss the major design methods used for implementing hardwired control.</p>
   </div>
-  <p><strong>Model answer.</strong> Define the hardwired unit as fixed combinational logic driven by the IR, the flags and a timing state. Draw Figure 6: IR → opcode decoder; clock → sequence counter → state decoder; both into the logic array; the array drives the control lines. Give one equation, such as <code>MAR_in = T0</code> and <code>ALU_add = T3 · ADD_op + T4 · INC_op</code>, to show how opcode and timing are combined. Discuss the design methods: sequence counter (most common), ring counter (one-hot, no decoder), Johnson counter (2n states from n flip-flops), delay-element chain (cheap but drift-prone), and PLA/ROM logic (regular layout, still fixed after fabrication). State advantages (fast, no control memory, deterministic) and disadvantages (rigid, hard to modify, complex for large instruction sets). <strong>Final:</strong> fast and fixed; best for small instruction sets such as classic RISC.</p>
+  <p><strong>Model answer.</strong> Define the hardwired unit as fixed combinational logic driven by the IR, the flags and a timing state. Draw Figure 9: IR → opcode decoder; clock → sequence counter → state decoder; both into the logic array; the array drives the control lines. Give one equation, such as <code>MAR_in = T0</code> and <code>ALU_add = T3 · ADD_op + T4 · INC_op</code>, to show how opcode and timing are combined. Discuss the design methods: sequence counter (most common), ring counter (one-hot, no decoder), Johnson counter (2n states from n flip-flops), delay-element chain (cheap but drift-prone), and PLA/ROM logic (regular layout, still fixed after fabrication). State advantages (fast, no control memory, deterministic) and disadvantages (rigid, hard to modify, complex for large instruction sets). <strong>Final:</strong> fast and fixed; best for small instruction sets such as classic RISC.</p>
 
   <div class="exam-q">
     <div class="exam-q-title">40Q Q26</div>
     <div class="exam-source">Teacher 40-question document — not a University paper</div>
     <p>Explain the design of a microprogrammed control unit. What is a microinstruction? Explain microinstruction sequencing and execution.</p>
   </div>
-  <p><strong>Model answer.</strong> Define a microinstruction as one control word that specifies a set of micro-operations and a next-address choice; a microprogram is the sequence of microinstructions for one machine instruction. Draw Figure 7: control memory → MIR → control signals; CAR → control memory; sequencer → CAR; mapping logic from the opcode. Explain horizontal versus vertical encoding and give the width trade-off (64 signals: 64 bits horizontal, 7 bits fully vertical, 32 bits for eight groups of eight). For sequencing, list the four next-address sources: increment, branch, mapping and subroutine return. For execution, give the three steps: read the control word into MIR, drive the datapath, compute the next CAR. Add the control-memory calculation: 512 × 40 bits = 2.5 KB, 9 address bits. <strong>Final:</strong> a microprogrammed unit trades one control-memory access for flexibility and a regular design.</p>
+  <p><strong>Model answer.</strong> Define a microinstruction as one control word that specifies a set of micro-operations and a next-address choice; a microprogram is the sequence of microinstructions for one machine instruction. Draw Figure 10: control memory → MIR → control signals; CAR → control memory; sequencer → CAR; mapping logic from the opcode. Explain horizontal versus vertical encoding and give the width trade-off (64 signals: 64 bits horizontal, 7 bits fully vertical, 32 bits for eight groups of eight). For sequencing, list the four next-address sources: increment, branch, mapping and subroutine return. For execution, give the three steps: read the control word into MIR, drive the datapath, compute the next CAR. Add the control-memory calculation: 512 × 40 bits = 2.5 KB, 9 address bits. <strong>Final:</strong> a microprogrammed unit trades one control-memory access for flexibility and a regular design.</p>
 
   <div class="exam-q">
     <div class="exam-q-title">40Q Q27</div>
@@ -2168,10 +2208,10 @@ SKIP:   DEC     CL
   <table>
     <tr><th>Assignment group</th><th>Where the full answer is</th><th>What to add for full marks</th></tr>
     <tr><td>1 · Architecture of the 8086</td><td>Section 2 and Figure 1</td><td>BIU/EU split, 6-byte queue, 1 MB from 20 lines, one sentence on overlap.</td></tr>
-    <tr><td>2 · Register organization</td><td>Section 3 and Figure 2</td><td>Five groups, 8-bit halves, default segment pairings, 9 flags.</td></tr>
-    <tr><td>3 · Instruction format with example</td><td>Section 4 and Figure 3</td><td>Decode 89 D8 field by field; state the 6-byte maximum.</td></tr>
-    <tr><td>4 · Instruction cycle with diagram</td><td>Section 5 and Figure 4</td><td>Fetch micro-operations, interrupt check, clock versus machine cycle.</td></tr>
-    <tr><td>5 · Addressing modes</td><td>Section 6 and Figure 5</td><td>EA rule and default segment for each mode, plus one physical-address numerical.</td></tr>
+    <tr><td>2 · Register organization</td><td>Section 3 and Figure 4</td><td>Five groups, 8-bit halves, default segment pairings, 9 flags.</td></tr>
+    <tr><td>3 · Instruction format with example</td><td>Section 4 and Figure 5</td><td>Decode 89 D8 field by field; state the 6-byte maximum.</td></tr>
+    <tr><td>4 · Instruction cycle with diagram</td><td>Section 5 and Figure 7</td><td>Fetch micro-operations, interrupt check, clock versus machine cycle.</td></tr>
+    <tr><td>5 · Addressing modes</td><td>Section 6 and Figure 8</td><td>EA rule and default segment for each mode, plus one physical-address numerical.</td></tr>
   </table>
 
   <h2 id="musa">13 · MUSA question bank</h2>
@@ -2209,28 +2249,28 @@ SKIP:   DEC     CL
     <div class="exam-source">MUSA question bank (Winter 2026) — student association, not a University paper</div>
     <p>Explain Hardwired control unit. List and explain various methods to design hardwired control unit.</p>
   </div>
-  <p><strong>Model answer.</strong> Define the hardwired unit, draw Figure 6 and list the five design methods from Section 8.3: sequence counter, ring counter, Johnson counter, delay element, PLA/ROM logic. Add the Boolean equation example and two advantages and two disadvantages. <strong>Final:</strong> fast and fixed; best for small instruction sets.</p>
+  <p><strong>Model answer.</strong> Define the hardwired unit, draw Figure 9 and list the five design methods from Section 8.3: sequence counter, ring counter, Johnson counter, delay element, PLA/ROM logic. Add the Boolean equation example and two advantages and two disadvantages. <strong>Final:</strong> fast and fixed; best for small instruction sets.</p>
 
   <div class="exam-q">
     <div class="exam-q-title">MUSA QB Q14</div>
     <div class="exam-source">MUSA question bank (Winter 2026) — student association, not a University paper</div>
     <p>Explain microprogrammed control unit design with suitable diagram.</p>
   </div>
-  <p><strong>Model answer.</strong> Use Figure 7 and Section 9.2: control memory, CAR, MIR, sequencer, mapping logic and subroutine register. Explain horizontal versus vertical encoding, give the 512 × 40 = 2.5 KB calculation, and add the four-line fetch microprogram. <strong>Final:</strong> a regular memory-plus-sequencer design that trades speed for flexibility.</p>
+  <p><strong>Model answer.</strong> Use Figure 10 and Section 9.2: control memory, CAR, MIR, sequencer, mapping logic and subroutine register. Explain horizontal versus vertical encoding, give the 512 × 40 = 2.5 KB calculation, and add the four-line fetch microprogram. <strong>Final:</strong> a regular memory-plus-sequencer design that trades speed for flexibility.</p>
 
   <div class="exam-q">
     <div class="exam-q-title">MUSA QB Q17</div>
     <div class="exam-source">MUSA question bank (Winter 2026) — student association, not a University paper</div>
     <p>Draw and explain microinstruction sequencing and execution organization.</p>
   </div>
-  <p><strong>Model answer.</strong> Draw Figure 8: the four next-address sources (increment, branch, mapping, subroutine return) into a multiplexer that loads the CAR. Explain the branch-control field (condition, type, address selection) and the three execution steps (read into MIR, drive the datapath, sequence the next CAR). Add the opcode-mapping numerical: 25H → 37 × 4 = 148 = 94H. <strong>Final:</strong> sequencing chooses the next microinstruction; execution asserts its control signals.</p>
+  <p><strong>Model answer.</strong> Draw Figure 12: the four next-address sources (increment, branch, mapping, subroutine return) into a multiplexer that loads the CAR. Explain the branch-control field (condition, type, address selection) and the three execution steps (read into MIR, drive the datapath, sequence the next CAR). Add the opcode-mapping numerical: 25H → 37 × 4 = 148 = 94H. <strong>Final:</strong> sequencing chooses the next microinstruction; execution asserts its control signals.</p>
 
   <div class="exam-q">
     <div class="exam-q-title">MUSA QB Q20</div>
     <div class="exam-source">MUSA question bank (Winter 2026) — student association, not a University paper</div>
     <p>Draw and explain the instruction formats of 8086 with suitable examples.</p>
   </div>
-  <p><strong>Model answer.</strong> Draw Figure 3, define opcode, D, W, mod, reg, r/m, displacement and immediate, and decode 89H D8H as <code>MOV AX, BX</code>. State the 1–6 byte range and the 6-byte maximum with a 16-bit displacement and a 16-bit immediate. <strong>Final:</strong> variable length, with the ModR/M byte selecting register or memory operands.</p>
+  <p><strong>Model answer.</strong> Draw Figure 5, define opcode, D, W, mod, reg, r/m, displacement and immediate, and decode 89H D8H as <code>MOV AX, BX</code>. State the 1–6 byte range and the 6-byte maximum with a 16-bit displacement and a 16-bit immediate. <strong>Final:</strong> variable length, with the ModR/M byte selecting register or memory operands.</p>
 
   <div class="exam-q">
     <div class="exam-q-title">MUSA QB Q23</div>
@@ -2270,7 +2310,7 @@ SKIP:   DEC     CL
     <div class="exam-source">MUSA Practice Paper Set-1 (Winter 2025) — Q6 is 15 marks for any three short notes, so each note is about 5 marks</div>
     <p>Draw instruction cycle state diagram with interrupt.</p>
   </div>
-  <p><strong>Model answer.</strong> Draw Figure 4 and label fetch, decode, execute, interrupt check, interrupt cycle and the two return paths. Add the save sequence: flags, CS, IP; load the vector; return with <code>IRET</code>. State that the check happens after the current instruction completes. <strong>Final:</strong> a state diagram with one interrupt branch and one no-interrupt branch.</p>
+  <p><strong>Model answer.</strong> Draw Figure 7 and label fetch, decode, execute, interrupt check, interrupt cycle and the two return paths. Add the save sequence: flags, CS, IP; load the vector; return with <code>IRET</code>. State that the check happens after the current instruction completes. <strong>Final:</strong> a state diagram with one interrupt branch and one no-interrupt branch.</p>
 
 
   <h2 id="practice">14 · Independent practice</h2>
