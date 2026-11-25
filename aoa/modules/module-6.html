@@ -452,7 +452,17 @@
   :root[data-theme="dark"] { --danger: #ff7b8f; }
   @media print { :root, :root[data-theme="dark"] { --danger: #b00020; } }
   .aoa-fig figcaption { font-size: .85rem; color: var(--muted); line-height: 1.45; margin-top: .6rem; }
-  @media (max-width: 600px) { .aoa-fig { padding: .5rem; } }
+  @media (max-width: 600px) {
+    .aoa-fig { padding: .35rem; margin-left: -.6rem; margin-right: -.6rem; max-width: none; }
+    .aoa-fig figcaption { padding: 0 .25rem; }
+  }
+  .aoa-scroll { display: block; }
+  @media (max-width: 600px) {
+    .aoa-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .aoa-scroll svg { width: 520px; max-width: none; margin-left: 0; margin-right: 0; }
+    .aoa-scroll:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+    .aoa-fig--scroll figcaption::before { content: "Swipe sideways to see the whole diagram. "; display: block; font-size: .78rem; color: var(--muted); font-style: italic; margin-bottom: .15rem; }
+  }
 </style>
 <link rel="stylesheet" href="/assets/a11y.css">
 </head>
