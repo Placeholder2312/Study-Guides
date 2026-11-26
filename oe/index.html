@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OE Study Guide &mdash; Global and Regional Environmental Issues</title>
+<meta name="description" content="Exam study guide for the Open Elective Global and Regional Environmental Issues: 24 questions with recall cues, model answers, keywords, rapid review and sources.">
+<link rel="canonical" href="https://study-guides-placeholder.vercel.app/oe">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Study Guides">
+<meta property="og:title" content="OE Study Guide &mdash; Global and Regional Environmental Issues">
+<meta property="og:description" content="24 exam questions with recall cues, model answers, keywords, rapid review and sources.">
+<meta property="og:url" content="https://study-guides-placeholder.vercel.app/oe">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/a11y.css">
+<style>
+  /* OE study page: same tokens, type, spacing and square corners as the rest of the site. */
+  .callout { border:1px solid var(--line); border-left:3px solid var(--ink); background:var(--surface-alt); padding:.8rem 1rem; margin:1.25rem 0; font-size:.9rem; }
+  .callout .label, .label { display:block; font-size:.7rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin:0 0 .2rem; }
+  .callout p { margin:0; }
+  .oe-tools { border:1px solid var(--line); background:var(--surface); padding:.8rem; margin:1.25rem 0; }
+  .oe-row { display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; }
+  .seg { display:inline-flex; border:1px solid var(--ink); }
+  .seg button { font:inherit; font-size:.85rem; font-weight:600; color:var(--ink); background:var(--bg); border:0; padding:.45rem .8rem; min-height:44px; cursor:pointer; }
+  .seg button + button { border-left:1px solid var(--ink); }
+  .seg button[aria-pressed="true"] { background:var(--ink); color:var(--bg); }
+  .seg button:focus-visible, .btn:focus-visible, .jump:focus-visible, .panel summary:focus-visible { outline:2px solid var(--ink); outline-offset:2px; }
+  .btn { font:inherit; font-size:.85rem; font-weight:600; color:var(--ink); background:var(--bg); border:1px solid var(--ink); padding:.45rem .8rem; min-height:44px; cursor:pointer; }
+  .btn:hover { background:var(--surface-hi); }
+  .btn[disabled] { opacity:.45; cursor:not-allowed; }
+  .btn[aria-pressed="true"] { background:var(--ink); color:var(--bg); }
+  .progress-line { margin-top:.7rem; font-size:.82rem; color:var(--muted); }
+  .bar { height:8px; border:1px solid var(--line); background:var(--bg); margin-top:.35rem; }
+  .bar > span { display:block; height:100%; width:0; background:var(--ink); }
+  .hint { font-size:.8rem; color:var(--muted); margin:.5rem 0 0; }
+  .checklist { border:1px solid var(--line); background:var(--surface); padding:1rem; margin:1.25rem 0; }
+  .cl-head { display:flex; align-items:baseline; justify-content:space-between; gap:1rem; }
+  .checklist h2 { font-family:Georgia,Cambria,"Times New Roman",serif; font-size:1.05rem; line-height:1.3; margin:0; }
+  .cl-count { font-size:.78rem; font-weight:700; color:var(--muted); white-space:nowrap; }
+  .cl-group h3 { font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin:.8rem 0 .2rem; }
+  .cl-grid { list-style:none; padding:0; margin:0; display:grid; grid-template-columns:1fr 1fr; gap:0 .8rem; }
+  .cl-grid label { display:flex; align-items:flex-start; gap:.45rem; font-size:.78rem; line-height:1.35; padding:.25rem .1rem; min-height:30px; cursor:pointer; }
+  .cl-grid input, .done-toggle input { width:1rem; height:1rem; margin:.1rem 0 0; flex:none; accent-color:var(--ink); }
+  .cl-grid label:hover { background:var(--surface-hi); }
+  .jump-nav { display:flex; flex-wrap:wrap; gap:.35rem; margin:1rem 0; }
+  .jump { font:inherit; font-size:.7rem; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); background:var(--bg); border:1px solid var(--line); padding:.3rem .55rem; min-height:36px; cursor:pointer; }
+  .jump:hover { color:var(--ink); border-color:var(--ink); background:var(--surface-hi); }
+  .section-block { margin:0 0 2.5rem; }
+  .section-block > h2 { font-family:Georgia,Cambria,"Times New Roman",serif; font-size:1.1rem; line-height:1.3; margin:.2rem 0 .4rem; padding-bottom:.35rem; border-bottom:1px solid var(--line); }
+  .sec-kicker { font-size:.7rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin:0; }
+  .section-intro { font-size:.88rem; color:var(--muted); margin:0 0 1rem; }
+  .q { border:1px solid var(--line); border-left:3px solid var(--ink); background:var(--surface); padding:1.25rem; margin:0 0 1rem; }
+  .q-head { display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; margin-bottom:.35rem; }
+  .q-id { display:inline-block; font-size:.72rem; font-weight:800; letter-spacing:.08em; border:1px solid var(--ink); padding:.1rem .4rem; }
+  .q-side { text-align:right; }
+  .q-meta { display:block; font-size:.68rem; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); }
+  .done-toggle { display:inline-flex; align-items:center; gap:.35rem; font-size:.76rem; font-weight:600; min-height:30px; margin-top:.25rem; cursor:pointer; }
+  .q-title { font-family:Georgia,Cambria,"Times New Roman",serif; font-size:1.2rem; line-height:1.35; font-weight:700; margin:.2rem 0 .8rem; }
+  .q-title:focus { outline:2px solid var(--ink); outline-offset:4px; }
+  .cue { border-left:3px solid var(--rule); padding:.1rem 0 .1rem .75rem; margin:.8rem 0; }
+  .cue p { margin:0; font-weight:600; }
+  .skeleton { border:1px solid var(--line); background:var(--surface-alt); padding:.65rem .8rem; margin:.8rem 0; }
+  .skeleton ol { margin:.2rem 0 0; padding-left:1.2rem; font-size:.9rem; }
+  .skeleton li + li { margin-top:.25rem; }
+  .actions { margin:.9rem 0; }
+  .answer { border-top:1px solid var(--line); margin-top:.9rem; padding-top:.9rem; font-size:.96rem; }
+  .answer p { margin:0 0 .75rem; }
+  .answer p:last-child { margin-bottom:0; }
+  .answer .ans-point { padding-left:.15rem; }
+  .keywords { margin-top:1rem; border-top:1px solid var(--line); padding-top:.7rem; }
+  .keywords ul { list-style:none; display:flex; flex-wrap:wrap; gap:.3rem; padding:0; margin:.25rem 0 0; }
+  .keywords li { border:1px solid var(--line); background:var(--bg); font-size:.76rem; padding:.12rem .4rem; }
+  .src { color:var(--accent); text-decoration:underline; text-underline-offset:2px; }
+  .src:hover { background:var(--accent-soft); }
+  .selftest-note { display:none; font-size:.82rem; color:var(--muted); border-left:3px solid var(--rule); padding-left:.65rem; margin:.6rem 0 0; }
+  body.selftest .q:not(.is-revealed) .selftest-note { display:block; }
+  body.selftest .q:not(.is-revealed) .skeleton,
+  body.selftest .q:not(.is-revealed) .keywords { display:none; }
+  .qnav { display:flex; align-items:center; justify-content:space-between; gap:.5rem; margin:1.25rem 0 2rem; }
+  .qnav .pos { font-size:.85rem; color:var(--muted); font-variant-numeric:tabular-nums; }
+  .panel { border:1px solid var(--line); background:var(--surface); margin:1.25rem 0; }
+  .panel summary { cursor:pointer; padding:.7rem 1rem; min-height:44px; display:flex; align-items:center; justify-content:space-between; gap:.5rem; font-size:.88rem; font-weight:700; list-style:none; }
+  .panel summary::-webkit-details-marker { display:none; }
+  .panel summary::after { content:"+"; font-weight:800; }
+  .panel[open] summary::after { content:"\2212"; }
+  .panel .panel-body { border-top:1px solid var(--line); padding:.75rem 1rem 1rem; font-size:.9rem; }
+  .panel h3 { font-size:.92rem; margin:1rem 0 .35rem; }
+  .panel ul.plain, .panel ol.plain, .plain { padding-left:1.2rem; margin:.25rem 0 .75rem; }
+  .plain li + li { margin-top:.35rem; }
+  .panel p { margin:.4rem 0; }
+  .table-wrap { border:1px solid var(--line); overflow-x:auto; }
+  .review-table { width:100%; border-collapse:collapse; font-size:.86rem; }
+  .review-table th, .review-table td { border-bottom:1px solid var(--line); padding:.5rem .6rem; text-align:left; vertical-align:top; }
+  .review-table thead th { background:var(--surface-hi); font-size:.7rem; letter-spacing:.07em; text-transform:uppercase; }
+  .review-table tbody th { width:28%; font-weight:700; }
+  .review-table tr:last-child th, .review-table tr:last-child td { border-bottom:0; }
+  .ev { list-style:none; padding:0; margin:0; }
+  .ev li { border-top:1px solid var(--line); padding:.65rem 0; font-size:.86rem; scroll-margin-top:1rem; }
+  .ev .sid { display:inline-block; font-weight:800; margin-right:.4rem; }
+  .ev-link { color:var(--accent); text-underline-offset:2px; }
+  .ev-link:hover { background:var(--accent-soft); }
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  .focus-mode .q { display:none; }
+  .focus-mode .q.is-current { display:block; }
+  .focus-mode .section-block > h2, .focus-mode .sec-kicker, .focus-mode .section-intro { display:none; }
+  .focus-mode .section-block { margin:0; }
+  .all-mode .qnav { display:none; }
+  @media (max-width:600px) {
+    .q { padding:1rem; }
+    .q-head { gap:.5rem; }
+    .q-title { font-size:1.1rem; }
+    .cl-grid { gap:0 .5rem; }
+    .cl-grid label { font-size:.74rem; }
+    .review-table { font-size:.78rem; }
+    .review-table th, .review-table td { padding:.4rem; }
+    .qnav .btn { flex:1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { scroll-behavior:auto !important; transition:none !important; animation:none !important; }
+  }
+  @media print {
+    .topbar, .oe-tools, .jump-nav, .qnav, .done-toggle, .reveal, .selftest-note, .hint, .skip-link { display:none !important; }
+    .wrap { max-width:none; padding:0; }
+    body { font-size:11pt; }
+    header { margin-bottom:1rem; }
+    .section-block > h2, .sec-kicker, .section-intro { display:block !important; }
+    .q { display:block !important; border:1px solid #bbb; padding:.75rem; margin:0 0 .8rem; break-inside:auto; }
+    .q-title { font-size:1rem; break-after:avoid; }
+    .answer, .answer[hidden] { display:block !important; }
+    .skeleton, .keywords { display:block !important; }
+    .panel .panel-body { display:block !important; }
+    .ev-link[href]::after { content:" (" attr(href) ")"; font-size:.78em; word-break:break-all; }
+    .review-table { font-size:9pt; }
+  }
+</style>
+<script src="/assets/theme.js"></script>
+</head>
+<body class="focus-mode">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="wrap">
+  <nav class="topbar" aria-label="Site"><a class="back" href="/">&larr; All subjects</a><button class="theme-toggle" type="button" id="themeToggle" hidden></button></nav>
+  <header>
+    <h1>OE</h1>
+    <p class="subtitle">Global and Regional Environmental Issues</p>
+    <div class="meta">Open Elective &middot; ESE &middot; 27 November 2026 &middot; 12 short + 12 descriptive questions</div>
+  </header>
+  <main id="main" tabindex="-1">
+    <div class="callout">
+      <p class="label">Important</p>
+      <p>This is an exam learning aid, not official University material. Where this pack adds current research beyond the supplied question bank, it is identified through source markers such as [<a class="src" href="#ev-S6" aria-label="Evidence entry S6">S6</a>].</p>
+    </div>
+
+    <details class="panel" id="guide">
+      <summary>How to use this pack &mdash; ADHD-informed study guidance</summary>
+      <div class="panel-body">
+<p>ADD is commonly used informally to refer to ADHD. ADHD varies between people; these are adjustable design choices, not a claim that everyone with ADHD learns the same way.</p>
+<h3>1. What the evidence supports</h3><ul class="plain">
+<li>Reduce avoidable friction in the environment. NICE describes individualised environmental modifications such as reducing noise/distractions, adjusting lighting or seating, using shorter focus periods with movement breaks, and reinforcing verbal information with written instructions. [<a class="src" href="#ev-S1" aria-label="Evidence entry S1">S1</a>]</li>
+<li>Make tasks finite and visible. CHADD’s college guidance recommends dividing study and assignment work into chunks and taking short breaks rather than trying to work for hours continuously. Its example is 30 minutes of work followed by 5–10 minutes off; use a shorter or longer interval if it fits better. [<a class="src" href="#ev-S2" aria-label="Evidence entry S2">S2</a>]</li>
+<li>Use retrieval practice rather than relying only on rereading. A systematic review of classroom studies found retrieval practice improved learning across many contexts; a broader review rated practice testing and distributed practice highly. These findings support the learning methods generally, not an ADHD-specific guarantee. [<a class="src" href="#ev-S3" aria-label="Evidence entry S3">S3</a>, <a class="src" href="#ev-S4" aria-label="Evidence entry S4">S4</a>]</li>
+<li>Return to material in more than one short pass. Distributed practice means revisiting information after a gap instead of doing all repetitions at once. The exact ideal interval depends on the time available and the material; with an exam tomorrow, use short same-day returns. [<a class="src" href="#ev-S3" aria-label="Evidence entry S3">S3</a>, <a class="src" href="#ev-S4" aria-label="Evidence entry S4">S4</a>]</li>
+</ul><h3>2. Design choices used in the website brief</h3><ul class="plain">
+<li>One question or one concept per focused screen. Avoid a giant wall of text.</li>
+<li>Every question starts with a one-line recall cue and a small answer skeleton before the full answer.</li>
+<li>Reveal the full answer on demand. Keep a “show answer” control obvious and keyboard accessible.</li>
+<li>A visible progress checklist for 24 questions, with completion saved locally. No streak pressure or penalty for leaving and returning.</li>
+<li>A “next small step” instruction so the student never has to decide what to do from a blank page.</li>
+<li>Short study blocks with a suggested break, but no compulsory timer, countdown or alarm.</li>
+<li>Use clear headings, short paragraphs, whitespace, bullets and a restrained high-contrast palette. Never rely on colour alone.</li>
+<li>Offer both Focus mode (one question at a time) and All questions mode (scan the whole section).</li>
+<li>Optional self-test: hide the answer, speak/write a response, then compare against the key points. No forced score or public ranking.</li>
+<li>Use hand-authored simple SVG diagrams only when they explain a mechanism. No AI-generated imagery, stock decoration or autoplay animation.</li>
+</ul><h3>3. A practical loop for tonight</h3>
+<div class="callout"><p class="label">TRY THIS FIRST</p><p>Pick one small topic. Study for 10–20 minutes (or a duration that feels workable), close the answer, recall 3–5 key points, then take a short movement/water break. Revisit the same topic later for a 1–2 minute recall. The interval is a flexible starting point, not a prescription.</p></div>
+<h3>4. How to answer a 7&ndash;8 mark question</h3><ol class="plain">
+<li>Start with a 1–2 sentence definition or introduction.</li>
+<li>Use 3–5 meaningful headings: causes / process / effects / measures, as relevant.</li>
+<li>Give one Indian example or current initiative where it genuinely fits.</li>
+<li>Explain the connection; do not only list keywords.</li>
+<li>End with one conclusion sentence that answers the question directly.</li>
+</ol><p>For a short answer, aim for a direct definition plus 2–4 relevant points. Do not inflate an answer with unrelated facts.</p>
+      </div>
+    </details>
+
+    <div class="oe-tools">
+      <div class="oe-row">
+        <div class="seg" role="group" aria-label="View mode">
+          <button type="button" id="modeFocus" aria-pressed="true">Focus</button>
+          <button type="button" id="modeAll" aria-pressed="false">All questions</button>
+        </div>
+        <button class="btn" type="button" id="continueBtn">Continue at A1</button>
+        <button class="btn" type="button" id="selfTestBtn" aria-pressed="false">Self-test mode</button>
+        <button class="btn" type="button" id="resetBtn">Reset progress</button>
+      </div>
+      <div class="progress-line">
+        <span id="progressText">Question 1 of 24 &middot; 0 of 24 complete</span>
+        <div class="bar" id="progressBar" role="progressbar" aria-label="Questions completed" aria-valuemin="0" aria-valuemax="24" aria-valuenow="0"><span id="progressFill"></span></div>
+      </div>
+      <p class="hint">Focus shows one question at a time; All questions shows every card. Tick Done on a card to track progress (saved on this device).</p>
+      <p class="hint" id="selfTestNote" hidden>Self-test on: keywords and answer skeletons stay hidden until you reveal an answer.</p>
+    </div>
+
+    <nav class="jump-nav" aria-label="Sections">
+      <button class="jump" type="button" data-jump="A">A &middot; Short answers</button>
+      <button class="jump" type="button" data-jump="B">B &middot; Descriptive Q.2</button>
+      <button class="jump" type="button" data-jump="C">C &middot; Descriptive Q.3</button>
+      <button class="jump" type="button" data-jump="review">Rapid review</button>
+      <button class="jump" type="button" data-jump="sources">Sources</button>
+      <button class="jump" type="button" data-jump="guide">Study guide</button>
+      <button class="jump" type="button" data-jump="checklist">Checklist</button>
+    </nav>
+
+    <p class="sr-only" id="liveStatus" aria-live="polite"></p>
+
+<section class="section-block" id="sec-A" data-section="A" aria-labelledby="sec-A-h">
+  <p class="sec-kicker">SECTION A</p>
+  <h2 id="sec-A-h">Short answer questions</h2>
+  <p class="section-intro">The question wording below follows the uploaded question bank. Learn the recall cue first; use the answer to build a 3–5 sentence response.</p>
+<article class="q is-current" id="q-A1" data-id="A1" data-section="A" aria-labelledby="title-A1">
+  <div class="q-head">
+    <span class="q-id">A1</span>
+    <div class="q-side">
+      <span class="q-meta">Section A &middot; Short answer</span>
+      <label class="done-toggle"><input type="checkbox" data-done="A1"> <span>Done</span></label>
+    </div>
+  </div>
+  <h3 class="q-title" id="title-A1" tabindex="-1">Explain role of forests in maintaining ecological balance.</h3>
+  <div class="cue"><span class="label">Recall cue</span><p>Recall: climate, water, soil, biodiversity, carbon.</p></div>
+
+  <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
+  <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-A1">Show answer</button></div>
+  <div class="answer" id="ans-A1" hidden>
+<p>Forests maintain ecological balance by absorbing carbon dioxide and storing carbon, helping regulate climate. They release oxygen through photosynthesis and support the water cycle by intercepting rainfall, allowing infiltration and reducing runoff. Tree roots bind soil and reduce erosion, while forest habitats support biodiversity. Forests also regulate local temperature, protect watersheds and support the livelihoods of forest-dependent communities. [<a class="src" href="#ev-S8" aria-label="Evidence entry S8">S8</a>]</p>
+  </div>
+  <div class="keywords"><span class="label">Keywords</span><ul><li>carbon sink</li>
+<li>water cycle</li>
+<li>soil conservation</li>
+<li>habitat</li>
+<li>livelihoods</li></ul></div>
+</article>
+<article class="q" id="q-A2" data-id="A2" data-section="A" aria-labelledby="title-A2">
+  <div class="q-head">
+    <span class="q-id">A2</span>
+    <div class="q-side">
+      <span class="q-meta">Section A &middot; Short answer</span>
+      <label class="done-toggle"><input type="checkbox" data-done="A2"> <span>Done</span></label>
+    </div>
+  </div>
+  <h3 class="q-title" id="title-A2" tabindex="-1">What is Carbon Footprint? Explain with example.</h3>
+  <div class="cue"><span class="label">Recall cue</span><p>Recall: total GHG emissions, CO₂-equivalent, example.</p></div>
+
+  <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
+  <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-A2">Show answer</button></div>
+  <div class="answer" id="ans-A2" hidden>
+<p>A carbon footprint is the total greenhouse-gas emissions associated with a person, product, activity or organisation, expressed as carbon-dioxide equivalent (CO₂e). It may include direct emissions and indirect emissions across energy use, transport and supply chains. For example, travelling daily by a petrol car creates emissions from fuel combustion; the electricity used to charge a phone can also have an indirect footprint depending on how the electricity is generated. [<a class="src" href="#ev-S6" aria-label="Evidence entry S6">S6</a>]</p>
+  </div>
+  <div class="keywords"><span class="label">Keywords</span><ul><li>greenhouse gases</li>
+<li>CO₂e</li>
+<li>direct and indirect</li>
+<li>fuel</li>
+<li>electricity</li></ul></div>
+</article>
+<article class="q" id="q-A3" data-id="A3" data-section="A" aria-labelledby="title-A3">
+  <div class="q-head">
+    <span class="q-id">A3</span>
+    <div class="q-side">
+      <span class="q-meta">Section A &middot; Short answer</span>
+      <label class="done-toggle"><input type="checkbox" data-done="A3"> <span>Done</span></label>
+    </div>
+  </div>
+  <h3 class="q-title" id="title-A3" tabindex="-1">What are Radioactive gases?</h3>
+  <div class="cue"><span class="label">Recall cue</span><p>Recall: unstable radioactive atoms in gaseous form; radon example; exposure risk.</p></div>
+
+  <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
+  <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-A3">Show answer</button></div>
+  <div class="answer" id="ans-A3" hidden>
+<p>Radioactive gases are gases containing unstable radioactive atoms that release ionising radiation as they decay. A major natural example is radon, a colourless, odourless gas produced during the radioactive decay of uranium in rocks and soil. It can enter buildings and accumulate in poorly ventilated spaces. Long-term inhalation of radon decay products increases lung-cancer risk. [<a class="src" href="#ev-S13" aria-label="Evidence entry S13">S13</a>]</p>
+  </div>
+  <div class="keywords"><span class="label">Keywords</span><ul><li>radon</li>
+<li>radioactive decay</li>
+<li>uranium</li>
+<li>indoor accumulation</li>
+<li>lung cancer</li></ul></div>
+</article>
+<article class="q" id="q-A4" data-id="A4" data-section="A" aria-labelledby="title-A4">
+  <div class="q-head">
+    <span class="q-id">A4</span>
+    <div class="q-side">
+      <span class="q-meta">Section A &middot; Short answer</span>
+      <label class="done-toggle"><input type="checkbox" data-done="A4"> <span>Done</span></label>
+    </div>
+  </div>
+  <h3 class="q-title" id="title-A4" tabindex="-1">Explain the main causes of environmental degradation?</h3>
+  <div class="cue"><span class="label">Recall cue</span><p>Recall: land-use change, extraction, pollution, overuse, climate.</p></div>
+
+  <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
+  <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-A4">Show answer</button></div>
+  <div class="answer" id="ans-A4" hidden>
+<p>Environmental degradation is the deterioration of air, water, soil and ecosystems. Main causes include deforestation and habitat destruction; mining and excessive extraction of natural resources; industrial, vehicle and agricultural pollution; overcultivation and overgrazing; urbanisation and poorly planned infrastructure; improper waste disposal; and greenhouse-gas emissions that intensify climate change. These pressures interact and reduce ecosystem health and the ability of nature to support people. [<a class="src" href="#ev-S14" aria-label="Evidence entry S14">S14</a>, <a class="src" href="#ev-S15" aria-label="Evidence entry S15">S15</a>]</p>
+  </div>
+  <div class="keywords"><span class="label">Keywords</span><ul><li>deforestation</li>
+<li>mining</li>
+<li>pollution</li>
+<li>overgrazing</li>
+<li>urbanisation</li>
+<li>climate change</li></ul></div>
+</article>
+<article class="q" id="q-A5" data-id="A5" data-section="A" aria-labelledby="title-A5">
+  <div class="q-head">
+    <span class="q-id">A5</span>
+    <div class="q-side">
+      <span class="q-meta">Section A &middot; Short answer</span>
+      <label class="done-toggle"><input type="checkbox" data-done="A5"> <span>Done</span></label>
+    </div>
+  </div>
+  <h3 class="q-title" id="title-A5" tabindex="-1">Explain India's malnutrition crisis, including 'hidden hunger' and the malnutrition paradox.</h3>
+  <div class="cue"><span class="label">Recall cue</span><p>Recall: not only lack of food—also poor quality, deficiencies and excess.</p></div>
+
+  <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
+  <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-A5">Show answer</button></div>
+  <div class="answer" id="ans-A5" hidden>
+<p>India faces multiple forms of malnutrition: undernutrition (stunting, wasting and underweight), micronutrient deficiencies, and overweight/obesity. “Hidden hunger” means a person may consume enough calories but still lack essential vitamins or minerals such as iron, iodine, vitamin A or zinc. The “malnutrition paradox” describes the coexistence of undernutrition and obesity or poor-quality diets, sometimes within the same community or household. Causes include poverty, unequal food access, low dietary diversity, illness, poor sanitation and nutrition knowledge gaps. Responses include diverse diets, maternal and child nutrition services, food fortification where appropriate, health care, safe water and sanitation. [<a class="src" href="#ev-S5" aria-label="Evidence entry S5">S5</a>]</p>
+  </div>
+  <div class="keywords"><span class="label">Keywords</span><ul><li>stunting</li>
+<li>wasting</li>
+<li>micronutrients</li>
+<li>hidden hunger</li>
+<li>double burden</li></ul></div>
+</article>
+<article class="q" id="q-A6" data-id="A6" data-section="A" aria-labelledby="title-A6">
+  <div class="q-head">
+    <span class="q-id">A6</span>
+    <div class="q-side">
+      <span class="q-meta">Section A &middot; Short answer</span>
+      <label class="done-toggle"><input type="checkbox" data-done="A6"> <span>Done</span></label>
+    </div>
+  </div>
+  <h3 class="q-title" id="title-A6" tabindex="-1">Discuss the major sources of air pollution in Delhi and its seasonal pattern.</h3>
+  <div class="cue"><span class="label">Recall cue</span><p>Recall: vehicles, dust, industry, biomass; winter stagnation; monsoon relief.</p></div>
+
+  <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
+  <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-A6">Show answer</button></div>
+  <div class="answer" id="ans-A6" hidden>
+<p>Major sources include vehicle exhaust, road and construction dust, industries and power plants, biomass and waste burning, diesel generators and secondary particles formed in the atmosphere. Pollution usually worsens in winter because wind speeds and the atmospheric mixing height fall, so pollutants remain near the ground; crop-residue burning can add to the post-monsoon episode. Fog and stagnant air further restrict dispersion. Monsoon rain and stronger mixing generally reduce pollution. A 2026 CAQM expert report identifies transport, dust, biomass burning, industry and secondary particulates as important contributors, with their shares changing by season. [<a class="src" href="#ev-S9" aria-label="Evidence entry S9">S9</a>]</p>
+  </div>
+  <div class="keywords"><span class="label">Keywords</span><ul><li>transport</li>
+<li>road/construction dust</li>
+<li>biomass burning</li>
+<li>secondary PM₂.₅</li>
+<li>winter inversion/stagnation</li>
+<li>monsoon</li></ul></div>
+</article>
+<article class="q" id="q-A7" data-id="A7" data-section="A" aria-labelledby="title-A7">
+  <div class="q-head">
+    <span class="q-id">A7</span>
+    <div class="q-side">
+      <span class="q-meta">Section A &middot; Short answer</span>
+      <label class="done-toggle"><input type="checkbox" data-done="A7"> <span>Done</span></label>
+    </div>
+  </div>
+  <h3 class="q-title" id="title-A7" tabindex="-1">What is meant by carbon footprint? Explain how it contributes to the greenhouse effect.</h3>
+  <div class="cue"><span class="label">Recall cue</span><p>Recall: measure of emissions; emitted GHGs trap outgoing heat.</p></div>
+
+  <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
+  <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-A7">Show answer</button></div>
+  <div class="answer" id="ans-A7" hidden>
+<p>A carbon footprint is the sum of greenhouse-gas emissions linked to an activity, product, person or organisation, commonly reported as CO₂e. For example, burning petrol in a car releases carbon dioxide. Greenhouse gases such as carbon dioxide absorb some of the infrared energy emitted by Earth’s surface and re-emit energy, slowing heat loss to space. A larger footprint therefore adds to atmospheric greenhouse gases and strengthens the human-caused greenhouse effect. [<a class="src" href="#ev-S6" aria-label="Evidence entry S6">S6</a>, <a class="src" href="#ev-S7" aria-label="Evidence entry S7">S7</a>, <a class="src" href="#ev-S8" aria-label="Evidence entry S8">S8</a>]</p>
+  </div>
+  <div class="keywords"><span class="label">Keywords</span><ul><li>CO₂e</li>
+<li>fuel combustion</li>
+<li>infrared radiation</li>
+<li>heat trapping</li>
+<li>global warming</li></ul></div>
+</article>
+<article class="q" id="q-A8" data-id="A8" data-section="A" aria-labelledby="title-A8">
+  <div class="q-head">
+    <span class="q-id">A8</span>
+    <div class="q-side">
+      <span class="q-meta">Section A &middot; Short answer</span>
+      <label class="done-toggle"><input type="checkbox" data-done="A8"> <span>Done</span></label>
+    </div>
+  </div>
+  <h3 class="q-title" id="title-A8" tabindex="-1">Define Global Environmental Issues and state four examples.</h3>
+  <div class="cue"><span class="label">Recall cue</span><p>Recall: large-scale or cross-border problems; give four.</p></div>
+
+  <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
+  <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-A8">Show answer</button></div>
+  <div class="answer" id="ans-A8" hidden>
+<p>Global environmental issues are environmental problems whose causes or effects extend beyond one locality or country, affect shared Earth systems, or require international cooperation. Four examples are climate change, ozone-layer depletion, biodiversity loss, and transboundary air or water pollution. Other examples include ocean plastic pollution and desertification. These problems require action by governments, industries, communities and international agreements.</p>
+  </div>
+  <div class="keywords"><span class="label">Keywords</span><ul><li>cross-border</li>
+<li>climate change</li>
+<li>ozone depletion</li>
+<li>biodiversity loss</li>
+<li>pollution</li></ul></div>
+</article>
+<article class="q" id="q-A9" data-id="A9" data-section="A" aria-labelledby="title-A9">
+  <div class="q-head">
+    <span class="q-id">A9</span>
+    <div class="q-side">
+      <span class="q-meta">Section A &middot; Short answer</span>
+      <label class="done-toggle"><input type="checkbox" data-done="A9"> <span>Done</span></label>
+    </div>
+  </div>
+  <h3 class="q-title" id="title-A9" tabindex="-1">State the two criteria used to identify a biodiversity hotspot.</h3>
+  <div class="cue"><span class="label">Recall cue</span><p>Recall: 1,500 endemic vascular plants; 70% habitat loss.</p></div>
+
+  <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
+  <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-A9">Show answer</button></div>
+  <div class="answer" id="ans-A9" hidden>
+<p>A region qualifies as a biodiversity hotspot when it meets both criteria: (1) it contains at least 1,500 endemic vascular plant species—plants found nowhere else; and (2) it has lost at least 70% of its original natural vegetation. The criteria identify places with exceptional irreplaceable plant diversity that are also highly threatened. [<a class="src" href="#ev-S10" aria-label="Evidence entry S10">S10</a>]</p>
+  </div>
+  <div class="keywords"><span class="label">Keywords</span><ul><li>1,500 endemic vascular plants</li>
+<li>70% original habitat lost</li>
+<li>irreplaceability</li>
+<li>threat</li></ul></div>
+</article>
+<article class="q" id="q-A10" data-id="A10" data-section="A" aria-labelledby="title-A10">
+  <div class="q-head">
+    <span class="q-id">A10</span>
+    <div class="q-side">
+      <span class="q-meta">Section A &middot; Short answer</span>
+      <label class="done-toggle"><input type="checkbox" data-done="A10"> <span>Done</span></label>
+    </div>
+  </div>
+  <h3 class="q-title" id="title-A10" tabindex="-1">What is ozone layer depletion? State one consequence of increased UV-B radiation.</h3>
+  <div class="cue"><span class="label">Recall cue</span><p>Recall: stratospheric ozone thins; more UV-B reaches surface.</p></div>
+
+  <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
+  <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-A10">Show answer</button></div>
+  <div class="answer" id="ans-A10" hidden>
+<p>Ozone-layer depletion is the thinning or reduction of ozone concentration in the stratosphere, mainly due to ozone-depleting substances such as CFCs and halons. The ozone layer absorbs much of the Sun’s harmful ultraviolet radiation. When it becomes thinner, more UV-B reaches Earth’s surface. One consequence is an increased risk of skin cancer; UV-B can also cause cataracts and harm crops and aquatic organisms. [<a class="src" href="#ev-S11" aria-label="Evidence entry S11">S11</a>]</p>
+  </div>
+  <div class="keywords"><span class="label">Keywords</span><ul><li>stratospheric ozone</li>
+<li>CFCs</li>
+<li>UV-B</li>
+<li>skin cancer</li>
+<li>cataracts</li></ul></div>
+</article>
+<article class="q" id="q-A11" data-id="A11" data-section="A" aria-labelledby="title-A11">
+  <div class="q-head">
+    <span class="q-id">A11</span>
+    <div class="q-side">
+      <span class="q-meta">Section A &middot; Short answer</span>
+      <label class="done-toggle"><input type="checkbox" data-done="A11"> <span>Done</span></label>
+    </div>
+  </div>
+  <h3 class="q-title" id="title-A11" tabindex="-1">Define desertification and state any two human activities that accelerate it.</h3>
+  <div class="cue"><span class="label">Recall cue</span><p>Recall: dryland land degradation—not simply desert expansion.</p></div>
+
+  <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
+  <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-A11">Show answer</button></div>
+  <div class="answer" id="ans-A11" hidden>
+<p>Desertification is land degradation in arid, semi-arid and dry sub-humid areas caused by climatic variations and human activities. It reduces soil productivity and vegetation cover; it does not simply mean that a sand desert is expanding. Two human activities that accelerate it are overgrazing and deforestation. Overcultivation and poor irrigation practices can also contribute. [<a class="src" href="#ev-S12" aria-label="Evidence entry S12">S12</a>]</p>
+  </div>
+  <div class="keywords"><span class="label">Keywords</span><ul><li>drylands</li>
+<li>land degradation</li>
+<li>overgrazing</li>
+<li>deforestation</li>
+<li>poor irrigation</li></ul></div>
+</article>
+<article class="q" id="q-A12" data-id="A12" data-section="A" aria-labelledby="title-A12">
+  <div class="q-head">
+    <span class="q-id">A12</span>
+    <div class="q-side">
+      <span class="q-meta">Section A &middot; Short answer</span>
+      <label class="done-toggle"><input type="checkbox" data-done="A12"> <span>Done</span></label>
+    </div>
+  </div>
+  <h3 class="q-title" id="title-A12" tabindex="-1">What is the Montreal Protocol? State its main objective.</h3>
+  <div class="cue"><span class="label">Recall cue</span><p>Recall: 1987 global agreement; phase out ozone-depleting substances.</p></div>
+
+  <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
+  <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-A12">Show answer</button></div>
+  <div class="answer" id="ans-A12" hidden>
+<p>The Montreal Protocol is an international environmental agreement adopted in 1987 to protect the ozone layer. Its main objective is to phase out the production and consumption of ozone-depleting substances, including CFCs and halons. It entered into force in 1989 and is widely regarded as a successful example of international environmental cooperation. The Kigali Amendment later introduced a phasedown of HFCs, which are powerful greenhouse gases but do not deplete the ozone layer. [<a class="src" href="#ev-S11" aria-label="Evidence entry S11">S11</a>]</p>
+  </div>
+  <div class="keywords"><span class="label">Keywords</span><ul><li>1987</li>
+<li>international treaty</li>
+<li>phase out ODS</li>
+<li>CFCs</li>
+<li>Kigali Amendment</li></ul></div>
+</article>
+</section>
+<section class="section-block" id="sec-B" data-section="B" aria-labelledby="sec-B-h">
+  <p class="sec-kicker">SECTION B · Q.2</p>
+  <h2 id="sec-B-h">Descriptive questions (Question 2)</h2>
+  <p class="section-intro">Prepare all six. The answer skeleton is the minimum recall structure; the model answer expands it into an exam response.</p>
+<article class="q" id="q-B1" data-id="B1" data-section="B" aria-labelledby="title-B1">
+  <div class="q-head">
+    <span class="q-id">B1</span>
+    <div class="q-side">
+      <span class="q-meta">Section B &middot; Descriptive &middot; 8 marks</span>
+      <label class="done-toggle"><input type="checkbox" data-done="B1"> <span>Done</span></label>
+    </div>
+  </div>
+  <h3 class="q-title" id="title-B1" tabindex="-1">Explain the impact of Environmental pollution on Human Health.  (8 marks)</h3>
+  <div class="cue"><span class="label">Recall cue</span><p>Types → exposure routes → health effects → vulnerable groups → prevention.</p></div>
+  <div class="skeleton"><span class="label">Answer skeleton</span><ol><li>Pollution enters the body through air, water, food and other exposures; harm depends on the pollutant, dose, duration and route.</li>
+<li>Air pollution, especially PM₂.₅, is linked to respiratory and cardiovascular disease, stroke and lung cancer, with children and older people most vulnerable.</li>
+<li>Water, soil/food and noise pollution cause water-borne disease, chemical organ damage, and hearing, sleep and concentration problems.</li>
+<li>Control at source: emission and effluent standards, sewage and waste treatment, clean transport and energy, monitoring and safe drinking water.</li></ol></div>
+  <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
+  <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-B1">Show answer</button></div>
+  <div class="answer" id="ans-B1" hidden>
+<p>Environmental pollution harms health when people breathe contaminated air, drink polluted water, eat contaminated food or are exposed to toxic substances and excessive noise. Its effects depend on the pollutant, dose, duration and route of exposure.</p>
+<p class="ans-point">1. Air pollution: Fine particles such as PM₂.₅ can travel deep into the lungs and may enter the bloodstream. Exposure is associated with asthma and other respiratory infections, chronic obstructive pulmonary disease, heart disease, stroke and lung cancer. Children, older people and those with existing illnesses are especially vulnerable. [<a class="src" href="#ev-S16" aria-label="Evidence entry S16">S16</a>]</p>
+<p class="ans-point">2. Water pollution: Sewage and disease-causing microorganisms can spread diarrhoea, cholera, typhoid and other water-borne diseases. Chemical contaminants such as arsenic, lead and mercury can damage organs and affect the nervous system.</p>
+<p class="ans-point">3. Soil and food contamination: Pesticides, industrial chemicals and heavy metals can enter crops and the food chain. Long-term exposure may affect the nervous system, kidneys, development and reproductive health, depending on the substance.</p>
+<p class="ans-point">4. Noise and other pollution: Excessive noise can cause hearing problems, sleep disturbance, stress and reduced concentration.</p>
+<p>Control measures: Enforce emission and effluent standards; treat sewage and industrial wastewater; improve public transport and clean energy; manage solid and hazardous waste scientifically; monitor air and water quality; provide safe drinking water; and educate communities.</p>
+<p>Conclusion: Pollution is not only an environmental problem; it is a public-health issue. Prevention at the source, monitoring and strong enforcement protect both people and ecosystems.</p>
+  </div>
+  <div class="keywords"><span class="label">Keywords</span><ul><li>PM₂.₅</li>
+<li>respiratory and cardiovascular disease</li>
+<li>water-borne disease</li>
+<li>toxic chemicals</li>
+<li>source control</li></ul></div>
+</article>
+<article class="q" id="q-B2" data-id="B2" data-section="B" aria-labelledby="title-B2">
+  <div class="q-head">
+    <span class="q-id">B2</span>
+    <div class="q-side">
+      <span class="q-meta">Section B &middot; Descriptive &middot; 7 marks</span>
+      <label class="done-toggle"><input type="checkbox" data-done="B2"> <span>Done</span></label>
+    </div>
+  </div>
+  <h3 class="q-title" id="title-B2" tabindex="-1">Apply the concept of the carbon footprint to explain how industries and transportation contribute to global warming. Suggest methods for reducing their carbon footprint.  (7 marks)</h3>
+  <div class="cue"><span class="label">Recall cue</span><p>Define footprint → industry emissions → transport emissions → reductions.</p></div>
+  <div class="skeleton"><span class="label">Answer skeleton</span><ol><li>A carbon footprint is the total greenhouse-gas emissions of an activity or organisation in CO₂e, including direct and indirect emissions.</li>
+<li>Industry burns coal, oil and gas and releases process CO₂ (for example cement), with fuel extraction and supply chains adding emissions.</li>
+<li>Transport burns petrol, diesel and aviation fuel; congestion and inefficient vehicles increase fuel use.</li>
+<li>Extra greenhouse gases strengthen the greenhouse effect and cause global warming.</li>
+<li>Reduce through efficiency, renewables, electrification, lower-carbon materials, public transport, cycling, rail, electric vehicles and better logistics.</li></ol></div>
+  <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
+  <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-B2">Show answer</button></div>
+  <div class="answer" id="ans-B2" hidden>
+<p>A carbon footprint is the total greenhouse-gas emissions associated with an activity or organisation, expressed as carbon-dioxide equivalent (CO₂e). It includes direct emissions and, depending on the boundary used, indirect emissions from purchased energy and supply chains. [<a class="src" href="#ev-S6" aria-label="Evidence entry S6">S6</a>]</p>
+<p>Industries: Factories and power plants burn coal, oil and gas to produce heat and electricity, releasing carbon dioxide. Some industrial processes, such as cement production, also release CO₂ through chemical reactions. Extraction and transport of fuels, leaks and energy-intensive supply chains add further emissions.</p>
+<p>Transportation: Cars, buses, trucks, ships and aircraft burn petrol, diesel, aviation fuel or other fossil fuels. Combustion releases CO₂; congestion and inefficient vehicles increase fuel use. Freight and personal travel therefore add to the carbon footprint.</p>
+<p>How this causes global warming: Greenhouse gases absorb some outgoing infrared radiation from Earth and re-emit energy. Increasing their concentration strengthens the greenhouse effect and changes the climate system. Human activities, especially greenhouse-gas emissions, have unequivocally caused global warming. [<a class="src" href="#ev-S7" aria-label="Evidence entry S7">S7</a>, <a class="src" href="#ev-S8" aria-label="Evidence entry S8">S8</a>]</p>
+<p>Reduction methods: Industries can improve energy efficiency, recover waste heat, electrify processes where possible, use renewable electricity, adopt lower-carbon materials, reduce process emissions, repair gas leaks and measure supply-chain emissions. Transport emissions can be reduced by reliable public transport, walking and cycling infrastructure, rail and efficient freight, shared mobility, electric vehicles powered by cleaner electricity, fuel-efficient vehicles and better logistics.</p>
+<p>Conclusion: Measuring the footprint helps identify the largest sources; reducing fossil-fuel use and improving efficiency in industry and transport are central climate solutions.</p>
+  </div>
+  <div class="keywords"><span class="label">Keywords</span><ul><li>CO₂e</li>
+<li>industrial fuel and process emissions</li>
+<li>vehicle fuel combustion</li>
+<li>renewables</li>
+<li>efficiency</li>
+<li>public transport</li></ul></div>
+</article>
+<article class="q" id="q-B3" data-id="B3" data-section="B" aria-labelledby="title-B3">
+  <div class="q-head">
+    <span class="q-id">B3</span>
+    <div class="q-side">
+      <span class="q-meta">Section B &middot; Descriptive &middot; 8 marks</span>
+      <label class="done-toggle"><input type="checkbox" data-done="B3"> <span>Done</span></label>
+    </div>
+  </div>
+  <h3 class="q-title" id="title-B3" tabindex="-1">Explain India's major environmental priorities with reference to initiatives such as NCAP and Jal Jeevan Mission.  (8 marks)</h3>
+  <div class="cue"><span class="label">Recall cue</span><p>Priorities → NCAP (clean air) → JJM (safe rural water) → integrated governance.</p></div>
+  <div class="skeleton"><span class="label">Answer skeleton</span><ol><li>India’s priorities connect air quality, safe water, rivers and groundwater, forests, biodiversity, land, waste and climate adaptation.</li>
+<li>NCAP (2019) supports city clean-air plans across 130 cities and targets PM₁₀ reduction; 2026 results show programme-wide improvement.</li>
+<li>Jal Jeevan Mission (2019) provides rural household tap connections and safe water, with source sustainability, quality monitoring and community participation; JJM 2.0 was approved in March 2026.</li>
+<li>Other priorities include sewage treatment, river rejuvenation, biodiversity conservation, sustainable agriculture, groundwater recharge and waste segregation.</li>
+<li>Long-term success depends on local implementation, monitoring, maintenance and public participation.</li></ol></div>
+  <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
+  <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-B3">Show answer</button></div>
+  <div class="answer" id="ans-B3" hidden>
+<p>India’s environmental priorities include improving air quality, securing safe drinking water, protecting rivers and groundwater, restoring forests and biodiversity, preventing land degradation, managing waste and adapting to climate risks. These priorities are connected: polluted air and water harm health, degraded land affects food production, and damaged ecosystems reduce natural protection.</p>
+<p class="ans-point">1. National Clean Air Programme (NCAP): Launched in 2019, NCAP supports city-specific clean-air action plans across 130 cities. Measures include controlling road and construction dust, cleaner transport, industrial emission control, reducing waste burning, monitoring air quality and public awareness. The programme’s target was to reduce PM₁₀ levels by up to 40% from 2017–18 levels or achieve the national standard by 2025–26. In September 2026, the Government reported that 108 cities had lower PM₁₀ than in 2017–18; 72 had reductions above 20%, 26 above 40%, and 14 met the PM₁₀ standard. These are programme-wide results, not a claim that every city has clean air. [<a class="src" href="#ev-S17" aria-label="Evidence entry S17">S17</a>, <a class="src" href="#ev-S18" aria-label="Evidence entry S18">S18</a>]</p>
+<p class="ans-point">2. Jal Jeevan Mission (JJM): Launched in 2019, JJM aims to provide functional household tap connections and safe drinking water to rural households. It also requires source sustainability, water-quality monitoring, community participation and maintenance of supply systems. In March 2026, JJM 2.0 was approved up to December 2028 with a total outlay of ₹8.69 lakh crore and a stronger focus on reliable service delivery and water governance. [<a class="src" href="#ev-S19" aria-label="Evidence entry S19">S19</a>]</p>
+<p>Other priorities include sewage treatment and river rejuvenation, biodiversity conservation, sustainable agriculture, groundwater recharge, waste segregation and circular use of materials.</p>
+<p>Conclusion: NCAP and JJM show how environmental policy can directly improve public health. Long-term success depends on local implementation, monitoring, maintenance and public participation.</p>
+  </div>
+  <div class="keywords"><span class="label">Keywords</span><ul><li>NCAP</li>
+<li>130 cities</li>
+<li>PM₁₀</li>
+<li>2017–18 baseline</li>
+<li>JJM 2.0</li>
+<li>December 2028</li>
+<li>safe water</li></ul></div>
+</article>
+<article class="q" id="q-B4" data-id="B4" data-section="B" aria-labelledby="title-B4">
+  <div class="q-head">
+    <span class="q-id">B4</span>
+    <div class="q-side">
+      <span class="q-meta">Section B &middot; Descriptive &middot; 7 marks</span>
+      <label class="done-toggle"><input type="checkbox" data-done="B4"> <span>Done</span></label>
+    </div>
+  </div>
+  <h3 class="q-title" id="title-B4" tabindex="-1">Analyze the pollution of the river Ganges – its sources, scale, and human impact – and evaluate the measures used to address it.  (7 marks)</h3>
+  <div class="cue"><span class="label">Recall cue</span><p>Sources → basin-wide scale → people/ecosystems → Namami Gange measures → evaluation.</p></div>
+  <div class="skeleton"><span class="label">Answer skeleton</span><ol><li>The Ganges supports drinking water, irrigation, fisheries, transport, culture and livelihoods across a large basin.</li>
+<li>Sources include untreated or partly treated sewage, industrial effluent, agricultural runoff, solid and plastic waste, religious and cremation waste, livestock and storm-water; reduced flow limits dilution.</li>
+<li>Scale and impact vary by location and season, affecting health, treatment costs, aquatic habitats, fisheries and livelihoods; CPCB monitors 112 main-stem locations.</li>
+<li>Namami Gange funds sewage networks and treatment, effluent treatment, cleaning, monitoring, environmental flow, afforestation and biodiversity work; 3,977 MLD capacity was reported by December 2025.</li>
+<li>Evaluation: capacity must be connected, operated and monitored, alongside industrial compliance, solid-waste control, ecological flow and public participation.</li></ol></div>
+  <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
+  <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-B4">Show answer</button></div>
+  <div class="answer" id="ans-B4" hidden>
+<p>The Ganges is a major river system supporting drinking water, irrigation, fisheries, transport, cultural practices and livelihoods. Its pollution is caused by several sources operating across towns, cities and industrial areas along the river and its tributaries.</p>
+<p>Sources: Untreated or partly treated municipal sewage is a major source of organic pollution and pathogens. Industrial effluents may contain chemicals and heavy metals. Other sources include agricultural runoff carrying fertilisers and pesticides, solid waste, plastic, religious offerings, cremation-related waste, livestock and urban storm-water runoff. Reduced environmental flow can also limit the river’s ability to dilute and process pollutants.</p>
+<p>Scale and impact: Pollution is not uniform; it varies by location and season. It affects human health through unsafe contact or consumption, increases treatment costs, damages aquatic habitats and can affect fisheries and river-dependent livelihoods. CPCB monitoring covers 112 locations on the Ganga main stem across five states. A February 2026 parliamentary answer reported that, although pH and dissolved oxygen met bathing criteria at monitored locations, some stretches in Uttar Pradesh did not meet the biochemical oxygen demand bathing criterion. This shows improvement in some stretches but continuing local problems. [<a class="src" href="#ev-S20" aria-label="Evidence entry S20">S20</a>]</p>
+<p>Measures: Namami Gange funds sewage networks and treatment plants, industrial effluent treatment, river-surface cleaning, monitoring, environmental-flow measures, afforestation and biodiversity conservation. As of December 2025, the Mission reported 3,977 million litres per day (MLD) of sewage-treatment capacity created; 25 sewage-treatment plants with 530 MLD capacity were operationalised during 2025. Industrial common effluent treatment plants and enforcement are also part of pollution control. [<a class="src" href="#ev-S20" aria-label="Evidence entry S20">S20</a>]</p>
+<p>Evaluation: Treatment capacity is important, but it must be connected to sewers, operated reliably and monitored. Industrial compliance, solid-waste control, ecological flow and public participation are equally necessary.</p>
+<p>Conclusion: Cleaning the Ganga requires continuous basin-wide prevention and enforcement, not only construction of treatment plants.</p>
+  </div>
+  <div class="keywords"><span class="label">Keywords</span><ul><li>sewage</li>
+<li>industrial effluent</li>
+<li>agricultural runoff</li>
+<li>112 monitoring sites</li>
+<li>BOD</li>
+<li>3,977 MLD</li>
+<li>Namami Gange</li></ul></div>
+</article>
+<article class="q" id="q-B5" data-id="B5" data-section="B" aria-labelledby="title-B5">
+  <div class="q-head">
+    <span class="q-id">B5</span>
+    <div class="q-side">
+      <span class="q-meta">Section B &middot; Descriptive &middot; 8 marks</span>
+      <label class="done-toggle"><input type="checkbox" data-done="B5"> <span>Done</span></label>
+    </div>
+  </div>
+  <h3 class="q-title" id="title-B5" tabindex="-1">Describe the present state of India's environment with reference to air, water, land, forests and waste.  (8 marks)</h3>
+  <div class="cue"><span class="label">Recall cue</span><p>Five headings: air, water, land, forests, waste; end with governance and public health.</p></div>
+  <div class="skeleton"><span class="label">Answer skeleton</span><ol><li>India’s environment is diverse but pressured by urbanisation, industry, resource use, population density and climate variability; monitoring, conservation and regulation have brought progress.</li>
+<li>Air: particulate pollution from vehicles, industry, power plants, dust, biomass and waste burning, worsened by winter pollutant trapping.</li>
+<li>Water: sewage, industrial effluent, agricultural chemicals, solid waste and over-extraction affect rivers, lakes and groundwater.</li>
+<li>Land and forests: erosion, salinity, waterlogging, mining, urban expansion, overgrazing and unsustainable cultivation degrade land; forests face fragmentation, development, encroachment, fires and invasive species.</li>
+<li>Waste: poor segregation, dumping and burning pollute soil, water and air; the Solid Waste Management Rules, 2026 require four-stream segregation.</li></ol></div>
+  <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
+  <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-B5">Show answer</button></div>
+  <div class="answer" id="ans-B5" hidden>
+<p>India’s environment is diverse and supports a large population and economy, but it faces pressure from urbanisation, industrial growth, resource use, population density and climate variability. There has also been progress through monitoring, conservation programmes and environmental regulation.</p>
+<p class="ans-point">1. Air: Many cities experience particulate pollution from vehicles, industries, power plants, road and construction dust, biomass burning and waste burning. Winter weather can trap pollutants, as documented for Delhi-NCR by CAQM. [<a class="src" href="#ev-S9" aria-label="Evidence entry S9">S9</a>]</p>
+<p class="ans-point">2. Water: Rivers, lakes and groundwater are affected by untreated sewage, industrial effluents, agricultural chemicals, solid waste and over-extraction. Safe drinking water, wastewater treatment and river-basin management remain priorities. The Ganga monitoring record illustrates that water quality can improve in some stretches while local pollution persists. [<a class="src" href="#ev-S20" aria-label="Evidence entry S20">S20</a>]</p>
+<p class="ans-point">3. Land and soil: Soil erosion, salinity, waterlogging, mining, urban expansion, overgrazing and unsustainable cultivation reduce land productivity. Desertification is a form of degradation in drylands and is accelerated by poor land management and climatic stress. [<a class="src" href="#ev-S12" aria-label="Evidence entry S12">S12</a>, <a class="src" href="#ev-S21" aria-label="Evidence entry S21">S21</a>]</p>
+<p class="ans-point">4. Forests and biodiversity: Forests provide carbon storage, water and soil protection, habitats and livelihoods. Pressures include habitat fragmentation, development projects, encroachment, fires, invasive species and over-exploitation. Conservation, restoration and community participation are therefore essential. [<a class="src" href="#ev-S10" aria-label="Evidence entry S10">S10</a>, <a class="src" href="#ev-S22" aria-label="Evidence entry S22">S22</a>]</p>
+<p class="ans-point">5. Waste: Cities generate wet, dry, sanitary, hazardous and special-care waste. Poor segregation, open dumping and burning can pollute soil, water and air. India’s Solid Waste Management Rules, 2026 (effective 1 April 2026) require four-stream segregation at source: wet, dry, sanitary and special-care waste. [<a class="src" href="#ev-S23" aria-label="Evidence entry S23">S23</a>]</p>
+<p>Conclusion: India’s environmental condition is mixed: there are measurable policy efforts, but pollution, land degradation and ecosystem pressures remain. Strong implementation, scientific monitoring, sustainable consumption and public participation are needed.</p>
+  </div>
+  <div class="keywords"><span class="label">Keywords</span><ul><li>air pollution</li>
+<li>sewage</li>
+<li>soil erosion</li>
+<li>habitat fragmentation</li>
+<li>four-stream segregation</li>
+<li>monitoring</li></ul></div>
+</article>
+<article class="q" id="q-B6" data-id="B6" data-section="B" aria-labelledby="title-B6">
+  <div class="q-head">
+    <span class="q-id">B6</span>
+    <div class="q-side">
+      <span class="q-meta">Section B &middot; Descriptive &middot; 7 marks</span>
+      <label class="done-toggle"><input type="checkbox" data-done="B6"> <span>Done</span></label>
+    </div>
+  </div>
+  <h3 class="q-title" id="title-B6" tabindex="-1">Describe the causes of acidification and explain suitable mitigation measures for affected lakes, soils and forests.  (7 marks)</h3>
+  <div class="cue"><span class="label">Recall cue</span><p>SO₂ + NOₓ → sulfuric/nitric acids → deposition → ecosystem damage → reduce emissions and restore.</p></div>
+  <div class="skeleton"><span class="label">Answer skeleton</span><ol><li>Acidification occurs when acidic deposition exceeds natural buffering; SO₂ and NOₓ from power plants, industry, vehicles and fuel combustion form sulphuric and nitric acids.</li>
+<li>Acids return by rain, snow, fog or dry deposition; lakes lose sensitive fish, eggs, plankton and insects, and aluminium becomes toxic.</li>
+<li>Soils leach calcium and magnesium and mobilise aluminium; trees suffer root and leaf damage and become less resilient.</li>
+<li>Mitigation: reduce SO₂ and NOₓ at source through low-sulphur fuel, scrubbers, low-NOₓ combustion, catalytic reduction, cleaner energy, efficiency and stricter standards.</li>
+<li>Restoration: scientifically assessed liming, forest restoration, soil testing, catchment protection and long-term monitoring, not a substitute for emission reduction.</li></ol></div>
+  <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
+  <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-B6">Show answer</button></div>
+  <div class="answer" id="ans-B6" hidden>
+<p>Acidification occurs when lakes, soils and forests receive acidic substances faster than their natural buffering capacity can neutralise them. A major cause is the release of sulphur dioxide (SO₂) and nitrogen oxides (NOₓ) from coal-fired power plants, industries, vehicles and fuel combustion. In the atmosphere these gases react with water, oxygen and other chemicals to form sulphuric and nitric acids. The acids return to Earth through rain, snow, fog or dry deposition. [<a class="src" href="#ev-S24" aria-label="Evidence entry S24">S24</a>]</p>
+<p>Effects on lakes: Lower pH harms sensitive fish, eggs, plankton and aquatic insects. Acidic water can also release aluminium from surrounding soils, which is toxic to aquatic organisms.</p>
+<p>Effects on soils and forests: Acid deposition can leach essential nutrients such as calcium and magnesium from soil and mobilise aluminium. Tree roots may be damaged, leaves and needles may be injured, and trees become less resilient to drought, cold, pests and disease.</p>
+<p>Mitigation: The most important solution is to reduce SO₂ and NOₓ at the source. Measures include low-sulphur fuels, flue-gas desulphurisation scrubbers, low-NOₓ combustion systems, catalytic reduction, cleaner energy, energy efficiency and stricter industrial and vehicle standards.</p>
+<p>Restoration: Where appropriate and scientifically assessed, lakes and soils may be treated with lime or other alkaline materials to neutralise acidity. Forest restoration, soil testing, protection of catchments and long-term pH and biodiversity monitoring can help recovery. Liming is a local restoration measure, not a substitute for emission reduction. [<a class="src" href="#ev-S24" aria-label="Evidence entry S24">S24</a>]</p>
+<p>Conclusion: Acidification is best controlled by preventing acid-forming emissions and supporting recovery of affected ecosystems.</p>
+  </div>
+  <div class="keywords"><span class="label">Keywords</span><ul><li>SO₂</li>
+<li>NOₓ</li>
+<li>sulphuric acid</li>
+<li>nitric acid</li>
+<li>low pH</li>
+<li>aluminium</li>
+<li>liming</li>
+<li>emission control</li></ul></div>
+</article>
+</section>
+<section class="section-block" id="sec-C" data-section="C" aria-labelledby="sec-C-h">
+  <p class="sec-kicker">SECTION C · Q.3</p>
+  <h2 id="sec-C-h">Descriptive questions (Question 3)</h2>
+  <p class="section-intro">Prepare all six. Learn the sequence in the recall cue, then use the full answer to practise writing in your own words.</p>
+<article class="q" id="q-C1" data-id="C1" data-section="C" aria-labelledby="title-C1">
+  <div class="q-head">
+    <span class="q-id">C1</span>
+    <div class="q-side">
+      <span class="q-meta">Section C &middot; Descriptive &middot; 8 marks</span>
+      <label class="done-toggle"><input type="checkbox" data-done="C1"> <span>Done</span></label>
+    </div>
+  </div>
+  <h3 class="q-title" id="title-C1" tabindex="-1">Explain how do deforestation, infrastructure development, and agriculture affect hotspots?  (8 marks)</h3>
+  <div class="cue"><span class="label">Recall cue</span><p>Hotspot = unique species + threat; these activities remove, split and degrade habitat.</p></div>
+  <div class="skeleton"><span class="label">Answer skeleton</span><ol><li>Hotspots contain many endemic species and have lost at least 70% of original vegetation, so further disturbance is serious.</li>
+<li>Deforestation removes habitat, isolates patches, reduces breeding and gene flow, increases erosion and can increase human–wildlife conflict.</li>
+<li>Infrastructure fragments habitat: roads create barriers and mortality, dams alter flow and fish movement, and construction adds noise, light, pollution and human activity.</li>
+<li>Agriculture replaces forests and grasslands; pesticides and fertilisers pollute, monoculture reduces habitat diversity, and irrigation affects wetlands and rivers.</li>
+<li>Conserve core habitats and corridors, require rigorous EIA, avoid sensitive areas, use wildlife crossings and pollution controls, promote agroforestry and native restoration, and involve local communities.</li></ol></div>
+  <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
+  <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-C1">Show answer</button></div>
+  <div class="answer" id="ans-C1" hidden>
+<p>Biodiversity hotspots contain many endemic species and have already lost at least 70% of their original natural vegetation. They are therefore highly sensitive to further habitat disturbance. [<a class="src" href="#ev-S10" aria-label="Evidence entry S10">S10</a>]</p>
+<p>Deforestation: Clearing forests for timber, fuel, settlements or commercial use removes the habitat on which plants and animals depend. Small surviving forest patches become isolated, reducing breeding opportunities and gene flow. Loss of tree cover also increases erosion, changes local moisture and temperature and may increase human–wildlife conflict.</p>
+<p>Infrastructure development: Roads, railways, dams, mines, power lines and urban expansion can divide continuous habitats into smaller fragments. Roads create barriers and wildlife mortality; dams alter river flow and fish movement; construction brings noise, light, pollution and human activity into previously less-disturbed areas. Poorly planned projects can disrupt wildlife corridors and breeding sites.</p>
+<p>Agriculture: Expansion of cropland and plantations can replace natural forests and grasslands. Intensive farming may use pesticides and fertilisers that pollute soil and water. Monoculture reduces habitat diversity, while excessive irrigation and water extraction affect nearby wetlands and rivers.</p>
+<p>Conservation measures: Protect core habitats and ecological corridors; require rigorous environmental impact assessment; avoid sensitive areas when alternatives exist; use wildlife crossings and pollution controls; promote agroforestry and sustainable farming; restore degraded areas with native species; and involve local and Indigenous communities in decisions. IPBES identifies land/sea-use change, direct exploitation, climate change, pollution and invasive species as the five major direct drivers of biodiversity loss. [<a class="src" href="#ev-S15" aria-label="Evidence entry S15">S15</a>]</p>
+<p>Conclusion: Development and food production must be planned so that they do not destroy the ecological foundations of biodiversity hotspots.</p>
+  </div>
+  <div class="keywords"><span class="label">Keywords</span><ul><li>endemic species</li>
+<li>habitat loss</li>
+<li>fragmentation</li>
+<li>roads and dams</li>
+<li>agricultural expansion</li>
+<li>corridors</li>
+<li>EIA</li></ul></div>
+</article>
+<article class="q" id="q-C2" data-id="C2" data-section="C" aria-labelledby="title-C2">
+  <div class="q-head">
+    <span class="q-id">C2</span>
+    <div class="q-side">
+      <span class="q-meta">Section C &middot; Descriptive &middot; 7 marks</span>
+      <label class="done-toggle"><input type="checkbox" data-done="C2"> <span>Done</span></label>
+    </div>
+  </div>
+  <h3 class="q-title" id="title-C2" tabindex="-1">Analyze the relationship between fossil-fuel consumption and global climate change.  (7 marks)</h3>
+  <div class="cue"><span class="label">Recall cue</span><p>Coal, oil and gas → CO₂ and other GHGs → enhanced greenhouse effect → climate impacts.</p></div>
+  <div class="skeleton"><span class="label">Answer skeleton</span><ol><li>Coal, petroleum and natural gas generate electricity, run vehicles, power industry and heat buildings; combustion releases CO₂ and extraction can release methane.</li>
+<li>The natural greenhouse effect keeps Earth warm; human emissions raise greenhouse-gas concentrations so more heat is retained.</li>
+<li>The IPCC concludes that human activities, principally greenhouse-gas emissions, have unequivocally caused global warming.</li>
+<li>Impacts include heat extremes, changed rainfall, drought and flood risks, glacier melt, sea-level rise, and effects on agriculture, water, ecosystems and health.</li>
+<li>Reduce by replacing fossil-fuel electricity with renewables, improving efficiency, electrifying transport and heat, strengthening public transport and rail, cutting methane leaks, protecting forests and using lower-carbon industry; adaptation is also needed.</li></ol></div>
+  <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
+  <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-C2">Show answer</button></div>
+  <div class="answer" id="ans-C2" hidden>
+<p>Fossil fuels include coal, petroleum and natural gas. They are widely used to generate electricity, run vehicles, power industries and heat buildings. Their combustion releases carbon dioxide (CO₂), while extraction and distribution can also release methane. Cement and other industrial processes add further emissions.</p>
+<p>The natural greenhouse effect keeps Earth warm enough for life. Greenhouse gases absorb some of the infrared radiation emitted by Earth’s surface and re-emit energy. When human activities increase the concentration of these gases, more heat is retained in the climate system. The IPCC concludes that human activities, principally greenhouse-gas emissions, have unequivocally caused global warming. [<a class="src" href="#ev-S7" aria-label="Evidence entry S7">S7</a>, <a class="src" href="#ev-S8" aria-label="Evidence entry S8">S8</a>]</p>
+<p>Impacts: Global warming increases the frequency and intensity of many heat extremes; changes rainfall patterns and increases risks from heavy precipitation and drought in different regions; contributes to melting glaciers and rising sea levels; and affects agriculture, water availability, ecosystems and human health. The severity of impacts depends on the level of warming and the vulnerability of communities.</p>
+<p>Ways to reduce the link: Replace fossil-fuel electricity with renewable sources; improve energy efficiency; electrify transport and industrial heat where feasible; strengthen public transport and rail; reduce methane leaks; improve building efficiency; protect and restore forests; and use lower-carbon industrial processes. Adaptation measures such as heat-action plans, water conservation and climate-resilient agriculture are also necessary.</p>
+<p>Conclusion: The more fossil fuels are consumed without effective controls, the more greenhouse gases accumulate. Rapid emissions reduction is essential to limit future climate change.</p>
+  </div>
+  <div class="keywords"><span class="label">Keywords</span><ul><li>coal</li>
+<li>oil</li>
+<li>natural gas</li>
+<li>CO₂</li>
+<li>methane</li>
+<li>greenhouse effect</li>
+<li>heat extremes</li>
+<li>sea-level rise</li></ul></div>
+</article>
+<article class="q" id="q-C3" data-id="C3" data-section="C" aria-labelledby="title-C3">
+  <div class="q-head">
+    <span class="q-id">C3</span>
+    <div class="q-side">
+      <span class="q-meta">Section C &middot; Descriptive &middot; 8 marks</span>
+      <label class="done-toggle"><input type="checkbox" data-done="C3"> <span>Done</span></label>
+    </div>
+  </div>
+  <h3 class="q-title" id="title-C3" tabindex="-1">Explain the environmental linkages of climate variability, soil degradation, and water stress with food security in India.  (8 marks)</h3>
+  <div class="cue"><span class="label">Recall cue</span><p>Climate shocks + degraded soil + inadequate water → lower/unstable production → food access and nutrition.</p></div>
+  <div class="skeleton"><span class="label">Answer skeleton</span><ol><li>Food security means reliable access to sufficient, safe and nutritious food; climate variability, soil degradation and water stress interact to weaken it.</li>
+<li>Climate variability: irregular monsoon rain, heatwaves, droughts, floods and unseasonal rain damage crops, livestock, fisheries, roads, storage and supply chains.</li>
+<li>Soil degradation: erosion removes topsoil, lost organic matter weakens structure and water-holding capacity, and salinity, waterlogging and contamination reduce productivity.</li>
+<li>Water stress: groundwater over-extraction, falling tables, polluted sources and irregular rain limit irrigation and raise costs and uncertainty.</li>
+<li>Combined impact: lower and more variable production raises prices and reduces access, while poor diets worsen nutrition; measures include soil conservation, rainwater harvesting, watershed restoration, micro-irrigation, crop diversification, tolerant varieties, forecasts, storage, markets and nutrition programmes.</li></ol></div>
+  <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
+  <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-C3">Show answer</button></div>
+  <div class="answer" id="ans-C3" hidden>
+<p>Food security means that people have reliable access to sufficient, safe and nutritious food. In India, climate variability, soil degradation and water stress interact and can weaken food security.</p>
+<p>Climate variability: Irregular monsoon rainfall, heatwaves, droughts, floods and unseasonal rain can damage crops, delay sowing, reduce yields and affect livestock and fisheries. Extreme events can also damage roads, storage facilities and supply chains, making food less accessible.</p>
+<p>Soil degradation: Soil erosion removes fertile topsoil. Loss of organic matter reduces soil structure and water-holding capacity. Salinity, waterlogging and excessive chemical contamination can reduce crop productivity. When soil is degraded, crops become more vulnerable to drought and heavy rainfall. [<a class="src" href="#ev-S21" aria-label="Evidence entry S21">S21</a>]</p>
+<p>Water stress: Agriculture requires reliable water. Over-extraction of groundwater, falling water tables, polluted sources and irregular rainfall can limit irrigation. Farmers may face higher pumping costs and greater uncertainty. Water shortages can reduce crop choices and production, while competition between agriculture, cities and industry increases.</p>
+<p>Combined impact on food security: Lower and more variable production can raise prices and reduce household access to food. Poor-quality diets can worsen nutrition, particularly for children, pregnant women and low-income households. Thus environmental stress can affect food availability, access, stability and nutritional utilisation.</p>
+<p>Measures: Promote soil conservation, organic matter and balanced nutrient management; harvest rainwater; restore watersheds; use micro-irrigation and efficient scheduling; diversify crops; adopt locally suitable drought- and heat-tolerant varieties; conserve groundwater; improve weather forecasts and early warnings; and strengthen storage, local markets and nutrition programmes.</p>
+<p>Conclusion: Food security depends on healthy soil, reliable water and resilient ecosystems as well as agricultural production.</p>
+  </div>
+  <div class="keywords"><span class="label">Keywords</span><ul><li>monsoon variability</li>
+<li>heatwaves and floods</li>
+<li>soil erosion</li>
+<li>organic matter</li>
+<li>groundwater</li>
+<li>food availability/access/stability/utilisation</li></ul></div>
+</article>
+<article class="q" id="q-C4" data-id="C4" data-section="C" aria-labelledby="title-C4">
+  <div class="q-head">
+    <span class="q-id">C4</span>
+    <div class="q-side">
+      <span class="q-meta">Section C &middot; Descriptive &middot; 7 marks</span>
+      <label class="done-toggle"><input type="checkbox" data-done="C4"> <span>Done</span></label>
+    </div>
+  </div>
+  <h3 class="q-title" id="title-C4" tabindex="-1">Analyze the pressure on India's biodiversity hotspots and freshwater ecosystems, and suggest measures for their conservation.  (7 marks)</h3>
+  <div class="cue"><span class="label">Recall cue</span><p>Name four hotspots → pressures → freshwater pressures → conservation.</p></div>
+  <div class="skeleton"><span class="label">Answer skeleton</span><ol><li>India contains four globally recognised hotspots: the Himalaya, Indo-Burma, Western Ghats and Sri Lanka, and Sundaland (including the Nicobar Islands), all with high endemism.</li>
+<li>Hotspot pressures include deforestation, fragmentation, roads, mining, dams, urbanisation, agricultural expansion, fires, invasive species, pollution and climate change.</li>
+<li>Freshwater pressures include sewage, industrial effluent, farm runoff, plastic and solid waste, sand mining, overfishing, invasive species, water withdrawal, and dams that alter flow.</li>
+<li>Conserve protected areas and corridors, restore native vegetation and wetlands, maintain environmental flows, treat wastewater, regulate extraction, reduce runoff, prevent invasive species and monitor water and biodiversity.</li>
+<li>Community participation, traditional knowledge and sustainable livelihoods support long-term conservation.</li></ol></div>
+  <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
+  <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-C4">Show answer</button></div>
+  <div class="answer" id="ans-C4" hidden>
+<p>India contains parts of four globally recognised biodiversity hotspots: the Himalaya, Indo-Burma, Western Ghats and Sri Lanka, and Sundaland (including the Nicobar Islands). These regions have high endemism and are important for ecological functions and livelihoods. [<a class="src" href="#ev-S10" aria-label="Evidence entry S10">S10</a>, <a class="src" href="#ev-S25" aria-label="Evidence entry S25">S25</a>]</p>
+<p>Pressures on hotspots: Deforestation, habitat fragmentation, roads, mining, dams, urbanisation, agricultural expansion, fires, invasive species, pollution and climate change threaten habitats and endemic species. Infrastructure can divide wildlife corridors; intensive farming can pollute rivers and wetlands; over-exploitation can reduce plant and animal populations.</p>
+<p>Pressures on freshwater ecosystems: Rivers, lakes, wetlands and streams face sewage, industrial effluents, fertiliser and pesticide runoff, plastic and solid waste, sand mining, overfishing, invasive species and excessive water withdrawal. Dams and river regulation can change natural flow, block fish migration and reduce sediment movement.</p>
+<p>Conservation measures: Expand and effectively manage protected areas; conserve ecological corridors; restore native vegetation and wetlands; maintain environmental flows; treat municipal sewage and industrial wastewater; regulate sand mining and over-extraction; reduce agricultural runoff; prevent invasive species; and monitor water quality and biodiversity. Community participation, traditional knowledge and sustainable livelihoods are important for long-term conservation.</p>
+<p>Conclusion: Hotspots and freshwater ecosystems must be protected together because forests, rivers, wetlands and people are ecologically connected.</p>
+  </div>
+  <div class="keywords"><span class="label">Keywords</span><ul><li>Himalaya</li>
+<li>Indo-Burma</li>
+<li>Western Ghats–Sri Lanka</li>
+<li>Sundaland</li>
+<li>sewage</li>
+<li>dams</li>
+<li>environmental flows</li>
+<li>wetland restoration</li></ul></div>
+</article>
+<article class="q" id="q-C5" data-id="C5" data-section="C" aria-labelledby="title-C5">
+  <div class="q-head">
+    <span class="q-id">C5</span>
+    <div class="q-side">
+      <span class="q-meta">Section C &middot; Descriptive &middot; 8 marks</span>
+      <label class="done-toggle"><input type="checkbox" data-done="C5"> <span>Done</span></label>
+    </div>
+  </div>
+  <h3 class="q-title" id="title-C5" tabindex="-1">Explain how the enhanced greenhouse effect occurs and discuss any three impacts of rising atmospheric CO₂.  (8 marks)</h3>
+  <div class="cue"><span class="label">Recall cue</span><p>Sun in → surface warms → infrared out → GHG absorption; more CO₂ = energy imbalance. Give 3 impacts.</p></div>
+  <div class="skeleton"><span class="label">Answer skeleton</span><ol><li>Natural greenhouse effect: sunlight warms the surface, the surface emits infrared radiation, and greenhouse gases absorb and re-emit energy, keeping Earth warm enough for life.</li>
+<li>Enhanced effect: burning coal, oil and gas, cement production and deforestation add greenhouse gases, which absorb more outgoing infrared energy and disturb Earth’s energy balance.</li>
+<li>Impact 1: higher average temperatures and more severe heat extremes affect health, work and crops.</li>
+<li>Impact 2: changing rainfall brings heavier rain and flood risk in some regions and longer or more intense drought and water stress in others.</li>
+<li>Impact 3: sea-level rise from ocean expansion and melting land ice increases coastal flooding and erosion; CO₂ also contributes to ocean acidification.</li></ol></div>
+  <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
+  <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-C5">Show answer</button></div>
+  <div class="answer" id="ans-C5" hidden>
+<p>The natural greenhouse effect occurs when sunlight passes through the atmosphere and warms Earth’s surface. The surface then emits energy as infrared radiation. Greenhouse gases such as carbon dioxide, methane and nitrous oxide absorb some of this outgoing radiation and re-emit energy, including back towards the surface. This natural process keeps Earth warm enough for life.</p>
+<p>The enhanced greenhouse effect occurs when human activities—especially burning coal, oil and gas, cement production and deforestation—add extra greenhouse gases to the atmosphere. Higher concentrations absorb more outgoing infrared energy and disturb Earth’s energy balance, causing long-term warming. NASA explains that the natural greenhouse effect is essential, but the additional greenhouse gases from human activity trap extra heat. The IPCC identifies human greenhouse-gas emissions as the cause of observed global warming. [<a class="src" href="#ev-S7" aria-label="Evidence entry S7">S7</a>, <a class="src" href="#ev-S8" aria-label="Evidence entry S8">S8</a>]</p>
+<p>Three impacts of rising atmospheric CO₂ and the resulting climate change:</p>
+<p class="ans-point">1. Higher temperatures and heat extremes: Average temperatures rise and dangerous heat events become more severe, affecting health, work and crops.</p>
+<p class="ans-point">2. Changing rainfall and water availability: Some regions experience heavier rainfall and flood risk, while others face longer or more intense drought and water stress.</p>
+<p class="ans-point">3. Sea-level rise: Warmer ocean water expands and melting land ice adds water to the oceans, increasing coastal flooding and erosion risks.</p>
+<p>CO₂ also dissolves into seawater and contributes to ocean acidification, which can harm organisms that build shells or skeletons.</p>
+<p>Conclusion: The enhanced greenhouse effect is a human-driven strengthening of a natural process. Reducing emissions and protecting carbon-storing ecosystems can limit its impacts.</p>
+  </div>
+  <div class="keywords"><span class="label">Keywords</span><ul><li>infrared radiation</li>
+<li>natural greenhouse effect</li>
+<li>extra CO₂</li>
+<li>energy imbalance</li>
+<li>heat extremes</li>
+<li>rainfall/drought</li>
+<li>sea-level rise</li></ul></div>
+</article>
+<article class="q" id="q-C6" data-id="C6" data-section="C" aria-labelledby="title-C6">
+  <div class="q-head">
+    <span class="q-id">C6</span>
+    <div class="q-side">
+      <span class="q-meta">Section C &middot; Descriptive &middot; 7 marks</span>
+      <label class="done-toggle"><input type="checkbox" data-done="C6"> <span>Done</span></label>
+    </div>
+  </div>
+  <h3 class="q-title" id="title-C6" tabindex="-1">Explain the importance of biodiversity and analyse the major causes and consequences of biodiversity loss.  (7 marks)</h3>
+  <div class="cue"><span class="label">Recall cue</span><p>Importance → five direct drivers → ecological/social consequences → conservation.</p></div>
+  <div class="skeleton"><span class="label">Answer skeleton</span><ol><li>Biodiversity is variety at genetic, species and ecosystem levels; it provides food, medicine, fibre, fuel, pollination, soil formation, water purification, climate regulation and cultural value.</li>
+<li>IPBES identifies five direct drivers: land- and sea-use change, direct exploitation, climate change, pollution, and invasive alien species.</li>
+<li>Consequences include species decline or extinction, lost genetic diversity, and loss of pollinators, pest control, water purification and soil protection.</li>
+<li>Food production and fisheries may become less reliable; forest, wetland and coastal communities can lose income, food and cultural practices, and ecosystems become less resilient.</li>
+<li>Conserve habitats and corridors, restore ecosystems, control illegal wildlife trade and over-exploitation, reduce pollution, prevent invasive species, promote sustainable agriculture and fisheries, and involve local communities.</li></ol></div>
+  <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
+  <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-C6">Show answer</button></div>
+  <div class="answer" id="ans-C6" hidden>
+<p>Biodiversity is the variety of life at genetic, species and ecosystem levels. It is essential because ecosystems provide food, medicine, fibre, fuel, pollination, soil formation, water purification, climate regulation and cultural value. Biodiversity also supports agriculture, fisheries, livelihoods and resilience to environmental change.</p>
+<p>Major causes of biodiversity loss: IPBES identifies five major direct drivers: (1) land- and sea-use change, including deforestation and habitat fragmentation; (2) direct exploitation of organisms, such as overfishing, hunting and excessive logging; (3) climate change; (4) pollution of air, soil and water; and (5) invasive alien species that outcompete or prey on native species. These pressures often act together. [<a class="src" href="#ev-S15" aria-label="Evidence entry S15">S15</a>]</p>
+<p>Consequences: Species may decline or become extinct, reducing genetic diversity. Damaged ecosystems can lose pollinators, natural pest control, water purification and soil protection. Food production and fisheries may become less reliable. Communities that depend on forests, wetlands and coastal resources can lose income, food and cultural practices. Less diverse ecosystems may also be less resilient to droughts, pests, disease and climate extremes.</p>
+<p>Conservation measures: Protect habitats and ecological corridors; restore degraded ecosystems; control illegal wildlife trade and over-exploitation; reduce pollution; prevent the spread of invasive species; promote sustainable agriculture and fisheries; and involve local communities in conservation.</p>
+<p>Conclusion: Biodiversity is not simply a collection of species; it underpins ecosystem services and human well-being. Conserving it is necessary for sustainable development.</p>
+  </div>
+  <div class="keywords"><span class="label">Keywords</span><ul><li>genetic/species/ecosystem diversity</li>
+<li>ecosystem services</li>
+<li>five direct drivers</li>
+<li>habitat loss</li>
+<li>overexploitation</li>
+<li>pollution</li>
+<li>invasive species</li></ul></div>
+</article>
+</section>
+
+    <nav class="qnav" aria-label="Question navigation">
+      <button class="btn" type="button" id="prevBtn">&larr; Previous</button>
+      <span class="pos" id="posLabel">1 / 24</span>
+      <button class="btn" type="button" id="nextBtn">Next &rarr;</button>
+    </nav>
+
+    <section class="checklist" id="checklist" aria-labelledby="checklistHeading">
+      <div class="cl-head"><h2 id="checklistHeading">24-question checklist</h2><span class="cl-count" id="doneCount">0 of 24</span></div>
+      <p class="hint">Tick a question when you can answer it from memory. Saved in this browser.</p>
+<div class="cl-group"><h3>Section A &middot; Short answers</h3><ul class="cl-grid"><li><label><input type="checkbox" data-done="A1"> <span><b>A1</b> Forests &amp; ecological balance</span></label></li>
+<li><label><input type="checkbox" data-done="A2"> <span><b>A2</b> Carbon footprint</span></label></li>
+<li><label><input type="checkbox" data-done="A3"> <span><b>A3</b> Radioactive gases</span></label></li>
+<li><label><input type="checkbox" data-done="A4"> <span><b>A4</b> Causes of environmental degradation</span></label></li>
+<li><label><input type="checkbox" data-done="A5"> <span><b>A5</b> Malnutrition, hidden hunger &amp; paradox</span></label></li>
+<li><label><input type="checkbox" data-done="A6"> <span><b>A6</b> Delhi air pollution &amp; seasons</span></label></li>
+<li><label><input type="checkbox" data-done="A7"> <span><b>A7</b> Carbon footprint &amp; greenhouse effect</span></label></li>
+<li><label><input type="checkbox" data-done="A8"> <span><b>A8</b> Global environmental issues</span></label></li>
+<li><label><input type="checkbox" data-done="A9"> <span><b>A9</b> Biodiversity hotspot criteria</span></label></li>
+<li><label><input type="checkbox" data-done="A10"> <span><b>A10</b> Ozone layer depletion</span></label></li>
+<li><label><input type="checkbox" data-done="A11"> <span><b>A11</b> Desertification</span></label></li>
+<li><label><input type="checkbox" data-done="A12"> <span><b>A12</b> Montreal Protocol</span></label></li></ul></div>
+<div class="cl-group"><h3>Section B &middot; Descriptive</h3><ul class="cl-grid"><li><label><input type="checkbox" data-done="B1"> <span><b>B1</b> Pollution &amp; human health</span></label></li>
+<li><label><input type="checkbox" data-done="B2"> <span><b>B2</b> Industry, transport &amp; carbon</span></label></li>
+<li><label><input type="checkbox" data-done="B3"> <span><b>B3</b> India&rsquo;s environmental priorities</span></label></li>
+<li><label><input type="checkbox" data-done="B4"> <span><b>B4</b> Ganga pollution</span></label></li>
+<li><label><input type="checkbox" data-done="B5"> <span><b>B5</b> State of India&rsquo;s environment</span></label></li>
+<li><label><input type="checkbox" data-done="B6"> <span><b>B6</b> Acidification</span></label></li></ul></div>
+<div class="cl-group"><h3>Section C &middot; Descriptive</h3><ul class="cl-grid"><li><label><input type="checkbox" data-done="C1"> <span><b>C1</b> Hotspots: deforestation, infrastructure, agriculture</span></label></li>
+<li><label><input type="checkbox" data-done="C2"> <span><b>C2</b> Fossil fuels &amp; climate change</span></label></li>
+<li><label><input type="checkbox" data-done="C3"> <span><b>C3</b> Climate, soil, water &amp; food security</span></label></li>
+<li><label><input type="checkbox" data-done="C4"> <span><b>C4</b> Biodiversity &amp; freshwater pressure</span></label></li>
+<li><label><input type="checkbox" data-done="C5"> <span><b>C5</b> Enhanced greenhouse effect</span></label></li>
+<li><label><input type="checkbox" data-done="C6"> <span><b>C6</b> Biodiversity importance &amp; loss</span></label></li></ul></div>
+    </section>
+
+    <section id="review" aria-labelledby="reviewHeading">
+      <p class="sec-kicker">Reference</p>
+      <h2 id="reviewHeading" style="font-family:Georgia,Cambria,'Times New Roman',serif;font-size:1.35rem;line-height:1.3;margin:.2rem 0 .4rem;padding-bottom:.35rem;border-bottom:1px solid var(--line);">Rapid review</h2>
+      <p class="section-intro">Last-minute recall sheet. Use this after you have worked through the answers. Cover the right column and retrieve the points first.</p>
+<div class="table-wrap"><table class="review-table"><caption class="sr-only">Rapid review sheet: topic and recall points</caption><thead><tr>
+<th scope="col">TOPIC</th>
+<th scope="col">RECALL POINTS</th>
+</tr></thead><tbody>
+<tr><th scope="row">Forests</th><td>Carbon sink • oxygen • water cycle • soil protection • biodiversity • livelihoods</td></tr>
+<tr><th scope="row">Carbon footprint</th><td>Total GHG emissions/removals in CO₂e; direct + indirect; energy, travel, supply chain</td></tr>
+<tr><th scope="row">Delhi air</th><td>Transport • dust • industry/power • biomass/waste burning • secondary particles; winter stagnation, monsoon relief</td></tr>
+<tr><th scope="row">Malnutrition</th><td>Undernutrition + micronutrient deficiencies + overweight/obesity; hidden hunger = micronutrient deficiency despite calories</td></tr>
+<tr><th scope="row">Hotspot criteria</th><td>At least 1,500 endemic vascular plants AND at least 70% original natural vegetation lost</td></tr>
+<tr><th scope="row">India hotspots</th><td>Himalaya • Indo-Burma • Western Ghats–Sri Lanka • Sundaland (Nicobar Islands)</td></tr>
+<tr><th scope="row">Greenhouse effect</th><td>Sunlight warms surface; surface emits infrared; GHGs absorb/re-emit; more GHG = extra heat retained</td></tr>
+<tr><th scope="row">Biodiversity loss drivers</th><td>Land/sea-use change • exploitation • climate change • pollution • invasive alien species</td></tr>
+<tr><th scope="row">Desertification</th><td>Land degradation in arid, semi-arid and dry sub-humid areas; overgrazing, deforestation, overcultivation, poor irrigation</td></tr>
+<tr><th scope="row">Acidification</th><td>SO₂ + NOₓ form sulphuric/nitric acids; wet/dry deposition; lower pH; reduce emissions, restore/monitor</td></tr>
+<tr><th scope="row">Montreal Protocol</th><td>1987; phase out ozone-depleting substances; entered into force 1989</td></tr>
+<tr><th scope="row">NCAP update</th><td>130 cities; 2025–26 vs 2017–18: 108 cities lower PM₁₀; 72 &gt;20% reduction; 26 &gt;40%; 14 met PM₁₀ standard</td></tr>
+<tr><th scope="row">JJM update</th><td>JJM 2.0 approved March 2026; extended to December 2028; service delivery / safe sustainable rural tap water</td></tr>
+<tr><th scope="row">Ganga update</th><td>112 main-stem monitoring locations across five states; 3,977 MLD treatment capacity reported by Dec 2025</td></tr>
+</tbody></table></div>
+<h3>Exam answer skeletons</h3><ul class="plain">
+<li>Pollution/health: pollutant → exposure → body system → disease → prevention.</li>
+<li>Carbon/climate: source → gas → greenhouse mechanism → impact → reduction.</li>
+<li>Environmental priority: issue → programme → action → current status → limitation.</li>
+<li>River/acidification: source → pathway → impact → control → evaluation.</li>
+<li>Biodiversity/food: ecosystem connection → pressures → consequences → conservation/adaptation.</li>
+</ul>
+<div class="callout"><p class="label">Do not mix these up</p><p>DO NOT MIX THESE UP — Ozone depletion is caused mainly by ozone-depleting substances in the stratosphere. Global warming is caused by the enhanced greenhouse effect. They are different environmental problems, although some chemicals can affect climate as well.</p></div>
+    </section>
+
+    <section id="sources" aria-labelledby="sourcesHeading" style="margin-top:2.5rem;">
+      <p class="sec-kicker">Reference</p>
+      <h2 id="sourcesHeading" style="font-family:Georgia,Cambria,'Times New Roman',serif;font-size:1.35rem;line-height:1.3;margin:.2rem 0 .4rem;padding-bottom:.35rem;border-bottom:1px solid var(--line);">Evidence register</h2>
+      <p class="section-intro">Sources used in the researched answers and study-design choices. Source markers in the answers refer to this list. Current policy information is date-stamped; use the published date shown, not search ranking or snippets.</p>
+<ul class="ev">
+<li id="ev-S1"><span class="sid">S1</span>NICE Guideline NG87 — ADHD: diagnosis and management. Environmental modifications include reducing distraction, shorter focus periods, movement breaks and written reinforcement; adapt to individual need. <a class="ev-link" href="https://www.nice.org.uk/guidance/ng87/resources/attention-deficit-hyperactivitydisorder-diagnosis-and-managementpdf-1837699732933" target="_blank" rel="noopener" aria-label="Open source S1 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
+<li id="ev-S2"><span class="sid">S2</span>CHADD — Succeeding in College with ADHD. Practical guidance on breaking work into chunks and taking short breaks. <a class="ev-link" href="https://chadd.org/for-parents/succeeding-in-college-with-adhd/" target="_blank" rel="noopener" aria-label="Open source S2 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
+<li id="ev-S3"><span class="sid">S3</span>Dunlosky et al. (2013), Improving Students’ Learning With Effective Learning Techniques, Psychological Science in the Public Interest. Practice testing and distributed practice rated high utility. <a class="ev-link" href="https://www.psychologicalscience.org/journals/pspi/1529100612453266/" target="_blank" rel="noopener" aria-label="Open source S3 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
+<li id="ev-S4"><span class="sid">S4</span>Agarwal, Nunes &amp; Blunt (2021), Retrieval Practice Consistently Benefits Student Learning: A Systematic Review of Applied Research in Schools and Classrooms. <a class="ev-link" href="https://doi.org/10.1007/s10648-021-09595-9" target="_blank" rel="noopener" aria-label="Open source S4 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
+<li id="ev-S5"><span class="sid">S5</span>World Health Organization — Malnutrition. Defines wasting, stunting, underweight, micronutrient deficiencies and the double burden of malnutrition. <a class="ev-link" href="https://www.who.int/health-topics/malnutrition" target="_blank" rel="noopener" aria-label="Open source S5 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
+<li id="ev-S6"><span class="sid">S6</span>International Organization for Standardization — Carbon footprint glossary, based on ISO 14067 / ISO 14064-1. Defines GHG emissions/removals expressed as CO₂-equivalents. <a class="ev-link" href="https://www.iso.org/renewable-energy/carbon-footprint" target="_blank" rel="noopener" aria-label="Open source S6 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
+<li id="ev-S7"><span class="sid">S7</span>NASA Science — What is the greenhouse effect? Explains greenhouse gases, the natural greenhouse effect and additional heat retained due to human emissions. <a class="ev-link" href="https://science.nasa.gov/climate%20change/faq/what%20is%20the%20greenhouse%20effect/" target="_blank" rel="noopener" aria-label="Open source S7 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
+<li id="ev-S8"><span class="sid">S8</span>IPCC AR6 Synthesis Report — Summary for Policymakers. Human activities, principally greenhouse-gas emissions, have unequivocally caused global warming. <a class="ev-link" href="https://www.ipcc.ch/report/ar6/syr/summary-for-policymakers/" target="_blank" rel="noopener" aria-label="Open source S8 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
+<li id="ev-S9"><span class="sid">S9</span>Commission for Air Quality Management (CAQM), January 2026 — Report of the Air Quality Experts on Identification of the Causes for Worsening AQI in Delhi-NCR. Includes seasonal meteorology and source apportionment. <a class="ev-link" href="https://caqm.nic.in/FileUploadDomain/WebsiteDocument/Documents/Policies/AQI%20Report%20V5%20Final637d7a8a-8dad-44fb-9c8c-8be0dfe42839.pdf" target="_blank" rel="noopener" aria-label="Open source S9 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
+<li id="ev-S10"><span class="sid">S10</span>Conservation International — Biodiversity Hotspots. Criteria: at least 1,500 endemic plant species and at least 70% loss of original natural vegetation. <a class="ev-link" href="https://www.conservation.org/learning/biodiversity-hotspots?showpage=Biodiversity" target="_blank" rel="noopener" aria-label="Open source S10 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
+<li id="ev-S11"><span class="sid">S11</span>UNEP Ozone Secretariat — The Montreal Protocol on Substances that Deplete the Ozone Layer. Signed in 1987; entered into force in 1989; phases out ozone-depleting substances. <a class="ev-link" href="https://ozone.unep.org/treaties/montreal-protocol" target="_blank" rel="noopener" aria-label="Open source S11 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
+<li id="ev-S12"><span class="sid">S12</span>United Nations Convention to Combat Desertification — UNCCD FAQ and Article 1. Defines desertification as land degradation in arid, semi-arid and dry sub-humid areas. <a class="ev-link" href="https://www.unccd.int/unccd-faq" target="_blank" rel="noopener" aria-label="Open source S12 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
+<li id="ev-S13"><span class="sid">S13</span>World Health Organization — Radon and health. Radon is a naturally occurring radioactive gas from uranium decay in rocks and soil; indoor accumulation is a health concern. <a class="ev-link" href="https://www.who.int/news-room/fact-sheets/detail/radon-and-health/" target="_blank" rel="noopener" aria-label="Open source S13 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
+<li id="ev-S14"><span class="sid">S14</span>World Health Organization — Climate change, land degradation and desertification. Describes human drivers including over-cultivation, overgrazing, forest conversion and urbanisation. <a class="ev-link" href="https://www.who.int/news-room/questions-and-answers/item/climate-change-land-degradation-and-desertification" target="_blank" rel="noopener" aria-label="Open source S14 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
+<li id="ev-S15"><span class="sid">S15</span>IPBES — Models of drivers of biodiversity and ecosystem change. Lists land-use change, exploitation, climate change, pollution and invasive alien species as direct drivers. <a class="ev-link" href="https://www.ipbes.net/models-drivers-biodiversity-ecosystem-change" target="_blank" rel="noopener" aria-label="Open source S15 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
+<li id="ev-S16"><span class="sid">S16</span>World Health Organization (25 June 2024) — Health consequences of air pollution on populations. Includes respiratory, cardiovascular and other health risks from air pollution. <a class="ev-link" href="https://www.who.int/news/item/25-06-2024-what-are-health-consequences-of-air-pollution-on-populations" target="_blank" rel="noopener" aria-label="Open source S16 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
+<li id="ev-S17"><span class="sid">S17</span>Press Information Bureau, Government of India (7 September 2026) — 5th Swachh Vayu Sarvekshan / NCAP results. Reports the 108, 72, 26 and 14-city PM₁₀ results for FY 2025–26. <a class="ev-link" href="https://www.pib.gov.in/PressReleasePage.aspx?PRID=2307388&amp;lang=1&amp;reg=2" target="_blank" rel="noopener" aria-label="Open source S17 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
+<li id="ev-S18"><span class="sid">S18</span>Press Information Bureau, Government of India — National Clean Air Programme target and city action plans. Target: up to 40% PM₁₀ reduction or national standard by 2025–26. <a class="ev-link" href="https://www.pib.gov.in/PressReleasePage.aspx?PRID=2078363&amp;lang=2&amp;reg=48" target="_blank" rel="noopener" aria-label="Open source S18 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
+<li id="ev-S19"><span class="sid">S19</span>Press Information Bureau, Government of India (10 March 2026) — Cabinet approves Jal Jeevan Mission extension up to December 2028 and JJM 2.0 reorientation. <a class="ev-link" href="https://www.pib.gov.in/PressReleasePage.aspx?PRID=2237550&amp;lang=1&amp;reg=1" target="_blank" rel="noopener" aria-label="Open source S19 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
+<li id="ev-S20"><span class="sid">S20</span>Rajya Sabha / Ministry of Jal Shakti (2 February 2026), Unstarred Question 273 — Namami Gange Mission Phase-II. Reports sewage-treatment capacity, monitoring sites and stretches with remaining BOD issues. <a class="ev-link" href="https://sansad.in/getFile/annex/270/AU273_IXq0T2.pdf?source=pqars" target="_blank" rel="noopener" aria-label="Open source S20 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
+<li id="ev-S21"><span class="sid">S21</span>MoEFCC, Government of India — National Action Plan to Combat Desertification and Land Degradation through Forestry Interventions (2023); summarises land degradation processes in India. <a class="ev-link" href="https://www.moef.gov.in/uploads/2023/07/NAP%20final-2023.pdf" target="_blank" rel="noopener" aria-label="Open source S21 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
+<li id="ev-S22"><span class="sid">S22</span>Food and Agriculture Organization — Forests for soil and water conservation. Explains forest roles in water-cycle regulation, water supply, quality and soil protection. <a class="ev-link" href="https://www.fao.org/forestry/sfm/sfm-for-soil-and-water-conservation/" target="_blank" rel="noopener" aria-label="Open source S22 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
+<li id="ev-S23"><span class="sid">S23</span>Gazette of India (28 January 2026) — Solid Waste Management Rules, 2026, Rules 1 and 5. Confirms commencement on 1 April 2026 and four-stream source segregation: wet, dry, sanitary and special-care waste. <a class="ev-link" href="https://egazette.gov.in/WriteReadData/2026/269620.pdf" target="_blank" rel="noopener" aria-label="Open source S23 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
+<li id="ev-S24"><span class="sid">S24</span>US Environmental Protection Agency — What is Acid Rain? and Effects of Acid Rain. Explains SO₂/NOₓ chemistry, deposition, ecosystem effects and buffering capacity. <a class="ev-link" href="https://www.epa.gov/acidrain/what-acid-rain" target="_blank" rel="noopener" aria-label="Open source S24 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
+<li id="ev-S25"><span class="sid">S25</span>Convention on Biological Diversity — India Country Profile. Lists the four biodiversity hotspots represented in India. <a class="ev-link" href="https://www.cbd.int/countries/profile?country=in" target="_blank" rel="noopener" aria-label="Open source S25 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
+</ul>
+<h3>Research integrity notes</h3><ul class="plain">
+<li>The exam questions are taken from the user-uploaded question bank. External sources support explanations and current factual examples; they do not change the exam scope.</li>
+<li>The “malnutrition paradox” phrase is explained as the coexistence of undernutrition, micronutrient deficiency and overweight/obesity. WHO uses the term “double burden of malnutrition”; “malnutrition paradox” is not presented here as a separate formal WHO diagnosis.</li>
+<li>Delhi source-apportionment percentages are not presented as universal constants. The CAQM report notes that contributions change by season, pollutant and location; the answer uses the categories and seasonal pattern rather than implying one fixed percentage breakdown.</li>
+<li>NCAP and JJM figures are time-sensitive. The text explicitly uses the 2026 releases cited above. A future website update should not change these figures unless the user requests an updated research pass.</li>
+<li>The Ganga figures are government-reported treatment capacity and monitoring results, not proof that all pollution has been eliminated. The answer notes remaining local BOD issues.</li>
+<li>ADHD-related design guidance is individualised. NICE recommends assessment-based environmental modifications; study-block lengths are suggestions, not universal clinical rules.</li>
+</ul>
+    </section>
+  </main>
+  <footer>Prepared from the uploaded file: Final Question Bank ESE.docx &middot; Research and policy status checked: 26 November 2026.</footer>
+</div>
+<noscript>
+  <style>
+    .answer[hidden] { display:block !important; }
+    .q { display:block !important; }
+    .reveal, .oe-tools, .qnav, .jump-nav, .selftest-note { display:none !important; }
+    .section-block > h2, .sec-kicker, .section-intro { display:block !important; }
+  </style>
+</noscript>
+<script>
+(function () {
+  'use strict';
+  var KEY = 'oe-env-progress-v1';
+  var qs = Array.prototype.slice.call(document.querySelectorAll('.q'));
+  var ids = qs.map(function (q) { return q.getAttribute('data-id'); });
+  var body = document.body;
+  var state = { done: {}, index: 0, mode: 'focus', selftest: false };
+  var el = {
+    modeFocus: document.getElementById('modeFocus'),
+    modeAll: document.getElementById('modeAll'),
+    continueBtn: document.getElementById('continueBtn'),
+    selfTestBtn: document.getElementById('selfTestBtn'),
+    selfTestNote: document.getElementById('selfTestNote'),
+    resetBtn: document.getElementById('resetBtn'),
+    progressText: document.getElementById('progressText'),
+    progressBar: document.getElementById('progressBar'),
+    progressFill: document.getElementById('progressFill'),
+    doneCount: document.getElementById('doneCount'),
+    posLabel: document.getElementById('posLabel'),
+    prevBtn: document.getElementById('prevBtn'),
+    nextBtn: document.getElementById('nextBtn'),
+    live: document.getElementById('liveStatus')
+  };
+
+  function clamp(n) { return Math.max(0, Math.min(ids.length - 1, n)); }
+  function reduce() { return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+  function scrollTo(node) { if (node) node.scrollIntoView({ behavior: reduce() ? 'auto' : 'smooth', block: 'start' }); }
+
+  function load() {
+    try {
+      var raw = localStorage.getItem(KEY);
+      if (!raw) return;
+      var p = JSON.parse(raw);
+      if (!p || typeof p !== 'object') return;
+      if (p.done && typeof p.done === 'object') {
+        ids.forEach(function (id) { if (p.done[id] === true) state.done[id] = true; });
+      }
+      if (typeof p.index === 'number') state.index = clamp(p.index);
+      if (p.mode === 'all' || p.mode === 'focus') state.mode = p.mode;
+      if (p.selftest === true) state.selftest = true;
+    } catch (e) {}
+  }
+
+  function save() {
+    try {
+      localStorage.setItem(KEY, JSON.stringify({
+        v: 1, done: state.done, index: state.index, mode: state.mode, selftest: state.selftest
+      }));
+    } catch (e) {}
+  }
+
+  function countDone() {
+    return ids.filter(function (id) { return state.done[id] === true; }).length;
+  }
+
+  function setChecked(id, val) {
+    var boxes = document.querySelectorAll('[data-done="' + id + '"]');
+    for (var i = 0; i < boxes.length; i++) boxes[i].checked = val;
+  }
+
+  function syncDone(id, val) {
+    if (val) state.done[id] = true; else delete state.done[id];
+    setChecked(id, val);
+    updateProgress();
+    save();
+  }
+
+  function updateProgress() {
+    var n = countDone();
+    if (state.mode === 'focus') {
+      el.progressText.textContent = 'Question ' + (state.index + 1) + ' of ' + ids.length + ' \u00b7 ' + n + ' of ' + ids.length + ' complete';
+    } else {
+      el.progressText.textContent = 'All questions \u00b7 ' + n + ' of ' + ids.length + ' complete';
+    }
+    el.doneCount.textContent = n + ' of ' + ids.length;
+    el.progressFill.style.width = (n / ids.length * 100) + '%';
+    el.progressBar.setAttribute('aria-valuenow', String(n));
+    el.posLabel.textContent = (state.index + 1) + ' / ' + ids.length;
+    el.prevBtn.disabled = state.index === 0;
+    el.nextBtn.disabled = state.index === ids.length - 1;
+    el.continueBtn.textContent = 'Continue at ' + ids[state.index];
+  }
+
+  function show(i, opts) {
+    opts = opts || {};
+    state.index = clamp(i);
+    qs.forEach(function (q, idx) { q.classList.toggle('is-current', idx === state.index); });
+    if (opts.scroll) scrollTo(qs[state.index]);
+    if (opts.focus) {
+      var t = qs[state.index].querySelector('.q-title');
+      if (t) t.focus({ preventScroll: true });
+    }
+    el.live.textContent = ids[state.index] + ', question ' + (state.index + 1) + ' of ' + ids.length + ', section ' + qs[state.index].getAttribute('data-section');
+    updateProgress();
+    save();
+  }
+
+  function setMode(m) {
+    state.mode = m;
+    body.classList.toggle('focus-mode', m === 'focus');
+    body.classList.toggle('all-mode', m === 'all');
+    el.modeFocus.setAttribute('aria-pressed', String(m === 'focus'));
+    el.modeAll.setAttribute('aria-pressed', String(m === 'all'));
+    updateProgress();
+    save();
+  }
+
+  function applySelfTest() {
+    body.classList.toggle('selftest', state.selftest);
+    el.selfTestBtn.setAttribute('aria-pressed', String(state.selftest));
+    el.selfTestNote.hidden = !state.selftest;
+  }
+
+  function reveal(btn) {
+    var ans = document.getElementById(btn.getAttribute('aria-controls'));
+    var q = btn.closest('.q');
+    var open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!open));
+    ans.hidden = open;
+    btn.textContent = open ? 'Show answer' : 'Hide answer';
+    q.classList.toggle('is-revealed', !open);
+  }
+
+  load();
+  applySelfTest();
+  setMode(state.mode);
+  show(state.index);
+  ids.forEach(function (id) { if (state.done[id]) setChecked(id, true); });
+
+  el.modeFocus.addEventListener('click', function () { setMode('focus'); show(state.index, { scroll: true, focus: true }); });
+  el.modeAll.addEventListener('click', function () { setMode('all'); });
+  el.continueBtn.addEventListener('click', function () { show(state.index, { scroll: true, focus: true }); });
+  el.selfTestBtn.addEventListener('click', function () { state.selftest = !state.selftest; applySelfTest(); save(); });
+  el.prevBtn.addEventListener('click', function () { show(state.index - 1, { scroll: true, focus: true }); });
+  el.nextBtn.addEventListener('click', function () { show(state.index + 1, { scroll: true, focus: true }); });
+
+  el.resetBtn.addEventListener('click', function () {
+    if (!window.confirm('Reset all progress and start again at A1?')) return;
+    state.done = {};
+    state.index = 0;
+    qs.forEach(function (q) {
+      q.classList.remove('is-revealed');
+      var a = q.querySelector('.answer');
+      if (a) a.hidden = true;
+      var b = q.querySelector('.reveal');
+      if (b) { b.setAttribute('aria-expanded', 'false'); b.textContent = 'Show answer'; }
+    });
+    ids.forEach(function (id) { setChecked(id, false); });
+    show(0, { scroll: true, focus: true });
+    el.live.textContent = 'Progress reset. Starting at A1.';
+  });
+
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest ? e.target.closest('.reveal') : null;
+    if (b) reveal(b);
+  });
+
+  document.addEventListener('change', function (e) {
+    var cb = e.target.closest ? e.target.closest('[data-done]') : null;
+    if (cb) syncDone(cb.getAttribute('data-done'), cb.checked);
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-jump]'), function (btn) {
+    btn.addEventListener('click', function () {
+      var j = btn.getAttribute('data-jump');
+      if (j === 'A' || j === 'B' || j === 'C') {
+        var first = -1;
+        for (var i = 0; i < qs.length; i++) {
+          if (qs[i].getAttribute('data-section') === j) { first = i; break; }
+        }
+        if (state.mode === 'focus') show(first, { scroll: true, focus: true });
+        else scrollTo(document.getElementById('sec-' + j));
+      } else if (j === 'guide') {
+        var guide = document.getElementById('guide');
+        if (guide) { guide.open = true; scrollTo(guide); }
+      } else {
+        scrollTo(document.getElementById(j));
+      }
+    });
+  });
+
+  var printOpen = [];
+  window.addEventListener('beforeprint', function () {
+    printOpen = [];
+    var ds = document.querySelectorAll('details');
+    for (var i = 0; i < ds.length; i++) {
+      printOpen.push([ds[i], ds[i].open]);
+      ds[i].open = true;
+    }
+  });
+  window.addEventListener('afterprint', function () {
+    for (var i = 0; i < printOpen.length; i++) printOpen[i][0].open = printOpen[i][1];
+  });
+})();
+</script>
+</body>
+</html>

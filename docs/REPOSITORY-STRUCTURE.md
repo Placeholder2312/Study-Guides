@@ -53,6 +53,8 @@ Study-Guides/
 │   ├── index.html
 │   ├── README.md
 │   └── AGENTS.md
+├── oe/                          # Semester III: Open Elective - Global and Regional Environmental Issues
+│   └── index.html               # 24-question exam bank study guide
 └── coa/                         # Semester III: Computer Organization and Architecture landing page
 ```
 
