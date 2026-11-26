@@ -55,24 +55,36 @@
   .sec-kicker { font-size:.78rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin:0; }
   .section-intro { font-size:.95rem; color:var(--muted); margin:0 0 1rem; }
   .q { border:1px solid var(--line); border-left:3px solid var(--ink); background:var(--surface); padding:1.6rem 1.25rem; margin:0 0 1.6rem; }
-  .q-head { display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; margin-bottom:.35rem; }
+  .q-head { display:flex; align-items:center; gap:.75rem; padding-bottom:1rem; margin-bottom:1.25rem; border-bottom:1px solid var(--line); }
   .q-id { color:var(--accent); display:inline-block; font-size:.82rem; font-weight:800; letter-spacing:.08em; border:1px solid var(--ink); padding:.1rem .4rem; }
-  .q-side { text-align:right; }
-  .q-meta { display:block; font-size:.78rem; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); }
-  .done-toggle { display:inline-flex; align-items:center; gap:.35rem; font-size:.9rem; font-weight:600; min-height:30px; margin-top:.25rem; cursor:pointer; }
-  .q-title { font-family:Georgia,Cambria,"Times New Roman",serif; font-size:1.2rem; line-height:1.45; font-weight:700; margin:.8rem 0 1.2rem; }
+  .q-side { flex:1; display:flex; align-items:center; justify-content:space-between; gap:.75rem; flex-wrap:wrap; }
+  .q-meta { display:block; font-size:.78rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); text-align:left; }
+  .done-toggle { display:inline-flex; align-items:center; gap:.45rem; font-size:.9rem; font-weight:600; min-height:36px; padding:0 .75rem; border:1px solid var(--line); background:var(--bg); cursor:pointer; }
+  .done-toggle:hover { border-color:var(--ink); }
+  .q-title { font-family:Georgia,Cambria,"Times New Roman",serif; font-size:1.3rem; line-height:1.4; font-weight:700; margin:0 0 1.5rem; }
+  @media (max-width:520px) {
+    .q-head { flex-wrap:wrap; row-gap:.6rem; }
+    .q-side { display:contents; }
+    .q-id { order:1; }
+    .done-toggle { order:2; margin-left:auto; }
+    .q-meta { order:3; flex-basis:100%; }
+  }
   .q-title:focus { outline:2px solid var(--accent); outline-offset:4px; }
-  .cue { border-left:3px solid var(--accent); padding:.15rem 0 .15rem 1rem; margin:1.4rem 0; }
+  .cue { border:1px solid var(--line); background:var(--bg); margin:0 0 .75rem; }
   .cue p { margin:0; font-weight:600; }
-  .cue summary { cursor:pointer; color:var(--accent); font-size:.95rem; font-weight:700; min-height:36px; display:flex; align-items:center; list-style:none; }
+  .cue summary { cursor:pointer; color:var(--accent); font-size:.95rem; font-weight:700; min-height:48px; padding:0 1rem; display:flex; align-items:center; justify-content:space-between; list-style:none; }
   .cue summary::-webkit-details-marker { display:none; }
-  .cue summary::before { content:"+"; margin-right:.5rem; font-weight:800; }
-  .cue[open] summary::before { content:"\2212"; }
-  .cue[open] summary { margin-bottom:.4rem; }
+  .cue summary::before { content:none; }
+  .cue summary::after { content:"+"; font-weight:800; }
+  .cue[open] summary::after { content:"\2212"; }
+  .cue[open] summary { border-bottom:1px solid var(--line); }
+  .cue p { padding:.85rem 1rem; }
+  .q .actions .btn { width:100%; min-height:48px; background:var(--accent); border-color:var(--accent); color:var(--bg); font-weight:700; }
+  .q .actions .btn:hover { filter:brightness(1.08); }
   .skeleton { border:1px solid var(--line); background:var(--surface-alt); padding:.9rem 1.1rem; margin:1.4rem 0; }
   .skeleton ol { margin:.2rem 0 0; padding-left:1.2rem; font-size:.95rem; }
   .skeleton li + li { margin-top:.5rem; }
-  .actions { margin:.9rem 0; }
+  .actions { margin:0; }
   .answer { border:2px solid var(--accent); background:var(--accent-soft); margin-top:1.4rem; padding:1.1rem 1.25rem; font-size:1rem; }
   .answer::before { content:"Model answer"; display:block; font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin-bottom:.4rem; }
   .answer p { margin:0 0 1rem; }
