@@ -970,7 +970,7 @@
     <details class="panel" id="sources">
       <summary>Sources and research notes (reference only)</summary>
       <div class="panel-body">
-<p class="section-intro">Sources used in the researched answers and study-design choices. Source markers in the answers refer to this list. Current policy information is date-stamped; use the published date shown, not search ranking or snippets.</p>
+<details class="panel" style="margin:.8rem 0"><summary>Evidence register (S1&ndash;S25)</summary><div class="panel-body"><p class="section-intro">Sources used in the researched answers and study-design choices. Source markers in the answers refer to this list. Current policy information is date-stamped; use the published date shown, not search ranking or snippets.</p>
 <ul class="ev">
 <li id="ev-S1"><span class="sid">S1</span>NICE Guideline NG87 — ADHD: diagnosis and management. Environmental modifications include reducing distraction, shorter focus periods, movement breaks and written reinforcement; adapt to individual need. <a class="ev-link" href="https://www.nice.org.uk/guidance/ng87/resources/attention-deficit-hyperactivitydisorder-diagnosis-and-managementpdf-1837699732933" target="_blank" rel="noopener" aria-label="Open source S1 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
 <li id="ev-S2"><span class="sid">S2</span>CHADD — Succeeding in College with ADHD. Practical guidance on breaking work into chunks and taking short breaks. <a class="ev-link" href="https://chadd.org/for-parents/succeeding-in-college-with-adhd/" target="_blank" rel="noopener" aria-label="Open source S2 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
@@ -998,7 +998,8 @@
 <li id="ev-S24"><span class="sid">S24</span>US Environmental Protection Agency — What is Acid Rain? and Effects of Acid Rain. Explains SO₂/NOₓ chemistry, deposition, ecosystem effects and buffering capacity. <a class="ev-link" href="https://www.epa.gov/acidrain/what-acid-rain" target="_blank" rel="noopener" aria-label="Open source S24 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
 <li id="ev-S25"><span class="sid">S25</span>Convention on Biological Diversity — India Country Profile. Lists the four biodiversity hotspots represented in India. <a class="ev-link" href="https://www.cbd.int/countries/profile?country=in" target="_blank" rel="noopener" aria-label="Open source S25 (opens in a new tab)">Open source<span class="sr-only"> (opens in a new tab)</span></a></li>
 </ul>
-<h3>Research integrity notes</h3><ul class="plain">
+</div></details>
+<details class="panel" style="margin:.8rem 0"><summary>Research integrity notes</summary><div class="panel-body"><ul class="plain">
 <li>The exam questions are taken from the user-uploaded question bank. External sources support explanations and current factual examples; they do not change the exam scope.</li>
 <li>The “malnutrition paradox” phrase is explained as the coexistence of undernutrition, micronutrient deficiency and overweight/obesity. WHO uses the term “double burden of malnutrition”; “malnutrition paradox” is not presented here as a separate formal WHO diagnosis.</li>
 <li>Delhi source-apportionment percentages are not presented as universal constants. The CAQM report notes that contributions change by season, pollutant and location; the answer uses the categories and seasonal pattern rather than implying one fixed percentage breakdown.</li>
@@ -1006,7 +1007,8 @@
 <li>The Ganga figures are government-reported treatment capacity and monitoring results, not proof that all pollution has been eliminated. The answer notes remaining local BOD issues.</li>
 <li>ADHD-related design guidance is individualised. NICE recommends assessment-based environmental modifications; study-block lengths are suggestions, not universal clinical rules.</li>
 </ul>
-          </div>
+    </div></details>
+      </div>
     </details>
   </main>
   <footer>Prepared from the uploaded file: Final Question Bank ESE.docx &middot; Research and policy status checked: 26 November 2026.</footer>
@@ -1205,8 +1207,8 @@
 
   document.addEventListener('click', function (e) {
     var a = e.target.closest ? e.target.closest('a[href^="#ev-"]') : null;
-    var src = document.getElementById('sources');
-    if (a && src) src.open = true;
+    var t = a ? document.getElementById(a.getAttribute('href').slice(1)) : null;
+    while (t) { if (t.tagName === 'DETAILS') t.open = true; t = t.parentElement; }
   });
 
   var printOpen = [];
