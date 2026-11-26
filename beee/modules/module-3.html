@@ -229,6 +229,15 @@ a:hover, a:focus-visible {
   @media print { .rail, .rm-bar, .rm-tab, .rm-back, .rm-sheet { display:none !important; } }
 </style>
 <link rel="stylesheet" href="/assets/a11y.css">
+<style id="beee-scroll">
+  .beee-scroll { display: block; }
+  @media (max-width: 600px) {
+    .beee-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .beee-scroll svg { width: var(--sw) !important; max-width: none !important; margin: 0; }
+    .beee-scroll:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+    .beee-fig--scroll figcaption::before, .beee-fig--scroll .figcap::before { content: "Swipe sideways to see the whole diagram. "; display: block; font-size: .78rem; color: var(--muted); font-style: italic; margin-bottom: .15rem; }
+  }
+</style>
 </head>
 <body id="top">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -393,8 +402,8 @@ a:hover, a:focus-visible {
 
   <p>A single-phase transformer is two coils sharing one iron path. Everything else — tank, bushings, cooling — exists to protect and cool those three parts.</p>
 
-  <figure>
-    <svg viewBox="0 0 640 330" role="img" aria-labelledby="fig1t">
+  <figure class="beee-fig--scroll">
+    <div class="beee-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:660px"><svg viewBox="0 0 640 330" role="img" aria-labelledby="fig1t">
       <title id="fig1t">Labelled construction of a single-phase transformer: laminated core, primary winding and secondary winding</title>
       <g fill="none" stroke="var(--ink)" stroke-width="2">
         <rect x="120" y="40" width="56" height="250" />
@@ -424,7 +433,7 @@ a:hover, a:focus-visible {
         <text x="306" y="10">laminated core</text>
         <text x="306" y="318">core = closed low-reluctance path for flux</text>
       </g>
-    </svg>
+    </svg></div>
     <p class="figcap"><strong>Figure 1.</strong> Construction of a single-phase transformer. The core is a closed loop of thin, varnish-insulated silicon-steel sheets (laminations). Both windings are wound on the same core but are electrically separate — the only link between them is magnetic flux.</p>
   </figure>
 
@@ -448,8 +457,8 @@ a:hover, a:focus-visible {
 
   <h2 id="principle">Working principle — mutual induction and the EMF equation</h2>
 
-  <figure>
-    <svg viewBox="0 0 640 340" role="img" aria-labelledby="fig2t">
+  <figure class="beee-fig--scroll">
+    <div class="beee-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:660px"><svg viewBox="0 0 640 340" role="img" aria-labelledby="fig2t">
       <title id="fig2t">Working principle: alternating current in the primary produces an alternating flux in the core, which induces an EMF in the secondary</title>
       <g fill="none" stroke="var(--ink)" stroke-width="2">
         <rect x="230" y="60" width="180" height="220" />
@@ -488,7 +497,7 @@ a:hover, a:focus-visible {
           <path d="M0 0L10 5L0 10z" fill="var(--accent)" />
         </marker>
       </defs>
-    </svg>
+    </svg></div>
     <p class="figcap"><strong>Figure 2.</strong> Energy path: electrical → magnetic → electrical. The primary current sets up an alternating flux in the core; that flux links the secondary and induces an EMF there. There is no wire between the two circuits.</p>
   </figure>
 
@@ -570,8 +579,8 @@ a:hover, a:focus-visible {
     <span class="attrib">Tony R. Kuphaldt, <em>Lessons In Electric Circuits, Volume II — AC</em>, Chapter 9, section “Step-up and step-down transformers”. <a href="https://www.ibiblio.org/kuphaldt/electricCircuits/AC/AC_9.html">Chapter 9</a>.</span>
   </div>
 
-  <figure>
-    <svg viewBox="0 0 640 300" role="img" aria-labelledby="fig3t">
+  <figure class="beee-fig--scroll">
+    <div class="beee-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:660px"><svg viewBox="0 0 640 300" role="img" aria-labelledby="fig3t">
       <title id="fig3t">Comparison of a step-up transformer with a step-down transformer</title>
       <g fill="none" stroke="var(--ink)" stroke-width="2">
         <rect x="80" y="70" width="150" height="150" />
@@ -605,7 +614,7 @@ a:hover, a:focus-visible {
         <text x="76" y="278">K = N₂/N₁ &gt; 1</text>
         <text x="406" y="278">K = N₂/N₁ &lt; 1</text>
       </g>
-    </svg>
+    </svg></div>
     <p class="figcap"><strong>Figure 3.</strong> The only structural difference is which winding has more turns. In both cases the winding that carries the higher voltage carries the lower current and is wound with thinner wire.</p>
   </figure>
 
