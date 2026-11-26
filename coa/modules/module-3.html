@@ -489,6 +489,15 @@
   .eq { white-space: normal; }
   svg, figure svg { max-width: 100%; }
 </style>
+<style id="coa-scroll">
+  .coa-scroll { display: block; }
+  @media (max-width: 600px) {
+    .coa-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .coa-scroll svg { width: var(--sw) !important; max-width: none !important; height: auto; margin-left: 0; margin-right: 0; }
+    .coa-scroll:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+    .coa-fig--scroll figcaption::before { content: "Swipe sideways to see the whole diagram. "; display: block; font-size: .78rem; color: var(--muted); font-style: italic; margin-bottom: .15rem; }
+  }
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -657,8 +666,8 @@
 
   <p><strong>The three internal buses.</strong> The teacher’s notes name three internal buses. The <strong>A-Bus</strong> is the interface between the BIU and the EU; the <strong>B-Bus</strong> carries instruction fetches, data fetches, address transfers and effective-address computation; the <strong>C-Bus</strong> carries the instructions, addresses and data that the BIU passes to the EU. Figure 1 draws them as one internal-bus connection. Naming them separately is a cheap way to add detail to an architecture answer, because it shows that the two units are physically connected and not merely logically separate.</p>
 
-  <figure>
-    <svg viewBox="0 0 620 392" role="img" aria-labelledby="m3-arch-title m3-arch-desc" style="max-width:100%">
+  <figure class="coa-fig--scroll">
+    <div class="coa-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:620px"><svg viewBox="0 0 620 392" role="img" aria-labelledby="m3-arch-title m3-arch-desc" style="max-width:100%">
       <title id="m3-arch-title">Functional block diagram of the 8086</title>
       <desc id="m3-arch-desc">The 8086 is divided into a Bus Interface Unit and an Execution Unit. The BIU contains the instruction queue, segment registers, instruction pointer, address adder and bus control logic. The EU contains the control unit, decoder, ALU, flag register, general-purpose registers and pointer registers. The two units communicate over internal buses.</desc>
       <defs>
@@ -720,7 +729,7 @@
         <line x1="154" y1="352" x2="466" y2="352" stroke="var(--muted)" stroke-dasharray="5 4"/>
         <text x="310" y="368" text-anchor="middle" font-size="10" fill="var(--muted)">internal buses: A-Bus · B-Bus · C-Bus</text>
       </g>
-    </svg>
+    </svg></div>
     <figcaption>Figure 1. The 8086 in two halves. The BIU owns every external transfer; the EU decodes and executes from the queue.</figcaption>
   </figure>
 
@@ -795,13 +804,13 @@
   <div class="qa-final"><div class="qa-label">Final Answer</div>
     <p class="qa-final-text"><strong>(a) 3FFFEH &nbsp; (b) FFFF0H.</strong></p>
 
-  <figure>
-    <svg viewBox="0 0 620 186" role="img" aria-labelledby="m3-segov-t m3-segov-d" style="max-width:100%">
+  <figure class="coa-fig--scroll">
+    <div class="coa-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:620px"><svg viewBox="0 0 620 186" role="img" aria-labelledby="m3-segov-t m3-segov-d" style="max-width:100%">
       <title id="m3-segov-t">Segment overlap</title>
       <desc id="m3-segov-d">1000:0020 and 1002:0000 both add up to physical address 10020H.</desc>
       <defs><marker id="s1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 z" fill="var(--ink)"/></marker></defs>
       <g font-family="Helvetica, Arial, sans-serif"><rect x="20" y="30" width="100" height="36" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="70.0" y="48.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">seg 1000H</text><line x1="120" y1="48" x2="168" y2="48" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#s1)"/><text x="144" y="34" font-size="13" font-weight="700" fill="var(--accent)" text-anchor="middle" dominant-baseline="central">×10H</text><rect x="170" y="30" width="110" height="36" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="225.0" y="48.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">10000H</text><text x="300" y="48" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">+</text><rect x="320" y="30" width="100" height="36" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="370.0" y="48.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">off 0020H</text><text x="440" y="48" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">=</text><rect x="460" y="30" width="130" height="36" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="525.0" y="48.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">10020H</text><rect x="20" y="100" width="100" height="36" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="70.0" y="118.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">seg 1002H</text><line x1="120" y1="118" x2="168" y2="118" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#s1)"/><text x="144" y="104" font-size="13" font-weight="700" fill="var(--accent)" text-anchor="middle" dominant-baseline="central">×10H</text><rect x="170" y="100" width="110" height="36" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="225.0" y="118.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">10020H</text><text x="300" y="118" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">+</text><rect x="320" y="100" width="100" height="36" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="370.0" y="118.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">off 0000H</text><text x="440" y="118" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">=</text><rect x="460" y="100" width="130" height="36" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="525.0" y="118.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">10020H</text><text x="310" y="172" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">two different segment:offset pairs, the same physical byte</text></g>
-    </svg>
+    </svg></div>
     <figcaption>Figure 2. Segments overlap. The segment is shifted left by four bits, then the offset is added; different pairs can reach the same byte.</figcaption>
   </figure>
   </div>
@@ -814,13 +823,13 @@
 
   <p>This is why compilers and assemblers align 16-bit data on even addresses. A 100-word array that starts at an odd address therefore costs 200 bus cycles instead of 100, which is a 100% penalty for a one-byte misalignment.</p>
 
-  <figure>
-    <svg viewBox="0 0 620 184" role="img" aria-labelledby="m3-align-t m3-align-d" style="max-width:100%">
+  <figure class="coa-fig--scroll">
+    <div class="coa-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:620px"><svg viewBox="0 0 620 184" role="img" aria-labelledby="m3-align-t m3-align-d" style="max-width:100%">
       <title id="m3-align-t">Aligned and misaligned words</title>
       <desc id="m3-align-d">A word at an even address uses both banks in one cycle; a word at an odd address spans two rows and needs two cycles.</desc>
       <defs></defs>
       <g font-family="Helvetica, Arial, sans-serif"><text x="115" y="14" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">Aligned word at 2</text><text x="67" y="40" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">even bank</text><text x="162" y="40" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">odd bank</text><rect x="20" y="54" width="95" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="67.5" y="71.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">addr 0</text><rect x="115" y="54" width="95" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="162.5" y="71.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">addr 1</text><rect x="20" y="88" width="95" height="34" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="67.5" y="105.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">addr 2</text><rect x="115" y="88" width="95" height="34" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="162.5" y="105.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">addr 3</text><rect x="20" y="122" width="95" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="67.5" y="139.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">addr 4</text><rect x="115" y="122" width="95" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="162.5" y="139.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">addr 5</text><text x="425" y="14" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">Misaligned word at 3</text><text x="377" y="40" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">even bank</text><text x="472" y="40" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">odd bank</text><rect x="330" y="54" width="95" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="377.5" y="71.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">addr 0</text><rect x="425" y="54" width="95" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="472.5" y="71.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">addr 1</text><rect x="330" y="88" width="95" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="377.5" y="105.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">addr 2</text><rect x="425" y="88" width="95" height="34" fill="var(--accent-soft)" stroke="var(--danger)" stroke-width="1.5"/><text x="472.5" y="105.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">addr 3</text><rect x="330" y="122" width="95" height="34" fill="var(--accent-soft)" stroke="var(--danger)" stroke-width="1.5"/><text x="377.5" y="139.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">addr 4</text><rect x="425" y="122" width="95" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="472.5" y="139.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">addr 5</text><text x="115" y="168" font-size="13" font-weight="700" fill="var(--accent)" text-anchor="middle" dominant-baseline="central">1 bus cycle</text><text x="425" y="168" font-size="13" font-weight="700" fill="var(--danger)" text-anchor="middle" dominant-baseline="central">2 bus cycles</text></g>
-    </svg>
+    </svg></div>
     <figcaption>Figure 3. Word alignment. At an even address both bytes sit in the same row; at an odd address they sit in two rows.</figcaption>
   </figure>
 
@@ -910,8 +919,8 @@
     <tr><td>11</td><td>OF</td><td>Overflow</td><td>Set when a signed result does not fit in the destination.</td></tr>
   </table>
 
-  <figure>
-    <svg viewBox="0 0 620 214" role="img" aria-labelledby="m3-flag-title m3-flag-desc" style="max-width:100%">
+  <figure class="coa-fig--scroll">
+    <div class="coa-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:620px"><svg viewBox="0 0 620 214" role="img" aria-labelledby="m3-flag-title m3-flag-desc" style="max-width:100%">
       <title id="m3-flag-title">The 8086 flag register</title>
       <desc id="m3-flag-desc">Sixteen bit positions from 15 down to 0. Bits 0, 2, 4, 6, 7, 8, 9, 10 and 11 are defined as carry, parity, auxiliary carry, zero, sign, trap, interrupt enable, direction and overflow. The remaining bits are undefined.</desc>
       <g font-family="Helvetica, Arial" font-size="9" fill="var(--ink)">
@@ -964,7 +973,7 @@
         <text x="16" y="170" font-size="9" fill="var(--muted)">Status flags (CF, PF, AF, ZF, SF, OF) describe the last result; control flags (TF, IF, DF) change behaviour.</text>
         <text x="16" y="190" font-size="9" fill="var(--muted)">Bits 1, 3, 5 and 12–15 are undefined on the 8086. Do not assume they hold a fixed value.</text>
       </g>
-    </svg>
+    </svg></div>
     <figcaption>Figure 4. The nine defined flags. The shaded bits are the control flags.</figcaption>
   </figure>
 
@@ -1024,8 +1033,8 @@
     <tr><td><strong>Immediate</strong></td><td>0, 8 or 16 bits</td><td>A constant operand carried inside the instruction.</td></tr>
   </table>
 
-  <figure>
-    <svg viewBox="0 0 620 208" role="img" aria-labelledby="m3-fmt-title m3-fmt-desc" style="max-width:100%">
+  <figure class="coa-fig--scroll">
+    <div class="coa-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:620px"><svg viewBox="0 0 620 208" role="img" aria-labelledby="m3-fmt-title m3-fmt-desc" style="max-width:100%">
       <title id="m3-fmt-title">General 8086 instruction format</title>
       <desc id="m3-fmt-desc">The first byte holds a six-bit opcode followed by the direction bit D and the word bit W. An optional second byte holds the two-bit mod field, the three-bit reg field and the three-bit r/m field. Optional displacement and immediate fields follow, giving a total length of one to six bytes.</desc>
       <g font-family="Helvetica, Arial" font-size="10" fill="var(--ink)">
@@ -1070,7 +1079,7 @@
         <text x="34" y="166" font-size="9">Order on the wire: opcode byte → ModR/M byte → displacement → immediate.</text>
         <text x="34" y="182" font-size="9" fill="var(--muted)">The immediate comes last, so a 16-bit immediate costs two extra bytes after the displacement.</text>
       </g>
-    </svg>
+    </svg></div>
     <figcaption>Figure 5. The general format. Not every instruction uses every field; the opcode determines which optional fields follow.</figcaption>
   </figure>
 
@@ -1101,13 +1110,13 @@
     <p class="qa-final-text"><strong>89H D8H = <code>MOV AX, BX</code> (AX ← BX).</strong></p>
   </div>
 
-    <figure>
-    <svg viewBox="0 0 620 196" role="img" aria-labelledby="m3-dec-t m3-dec-d" style="max-width:100%">
+    <figure class="coa-fig--scroll">
+    <div class="coa-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:620px"><svg viewBox="0 0 620 196" role="img" aria-labelledby="m3-dec-t m3-dec-d" style="max-width:100%">
       <title id="m3-dec-t">Decoding 89 D8</title>
       <desc id="m3-dec-d">Byte 89H splits into opcode 100010, D 0, W 1. Byte D8H splits into mod 11, reg 011, r/m 000. Together they mean MOV AX, BX.</desc>
       <defs></defs>
       <g font-family="Helvetica, Arial, sans-serif"><text x="20" y="14" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="start" dominant-baseline="central">89H = 1000 1001</text><rect x="20" y="28" width="240" height="34" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="140.0" y="45.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">100010</text><rect x="260" y="28" width="60" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="290.0" y="45.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">0</text><rect x="320" y="28" width="60" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="350.0" y="45.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">1</text><text x="145" y="80" font-size="13" font-weight="400" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">opcode = MOV</text><text x="290" y="80" font-size="13" font-weight="400" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">D = 0</text><text x="350" y="80" font-size="13" font-weight="400" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">W = 1</text><text x="20" y="112" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="start" dominant-baseline="central">D8H = 1101 1000</text><rect x="20" y="126" width="90" height="34" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="65.0" y="143.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">11</text><rect x="110" y="126" width="135" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="177.5" y="143.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">011</text><rect x="245" y="126" width="135" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="312.5" y="143.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">000</text><text x="65" y="178" font-size="13" font-weight="400" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">mod</text><text x="177" y="178" font-size="13" font-weight="400" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">reg = BX</text><text x="312" y="178" font-size="13" font-weight="400" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">r/m = AX</text><rect x="410" y="70" width="190" height="44" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="505.0" y="92.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">MOV AX, BX</text><text x="505" y="134" font-size="13" font-weight="400" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">D = 0: r/m is the</text><text x="505" y="152" font-size="13" font-weight="400" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">destination</text></g>
-    </svg>
+    </svg></div>
     <figcaption>Figure 6. Decoding 89H D8H field by field: both operands are 16-bit registers, giving MOV AX, BX.</figcaption>
   </figure>
 
@@ -1194,8 +1203,8 @@
 
   <h3>5.4 The state diagram</h3>
 
-  <figure>
-    <svg viewBox="0 0 620 300" role="img" aria-labelledby="m3-cycle-title m3-cycle-desc" style="max-width:100%">
+  <figure class="coa-fig--scroll">
+    <div class="coa-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:620px"><svg viewBox="0 0 620 300" role="img" aria-labelledby="m3-cycle-title m3-cycle-desc" style="max-width:100%">
       <title id="m3-cycle-title">Instruction cycle with interrupt check</title>
       <desc id="m3-cycle-desc">The processor fetches an instruction, decodes it and executes it. After execution it checks for an interrupt. If no interrupt is pending it returns to fetch; if one is pending and enabled it enters the interrupt cycle and then returns to fetch.</desc>
       <defs>
@@ -1235,7 +1244,7 @@
         <path d="M520,120 L520,18 L105,18 L105,30" fill="none" stroke="var(--ink)" marker-end="url(#m3-cycle-arrow)"/>
         <text x="310" y="14" text-anchor="middle" font-size="9" fill="var(--muted)">return from interrupt service routine</text>
       </g>
-    </svg>
+    </svg></div>
     <figcaption>Figure 7. The instruction cycle. The interrupt check sits between execute and the next fetch.</figcaption>
   </figure>
 
@@ -1245,13 +1254,13 @@
 
   <div class="eq">T = 1 / f &nbsp;·&nbsp; bus cycle = 4T (minimum) &nbsp;·&nbsp; instruction time = number of T-states × T</div>
 
-  <figure>
-    <svg viewBox="0 0 620 240" role="img" aria-labelledby="m3-timing-t m3-timing-d" style="max-width:100%">
+  <figure class="coa-fig--scroll">
+    <div class="coa-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:620px"><svg viewBox="0 0 620 240" role="img" aria-labelledby="m3-timing-t m3-timing-d" style="max-width:100%">
       <title id="m3-timing-t">Clock cycle, bus cycle and instruction cycle</title>
       <desc id="m3-timing-d">A clock waveform is split into four T-states, T1 to T4, which together make one bus cycle of 800 nanoseconds at 5 megahertz. Four bus cycles make one instruction of sixteen T-states, 3.2 microseconds. The first bus cycle is shaded.</desc>
       <defs></defs>
       <g font-family="Helvetica, Arial, sans-serif"><text x="310" y="12" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">Clock: one period = one T-state (T = 200 ns at 5 MHz)</text><path d="M70,84 L70,44 L130,44 L130,84 L190,84 L190,44 L250,44 L250,84 L310,84 L310,44 L370,44 L370,84 L430,84 L430,44 L490,44 L490,84 L550,84" fill="none" stroke="var(--ink)" stroke-width="1.5"/><text x="36" y="64" font-size="12" font-weight="700" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">CLK</text><text x="130" y="102" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">T1</text><text x="250" y="102" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">T2</text><text x="370" y="102" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">T3</text><text x="490" y="102" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">T4</text><path d="M70,120 L70,132 L550,132 L550,120" fill="none" stroke="var(--ink)" stroke-width="1.5"/><text x="310" y="148" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">one bus cycle = 4T (minimum) = 800 ns</text><text x="310" y="176" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">one instruction = four bus cycles = 16T = 3.2 µs</text><rect x="70" y="190" width="120" height="34" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="130" y="207" font-size="12" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">bus cycle 1</text><rect x="190" y="190" width="120" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="250" y="207" font-size="12" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">bus cycle 2</text><rect x="310" y="190" width="120" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="370" y="207" font-size="12" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">bus cycle 3</text><rect x="430" y="190" width="120" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="490" y="207" font-size="12" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">bus cycle 4</text></g>
-    </svg>
+    </svg></div>
     <figcaption>Figure 8. Three time units. Four T-states make a bus cycle; four bus cycles make the instruction in the worked example, so 100 instructions take 1600 T = 320 µs.</figcaption>
   </figure>
 
@@ -1288,13 +1297,13 @@
     <li>Execute the service routine; finish with <code>IRET</code>, which restores IP, CS and the flags.</li>
   </ol>
 
-  <figure>
-    <svg viewBox="0 0 620 250" role="img" aria-labelledby="m3-istk-t m3-istk-d" style="max-width:100%">
+  <figure class="coa-fig--scroll">
+    <div class="coa-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:620px"><svg viewBox="0 0 620 250" role="img" aria-labelledby="m3-istk-t m3-istk-d" style="max-width:100%">
       <title id="m3-istk-t">Interrupt cycle: state pushed on the stack</title>
       <desc id="m3-istk-d">The processor pushes the flag register, then CS, then IP onto the stack, so the stack pointer ends at the saved IP. It then clears IF and TF, loads CS and IP from the interrupt vector table, runs the service routine and finishes with IRET, which pops IP, CS and the flags.</desc>
       <defs><marker id="m3-istk-ar" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="var(--ink)"/></marker></defs>
       <g font-family="Helvetica, Arial, sans-serif"><text x="160" y="14" font-size="12" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">Stack (grows toward lower addresses)</text><text x="160" y="36" font-size="11" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">higher address</text><rect x="70" y="50" width="180" height="40" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="140" y="70" font-size="14" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">flags</text><text x="210" y="70" font-size="11" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">pushed 1st</text><rect x="70" y="96" width="180" height="40" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="140" y="116" font-size="14" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">CS</text><text x="210" y="116" font-size="11" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">pushed 2nd</text><rect x="70" y="142" width="180" height="40" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="140" y="162" font-size="14" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">IP</text><text x="210" y="162" font-size="11" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">pushed 3rd</text><text x="160" y="200" font-size="11" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">lower address</text><text x="30" y="164" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">SP</text><path d="M44,164 L68,164" fill="none" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#m3-istk-ar)"/><text x="160" y="226" font-size="11" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">SP ends at the pushed IP</text><rect x="340" y="50" width="250" height="44" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="362" y="72" font-size="14" font-weight="700" fill="var(--accent)" text-anchor="middle" dominant-baseline="central">3</text><text x="476" y="72" font-size="12" font-weight="400" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">Clear IF and TF</text><path d="M465,94 L465,110" fill="none" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#m3-istk-ar)"/><rect x="340" y="110" width="250" height="44" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="362" y="132" font-size="14" font-weight="700" fill="var(--accent)" text-anchor="middle" dominant-baseline="central">4</text><text x="476" y="132" font-size="12" font-weight="400" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">Load CS:IP from the vector table</text><path d="M465,154 L465,170" fill="none" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#m3-istk-ar)"/><rect x="340" y="170" width="250" height="44" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="362" y="192" font-size="14" font-weight="700" fill="var(--accent)" text-anchor="middle" dominant-baseline="central">5</text><text x="476" y="192" font-size="12" font-weight="400" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">Run the service routine, end with IRET</text><text x="465" y="14" font-size="12" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">Then, in order</text><path d="M270,120 L330,120" fill="none" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#m3-istk-ar)"/><text x="300" y="106" font-size="11" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">step 2: push</text><text x="465" y="234" font-size="11" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">IRET pops IP, then CS, then the flags</text></g>
-    </svg>
+    </svg></div>
     <figcaption>Figure 9. The interrupt cycle. The step numbers match the list above (step 1 is finishing the current instruction). IRET pops in the opposite order to the pushes.</figcaption>
   </figure>
 
@@ -1336,13 +1345,13 @@
 
   <p>Three further modes appear in the syllabus and in the teacher’s notes but are usually described separately: <strong>string</strong> mode (SI and DI auto-update, with DF setting the direction), <strong>I/O</strong> mode (<code>IN</code>/<code>OUT</code> with a port number), and <strong>relative</strong> mode (the target is IP + a signed displacement, used by jumps). Learn them as a short list; the eight memory modes above carry most of the marks.</p>
 
-  <figure>
-    <svg viewBox="0 0 620 240" role="img" aria-labelledby="m3-eacomp-t m3-eacomp-d" style="max-width:100%">
+  <figure class="coa-fig--scroll">
+    <div class="coa-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:620px"><svg viewBox="0 0 620 240" role="img" aria-labelledby="m3-eacomp-t m3-eacomp-d" style="max-width:100%">
       <title id="m3-eacomp-t">Effective address built from up to three terms</title>
       <desc id="m3-eacomp-d">A base register (BX or BP), an index register (SI or DI) and a displacement of none, 8 or 16 bits feed an adder. The sum is the 16-bit effective address. Any term can be absent depending on the addressing mode.</desc>
       <defs><marker id="m3-eac-ar" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="var(--ink)"/></marker></defs>
       <g font-family="Helvetica, Arial, sans-serif"><rect x="30" y="20" width="200" height="48" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="130" y="36" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">Base</text><text x="130" y="54" font-size="11" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">BX or BP</text><path d="M230,44 L300,44" fill="none" stroke="var(--ink)" stroke-width="1.5"/><rect x="30" y="82" width="200" height="48" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="130" y="98" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">Index</text><text x="130" y="116" font-size="11" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">SI or DI</text><path d="M230,106 L300,106" fill="none" stroke="var(--ink)" stroke-width="1.5"/><rect x="30" y="144" width="200" height="48" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="130" y="160" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">Displacement</text><text x="130" y="178" font-size="11" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">none, 8 or 16 bits</text><path d="M230,168 L300,168" fill="none" stroke="var(--ink)" stroke-width="1.5"/><circle cx="330" cy="106" r="24" fill="var(--surface-hi)" stroke="var(--ink)" stroke-width="1.5"/><text x="330" y="106" font-size="22" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">+</text><path d="M300,44 L300,92 L306,98" fill="none" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#m3-eac-ar)"/><path d="M230,106 L306,106" fill="none" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#m3-eac-ar)"/><path d="M300,168 L300,120 L306,114" fill="none" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#m3-eac-ar)"/><path d="M354,106 L420,106" fill="none" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#m3-eac-ar)"/><rect x="422" y="82" width="170" height="48" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="507" y="98" font-size="14" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">EA</text><text x="507" y="117" font-size="11" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">16-bit offset</text><text x="310" y="208" font-size="12" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">Any term may be missing. Direct mode is displacement only;</text><text x="310" y="226" font-size="12" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">register indirect is one register only.</text></g>
-    </svg>
+    </svg></div>
     <figcaption>Figure 10. The effective address is a sum of up to three terms. The modes in the table differ only in which terms are present.</figcaption>
   </figure>
 
@@ -1367,8 +1376,8 @@
 
   <h3>6.4 From effective address to physical address</h3>
 
-  <figure>
-    <svg viewBox="0 0 620 220" role="img" aria-labelledby="m3-ea-title m3-ea-desc" style="max-width:100%">
+  <figure class="coa-fig--scroll">
+    <div class="coa-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:620px"><svg viewBox="0 0 620 220" role="img" aria-labelledby="m3-ea-title m3-ea-desc" style="max-width:100%">
       <title id="m3-ea-title">Effective address and physical address formation</title>
       <desc id="m3-ea-desc">The effective address is the sum of a base register, an index register and a displacement. The segment register is multiplied by ten hexadecimal, equivalent to a four-bit shift, and added to the effective address to form the twenty-bit physical address.</desc>
       <defs>
@@ -1405,7 +1414,7 @@
         <text x="325" y="132" font-size="9" fill="var(--muted)">step 2: add the 16-bit offset</text>
         <text x="410" y="34" font-size="9" fill="var(--muted)">result wraps inside 1 MB</text>
       </g>
-    </svg>
+    </svg></div>
     <figcaption>Figure 11. Two additions produce the physical address. The segment is shifted, not merely added, because it is a 16-bit base for a 20-bit space.</figcaption>
   </figure>
 
@@ -1545,8 +1554,8 @@
 
   <p>Because the function is combinational, the signal appears as soon as its inputs are stable. That is the source of the hardwired unit’s speed advantage, and also of its rigidity: adding an instruction means redesigning the logic and the chip.</p>
 
-  <figure>
-    <svg viewBox="0 0 620 300" role="img" aria-labelledby="m3-hw-title m3-hw-desc" style="max-width:100%">
+  <figure class="coa-fig--scroll">
+    <div class="coa-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:620px"><svg viewBox="0 0 620 300" role="img" aria-labelledby="m3-hw-title m3-hw-desc" style="max-width:100%">
       <title id="m3-hw-title">Hardwired control unit</title>
       <desc id="m3-hw-desc">A clock drives a sequence counter whose decoded outputs are combined with the decoded opcode and the flags in a combinational logic array. The array produces the control signals for the datapath.</desc>
       <defs>
@@ -1595,7 +1604,7 @@
         <line x1="376" y1="153" x2="400" y2="153" stroke="var(--ink)" marker-end="url(#m3-hw-arrow)"/>
         <line x1="502" y1="196" x2="502" y2="228" stroke="var(--ink)" marker-end="url(#m3-hw-arrow)"/>
       </g>
-    </svg>
+    </svg></div>
     <figcaption>Figure 12. A hardwired control unit. The timing state and the decoded opcode are combined in fixed logic.</figcaption>
   </figure>
 
@@ -1677,8 +1686,8 @@
 
   <div class="eq">machine instruction → microprogram → sequence of microinstructions → control signals</div>
 
-  <figure>
-    <svg viewBox="0 0 620 320" role="img" aria-labelledby="m3-mc-title m3-mc-desc" style="max-width:100%">
+  <figure class="coa-fig--scroll">
+    <div class="coa-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:620px"><svg viewBox="0 0 620 320" role="img" aria-labelledby="m3-mc-title m3-mc-desc" style="max-width:100%">
       <title id="m3-mc-title">Microprogrammed control unit</title>
       <desc id="m3-mc-desc">A control address register addresses a control memory. The selected microinstruction is loaded into the microinstruction register, whose control fields drive the datapath and whose next-address fields drive the sequencer. The sequencer also receives condition flags and a mapping address derived from the opcode.</desc>
       <defs>
@@ -1729,7 +1738,7 @@
         <line x1="394" y1="197" x2="354" y2="197" stroke="var(--ink)" marker-end="url(#m3-mc-arrow)"/>
         <line x1="300" y1="258" x2="300" y2="228" stroke="var(--ink)" marker-end="url(#m3-mc-arrow)"/>
       </g>
-    </svg>
+    </svg></div>
     <figcaption>Figure 13. A microprogrammed control unit. The control memory holds the microprogram; the sequencer chooses the next microinstruction.</figcaption>
   </figure>
 
@@ -1759,13 +1768,13 @@
     <tr><td>Typical use</td><td>Fast machines, wide control words</td><td>Cost-sensitive machines, compact firmware</td></tr>
   </table>
 
-  <figure>
-    <svg viewBox="0 0 620 204" role="img" aria-labelledby="m3-hv-t m3-hv-d" style="max-width:100%">
+  <figure class="coa-fig--scroll">
+    <div class="coa-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:620px"><svg viewBox="0 0 620 204" role="img" aria-labelledby="m3-hv-t m3-hv-d" style="max-width:100%">
       <title id="m3-hv-t">Horizontal and vertical microinstructions</title>
       <desc id="m3-hv-d">A horizontal microinstruction has one control bit per signal. A vertical microinstruction holds a coded field that a decoder expands into one signal.</desc>
       <defs><marker id="s2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 z" fill="var(--ink)"/></marker></defs>
       <g font-family="Helvetica, Arial, sans-serif"><text x="20" y="14" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="start" dominant-baseline="central">Horizontal: one bit per signal</text><rect x="20" y="28" width="40" height="30" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="40.0" y="43.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">1</text><text x="40" y="74" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">c1</text><rect x="60" y="28" width="40" height="30" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="80.0" y="43.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">0</text><text x="80" y="74" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">c2</text><rect x="100" y="28" width="40" height="30" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="120.0" y="43.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">1</text><text x="120" y="74" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">c3</text><rect x="140" y="28" width="40" height="30" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="160.0" y="43.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">0</text><text x="160" y="74" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">c4</text><rect x="180" y="28" width="40" height="30" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="200.0" y="43.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">0</text><text x="200" y="74" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">c5</text><rect x="220" y="28" width="40" height="30" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="240.0" y="43.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">1</text><text x="240" y="74" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">c6</text><rect x="260" y="28" width="40" height="30" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="280.0" y="43.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">0</text><text x="280" y="74" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">c7</text><rect x="300" y="28" width="40" height="30" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="320.0" y="43.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">0</text><text x="320" y="74" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">c8</text><rect x="340" y="28" width="40" height="30" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="360.0" y="43.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">0</text><text x="360" y="74" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">c9</text><rect x="380" y="28" width="40" height="30" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="400.0" y="43.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">1</text><text x="400" y="74" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">c10</text><rect x="420" y="28" width="40" height="30" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="440.0" y="43.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">0</text><text x="440" y="74" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">c11</text><rect x="460" y="28" width="40" height="30" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="480.0" y="43.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">0</text><text x="480" y="74" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">c12</text><text x="510" y="43" font-size="13" font-weight="400" fill="var(--ink)" text-anchor="start" dominant-baseline="central">12 bits, 3 on</text><text x="20" y="112" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="start" dominant-baseline="central">Vertical: a coded field</text><rect x="20" y="128" width="140" height="36" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="90.0" y="146.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">field 0110</text><line x1="160" y1="146" x2="208" y2="146" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#s2)"/><rect x="210" y="128" width="110" height="36" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="265.0" y="146.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">decoder</text><line x1="320" y1="146" x2="368" y2="146" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#s2)"/><rect x="370" y="128" width="220" height="36" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="480.0" y="146.0" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">one signal asserted</text><text x="20" y="190" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="start" dominant-baseline="central">Horizontal is wide and parallel; vertical is narrow but pays a decoder delay.</text></g>
-    </svg>
+    </svg></div>
     <figcaption>Figure 14. Horizontal against vertical. Horizontal words are wide and fast; vertical words are compact but need a decoder.</figcaption>
   </figure>
 
@@ -1837,13 +1846,13 @@
 
   <p>Addresses 0–3 are the shared fetch routine. Addresses 10–12 are the add routine. The last microinstruction of every routine returns to address 0, which starts the next fetch. That single convention is what makes the control unit a loop rather than a one-shot sequence.</p>
 
-  <figure>
-    <svg viewBox="0 0 620 252" role="img" aria-labelledby="m3-mpgm-t m3-mpgm-d" style="max-width:100%">
+  <figure class="coa-fig--scroll">
+    <div class="coa-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:620px"><svg viewBox="0 0 620 252" role="img" aria-labelledby="m3-mpgm-t m3-mpgm-d" style="max-width:100%">
       <title id="m3-mpgm-t">Microprogram loop for fetch and add</title>
       <desc id="m3-mpgm-d">Addresses 0, 1, 2 and 3 form the shared fetch routine. Address 3 maps the opcode to the add routine at addresses 10, 11 and 12. The last microinstruction returns to address 0, so the control unit loops.</desc>
       <defs><marker id="m3-mpg-ar" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="var(--ink)"/></marker></defs>
       <g font-family="Helvetica, Arial, sans-serif"><rect x="20" y="36" width="130" height="48" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="85" y="52" font-size="12" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">Address 0</text><text x="85" y="70" font-size="11" font-weight="400" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">MAR ← PC</text><path d="M150,60 L175,60" fill="none" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#m3-mpg-ar)"/><rect x="175" y="36" width="130" height="48" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="240" y="52" font-size="12" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">Address 1</text><text x="240" y="70" font-size="11" font-weight="400" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">MDR ← M[MAR], PC+1</text><path d="M305,60 L330,60" fill="none" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#m3-mpg-ar)"/><rect x="330" y="36" width="130" height="48" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="395" y="52" font-size="12" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">Address 2</text><text x="395" y="70" font-size="11" font-weight="400" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">IR ← MDR</text><path d="M460,60 L485,60" fill="none" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#m3-mpg-ar)"/><rect x="485" y="36" width="130" height="48" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="550" y="52" font-size="12" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">Address 3</text><text x="550" y="70" font-size="11" font-weight="400" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">Map opcode</text><rect x="20" y="150" width="130" height="48" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="85" y="166" font-size="12" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">Address 10</text><text x="85" y="184" font-size="11" font-weight="400" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">MAR ← IR(addr)</text><path d="M150,174 L175,174" fill="none" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#m3-mpg-ar)"/><rect x="175" y="150" width="130" height="48" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="240" y="166" font-size="12" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">Address 11</text><text x="240" y="184" font-size="11" font-weight="400" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">MDR ← M[MAR]</text><path d="M305,174 L330,174" fill="none" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#m3-mpg-ar)"/><rect x="330" y="150" width="130" height="48" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="395" y="166" font-size="12" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">Address 12</text><text x="395" y="184" font-size="11" font-weight="400" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">R1 ← R1 + MDR</text><text x="310" y="14" font-size="12" font-weight="700" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">Shared fetch routine (addresses 0 to 3)</text><text x="250" y="136" font-size="11" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">mapping logic picks the add routine from the opcode</text><path d="M550,84 L550,118 L85,118 L85,150" fill="none" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#m3-mpg-ar)"/><path d="M395,198 L395,226 L8,226 L8,60 L20,60" fill="none" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#m3-mpg-ar)"/><text x="250" y="238" font-size="11" font-weight="400" fill="var(--muted)" text-anchor="middle" dominant-baseline="central">last microinstruction of every routine returns to address 0</text></g>
-    </svg>
+    </svg></div>
     <figcaption>Figure 15. The microprogram as a loop. The fetch routine is shared; each opcode selects its own routine and returns to address 0.</figcaption>
   </figure>
 
@@ -1887,8 +1896,8 @@
     <tr><td><strong>Subroutine</strong></td><td>A shared micro-routine is called and must return.</td><td>Call a common “effective address” routine.</td></tr>
   </table>
 
-  <figure>
-    <svg viewBox="0 0 620 246" role="img" aria-labelledby="m3-seq-title m3-seq-desc" style="max-width:100%">
+  <figure class="coa-fig--scroll">
+    <div class="coa-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:620px"><svg viewBox="0 0 620 246" role="img" aria-labelledby="m3-seq-title m3-seq-desc" style="max-width:100%">
       <title id="m3-seq-title">Microinstruction next-address selection</title>
       <desc id="m3-seq-desc">A multiplexer selects the next control address from four sources: the incremented current address, a branch address, a mapping address derived from the opcode, and a subroutine return address. The select lines come from the microinstruction and the sequencer.</desc>
       <defs>
@@ -1934,7 +1943,7 @@
         <line x1="340" y1="113" x2="390" y2="91" stroke="var(--ink)" marker-end="url(#m3-seq-arrow)"/>
         <line x1="390" y1="170" x2="340" y2="140" stroke="var(--ink)" marker-end="url(#m3-seq-arrow)"/>
       </g>
-    </svg>
+    </svg></div>
     <figcaption>Figure 16. The sequencer chooses among four next-address sources. Only one passes through the multiplexer at a time.</figcaption>
   </figure>
 

@@ -489,6 +489,15 @@
   .eq { white-space: normal; }
   svg, figure svg { max-width: 100%; }
 </style>
+<style id="coa-scroll">
+  .coa-scroll { display: block; }
+  @media (max-width: 600px) {
+    .coa-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .coa-scroll svg { width: var(--sw) !important; max-width: none !important; height: auto; margin-left: 0; margin-right: 0; }
+    .coa-scroll:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+    .coa-fig--scroll figcaption::before { content: "Swipe sideways to see the whole diagram. "; display: block; font-size: .78rem; color: var(--muted); font-style: italic; margin-bottom: .15rem; }
+  }
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -629,8 +638,8 @@
 
   <p>A <strong>bus</strong> is a set of shared electrical lines with a defined protocol that lets several units communicate. A unit that can start a transfer is a <strong>bus master</strong>; a unit that responds is a <strong>bus slave</strong>. The CPU is normally the master, but a DMA controller or another processor can also become master. Because the lines are shared, only one master may drive them at a time; this is why bus arbitration (Section 3) is needed.</p>
 
-  <figure>
-    <svg viewBox="0 0 620 300" role="img" aria-labelledby="m5-bus-title m5-bus-desc" style="max-width:620px">
+  <figure class="coa-fig--scroll">
+    <div class="coa-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:620px"><svg viewBox="0 0 620 300" role="img" aria-labelledby="m5-bus-title m5-bus-desc" style="max-width:620px">
       <title id="m5-bus-title">The three groups of system bus lines</title>
       <desc id="m5-bus-desc">The CPU, memory and I/O modules are connected by three buses: a bidirectional data bus, a unidirectional address bus, and a control bus carrying read, write, interrupt and bus-grant signals.</desc>
       <g font-family="Helvetica, Arial" font-size="12" fill="var(--ink)">
@@ -663,7 +672,7 @@
         <line x1="310" y1="170" x2="310" y2="230" stroke="var(--muted)"/>
         <line x1="530" y1="170" x2="530" y2="230" stroke="var(--muted)"/>
       </g>
-    </svg>
+    </svg></div>
     <figcaption>Figure 2. A system bus has three functional groups. The address bus selects, the data bus carries, and the control bus coordinates.</figcaption>
   </figure>
 
@@ -791,22 +800,22 @@
     <tr><td>Independent request</td><td>One request and one grant per master</td><td>Fully programmable</td><td>Fastest</td><td>Many pins and wires; poor scaling.</td></tr>
   </table>
 
-  <figure>
-    <svg viewBox="0 0 420 248" role="img" aria-labelledby="m5-daisy-t m5-daisy-d" style="max-width:420px">
+  <figure class="coa-fig--scroll">
+    <div class="coa-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:420px"><svg viewBox="0 0 420 248" role="img" aria-labelledby="m5-daisy-t m5-daisy-d" style="max-width:420px">
       <title id="m5-daisy-t">Daisy-chain arbitration</title>
       <desc id="m5-daisy-d">The arbiter sends a bus grant through devices D1, D2 and D3 in series while all devices share one bus-request line.</desc>
       <defs><marker id="m5-daisy-m" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 z" fill="var(--accent)"/></marker></defs>
       <g font-family="Helvetica, Arial, sans-serif"><text x="210" y="18" font-size="14" font-weight="700" fill="var(--ink)" text-anchor="middle">Daisy-chain bus arbitration</text><rect x="20" y="70" width="80" height="50" fill="var(--surface-hi)" stroke="var(--ink)" stroke-width="1.5"/><text x="60" y="100" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle">Arbiter</text><rect x="140" y="70" width="60" height="50" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="170" y="100" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle">D1</text><rect x="230" y="70" width="60" height="50" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="260" y="100" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle">D2</text><rect x="320" y="70" width="60" height="50" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="350" y="100" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle">D3</text><line x1="100" y1="95" x2="139" y2="95" stroke="var(--accent)" stroke-width="2.4" marker-end="url(#m5-daisy-m)" /><text x="120.0" y="86" font-size="11" font-weight="700" fill="var(--accent)" text-anchor="middle">BG</text><line x1="200" y1="95" x2="229" y2="95" stroke="var(--accent)" stroke-width="2.4" marker-end="url(#m5-daisy-m)" /><text x="215.0" y="86" font-size="11" font-weight="700" fill="var(--accent)" text-anchor="middle">BG</text><line x1="290" y1="95" x2="319" y2="95" stroke="var(--accent)" stroke-width="2.4" marker-end="url(#m5-daisy-m)" /><text x="305.0" y="86" font-size="11" font-weight="700" fill="var(--accent)" text-anchor="middle">BG</text><line x1="60" y1="120" x2="60" y2="170" stroke="var(--ink)" stroke-width="1.5"  /><line x1="170" y1="120" x2="170" y2="170" stroke="var(--ink)" stroke-width="1.5"  /><line x1="260" y1="120" x2="260" y2="170" stroke="var(--ink)" stroke-width="1.5"  /><line x1="350" y1="120" x2="350" y2="170" stroke="var(--ink)" stroke-width="1.5"  /><line x1="60" y1="170" x2="350" y2="170" stroke="var(--ink)" stroke-width="2.4"  /><text x="205" y="192" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle">BR: one shared bus-request line</text><text x="210" y="216" font-size="12.5" font-weight="400" fill="var(--muted)" text-anchor="middle">Grant (BG) passes through the devices in series.</text><text x="210" y="236" font-size="12.5" font-weight="400" fill="var(--muted)" text-anchor="middle">D1 nearest the arbiter has the highest priority; D3 the lowest.</text></g>
-    </svg>
+    </svg></div>
     <figcaption>Figure 5. Daisy-chain arbitration. Any device raises the shared request; the grant travels D1 → D2 → D3 and the first requesting device keeps it.</figcaption>
   </figure>
-  <figure>
-    <svg viewBox="0 0 420 218" role="img" aria-labelledby="m5-indep-t m5-indep-d" style="max-width:420px">
+  <figure class="coa-fig--scroll">
+    <div class="coa-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:420px"><svg viewBox="0 0 420 218" role="img" aria-labelledby="m5-indep-t m5-indep-d" style="max-width:420px">
       <title id="m5-indep-t">Independent request arbitration</title>
       <desc id="m5-indep-d">Each of three devices has its own bus-request and bus-grant line to the arbiter.</desc>
       <defs><marker id="m5-indep-m" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 z" fill="var(--accent)"/></marker></defs>
       <g font-family="Helvetica, Arial, sans-serif"><text x="210" y="16" font-size="14" font-weight="700" fill="var(--ink)" text-anchor="middle">Independent-request arbitration</text><rect x="20" y="30" width="100" height="130" fill="var(--surface-hi)" stroke="var(--ink)" stroke-width="1.5"/><text x="70" y="92" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle">Arbiter</text><text x="70" y="112" font-size="11.5" font-weight="400" fill="var(--muted)" text-anchor="middle">sees all</text><text x="70" y="128" font-size="11.5" font-weight="400" fill="var(--muted)" text-anchor="middle">requests</text><rect x="300" y="34" width="80" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="340" y="56" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle">D1</text><line x1="298" y1="45" x2="122" y2="45" stroke="var(--accent)" stroke-width="2" marker-end="url(#m5-indep-m)" /><line x1="122" y1="59" x2="298" y2="59" stroke="var(--accent)" stroke-width="2" marker-end="url(#m5-indep-m)" /><text x="165" y="39" font-size="11.5" font-weight="700" fill="var(--accent)" text-anchor="middle">BR1</text><text x="255" y="75" font-size="11.5" font-weight="700" fill="var(--accent)" text-anchor="middle">BG1</text><rect x="300" y="84" width="80" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="340" y="106" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle">D2</text><line x1="298" y1="95" x2="122" y2="95" stroke="var(--accent)" stroke-width="2" marker-end="url(#m5-indep-m)" /><line x1="122" y1="109" x2="298" y2="109" stroke="var(--accent)" stroke-width="2" marker-end="url(#m5-indep-m)" /><text x="165" y="89" font-size="11.5" font-weight="700" fill="var(--accent)" text-anchor="middle">BR2</text><text x="255" y="125" font-size="11.5" font-weight="700" fill="var(--accent)" text-anchor="middle">BG2</text><rect x="300" y="134" width="80" height="34" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="340" y="156" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle">D3</text><line x1="298" y1="145" x2="122" y2="145" stroke="var(--accent)" stroke-width="2" marker-end="url(#m5-indep-m)" /><line x1="122" y1="159" x2="298" y2="159" stroke="var(--accent)" stroke-width="2" marker-end="url(#m5-indep-m)" /><text x="165" y="139" font-size="11.5" font-weight="700" fill="var(--accent)" text-anchor="middle">BR3</text><text x="255" y="175" font-size="11.5" font-weight="700" fill="var(--accent)" text-anchor="middle">BG3</text><text x="210" y="188" font-size="12.5" font-weight="400" fill="var(--muted)" text-anchor="middle">Each device has its own request (BR) and grant (BG) line.</text><text x="210" y="206" font-size="12.5" font-weight="400" fill="var(--muted)" text-anchor="middle">The arbiter picks one by priority and grants it at once.</text></g>
-    </svg>
+    </svg></div>
     <figcaption>Figure 6. Independent request. Separate request and grant lines make it the fastest method but use the most wiring.</figcaption>
   </figure>
   <h3>3.3 Distributed arbitration</h3>
@@ -1197,8 +1206,8 @@
 
   <h3>9.2 The DMA controller</h3>
 
-  <figure>
-    <svg viewBox="0 0 620 330" role="img" aria-labelledby="m5-dma-title m5-dma-desc" style="max-width:620px">
+  <figure class="coa-fig--scroll">
+    <div class="coa-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:620px"><svg viewBox="0 0 620 330" role="img" aria-labelledby="m5-dma-title m5-dma-desc" style="max-width:620px">
       <title id="m5-dma-title">DMA controller connecting a device and main memory</title>
       <desc id="m5-dma-desc">The CPU programs the DMA controller through the bus. The controller contains an address register, a count register, a control and status register, and control logic. It drives address, data and control lines to memory and data, status and control lines to the device, and uses bus request and bus grant to take over the bus.</desc>
       <g font-family="Helvetica, Arial" font-size="12" fill="var(--ink)">
@@ -1247,7 +1256,7 @@
           <path d="M0,0 L8,4 L0,8" fill="var(--muted)"/>
         </marker>
       </defs>
-    </svg>
+    </svg></div>
     <figcaption>Figure 12. A DMA controller sits between the device and memory. It holds the address, count and control information, and uses bus request/grant to become the bus master.</figcaption>
   </figure>
 

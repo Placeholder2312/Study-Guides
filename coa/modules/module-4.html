@@ -514,6 +514,15 @@
   .cfig .fi { fill: var(--ink); } .cfig .fa { fill: var(--accent); } .cfig .fr { fill: var(--danger); }
   @media print { .cfig { background: #fff; break-inside: avoid; } }
 </style>
+<style id="coa-scroll">
+  .coa-scroll { display: block; }
+  @media (max-width: 600px) {
+    .coa-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .coa-scroll svg { width: var(--sw) !important; max-width: none !important; height: auto; margin-left: 0; margin-right: 0; }
+    .coa-scroll:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+    .coa-fig--scroll figcaption::before { content: "Swipe sideways to see the whole diagram. "; display: block; font-size: .78rem; color: var(--muted); font-style: italic; margin-bottom: .15rem; }
+  }
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -1768,8 +1777,8 @@
 
   <p>In direct mapping, the cache line is fixed by the block number. The low bits of the block number select the line, and the remaining high bits become the tag. The advantage is simple, cheap hardware: one comparator and one multiplexer. The disadvantage is <strong>conflict misses</strong>: two frequently used blocks that map to the same line keep evicting each other even if the rest of the cache is empty.</p>
 
-  <figure>
-    <svg viewBox="0 0 620 280" role="img" aria-labelledby="m4-direct-title m4-direct-desc" style="max-width:620px">
+  <figure class="coa-fig--scroll">
+    <div class="coa-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:620px"><svg viewBox="0 0 620 280" role="img" aria-labelledby="m4-direct-title m4-direct-desc" style="max-width:620px">
       <title id="m4-direct-title">Direct-mapped cache address fields</title>
       <desc id="m4-direct-desc">A main memory address is split into tag, line number and offset. The line number selects exactly one cache line. The stored tag is compared with the incoming tag; a match is a hit.</desc>
       <g font-family="Helvetica, Arial" font-size="12" fill="var(--ink)">
@@ -1798,7 +1807,7 @@
           <path d="M0,0 L8,4 L0,8" fill="var(--muted)"/>
         </marker>
       </defs>
-    </svg>
+    </svg></div>
     <figcaption>Figure 16. Direct mapping. The line number selects one line; only that line’s tag is compared.</figcaption>
   </figure>
 
@@ -1810,8 +1819,8 @@
 
   <p>In fully associative mapping, any block can go into any line. There is no line number in the address, so the address has only a tag and an offset. On every access, the cache compares the incoming tag with the tag of every line in parallel. This removes conflict misses completely, but it needs a comparator per line and a priority encoder to choose the matching line. It is expensive for large caches, which is why it is used for small structures such as TLBs.</p>
 
-  <figure>
-    <svg viewBox="0 0 620 250" role="img" aria-labelledby="m4-fa-title m4-fa-desc" style="max-width:620px">
+  <figure class="coa-fig--scroll">
+    <div class="coa-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:620px"><svg viewBox="0 0 620 250" role="img" aria-labelledby="m4-fa-title m4-fa-desc" style="max-width:620px">
       <title id="m4-fa-title">Fully associative cache tag comparison</title>
       <desc id="m4-fa-desc">The address has a tag and an offset. The tag is compared in parallel with the tags of all cache lines. A match selects the corresponding data block.</desc>
       <g font-family="Helvetica, Arial" font-size="12" fill="var(--ink)">
@@ -1837,7 +1846,7 @@
         <rect x="20" y="222" width="510" height="18" fill="var(--bg)" stroke="var(--line)"/>
         <text x="30" y="235" font-size="11">priority encoder → matching line number</text>
       </g>
-    </svg>
+    </svg></div>
     <figcaption>Figure 17. Fully associative mapping. Every line’s tag is compared in parallel; there is no index field.</figcaption>
   </figure>
 
@@ -1845,8 +1854,8 @@
 
   <p>Set-associative mapping is the compromise. The cache is divided into <span class="kbd">S</span> sets, each containing <span class="kbd">N</span> lines (an “N-way” cache). A block maps to exactly one set, but within that set it can occupy any of the N ways. The hardware compares N tags in parallel, not all lines. A 4-way set-associative cache with 64 lines has 16 sets; a block maps to one of those 16 sets and can sit in any of its 4 lines.</p>
 
-  <figure>
-    <svg viewBox="0 0 620 280" role="img" aria-labelledby="m4-set-title m4-set-desc" style="max-width:620px">
+  <figure class="coa-fig--scroll">
+    <div class="coa-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:620px"><svg viewBox="0 0 620 280" role="img" aria-labelledby="m4-set-title m4-set-desc" style="max-width:620px">
       <title id="m4-set-title">Set-associative cache organisation</title>
       <desc id="m4-set-desc">The address is split into tag, set index and offset. The set index selects one set. Within that set, four ways are compared in parallel, and any matching way supplies the data.</desc>
       <g font-family="Helvetica, Arial" font-size="12" fill="var(--ink)">
@@ -1875,7 +1884,7 @@
           <path d="M0,0 L8,4 L0,8" fill="var(--muted)"/>
         </marker>
       </defs>
-    </svg>
+    </svg></div>
     <figcaption>Figure 18. A 4-way set-associative cache. The set index selects one set; the tag is compared with the four ways in that set.</figcaption>
   </figure>
 
@@ -2267,8 +2276,8 @@
     <tr><td><strong>High-order interleaving</strong></td><td>High address bits; <span class="kbd">bank = floor(address ÷ bank size)</span></td><td>The same bank until its address range ends</td><td>Large contiguous blocks, simple expansion</td><td>Sequential accesses do not spread across banks, so less parallelism.</td></tr>
   </table>
 
-  <figure>
-    <svg viewBox="0 0 620 250" role="img" aria-labelledby="m4-il-title m4-il-desc" style="max-width:620px">
+  <figure class="coa-fig--scroll">
+    <div class="coa-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:620px"><svg viewBox="0 0 620 250" role="img" aria-labelledby="m4-il-title m4-il-desc" style="max-width:620px">
       <title id="m4-il-title">Low-order and high-order interleaving</title>
       <desc id="m4-il-desc">In low-order interleaving, consecutive addresses 0, 1, 2, 3 go to banks 0, 1, 2, 3. In high-order interleaving, each bank owns a contiguous range of addresses, so consecutive addresses stay in the same bank.</desc>
       <g font-family="Helvetica, Arial" font-size="12" fill="var(--ink)">
@@ -2286,7 +2295,7 @@
         <rect x="440" y="168" width="130" height="40" fill="var(--surface)" stroke="var(--ink)"/><text x="505" y="193" text-anchor="middle">Bank 3: 3072–4095</text>
         <text x="20" y="235" font-size="11" fill="var(--muted)">Consecutive addresses stay in one bank → less parallel service for a sequential scan.</text>
       </g>
-    </svg>
+    </svg></div>
     <figcaption>Figure 22. Low-order versus high-order interleaving. The difference is which address bits choose the bank.</figcaption>
   </figure>
 
@@ -2381,8 +2390,8 @@
     <p>An associative memory is a memory array with comparison logic attached to every word. The <strong>argument register</strong> holds the search key, the <strong>key register</strong> (mask register) selects which bit positions participate in the comparison, and the <strong>match register</strong> has one bit per stored word. After a search, the match bits of all matching words are set to 1.</p>
   </div>
 
-  <figure>
-    <svg viewBox="0 0 620 300" role="img" aria-labelledby="m4-cam-title m4-cam-desc" style="max-width:620px">
+  <figure class="coa-fig--scroll">
+    <div class="coa-scroll" tabindex="0" role="group" aria-label="Diagram; scrolls sideways on small screens" style="--sw:620px"><svg viewBox="0 0 620 300" role="img" aria-labelledby="m4-cam-title m4-cam-desc" style="max-width:620px">
       <title id="m4-cam-title">Associative memory block diagram</title>
       <desc id="m4-cam-desc">An argument register and key register feed a comparator array. The comparator array compares the key with every word in the associative memory array. The match register records which words matched, and a priority encoder produces the matching location.</desc>
       <g font-family="Helvetica, Arial" font-size="12" fill="var(--ink)">
@@ -2424,7 +2433,7 @@
           <path d="M0,0 L8,4 L0,8" fill="var(--muted)"/>
         </marker>
       </defs>
-    </svg>
+    </svg></div>
     <figcaption>Figure 24. Associative memory. The key is compared with every word in parallel, and the match register records the results.</figcaption>
   </figure>
 
