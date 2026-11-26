@@ -63,7 +63,11 @@
   .q-title:focus { outline:2px solid var(--accent); outline-offset:4px; }
   .cue { border-left:3px solid var(--accent); padding:.15rem 0 .15rem 1rem; margin:1.4rem 0; }
   .cue p { margin:0; font-weight:600; }
-  .cue .label { color:var(--accent); }
+  .cue summary { cursor:pointer; color:var(--accent); font-size:.95rem; font-weight:700; min-height:36px; display:flex; align-items:center; list-style:none; }
+  .cue summary::-webkit-details-marker { display:none; }
+  .cue summary::before { content:"+"; margin-right:.5rem; font-weight:800; }
+  .cue[open] summary::before { content:"\2212"; }
+  .cue[open] summary { margin-bottom:.4rem; }
   .skeleton { border:1px solid var(--line); background:var(--surface-alt); padding:.9rem 1.1rem; margin:1.4rem 0; }
   .skeleton ol { margin:.2rem 0 0; padding-left:1.2rem; font-size:.95rem; }
   .skeleton li + li { margin-top:.5rem; }
@@ -235,7 +239,7 @@
     </div>
   </div>
   <h3 class="q-title" id="title-A1" tabindex="-1">Explain role of forests in maintaining ecological balance.</h3>
-  <div class="cue"><span class="label">Recall cue</span><p>Recall: climate, water, soil, biodiversity, carbon.</p></div>
+  <details class="cue"><summary>Show recall cue</summary><p>Recall: climate, water, soil, biodiversity, carbon.</p></details>
 
   <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
   <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-A1">Show answer</button></div>
@@ -257,7 +261,7 @@
     </div>
   </div>
   <h3 class="q-title" id="title-A2" tabindex="-1">What is Carbon Footprint? Explain with example.</h3>
-  <div class="cue"><span class="label">Recall cue</span><p>Recall: total GHG emissions, CO₂-equivalent, example.</p></div>
+  <details class="cue"><summary>Show recall cue</summary><p>Recall: total GHG emissions, CO₂-equivalent, example.</p></details>
 
   <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
   <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-A2">Show answer</button></div>
@@ -279,7 +283,7 @@
     </div>
   </div>
   <h3 class="q-title" id="title-A3" tabindex="-1">What are Radioactive gases?</h3>
-  <div class="cue"><span class="label">Recall cue</span><p>Recall: unstable radioactive atoms in gaseous form; radon example; exposure risk.</p></div>
+  <details class="cue"><summary>Show recall cue</summary><p>Recall: unstable radioactive atoms in gaseous form; radon example; exposure risk.</p></details>
 
   <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
   <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-A3">Show answer</button></div>
@@ -301,7 +305,7 @@
     </div>
   </div>
   <h3 class="q-title" id="title-A4" tabindex="-1">Explain the main causes of environmental degradation?</h3>
-  <div class="cue"><span class="label">Recall cue</span><p>Recall: land-use change, extraction, pollution, overuse, climate.</p></div>
+  <details class="cue"><summary>Show recall cue</summary><p>Recall: land-use change, extraction, pollution, overuse, climate.</p></details>
 
   <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
   <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-A4">Show answer</button></div>
@@ -324,7 +328,7 @@
     </div>
   </div>
   <h3 class="q-title" id="title-A5" tabindex="-1">Explain India's malnutrition crisis, including 'hidden hunger' and the malnutrition paradox.</h3>
-  <div class="cue"><span class="label">Recall cue</span><p>Recall: not only lack of food—also poor quality, deficiencies and excess.</p></div>
+  <details class="cue"><summary>Show recall cue</summary><p>Recall: not only lack of food—also poor quality, deficiencies and excess.</p></details>
 
   <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
   <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-A5">Show answer</button></div>
@@ -346,7 +350,7 @@
     </div>
   </div>
   <h3 class="q-title" id="title-A6" tabindex="-1">Discuss the major sources of air pollution in Delhi and its seasonal pattern.</h3>
-  <div class="cue"><span class="label">Recall cue</span><p>Recall: vehicles, dust, industry, biomass; winter stagnation; monsoon relief.</p></div>
+  <details class="cue"><summary>Show recall cue</summary><p>Recall: vehicles, dust, industry, biomass; winter stagnation; monsoon relief.</p></details>
 
   <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
   <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-A6">Show answer</button></div>
@@ -369,7 +373,7 @@
     </div>
   </div>
   <h3 class="q-title" id="title-A7" tabindex="-1">What is meant by carbon footprint? Explain how it contributes to the greenhouse effect.</h3>
-  <div class="cue"><span class="label">Recall cue</span><p>Recall: measure of emissions; emitted GHGs trap outgoing heat.</p></div>
+  <details class="cue"><summary>Show recall cue</summary><p>Recall: measure of emissions; emitted GHGs trap outgoing heat.</p></details>
 
   <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
   <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-A7">Show answer</button></div>
@@ -391,7 +395,7 @@
     </div>
   </div>
   <h3 class="q-title" id="title-A8" tabindex="-1">Define Global Environmental Issues and state four examples.</h3>
-  <div class="cue"><span class="label">Recall cue</span><p>Recall: large-scale or cross-border problems; give four.</p></div>
+  <details class="cue"><summary>Show recall cue</summary><p>Recall: large-scale or cross-border problems; give four.</p></details>
 
   <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
   <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-A8">Show answer</button></div>
@@ -413,7 +417,7 @@
     </div>
   </div>
   <h3 class="q-title" id="title-A9" tabindex="-1">State the two criteria used to identify a biodiversity hotspot.</h3>
-  <div class="cue"><span class="label">Recall cue</span><p>Recall: 1,500 endemic vascular plants; 70% habitat loss.</p></div>
+  <details class="cue"><summary>Show recall cue</summary><p>Recall: 1,500 endemic vascular plants; 70% habitat loss.</p></details>
 
   <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
   <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-A9">Show answer</button></div>
@@ -434,7 +438,7 @@
     </div>
   </div>
   <h3 class="q-title" id="title-A10" tabindex="-1">What is ozone layer depletion? State one consequence of increased UV-B radiation.</h3>
-  <div class="cue"><span class="label">Recall cue</span><p>Recall: stratospheric ozone thins; more UV-B reaches surface.</p></div>
+  <details class="cue"><summary>Show recall cue</summary><p>Recall: stratospheric ozone thins; more UV-B reaches surface.</p></details>
 
   <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
   <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-A10">Show answer</button></div>
@@ -456,7 +460,7 @@
     </div>
   </div>
   <h3 class="q-title" id="title-A11" tabindex="-1">Define desertification and state any two human activities that accelerate it.</h3>
-  <div class="cue"><span class="label">Recall cue</span><p>Recall: dryland land degradation—not simply desert expansion.</p></div>
+  <details class="cue"><summary>Show recall cue</summary><p>Recall: dryland land degradation—not simply desert expansion.</p></details>
 
   <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
   <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-A11">Show answer</button></div>
@@ -478,7 +482,7 @@
     </div>
   </div>
   <h3 class="q-title" id="title-A12" tabindex="-1">What is the Montreal Protocol? State its main objective.</h3>
-  <div class="cue"><span class="label">Recall cue</span><p>Recall: 1987 global agreement; phase out ozone-depleting substances.</p></div>
+  <details class="cue"><summary>Show recall cue</summary><p>Recall: 1987 global agreement; phase out ozone-depleting substances.</p></details>
 
   <p class="selftest-note">Self-test: say or write your answer from the cue, then reveal it and compare.</p>
   <div class="actions"><button class="btn reveal" type="button" aria-expanded="false" aria-controls="ans-A12">Show answer</button></div>
@@ -505,7 +509,7 @@
     </div>
   </div>
   <h3 class="q-title" id="title-B1" tabindex="-1">Explain the impact of Environmental pollution on Human Health.  (8 marks)</h3>
-  <div class="cue"><span class="label">Recall cue</span><p>Types → exposure routes → health effects → vulnerable groups → prevention.</p></div>
+  <details class="cue"><summary>Show recall cue</summary><p>Types → exposure routes → health effects → vulnerable groups → prevention.</p></details>
   <div class="skeleton"><span class="label">Answer skeleton</span><ol><li>Pollution enters the body through air, water, food and other exposures; harm depends on the pollutant, dose, duration and route.</li>
 <li>Air pollution, especially PM₂.₅, is linked to respiratory and cardiovascular disease, stroke and lung cancer, with children and older people most vulnerable.</li>
 <li>Water, soil/food and noise pollution cause water-borne disease, chemical organ damage, and hearing, sleep and concentration problems.</li>
@@ -536,7 +540,7 @@
     </div>
   </div>
   <h3 class="q-title" id="title-B2" tabindex="-1">Apply the concept of the carbon footprint to explain how industries and transportation contribute to global warming. Suggest methods for reducing their carbon footprint.  (7 marks)</h3>
-  <div class="cue"><span class="label">Recall cue</span><p>Define footprint → industry emissions → transport emissions → reductions.</p></div>
+  <details class="cue"><summary>Show recall cue</summary><p>Define footprint → industry emissions → transport emissions → reductions.</p></details>
   <div class="skeleton"><span class="label">Answer skeleton</span><ol><li>A carbon footprint is the total greenhouse-gas emissions of an activity or organisation in CO₂e, including direct and indirect emissions.</li>
 <li>Industry burns coal, oil and gas and releases process CO₂ (for example cement), with fuel extraction and supply chains adding emissions.</li>
 <li>Transport burns petrol, diesel and aviation fuel; congestion and inefficient vehicles increase fuel use.</li>
@@ -568,7 +572,7 @@
     </div>
   </div>
   <h3 class="q-title" id="title-B3" tabindex="-1">Explain India's major environmental priorities with reference to initiatives such as NCAP and Jal Jeevan Mission.  (8 marks)</h3>
-  <div class="cue"><span class="label">Recall cue</span><p>Priorities → NCAP (clean air) → JJM (safe rural water) → integrated governance.</p></div>
+  <details class="cue"><summary>Show recall cue</summary><p>Priorities → NCAP (clean air) → JJM (safe rural water) → integrated governance.</p></details>
   <div class="skeleton"><span class="label">Answer skeleton</span><ol><li>India’s priorities connect air quality, safe water, rivers and groundwater, forests, biodiversity, land, waste and climate adaptation.</li>
 <li>NCAP (2019) supports city clean-air plans across 130 cities and targets PM₁₀ reduction; 2026 results show programme-wide improvement.</li>
 <li>Jal Jeevan Mission (2019) provides rural household tap connections and safe water, with source sustainability, quality monitoring and community participation; JJM 2.0 was approved in March 2026.</li>
@@ -600,7 +604,7 @@
     </div>
   </div>
   <h3 class="q-title" id="title-B4" tabindex="-1">Analyze the pollution of the river Ganges – its sources, scale, and human impact – and evaluate the measures used to address it.  (7 marks)</h3>
-  <div class="cue"><span class="label">Recall cue</span><p>Sources → basin-wide scale → people/ecosystems → Namami Gange measures → evaluation.</p></div>
+  <details class="cue"><summary>Show recall cue</summary><p>Sources → basin-wide scale → people/ecosystems → Namami Gange measures → evaluation.</p></details>
   <div class="skeleton"><span class="label">Answer skeleton</span><ol><li>The Ganges supports drinking water, irrigation, fisheries, transport, culture and livelihoods across a large basin.</li>
 <li>Sources include untreated or partly treated sewage, industrial effluent, agricultural runoff, solid and plastic waste, religious and cremation waste, livestock and storm-water; reduced flow limits dilution.</li>
 <li>Scale and impact vary by location and season, affecting health, treatment costs, aquatic habitats, fisheries and livelihoods; CPCB monitors 112 main-stem locations.</li>
@@ -633,7 +637,7 @@
     </div>
   </div>
   <h3 class="q-title" id="title-B5" tabindex="-1">Describe the present state of India's environment with reference to air, water, land, forests and waste.  (8 marks)</h3>
-  <div class="cue"><span class="label">Recall cue</span><p>Five headings: air, water, land, forests, waste; end with governance and public health.</p></div>
+  <details class="cue"><summary>Show recall cue</summary><p>Five headings: air, water, land, forests, waste; end with governance and public health.</p></details>
   <div class="skeleton"><span class="label">Answer skeleton</span><ol><li>India’s environment is diverse but pressured by urbanisation, industry, resource use, population density and climate variability; monitoring, conservation and regulation have brought progress.</li>
 <li>Air: particulate pollution from vehicles, industry, power plants, dust, biomass and waste burning, worsened by winter pollutant trapping.</li>
 <li>Water: sewage, industrial effluent, agricultural chemicals, solid waste and over-extraction affect rivers, lakes and groundwater.</li>
@@ -666,7 +670,7 @@
     </div>
   </div>
   <h3 class="q-title" id="title-B6" tabindex="-1">Describe the causes of acidification and explain suitable mitigation measures for affected lakes, soils and forests.  (7 marks)</h3>
-  <div class="cue"><span class="label">Recall cue</span><p>SO₂ + NOₓ → sulfuric/nitric acids → deposition → ecosystem damage → reduce emissions and restore.</p></div>
+  <details class="cue"><summary>Show recall cue</summary><p>SO₂ + NOₓ → sulfuric/nitric acids → deposition → ecosystem damage → reduce emissions and restore.</p></details>
   <div class="skeleton"><span class="label">Answer skeleton</span><ol><li>Acidification occurs when acidic deposition exceeds natural buffering; SO₂ and NOₓ from power plants, industry, vehicles and fuel combustion form sulphuric and nitric acids.</li>
 <li>Acids return by rain, snow, fog or dry deposition; lakes lose sensitive fish, eggs, plankton and insects, and aluminium becomes toxic.</li>
 <li>Soils leach calcium and magnesium and mobilise aluminium; trees suffer root and leaf damage and become less resilient.</li>
@@ -705,7 +709,7 @@
     </div>
   </div>
   <h3 class="q-title" id="title-C1" tabindex="-1">Explain how do deforestation, infrastructure development, and agriculture affect hotspots?  (8 marks)</h3>
-  <div class="cue"><span class="label">Recall cue</span><p>Hotspot = unique species + threat; these activities remove, split and degrade habitat.</p></div>
+  <details class="cue"><summary>Show recall cue</summary><p>Hotspot = unique species + threat; these activities remove, split and degrade habitat.</p></details>
   <div class="skeleton"><span class="label">Answer skeleton</span><ol><li>Hotspots contain many endemic species and have lost at least 70% of original vegetation, so further disturbance is serious.</li>
 <li>Deforestation removes habitat, isolates patches, reduces breeding and gene flow, increases erosion and can increase human–wildlife conflict.</li>
 <li>Infrastructure fragments habitat: roads create barriers and mortality, dams alter flow and fish movement, and construction adds noise, light, pollution and human activity.</li>
@@ -738,7 +742,7 @@
     </div>
   </div>
   <h3 class="q-title" id="title-C2" tabindex="-1">Analyze the relationship between fossil-fuel consumption and global climate change.  (7 marks)</h3>
-  <div class="cue"><span class="label">Recall cue</span><p>Coal, oil and gas → CO₂ and other GHGs → enhanced greenhouse effect → climate impacts.</p></div>
+  <details class="cue"><summary>Show recall cue</summary><p>Coal, oil and gas → CO₂ and other GHGs → enhanced greenhouse effect → climate impacts.</p></details>
   <div class="skeleton"><span class="label">Answer skeleton</span><ol><li>Coal, petroleum and natural gas generate electricity, run vehicles, power industry and heat buildings; combustion releases CO₂ and extraction can release methane.</li>
 <li>The natural greenhouse effect keeps Earth warm; human emissions raise greenhouse-gas concentrations so more heat is retained.</li>
 <li>The IPCC concludes that human activities, principally greenhouse-gas emissions, have unequivocally caused global warming.</li>
@@ -771,7 +775,7 @@
     </div>
   </div>
   <h3 class="q-title" id="title-C3" tabindex="-1">Explain the environmental linkages of climate variability, soil degradation, and water stress with food security in India.  (8 marks)</h3>
-  <div class="cue"><span class="label">Recall cue</span><p>Climate shocks + degraded soil + inadequate water → lower/unstable production → food access and nutrition.</p></div>
+  <details class="cue"><summary>Show recall cue</summary><p>Climate shocks + degraded soil + inadequate water → lower/unstable production → food access and nutrition.</p></details>
   <div class="skeleton"><span class="label">Answer skeleton</span><ol><li>Food security means reliable access to sufficient, safe and nutritious food; climate variability, soil degradation and water stress interact to weaken it.</li>
 <li>Climate variability: irregular monsoon rain, heatwaves, droughts, floods and unseasonal rain damage crops, livestock, fisheries, roads, storage and supply chains.</li>
 <li>Soil degradation: erosion removes topsoil, lost organic matter weakens structure and water-holding capacity, and salinity, waterlogging and contamination reduce productivity.</li>
@@ -804,7 +808,7 @@
     </div>
   </div>
   <h3 class="q-title" id="title-C4" tabindex="-1">Analyze the pressure on India's biodiversity hotspots and freshwater ecosystems, and suggest measures for their conservation.  (7 marks)</h3>
-  <div class="cue"><span class="label">Recall cue</span><p>Name four hotspots → pressures → freshwater pressures → conservation.</p></div>
+  <details class="cue"><summary>Show recall cue</summary><p>Name four hotspots → pressures → freshwater pressures → conservation.</p></details>
   <div class="skeleton"><span class="label">Answer skeleton</span><ol><li>India contains four globally recognised hotspots: the Himalaya, Indo-Burma, Western Ghats and Sri Lanka, and Sundaland (including the Nicobar Islands), all with high endemism.</li>
 <li>Hotspot pressures include deforestation, fragmentation, roads, mining, dams, urbanisation, agricultural expansion, fires, invasive species, pollution and climate change.</li>
 <li>Freshwater pressures include sewage, industrial effluent, farm runoff, plastic and solid waste, sand mining, overfishing, invasive species, water withdrawal, and dams that alter flow.</li>
@@ -837,7 +841,7 @@
     </div>
   </div>
   <h3 class="q-title" id="title-C5" tabindex="-1">Explain how the enhanced greenhouse effect occurs and discuss any three impacts of rising atmospheric CO₂.  (8 marks)</h3>
-  <div class="cue"><span class="label">Recall cue</span><p>Sun in → surface warms → infrared out → GHG absorption; more CO₂ = energy imbalance. Give 3 impacts.</p></div>
+  <details class="cue"><summary>Show recall cue</summary><p>Sun in → surface warms → infrared out → GHG absorption; more CO₂ = energy imbalance. Give 3 impacts.</p></details>
   <div class="skeleton"><span class="label">Answer skeleton</span><ol><li>Natural greenhouse effect: sunlight warms the surface, the surface emits infrared radiation, and greenhouse gases absorb and re-emit energy, keeping Earth warm enough for life.</li>
 <li>Enhanced effect: burning coal, oil and gas, cement production and deforestation add greenhouse gases, which absorb more outgoing infrared energy and disturb Earth’s energy balance.</li>
 <li>Impact 1: higher average temperatures and more severe heat extremes affect health, work and crops.</li>
@@ -872,7 +876,7 @@
     </div>
   </div>
   <h3 class="q-title" id="title-C6" tabindex="-1">Explain the importance of biodiversity and analyse the major causes and consequences of biodiversity loss.  (7 marks)</h3>
-  <div class="cue"><span class="label">Recall cue</span><p>Importance → five direct drivers → ecological/social consequences → conservation.</p></div>
+  <details class="cue"><summary>Show recall cue</summary><p>Importance → five direct drivers → ecological/social consequences → conservation.</p></details>
   <div class="skeleton"><span class="label">Answer skeleton</span><ol><li>Biodiversity is variety at genetic, species and ecosystem levels; it provides food, medicine, fibre, fuel, pollination, soil formation, water purification, climate regulation and cultural value.</li>
 <li>IPBES identifies five direct drivers: land- and sea-use change, direct exploitation, climate change, pollution, and invasive alien species.</li>
 <li>Consequences include species decline or extinction, lost genetic diversity, and loss of pollinators, pest control, water purification and soil protection.</li>
