@@ -1,0 +1,9 @@
+/* Kindle / old-WebKit safety net. Plain values only (no var(), grid, min(), max() or clamp()).
+   Loaded before each page's own styles, so modern browsers keep the page's own design.
+   Kept deliberately minimal so it cannot change how pages look in modern browsers. */
+html { -webkit-text-size-adjust: 100%; }
+body { background: #fff; color: #000; word-wrap: break-word; overflow-wrap: break-word; }
+main, header, footer, nav, section, article, aside, figure, details, summary { display: block; }
+img, svg, video, canvas, iframe { max-width: 100%; }
+table { max-width: 100%; }
+[hidden] { display: none !important; }
