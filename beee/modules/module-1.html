@@ -20,6 +20,7 @@
     --font-mono: "Courier New", Courier, monospace;
   }
   * { box-sizing: border-box; }
+  sub, sup { font-size: 0.75em; line-height: 0; }
   @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
   body {
     font-family: var(--font-sans);
@@ -32,80 +33,318 @@
     font-weight: 500;
     text-wrap: pretty;
   }
-  .wrap { max-width: 64ch; margin: 0 auto; padding: 2.5rem 1rem 4rem; }
-  header { border-bottom: 2px solid var(--ink); margin-bottom: 2.5rem; padding-bottom: 1rem; }
-  h1 { font-family: var(--font-serif); font-size: 2.25rem; font-weight: 700; line-height: 1.25; margin: 0 0 0.5rem; letter-spacing: -0.01em; }
-  .subtitle { color: var(--muted); font-size: 1rem; font-weight: 400; margin: 0; }
-  .meta { font-size: 0.85rem; line-height: 1.5; font-weight: 500; color: var(--muted); margin-top: 1rem; }
-  h2 { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; line-height: 1.3; margin: 3rem 0 1rem; border-bottom: 1px solid var(--line); padding-bottom: 0.4rem; }
+  .wrap {
+    max-width: 62ch;
+    margin: 0 auto;
+    padding: 2.5rem 1rem 4rem;
+  }
+  header {
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+  }
+  h1 {
+    font-family: var(--font-serif);
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0;
+  }
+  .meta {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    font-weight: 500;
+    color: var(--muted);
+    margin-top: 1rem;
+  }
+  h2 {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 3rem 0 1rem;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.4rem;
+  }
   h2 > a { text-decoration: none; color: inherit; }
   h1, h2, h3, h4 { text-wrap: balance; }
-  h3 { font-size: 1.15rem; font-weight: 600; line-height: 1.3; margin: 2rem 0 0.5rem; }
-  h4 { font-size: 1rem; font-weight: 600; line-height: 1.3; margin: 1.5rem 0 0.5rem; }
-  p { margin: 0 0 1rem; line-height: 1.6; }
+  h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 2rem 0 0.5rem;
+  }
+  h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 1.5rem 0 0.5rem;
+  }
+  p {
+    margin: 0 0 1rem;
+    line-height: 1.6;
+  }
+  .wrap > div, .wrap > main > div { line-height: 1.6; }
   ul, ol, blockquote, pre, figure { line-height: 1.6; }
   td { line-height: 1.5; }
-  .v { font-family: var(--font-serif); font-style: italic; }
-  .theory { border-left: 3px solid var(--ink); padding: 1rem 1.25rem; margin: 1.75rem 0; font-size: 0.98rem; }
+  strong, em, span, b, i { line-height: 1.6; }
+  .theory {
+    border-left: 3px solid var(--ink);
+    padding: 1rem 1.25rem;
+    margin: 1.75rem 0;
+    font-size: 0.98rem;
+  }
   .theory p:first-child { margin-top: 0; }
   .theory p:last-child { margin-bottom: 0; }
-  .quote { border-left: 3px solid var(--accent); background: var(--surface); padding: 0.9rem 1.15rem; margin: 1.25rem 0; }
-  .quote p { font-family: var(--font-serif); font-size: 1.02rem; font-style: italic; margin: 0 0 0.5rem; }
-  .quote p:last-child { margin-bottom: 0; }
-  .attrib { display: block; font-family: var(--font-sans); font-style: normal; font-size: 0.78rem; line-height: 1.45; font-weight: 600; color: var(--muted); margin-top: 0.55rem; }
-  .source { display: block; font-size: 0.78rem; line-height: 1.4; font-weight: 600; color: var(--muted); letter-spacing: 0.04em; margin-bottom: 0.5rem; }
-  .eq { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 600; text-align: center; margin: 1.25rem 0; padding: 0.75rem 1rem; background: var(--surface-eq); border: 1px solid var(--line); color: var(--ink); overflow-x: auto; }
-  .eq-note { font-size: 0.85rem; line-height: 1.4; color: var(--muted); text-align: center; margin-top: -0.75rem; margin-bottom: 1.5rem; }
-  .example { border: 1px solid var(--line); padding: 1rem 1.25rem; margin: 1.5rem 0; font-size: 0.95rem; background: var(--surface); }
-  .example-title { font-weight: 700; line-height: 1.3; margin-bottom: 0.6rem; font-size: 0.8rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+  .source {
+    display: block;
+    font-size: 0.78rem;
+    line-height: 1.4;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+  }
+  .eq {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 1.25rem 0;
+    padding: 0.75rem 1rem;
+    background: var(--surface-eq);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .eq-note {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--muted);
+    text-align: center;
+    margin-top: -0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .example {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+    font-size: 0.95rem;
+    background: var(--surface);
+  }
+  .example-title {
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0;
+    color: var(--muted);
+  }
   .example .eq { margin: 0.75rem 0; background: var(--bg); border: 1px solid var(--line); }
-  .example p { margin-bottom: 0.65rem; }
-  .steps { list-style: none; padding: 0; margin: 1.5rem 0; border: 1px solid var(--line); background: var(--surface); padding: 1rem 1.25rem; }
-  .steps li { margin-bottom: 0.75rem; font-size: 0.95rem; padding-left: 1.5rem; position: relative; }
-  .steps li::before { content: ""; position: absolute; left: 0; top: 0.35rem; width: 0.6rem; height: 0.6rem; background: var(--ink); border-radius: 50%; }
+  .qa-question, .qa-solution, .qa-final { margin: 0.9rem 0; padding: 0.75rem 1rem; }
+  .qa-question { border-left: 4px solid var(--ink); background: var(--bg); }
+  .qa-solution { border-left: 4px solid var(--line); }
+  .qa-final { border: 2px solid var(--accent); background: var(--accent-soft); }
+  .qa-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+  .qa-final .qa-label { color: var(--accent); }
+  .qa-question > :last-child, .qa-solution > :last-child, .qa-final > :last-child { margin-bottom: 0; }
+  .qa-question > p:first-of-type, .qa-final > p:first-of-type { margin-top: 0; }
+  .qa-final .eq { margin: 0.25rem 0 0; background: transparent; border: 0; padding: 0; text-align: left; }
+  .qa-final-list { margin: 0; padding-left: 1.25rem; }
+  .qa-final-text { margin: 0; font-weight: 600; }
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    padding: 1rem 1.25rem;
+  }
+  .steps li {
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+  .steps li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.1rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    background: var(--ink);
+    border-radius: 50%;
+  }
   .steps li:last-child { margin-bottom: 0; }
-  table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.92rem; }
-  th, td { border: 1px solid var(--line); padding: 0.625rem 0.875rem; text-align: left; vertical-align: top; }
-  th { background: var(--surface-hi); font-weight: 700; font-size: 0.82rem; line-height: 1.4; letter-spacing: 0.04em; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.75rem 0;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 0.625rem 0.875rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--surface-hi);
+    font-weight: 700;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+  }
   tr:nth-child(even) td { background: var(--surface-alt); }
-  .kbd { font-family: var(--font-mono); font-size: 0.875rem; line-height: 1.4; background: var(--surface-hi); border: 1px solid var(--line); border-radius: 3px; padding: 0.1rem 0.4rem; }
-  .toc { border: 1px solid var(--line); padding: 1rem 1.25rem; margin: 2rem 0; background: var(--surface); }
+  .kbd {
+    display: inline-block;
+    max-width: 100%;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    white-space: nowrap;
+    word-break: normal;
+    overflow-wrap: normal;
+    overflow-x: auto;
+    vertical-align: baseline;
+    background: var(--surface-hi);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 0.1rem 0.4rem;
+  }
+  .toc {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 2rem 0;
+    background: var(--surface);
+  }
   .toc ol { margin: 0; padding-left: 1.25rem; }
   .toc li { margin-bottom: 0.35rem; font-size: 0.95rem; }
   .toc a { color: var(--ink); text-decoration: none; }
   .toc a:hover { text-decoration: underline; }
-  .nav { margin: 1.5rem 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .nav a { padding: 0.25rem 0.6rem; border: 1px solid var(--line); text-decoration: none; color: var(--ink); font-size: 0.85rem; border-radius: 3px; }
+  .nav {
+    margin: 1.5rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .nav a {
+    padding: 0.25rem 0.6rem;
+    border: 1px solid var(--line);
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.85rem;
+    border-radius: 3px;
+  }
   .nav a:hover { background: var(--surface-hi); }
-  .practice, .answer-key, .common-mistakes, .revision-sheet, .references, .exam-q, .callout { border: 1px solid var(--line); padding: 1rem 1.25rem; margin: 1.5rem 0; background: var(--surface); }
-  .practice > h3:first-of-type, .answer-key > h3:first-of-type, .common-mistakes > h3:first-of-type, .revision-sheet > h3:first-of-type, .references > h3:first-of-type { margin-top: 0; }
-  .self-learning { border-left: 3px solid var(--muted); padding: 1rem 1.25rem; margin: 1.75rem 0; font-size: 0.95rem; color: var(--muted); }
+  .practice {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: var(--surface);
+  }
+  .practice > h3:first-of-type { margin-top: 0; }
+  .answer-key {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: var(--surface);
+  }
+  .answer-key > h3:first-of-type { margin-top: 0; }
+  .common-mistakes {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: var(--surface);
+  }
+  .common-mistakes > h3:first-of-type { margin-top: 0; }
+  .self-learning {
+    border-left: 3px solid var(--muted);
+    padding: 1rem 1.25rem;
+    margin: 1.75rem 0;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
   .self-learning p { margin-bottom: 0.75rem; }
-  .warning { color: var(--danger); font-weight: 700; }
-  .mu-badge { display: inline-block; background: var(--accent-soft); border: 1px solid var(--accent); color: var(--accent); font-size: 0.75rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 3px; letter-spacing: 0.04em; margin-left: 0.5rem; }
-  .tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid var(--line); padding: 0.12rem 0.4rem; margin-right: 0.3rem; color: var(--muted); vertical-align: 0.1em; }
-  .tag.q { border-color: var(--accent); color: var(--accent); }
-  .tag.c { border-color: var(--ink); color: var(--ink); }
-  .exam-q { border: 1px solid var(--line); padding: 1rem 1.25rem; margin: 1.25rem 0; background: var(--surface); }
-  .exam-q-title { font-weight: 700; line-height: 1.3; margin-bottom: 0.5rem; font-size: 0.9rem; letter-spacing: 0; color: var(--muted); }
-  .exam-source { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom: 0.5rem; }
-  figure { margin: 1.5rem 0; }
-  svg { width: 100%; max-width: 100%; height: auto; display: block; margin: 0 auto; padding: 0.5rem; background: var(--bg); border: 1px solid var(--line); }
-  svg text { paint-order: stroke; stroke: var(--bg); stroke-width: 2.5px; stroke-linejoin: round; }
-  .figcap { font-size: 0.8rem; line-height: 1.45; color: var(--muted); text-align: center; margin: 0.45rem 0 0; }
-  .two { display: grid; grid-template-columns: 1fr; gap: 1rem; }
-  @media (min-width: 640px) { .two { grid-template-columns: 1fr 1fr; } }
-  .given-grid { display: grid; grid-template-columns: 1fr; gap: 0.25rem 1rem; margin: 0.75rem 0; font-size: 0.93rem; }
-  @media (min-width: 560px) { .given-grid { grid-template-columns: 8.5rem 1fr; } }
-  .given-grid dt { font-weight: 700; }
-  .given-grid dd { margin: 0; }
-  .method-note { border: 1px dashed var(--line); padding: 0.75rem 1rem; margin: 1rem 0; font-size: 0.95rem; }
-  .small { font-size: 0.88rem; color: var(--muted); }
-  footer { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; line-height: 1.5; text-align: center; }
+  .revision-sheet {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: var(--surface);
+  }
+  .revision-sheet > h3:first-of-type { margin-top: 0; }
+  .warning {
+    color: var(--danger);
+    font-weight: 700;
+  }
+  .mu-badge {
+    display: inline-block;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+    margin-left: 0.5rem;
+  }
+  .exam-q {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+    background: var(--surface);
+  }
+  .exam-q-title {
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    letter-spacing: 0;
+    color: var(--muted);
+  }
+  .exam-source {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  svg { width: 100%; max-width: 440px; height: auto; display: block; margin: 1rem auto; padding: 0.5rem; background: var(--bg); border: 1px solid var(--line); }
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+  .references {
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    margin: 2rem 0;
+    background: var(--surface);
+  }
+  .references > h3:first-of-type { margin-top: 0; }
   .references p { margin: 0.5rem 0; }
   .references ul { margin: 0.5rem 0; padding-left: 1.5rem; }
   ::selection { background: var(--ink); color: var(--bg); }
   :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  @media (max-width: 600px) {
+    .wrap { padding: 1.5rem 1rem 3rem; }
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.4rem; }
+    .eq { font-size: 1.15rem; }
+  }
   @media (max-width: 600px) {
     body { font-size: 16px; }
     .wrap { padding: 1rem 0.75rem 3rem; }
@@ -113,11 +352,11 @@
     h2 { font-size: 1.3rem; margin-top: 2.25rem; }
     table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; font-size: 0.85rem; }
     th, td { padding: 0.45rem 0.55rem; }
-    .theory, .example, .practice, .answer-key, .common-mistakes, .revision-sheet, .references, .exam-q, .steps, .toc, .self-learning, .quote, .callout { padding: 0.75rem; }
+    .theory, .example, .practice, .answer-key, .common-mistakes, .revision-sheet, .references, .exam-q, .steps, .toc, .self-learning { padding: 0.75rem; }
     .eq { font-size: 1rem; padding: 0.6rem 0.5rem; text-align: left; }
-    .kbd { word-break: break-word; }
+    /* Keep mathematical tokens intact on narrow screens; long chips scroll horizontally. */
     .nav a { padding: 0.4rem 0.7rem; }
-    svg { padding: 0.25rem; }
+    svg { max-width: 100%; padding: 0.25rem; }
   }
   @media print {
     body { font-size: 12pt; line-height: 1.4; color: #000; background: #fff; }
@@ -126,7 +365,11 @@
     h2 { margin: 2rem 0 0.75rem; border-bottom: 1px solid #000; padding-bottom: 0.3rem; }
     h3 { margin: 1.5rem 0 0.4rem; }
     .toc, .nav { display: none; }
-    .example, .practice, .answer-key, .revision-sheet, .steps, .theory, .common-mistakes, .references, .exam-q, .quote, .callout { border: 1px solid #999; background: #fff !important; page-break-inside: avoid; }
+    .example, .practice, .answer-key, .revision-sheet, .steps, .theory, .common-mistakes, .references, .exam-q {
+      border: 1px solid #999;
+      background: #fff !important;
+      page-break-inside: avoid;
+    }
     .eq { background: #fff; border: 1px solid #999; page-break-inside: avoid; }
     .eq-note { display: none; }
     a { text-decoration: none; color: #000; }
@@ -138,21 +381,13 @@
 <style id="theme">
   :root { color-scheme: light; --ink:#0a0a0a;--muted:#444444;--bg:#ffffff;--line:#cccccc;--rule:#999999;--accent:#1d4ed8;--accent-soft:#eef2ff;--danger:#b00020;--surface:#fafafa;--surface-alt:#f9f9f9;--surface-eq:#f5f5f5;--surface-hi:#f0f0f0; }
   :root[data-theme="dark"] { color-scheme: dark; --ink:#ececec;--muted:#a8a8ad;--bg:#0f0f11;--line:#34343a;--rule:#5a5a62;--accent:#8ab0ff;--accent-soft:#1b2540;--danger:#ff7b8f;--surface:#17171a;--surface-alt:#1b1b1f;--surface-eq:#1e1e23;--surface-hi:#26262c; }
+  :root[data-theme="dark"] svg circle[fill-opacity] { fill-opacity: .3; }
   :root[data-theme="dark"] svg text[fill="var(--muted)"] { fill: var(--ink); }
   .topbar { display:flex; align-items:center; justify-content:space-between; gap:.5rem; margin:0 0 1rem; }
   .topbar .back { display:inline-flex; align-items:center; min-height:44px; font-size:.85rem; font-weight:600; color:var(--ink); }
   .theme-toggle { font:inherit; font-size:.85rem; font-weight:600; color:var(--ink); background:var(--bg); border:1px solid var(--ink); border-radius:0; padding:.4rem .8rem; min-height:44px; min-width:44px; cursor:pointer; margin-left:auto; }
   .theme-toggle:hover { background:var(--surface-hi); }
-  .theme-toggle/* minimal flair: subtle transitions for polish */
-a, .card, .exam-q, .quote, .theory, .example, .practice, .answer-key, .common-mistakes, .revision-sheet, .references, .callout, .nav, .small, .warning, .mu-badge {
-  transition: color .15s ease, background-color .15s ease, border-color .15s ease;
-}
-a:hover, a:focus-visible {
-  background-color: var(--surface-hi);
-}
-.card:hover, .exam-q:hover {
-  border-color: var(--accent);
-}
+  .theme-toggle:focus-visible { outline:2px solid var(--ink); outline-offset:2px; }
   @media print {
     :root, :root[data-theme="dark"], :root:not([data-theme="light"]) { color-scheme: light; --ink:#0a0a0a;--muted:#444444;--bg:#ffffff;--line:#cccccc;--rule:#999999;--accent:#1d4ed8;--accent-soft:#eef2ff;--danger:#b00020;--surface:#fafafa;--surface-alt:#f9f9f9;--surface-eq:#f5f5f5;--surface-hi:#f0f0f0; }
     .topbar { display:none; }
@@ -203,6 +438,16 @@ a:hover, a:focus-visible {
   .rail a.is-done .node { background:var(--muted); border-color:var(--muted); }
   .rail .num { font:600 .62rem/1 var(--font-mono); letter-spacing:.04em; font-variant-numeric:tabular-nums; }
   .rail .lbl { display:none; font-size:.74rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:14rem; }
+  .rail-sublist { list-style:none; margin:0 0 .3rem 1.65rem; padding:0 0 0 .55rem; border-left:1px solid var(--line); }
+  .rail-sublist a { grid-template-columns:1rem minmax(0,1fr); column-gap:.3rem; height:1.2rem; padding-left:.1rem; }
+  .rail-sublist .sub-lbl { display:block; font-size:.68rem; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .rail-sublist .sub-num { font:600 .62rem/1 var(--font-mono); color:var(--accent); }
+  .rail-sublist a[aria-current="location"] { color:var(--accent); font-weight:700; }
+  .rail.is-collapsed .rail-sublist { display:none; }
+  .rm-sublist { margin:0 0 .35rem 2.65rem !important; padding:.15rem 0 .25rem .65rem !important; border-left:1px solid var(--line); }
+  .rm-sublist a { grid-template-columns:1.1rem minmax(0,1fr); min-height:34px; padding:.25rem .5rem; border-left:0; font-size:.84rem; }
+  .rm-sublist a[aria-current="location"] { color:var(--accent); background:var(--accent-soft); }
+
   .rail a:hover { color:var(--ink); }
   .rail a:hover .node { border-color:var(--ink); }
   .rail a[aria-current="true"] { color:var(--ink); }
@@ -227,7 +472,114 @@ a:hover, a:focus-visible {
   @media (prefers-reduced-motion:reduce) {
     .rm-sheet, .rm-back, .rm-tab span, .rail-in { transition:none; }
   }
+  /* Show children only for the section currently being read. */
+  .rail-list > li > .rail-sublist { display:none; }
+  .rail-list > li > a[aria-current="true"] ~ .rail-sublist { display:block; }
+  .rail.is-collapsed .rail-list > li > .rail-sublist { display:none; }
+  .rm-sheet > ol > li > .rm-sublist { display:none; }
+  .rm-sheet > ol > li > a[aria-current="true"] ~ .rm-sublist { display:block; }
   @media print { .rail, .rm-bar, .rm-tab, .rm-back, .rm-sheet { display:none !important; } }
+
+</style>
+<style id="beee-extension">
+/* ======================================================================
+   BEEE Module 1 extension
+   The shared design system above is copied unchanged from DSGT Module 4.
+   Everything below is specific to this page: circuit diagrams, the source
+   quotation style, provenance tags, and the Study Mode / recall controls.
+   ====================================================================== */
+
+/* Circuit diagrams. The labels inside these SVGs are small, so they keep the
+   full measure instead of the 440px cap DSGT uses for its own diagrams. */
+figure { margin: 1.5rem 0; }
+figure svg { max-width: 100%; }
+svg text { paint-order: stroke; stroke: var(--bg); stroke-width: 2.5px; stroke-linejoin: round; }
+.figcap { font-size: 0.8rem; line-height: 1.45; color: var(--muted); text-align: center; margin: 0.45rem 0 0; }
+
+/* Symbol variables (I, V, R, ...) are set in italic serif throughout. */
+.v { font-family: var(--font-serif); font-style: italic; }
+
+/* Short attributed quotations from OpenStax and Kuphaldt. */
+.quote { border-left: 3px solid var(--accent); background: var(--surface); padding: 0.9rem 1.15rem; margin: 1.25rem 0; }
+.quote p { font-family: var(--font-serif); font-size: 1.02rem; font-style: italic; margin: 0 0 0.5rem; }
+.quote p:last-child { margin-bottom: 0; }
+.attrib { display: block; font-family: var(--font-sans); font-style: normal; font-size: 0.78rem; line-height: 1.45; font-weight: 600; color: var(--muted); margin-top: 0.55rem; }
+
+/* Provenance tags and the note box that explains them. */
+.tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid var(--line); padding: 0.12rem 0.4rem; margin-right: 0.3rem; color: var(--muted); vertical-align: 0.1em; }
+.tag.q { border-color: var(--accent); color: var(--accent); }
+.tag.c { border-color: var(--ink); color: var(--ink); }
+.callout { border: 1px solid var(--line); padding: 1rem 1.25rem; margin: 1.5rem 0; background: var(--surface); }
+
+/* Compact asides used by the circuit content. */
+.method-note { border: 1px dashed var(--line); padding: 0.75rem 1rem; margin: 1rem 0; font-size: 0.95rem; }
+.small { font-size: 0.88rem; color: var(--muted); }
+
+/* ----------------------------------------------------------------------
+   Study Mode
+   ---------------------------------------------------------------------- */
+.study-toggle { font: inherit; font-size: 0.85rem; font-weight: 600; color: var(--ink); background: var(--bg); border: 1px solid var(--line); padding: 0.4rem 0.8rem; min-height: 44px; cursor: pointer; margin-left: auto; }
+.study-toggle:hover { background: var(--surface-hi); border-color: var(--ink); }
+.topbar .theme-toggle { margin-left: 0.5rem; }
+
+.study-bar { display: none; }
+body.study-mode .study-bar { display: block; position: sticky; top: 0; z-index: 25; margin: 0 0 1.75rem; padding: 0.65rem 0.8rem 0.7rem; background: var(--bg); border: 1px solid var(--line); border-top: 3px solid var(--accent); }
+.study-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+.study-kicker { font: 700 0.66rem/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.study-pos { font: 600 0.72rem/1 var(--font-mono); color: var(--accent); font-variant-numeric: tabular-nums; }
+.study-title { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 700; line-height: 1.3; margin: 0.4rem 0 0; }
+.study-btns { display: flex; gap: 0.4rem; margin-left: auto; }
+.study-btns button, .qa-reveal, .recall-btn { font: inherit; font-size: 0.82rem; font-weight: 600; min-height: 40px; padding: 0.3rem 0.65rem; color: var(--ink); background: var(--bg); border: 1px solid var(--ink); border-radius: 0; cursor: pointer; }
+.study-btns button:hover:not(:disabled), .qa-reveal:hover, .recall-btn:hover { background: var(--surface-hi); }
+.study-btns button:disabled { opacity: 0.38; cursor: default; }
+.study-btns button:focus-visible, .qa-reveal:focus-visible, .recall-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.study-prog { height: 3px; margin-top: 0.6rem; background: var(--line); }
+.study-prog span { display: block; width: 0; height: 100%; background: var(--accent); transition: width 0.2s; }
+
+body.study-mode .toc, body.study-mode .nav, body.study-mode .rail,
+body.study-mode .rm-bar, body.study-mode .rm-tab, body.study-mode .rm-back,
+body.study-mode .rm-sheet { display: none !important; }
+body.study-mode .study-off { display: none !important; }
+
+/* Progressive solutions: closed until the student asks for them. */
+.qa-reveal { display: none; margin: 0.7rem 0 0.2rem; }
+body.study-mode .qa-reveal { display: inline-block; }
+body.study-mode .qa:not(.is-open) > .qa-solution,
+body.study-mode .qa:not(.is-open) > .qa-final { display: none; }
+
+/* Goal / Recognise card and recall checkpoints. */
+.study-card { border: 1px solid var(--line); border-left: 3px solid var(--accent); background: var(--surface); padding: 0.8rem 1rem; margin: 1.25rem 0; font-size: 0.95rem; }
+.study-card dl { display: grid; grid-template-columns: 1fr; gap: 0.35rem 0.9rem; margin: 0; }
+@media (min-width: 560px) { .study-card dl { grid-template-columns: 6.5rem 1fr; } }
+.study-card dt { font: 700 0.68rem/1.6 var(--font-mono); letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); }
+.study-card dd { margin: 0; line-height: 1.55; }
+
+.recall { border: 1px dashed var(--rule); padding: 0.8rem 1rem; margin: 1.5rem 0; }
+.recall-label { font: 700 0.68rem/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin: 0 0 0.45rem; }
+.recall-q { margin: 0 0 0.6rem; font-weight: 600; }
+.recall-a { margin: 0.65rem 0 0; padding-top: 0.6rem; border-top: 1px solid var(--line); }
+
+/* Mobile and print additions for the page-specific blocks. */
+@media (max-width: 600px) {
+  .quote, .callout, .study-card, .recall { padding: 0.75rem; }
+  .study-btns { width: 100%; margin-left: 0; }
+  .study-btns button { flex: 1 1 auto; }
+}
+@media print {
+  .study-bar, .qa-reveal, .study-toggle { display: none !important; }
+  body.study-mode .qa:not(.is-open) > .qa-solution,
+  body.study-mode .qa:not(.is-open) > .qa-final { display: block !important; }
+  .recall-a[hidden] { display: block !important; }
+  .quote, .callout, .study-card, .recall { border: 1px solid #999; background: #fff !important; page-break-inside: avoid; }
+  figure { page-break-inside: avoid; }
+}
+
+/* Study Mode shows one section at a time and leaves the full guide intact. */
+body.study-mode main > * { display: none !important; }
+body.study-mode main > .study-bar,
+body.study-mode main > .is-current-unit { display: block !important; }
+body.study-mode .qa-reveal { margin-top: 0.85rem; }
+.recall-btn { margin-top: 0.15rem; }
 </style>
 <link rel="stylesheet" href="/assets/a11y.css">
 <style id="beee-scroll">
@@ -244,7 +596,7 @@ a:hover, a:focus-visible {
 <a class="skip-link" href="#main">Skip to content</a>
 
 <div class="wrap">
-  <nav class="topbar" aria-label="Site"><a class="back" href="/beee">← All modules</a><button class="theme-toggle" type="button" id="themeToggle" hidden></button></nav>
+  <nav class="topbar" aria-label="Site"><a class="back" href="/beee">← All modules</a><button class="study-toggle" type="button" id="studyToggle" aria-pressed="false" hidden>Study mode</button><button class="theme-toggle" type="button" id="themeToggle" hidden></button></nav>
 
   <header>
     <h1>BEEE Module 1 — DC Circuits</h1>
@@ -253,6 +605,19 @@ a:hover, a:focus-visible {
   </header>
 
   <main id="main" tabindex="-1">
+  <div class="study-bar" id="studyBar" role="region" aria-label="Study mode">
+    <div class="study-row">
+      <span class="study-kicker">Study mode</span>
+      <span class="study-pos" id="studyPos">Section 1</span>
+      <div class="study-btns">
+        <button type="button" id="studyPrev" aria-label="Previous section">&#8592; Previous</button>
+        <button type="button" id="studyNext" aria-label="Next section">Next &#8594;</button>
+        <button type="button" id="studyExit">Exit study mode</button>
+      </div>
+    </div>
+    <p class="study-title" id="studyTitle"></p>
+    <div class="study-prog" aria-hidden="true"><span id="studyProg"></span></div>
+  </div>
 
   <div class="callout">
     <p><strong>How this guide labels evidence.</strong> This page separates four kinds of material so you always know what you are reading:</p>
@@ -263,6 +628,7 @@ a:hover, a:focus-visible {
       <li><span class="tag">Guide</span> <strong>Guide explanation and worked solutions</strong> — written for this page. They are not presented as quotations or as official university solutions.</li>
     </ul>
     <p class="small">No Unit 1 slide deck was supplied. The course-specific primary material is the two assignments, the practice question bank and the June 2025 paper. Where a scanned diagram is ambiguous, the assumption used is printed with the answer rather than hidden.</p>
+    <p class="small"><strong>Optional Study Mode.</strong> The button at the top of the page shows one section at a time, with worked solutions hidden until you ask for them. The full guide is always available, and Study Mode remembers your last section on this device.</p>
   </div>
 
   <h2 id="syllabus">Syllabus — what is examinable</h2>
@@ -389,10 +755,14 @@ a:hover, a:focus-visible {
     <p class="figcap">Figure 1. The 3 Ω and 6 Ω resistors are in parallel because they share nodes A and the bottom rail. Their equivalent is in series with the 6 Ω resistor and the 12 V source.</p>
   </figure>
 
-  <div class="example">
+  <div class="example qa" id="qa-1">
     <div class="example-title">Worked example — reduce, then work backwards</div>
+    <button class="qa-reveal" type="button" aria-expanded="false" aria-controls="qa-1-sol qa-1-fin">Show solution</button>
+    <div class="qa-question" id="qa-1-q"><div class="qa-label">Question</div>
     <p><strong>Given.</strong> A 12 V ideal source feeds 6 Ω in series with the parallel combination of 3 Ω and 6 Ω (Figure 1).</p>
     <p><strong>Required.</strong> Total current, the voltage at A, and the current in each parallel branch.</p>
+    </div>
+    <div class="qa-solution" id="qa-1-sol"><div class="qa-label">Solution</div>
     <p><strong>Step 1 — parallel pair.</strong></p>
     <div class="eq"><span class="v">R</span><sub>p</sub> = (3 × 6)/(3 + 6) = 18/9 = 2 Ω</div>
     <p><strong>Step 2 — total resistance.</strong></p>
@@ -403,6 +773,9 @@ a:hover, a:focus-visible {
     <p><strong>Step 5 — branch currents.</strong></p>
     <div class="eq"><span class="v">I</span><sub>3Ω</sub> = 3/3 = 1 A &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">I</span><sub>6Ω</sub> = 3/6 = 0.5 A</div>
     <p><strong>Check.</strong> 1 + 0.5 = 1.5 A, which is the source current. Power: source supplies 12 × 1.5 = 18 W; resistors dissipate 1.5²×6 + 1²×3 + 0.5²×6 = 13.5 + 3 + 1.5 = 18 W. Balances.</p>
+    </div>
+    <div class="qa-final" id="qa-1-fin"><div class="qa-label">Final answer</div><p class="qa-final-text"><span class="v">I</span> = 1.5 A; <span class="v">V</span><sub>A</sub> = 3 V; <span class="v">I</span><sub>3Ω</sub> = 1 A; <span class="v">I</span><sub>6Ω</sub> = 0.5 A.</p>
+  </div>
   </div>
 
   <h3>5 · Power and energy</h3>
@@ -540,14 +913,21 @@ a:hover, a:focus-visible {
     <p class="figcap">Figure 2. The four source models. A practical voltage source is an ideal emf ε in series with r; a practical current source is an ideal current source in parallel with r. The two practical models can be made exactly equivalent by source transformation.</p>
   </figure>
 
-  <div class="example">
+  <div class="example qa" id="qa-2">
     <div class="example-title">Worked example — terminal voltage of a real battery</div>
+    <button class="qa-reveal" type="button" aria-expanded="false" aria-controls="qa-2-sol qa-2-fin">Show solution</button>
+    <div class="qa-question" id="qa-2-q"><div class="qa-label">Question</div>
     <p><strong>Given.</strong> ε = 12 V, internal resistance <span class="v">r</span> = 0.5 Ω, load current <span class="v">I</span> = 4 A.</p>
     <p><strong>Required.</strong> Terminal voltage and the power lost inside the battery.</p>
+    </div>
+    <div class="qa-solution" id="qa-2-sol"><div class="qa-label">Solution</div>
     <p><strong>Equation.</strong></p>
     <div class="eq"><span class="v">V</span><sub>terminal</sub> = ε − <span class="v">I r</span> = 12 − (4)(0.5)</div>
     <p><strong>Solve.</strong> <span class="v">V</span><sub>terminal</sub> = 12 − 2 = <strong>10 V</strong>. Internal loss = <span class="v">I</span>²<span class="v">r</span> = 16 × 0.5 = <strong>8 W</strong>.</p>
     <p><strong>Check.</strong> The load receives 10 × 4 = 40 W; the battery chemically supplies 40 + 8 = 48 W = 12 × 4. Balances.</p>
+    </div>
+    <div class="qa-final" id="qa-2-fin"><div class="qa-label">Final answer</div><p class="qa-final-text"><span class="v">V</span><sub>terminal</sub> = 10 V; power lost inside the battery = 8 W.</p>
+  </div>
   </div>
 
   <p><strong>When to use the practical model.</strong> Use it whenever a problem gives an internal resistance, asks for terminal voltage under load, or asks why a battery’s voltage falls when a heavy load is connected. Use the ideal model when no internal resistance is given and the source is drawn as an ideal symbol.</p>
@@ -604,10 +984,14 @@ a:hover, a:focus-visible {
     <p class="figcap">Figure 3. The voltage source and the current source are equivalent at terminals A–B. The arrow points from the − terminal to the + terminal inside the source, so the current leaves the + terminal into the external circuit.</p>
   </figure>
 
-  <div class="example">
+  <div class="example qa" id="qa-3">
     <div class="example-title">Worked example — transform, combine, then find the current</div>
+    <button class="qa-reveal" type="button" aria-expanded="false" aria-controls="qa-3-sol qa-3-fin">Show solution</button>
+    <div class="qa-question" id="qa-3-q"><div class="qa-label">Question</div>
     <p><strong>Given.</strong> An 18 V source in series with 6 Ω feeds a 3 Ω resistor connected across the output.</p>
     <p><strong>Required.</strong> The current in the 3 Ω resistor.</p>
+    </div>
+    <div class="qa-solution" id="qa-3-sol"><div class="qa-label">Solution</div>
     <p><strong>Step 1 — transform the source.</strong> 18 V in series with 6 Ω becomes 3 A in parallel with 6 Ω.</p>
     <p><strong>Step 2 — combine the parallel resistors.</strong> The 6 Ω and 3 Ω are now in parallel:</p>
     <div class="eq"><span class="v">R</span><sub>p</sub> = (6 × 3)/(6 + 3) = 2 Ω</div>
@@ -616,6 +1000,9 @@ a:hover, a:focus-visible {
     <p><strong>Step 4 — go back to the original branch.</strong> The 3 Ω resistor has 6 V across it:</p>
     <div class="eq"><span class="v">I</span><sub>3Ω</sub> = 6/3 = 2 A</div>
     <p><strong>Check.</strong> Original circuit: total resistance 6 + 3 = 9 Ω, source current 18/9 = 2 A; that current all passes through the 3 Ω resistor. Matches.</p>
+    </div>
+    <div class="qa-final" id="qa-3-fin"><div class="qa-label">Final answer</div><p class="qa-final-text"><span class="v">I</span><sub>3Ω</sub> = 2 A.</p>
+  </div>
   </div>
 
   <h3>Rules and limits</h3>
@@ -687,10 +1074,14 @@ a:hover, a:focus-visible {
     <p class="figcap">Figure 4. The two right-hand resistors are in parallel between node A and ground. KCL at A and KVL around the two meshes must give the same answer.</p>
   </figure>
 
-  <div class="example">
+  <div class="example qa" id="qa-4">
     <div class="example-title">Worked example — the same circuit by KCL and by KVL</div>
+    <button class="qa-reveal" type="button" aria-expanded="false" aria-controls="qa-4-sol qa-4-fin">Show solution</button>
+    <div class="qa-question" id="qa-4-q"><div class="qa-label">Question</div>
     <p><strong>Given.</strong> 10 V ideal source, 2 Ω series resistor, node A, then 2 Ω and 4 Ω in parallel to the bottom rail (Figure 4).</p>
     <p><strong>Required.</strong> <span class="v">V</span><sub>A</sub>, the current in each resistor, and a power check.</p>
+    </div>
+    <div class="qa-solution" id="qa-4-sol"><div class="qa-label">Solution</div>
     <p><strong>Assumed directions.</strong> Current leaves the + terminal of the 10 V source, flows right through the 2 Ω series resistor into A, then down through the 2 Ω and 4 Ω resistors.</p>
     <p><strong>KCL at A.</strong> Take the bottom rail as 0 V. Current entering A from the source is (10 − <span class="v">V</span><sub>A</sub>)/2. Currents leaving are <span class="v">V</span><sub>A</sub>/2 and <span class="v">V</span><sub>A</sub>/4.</p>
     <div class="eq">(10 − <span class="v">V</span><sub>A</sub>)/2 = <span class="v">V</span><sub>A</sub>/2 + <span class="v">V</span><sub>A</sub>/4</div>
@@ -701,6 +1092,9 @@ a:hover, a:focus-visible {
     <p><strong>KVL check, right mesh.</strong> +2(2) − 4(1) = 4 − 4 = 0. ✓</p>
     <p><strong>Power check.</strong> Source supplies 10 × 3 = 30 W. Resistors absorb 3²×2 + 2²×2 + 1²×4 = 18 + 8 + 4 = 30 W. ✓</p>
     <p><strong>Answer.</strong> <span class="v">V</span><sub>A</sub> = 4 V; 3 A from the source, 2 A down the 2 Ω branch, 1 A down the 4 Ω branch.</p>
+    </div>
+    <div class="qa-final" id="qa-4-fin"><div class="qa-label">Final answer</div><p class="qa-final-text"><span class="v">V</span><sub>A</sub> = 4 V; 3 A from the source, 2 A down the 2 Ω branch, 1 A down the 4 Ω branch.</p>
+  </div>
   </div>
 
   <h3>When a source fixes a quantity</h3>
@@ -730,6 +1124,17 @@ a:hover, a:focus-visible {
       <li>Dropping the units and adding volts to amperes.</li>
       <li>Reporting a negative answer as “wrong.” The negative sign is the direction.</li>
     </ul>
+  </div>
+
+  <div class="recall">
+    <p class="recall-label">Recall check</p>
+    <p class="recall-q">Without looking back: (1) state KCL at a node, (2) state KVL around a closed loop, and (3) say what a negative answer for a current means.</p>
+    <button class="recall-btn" type="button" aria-expanded="false" aria-controls="recall-1-a">Show answer</button>
+    <div class="recall-a" id="recall-1-a" hidden>
+      <p><strong>1.</strong> The algebraic sum of the currents leaving a node is zero: <span class="v">&#931;</span> <span class="v">I</span><sub>out</sub> = 0. Charge does not pile up at a node.</p>
+      <p><strong>2.</strong> The algebraic sum of the voltage rises and drops around any closed loop is zero: <span class="v">&#931;</span> <span class="v">V</span> = 0, with one consistent sign convention.</p>
+      <p><strong>3.</strong> The current flows opposite to the arrow you assumed. The magnitude is still correct; only the direction was wrong, so keep the minus sign in the working and state the direction in the answer.</p>
+    </div>
   </div>
 
   <h2 id="mesh">Mesh analysis</h2>
@@ -786,10 +1191,14 @@ a:hover, a:focus-visible {
     <p class="figcap">Figure 5. Mesh 1 is the left window, mesh 2 the right. The 4 Ω resistor is shared; the current downwards through it is <span class="v">I</span><sub>1</sub> − <span class="v">I</span><sub>2</sub>.</p>
   </figure>
 
-  <div class="example">
+  <div class="example qa" id="qa-5">
     <div class="example-title">Worked example — two meshes, two sources</div>
+    <button class="qa-reveal" type="button" aria-expanded="false" aria-controls="qa-5-sol qa-5-fin">Show solution</button>
+    <div class="qa-question" id="qa-5-q"><div class="qa-label">Question</div>
     <p><strong>Given.</strong> Left mesh: 12 V source, 2 Ω top resistor, 4 Ω shared resistor. Right mesh: 4 Ω shared, 2 Ω top resistor, 6 V source (Figure 5). Both mesh currents clockwise.</p>
     <p><strong>Required.</strong> <span class="v">I</span><sub>1</sub>, <span class="v">I</span><sub>2</sub> and the current through the 4 Ω resistor.</p>
+    </div>
+    <div class="qa-solution" id="qa-5-sol"><div class="qa-label">Solution</div>
     <p><strong>KVL, mesh 1 (clockwise).</strong> Rise 12 V, drop 2<span class="v">I</span><sub>1</sub>, drop 4(<span class="v">I</span><sub>1</sub> − <span class="v">I</span><sub>2</sub>):</p>
     <div class="eq">12 − 2<span class="v">I</span><sub>1</sub> − 4(<span class="v">I</span><sub>1</sub> − <span class="v">I</span><sub>2</sub>) = 0 &nbsp;→&nbsp; 3<span class="v">I</span><sub>1</sub> − 2<span class="v">I</span><sub>2</sub> = 6</div>
     <p><strong>KVL, mesh 2 (clockwise).</strong> Drop 4(<span class="v">I</span><sub>2</sub> − <span class="v">I</span><sub>1</sub>), drop 2<span class="v">I</span><sub>2</sub>, then the 6 V source is crossed from + to −, which is a drop:</p>
@@ -800,6 +1209,9 @@ a:hover, a:focus-visible {
     <p><strong>Shared branch.</strong> Downwards through the 4 Ω: <span class="v">I</span><sub>1</sub> − <span class="v">I</span><sub>2</sub> = 1.8 A.</p>
     <p><strong>Check.</strong> Voltage at the top of the shared resistor: 12 − 2(2.4) = 7.2 V; from the right, 6 + 2(0.6) = 7.2 V. The shared current is 7.2/4 = 1.8 A, which equals 2.4 − 0.6. ✓</p>
     <p><strong>Power check.</strong> 12 V source delivers 12 × 2.4 = 28.8 W. The 6 V source absorbs 6 × 0.6 = 3.6 W because current enters its + terminal. Resistors absorb 2(2.4²) + 4(1.8²) + 2(0.6²) = 11.52 + 12.96 + 0.72 = 25.2 W. 28.8 − 3.6 = 25.2. ✓</p>
+    </div>
+    <div class="qa-final" id="qa-5-fin"><div class="qa-label">Final answer</div><p class="qa-final-text"><span class="v">I</span><sub>1</sub> = 2.4 A; <span class="v">I</span><sub>2</sub> = 0.6 A; 1.8 A downward through the shared 4 Ω resistor.</p>
+  </div>
   </div>
 
   <h3>Exam procedure — mesh</h3>
@@ -876,10 +1288,14 @@ a:hover, a:focus-visible {
     <p class="figcap">Figure 6. Node A is the only unknown node. Both sources have one terminal at the reference, so each source fixes the voltage at its own end of the resistor.</p>
   </figure>
 
-  <div class="example">
+  <div class="example qa" id="qa-6">
     <div class="example-title">Worked example — one unknown node</div>
+    <button class="qa-reveal" type="button" aria-expanded="false" aria-controls="qa-6-sol qa-6-fin">Show solution</button>
+    <div class="qa-question" id="qa-6-q"><div class="qa-label">Question</div>
     <p><strong>Given.</strong> Node A is connected to a 12 V source through 6 Ω, to a 6 V source through 3 Ω, and to ground through 2 Ω (Figure 6).</p>
     <p><strong>Required.</strong> <span class="v">V</span><sub>A</sub> and the current in each branch.</p>
+    </div>
+    <div class="qa-solution" id="qa-6-sol"><div class="qa-label">Solution</div>
     <p><strong>Assumed directions.</strong> All branch currents leave A.</p>
     <p><strong>KCL at A.</strong></p>
     <div class="eq">(<span class="v">V</span><sub>A</sub> − 12)/6 + (<span class="v">V</span><sub>A</sub> − 6)/3 + <span class="v">V</span><sub>A</sub>/2 = 0</div>
@@ -889,6 +1305,9 @@ a:hover, a:focus-visible {
     <p><strong>Branch currents.</strong> 6 Ω branch: (4 − 12)/6 = −1.333 A, so 1.333 A flows <em>into</em> A. 3 Ω branch: (4 − 6)/3 = −0.667 A, so 0.667 A flows into A. 2 Ω branch: 4/2 = 2 A leaves A.</p>
     <p><strong>Check.</strong> 1.333 + 0.667 = 2 A into A; 2 A leaves. ✓</p>
     <p><strong>Power check.</strong> 12 V source delivers 12 × 1.333 = 16 W. 6 V source delivers 6 × 0.667 = 4 W. Resistors absorb 1.333²×6 + 0.667²×3 + 2²×2 = 10.667 + 1.333 + 8 = 20 W. ✓</p>
+    </div>
+    <div class="qa-final" id="qa-6-fin"><div class="qa-label">Final answer</div><p class="qa-final-text"><span class="v">V</span><sub>A</sub> = 4 V; 1.333 A into A through the 6 Ω branch, 0.667 A into A through the 3 Ω branch, 2 A out through the 2 Ω branch.</p>
+  </div>
   </div>
 
   <h3>Exam procedure — nodal</h3>
@@ -910,6 +1329,15 @@ a:hover, a:focus-visible {
       <li>Forgetting a branch, especially a current-source branch that does not look like a resistor.</li>
       <li>Mixing node voltages with branch voltages in the final answer. A branch voltage is a difference of two node voltages.</li>
     </ul>
+  </div>
+
+  <div class="recall">
+    <p class="recall-label">Recall check</p>
+    <p class="recall-q">A network has two windows and three essential nodes. Which method gives fewer equations, and why?</p>
+    <button class="recall-btn" type="button" aria-expanded="false" aria-controls="recall-2-a">Show answer</button>
+    <div class="recall-a" id="recall-2-a" hidden>
+      <p>Mesh analysis gives one equation per window, so two equations. Nodal analysis gives one equation for every node except the reference, so two equations as well. Choose whichever set you can write with fewer sign errors: mesh if the network is mostly voltage sources and series elements, nodal if it is mostly current sources and parallel elements. Both are examinable, and neither needs a supermesh or a supernode in this module.</p>
+    </div>
   </div>
 
   <h2 id="star-delta">Star–delta and delta–star conversion</h2>
@@ -1025,10 +1453,14 @@ a:hover, a:focus-visible {
     <p class="figcap">Figure 8. Converting the delta C–D–B (10 Ω, 30 Ω, 10 Ω) to a star with centre S gives legs C–S = 2 Ω, D–S = 6 Ω, B–S = 6 Ω. The bridge then reduces to (4 + 2) ∥ (6 + 6) + 6 = 10 Ω.</p>
   </figure>
 
-  <div class="example">
+  <div class="example qa" id="qa-7">
     <div class="example-title">Worked example — reduce a bridge with Δ → Y</div>
+    <button class="qa-reveal" type="button" aria-expanded="false" aria-controls="qa-7-sol qa-7-fin">Show solution</button>
+    <div class="qa-question" id="qa-7-q"><div class="qa-label">Question</div>
     <p><strong>Given.</strong> Terminals A and B. A–C = 4 Ω, A–D = 6 Ω, C–B = 10 Ω, D–B = 30 Ω, C–D = 10 Ω (left panel of Figure 8).</p>
     <p><strong>Required.</strong> <span class="v">R</span><sub>AB</sub>.</p>
+    </div>
+    <div class="qa-solution" id="qa-7-sol"><div class="qa-label">Solution</div>
     <p><strong>Choose the delta.</strong> The resistors C–D, D–B and B–C form a delta with terminals C, D, B. Convert this delta to a star with centre S.</p>
     <p><strong>Step 1 — sum.</strong></p>
     <div class="eq"><span class="v">S</span> = 10 + 30 + 10 = 50 Ω</div>
@@ -1039,6 +1471,9 @@ a:hover, a:focus-visible {
     <div class="eq"><span class="v">R</span><sub>AS</sub> = (6 × 12)/(6 + 12) = 72/18 = 4 Ω</div>
     <div class="eq"><span class="v">R</span><sub>AB</sub> = 4 + 6 = <strong>10 Ω</strong></div>
     <p><strong>Check.</strong> Inject 1 A from A to B and solve the original bridge by nodal analysis: <span class="v">V</span><sub>A</sub> − <span class="v">V</span><sub>B</sub> = 10 V, so <span class="v">R</span><sub>AB</sub> = 10 Ω. The conversion and the original circuit agree.</p>
+    </div>
+    <div class="qa-final" id="qa-7-fin"><div class="qa-label">Final answer</div><p class="qa-final-text"><span class="v">R</span><sub>AB</sub> = 10 Ω.</p>
+  </div>
   </div>
 
   <h3>Exam procedure — star–delta</h3>
@@ -1113,10 +1548,14 @@ a:hover, a:focus-visible {
     <p class="figcap">Figure 9b. The two reduced circuits for the example below. Each contribution is 8 V at node A, and they add to V<sub>A</sub> = 16 V.</p>
   </figure>
 
-  <div class="example">
+  <div class="example qa" id="qa-8">
     <div class="example-title">Worked example — two sources, two contributions</div>
+    <button class="qa-reveal" type="button" aria-expanded="false" aria-controls="qa-8-sol qa-8-fin">Show solution</button>
+    <div class="qa-question" id="qa-8-q"><div class="qa-label">Question</div>
     <p><strong>Given.</strong> 12 V source through 2 Ω to node A; 4 Ω from A to ground; 6 A source from ground into A (Figure 9).</p>
     <p><strong>Required.</strong> <span class="v">V</span><sub>A</sub> by superposition, and a comment on power.</p>
+    </div>
+    <div class="qa-solution" id="qa-8-sol"><div class="qa-label">Solution</div>
     <p><strong>Contribution 1 — 12 V source alone.</strong> Replace the 6 A source by an open circuit. The 2 Ω and 4 Ω are in series across 12 V. By voltage division:</p>
     <div class="eq"><span class="v">V</span><sub>A</sub>′ = 12 × 4/(2 + 4) = <strong>8 V</strong></div>
     <p><strong>Contribution 2 — 6 A source alone.</strong> Replace the 12 V source by a short circuit. The 2 Ω and 4 Ω are now in parallel from A to ground:</p>
@@ -1126,6 +1565,9 @@ a:hover, a:focus-visible {
     <div class="eq"><span class="v">V</span><sub>A</sub> = 8 + 8 = <strong>16 V</strong></div>
     <p><strong>Check with KCL.</strong> At 16 V, the current through 2 Ω is (16 − 12)/2 = 2 A, flowing from A toward the 12 V source. The current through 4 Ω is 16/4 = 4 A downward. The 6 A source injects 6 A into A. 2 + 4 = 6. ✓</p>
     <p><strong>Power warning.</strong> Actual power in the 4 Ω resistor is 16²/4 = 64 W. The separate contributions would give 8²/4 = 16 W and 8²/4 = 16 W, whose sum is only 32 W. Superposition does <em>not</em> apply to power, because power is proportional to the square of voltage or current, not to the first power.</p>
+    </div>
+    <div class="qa-final" id="qa-8-fin"><div class="qa-label">Final answer</div><p class="qa-final-text"><span class="v">V</span><sub>A</sub> = 16 V. Power is not additive: compute it from the total voltage, not from the two contributions.</p>
+  </div>
   </div>
 
   <h3>Rules</h3>
@@ -1253,10 +1695,14 @@ a:hover, a:focus-visible {
     <p class="figcap">Figure 10b. The two measurements behind a Thevenin equivalent, for the example below. Remove the load and read the open-circuit voltage; then short the voltage source, open the current source and look back into A–B.</p>
   </figure>
 
-  <div class="example">
+  <div class="example qa" id="qa-9">
     <div class="example-title">Worked example — Thevenin with a current source</div>
+    <button class="qa-reveal" type="button" aria-expanded="false" aria-controls="qa-9-sol qa-9-fin">Show solution</button>
+    <div class="qa-question" id="qa-9-q"><div class="qa-label">Question</div>
     <p><strong>Given.</strong> 12 V source in series with 3 Ω to node A; 6 Ω from A to ground; 6 A source from ground into A; load 2 Ω from A to ground (Figure 10a).</p>
     <p><strong>Required.</strong> <span class="v">V</span><sub>th</sub>, <span class="v">R</span><sub>th</sub>, and the load current.</p>
+    </div>
+    <div class="qa-solution" id="qa-9-sol"><div class="qa-label">Solution</div>
     <p><strong>Step 1 — remove the load.</strong> The 2 Ω branch is open. The 12 V source, 3 Ω, 6 Ω and 6 A source remain.</p>
     <p><strong>Step 2 — find <span class="v">V</span><sub>th</sub>.</strong> Let <span class="v">V</span><sub>A</sub> be the open-circuit voltage. KCL at A, with the 6 A source entering:</p>
     <div class="eq">(<span class="v">V</span><sub>A</sub> − 12)/3 + <span class="v">V</span><sub>A</sub>/6 = 6</div>
@@ -1271,6 +1717,9 @@ a:hover, a:focus-visible {
     <div class="eq">(<span class="v">V</span> − 12)/3 + <span class="v">V</span>/6 + <span class="v">V</span>/2 = 6</div>
     <div class="eq">2(<span class="v">V</span> − 12) + <span class="v">V</span> + 3<span class="v">V</span> = 36 &nbsp;→&nbsp; 6<span class="v">V</span> = 60 &nbsp;→&nbsp; <span class="v">V</span> = 10 V</div>
     <p>Then <span class="v">I</span><sub>L</sub> = 10/2 = 5 A. ✓</p>
+    </div>
+    <div class="qa-final" id="qa-9-fin"><div class="qa-label">Final answer</div><p class="qa-final-text"><span class="v">V</span><sub>th</sub> = 20 V; <span class="v">R</span><sub>th</sub> = 2 Ω; <span class="v">I</span><sub>L</sub> = 5 A; <span class="v">V</span><sub>L</sub> = 10 V; <span class="v">P</span><sub>L</sub> = 50 W.</p>
+  </div>
   </div>
 
   <h3>When to use Thevenin</h3>
@@ -1314,16 +1763,23 @@ a:hover, a:focus-visible {
   <p><strong>Definition.</strong> <span class="v">I</span><sub>N</sub> is the <strong>short-circuit current</strong> that flows from A to B when the load is replaced by a wire. <span class="v">R</span><sub>N</sub> is the resistance looking into the terminals with all independent sources killed; it is the same as <span class="v">R</span><sub>th</sub>.</p>
   <div class="eq"><span class="v">I</span><sub>N</sub> = <span class="v">I</span><sub>sc</sub> &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">R</span><sub>N</sub> = <span class="v">R</span><sub>th</sub> &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">V</span><sub>th</sub> = <span class="v">I</span><sub>N</sub><span class="v">R</span><sub>N</sub></div>
 
-  <div class="example">
+  <div class="example qa" id="qa-10">
     <div class="example-title">Worked example — Norton by the short-circuit current</div>
+    <button class="qa-reveal" type="button" aria-expanded="false" aria-controls="qa-10-sol qa-10-fin">Show solution</button>
+    <div class="qa-question" id="qa-10-q"><div class="qa-label">Question</div>
     <p><strong>Given.</strong> The same network as the Thevenin example: 12 V through 3 Ω to A, 6 Ω from A to ground, 6 A into A; load 2 Ω (Figure 10a).</p>
     <p><strong>Required.</strong> <span class="v">I</span><sub>N</sub>, <span class="v">R</span><sub>N</sub> and the load current.</p>
+    </div>
+    <div class="qa-solution" id="qa-10-sol"><div class="qa-label">Solution</div>
     <p><strong>Step 1 — short A to B.</strong> With A shorted to ground, the 6 Ω is bypassed and carries no current. The 3 Ω branch has the full 12 V across it, so it carries 12/3 = 4 A from the source to A. The 6 A source also drives current into A. Both currents leave through the short from A to B:</p>
     <div class="eq"><span class="v">I</span><sub>N</sub> = 4 + 6 = <strong>10 A</strong></div>
     <p><strong>Step 2 — <span class="v">R</span><sub>N</sub>.</strong> Kill the sources exactly as for Thevenin: 3 Ω ∥ 6 Ω = <strong>2 Ω</strong>.</p>
     <p><strong>Step 3 — reconnect the load.</strong> The Norton source and <span class="v">R</span><sub>N</sub> are in parallel, and the load is also in parallel. Use the current divider:</p>
     <div class="eq"><span class="v">I</span><sub>L</sub> = <span class="v">I</span><sub>N</sub> × <span class="v">R</span><sub>N</sub>/(<span class="v">R</span><sub>N</sub> + <span class="v">R</span><sub>L</sub>) = 10 × 2/(2 + 2) = <strong>5 A</strong></div>
     <p><strong>Check.</strong> <span class="v">V</span><sub>th</sub> = <span class="v">I</span><sub>N</sub><span class="v">R</span><sub>N</sub> = 10 × 2 = 20 V, which matches the Thevenin calculation. The load current 5 A matches. ✓</p>
+    </div>
+    <div class="qa-final" id="qa-10-fin"><div class="qa-label">Final answer</div><p class="qa-final-text"><span class="v">I</span><sub>N</sub> = 10 A; <span class="v">R</span><sub>N</sub> = 2 Ω; <span class="v">I</span><sub>L</sub> = 5 A.</p>
+  </div>
   </div>
 
   <p><strong>Direction convention.</strong> <span class="v">I</span><sub>N</sub> is defined as the short-circuit current from A to B. In the equivalent circuit, the current source arrow points from B to A (toward the positive terminal A), so that it drives current out of A into the external load. If your arrow is drawn the other way, use a negative value; do not silently change the sign.</p>
@@ -1399,10 +1855,14 @@ a:hover, a:focus-visible {
     <p class="figcap">Figure 11. Load power rises, peaks at <span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub>, then falls. At the peak, half the source power is lost in <span class="v">R</span><sub>th</sub>.</p>
   </figure>
 
-  <div class="example">
+  <div class="example qa" id="qa-11">
     <div class="example-title">Worked example — maximum power for the Thevenin network</div>
+    <button class="qa-reveal" type="button" aria-expanded="false" aria-controls="qa-11-sol qa-11-fin">Show solution</button>
+    <div class="qa-question" id="qa-11-q"><div class="qa-label">Question</div>
     <p><strong>Given.</strong> <span class="v">V</span><sub>th</sub> = 20 V, <span class="v">R</span><sub>th</sub> = 2 Ω.</p>
     <p><strong>Required.</strong> <span class="v">R</span><sub>L</sub> for maximum power, <span class="v">P</span><sub>max</sub>, and the efficiency at that point.</p>
+    </div>
+    <div class="qa-solution" id="qa-11-sol"><div class="qa-label">Solution</div>
     <p><strong>Step 1 — matching condition.</strong></p>
     <div class="eq"><span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub> = <strong>2 Ω</strong></div>
     <p><strong>Step 2 — maximum power.</strong></p>
@@ -1410,6 +1870,9 @@ a:hover, a:focus-visible {
     <p><strong>Step 3 — check at the terminals.</strong> With <span class="v">R</span><sub>L</sub> = 2 Ω, <span class="v">I</span><sub>L</sub> = 20/4 = 5 A, <span class="v">V</span><sub>L</sub> = 10 V, <span class="v">P</span><sub>L</sub> = 5² × 2 = 50 W. ✓</p>
     <p><strong>Step 4 — efficiency.</strong> The source delivers 20 × 5 = 100 W. The load receives 50 W. Efficiency = 50/100 = 50%. The other 50 W is lost in <span class="v">R</span><sub>th</sub>.</p>
     <p><strong>Interpretation.</strong> Maximum power is not maximum efficiency. If efficiency matters (power systems), a much larger <span class="v">R</span><sub>L</sub> is used; if the goal is to deliver the most signal power (communications, audio), matching is used.</p>
+    </div>
+    <div class="qa-final" id="qa-11-fin"><div class="qa-label">Final answer</div><p class="qa-final-text"><span class="v">R</span><sub>L</sub> = 2 Ω; <span class="v">P</span><sub>max</sub> = 50 W; efficiency at maximum power = 50%.</p>
+  </div>
   </div>
 
   <h3>Exam procedure — maximum power</h3>
@@ -1460,6 +1923,17 @@ a:hover, a:focus-visible {
 
   <div class="method-note">
     <p><strong>What not to do.</strong> Do not use a supernode or a supermesh; they are outside the prescribed syllabus. Do not introduce dependent sources. Do not use a theorem that the question did not ask for if a simpler method is available, unless you are using it as a check.</p>
+  </div>
+
+  <div class="recall">
+    <p class="recall-label">Recall check</p>
+    <p class="recall-q">State the three theorem results from memory: the Thevenin equivalent, the Norton equivalent, and the load for maximum power transfer.</p>
+    <button class="recall-btn" type="button" aria-expanded="false" aria-controls="recall-3-a">Show answer</button>
+    <div class="recall-a" id="recall-3-a" hidden>
+      <p><strong>Thevenin.</strong> Any linear two-terminal network is a voltage source <span class="v">V</span><sub>th</sub> in series with <span class="v">R</span><sub>th</sub>. <span class="v">V</span><sub>th</sub> is the open-circuit terminal voltage; <span class="v">R</span><sub>th</sub> is the resistance seen from the terminals with every independent source killed.</p>
+      <p><strong>Norton.</strong> The same network is a current source <span class="v">I</span><sub>N</sub> in parallel with <span class="v">R</span><sub>N</sub>, where <span class="v">I</span><sub>N</sub> is the short-circuit current, <span class="v">R</span><sub>N</sub> = <span class="v">R</span><sub>th</sub>, and <span class="v">V</span><sub>th</sub> = <span class="v">I</span><sub>N</sub><span class="v">R</span><sub>N</sub>.</p>
+      <p><strong>Maximum power.</strong> <span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub>, giving <span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub><sup>2</sup>/(4<span class="v">R</span><sub>th</sub>). Maximum power is not maximum efficiency: at that point only half the source power reaches the load.</p>
+    </div>
   </div>
 
   <h2 id="assignments">Course assignments (Dr. Nirmala K.)</h2>
@@ -1631,23 +2105,32 @@ a:hover, a:focus-visible {
     <p class="small">The December 2024, Summer 2025 and undated DocScanner papers are subject <strong>58654</strong>, a different course and scheme. They are not evidence for ESC102 and are not reproduced as “university questions” for this module. See the note at the end of this section.</p>
   </div>
 
-  <div class="exam-q">
+  <div class="exam-q qa" id="paper-qa-1">
     <div class="exam-q-title">June 2025 · Q1(a) · Star to delta · 3 marks</div>
     <div class="exam-source">University of Mumbai, NEP 2020, BEEE (N10415), 13 June 2025, Q1(a). Compulsory question.</div>
+    <button class="qa-reveal" type="button" aria-expanded="false" aria-controls="paper-qa-1-sol paper-qa-1-fin">Show solution</button>
+    <div class="qa-question" id="paper-qa-1-q"><div class="qa-label">Question</div>
     <p><strong>Question as printed.</strong> “Convert the star circuit into its equivalent delta circuit.” The star has <span class="v">R</span><sub>A</sub> = 2 Ω from A to the star point N, <span class="v">R</span><sub>B</sub> = 4 Ω from B to N, and <span class="v">R</span><sub>C</sub> = 6 Ω from C to N.</p>
-    <p><strong>Answer.</strong> <span class="v">R</span><sub>AB</sub> = <strong>22/3 Ω</strong>, <span class="v">R</span><sub>BC</sub> = <strong>22 Ω</strong>, <span class="v">R</span><sub>CA</sub> = <strong>11 Ω</strong>.</p>
+    </div>
+    <div class="qa-solution" id="paper-qa-1-sol"><div class="qa-label">Solution</div>
     <p><strong>Working.</strong> The sum of the pairwise products is</p>
     <div class="eq"><span class="v">P</span> = (2 × 4) + (4 × 6) + (6 × 2) = 8 + 24 + 12 = 44 Ω²</div>
     <p>Each delta side is <span class="v">P</span> divided by the star leg opposite that side:</p>
     <div class="eq"><span class="v">R</span><sub>AB</sub> = 44/6 = 22/3 Ω &nbsp;·&nbsp; <span class="v">R</span><sub>BC</sub> = 44/2 = 22 Ω &nbsp;·&nbsp; <span class="v">R</span><sub>CA</sub> = 44/4 = 11 Ω</div>
     <p><strong>Check.</strong> The resistance between A and B with C open must be the same in both networks. Star: 2 + 4 = 6 Ω. Delta: 22/3 in parallel with (22 + 11) = (22/3 × 33)/(22/3 + 33) = 242/(121/3) = 6 Ω. Good. Do the same check for B–C and C–A if time allows.</p>
+    </div>
+    <div class="qa-final" id="paper-qa-1-fin"><div class="qa-label">Final answer</div><p class="qa-final-text"><span class="v">R</span><sub>AB</sub> = <strong>22/3 Ω</strong>, <span class="v">R</span><sub>BC</sub> = <strong>22 Ω</strong>, <span class="v">R</span><sub>CA</sub> = <strong>11 Ω</strong>.</p>
+  </div>
   </div>
 
-  <div class="exam-q">
+  <div class="exam-q qa" id="paper-qa-2">
     <div class="exam-q-title">June 2025 · Q2(a) · Norton through 3 Ω · 10 marks</div>
     <div class="exam-source">University of Mumbai, NEP 2020, BEEE (N10415), 13 June 2025, Q2(a). This is the same circuit as Assignment 1, Q3.</div>
+    <button class="qa-reveal" type="button" aria-expanded="false" aria-controls="paper-qa-2-sol paper-qa-2-fin">Show solution</button>
+    <div class="qa-question" id="paper-qa-2-q"><div class="qa-label">Question</div>
     <p><strong>Question as printed.</strong> “Using Norton’s theorem, calculate the current through 3 Ω resistor across the terminals A and B in the given circuit.” The network has a 15 V source with 2 Ω on the left, 8 Ω across the top, a 16 Ω diagonal, a 5 V source with 10 Ω in the centre, 2 Ω on the right and 2 Ω along the bottom; the 3 Ω load is between A (top right) and B (bottom right).</p>
-    <p><strong>Answer.</strong> <span class="v">I</span><sub>3Ω</sub> = <strong>41/48 A ≈ 0.854 A</strong> from A to B, taking the 15 V source positive at the top-left node, the 5 V source positive at its top node, and the 3 Ω load between A and B.</p>
+    </div>
+    <div class="qa-solution" id="paper-qa-2-sol"><div class="qa-label">Solution</div>
     <p><strong>Working.</strong> Remove the 3 Ω load and solve the remaining network by nodal analysis. The open-circuit voltage is</p>
     <div class="eq"><span class="v">V</span><sub>th</sub> = 205/26 V ≈ 7.885 V</div>
     <p>With the 15 V and 5 V sources replaced by short circuits, the resistance looking into A–B is</p>
@@ -1656,13 +2139,19 @@ a:hover, a:focus-visible {
     <div class="eq"><span class="v">I</span><sub>3Ω</sub> = <span class="v">V</span><sub>th</sub>/(<span class="v">R</span><sub>th</sub> + 3) = (205/26)/(120/13) = <strong>41/48 A</strong></div>
     <p><strong>Check.</strong> 41/48 = 0.8542 A. The load voltage is 0.8542 × 3 = 2.5625 V, and 2.5625/0.8542 = 3 Ω. The current is less than the short-circuit current 1.265 A, as it must be.</p>
     <p class="small"><strong>Polarity warning.</strong> The scan is faint around the 15 V and 5 V sources. If either polarity is reversed in your copy, the magnitude and sign of <span class="v">V</span><sub>th</sub> change. Mark the long line of every source on your redrawn circuit before writing the nodal equations. Do not memorise “41/48” without the polarity assumptions.</p>
+    </div>
+    <div class="qa-final" id="paper-qa-2-fin"><div class="qa-label">Final answer</div><p class="qa-final-text"><span class="v">I</span><sub>3Ω</sub> = <strong>41/48 A ≈ 0.854 A</strong> from A to B, taking the 15 V source positive at the top-left node, the 5 V source positive at its top node, and the 3 Ω load between A and B.</p>
+  </div>
   </div>
 
-  <div class="exam-q">
+  <div class="exam-q qa" id="paper-qa-3">
     <div class="exam-q-title">June 2025 · Q4(a) · Nodal analysis through 4 Ω · 5 marks</div>
     <div class="exam-source">University of Mumbai, NEP 2020, BEEE (N10415), 13 June 2025, Q4(a).</div>
+    <button class="qa-reveal" type="button" aria-expanded="false" aria-controls="paper-qa-3-sol paper-qa-3-fin">Show solution</button>
+    <div class="qa-question" id="paper-qa-3-q"><div class="qa-label">Question</div>
     <p><strong>Question as printed.</strong> “Find the current through 4 Ω resistance using Nodal analysis.” The circuit has a 6 V source (positive terminal at the top) in series with 3 Ω from the bottom rail to node A; 6 Ω from A to the bottom rail; 4 Ω from A to B; 2 Ω from B to the bottom rail; and a 5 A source from the bottom rail to B. The arrow on the 5 A source points <strong>upward</strong> in the scanned paper.</p>
-    <p><strong>Answer.</strong> With the 5 A arrow upward, <span class="v">I</span><sub>4Ω</sub> = <strong>0.75 A from B to A</strong>. If your copy shows the 5 A arrow downward, the answer becomes <strong>1.75 A from A to B</strong>. State the arrow direction with the answer.</p>
+    </div>
+    <div class="qa-solution" id="paper-qa-3-sol"><div class="qa-label">Solution</div>
     <p><strong>Working (5 A upward).</strong> Take the bottom rail as 0 V. The 6 V source and 3 Ω put the left branch in series, so KCL at A and B gives</p>
     <div class="eq">(<span class="v">V</span><sub>A</sub> − 6)/3 + <span class="v">V</span><sub>A</sub>/6 + (<span class="v">V</span><sub>A</sub> − <span class="v">V</span><sub>B</sub>)/4 = 0</div>
     <div class="eq">(<span class="v">V</span><sub>B</sub> − <span class="v">V</span><sub>A</sub>)/4 + <span class="v">V</span><sub>B</sub>/2 − 5 = 0</div>
@@ -1671,13 +2160,19 @@ a:hover, a:focus-visible {
     <div class="eq"><span class="v">V</span><sub>A</sub> = 5.5 V &nbsp;·&nbsp; <span class="v">V</span><sub>B</sub> = 8.5 V</div>
     <p>The current from A to B is (5.5 − 8.5)/4 = −0.75 A, so the magnitude is 0.75 A and the direction is B to A. Check at B: (8.5 − 5.5)/4 + 8.5/2 − 5 = 0.75 + 4.25 − 5 = 0.</p>
     <p><strong>If the 5 A arrow is downward:</strong> the second equation becomes (<span class="v">V</span><sub>B</sub> − <span class="v">V</span><sub>A</sub>)/4 + <span class="v">V</span><sub>B</sub>/2 + 5 = 0, giving <span class="v">V</span><sub>A</sub> = 0.5 V, <span class="v">V</span><sub>B</sub> = −6.5 V, and <span class="v">I</span><sub>4Ω</sub> = (0.5 + 6.5)/4 = 1.75 A from A to B. The two readings differ only in the source arrow, which is exactly why the arrow must be copied onto your answer sheet.</p>
+    </div>
+    <div class="qa-final" id="paper-qa-3-fin"><div class="qa-label">Final answer</div><p class="qa-final-text">With the 5 A arrow upward, <span class="v">I</span><sub>4Ω</sub> = <strong>0.75 A from B to A</strong>. If your copy shows the 5 A arrow downward, the answer becomes <strong>1.75 A from A to B</strong>. State the arrow direction with the answer.</p>
+  </div>
   </div>
 
-  <div class="exam-q">
+  <div class="exam-q qa" id="paper-qa-4">
     <div class="exam-q-title">June 2025 · Q6(a) · Source transformation through 8 Ω · 6 marks</div>
     <div class="exam-source">University of Mumbai, NEP 2020, BEEE (N10415), 13 June 2025, Q6(a).</div>
+    <button class="qa-reveal" type="button" aria-expanded="false" aria-controls="paper-qa-4-sol paper-qa-4-fin">Show solution</button>
+    <div class="qa-question" id="paper-qa-4-q"><div class="qa-label">Question</div>
     <p><strong>Question as printed.</strong> “Using source transformation find the current flowing the 8 Ω resistance.” The circuit has an 18 V source in series with 6 Ω feeding node C; 6 Ω from C to the bottom rail; 6 Ω from C to node D; a 2 A source from the bottom rail to D (arrow upward); 1 Ω from D to X; and the 8 Ω load from X to Y, with Y on the bottom rail.</p>
-    <p><strong>Answer.</strong> <span class="v">I</span><sub>8Ω</sub> = <strong>1.5 A downward</strong> (from X to Y).</p>
+    </div>
+    <div class="qa-solution" id="paper-qa-4-sol"><div class="qa-label">Solution</div>
     <p><strong>Working by source transformation.</strong></p>
     <ol class="steps">
       <li>18 V in series with 6 Ω becomes 3 A in parallel with 6 Ω; the arrow points from the bottom rail to C.</li>
@@ -1688,6 +2183,9 @@ a:hover, a:focus-visible {
       <li>The current through the 8 Ω branch is 13.5/(1 + 8) = <strong>1.5 A</strong>, from X to Y.</li>
     </ol>
     <p><strong>Check by nodal analysis.</strong> With the bottom rail at 0 V, the equations at C and D give <span class="v">V</span><sub>C</sub> = 10.5 V and <span class="v">V</span><sub>D</sub> = 13.5 V; then <span class="v">V</span><sub>X</sub> = 12 V and (13.5 − 12)/1 = 1.5 A. Both methods agree.</p>
+    </div>
+    <div class="qa-final" id="paper-qa-4-fin"><div class="qa-label">Final answer</div><p class="qa-final-text"><span class="v">I</span><sub>8Ω</sub> = <strong>1.5 A downward</strong> (from X to Y).</p>
+  </div>
   </div>
 
   <div class="method-note">
@@ -2023,12 +2521,34 @@ a:hover, a:focus-visible {
 <script>
 (function(){
   var hs=[].slice.call(document.querySelectorAll('.wrap h2[id]'));
+  var subHeads=[].slice.call(document.querySelectorAll('.wrap [data-rail-subsection][id]'));
   if(!hs.length)return;
   function pad(n){return (n<10?'0':'')+n;}
   function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
   var names=hs.map(function(h){return h.textContent.trim();});
+  var subGroups=hs.map(function(){return [];});
+  var sectionIndex=-1;
+  Array.prototype.forEach.call(document.querySelectorAll('.wrap h2[id], .wrap [data-rail-subsection][id]'),function(h){
+    if(h.tagName==='H2'){sectionIndex=hs.indexOf(h);}
+    else if(sectionIndex>=0)subGroups[sectionIndex].push(h);
+  });
 
-  /* wide screens: margin rail */
+  function makeSublist(parentLi,mobile,headings){
+    if(!headings.length)return [];
+    var list=el('ol',mobile?'rm-sublist':'rail-sublist');
+    var children=headings.map(function(h,i){
+      var li=el('li'),a=el('a',mobile?'rm-sub-link':'rail-sub-link');
+      var label=h.getAttribute('data-rail-label')||h.textContent.trim();
+      a.href='#'+h.id;a.title=label;
+      a.appendChild(el('span',mobile?'rm-k':'sub-num',String.fromCharCode(65+i)));
+      a.appendChild(el('span',mobile?'rm-sub-label':'sub-lbl',label));
+      li.appendChild(a);list.appendChild(li);
+      return {a:a,heading:h,done:false,top:0,mobile:null};
+    });
+    parentLi.appendChild(list);return children;
+  }
+
+  /* Wide screens: nested subsection links below their parent sections. */
   var nav=el('nav','rail');nav.setAttribute('aria-label','Section progress');
   var inn=el('div','rail-in'),top=el('div','rail-top'),sec=el('span','rail-sec','01'),meta=el('span','rail-meta');
   var pct=el('b',null,'0%');meta.appendChild(el('span',null,'of '+pad(hs.length)));meta.appendChild(pct);
@@ -2040,11 +2560,12 @@ a:hover, a:focus-visible {
     var li=el('li'),a=el('a'),nd=el('span','node');
     a.href='#'+h.id;a.title=names[i];nd.setAttribute('aria-hidden','true');
     a.appendChild(nd);a.appendChild(el('span','num',pad(i+1)));a.appendChild(el('span','lbl',names[i]));
-    li.appendChild(a);ol.appendChild(li);return {a:a,nd:nd,p:-1,done:false};
+    li.appendChild(a);var children=makeSublist(li,false,subGroups[i]);
+    ol.appendChild(li);return {a:a,nd:nd,p:-1,done:false,subs:children};
   });
   inn.appendChild(top);inn.appendChild(ol);nav.appendChild(inn);document.body.appendChild(nav);
 
-  /* phones and tablets: current-section line, edge tab, bottom sheet */
+  /* Phones and tablets: keep the same nested tree in the section sheet. */
   var bar=el('div','rm-bar');bar.setAttribute('aria-hidden','true');
   var tab=el('button','rm-tab');tab.type='button';tab.setAttribute('aria-haspopup','dialog');tab.setAttribute('aria-expanded','false');
   var tn=el('span',null,'01');tab.appendChild(tn);
@@ -2053,15 +2574,23 @@ a:hover, a:focus-visible {
   var sol=el('ol');
   var mitems=hs.map(function(h,i){
     var li=el('li'),a=el('a');a.href='#'+h.id;a.appendChild(el('span','rm-k',pad(i+1)));a.appendChild(el('span',null,names[i]));
-    li.appendChild(a);sol.appendChild(li);a.addEventListener('click',function(){setSheet(false);});return a;
+    li.appendChild(a);var children=makeSublist(li,true,subGroups[i]);
+    sol.appendChild(li);a.addEventListener('click',function(){setSheet(false);});
+    children.forEach(function(child){child.mobile=child.a;child.a.addEventListener('click',function(){setSheet(false);});});
+    return {a:a,subs:children};
   });
+  items.forEach(function(item,i){item.subs.forEach(function(child,j){child.mobile=mitems[i].subs[j].a;});});
   sheet.appendChild(sh);sheet.appendChild(sol);
   [bar,tab,back,sheet].forEach(function(n){document.body.appendChild(n);});
-  var moveT;
+  var moveT,cur=-2,currentSubItem=null,tick=false,centers=null,tops=[],end=0;
+
   function setSheet(o,refocus){
     document.body.classList.toggle('rm-open',o);tab.setAttribute('aria-expanded',String(o));
-    if(o){var c=mitems[cur>=0?cur:0];sheet.scrollTop=Math.max(0,c.offsetTop-sheet.clientHeight/3);try{c.focus({preventScroll:true});}catch(e){}}
-    else if(refocus){tab.focus();}
+    if(o){
+      var target=currentSubItem?currentSubItem.mobile:mitems[cur>=0?cur:0].a;
+      sheet.scrollTop+=target.getBoundingClientRect().top-sheet.getBoundingClientRect().top-sheet.clientHeight/3;
+      try{target.focus({preventScroll:true});}catch(e){}
+    }else if(refocus){tab.focus();}
   }
   tab.addEventListener('click',function(){setSheet(!document.body.classList.contains('rm-open'));});
   back.addEventListener('click',function(){setSheet(false);});
@@ -2078,34 +2607,55 @@ a:hover, a:focus-visible {
   }
   tg.addEventListener('click',function(){open=!open;try{localStorage.setItem('sg-rail',open?'o':'c');}catch(e){}paintToggle();});
 
-  var tops=[],end=0,cur=-2,tick=false,centers=null;
   function measure(){
-    var y=scrollY;tops=hs.map(function(h){return h.getBoundingClientRect().top+y;});
+    var y=scrollY;
+    tops=hs.map(function(h){return h.getBoundingClientRect().top+y;});
+    items.forEach(function(item){item.subs.forEach(function(child){child.top=child.heading.getBoundingClientRect().top+y;});});
     end=document.querySelector('.wrap').getBoundingClientRect().bottom+y;
   }
-  function measureCenters(){centers=items.map(function(it){var li=it.a.parentNode;return li.offsetTop+li.offsetHeight/2;});}
+  function measureCenters(){centers=items.map(function(it){return it.a.offsetTop+it.a.offsetHeight/2;});}
   function update(){
     tick=false;
     if(!centers)measureCenters();
-    var y=scrollY+innerHeight*0.25,c=-1,max=document.documentElement.scrollHeight-innerHeight;
+    var y=scrollY+innerHeight*.25,c=-1,max=document.documentElement.scrollHeight-innerHeight;
     var pv=Math.round(Math.max(0,Math.min(1,max>0?scrollY/max:0))*100);pct.textContent=pv+'%';shp.textContent=pv+'%';
     items.forEach(function(it,i){
       var nx=i+1<tops.length?tops[i+1]:end,p=Math.max(0,Math.min(1,(y-tops[i])/Math.max(1,nx-tops[i])));
       if(y>=tops[i])c=i;
       p=Math.round(p*100)/100;
       if(p!==it.p){it.p=p;it.nd.style.setProperty('--p',p);}
-      var d=y>=nx;if(d!==it.done){it.done=d;it.a.classList.toggle('is-done',d);mitems[i].classList.toggle('is-done',d);}
+      var d=y>=nx;if(d!==it.done){it.done=d;it.a.classList.toggle('is-done',d);mitems[i].a.classList.toggle('is-done',d);}
     });
     if(c<0)c=0;
     bar.style.setProperty('--w',Math.round(items[c].p*100)+'%');
-    var f=centers[c]+(c+1<centers.length?(centers[c+1]-centers[c])*items[c].p:0);
-    if(y<tops[0])f=centers[0]*Math.max(0,Math.min(1,y/Math.max(1,tops[0])));
-    ol.style.setProperty('--fill',f.toFixed(1)+'px');
-    if(c!==cur){
-      if(cur>=0){items[cur].a.removeAttribute('aria-current');mitems[cur].removeAttribute('aria-current');}
+    var fillPosition=centers[c]+(c+1<centers.length?(centers[c+1]-centers[c])*items[c].p:0);
+    if(y<tops[0])fillPosition=centers[0]*Math.max(0,Math.min(1,y/Math.max(1,tops[0])));
+    ol.style.setProperty('--fill',fillPosition.toFixed(1)+'px');
+    var sectionChanged=c!==cur;
+    if(sectionChanged){
+      if(cur>=0){items[cur].a.removeAttribute('aria-current');mitems[cur].a.removeAttribute('aria-current');}
       cur=c;sec.textContent=pad(c+1);tn.textContent=pad(c+1);
       tab.setAttribute('aria-label','Sections. Now reading '+pad(c+1)+', '+names[c]);
-      items[c].a.setAttribute('aria-current','true');mitems[c].setAttribute('aria-current','true');
+      items[c].a.setAttribute('aria-current','true');mitems[c].a.setAttribute('aria-current','true');
+    }
+
+    var activeSub=null;
+    items[c].subs.forEach(function(child,j){
+      var nx=j+1<items[c].subs.length?items[c].subs[j+1].top:(c+1<tops.length?tops[c+1]:end);
+      var done=y>=nx,active=y>=child.top&&y<nx;
+      if(done!==child.done){child.done=done;child.a.classList.toggle('is-done',done);child.mobile.classList.toggle('is-done',done);}
+      if(active)activeSub=child;
+    });
+    if(activeSub!==currentSubItem){
+      if(currentSubItem){currentSubItem.a.removeAttribute('aria-current');currentSubItem.mobile.removeAttribute('aria-current');}
+      currentSubItem=activeSub;
+      if(currentSubItem){
+        currentSubItem.a.setAttribute('aria-current','location');currentSubItem.mobile.setAttribute('aria-current','location');
+        var childRect=currentSubItem.a.getBoundingClientRect(),listRect=ol.getBoundingClientRect();
+        if(childRect.top<listRect.top||childRect.bottom>listRect.bottom)ol.scrollTop+=childRect.top-listRect.top-listRect.height/2;
+      }
+    }
+    if(sectionChanged&&!activeSub){
       var a=items[c].a,r=a.getBoundingClientRect(),lr=ol.getBoundingClientRect();
       if(r.top<lr.top||r.bottom>lr.bottom)ol.scrollTop+=r.top-lr.top-lr.height/2;
     }
@@ -2119,5 +2669,133 @@ a:hover, a:focus-visible {
   paintToggle();measure();update();
 })();
 </script>
+<script>
+/* Study Mode: one section at a time, hidden solutions, remembered position. */
+(function(){
+  var KEY='sg-study',POS='sg-study-pos';
+  var body=document.body;
+  var main=document.getElementById('main');
+  var bar=document.getElementById('studyBar');
+  var toggle=document.getElementById('studyToggle');
+  var prev=document.getElementById('studyPrev');
+  var next=document.getElementById('studyNext');
+  var exitBtn=document.getElementById('studyExit');
+  var titleEl=document.getElementById('studyTitle');
+  var posEl=document.getElementById('studyPos');
+  var progEl=document.getElementById('studyProg');
+  if(!main||!bar||!toggle)return;
+  toggle.hidden=false;
+
+  var units=[],cur=0,built=false;
+
+  function build(){
+    if(built)return;
+    var kids=[].slice.call(main.children),n=-1;
+    kids.forEach(function(el){
+      if(el===bar)return;
+      if(el.tagName==='H2'){
+        n=units.length;
+        units.push({title:el.textContent.trim(),nodes:[el]});
+      }else if(n<0){
+        n=0;
+        units.push({title:'How to use this guide',nodes:[el]});
+      }else{
+        units[n].nodes.push(el);
+      }
+      el.setAttribute('data-study-unit',String(n));
+    });
+    built=true;
+  }
+
+  function show(i,scroll){
+    if(!built)build();
+    i=Math.max(0,Math.min(units.length-1,i));
+    cur=i;
+    units.forEach(function(u,j){
+      u.nodes.forEach(function(el){el.classList.toggle('is-current-unit',j===i);});
+    });
+    titleEl.textContent=units[i].title;
+    posEl.textContent='Section '+(i+1)+' of '+units.length;
+    prev.disabled=(i===0);
+    next.disabled=(i===units.length-1);
+    prev.setAttribute('aria-label',i>0?'Previous section: '+units[i-1].title:'Previous section');
+    next.setAttribute('aria-label',i<units.length-1?'Next section: '+units[i+1].title:'Next section');
+    progEl.style.width=(((i+1)/units.length)*100).toFixed(1)+'%';
+    try{localStorage.setItem(POS,String(i));}catch(e){}
+    if(scroll){
+      var el=units[i].nodes[0];
+      var top=el.getBoundingClientRect().top+window.pageYOffset-bar.offsetHeight-14;
+      window.scrollTo(0,Math.max(0,top));
+    }
+  }
+
+  function setMode(on){
+    if(!built)build();
+    body.classList.toggle('study-mode',on);
+    toggle.setAttribute('aria-pressed',on?'true':'false');
+    toggle.textContent=on?'Exit study mode':'Study mode';
+    try{localStorage.setItem(KEY,on?'on':'off');}catch(e){}
+    if(on){
+      var saved=0;
+      try{saved=parseInt(localStorage.getItem(POS)||'0',10)||0;}catch(e){}
+      show(saved,false);
+      show(cur,true);
+      bar.focus&&bar.setAttribute('tabindex','-1');
+      bar.focus();
+    }else{
+      units.forEach(function(u){u.nodes.forEach(function(el){el.classList.remove('is-current-unit');});});
+      var el=units[cur]&&units[cur].nodes[0];
+      if(el){
+        var top=el.getBoundingClientRect().top+window.pageYOffset-24;
+        window.scrollTo(0,Math.max(0,top));
+      }
+    }
+  }
+
+  toggle.addEventListener('click',function(){setMode(!body.classList.contains('study-mode'));});
+  exitBtn.addEventListener('click',function(){setMode(false);toggle.focus();});
+  prev.addEventListener('click',function(){show(cur-1,true);});
+  next.addEventListener('click',function(){show(cur+1,true);});
+
+  main.addEventListener('click',function(e){
+    var t=e.target;
+    var qb=t.closest&&t.closest('.qa-reveal');
+    if(qb){
+      var qa=qb.closest('.qa');
+      var open=qa.classList.toggle('is-open');
+      qb.setAttribute('aria-expanded',open?'true':'false');
+      qb.textContent=open?'Hide solution':'Show solution';
+      return;
+    }
+    var rb=t.closest&&t.closest('.recall-btn');
+    if(rb){
+      var a=document.getElementById(rb.getAttribute('aria-controls'));
+      if(!a)return;
+      var hid=a.hasAttribute('hidden');
+      if(hid){a.removeAttribute('hidden');}else{a.setAttribute('hidden','');}
+      rb.setAttribute('aria-expanded',hid?'true':'false');
+      rb.textContent=hid?'Hide answer':'Show answer';
+    }
+  });
+
+  document.addEventListener('keydown',function(e){
+    if(!body.classList.contains('study-mode'))return;
+    if(e.altKey||e.ctrlKey||e.metaKey)return;
+    var t=e.target;
+    if(t&&/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))return;
+    if(t&&t.isContentEditable)return;
+    if(t&&t.closest&&t.closest('.beee-scroll'))return;
+    if(e.key==='ArrowRight'){e.preventDefault();show(cur+1,true);}
+    else if(e.key==='ArrowLeft'){e.preventDefault();show(cur-1,true);}
+    else if(e.key==='Escape'){setMode(false);toggle.focus();}
+  });
+
+  var saved='off';
+  try{saved=localStorage.getItem(KEY)||'off';}catch(e){}
+  build();
+  if(saved==='on')setMode(true);
+})();
+</script>
+
 </body>
 </html>
