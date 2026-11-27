@@ -518,7 +518,8 @@ svg text { paint-order: stroke; stroke: var(--bg); stroke-width: 2.5px; stroke-l
 /* ----------------------------------------------------------------------
    Study Mode
    ---------------------------------------------------------------------- */
-.study-toggle { font: inherit; font-size: 0.85rem; font-weight: 600; color: var(--ink); background: var(--bg); border: 1px solid var(--line); padding: 0.4rem 0.8rem; min-height: 44px; cursor: pointer; margin-left: auto; }
+.study-toggle { font: inherit; font-size: 0.85rem; font-weight: 600; color: var(--ink); background: var(--bg); border: 1px solid var(--ink); border-radius: 0; padding: 0.4rem 0.8rem; min-height: 44px; cursor: pointer; margin-left: auto; }
+.study-toggle:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .study-toggle:hover { background: var(--surface-hi); border-color: var(--ink); }
 .topbar .theme-toggle { margin-left: 0.5rem; }
 
@@ -527,7 +528,7 @@ body.study-mode .study-bar { display: block; position: fixed; right: max(0.75rem
 body.study-mode { padding-bottom: calc(4.5rem + env(safe-area-inset-bottom)); }
 .study-pill { display: inline-flex; align-items: center; gap: 0.5rem; font: 600 0.78rem/1 var(--font-mono); letter-spacing: 0.04em; color: var(--muted); background: var(--bg); border: 1px solid var(--ink); border-radius: 0; min-height: 44px; padding: 0 0.85rem; cursor: pointer; }
 .study-pill:hover { background: var(--surface-hi); }
-.study-pill:focus-visible, .study-btns button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.study-pill:focus-visible, .study-btns button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .study-pos { color: var(--accent); font-variant-numeric: tabular-nums; }
 .study-panel { position: absolute; max-height: 70vh; overflow-y: auto; right: 0; bottom: calc(100% + 0.5rem); width: min(20rem, calc(100vw - 1.5rem)); padding: 0.8rem 0.9rem 0.9rem; background: var(--bg); border: 1px solid var(--line); border-top: 3px solid var(--accent); }
 .study-panel[hidden] { display: none; }
