@@ -581,7 +581,7 @@ s + r ≥ m             (the remaining weights can still reach m)</code></pre>
 <p class="qa-final-text"><strong>Answer:</strong> the solutions are <code>{2, 7, 8}</code> and <code>{2, 15}</code>.</p></div>
 </div>
 <h3 id="3-7-complexity">3.7 Complexity</h3>
-<p>The tree has at most <code>2ⁿ</code> leaves and <code>2ⁿ⁺¹ − 1</code> nodes, so the worst case is <strong>O(2ⁿ)</strong> time and <strong>O(n)</strong> space for the recursion. The bounding tests do not change the worst case (if every subset is promising) but prune heavily in typical instances. The DP alternative is O(nm) time and O(nm) or O(m) space, which is better when <code>m</code> is small; backtracking is the prescribed method and is preferable when the question asks for all subsets or a search tree.</p>
+<p>The tree has at most <code>2ⁿ</code> leaves and <code>2ⁿ⁺¹ − 1</code> nodes, so the worst case is <strong>O(2<sup>n</sup>)</strong> time and <strong>O(n)</strong> space for the recursion. The bounding tests do not change the worst case (if every subset is promising) but prune heavily in typical instances. The DP alternative is O(nm) time and O(nm) or O(m) space, which is better when <code>m</code> is small; backtracking is the prescribed method and is preferable when the question asks for all subsets or a search tree.</p>
 <h3 id="3-8-common-mistakes">3.8 Common mistakes</h3>
 <ul>
 <li>Forgetting to subtract the weight from <code>r</code> on both branches.</li>
@@ -666,7 +666,7 @@ SAFE(k, c)
 <p class="qa-final-text"><strong>Answer:</strong> <code>(x₁, …, x₅) = (1, 2, 3, 3, 1)</code>, found after backtracking once at vertex 4.</p></div>
 </div>
 <h3 id="4-7-complexity">4.7 Complexity</h3>
-<p>The tree has at most <code>mⁿ</code> leaves, so the worst case is <strong>O(mⁿ)</strong> time and <strong>O(n)</strong> space. The <code>SAFE</code> test is O(n), so a naive bound is O(n·mⁿ); the pruning is what makes the search practical. Deciding whether a graph is <code>m</code>-colourable is NP-complete for <code>m ≥ 3</code>, so no polynomial algorithm is known.</p>
+<p>The tree has at most <code>mⁿ</code> leaves, so the worst case is <strong>O(m<sup>n</sup>)</strong> time and <strong>O(n)</strong> space. The <code>SAFE</code> test is O(n), so a naive bound is O(n·m<sup>n</sup>); the pruning is what makes the search practical. Deciding whether a graph is <code>m</code>-colourable is NP-complete for <code>m ≥ 3</code>, so no polynomial algorithm is known.</p>
 <h3 id="4-8-common-mistakes">4.8 Common mistakes</h3>
 <ul>
 <li>Checking only the neighbours with a smaller index when the graph is directed; for undirected graphs the earlier-neighbour test is sufficient.</li>
@@ -896,7 +896,7 @@ TSP-BB(C, n)
 <tr><td>6</td><td>ADB, ADC, ABC</td><td>25, 26, 26</td><td>prune</td><td>—</td></tr>
 </tbody></table></div>
 <h3 id="6-8-complexity">6.8 Complexity</h3>
-<p>The worst case enumerates all <code>(n−1)!</code> tours, so time is <strong>O(n!)</strong>; space for the live set can also be exponential. The reduced-matrix bound is strong, and in practice far fewer nodes are expanded. The reduction itself is O(n²) per node. For comparison, the DP of Module IV is O(n²2ⁿ) and is preferable for <code>n</code> up to about 15 when the full table fits; branch and bound is preferable when a good incumbent is found early and memory is limited.</p>
+<p>The worst case enumerates all <code>(n−1)!</code> tours, so time is <strong>O(n!)</strong>; space for the live set can also be exponential. The reduced-matrix bound is strong, and in practice far fewer nodes are expanded. The reduction itself is O(n<sup>2</sup>) per node. For comparison, the DP of Module IV is O(n<sup>2</sup>2<sup>n</sup>) and is preferable for <code>n</code> up to about 15 when the full table fits; branch and bound is preferable when a good incumbent is found early and memory is limited.</p>
 <h3 id="6-9-common-mistakes">6.9 Common mistakes</h3>
 <ul>
 <li>Forgetting to set the return edge <code>j → start</code> to ∞, so a child closes a subtour too early.</li>
@@ -1035,7 +1035,7 @@ TSP-BB(C, n)
 <tr><td>Tree</td><td>State-space tree, DFS</td><td>State-space tree, any strategy</td><td>Table of states, no tree</td></tr>
 <tr><td>Pruning test</td><td>Feasibility (promising)</td><td>Numeric bound + incumbent</td><td>None; every state is solved</td></tr>
 <tr><td>Search order</td><td>Depth-first</td><td>FIFO, LIFO or least-cost</td><td>Increasing state size</td></tr>
-<tr><td>Typical time</td><td>O(b^d), often n! or 2ⁿ</td><td>O(b^d), pruned</td><td>Polynomial or pseudo-polynomial</td></tr>
+<tr><td>Typical time</td><td>O(b^d), often n! or 2<sup>n</sup></td><td>O(b^d), pruned</td><td>Polynomial or pseudo-polynomial</td></tr>
 <tr><td>Space</td><td>O(d)</td><td>O(d) to exponential</td><td>Table size</td></tr>
 <tr><td>Examples</td><td>N-queens, sum of subsets, colouring</td><td>TSP, 15-puzzle</td><td>Multistage, Floyd, knapsack, TSP-DP, LCS</td></tr>
 </tbody></table></div>
@@ -1328,7 +1328,7 @@ D     1    9    8    ∞</code></pre>
 <p><strong>Backtracking.</strong> State-space tree; DFS; promising/non-promising; bounding function; backtrack. Time O(b^d), space O(d).</p>
 <p><strong>N-queens.</strong> One queen per row; <code>x[i]</code> = column; test <code>x[i] ≠ j</code> and <code>|x[i] − j| ≠ k − i</code>. 4-queens first solution <strong>(2,4,1,3)</strong>; 8-queens has <strong>92</strong> solutions.</p>
 <p><strong>Sum of subsets.</strong> Include/exclude; prune if <code>s + w[i] &gt; m</code> or <code>s + r &lt; m</code>. <code>(2,7,8,15)</code>, <code>m = 17</code> → <strong>{2,7,8}</strong> and <strong>{2,15}</strong>.</p>
-<p><strong>Graph colouring.</strong> <code>x[k] = c</code> is promising if no earlier neighbour has colour <code>c</code>. The five-vertex example gives <strong>(1,2,3,3,1)</strong>; complexity O(mⁿ).</p>
+<p><strong>Graph colouring.</strong> <code>x[k] = c</code> is promising if no earlier neighbour has colour <code>c</code>. The five-vertex example gives <strong>(1,2,3,3,1)</strong>; complexity O(m<sup>n</sup>).</p>
 <p><strong>Branch and bound.</strong> Live/dead/expanded; incumbent; FIFO, LIFO, LC. Prune if bound ≥ incumbent (minimisation). B&amp;B prunes on cost; backtracking prunes on feasibility.</p>
 <p><strong>TSP by B&amp;B.</strong> Reduce rows then columns; root bound = sum of reductions; child bound = parent bound + child reduction; set the return edge to ∞. Four-city example: root <strong>12</strong>, children <strong>20/23/18</strong>, tour <strong>A–B–D–C–A = 23</strong>; A–C–D–B–A is also 23.</p>
 <p><strong>15-puzzle.</strong> <code>c(x) = f(x) + g(x)</code>; <code>f</code> = depth, <code>g</code> = misplaced tiles (or Manhattan); expand the smallest <code>c</code>. Example: start <code>c = 3</code>, then Left (c=3), Down (c=3), Right (goal, c=3); sequence <strong>Left, Down, Right</strong>.</p>

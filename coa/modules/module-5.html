@@ -1365,7 +1365,7 @@
 
   <p>Ask three questions in order. <strong>How much data is there?</strong> A few bytes from a keypad does not justify a DMA controller; a 4 MB video frame does. <strong>How often does the device need attention?</strong> If it is idle most of the time, polling wastes the CPU and an interrupt is better. If it needs attention every few microseconds, even interrupts become too expensive, and DMA is the only sensible choice. <strong>What can the system afford?</strong> Polling needs almost no hardware, interrupts need a controller, DMA needs a controller and arbitration. In a tiny microcontroller, simplicity often wins; in a general-purpose computer, the memory bus is the scarce resource, so DMA wins for every high-rate device.</p>
 
-  <p>The three techniques are not mutually exclusive. A real system uses all of them: the keyboard is interrupt-driven, the disk uses DMA, and a temperature sensor on an I²C bus may be polled once a second. The exam answer should say this, because it shows that you understand the trade-off rather than memorising a ranking.</p>
+  <p>The three techniques are not mutually exclusive. A real system uses all of them: the keyboard is interrupt-driven, the disk uses DMA, and a temperature sensor on an I<sup>2</sup>C bus may be polled once a second. The exam answer should say this, because it shows that you understand the trade-off rather than memorising a ranking.</p>
 
   <figure>
     <svg viewBox="0 0 420 280" role="img" aria-labelledby="m5-cpu-t m5-cpu-d" style="max-width:420px">

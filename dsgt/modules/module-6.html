@@ -656,16 +656,16 @@
   <div class="example qa">
     <div class="example-title">Example 3: Edges in complete and complete bipartite graphs</div>
     <div class="qa-question"><div class="qa-label">Question</div>
-      <p>Find the number of edges in <span class="kbd">K₇</span> and in <span class="kbd">K₃,₄</span>.</p>
+      <p>Find the number of edges in <span class="kbd">K<sub>7</sub></span> and in <span class="kbd">K<sub>3</sub>,<sub>4</sub></span>.</p>
     </div>
     <div class="qa-solution"><div class="qa-label">Solution</div>
-      <p>In <span class="kbd">Kₙ</span> every pair of the <span class="kbd">n</span> vertices is joined:</p>
-      <div class="eq">|E(Kₙ)| = n(n − 1) / 2<br>|E(K₇)| = 7 × 6 / 2 = 21</div>
-      <p>In <span class="kbd">Kₘ,ₙ</span> every vertex of one part is joined to every vertex of the other, and there are no edges inside a part:</p>
-      <div class="eq">|E(Kₘ,ₙ)| = m × n<br>|E(K₃,₄)| = 3 × 4 = 12</div>
+      <p>In <span class="kbd">K<sub>n</sub></span> every pair of the <span class="kbd">n</span> vertices is joined:</p>
+      <div class="eq">|E(K<sub>n</sub>)| = n(n − 1) / 2<br>|E(K<sub>7</sub>)| = 7 × 6 / 2 = 21</div>
+      <p>In <span class="kbd">K<sub>m</sub>,<sub>n</sub></span> every vertex of one part is joined to every vertex of the other, and there are no edges inside a part:</p>
+      <div class="eq">|E(K<sub>m</sub>,<sub>n</sub>)| = m × n<br>|E(K<sub>3</sub>,<sub>4</sub>)| = 3 × 4 = 12</div>
     </div>
     <div class="qa-final"><div class="qa-label">Final Answer</div>
-      <p class="qa-final-text"><span class="kbd">K₇</span> has <strong>21</strong> edges; <span class="kbd">K₃,₄</span> has <strong>12</strong> edges.</p>
+      <p class="qa-final-text"><span class="kbd">K<sub>7</sub></span> has <strong>21</strong> edges; <span class="kbd">K<sub>3</sub>,<sub>4</sub></span> has <strong>12</strong> edges.</p>
     </div>
   </div>
 
@@ -677,12 +677,12 @@
     <tr><td><strong>Pseudograph</strong></td><td>Both loops and multiple edges allowed.</td><td>Figure 1.</td></tr>
     <tr><td><strong>Directed graph</strong></td><td>Each edge has a direction, written <span class="kbd">(u, v)</span>.</td><td>One-way streets.</td></tr>
     <tr><td><strong>Weighted graph</strong></td><td>Each edge carries a number: distance, cost, capacity.</td><td>Road network with distances.</td></tr>
-    <tr><td><strong>Regular graph</strong></td><td>Every vertex has the same degree <span class="kbd">r</span>.</td><td><span class="kbd">K₄</span> is 3-regular.</td></tr>
-    <tr><td><strong>Complete graph <span class="kbd">Kₙ</span></strong></td><td>Every pair of distinct vertices is adjacent.</td><td><span class="kbd">K₄</span> in Figure 2.</td></tr>
-    <tr><td><strong>Bipartite graph</strong></td><td>Vertices split into two parts, with edges only between parts.</td><td><span class="kbd">C₆</span> in Figure 2.</td></tr>
-    <tr><td><strong>Complete bipartite <span class="kbd">Kₘ,ₙ</span></strong></td><td>Bipartite, with every cross-pair joined.</td><td><span class="kbd">K₃,₃</span>.</td></tr>
-    <tr><td><strong>Cycle <span class="kbd">Cₙ</span></strong></td><td>One closed ring of <span class="kbd">n</span> vertices, all of degree 2.</td><td><span class="kbd">C₅</span> in Figure 6.</td></tr>
-    <tr><td><strong>Path <span class="kbd">Pₙ</span></strong></td><td><span class="kbd">n</span> vertices in a line; two ends of degree 1.</td><td><span class="kbd">P₄</span> in Practice 3.</td></tr>
+    <tr><td><strong>Regular graph</strong></td><td>Every vertex has the same degree <span class="kbd">r</span>.</td><td><span class="kbd">K<sub>4</sub></span> is 3-regular.</td></tr>
+    <tr><td><strong>Complete graph <span class="kbd">K<sub>n</sub></span></strong></td><td>Every pair of distinct vertices is adjacent.</td><td><span class="kbd">K<sub>4</sub></span> in Figure 2.</td></tr>
+    <tr><td><strong>Bipartite graph</strong></td><td>Vertices split into two parts, with edges only between parts.</td><td><span class="kbd">C<sub>6</sub></span> in Figure 2.</td></tr>
+    <tr><td><strong>Complete bipartite <span class="kbd">K<sub>m</sub>,<sub>n</sub></span></strong></td><td>Bipartite, with every cross-pair joined.</td><td><span class="kbd">K<sub>3</sub>,<sub>3</sub></span>.</td></tr>
+    <tr><td><strong>Cycle <span class="kbd">C<sub>n</sub></span></strong></td><td>One closed ring of <span class="kbd">n</span> vertices, all of degree 2.</td><td><span class="kbd">C<sub>5</sub></span> in Figure 6.</td></tr>
+    <tr><td><strong>Path <span class="kbd">P<sub>n</sub></span></strong></td><td><span class="kbd">n</span> vertices in a line; two ends of degree 1.</td><td><span class="kbd">P<sub>4</sub></span> in Practice 3.</td></tr>
   </table>
 
   <figure class="dsgt-diagram wide">
@@ -746,12 +746,12 @@
       <text x="480" y="251" text-anchor="middle" font-size="13" fill="var(--muted)" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">U = {u₁,u₂,u₃} · V = {v₁,v₂,v₃}</text>
     </svg>
     <svg class="dsgt-mobile-diagram" style="display:none" viewBox="0 0 380 592" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="d2mTitle d2mDesc"><title id="d2mTitle">Complete graph K4 above a bipartite cycle C6</title><desc id="d2mDesc">Top: K4 drawn as a square with both diagonals, so all six pairs are joined. Bottom: a six-cycle drawn as a hexagon with alternating colours, showing the two bipartition sets.</desc><g fill="none" stroke="var(--ink)" stroke-width="2.2"><line x1="120" y1="50" x2="260" y2="50"/><line x1="260" y1="50" x2="260" y2="190"/><line x1="260" y1="190" x2="120" y2="190"/><line x1="120" y1="190" x2="120" y2="50"/><line x1="120" y1="50" x2="260" y2="190"/><line x1="120" y1="190" x2="260" y2="50"/></g><circle cx="120" cy="50" r="17" fill="var(--bg)" stroke="var(--ink)" stroke-width="2.2"/><text x="120" y="50" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle" dominant-baseline="central" fill="var(--ink)">1</text><circle cx="260" cy="50" r="17" fill="var(--bg)" stroke="var(--ink)" stroke-width="2.2"/><text x="260" y="50" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle" dominant-baseline="central" fill="var(--ink)">2</text><circle cx="260" cy="190" r="17" fill="var(--bg)" stroke="var(--ink)" stroke-width="2.2"/><text x="260" y="190" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle" dominant-baseline="central" fill="var(--ink)">3</text><circle cx="120" cy="190" r="17" fill="var(--bg)" stroke="var(--ink)" stroke-width="2.2"/><text x="120" y="190" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle" dominant-baseline="central" fill="var(--ink)">4</text><text x="190" y="237" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">K₄</text><text x="190" y="258" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="14" font-weight="400" fill="var(--muted)" text-anchor="middle">4 vertices · 6 edges · 3-regular</text><path d="M20 282H360" stroke="var(--accent)" stroke-opacity=".38"/><g fill="none" stroke="var(--ink)" stroke-width="2.2"><line x1="190" y1="312" x2="275" y2="362"/><line x1="275" y1="362" x2="275" y2="459"/><line x1="275" y1="459" x2="190" y2="508"/><line x1="190" y1="508" x2="105" y2="459"/><line x1="105" y1="459" x2="105" y2="362"/><line x1="105" y1="362" x2="190" y2="312"/></g><circle cx="190" cy="312" r="19" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.2"/><text x="190" y="312" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" text-anchor="middle" dominant-baseline="central" fill="var(--accent)">u₁</text><circle cx="275" cy="362" r="19" fill="var(--bg)" stroke="var(--ink)" stroke-width="2.2"/><text x="275" y="362" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" text-anchor="middle" dominant-baseline="central" fill="var(--ink)">v₁</text><circle cx="275" cy="459" r="19" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.2"/><text x="275" y="459" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" text-anchor="middle" dominant-baseline="central" fill="var(--accent)">u₂</text><circle cx="190" cy="508" r="19" fill="var(--bg)" stroke="var(--ink)" stroke-width="2.2"/><text x="190" y="508" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" text-anchor="middle" dominant-baseline="central" fill="var(--ink)">v₂</text><circle cx="105" cy="459" r="19" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.2"/><text x="105" y="459" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" text-anchor="middle" dominant-baseline="central" fill="var(--accent)">u₃</text><circle cx="105" cy="362" r="19" fill="var(--bg)" stroke="var(--ink)" stroke-width="2.2"/><text x="105" y="362" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" text-anchor="middle" dominant-baseline="central" fill="var(--ink)">v₃</text><text x="190" y="552" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">C₆ is bipartite</text><text x="190" y="574" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="14" font-weight="400" fill="var(--muted)" text-anchor="middle">U = {u₁,u₂,u₃} · V = {v₁,v₂,v₃}</text></svg>
-    <figcaption>Figure 2. First: <span class="kbd">K₄</span> with all six edges; the diagonals cross in this square drawing, but <span class="kbd">K₄</span> also has a crossing-free drawing (Figure 7). Second: <span class="kbd">C₆</span> with its vertices coloured by bipartition — every edge runs between the two parts. A graph is bipartite exactly when it contains no odd cycle.</figcaption>
+    <figcaption>Figure 2. First: <span class="kbd">K<sub>4</sub></span> with all six edges; the diagonals cross in this square drawing, but <span class="kbd">K<sub>4</sub></span> also has a crossing-free drawing (Figure 7). Second: <span class="kbd">C<sub>6</sub></span> with its vertices coloured by bipartition — every edge runs between the two parts. A graph is bipartite exactly when it contains no odd cycle.</figcaption>
   </figure>
 
   <div class="theory">
     <span class="source">Two facts worth memorising</span>
-    <p><strong>Bipartite test:</strong> a graph is bipartite if and only if it has no odd cycle. <span class="kbd">C₆</span> passes; a triangle fails; <span class="kbd">K₄</span> fails because it contains triangles.</p>
+    <p><strong>Bipartite test:</strong> a graph is bipartite if and only if it has no odd cycle. <span class="kbd">C<sub>6</sub></span> passes; a triangle fails; <span class="kbd">K<sub>4</sub></span> fails because it contains triangles.</p>
     <p><strong>Regular graphs:</strong> if every vertex has degree <span class="kbd">r</span>, then <span class="kbd">2|E| = n·r</span>. So a 3-regular graph on 5 vertices would need <span class="kbd">|E| = 15/2</span>, which is impossible. This parity check appears in Question 1 parts.</p>
   </div>
 
@@ -776,7 +776,7 @@
   </table>
 
   <h3 id="adjacency-matrix" data-rail-subsection>Adjacency Matrix</h3>
-  <p><span class="kbd">A</span> is a <span class="kbd">|V| × |V|</span> matrix. For a simple graph, <span class="kbd">aᵢⱼ = 1</span> when <span class="kbd">i</span> and <span class="kbd">j</span> are adjacent, and 0 otherwise. The row sum is the degree, and the matrix is symmetric about the main diagonal.</p>
+  <p><span class="kbd">A</span> is a <span class="kbd">|V| × |V|</span> matrix. For a simple graph, <span class="kbd">a<sub>ij</sub> = 1</span> when <span class="kbd">i</span> and <span class="kbd">j</span> are adjacent, and 0 otherwise. The row sum is the degree, and the matrix is symmetric about the main diagonal.</p>
   <table>
     <tr><th scope="col"></th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th></tr>
     <tr><td><strong>1</strong></td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
@@ -788,7 +788,7 @@
   <h3 id="incidence-matrix" data-rail-subsection>Incidence Matrix</h3>
   <p><span class="kbd">B</span> is a <span class="kbd">|V| × |E|</span> matrix with one column per edge. For an undirected graph, put 1 in the two rows of the edge’s endpoints and 0 elsewhere. Every column therefore contains exactly two 1s.</p>
   <table>
-    <tr><th scope="col"></th><th scope="col">e₁ = 12</th><th scope="col">e₂ = 13</th><th scope="col">e₃ = 24</th><th scope="col">e₄ = 34</th></tr>
+    <tr><th scope="col"></th><th scope="col">e<sub>1</sub> = 12</th><th scope="col">e<sub>2</sub> = 13</th><th scope="col">e<sub>3</sub> = 24</th><th scope="col">e<sub>4</sub> = 34</th></tr>
     <tr><td><strong>1</strong></td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
     <tr><td><strong>2</strong></td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
     <tr><td><strong>3</strong></td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
@@ -797,7 +797,7 @@
 
   <div class="theory">
     <span class="source">Conventions for loops and multiple edges</span>
-    <p>For a multigraph, the adjacency entry <span class="kbd">aᵢⱼ</span> is the <em>number</em> of edges between <span class="kbd">i</span> and <span class="kbd">j</span>. For a loop, this guide writes 2 on the diagonal, so that row sums still equal degrees. Some books write 1; either is acceptable if you state the convention.</p>
+    <p>For a multigraph, the adjacency entry <span class="kbd">a<sub>ij</sub></span> is the <em>number</em> of edges between <span class="kbd">i</span> and <span class="kbd">j</span>. For a loop, this guide writes 2 on the diagonal, so that row sums still equal degrees. Some books write 1; either is acceptable if you state the convention.</p>
     <p>In the incidence matrix, a loop occupies a column with a single entry 2 in its vertex’s row. A directed edge from <span class="kbd">u</span> to <span class="kbd">v</span> is normally recorded as <span class="kbd">−1</span> at <span class="kbd">u</span> and <span class="kbd">+1</span> at <span class="kbd">v</span>.</p>
   </div>
 
@@ -833,13 +833,13 @@
       <p>Each row has two 1s, so every degree is 2. The edges form the ring <span class="kbd">1–2–3–4–1</span>.</p>
     </div>
     <div class="qa-final"><div class="qa-label">Final Answer</div>
-      <p class="qa-final-text">The graph is the cycle <span class="kbd">C₄</span> with 4 edges, and it is 2-regular.</p>
+      <p class="qa-final-text">The graph is the cycle <span class="kbd">C<sub>4</sub></span> with 4 edges, and it is 2-regular.</p>
     </div>
   </div>
 
   <div class="theory">
     <span class="source">Which representation to use</span>
-    <p>Use an <strong>adjacency list</strong> for sparse graphs: storage is <span class="kbd">O(V + E)</span>. Use an <strong>adjacency matrix</strong> when you need fast adjacency tests or when the graph is dense: storage is <span class="kbd">O(V²)</span>, but <span class="kbd">aᵢⱼ</span> is a direct lookup. Use an <strong>incidence matrix</strong> when the edges themselves matter — for example, when proving properties of circuits or cuts.</p>
+    <p>Use an <strong>adjacency list</strong> for sparse graphs: storage is <span class="kbd">O(V + E)</span>. Use an <strong>adjacency matrix</strong> when you need fast adjacency tests or when the graph is dense: storage is <span class="kbd">O(V<sup>2</sup>)</span>, but <span class="kbd">a<sub>ij</sub></span> is a direct lookup. Use an <strong>incidence matrix</strong> when the edges themselves matter — for example, when proving properties of circuits or cuts.</p>
   </div>
 
   <h2 id="subgraphs">3 · Subgraphs and Operations on Graphs (6.3)</h2>
@@ -870,20 +870,20 @@
   <h3 id="graph-operations" data-rail-subsection>Operations on Graphs</h3>
   <table>
     <tr><th scope="col">Operation</th><th scope="col">Vertex set</th><th scope="col">Edge set</th></tr>
-    <tr><td><strong>Union</strong> <span class="kbd">G₁ ∪ G₂</span></td><td><span class="kbd">V₁ ∪ V₂</span></td><td><span class="kbd">E₁ ∪ E₂</span></td></tr>
-    <tr><td><strong>Intersection</strong> <span class="kbd">G₁ ∩ G₂</span></td><td><span class="kbd">V₁ ∩ V₂</span></td><td><span class="kbd">E₁ ∩ E₂</span></td></tr>
-    <tr><td><strong>Ring sum</strong> <span class="kbd">G₁ ⊕ G₂</span></td><td><span class="kbd">V₁ ∪ V₂</span></td><td>Edges in exactly one of <span class="kbd">E₁, E₂</span></td></tr>
-    <tr><td><strong>Complement</strong> <span class="kbd">Ḡ</span></td><td><span class="kbd">V</span></td><td>All non-loops of <span class="kbd">Kₙ</span> not in <span class="kbd">E</span></td></tr>
+    <tr><td><strong>Union</strong> <span class="kbd">G<sub>1</sub> ∪ G<sub>2</sub></span></td><td><span class="kbd">V<sub>1</sub> ∪ V<sub>2</sub></span></td><td><span class="kbd">E<sub>1</sub> ∪ E<sub>2</sub></span></td></tr>
+    <tr><td><strong>Intersection</strong> <span class="kbd">G<sub>1</sub> ∩ G<sub>2</sub></span></td><td><span class="kbd">V<sub>1</sub> ∩ V<sub>2</sub></span></td><td><span class="kbd">E<sub>1</sub> ∩ E<sub>2</sub></span></td></tr>
+    <tr><td><strong>Ring sum</strong> <span class="kbd">G<sub>1</sub> ⊕ G<sub>2</sub></span></td><td><span class="kbd">V<sub>1</sub> ∪ V<sub>2</sub></span></td><td>Edges in exactly one of <span class="kbd">E<sub>1</sub>, E<sub>2</sub></span></td></tr>
+    <tr><td><strong>Complement</strong> <span class="kbd">Ḡ</span></td><td><span class="kbd">V</span></td><td>All non-loops of <span class="kbd">K<sub>n</sub></span> not in <span class="kbd">E</span></td></tr>
   </table>
   <p>The ring sum is also called the symmetric difference. It is the operation behind cycle space in graph theory: the ring sum of two cycles is a collection of cycles.</p>
 
   <div class="example qa">
     <div class="example-title">Example 7: Union, intersection and ring sum</div>
     <div class="qa-question"><div class="qa-label">Question</div>
-      <p>On the vertex set <span class="kbd">{1, 2, 3, 4, 5}</span>, let <span class="kbd">H₁</span> have edges <span class="kbd">{12, 23, 34}</span> and <span class="kbd">H₂</span> have edges <span class="kbd">{23, 34, 45}</span>. Find <span class="kbd">H₁ ∪ H₂</span>, <span class="kbd">H₁ ∩ H₂</span> and <span class="kbd">H₁ ⊕ H₂</span>.</p>
+      <p>On the vertex set <span class="kbd">{1, 2, 3, 4, 5}</span>, let <span class="kbd">H<sub>1</sub></span> have edges <span class="kbd">{12, 23, 34}</span> and <span class="kbd">H<sub>2</sub></span> have edges <span class="kbd">{23, 34, 45}</span>. Find <span class="kbd">H<sub>1</sub> ∪ H<sub>2</sub></span>, <span class="kbd">H<sub>1</sub> ∩ H<sub>2</sub></span> and <span class="kbd">H<sub>1</sub> ⊕ H<sub>2</sub></span>.</p>
     </div>
     <div class="qa-solution"><div class="qa-label">Solution</div>
-      <div class="eq">H₁ ∪ H₂ = {12, 23, 34, 45}<br>H₁ ∩ H₂ = {23, 34}<br>H₁ ⊕ H₂ = {12, 45}</div>
+      <div class="eq">H<sub>1</sub> ∪ H<sub>2</sub> = {12, 23, 34, 45}<br>H<sub>1</sub> ∩ H<sub>2</sub> = {23, 34}<br>H<sub>1</sub> ⊕ H<sub>2</sub> = {12, 45}</div>
       <p>The union is the path <span class="kbd">1–2–3–4–5</span>. The intersection is the middle path <span class="kbd">2–3–4</span>. The ring sum drops the shared edges and leaves the two ends.</p>
     </div>
     <div class="qa-final"><div class="qa-label">Final Answer</div>
@@ -900,7 +900,7 @@
       <p>A spanning subgraph must keep all five vertices. The outer ring of <span class="kbd">G</span> is <span class="kbd">1–2–3–4–5–1</span>, using edges <span class="kbd">12, 23, 34, 45, 51</span>. Dropping the chord <span class="kbd">13</span> removes the only extra edge.</p>
     </div>
     <div class="qa-final"><div class="qa-label">Final Answer</div>
-      <p class="qa-final-text">The spanning subgraph with edges <span class="kbd">{12, 23, 34, 45, 51}</span> is <span class="kbd">C₅</span>.</p>
+      <p class="qa-final-text">The spanning subgraph with edges <span class="kbd">{12, 23, 34, 45, 51}</span> is <span class="kbd">C<sub>5</sub></span>.</p>
     </div>
   </div>
 
@@ -908,7 +908,7 @@
 
   <div class="theory">
     <span class="source">Teacher’s vocabulary: how to move through a graph</span>
-    <p>A <strong>walk</strong> is an alternating sequence of vertices and edges, <span class="kbd">v₀, e₁, v₁, e₂, …, eₖ, vₖ</span>, where each edge <span class="kbd">eᵢ</span> joins <span class="kbd">vᵢ₋₁</span> to <span class="kbd">vᵢ</span>. Its <strong>length</strong> is the number of edges, <span class="kbd">k</span>. A walk is <strong>closed</strong> if it starts and ends at the same vertex, and <strong>open</strong> otherwise.</p>
+    <p>A <strong>walk</strong> is an alternating sequence of vertices and edges, <span class="kbd">v<sub>0</sub>, e<sub>1</sub>, v<sub>1</sub>, e<sub>2</sub>, …, e<sub>k</sub>, v<sub>k</sub></span>, where each edge <span class="kbd">e<sub>i</sub></span> joins <span class="kbd">v<sub>i−1</sub></span> to <span class="kbd">v<sub>i</sub></span>. Its <strong>length</strong> is the number of edges, <span class="kbd">k</span>. A walk is <strong>closed</strong> if it starts and ends at the same vertex, and <strong>open</strong> otherwise.</p>
     <p>A <strong>trail</strong> is a walk with no repeated edge. A <strong>path</strong> is a walk with no repeated vertex (apart from the starting vertex when the walk is closed). A <strong>circuit</strong> is a closed trail. A <strong>cycle</strong> is a closed path with at least three vertices.</p>
     <div class="eq">path ⊂ trail ⊂ walk &nbsp;·&nbsp; cycle ⊂ circuit ⊂ closed walk</div>
     <p class="eq-note">Every path is a trail, because repeating a vertex would force a repeated edge. The converse fails: you can revisit a vertex without reusing an edge.</p>
@@ -1043,7 +1043,7 @@
       <p>All five edges map to edges, so the five distinct edges of <span class="kbd">G</span> map onto the five distinct edges of <span class="kbd">H</span>. A non-edge also behaves: <span class="kbd">ac</span> maps to <span class="kbd">21</span>, which is not an edge of <span class="kbd">H</span>.</p>
     </div>
     <div class="qa-final"><div class="qa-label">Final Answer</div>
-      <p class="qa-final-text">The map <span class="kbd">a→2, b→4, c→1, d→3, e→5</span> is an isomorphism, so the house and the pentagram are the same graph, <span class="kbd">C₅</span>, drawn differently.</p>
+      <p class="qa-final-text">The map <span class="kbd">a→2, b→4, c→1, d→3, e→5</span> is an isomorphism, so the house and the pentagram are the same graph, <span class="kbd">C<sub>5</sub></span>, drawn differently.</p>
     </div>
   </div>
 
@@ -1094,7 +1094,7 @@
       </g>
     </svg>
     <svg class="dsgt-mobile-diagram" style="display:none" viewBox="0 0 380 548" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="d4mTitle d4mDesc"><title id="d4mTitle">A house-shaped five-cycle above a pentagram-shaped five-cycle</title><desc id="d4mDesc">Top: vertices a to e drawn as a house, forming a five-cycle. Bottom: vertices 1 to 5 drawn as a pentagram, also forming a five-cycle. The relabelling a to 2, b to 4, c to 1, d to 3, e to 5 preserves every edge.</desc><g fill="none" stroke="var(--ink)" stroke-width="2.2"><line x1="120" y1="170" x2="120" y2="100"/><line x1="120" y1="100" x2="190" y2="50"/><line x1="190" y1="50" x2="260" y2="100"/><line x1="260" y1="100" x2="260" y2="170"/><line x1="260" y1="170" x2="120" y2="170"/></g><circle cx="120" cy="170" r="17" fill="var(--bg)" stroke="var(--ink)" stroke-width="2.2"/><text x="120" y="170" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle" dominant-baseline="central" fill="var(--ink)">a</text><circle cx="120" cy="100" r="17" fill="var(--bg)" stroke="var(--ink)" stroke-width="2.2"/><text x="120" y="100" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle" dominant-baseline="central" fill="var(--ink)">b</text><circle cx="190" cy="50" r="17" fill="var(--bg)" stroke="var(--ink)" stroke-width="2.2"/><text x="190" y="50" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle" dominant-baseline="central" fill="var(--ink)">c</text><circle cx="260" cy="100" r="17" fill="var(--bg)" stroke="var(--ink)" stroke-width="2.2"/><text x="260" y="100" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle" dominant-baseline="central" fill="var(--ink)">d</text><circle cx="260" cy="170" r="17" fill="var(--bg)" stroke="var(--ink)" stroke-width="2.2"/><text x="260" y="170" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle" dominant-baseline="central" fill="var(--ink)">e</text><text x="190" y="218" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="var(--muted)" text-anchor="middle">house drawing of C₅</text><text x="190" y="240" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="var(--muted)" text-anchor="middle">a→2 · b→4 · c→1 · d→3 · e→5</text><path d="M20 262H360" stroke="var(--accent)" stroke-opacity=".38"/><g fill="none" stroke="var(--ink)" stroke-width="2.2"><line x1="190" y1="300" x2="250" y2="483"/><line x1="250" y1="483" x2="93" y2="370"/><line x1="93" y1="370" x2="287" y2="370"/><line x1="287" y1="370" x2="130" y2="483"/><line x1="130" y1="483" x2="190" y2="300"/></g><circle cx="190" cy="300" r="19" fill="var(--bg)" stroke="var(--ink)" stroke-width="2.2"/><text x="190" y="300" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle" dominant-baseline="central" fill="var(--ink)">1</text><circle cx="287" cy="370" r="19" fill="var(--bg)" stroke="var(--ink)" stroke-width="2.2"/><text x="287" y="370" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle" dominant-baseline="central" fill="var(--ink)">2</text><circle cx="250" cy="483" r="19" fill="var(--bg)" stroke="var(--ink)" stroke-width="2.2"/><text x="250" y="483" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle" dominant-baseline="central" fill="var(--ink)">3</text><circle cx="130" cy="483" r="19" fill="var(--bg)" stroke="var(--ink)" stroke-width="2.2"/><text x="130" y="483" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle" dominant-baseline="central" fill="var(--ink)">4</text><circle cx="93" cy="370" r="19" fill="var(--bg)" stroke="var(--ink)" stroke-width="2.2"/><text x="93" y="370" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle" dominant-baseline="central" fill="var(--ink)">5</text><text x="190" y="530" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="var(--muted)" text-anchor="middle">pentagram drawing of C₅</text></svg>
-    <figcaption>Figure 4. Both drawings have 5 vertices of degree 2 and 5 edges, so both are <span class="kbd">C₅</span>. The labels differ, but the cycle order does not: the mapping in the caption carries one cycle onto the other.</figcaption>
+    <figcaption>Figure 4. Both drawings have 5 vertices of degree 2 and 5 edges, so both are <span class="kbd">C<sub>5</sub></span>. The labels differ, but the cycle order does not: the mapping in the caption carries one cycle onto the other.</figcaption>
   </figure>
 
   <div class="example qa">
@@ -1104,11 +1104,11 @@
     </div>
     <div class="qa-solution"><div class="qa-label">Solution</div>
       <p>The easy invariants agree, so look at components.</p>
-      <div class="eq">c(C₆) = 1 &nbsp;·&nbsp; c(2C₃) = 2</div>
+      <div class="eq">c(C<sub>6</sub>) = 1 &nbsp;·&nbsp; c(2C<sub>3</sub>) = 2</div>
       <p>An isomorphism preserves paths, so it must map a connected graph to a connected graph. It cannot map the single 6-cycle onto two separate triangles.</p>
     </div>
     <div class="qa-final"><div class="qa-label">Final Answer</div>
-      <p class="qa-final-text">They are not isomorphic: <span class="kbd">C₆</span> is connected, while the two triangles form two components. Identical degree sequences do not prove isomorphism.</p>
+      <p class="qa-final-text">They are not isomorphic: <span class="kbd">C<sub>6</sub></span> is connected, while the two triangles form two components. Identical degree sequences do not prove isomorphism.</p>
     </div>
   </div>
 
@@ -1122,7 +1122,7 @@
   <div class="example qa">
     <div class="example-title">Example 13: A homomorphism that is not an isomorphism</div>
     <div class="qa-question"><div class="qa-label">Question</div>
-      <p>Let <span class="kbd">G = C₄</span> with vertices <span class="kbd">1–2–3–4–1</span>, and let <span class="kbd">H = K₂</span> with vertices <span class="kbd">x, y</span>. Define <span class="kbd">f(1) = f(3) = x</span> and <span class="kbd">f(2) = f(4) = y</span>. Show that <span class="kbd">f</span> is a homomorphism but not an isomorphism.</p>
+      <p>Let <span class="kbd">G = C<sub>4</sub></span> with vertices <span class="kbd">1–2–3–4–1</span>, and let <span class="kbd">H = K<sub>2</sub></span> with vertices <span class="kbd">x, y</span>. Define <span class="kbd">f(1) = f(3) = x</span> and <span class="kbd">f(2) = f(4) = y</span>. Show that <span class="kbd">f</span> is a homomorphism but not an isomorphism.</p>
     </div>
     <div class="qa-solution"><div class="qa-label">Solution</div>
       <p>Check each edge of the 4-cycle:</p>
@@ -1130,13 +1130,13 @@
       <p>Every image is the single edge <span class="kbd">xy</span>, so adjacency is preserved and <span class="kbd">f</span> is a homomorphism. But <span class="kbd">f(1) = f(3)</span>, so <span class="kbd">f</span> is not injective; also <span class="kbd">|V(G)| = 4</span> and <span class="kbd">|V(H)| = 2</span>, so no bijection exists.</p>
     </div>
     <div class="qa-final"><div class="qa-label">Final Answer</div>
-      <p class="qa-final-text"><span class="kbd">f</span> is a homomorphism but not an isomorphism. In fact it is exactly a proper 2-colouring of the bipartite graph <span class="kbd">C₄</span>.</p>
+      <p class="qa-final-text"><span class="kbd">f</span> is a homomorphism but not an isomorphism. In fact it is exactly a proper 2-colouring of the bipartite graph <span class="kbd">C<sub>4</sub></span>.</p>
     </div>
   </div>
 
   <div class="theory">
     <span class="source">Terminology note — course slides vs standard texts</span>
-    <p>The slide titled “Homomorphism” describes obtaining one graph from another by <em>subdividing edges</em> — inserting a new degree-2 vertex on an edge. Standard texts call that relation <strong>homeomorphism</strong>, not homomorphism. For example, subdividing one edge of <span class="kbd">C₄</span> gives <span class="kbd">C₅</span>: the graphs are homeomorphic, but not isomorphic, because they have different numbers of vertices.</p>
+    <p>The slide titled “Homomorphism” describes obtaining one graph from another by <em>subdividing edges</em> — inserting a new degree-2 vertex on an edge. Standard texts call that relation <strong>homeomorphism</strong>, not homomorphism. For example, subdividing one edge of <span class="kbd">C<sub>4</sub></span> gives <span class="kbd">C<sub>5</sub></span>: the graphs are homeomorphic, but not isomorphic, because they have different numbers of vertices.</p>
     <p>In this course, follow the slide’s usage when the question uses the course’s wording. If a question asks for the <em>standard</em> definition, use the adjacency-preserving map above and mention the distinction in one sentence. Do not silently swap the two terms.</p>
   </div>
 
@@ -1374,23 +1374,23 @@
         <text x="140" y="160">F₃</text>
       </g>
     </svg>
-    <figcaption>Figure 7. <span class="kbd">K₄</span> drawn without crossings. <span class="kbd">V = 4</span>, <span class="kbd">E = 6</span>, <span class="kbd">F = 4</span> (three inner triangles plus the outer face), and <span class="kbd">4 − 6 + 4 = 2</span>.</figcaption>
+    <figcaption>Figure 7. <span class="kbd">K<sub>4</sub></span> drawn without crossings. <span class="kbd">V = 4</span>, <span class="kbd">E = 6</span>, <span class="kbd">F = 4</span> (three inner triangles plus the outer face), and <span class="kbd">4 − 6 + 4 = 2</span>.</figcaption>
   </figure>
 
   <div class="example qa">
-    <div class="example-title">Example 18: Euler’s formula for K₄</div>
+    <div class="example-title">Example 18: Euler’s formula for K<sub>4</sub></div>
     <div class="qa-question"><div class="qa-label">Question</div>
-      <p>Verify Euler’s formula and the face-degree identity for the drawing in Figure 7. Is <span class="kbd">K₄</span> planar?</p>
+      <p>Verify Euler’s formula and the face-degree identity for the drawing in Figure 7. Is <span class="kbd">K<sub>4</sub></span> planar?</p>
     </div>
     <div class="qa-solution"><div class="qa-label">Solution</div>
       <p>There are 4 vertices, 6 edges and 4 faces: three bounded triangles and the unbounded outer region.</p>
       <div class="eq">V − E + F = 4 − 6 + 4 = 2</div>
       <p>Each of the four faces is bounded by a triangle, so every face degree is 3:</p>
       <div class="eq">Σ deg(f) = 3 + 3 + 3 + 3 = 12 = 2 × 6</div>
-      <p>The bound also holds: <span class="kbd">6 ≤ 3(4) − 6 = 6</span>, so <span class="kbd">K₄</span> saturates the planar edge bound.</p>
+      <p>The bound also holds: <span class="kbd">6 ≤ 3(4) − 6 = 6</span>, so <span class="kbd">K<sub>4</sub></span> saturates the planar edge bound.</p>
     </div>
     <div class="qa-final"><div class="qa-label">Final Answer</div>
-      <p class="qa-final-text"><span class="kbd">K₄</span> is planar. <span class="kbd">V−E+F = 2</span>, every face has degree 3, and <span class="kbd">E = 3V−6</span>.</p>
+      <p class="qa-final-text"><span class="kbd">K<sub>4</sub></span> is planar. <span class="kbd">V−E+F = 2</span>, every face has degree 3, and <span class="kbd">E = 3V−6</span>.</p>
     </div>
   </div>
 
@@ -1410,20 +1410,20 @@
   </div>
 
   <div class="example qa">
-    <div class="example-title">Example 20: Why K₅ and K₃,₃ are not planar</div>
+    <div class="example-title">Example 20: Why K<sub>5</sub> and K<sub>3</sub>,<sub>3</sub> are not planar</div>
     <div class="qa-question"><div class="qa-label">Question</div>
-      <p>Use the planar edge bounds to prove that (a) <span class="kbd">K₅</span> and (b) <span class="kbd">K₃,₃</span> are not planar.</p>
+      <p>Use the planar edge bounds to prove that (a) <span class="kbd">K<sub>5</sub></span> and (b) <span class="kbd">K<sub>3</sub>,<sub>3</sub></span> are not planar.</p>
     </div>
     <div class="qa-solution"><div class="qa-label">Solution</div>
-      <p>(a) <span class="kbd">K₅</span> has <span class="kbd">V = 5</span> and <span class="kbd">E = 10</span>. If it were planar, the simple-graph bound would require:</p>
+      <p>(a) <span class="kbd">K<sub>5</sub></span> has <span class="kbd">V = 5</span> and <span class="kbd">E = 10</span>. If it were planar, the simple-graph bound would require:</p>
       <div class="eq">E ≤ 3V − 6<br>10 ≤ 3(5) − 6 = 9</div>
-      <p>This is false, so <span class="kbd">K₅</span> is not planar.</p>
-      <p>(b) <span class="kbd">K₃,₃</span> has <span class="kbd">V = 6</span> and <span class="kbd">E = 3 × 3 = 9</span>. It is bipartite, so it has no triangles and the stronger bound applies:</p>
+      <p>This is false, so <span class="kbd">K<sub>5</sub></span> is not planar.</p>
+      <p>(b) <span class="kbd">K<sub>3</sub>,<sub>3</sub></span> has <span class="kbd">V = 6</span> and <span class="kbd">E = 3 × 3 = 9</span>. It is bipartite, so it has no triangles and the stronger bound applies:</p>
       <div class="eq">E ≤ 2V − 4<br>9 ≤ 2(6) − 4 = 8</div>
-      <p>This is false, so <span class="kbd">K₃,₃</span> is not planar. Using only <span class="kbd">3V − 6</span> would give <span class="kbd">9 ≤ 12</span>, which proves nothing — the bipartite bound is the one that works.</p>
+      <p>This is false, so <span class="kbd">K<sub>3</sub>,<sub>3</sub></span> is not planar. Using only <span class="kbd">3V − 6</span> would give <span class="kbd">9 ≤ 12</span>, which proves nothing — the bipartite bound is the one that works.</p>
     </div>
     <div class="qa-final"><div class="qa-label">Final Answer</div>
-      <p class="qa-final-text">Both violate a necessary planar bound: <span class="kbd">K₅</span> has 10 &gt; 9, and <span class="kbd">K₃,₃</span> has 9 &gt; 8. Neither is planar.</p>
+      <p class="qa-final-text">Both violate a necessary planar bound: <span class="kbd">K<sub>5</sub></span> has 10 &gt; 9, and <span class="kbd">K<sub>3</sub>,<sub>3</sub></span> has 9 &gt; 8. Neither is planar.</p>
     </div>
   </div>
 
@@ -1544,38 +1544,38 @@
 
     <div class="qa-question"><div class="qa-label">Question</div>
       <p>Two lab surveillance networks are modeled as undirected graphs:</p>
-      <p><strong>Graph G₁ (Cameras A, B, C, D):</strong><br>
+      <p><strong>Graph G<sub>1</sub> (Cameras A, B, C, D):</strong><br>
       A: B, C<br>
       B: A, D<br>
       C: A, D<br>
       D: B, C</p>
-      <p><strong>Graph G₂ (Cameras P, Q, R, S):</strong><br>
+      <p><strong>Graph G<sub>2</sub> (Cameras P, Q, R, S):</strong><br>
       P: Q, R<br>
       Q: P, S<br>
       R: P, S<br>
       S: Q, R</p>
-      <p>i. Determine whether G₁ and G₂ are isomorphic.<br>
+      <p>i. Determine whether G<sub>1</sub> and G<sub>2</sub> are isomorphic.<br>
       ii. If yes, provide the mapping.<br>
       iii. Explain how detecting isomorphic patterns helps in reusing surveillance layouts and minimizing storage of duplicate designs.</p>
     </div>
 
     <div class="qa-solution"><div class="qa-label">Solution</div>
-      <p><strong>(i) Compare invariants.</strong> Both graphs have 4 vertices. G₁ has edges <span class="kbd">AB, AC, BD, CD</span>; G₂ has edges <span class="kbd">PQ, PR, QS, RS</span>. Both have 4 edges, and every vertex in both graphs has degree 2. A connected 2-regular graph on 4 vertices is <span class="kbd">C₄</span>, so both are 4-cycles.</p>
-      <p><strong>(ii) Build the mapping.</strong> The cycle in G₁ is <span class="kbd">B–A–C–D–B</span>. The cycle in G₂ is <span class="kbd">Q–P–R–S–Q</span>. Match them in order:</p>
+      <p><strong>(i) Compare invariants.</strong> Both graphs have 4 vertices. G<sub>1</sub> has edges <span class="kbd">AB, AC, BD, CD</span>; G<sub>2</sub> has edges <span class="kbd">PQ, PR, QS, RS</span>. Both have 4 edges, and every vertex in both graphs has degree 2. A connected 2-regular graph on 4 vertices is <span class="kbd">C<sub>4</sub></span>, so both are 4-cycles.</p>
+      <p><strong>(ii) Build the mapping.</strong> The cycle in G<sub>1</sub> is <span class="kbd">B–A–C–D–B</span>. The cycle in G<sub>2</sub> is <span class="kbd">Q–P–R–S–Q</span>. Match them in order:</p>
       <div class="eq">A → P &nbsp; B → Q &nbsp; C → R &nbsp; D → S</div>
       <table>
-        <tr><th scope="col">Edge of G₁</th><th scope="col">Image in G₂</th><th scope="col">Present?</th></tr>
+        <tr><th scope="col">Edge of G<sub>1</sub></th><th scope="col">Image in G<sub>2</sub></th><th scope="col">Present?</th></tr>
         <tr><td><span class="kbd">AB</span></td><td><span class="kbd">PQ</span></td><td>Yes</td></tr>
         <tr><td><span class="kbd">AC</span></td><td><span class="kbd">PR</span></td><td>Yes</td></tr>
         <tr><td><span class="kbd">BD</span></td><td><span class="kbd">QS</span></td><td>Yes</td></tr>
         <tr><td><span class="kbd">CD</span></td><td><span class="kbd">RS</span></td><td>Yes</td></tr>
       </table>
-      <p>All four edges map to edges, and the two non-edges behave correctly: <span class="kbd">AD → PS</span> and <span class="kbd">BC → QR</span>, neither of which is an edge of G₂.</p>
+      <p>All four edges map to edges, and the two non-edges behave correctly: <span class="kbd">AD → PS</span> and <span class="kbd">BC → QR</span>, neither of which is an edge of G<sub>2</sub>.</p>
       <p><strong>(iii) Why it matters.</strong> Isomorphic layouts have identical adjacency structure, so one traversal or coverage plan works for both after relabelling the cameras. A company can store one canonical design, map device IDs to it, and avoid maintaining duplicate drawings and duplicate algorithms for what is structurally the same network.</p>
     </div>
 
     <div class="qa-final"><div class="qa-label">Final Answer</div>
-      <p class="qa-final-text">Yes, G₁ ≅ G₂. The mapping is <span class="kbd">A→P, B→Q, C→R, D→S</span>. Both are <span class="kbd">C₄</span>, so one layout and one set of algorithms can be reused under different camera labels.</p>
+      <p class="qa-final-text">Yes, G<sub>1</sub> ≅ G<sub>2</sub>. The mapping is <span class="kbd">A→P, B→Q, C→R, D→S</span>. Both are <span class="kbd">C<sub>4</sub></span>, so one layout and one set of algorithms can be reused under different camera labels.</p>
     </div>
   </div>
 
@@ -1622,22 +1622,22 @@
     <div class="exam-source">NEP DSGT Summer 2026 · 08 Marks</div>
 
     <div class="qa-question"><div class="qa-label">Question</div>
-      <p>A computer networking company proposes two communication network layouts represented by graphs G₁ and G₂. The organization wants to verify whether both network structures provide the same connectivity pattern even though the device labels are different.</p>
-      <p><span class="kbd">V(G₁) = {A, B, C, X, Y, Z}</span><br>
-      <span class="kbd long">E(G₁) = {(A,X), (A,Y), (B,X), (B,Y), (C,Y)}</span><br>
-      <span class="kbd">V(G₂) = {1, 2, 3, 4, 5, 6}</span><br>
-      <span class="kbd long">E(G₂) = {(1,4), (1,5), (2,4), (2,5), (3,5)}</span></p>
+      <p>A computer networking company proposes two communication network layouts represented by graphs G<sub>1</sub> and G<sub>2</sub>. The organization wants to verify whether both network structures provide the same connectivity pattern even though the device labels are different.</p>
+      <p><span class="kbd">V(G<sub>1</sub>) = {A, B, C, X, Y, Z}</span><br>
+      <span class="kbd long">E(G<sub>1</sub>) = {(A,X), (A,Y), (B,X), (B,Y), (C,Y)}</span><br>
+      <span class="kbd">V(G<sub>2</sub>) = {1, 2, 3, 4, 5, 6}</span><br>
+      <span class="kbd long">E(G<sub>2</sub>) = {(1,4), (1,5), (2,4), (2,5), (3,5)}</span></p>
       <p>1. Define isomorphism of graphs.<br>
-      2. Analyze whether graphs G₁ and G₂ are isomorphic.<br>
+      2. Analyze whether graphs G<sub>1</sub> and G<sub>2</sub> are isomorphic.<br>
       3. If they are isomorphic, determine a valid one-to-one correspondence between the vertices.<br>
       4. Justify your answer by comparing degree sequence and adjacency preservation.</p>
     </div>
 
     <div class="qa-solution"><div class="qa-label">Solution</div>
-      <p><strong>1. Definition.</strong> An isomorphism is a bijection <span class="kbd">f : V(G₁) → V(G₂)</span> such that <span class="kbd">uv ∈ E(G₁) ⇔ f(u)f(v) ∈ E(G₂)</span>. It renames vertices while preserving both adjacency and non-adjacency.</p>
+      <p><strong>1. Definition.</strong> An isomorphism is a bijection <span class="kbd">f : V(G<sub>1</sub>) → V(G<sub>2</sub>)</span> such that <span class="kbd">uv ∈ E(G<sub>1</sub>) ⇔ f(u)f(v) ∈ E(G<sub>2</sub>)</span>. It renames vertices while preserving both adjacency and non-adjacency.</p>
       <p><strong>2. Degree sequences.</strong></p>
       <table>
-        <tr><th scope="col">G₁ vertex</th><th scope="col">Degree</th><th scope="col">G₂ vertex</th><th scope="col">Degree</th></tr>
+        <tr><th scope="col">G<sub>1</sub> vertex</th><th scope="col">Degree</th><th scope="col">G<sub>2</sub> vertex</th><th scope="col">Degree</th></tr>
         <tr><td>A</td><td>2 (X, Y)</td><td>1</td><td>2 (4, 5)</td></tr>
         <tr><td>B</td><td>2 (X, Y)</td><td>2</td><td>2 (4, 5)</td></tr>
         <tr><td>C</td><td>1 (Y)</td><td>3</td><td>1 (5)</td></tr>
@@ -1650,18 +1650,18 @@
       <div class="eq">A → 1 &nbsp; B → 2 &nbsp; C → 3 &nbsp; X → 4 &nbsp; Y → 5 &nbsp; Z → 6</div>
       <p><strong>4. Adjacency preservation.</strong></p>
       <table>
-        <tr><th scope="col">Edge of G₁</th><th scope="col">Image in G₂</th><th scope="col">Present?</th></tr>
+        <tr><th scope="col">Edge of G<sub>1</sub></th><th scope="col">Image in G<sub>2</sub></th><th scope="col">Present?</th></tr>
         <tr><td><span class="kbd">AX</span></td><td><span class="kbd">14</span></td><td>Yes</td></tr>
         <tr><td><span class="kbd">AY</span></td><td><span class="kbd">15</span></td><td>Yes</td></tr>
         <tr><td><span class="kbd">BX</span></td><td><span class="kbd">24</span></td><td>Yes</td></tr>
         <tr><td><span class="kbd">BY</span></td><td><span class="kbd">25</span></td><td>Yes</td></tr>
         <tr><td><span class="kbd">CY</span></td><td><span class="kbd">35</span></td><td>Yes</td></tr>
       </table>
-      <p>All five edges map onto all five edges of G₂. The non-edges also behave: for example <span class="kbd">AB → 12</span>, <span class="kbd">CX → 34</span> and <span class="kbd">YZ → 56</span> are not edges of G₂.</p>
+      <p>All five edges map onto all five edges of G<sub>2</sub>. The non-edges also behave: for example <span class="kbd">AB → 12</span>, <span class="kbd">CX → 34</span> and <span class="kbd">YZ → 56</span> are not edges of G<sub>2</sub>.</p>
     </div>
 
     <div class="qa-final"><div class="qa-label">Final Answer</div>
-      <p class="qa-final-text">G₁ ≅ G₂. The bijection <span class="kbd">A→1, B→2, C→3, X→4, Y→5, Z→6</span> preserves every edge and every non-edge; the common degree sequence is 3, 2, 2, 2, 1, 0.</p>
+      <p class="qa-final-text">G<sub>1</sub> ≅ G<sub>2</sub>. The bijection <span class="kbd">A→1, B→2, C→3, X→4, Y→5, Z→6</span> preserves every edge and every non-edge; the common degree sequence is 3, 2, 2, 2, 1, 0.</p>
     </div>
   </div>
 
@@ -1675,7 +1675,7 @@
   <div class="self-learning">
     <p><strong>These topics are listed for self-learning in the syllabus.</strong> They are not developed in the Module 6 lecture slides and are not part of the standard 8-hour exam pattern. Treat them as assignment, viva or project material. The three paragraphs below give the vocabulary and the main result for each, so you can read further without starting from zero.</p>
     <p><strong>Network flow.</strong> A flow network is a directed graph with a capacity on every edge, a source <span class="kbd">s</span> and a sink <span class="kbd">t</span>. A feasible flow respects capacity and conserves flow at every vertex except the source and sink. The value of the flow is what leaves <span class="kbd">s</span>. The max-flow min-cut theorem states that the maximum flow equals the minimum capacity of an <span class="kbd">s–t</span> cut. Ford–Fulkerson finds it by repeatedly pushing flow along an augmenting path in the residual graph.</p>
-    <p><strong>Graph colouring in scheduling.</strong> A proper colouring gives adjacent vertices different colours; the smallest number of colours is the chromatic number <span class="kbd">χ(G)</span>. Build a conflict graph — vertices are tasks, edges are clashes — and colours become time slots, rooms or registers. A greedy colouring uses at most <span class="kbd">Δ + 1</span> colours, where <span class="kbd">Δ</span> is the maximum degree, though the true chromatic number can be smaller. Trees are 2-colourable; odd cycles need 3; <span class="kbd">Kₙ</span> needs <span class="kbd">n</span>.</p>
+    <p><strong>Graph colouring in scheduling.</strong> A proper colouring gives adjacent vertices different colours; the smallest number of colours is the chromatic number <span class="kbd">χ(G)</span>. Build a conflict graph — vertices are tasks, edges are clashes — and colours become time slots, rooms or registers. A greedy colouring uses at most <span class="kbd">Δ + 1</span> colours, where <span class="kbd">Δ</span> is the maximum degree, though the true chromatic number can be smaller. Trees are 2-colourable; odd cycles need 3; <span class="kbd">K<sub>n</sub></span> needs <span class="kbd">n</span>.</p>
     <p><strong>Optimisation: shortest paths, spanning trees, clustering.</strong> Dijkstra’s algorithm finds shortest paths from one source when weights are non-negative. Kruskal’s and Prim’s algorithms find a minimum spanning tree, which connects all vertices at least cost. Clustering groups vertices that are more tightly connected to each other than to the rest; the local clustering coefficient of a vertex is <span class="kbd">2Eᵥ / (deg(v)(deg(v) − 1))</span>, the fraction of possible neighbour pairs that are actually joined.</p>
   </div>
 
@@ -1688,10 +1688,10 @@
     <p>A graph has <span class="kbd">V = {1, 2, 3, 4, 5, 6}</span> and <span class="kbd">E = {12, 14, 23, 26, 35, 45}</span>. Find the degree of every vertex, identify any pendant or isolated vertices, and verify the handshaking lemma.</p>
 
     <h3>P2 · Counting edges</h3>
-    <p>(a) How many edges does <span class="kbd">K₉</span> have? (b) How many edges does a 5-regular graph on 8 vertices have? Show the calculation.</p>
+    <p>(a) How many edges does <span class="kbd">K<sub>9</sub></span> have? (b) How many edges does a 5-regular graph on 8 vertices have? Show the calculation.</p>
 
     <h3>P3 · Two matrix representations</h3>
-    <p>For the path <span class="kbd">P₄</span> with vertices 1–2–3–4, write (a) the adjacency matrix and (b) the incidence matrix.</p>
+    <p>For the path <span class="kbd">P<sub>4</sub></span> with vertices 1–2–3–4, write (a) the adjacency matrix and (b) the incidence matrix.</p>
 
     <h3>P4 · Classify the walks</h3>
     <p>In the graph <span class="kbd">V = {p, q, r, s, t}</span>, <span class="kbd">E = {pq, qr, rs, st, tp, pr}</span>, classify each sequence as a walk, trail, path or cycle:</p>
@@ -1703,10 +1703,10 @@
     <p>A graph has two components. The first consists of triangles <span class="kbd">A–B–C–A</span> and <span class="kbd">B–D–E–B</span>. The second is a star with centre <span class="kbd">F</span> and leaves <span class="kbd">G</span> and <span class="kbd">H</span>. Find the number of components, list their vertex sets, and identify all cut vertices.</p>
 
     <h3>P6 · Isomorphism of two 5-cycles</h3>
-    <p>G₁ is the cycle <span class="kbd">1–2–3–4–5–1</span>. G₂ has edges <span class="kbd">{ac, ce, eb, bd, da}</span>. Give an isomorphism from G₁ to G₂ and verify it on every edge.</p>
+    <p>G<sub>1</sub> is the cycle <span class="kbd">1–2–3–4–5–1</span>. G<sub>2</sub> has edges <span class="kbd">{ac, ce, eb, bd, da}</span>. Give an isomorphism from G<sub>1</sub> to G<sub>2</sub> and verify it on every edge.</p>
 
     <h3>P7 · Not isomorphic despite equal degrees</h3>
-    <p>G₁ is an 8-cycle. G₂ is two disjoint 4-cycles. Show that G₁ and G₂ are not isomorphic. State which invariants agree and which one separates them.</p>
+    <p>G<sub>1</sub> is an 8-cycle. G<sub>2</sub> is two disjoint 4-cycles. Show that G<sub>1</sub> and G<sub>2</sub> are not isomorphic. State which invariants agree and which one separates them.</p>
 
     <h3>P8 · Euler test</h3>
     <p>For <span class="kbd">V = {A, B, C, D, E, F}</span> and <span class="kbd">E = {AB, BC, CD, DE, EF, FA, AC}</span>, determine whether an Euler circuit or Euler trail exists. Construct the trail if it exists.</p>
@@ -1714,7 +1714,7 @@
 
   <div class="practice">
     <h3>P9 · Hamiltonian path without a Hamiltonian cycle</h3>
-    <p>Consider <span class="kbd">K₂,₃</span> with parts <span class="kbd">{A, B}</span> and <span class="kbd">{X, Y, Z}</span>. Explain why it has no Hamiltonian cycle, and write a Hamiltonian path.</p>
+    <p>Consider <span class="kbd">K<sub>2</sub>,<sub>3</sub></span> with parts <span class="kbd">{A, B}</span> and <span class="kbd">{X, Y, Z}</span>. Explain why it has no Hamiltonian cycle, and write a Hamiltonian path.</p>
 
     <h3>P10 · Planar formula</h3>
     <p>A connected simple planar graph has 10 vertices and 24 edges. Find the number of faces and check the planar edge bound. What does equality in the bound tell you?</p>
@@ -1740,7 +1740,7 @@
     <p>In (b), the degree sum is <span class="kbd">8 × 5 = 40</span>, and each edge contributes 2, so there are 20 edges.</p>
 
     <h3>P3 · Two matrix representations</h3>
-    <p>(a) Adjacency matrix of <span class="kbd">P₄</span>:</p>
+    <p>(a) Adjacency matrix of <span class="kbd">P<sub>4</sub></span>:</p>
     <table>
       <tr><th scope="col"></th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th></tr>
       <tr><td><strong>1</strong></td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
@@ -1748,15 +1748,15 @@
       <tr><td><strong>3</strong></td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
       <tr><td><strong>4</strong></td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
     </table>
-    <p>(b) Incidence matrix, with columns <span class="kbd">e₁ = 12</span>, <span class="kbd">e₂ = 23</span>, <span class="kbd">e₃ = 34</span>:</p>
+    <p>(b) Incidence matrix, with columns <span class="kbd">e<sub>1</sub> = 12</span>, <span class="kbd">e<sub>2</sub> = 23</span>, <span class="kbd">e<sub>3</sub> = 34</span>:</p>
     <table>
-      <tr><th scope="col"></th><th scope="col">e₁</th><th scope="col">e₂</th><th scope="col">e₃</th></tr>
+      <tr><th scope="col"></th><th scope="col">e<sub>1</sub></th><th scope="col">e<sub>2</sub></th><th scope="col">e<sub>3</sub></th></tr>
       <tr><td><strong>1</strong></td><td>1</td><td>0</td><td>0</td></tr>
       <tr><td><strong>2</strong></td><td>1</td><td>1</td><td>0</td></tr>
       <tr><td><strong>3</strong></td><td>0</td><td>1</td><td>1</td></tr>
       <tr><td><strong>4</strong></td><td>0</td><td>0</td><td>1</td></tr>
     </table>
-    <p>Each incidence column has exactly two 1s, and the row sums are 1, 2, 2, 1 — the degrees of <span class="kbd">P₄</span>.</p>
+    <p>Each incidence column has exactly two 1s, and the row sums are 1, 2, 2, 1 — the degrees of <span class="kbd">P<sub>4</sub></span>.</p>
 
     <h3>P4 · Classify the walks</h3>
     <table>
@@ -1774,10 +1774,10 @@
 
     <h3>P6 · Isomorphism of two 5-cycles</h3>
     <div class="eq">1 → a &nbsp; 2 → c &nbsp; 3 → e &nbsp; 4 → b &nbsp; 5 → d</div>
-    <p>Check the cycle edges: <span class="kbd">12 → ac</span>, <span class="kbd">23 → ce</span>, <span class="kbd">34 → eb</span>, <span class="kbd">45 → bd</span>, <span class="kbd">51 → da</span>. All five images are edges of G₂.</p>
+    <p>Check the cycle edges: <span class="kbd">12 → ac</span>, <span class="kbd">23 → ce</span>, <span class="kbd">34 → eb</span>, <span class="kbd">45 → bd</span>, <span class="kbd">51 → da</span>. All five images are edges of G<sub>2</sub>.</p>
 
     <h3>P7 · Not isomorphic despite equal degrees</h3>
-    <p>Both graphs have 8 vertices, 8 edges, and every degree is 2. <span class="kbd">C₈</span> is connected and has a cycle of length 8; two disjoint <span class="kbd">C₄</span>s form two components and have no cycle longer than 4.</p>
+    <p>Both graphs have 8 vertices, 8 edges, and every degree is 2. <span class="kbd">C<sub>8</sub></span> is connected and has a cycle of length 8; two disjoint <span class="kbd">C<sub>4</sub></span>s form two components and have no cycle longer than 4.</p>
     <p><strong>Separating invariant:</strong> number of components, <span class="kbd">1 ≠ 2</span>.</p>
 
     <h3>P8 · Euler test</h3>
@@ -1786,7 +1786,7 @@
     <p>Edges used: <span class="kbd">AB, BC, CD, DE, EF, FA, AC</span> — all seven exactly once.</p>
 
     <h3>P9 · Hamiltonian path without a Hamiltonian cycle</h3>
-    <p>Every edge of <span class="kbd">K₂,₃</span> joins <span class="kbd">{A, B}</span> to <span class="kbd">{X, Y, Z}</span>. Any cycle must alternate between the two parts, so it uses the same number of vertices from each. The parts have sizes 2 and 3, so no cycle can include all five vertices.</p>
+    <p>Every edge of <span class="kbd">K<sub>2</sub>,<sub>3</sub></span> joins <span class="kbd">{A, B}</span> to <span class="kbd">{X, Y, Z}</span>. Any cycle must alternate between the two parts, so it uses the same number of vertices from each. The parts have sizes 2 and 3, so no cycle can include all five vertices.</p>
     <p>A Hamiltonian path only needs the part sizes to differ by at most 1:</p>
     <div class="eq">X – A – Y – B – Z</div>
     <p>Its edges <span class="kbd">XA, AY, YB, BZ</span> all exist.</p>
@@ -1813,10 +1813,10 @@
     <ul>
       <li><strong>Counting a loop once.</strong> A loop contributes 2 to the degree because both ends meet the same vertex. It is still one edge.</li>
       <li><strong>Mixing up Euler and Hamiltonian.</strong> Euler covers every <em>edge</em> once; Hamiltonian visits every <em>vertex</em> once. The tests are completely different.</li>
-      <li><strong>Using the degree sequence to prove isomorphism.</strong> Equal degree sequences are necessary, not sufficient. <span class="kbd">C₆</span> and two triangles have the same degree sequence and are not isomorphic.</li>
+      <li><strong>Using the degree sequence to prove isomorphism.</strong> Equal degree sequences are necessary, not sufficient. <span class="kbd">C<sub>6</sub></span> and two triangles have the same degree sequence and are not isomorphic.</li>
       <li><strong>Checking only edges, not non-edges.</strong> An isomorphism must preserve non-adjacency too. A bijection that happens to map edges to edges is only a homomorphism until the reverse implication is checked.</li>
-      <li><strong>Forgetting the outer face.</strong> Euler’s formula counts the unbounded region. <span class="kbd">K₄</span> has 4 faces, not 3.</li>
-      <li><strong>Using <span class="kbd">E ≤ 3V − 6</span> on a bipartite graph.</strong> For triangle-free graphs the sharper bound is <span class="kbd">E ≤ 2V − 4</span>. For <span class="kbd">K₃,₃</span>, the first bound gives 9 ≤ 12 and proves nothing; the second gives 9 ≤ 8 and settles it.</li>
+      <li><strong>Forgetting the outer face.</strong> Euler’s formula counts the unbounded region. <span class="kbd">K<sub>4</sub></span> has 4 faces, not 3.</li>
+      <li><strong>Using <span class="kbd">E ≤ 3V − 6</span> on a bipartite graph.</strong> For triangle-free graphs the sharper bound is <span class="kbd">E ≤ 2V − 4</span>. For <span class="kbd">K<sub>3</sub>,<sub>3</sub></span>, the first bound gives 9 ≤ 12 and proves nothing; the second gives 9 ≤ 8 and settles it.</li>
       <li><strong>Treating a planar inequality as a proof of planarity.</strong> The bounds are necessary conditions. Passing them does not construct a crossing-free drawing.</li>
       <li><strong>Calling every closed walk a cycle.</strong> A cycle has no repeated vertex except the start and end. A closed walk may repeat vertices and edges.</li>
       <li><strong>Assuming Hamiltonian conditions are sufficient.</strong> A graph can satisfy the degree or bipartite conditions and still have no Hamiltonian cycle. Construct the cycle, or name a cut vertex, before concluding.</li>
@@ -1833,8 +1833,8 @@
     <table>
       <tr><th scope="col">Item</th><th scope="col">Statement</th></tr>
       <tr><td>Handshaking lemma</td><td><span class="kbd">Σ deg(v) = 2|E|</span>; odd-degree vertices occur in pairs.</td></tr>
-      <tr><td>Complete graph</td><td><span class="kbd">|E(Kₙ)| = n(n − 1)/2</span>.</td></tr>
-      <tr><td>Complete bipartite</td><td><span class="kbd">|E(Kₘ,ₙ)| = mn</span>.</td></tr>
+      <tr><td>Complete graph</td><td><span class="kbd">|E(K<sub>n</sub>)| = n(n − 1)/2</span>.</td></tr>
+      <tr><td>Complete bipartite</td><td><span class="kbd">|E(K<sub>m</sub>,<sub>n</sub>)| = mn</span>.</td></tr>
       <tr><td>Isomorphism</td><td>Bijection with <span class="kbd">uv ∈ E(G) ⇔ f(u)f(v) ∈ E(H)</span>.</td></tr>
       <tr><td>Euler circuit</td><td>Closed trail using every edge once; all degrees even.</td></tr>
       <tr><td>Euler trail</td><td>Open trail using every edge once; exactly two odd vertices.</td></tr>
