@@ -780,14 +780,14 @@ body.study-mode .qa-reveal { margin-top: 0.85rem; }
     <p><strong>Step 4 — voltage at A.</strong> The 6 Ω series resistor drops <span class="v">V</span> = 1.5 × 6 = 9 V, so <span class="v">V</span><sub>A</sub> = 12 − 9 = 3 V. Equivalently, <span class="v">V</span><sub>A</sub> = 1.5 × 2 = 3 V.</p>
     <p><strong>Step 5 — branch currents.</strong></p>
     <div class="eq"><span class="v">I</span><sub>3Ω</sub> = 3/3 = 1 A &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">I</span><sub>6Ω</sub> = 3/6 = 0.5 A</div>
-    <p><strong>Check.</strong> 1 + 0.5 = 1.5 A, which is the source current. Power: source supplies 12 × 1.5 = 18 W; resistors dissipate 1.5²×6 + 1²×3 + 0.5²×6 = 13.5 + 3 + 1.5 = 18 W. Balances.</p>
+    <p><strong>Check.</strong> 1 + 0.5 = 1.5 A, which is the source current. Power: source supplies 12 × 1.5 = 18 W; resistors dissipate 1.5<sup>2</sup>×6 + 1<sup>2</sup>×3 + 0.5<sup>2</sup>×6 = 13.5 + 3 + 1.5 = 18 W. Balances.</p>
     </div>
     <div class="qa-final" id="qa-1-fin"><div class="qa-label">Final answer</div><p class="qa-final-text"><span class="v">I</span> = 1.5 A; <span class="v">V</span><sub>A</sub> = 3 V; <span class="v">I</span><sub>3Ω</sub> = 1 A; <span class="v">I</span><sub>6Ω</sub> = 0.5 A.</p>
   </div>
   </div>
 
   <h3>5 · Power and energy</h3>
-  <div class="eq"><span class="v">P</span> = <span class="v">V I</span> = <span class="v">I</span>²<span class="v">R</span> = <span class="v">V</span>²/<span class="v">R</span> &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">E</span> = <span class="v">P t</span></div>
+  <div class="eq"><span class="v">P</span> = <span class="v">V I</span> = <span class="v">I</span><sup>2</sup><span class="v">R</span> = <span class="v">V</span><sup>2</sup>/<span class="v">R</span> &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">E</span> = <span class="v">P t</span></div>
   <p>Power is in watts (W), energy in joules (J). A 100 W lamp running for 10 h uses 1 kWh, commonly called one “unit” of electricity. In circuit problems, power is the best check: the power delivered by sources must equal the power absorbed by resistors (and by any source that is being charged).</p>
   <p><strong>Passive sign convention.</strong> If current enters the <strong>+</strong> terminal of an element, that element <em>absorbs</em> power: <span class="v">P</span> = <span class="v">V I</span> is positive. If current leaves the + terminal, the element <em>delivers</em> power. A resistor always absorbs; a source may deliver or absorb.</p>
 
@@ -795,7 +795,7 @@ body.study-mode .qa-reveal { margin-top: 0.85rem; }
   <ul>
     <li><strong>Simultaneous equations.</strong> Mesh and nodal analysis produce two or three linear equations. Solve by substitution or elimination; keep the units on every term.</li>
     <li><strong>Fractions are normal.</strong> Answers such as 41/48 A are exact. Convert to decimals only at the end, and state the unit.</li>
-    <li><strong>Prefixes.</strong> k = 10³, m = 10⁻³, μ = 10⁻⁶. Convert every value to base units before calculating.</li>
+    <li><strong>Prefixes.</strong> k = 10<sup>3</sup>, m = 10<sup>−3</sup>, μ = 10<sup>−6</sup>. Convert every value to base units before calculating.</li>
     <li><strong>Signs carry meaning.</strong> A negative current means the actual current is opposite to your assumed arrow. Do not throw the minus sign away.</li>
   </ul>
 
@@ -931,7 +931,7 @@ body.study-mode .qa-reveal { margin-top: 0.85rem; }
     <div class="qa-solution" id="qa-2-sol"><div class="qa-label">Solution</div>
     <p><strong>Equation.</strong></p>
     <div class="eq"><span class="v">V</span><sub>terminal</sub> = ε − <span class="v">I r</span> = 12 − (4)(0.5)</div>
-    <p><strong>Solve.</strong> <span class="v">V</span><sub>terminal</sub> = 12 − 2 = <strong>10 V</strong>. Internal loss = <span class="v">I</span>²<span class="v">r</span> = 16 × 0.5 = <strong>8 W</strong>.</p>
+    <p><strong>Solve.</strong> <span class="v">V</span><sub>terminal</sub> = 12 − 2 = <strong>10 V</strong>. Internal loss = <span class="v">I</span><sup>2</sup><span class="v">r</span> = 16 × 0.5 = <strong>8 W</strong>.</p>
     <p><strong>Check.</strong> The load receives 10 × 4 = 40 W; the battery chemically supplies 40 + 8 = 48 W = 12 × 4. Balances.</p>
     </div>
     <div class="qa-final" id="qa-2-fin"><div class="qa-label">Final answer</div><p class="qa-final-text"><span class="v">V</span><sub>terminal</sub> = 10 V; power lost inside the battery = 8 W.</p>
@@ -1098,7 +1098,7 @@ body.study-mode .qa-reveal { margin-top: 0.85rem; }
     <p><strong>Branch currents.</strong> Source branch: (10 − 4)/2 = 3 A. 2 Ω branch: 4/2 = 2 A. 4 Ω branch: 4/4 = 1 A.</p>
     <p><strong>KVL check, left mesh.</strong> Start at the bottom-left corner, go clockwise: +10 − 2(3) − 2(2) = 10 − 6 − 4 = 0. ✓</p>
     <p><strong>KVL check, right mesh.</strong> +2(2) − 4(1) = 4 − 4 = 0. ✓</p>
-    <p><strong>Power check.</strong> Source supplies 10 × 3 = 30 W. Resistors absorb 3²×2 + 2²×2 + 1²×4 = 18 + 8 + 4 = 30 W. ✓</p>
+    <p><strong>Power check.</strong> Source supplies 10 × 3 = 30 W. Resistors absorb 3<sup>2</sup>×2 + 2<sup>2</sup>×2 + 1<sup>2</sup>×4 = 18 + 8 + 4 = 30 W. ✓</p>
     <p><strong>Answer.</strong> <span class="v">V</span><sub>A</sub> = 4 V; 3 A from the source, 2 A down the 2 Ω branch, 1 A down the 4 Ω branch.</p>
     </div>
     <div class="qa-final" id="qa-4-fin"><div class="qa-label">Final answer</div><p class="qa-final-text"><span class="v">V</span><sub>A</sub> = 4 V; 3 A from the source, 2 A down the 2 Ω branch, 1 A down the 4 Ω branch.</p>
@@ -1216,7 +1216,7 @@ body.study-mode .qa-reveal { margin-top: 0.85rem; }
     <div class="eq"><span class="v">I</span><sub>1</sub> = 2.4 A &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">I</span><sub>2</sub> = 0.6 A</div>
     <p><strong>Shared branch.</strong> Downwards through the 4 Ω: <span class="v">I</span><sub>1</sub> − <span class="v">I</span><sub>2</sub> = 1.8 A.</p>
     <p><strong>Check.</strong> Voltage at the top of the shared resistor: 12 − 2(2.4) = 7.2 V; from the right, 6 + 2(0.6) = 7.2 V. The shared current is 7.2/4 = 1.8 A, which equals 2.4 − 0.6. ✓</p>
-    <p><strong>Power check.</strong> 12 V source delivers 12 × 2.4 = 28.8 W. The 6 V source absorbs 6 × 0.6 = 3.6 W because current enters its + terminal. Resistors absorb 2(2.4²) + 4(1.8²) + 2(0.6²) = 11.52 + 12.96 + 0.72 = 25.2 W. 28.8 − 3.6 = 25.2. ✓</p>
+    <p><strong>Power check.</strong> 12 V source delivers 12 × 2.4 = 28.8 W. The 6 V source absorbs 6 × 0.6 = 3.6 W because current enters its + terminal. Resistors absorb 2(2.4<sup>2</sup>) + 4(1.8<sup>2</sup>) + 2(0.6<sup>2</sup>) = 11.52 + 12.96 + 0.72 = 25.2 W. 28.8 − 3.6 = 25.2. ✓</p>
     </div>
     <div class="qa-final" id="qa-5-fin"><div class="qa-label">Final answer</div><p class="qa-final-text"><span class="v">I</span><sub>1</sub> = 2.4 A; <span class="v">I</span><sub>2</sub> = 0.6 A; 1.8 A downward through the shared 4 Ω resistor.</p>
   </div>
@@ -1312,7 +1312,7 @@ body.study-mode .qa-reveal { margin-top: 0.85rem; }
     <div class="eq">6<span class="v">V</span><sub>A</sub> = 24 &nbsp;→&nbsp; <span class="v">V</span><sub>A</sub> = 4 V</div>
     <p><strong>Branch currents.</strong> 6 Ω branch: (4 − 12)/6 = −1.333 A, so 1.333 A flows <em>into</em> A. 3 Ω branch: (4 − 6)/3 = −0.667 A, so 0.667 A flows into A. 2 Ω branch: 4/2 = 2 A leaves A.</p>
     <p><strong>Check.</strong> 1.333 + 0.667 = 2 A into A; 2 A leaves. ✓</p>
-    <p><strong>Power check.</strong> 12 V source delivers 12 × 1.333 = 16 W. 6 V source delivers 6 × 0.667 = 4 W. Resistors absorb 1.333²×6 + 0.667²×3 + 2²×2 = 10.667 + 1.333 + 8 = 20 W. ✓</p>
+    <p><strong>Power check.</strong> 12 V source delivers 12 × 1.333 = 16 W. 6 V source delivers 6 × 0.667 = 4 W. Resistors absorb 1.333<sup>2</sup>×6 + 0.667<sup>2</sup>×3 + 2<sup>2</sup>×2 = 10.667 + 1.333 + 8 = 20 W. ✓</p>
     </div>
     <div class="qa-final" id="qa-6-fin"><div class="qa-label">Final answer</div><p class="qa-final-text"><span class="v">V</span><sub>A</sub> = 4 V; 1.333 A into A through the 6 Ω branch, 0.667 A into A through the 3 Ω branch, 2 A out through the 2 Ω branch.</p>
   </div>
@@ -1572,7 +1572,7 @@ body.study-mode .qa-reveal { margin-top: 0.85rem; }
     <p><strong>Add.</strong> Both contributions have the same polarity at A (both make A positive), so</p>
     <div class="eq"><span class="v">V</span><sub>A</sub> = 8 + 8 = <strong>16 V</strong></div>
     <p><strong>Check with KCL.</strong> At 16 V, the current through 2 Ω is (16 − 12)/2 = 2 A, flowing from A toward the 12 V source. The current through 4 Ω is 16/4 = 4 A downward. The 6 A source injects 6 A into A. 2 + 4 = 6. ✓</p>
-    <p><strong>Power warning.</strong> Actual power in the 4 Ω resistor is 16²/4 = 64 W. The separate contributions would give 8²/4 = 16 W and 8²/4 = 16 W, whose sum is only 32 W. Superposition does <em>not</em> apply to power, because power is proportional to the square of voltage or current, not to the first power.</p>
+    <p><strong>Power warning.</strong> Actual power in the 4 Ω resistor is 16<sup>2</sup>/4 = 64 W. The separate contributions would give 8<sup>2</sup>/4 = 16 W and 8<sup>2</sup>/4 = 16 W, whose sum is only 32 W. Superposition does <em>not</em> apply to power, because power is proportional to the square of voltage or current, not to the first power.</p>
     </div>
     <div class="qa-final" id="qa-8-fin"><div class="qa-label">Final answer</div><p class="qa-final-text"><span class="v">V</span><sub>A</sub> = 16 V. Power is not additive: compute it from the total voltage, not from the two contributions.</p>
   </div>
@@ -1720,7 +1720,7 @@ body.study-mode .qa-reveal { margin-top: 0.85rem; }
     <div class="eq"><span class="v">R</span><sub>th</sub> = (3 × 6)/(3 + 6) = 18/9 = 2 Ω</div>
     <p><strong>Step 4 — reconnect the load.</strong></p>
     <div class="eq"><span class="v">I</span><sub>L</sub> = <span class="v">V</span><sub>th</sub>/(<span class="v">R</span><sub>th</sub> + <span class="v">R</span><sub>L</sub>) = 20/(2 + 2) = <strong>5 A</strong></div>
-    <div class="eq"><span class="v">V</span><sub>L</sub> = 5 × 2 = 10 V &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">P</span><sub>L</sub> = 5² × 2 = 50 W</div>
+    <div class="eq"><span class="v">V</span><sub>L</sub> = 5 × 2 = 10 V &nbsp;&nbsp;·&nbsp;&nbsp; <span class="v">P</span><sub>L</sub> = 5<sup>2</sup> × 2 = 50 W</div>
     <p><strong>Check by solving the original circuit with the load connected.</strong> KCL at A:</p>
     <div class="eq">(<span class="v">V</span> − 12)/3 + <span class="v">V</span>/6 + <span class="v">V</span>/2 = 6</div>
     <div class="eq">2(<span class="v">V</span> − 12) + <span class="v">V</span> + 3<span class="v">V</span> = 36 &nbsp;→&nbsp; 6<span class="v">V</span> = 60 &nbsp;→&nbsp; <span class="v">V</span> = 10 V</div>
@@ -1831,18 +1831,18 @@ body.study-mode .qa-reveal { margin-top: 0.85rem; }
   </div>
 
   <p><strong>Statement.</strong> A load receives maximum power from a linear network when <span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub> (equivalently <span class="v">R</span><sub>N</sub>). The maximum power is</p>
-  <div class="eq"><span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub>² / (4<span class="v">R</span><sub>th</sub>) = <span class="v">I</span><sub>N</sub>²<span class="v">R</span><sub>N</sub> / 4</div>
+  <div class="eq"><span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub><sup>2</sup> / (4<span class="v">R</span><sub>th</sub>) = <span class="v">I</span><sub>N</sub><sup>2</sup><span class="v">R</span><sub>N</sub> / 4</div>
   <p class="eq-note">Both forms are the same statement, because <span class="v">V</span><sub>th</sub> = <span class="v">I</span><sub>N</sub><span class="v">R</span><sub>N</sub>.</p>
 
   <h3>Derivation</h3>
   <p>Replace the network by its Thevenin equivalent. The load current is</p>
   <div class="eq"><span class="v">I</span><sub>L</sub> = <span class="v">V</span><sub>th</sub> / (<span class="v">R</span><sub>th</sub> + <span class="v">R</span><sub>L</sub>)</div>
   <p>So the load power is</p>
-  <div class="eq"><span class="v">P</span><sub>L</sub> = <span class="v">I</span><sub>L</sub>²<span class="v">R</span><sub>L</sub> = <span class="v">V</span><sub>th</sub>²<span class="v">R</span><sub>L</sub> / (<span class="v">R</span><sub>th</sub> + <span class="v">R</span><sub>L</sub>)²</div>
+  <div class="eq"><span class="v">P</span><sub>L</sub> = <span class="v">I</span><sub>L</sub><sup>2</sup><span class="v">R</span><sub>L</sub> = <span class="v">V</span><sub>th</sub><sup>2</sup><span class="v">R</span><sub>L</sub> / (<span class="v">R</span><sub>th</sub> + <span class="v">R</span><sub>L</sub>)<sup>2</sup></div>
   <p>Differentiate with respect to <span class="v">R</span><sub>L</sub> and set the derivative to zero:</p>
-  <div class="eq">d<span class="v">P</span><sub>L</sub>/d<span class="v">R</span><sub>L</sub> = <span class="v">V</span><sub>th</sub>²(<span class="v">R</span><sub>th</sub> − <span class="v">R</span><sub>L</sub>) / (<span class="v">R</span><sub>th</sub> + <span class="v">R</span><sub>L</sub>)³ = 0</div>
+  <div class="eq">d<span class="v">P</span><sub>L</sub>/d<span class="v">R</span><sub>L</sub> = <span class="v">V</span><sub>th</sub><sup>2</sup>(<span class="v">R</span><sub>th</sub> − <span class="v">R</span><sub>L</sub>) / (<span class="v">R</span><sub>th</sub> + <span class="v">R</span><sub>L</sub>)<sup>3</sup> = 0</div>
   <p>The only positive solution is <span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub>. Substituting back:</p>
-  <div class="eq"><span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub>²<span class="v">R</span><sub>th</sub> / (2<span class="v">R</span><sub>th</sub>)² = <span class="v">V</span><sub>th</sub>² / (4<span class="v">R</span><sub>th</sub>)</div>
+  <div class="eq"><span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub><sup>2</sup><span class="v">R</span><sub>th</sub> / (2<span class="v">R</span><sub>th</sub>)<sup>2</sup> = <span class="v">V</span><sub>th</sub><sup>2</sup> / (4<span class="v">R</span><sub>th</sub>)</div>
 
   <figure>
     <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="figMPTTitle">
@@ -1874,8 +1874,8 @@ body.study-mode .qa-reveal { margin-top: 0.85rem; }
     <p><strong>Step 1 — matching condition.</strong></p>
     <div class="eq"><span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub> = <strong>2 Ω</strong></div>
     <p><strong>Step 2 — maximum power.</strong></p>
-    <div class="eq"><span class="v">P</span><sub>max</sub> = 20²/(4 × 2) = 400/8 = <strong>50 W</strong></div>
-    <p><strong>Step 3 — check at the terminals.</strong> With <span class="v">R</span><sub>L</sub> = 2 Ω, <span class="v">I</span><sub>L</sub> = 20/4 = 5 A, <span class="v">V</span><sub>L</sub> = 10 V, <span class="v">P</span><sub>L</sub> = 5² × 2 = 50 W. ✓</p>
+    <div class="eq"><span class="v">P</span><sub>max</sub> = 20<sup>2</sup>/(4 × 2) = 400/8 = <strong>50 W</strong></div>
+    <p><strong>Step 3 — check at the terminals.</strong> With <span class="v">R</span><sub>L</sub> = 2 Ω, <span class="v">I</span><sub>L</sub> = 20/4 = 5 A, <span class="v">V</span><sub>L</sub> = 10 V, <span class="v">P</span><sub>L</sub> = 5<sup>2</sup> × 2 = 50 W. ✓</p>
     <p><strong>Step 4 — efficiency.</strong> The source delivers 20 × 5 = 100 W. The load receives 50 W. Efficiency = 50/100 = 50%. The other 50 W is lost in <span class="v">R</span><sub>th</sub>.</p>
     <p><strong>Interpretation.</strong> Maximum power is not maximum efficiency. If efficiency matters (power systems), a much larger <span class="v">R</span><sub>L</sub> is used; if the goal is to deliver the most signal power (communications, audio), matching is used.</p>
     </div>
@@ -1887,7 +1887,7 @@ body.study-mode .qa-reveal { margin-top: 0.85rem; }
   <ol class="steps">
     <li>Remove the load and find the Thevenin equivalent of the network facing it.</li>
     <li>Set <span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub>.</li>
-    <li>Calculate <span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub>²/(4<span class="v">R</span><sub>th</sub>).</li>
+    <li>Calculate <span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub><sup>2</sup>/(4<span class="v">R</span><sub>th</sub>).</li>
     <li>If the question asks for the load voltage or current at maximum power, use <span class="v">V</span><sub>L</sub> = <span class="v">V</span><sub>th</sub>/2 and <span class="v">I</span><sub>L</sub> = <span class="v">V</span><sub>th</sub>/(2<span class="v">R</span><sub>th</sub>).</li>
     <li>State the efficiency if it is relevant; it is 50% at maximum power.</li>
     <li>Check the units: volts squared divided by ohms gives watts.</li>
@@ -1897,7 +1897,7 @@ body.study-mode .qa-reveal { margin-top: 0.85rem; }
     <h3>Common mistakes — maximum power</h3>
     <ul>
       <li>Setting <span class="v">R</span><sub>L</sub> equal to the load in the original circuit instead of <span class="v">R</span><sub>th</sub>.</li>
-      <li>Using <span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub>²/<span class="v">R</span><sub>th</sub> and forgetting the factor 4.</li>
+      <li>Using <span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub><sup>2</sup>/<span class="v">R</span><sub>th</sub> and forgetting the factor 4.</li>
       <li>Confusing maximum power with maximum efficiency. At maximum power, half the power is lost in the source resistance.</li>
       <li>Forgetting to remove the load before finding <span class="v">V</span><sub>th</sub> and <span class="v">R</span><sub>th</sub>.</li>
       <li>Applying the theorem to a network whose source resistance cannot be modelled as a constant (non-linear source).</li>
@@ -1915,7 +1915,7 @@ body.study-mode .qa-reveal { margin-top: 0.85rem; }
     <tr><td>is a bridge with no series/parallel pair</td><td>Star–delta conversion</td><td>Creates a series/parallel reduction.</td></tr>
     <tr><td>has several sources and asks for one voltage/current</td><td>Superposition</td><td>Each source can be handled separately.</td></tr>
     <tr><td>asks for one load current/voltage in a large network</td><td>Thevenin or Norton</td><td>Reduces the network to two elements.</td></tr>
-    <tr><td>asks for the load for maximum power</td><td>Thevenin + MPT</td><td><span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub>; <span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub>²/(4<span class="v">R</span><sub>th</sub>).</td></tr>
+    <tr><td>asks for the load for maximum power</td><td>Thevenin + MPT</td><td><span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub>; <span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub><sup>2</sup>/(4<span class="v">R</span><sub>th</sub>).</td></tr>
     <tr><td>has a current source in an awkward place</td><td>Source transformation first</td><td>Turns it into a voltage source that mesh analysis can handle.</td></tr>
   </table>
 
@@ -1964,7 +1964,7 @@ body.study-mode .qa-reveal { margin-top: 0.85rem; }
     <div class="exam-q-title">A1-Q2 · Maximum power transfer</div>
     <div class="exam-source">Assignment 1, Q2 · Dr. Nirmala K. · AY 2025-26</div>
     <p>“State and prove the maximum power transfer theorem. Derive the formula of maximum power delivered to the load <span class="v">R</span><sub>L</sub>.”</p>
-    <p><strong>Answer:</strong> see the <a href="#mpt">Maximum power transfer</a> section for the statement, the derivation, the condition <span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub>, and <span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub>²/(4<span class="v">R</span><sub>th</sub>). The proof is the derivative <span class="v">dP</span><sub>L</sub>/<span class="v">dR</span><sub>L</sub> = 0.</p>
+    <p><strong>Answer:</strong> see the <a href="#mpt">Maximum power transfer</a> section for the statement, the derivation, the condition <span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub>, and <span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub><sup>2</sup>/(4<span class="v">R</span><sub>th</sub>). The proof is the derivative <span class="v">dP</span><sub>L</sub>/<span class="v">dR</span><sub>L</sub> = 0.</p>
   </div>
 
   <div class="exam-q">
@@ -2028,7 +2028,7 @@ body.study-mode .qa-reveal { margin-top: 0.85rem; }
     <div class="exam-source">Assignment 2, Q3 · Dr. Nirmala K. · AY 2025-26</div>
     <p>“Find the value of resistance <span class="v">R</span><sub>L</sub> for maximum power transfer and calculate the maximum power.” A 100 V source feeds a bridge: 10 Ω and 20 Ω on the top arms, 30 Ω and 40 Ω on the bottom arms, and <span class="v">R</span><sub>L</sub> between the midpoints.</p>
     <p><strong>Answer:</strong> <span class="v">R</span><sub>L</sub> = <strong>125/6 Ω ≈ 20.83 Ω</strong>; <span class="v">P</span><sub>max</sub> = <strong>5/6 W ≈ 0.833 W</strong>.</p>
-    <p><strong>Working sketch.</strong> Remove <span class="v">R</span><sub>L</sub>. The left divider gives 100 × 30/40 = 75 V; the right divider gives 100 × 40/60 = 66.667 V. So <span class="v">V</span><sub>th</sub> = 75 − 66.667 = 25/3 V. <span class="v">R</span><sub>th</sub> = (10 ∥ 30) + (20 ∥ 40) = 7.5 + 13.333 = 125/6 Ω. Then <span class="v">P</span><sub>max</sub> = (25/3)²/(4 × 125/6) = 5/6 W.</p>
+    <p><strong>Working sketch.</strong> Remove <span class="v">R</span><sub>L</sub>. The left divider gives 100 × 30/40 = 75 V; the right divider gives 100 × 40/60 = 66.667 V. So <span class="v">V</span><sub>th</sub> = 75 − 66.667 = 25/3 V. <span class="v">R</span><sub>th</sub> = (10 ∥ 30) + (20 ∥ 40) = 7.5 + 13.333 = 125/6 Ω. Then <span class="v">P</span><sub>max</sub> = (25/3)<sup>2</sup>/(4 × 125/6) = 5/6 W.</p>
   </div>
 
   <div class="exam-q">
@@ -2036,7 +2036,7 @@ body.study-mode .qa-reveal { margin-top: 0.85rem; }
     <div class="exam-source">Assignment 2, Q4 · Dr. Nirmala K. · AY 2025-26</div>
     <p>“Determine the value of <span class="v">R</span> for maximum power transfer. Also find the magnitude of maximum power transferred.” A 100 V source feeds a 40 Ω/60 Ω divider on the left and a 50 Ω/50 Ω divider on the right; <span class="v">R</span> and a 2 V source sit between the midpoints.</p>
     <p><strong>Answer:</strong> <span class="v">R</span> = <strong>49 Ω</strong>; <span class="v">P</span><sub>max</sub> = <strong>16/49 W ≈ 0.327 W</strong>, assuming the 2 V source is positive on its left terminal.</p>
-    <p><strong>Working sketch.</strong> Left midpoint = 100 × 60/100 = 60 V; right midpoint = 100 × 50/100 = 50 V. With the 2 V source positive on the left, the open-circuit voltage across the <span class="v">R</span> terminals is 60 − (50 + 2) = 8 V. <span class="v">R</span><sub>th</sub> = (40 ∥ 60) + (50 ∥ 50) = 24 + 25 = 49 Ω. Then <span class="v">P</span><sub>max</sub> = 8²/(4 × 49) = 16/49 W. If the 2 V polarity is reversed, <span class="v">V</span><sub>th</sub> = 12 V and <span class="v">P</span><sub>max</sub> = 36/49 W.</p>
+    <p><strong>Working sketch.</strong> Left midpoint = 100 × 60/100 = 60 V; right midpoint = 100 × 50/100 = 50 V. With the 2 V source positive on the left, the open-circuit voltage across the <span class="v">R</span> terminals is 60 − (50 + 2) = 8 V. <span class="v">R</span><sub>th</sub> = (40 ∥ 60) + (50 ∥ 50) = 24 + 25 = 49 Ω. Then <span class="v">P</span><sub>max</sub> = 8<sup>2</sup>/(4 × 49) = 16/49 W. If the 2 V polarity is reversed, <span class="v">V</span><sub>th</sub> = 12 V and <span class="v">P</span><sub>max</sub> = 36/49 W.</p>
   </div>
 
   <div class="exam-q">
@@ -2122,7 +2122,7 @@ body.study-mode .qa-reveal { margin-top: 0.85rem; }
     </div>
     <div class="qa-solution" id="paper-qa-1-sol"><div class="qa-label">Solution</div>
     <p><strong>Working.</strong> The sum of the pairwise products is</p>
-    <div class="eq"><span class="v">P</span> = (2 × 4) + (4 × 6) + (6 × 2) = 8 + 24 + 12 = 44 Ω²</div>
+    <div class="eq"><span class="v">P</span> = (2 × 4) + (4 × 6) + (6 × 2) = 8 + 24 + 12 = 44 Ω<sup>2</sup></div>
     <p>Each delta side is <span class="v">P</span> divided by the star leg opposite that side:</p>
     <div class="eq"><span class="v">R</span><sub>AB</sub> = 44/6 = 22/3 Ω &nbsp;·&nbsp; <span class="v">R</span><sub>BC</sub> = 44/2 = 22 Ω &nbsp;·&nbsp; <span class="v">R</span><sub>CA</sub> = 44/4 = 11 Ω</div>
     <p><strong>Check.</strong> The resistance between A and B with C open must be the same in both networks. Star: 2 + 4 = 6 Ω. Delta: 22/3 in parallel with (22 + 11) = (22/3 × 33)/(22/3 + 33) = 242/(121/3) = 6 Ω. Good. Do the same check for B–C and C–A if time allows.</p>
@@ -2344,11 +2344,11 @@ body.study-mode .qa-reveal { margin-top: 0.85rem; }
   <table>
     <tr><th scope="col">ID</th><th scope="col">Answer</th><th scope="col">Check / method</th></tr>
     <tr><td>B1</td><td>KCL: currents into a node equal currents out (algebraic sum zero). KVL: algebraic sum of voltages around a closed loop is zero. Ideal voltage source: fixed <span class="v">V</span>, zero internal resistance, current set by the circuit. Ideal current source: fixed <span class="v">I</span>, infinite internal resistance, voltage set by the circuit. Practical voltage source: internal resistance causes <span class="v">V</span><sub>terminal</sub> = <span class="v">E</span> − <span class="v">Ir</span>. MPT: <span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub>.</td><td>Theory; no calculation</td></tr>
-    <tr><td>B2</td><td><span class="v">I</span> = 24/6 = <strong>4 A</strong>; <span class="v">P</span> = <span class="v">VI</span> = 24 × 4 = <strong>96 W</strong> (or <span class="v">I</span>²<span class="v">R</span> = 16 × 6 = 96 W).</td><td>P = V²/R = 576/6 = 96 W.</td></tr>
+    <tr><td>B2</td><td><span class="v">I</span> = 24/6 = <strong>4 A</strong>; <span class="v">P</span> = <span class="v">VI</span> = 24 × 4 = <strong>96 W</strong> (or <span class="v">I</span><sup>2</sup><span class="v">R</span> = 16 × 6 = 96 W).</td><td>P = V<sup>2</sup>/R = 576/6 = 96 W.</td></tr>
     <tr><td>B3</td><td><span class="v">R</span> = <strong>6 Ω</strong>; <span class="v">V</span><sub>parallel</sub> = <strong>4 V</strong>; <span class="v">I</span><sub>6Ω</sub> = <strong>2/3 A</strong>; <span class="v">I</span><sub>3Ω</sub> = <strong>4/3 A</strong>.</td><td>6 ∥ 3 = 2 Ω; total 16/2 = 8 Ω, so <span class="v">R</span> = 8 − 2 = 6 Ω. Parallel voltage = 2 × 2 = 4 V.</td></tr>
     <tr><td>B4</td><td><span class="v">I</span> = <strong>3 A</strong>; <span class="v">V</span><sub>parallel</sub> = <strong>6 V</strong>; <span class="v">I</span><sub>6Ω</sub> = <strong>1 A</strong>.</td><td>6 ∥ 3 = 2 Ω; total 4 Ω; 12/4 = 3 A; 3 × 2 = 6 V; 6/6 = 1 A.</td></tr>
     <tr><td>B5</td><td><span class="v">I</span> = <strong>2 A</strong>; <span class="v">V</span><sub>3Ω</sub> = <strong>6 V</strong>, <span class="v">V</span><sub>5Ω</sub> = <strong>10 V</strong>, <span class="v">V</span><sub>2Ω</sub> = <strong>4 V</strong>.</td><td>Total 10 Ω; 20/10 = 2 A; 6 + 10 + 4 = 20 V.</td></tr>
-    <tr><td>B6</td><td><span class="v">V</span><sub>L</sub> = <strong>7.5 V</strong>; <span class="v">P</span><sub>L</sub> = <strong>7.5 W</strong>.</td><td>Total 15 Ω; <span class="v">I</span> = 1 A; divider gives half; 1² × 7.5 = 7.5 W.</td></tr>
+    <tr><td>B6</td><td><span class="v">V</span><sub>L</sub> = <strong>7.5 V</strong>; <span class="v">P</span><sub>L</sub> = <strong>7.5 W</strong>.</td><td>Total 15 Ω; <span class="v">I</span> = 1 A; divider gives half; 1<sup>2</sup> × 7.5 = 7.5 W.</td></tr>
     <tr><td>B7</td><td>(a) <strong>3 A in parallel with 10 Ω</strong>, arrow from the − terminal to the + terminal through the source. (b) <strong>30 V in series with 10 Ω</strong>, positive terminal at the head of the arrow.</td><td><span class="v">I</span><sub>s</sub> = 30/10 = 3 A; <span class="v">V</span><sub>s</sub> = 3 × 10 = 30 V.</td></tr>
     <tr><td>B8</td><td>(a) <strong>27 Ω</strong> each. (b) <strong>4 Ω</strong> each. (c) <span class="v">R</span><sub>Δ</sub> = 3<span class="v">R</span><sub>Y</sub>; <span class="v">R</span><sub>Y</sub> = <span class="v">R</span><sub>Δ</sub>/3.</td><td>9 × 3 = 27; 12/3 = 4.</td></tr>
   </table>
@@ -2359,9 +2359,9 @@ body.study-mode .qa-reveal { margin-top: 0.85rem; }
     <tr><td>E1</td><td><span class="v">I</span><sub>1</sub> = <strong>3.2 A</strong>; <span class="v">I</span><sub>2</sub> = <strong>0.4 A</strong>; shared current = <strong>2.8 A</strong>, in the direction of <span class="v">I</span><sub>1</sub>.</td><td>12 = 4<span class="v">I</span><sub>1</sub> − 2<span class="v">I</span><sub>2</sub>; −4 = −2<span class="v">I</span><sub>1</sub> + 6<span class="v">I</span><sub>2</sub>. Check: 4(3.2) − 2(0.4) = 12; −2(3.2) + 6(0.4) = −4.</td></tr>
     <tr><td>E2</td><td><span class="v">V</span><sub>A</sub> = <strong>4.5 V</strong>.</td><td>(<span class="v">V</span> − 9)/3 + <span class="v">V</span>/4 + <span class="v">V</span>/12 = 0 → 8<span class="v">V</span> = 36. Check: 4 ∥ 12 = 3 Ω, divider 9 × 3/6 = 4.5 V.</td></tr>
     <tr><td>E3</td><td><span class="v">V</span><sub>A</sub> = <strong>14 V</strong>; <span class="v">I</span><sub>6Ω</sub> = <strong>14/6 = 2.333 A</strong> downward.</td><td>(<span class="v">V</span> − 24)/2 + (<span class="v">V</span> − 6)/3 + <span class="v">V</span>/6 = 0 → 6<span class="v">V</span> = 84.</td></tr>
-    <tr><td>E4</td><td><span class="v">V</span><sub>th</sub> = <strong>12 V</strong>; <span class="v">R</span><sub>th</sub> = <strong>4 Ω</strong>; <span class="v">I</span><sub>L</sub> = <strong>2 A</strong>; <span class="v">P</span><sub>L</sub> = <strong>8 W</strong>.</td><td>18 × 12/18 = 12 V; 6 ∥ 12 = 4 Ω; 12/(4 + 2) = 2 A; 2² × 2 = 8 W.</td></tr>
+    <tr><td>E4</td><td><span class="v">V</span><sub>th</sub> = <strong>12 V</strong>; <span class="v">R</span><sub>th</sub> = <strong>4 Ω</strong>; <span class="v">I</span><sub>L</sub> = <strong>2 A</strong>; <span class="v">P</span><sub>L</sub> = <strong>8 W</strong>.</td><td>18 × 12/18 = 12 V; 6 ∥ 12 = 4 Ω; 12/(4 + 2) = 2 A; 2<sup>2</sup> × 2 = 8 W.</td></tr>
     <tr><td>E5</td><td><span class="v">I</span><sub>N</sub> = <strong>6 A</strong>; <span class="v">R</span><sub>N</sub> = <strong>2 Ω</strong>; <span class="v">I</span><sub>L</sub> = <strong>2 A</strong>.</td><td>18 × 6/9 = 12 V; 3 ∥ 6 = 2 Ω; 12/2 = 6 A; 6 × 2/(2 + 4) = 2 A.</td></tr>
-    <tr><td>E6</td><td><span class="v">R</span><sub>L</sub> = <strong>2 Ω</strong>; <span class="v">P</span><sub>max</sub> = <strong>18 W</strong>.</td><td>36 × 3/9 = 12 V; 6 ∥ 3 = 2 Ω; 12²/(4 × 2) = 18 W.</td></tr>
+    <tr><td>E6</td><td><span class="v">R</span><sub>L</sub> = <strong>2 Ω</strong>; <span class="v">P</span><sub>max</sub> = <strong>18 W</strong>.</td><td>36 × 3/9 = 12 V; 6 ∥ 3 = 2 Ω; 12<sup>2</sup>/(4 × 2) = 18 W.</td></tr>
     <tr><td>E7</td><td><span class="v">R</span><sub>AB</sub> = <strong>16/3 Ω ≈ 5.33 Ω</strong>.</td><td>2 ∥ 4 = 4/3; 4 + 4/3 = 16/3.</td></tr>
     <tr><td>E8</td><td><span class="v">I</span><sub>6Ω</sub> = <strong>2 A</strong> downward.</td><td>3 ∥ 6 = 2 Ω; <span class="v">V</span><sub>A</sub> = 6 × 2 = 12 V; 12/6 = 2 A. Current division: 6 × 3/(3 + 6) = 2 A.</td></tr>
   </table>
@@ -2369,9 +2369,9 @@ body.study-mode .qa-reveal { margin-top: 0.85rem; }
   <h3>Challenging</h3>
   <table>
     <tr><th scope="col">ID</th><th scope="col">Answer</th><th scope="col">Key steps</th></tr>
-    <tr><td>C1</td><td><span class="v">V</span><sub>th</sub> = <strong>20 V</strong>; <span class="v">R</span><sub>th</sub> = <strong>2 Ω</strong>; <span class="v">I</span><sub>L</sub> = <strong>4 A</strong>; <span class="v">P</span><sub>L</sub> = <strong>48 W</strong>.</td><td>At X: 60 × 6/12 = 30 V, <span class="v">R</span> = 6 ∥ 6 = 3 Ω. At A: 30 × 6/9 = 20 V, <span class="v">R</span> = 3 ∥ 6 = 2 Ω. Load 3 Ω: 20/5 = 4 A; 4² × 3 = 48 W.</td></tr>
-    <tr><td>C2</td><td><span class="v">V</span><sub>th</sub> = <strong>8 V</strong>; <span class="v">R</span><sub>th</sub> = <strong>2 Ω</strong>; <span class="v">R</span><sub>L</sub> = <strong>2 Ω</strong>; <span class="v">P</span><sub>max</sub> = <strong>8 W</strong>.</td><td>Short-circuit current = 18/6 + 1 = 4 A; <span class="v">R</span><sub>th</sub> = 6 ∥ 3 = 2 Ω; <span class="v">V</span><sub>th</sub> = 4 × 2 = 8 V; 8²/(4 × 2) = 8 W.</td></tr>
-    <tr><td>C3</td><td><span class="v">V</span><sub>A</sub> = <strong>120/13 V ≈ 9.23 V</strong>; source current = <strong>70/13 A ≈ 5.38 A</strong>; <span class="v">P</span><sub>4Ω</sub> = <strong>3600/169 W ≈ 21.3 W</strong>.</td><td>(<span class="v">V</span> − 20)/2 + <span class="v">V</span>/3 + <span class="v">V</span>/4 = 0 ×12 → 6<span class="v">V</span> − 120 + 4<span class="v">V</span> + 3<span class="v">V</span> = 0; 13<span class="v">V</span> = 120. Source current = (20 − <span class="v">V</span>)/2. <span class="v">P</span><sub>4</sub> = <span class="v">V</span>²/4.</td></tr>
+    <tr><td>C1</td><td><span class="v">V</span><sub>th</sub> = <strong>20 V</strong>; <span class="v">R</span><sub>th</sub> = <strong>2 Ω</strong>; <span class="v">I</span><sub>L</sub> = <strong>4 A</strong>; <span class="v">P</span><sub>L</sub> = <strong>48 W</strong>.</td><td>At X: 60 × 6/12 = 30 V, <span class="v">R</span> = 6 ∥ 6 = 3 Ω. At A: 30 × 6/9 = 20 V, <span class="v">R</span> = 3 ∥ 6 = 2 Ω. Load 3 Ω: 20/5 = 4 A; 4<sup>2</sup> × 3 = 48 W.</td></tr>
+    <tr><td>C2</td><td><span class="v">V</span><sub>th</sub> = <strong>8 V</strong>; <span class="v">R</span><sub>th</sub> = <strong>2 Ω</strong>; <span class="v">R</span><sub>L</sub> = <strong>2 Ω</strong>; <span class="v">P</span><sub>max</sub> = <strong>8 W</strong>.</td><td>Short-circuit current = 18/6 + 1 = 4 A; <span class="v">R</span><sub>th</sub> = 6 ∥ 3 = 2 Ω; <span class="v">V</span><sub>th</sub> = 4 × 2 = 8 V; 8<sup>2</sup>/(4 × 2) = 8 W.</td></tr>
+    <tr><td>C3</td><td><span class="v">V</span><sub>A</sub> = <strong>120/13 V ≈ 9.23 V</strong>; source current = <strong>70/13 A ≈ 5.38 A</strong>; <span class="v">P</span><sub>4Ω</sub> = <strong>3600/169 W ≈ 21.3 W</strong>.</td><td>(<span class="v">V</span> − 20)/2 + <span class="v">V</span>/3 + <span class="v">V</span>/4 = 0 ×12 → 6<span class="v">V</span> − 120 + 4<span class="v">V</span> + 3<span class="v">V</span> = 0; 13<span class="v">V</span> = 120. Source current = (20 − <span class="v">V</span>)/2. <span class="v">P</span><sub>4</sub> = <span class="v">V</span><sup>2</sup>/4.</td></tr>
     <tr><td>C4</td><td><span class="v">I</span><sub>source</sub> = <strong>3.75 A</strong>; <span class="v">I</span><sub>5Ω</sub> = <strong>0 A</strong>.</td><td>2/4 = 4/8, so the bridge is balanced; C and D are at the same potential. <span class="v">R</span><sub>eq</sub> = (2 + 4) ∥ (4 + 8) = 6 ∥ 12 = 4 Ω; 15/4 = 3.75 A.</td></tr>
   </table>
 
@@ -2379,7 +2379,7 @@ body.study-mode .qa-reveal { margin-top: 0.85rem; }
   <table>
     <tr><th scope="col">Question</th><th scope="col">Answer</th><th scope="col">Note</th></tr>
     <tr><td>A1-Q1</td><td><span class="v">V</span><sub>4Ω</sub> = <strong>28 V</strong>, positive at the top.</td><td>Superposition: 8 + 20 + 0 V.</td></tr>
-    <tr><td>A1-Q2</td><td><span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub>; <span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub>²/(4<span class="v">R</span><sub>th</sub>).</td><td>Proof by <span class="v">dP</span><sub>L</sub>/<span class="v">dR</span><sub>L</sub> = 0.</td></tr>
+    <tr><td>A1-Q2</td><td><span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub>; <span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub><sup>2</sup>/(4<span class="v">R</span><sub>th</sub>).</td><td>Proof by <span class="v">dP</span><sub>L</sub>/<span class="v">dR</span><sub>L</sub> = 0.</td></tr>
     <tr><td>A1-Q3</td><td><span class="v">I</span><sub>3Ω</sub> = <strong>41/48 A ≈ 0.854 A</strong>, A to B.</td><td>Same as June 2025 Q2(a); polarity-dependent.</td></tr>
     <tr><td>A1-Q4</td><td><strong>No defensible numerical answer.</strong></td><td>Right end of <span class="v">R</span><sub>3</sub> is cut off; under the common-bottom assumption the resistance is negative.</td></tr>
     <tr><td>A1-Q5</td><td><span class="v">I</span><sub>10Ω</sub> = <strong>34/47 A ≈ 0.723 A</strong>.</td><td>Assumes 20 V positive at the top and 2 A arrow to the right; current flows from the 20 V node toward the junction.</td></tr>
@@ -2429,7 +2429,7 @@ body.study-mode .qa-reveal { margin-top: 0.85rem; }
     <table>
       <tr><th scope="col">Idea</th><th scope="col">Formula</th><th scope="col">Remember</th></tr>
       <tr><td>Ohm’s law</td><td><span class="v">V</span> = <span class="v">IR</span></td><td><span class="v">V</span> across, <span class="v">I</span> through, <span class="v">R</span> opposes.</td></tr>
-      <tr><td>Power</td><td><span class="v">P</span> = <span class="v">VI</span> = <span class="v">I</span>²<span class="v">R</span> = <span class="v">V</span>²/<span class="v">R</span></td><td>Use the form that matches the known quantities.</td></tr>
+      <tr><td>Power</td><td><span class="v">P</span> = <span class="v">VI</span> = <span class="v">I</span><sup>2</sup><span class="v">R</span> = <span class="v">V</span><sup>2</sup>/<span class="v">R</span></td><td>Use the form that matches the known quantities.</td></tr>
       <tr><td>Series</td><td><span class="v">R</span><sub>eq</sub> = <span class="v">R</span><sub>1</sub> + <span class="v">R</span><sub>2</sub> + …</td><td>Same current; voltages add.</td></tr>
       <tr><td>Parallel</td><td>1/<span class="v">R</span><sub>eq</sub> = 1/<span class="v">R</span><sub>1</sub> + 1/<span class="v">R</span><sub>2</sub> + …</td><td>Same voltage; currents add. For two: product/sum.</td></tr>
       <tr><td>Voltage divider</td><td><span class="v">V</span><sub>2</sub> = <span class="v">V</span><sub>total</sub> × <span class="v">R</span><sub>2</sub>/(<span class="v">R</span><sub>1</sub> + <span class="v">R</span><sub>2</sub>)</td><td>Only for a series pair.</td></tr>
@@ -2441,7 +2441,7 @@ body.study-mode .qa-reveal { margin-top: 0.85rem; }
       <tr><td>Delta → star</td><td><span class="v">R</span><sub>A</sub> = <span class="v">R</span><sub>AB</sub><span class="v">R</span><sub>CA</sub>/<span class="v">S</span>, etc.</td><td><span class="v">S</span> = <span class="v">R</span><sub>AB</sub> + <span class="v">R</span><sub>BC</sub> + <span class="v">R</span><sub>CA</sub>.</td></tr>
       <tr><td>Thevenin</td><td><span class="v">V</span><sub>th</sub> = open-circuit voltage; <span class="v">R</span><sub>th</sub> = resistance with sources dead</td><td>Voltage sources → short; current sources → open.</td></tr>
       <tr><td>Norton</td><td><span class="v">I</span><sub>N</sub> = short-circuit current; <span class="v">R</span><sub>N</sub> = <span class="v">R</span><sub>th</sub></td><td><span class="v">V</span><sub>th</sub> = <span class="v">I</span><sub>N</sub><span class="v">R</span><sub>N</sub>.</td></tr>
-      <tr><td>Maximum power</td><td><span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub>; <span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub>²/(4<span class="v">R</span><sub>th</sub>)</td><td>Maximum power, not maximum efficiency.</td></tr>
+      <tr><td>Maximum power</td><td><span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub>; <span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub><sup>2</sup>/(4<span class="v">R</span><sub>th</sub>)</td><td>Maximum power, not maximum efficiency.</td></tr>
     </table>
 
     <h3>Sign and unit discipline</h3>
@@ -2450,7 +2450,7 @@ body.study-mode .qa-reveal { margin-top: 0.85rem; }
       <li>Choose mesh currents all clockwise, or all anticlockwise, and keep the choice. A shared branch carries the difference of the two mesh currents.</li>
       <li>For nodal analysis, mark the reference node with 0 V and write every current as “(node voltage − neighbour voltage)/resistance” for currents leaving the node.</li>
       <li>A current source fixes the current in its branch, not the voltage across it. A voltage source fixes the voltage between its terminals, not the current through it.</li>
-      <li>Carry units through the arithmetic: Ω × A = V; V × A = W; V²/Ω = W.</li>
+      <li>Carry units through the arithmetic: Ω × A = V; V × A = W; V<sup>2</sup>/Ω = W.</li>
       <li>A negative answer is information, not an error: it means the actual direction is opposite to the assumed arrow. Keep the magnitude and state the true direction.</li>
       <li>Never add powers from superposition. Superposition applies to voltages and currents in linear circuits, not to power.</li>
     </ul>
@@ -2461,7 +2461,7 @@ body.study-mode .qa-reveal { margin-top: 0.85rem; }
       <tr><td>“Find current in one branch” and the network is complicated</td><td>Nodal analysis</td><td>One unknown node voltage gives the branch current directly.</td></tr>
       <tr><td>“Find several branch currents” in a planar network</td><td>Mesh analysis</td><td>One unknown per window; shared-branch currents come from differences.</td></tr>
       <tr><td>“Find current through a load” and the load can be removed</td><td>Thevenin or Norton</td><td>The network collapses to one source and one resistance.</td></tr>
-      <tr><td>“Find <span class="v">R</span><sub>L</sub> for maximum power”</td><td>Thevenin + MPT</td><td>Set <span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub>; use <span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub>²/(4<span class="v">R</span><sub>th</sub>).</td></tr>
+      <tr><td>“Find <span class="v">R</span><sub>L</sub> for maximum power”</td><td>Thevenin + MPT</td><td>Set <span class="v">R</span><sub>L</sub> = <span class="v">R</span><sub>th</sub>; use <span class="v">P</span><sub>max</sub> = <span class="v">V</span><sub>th</sub><sup>2</sup>/(4<span class="v">R</span><sub>th</sub>).</td></tr>
       <tr><td>“Use superposition” explicitly</td><td>One source at a time</td><td>Kill the others: voltage sources short, current sources open.</td></tr>
       <tr><td>A bridge with no series/parallel pair</td><td>Star–delta conversion</td><td>Convert one three-terminal group, then reduce.</td></tr>
       <tr><td>“Convert the source” explicitly</td><td>Source transformation</td><td><span class="v">V</span><sub>s</sub> in series with <span class="v">R</span> ↔ <span class="v">I</span><sub>s</sub> in parallel with <span class="v">R</span>.</td></tr>

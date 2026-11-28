@@ -7,3 +7,4 @@ main, header, footer, nav, section, article, aside, figure, details, summary { d
 img, svg, video, canvas, iframe { max-width: 100%; }
 table { max-width: 100%; }
 [hidden] { display: none !important; }
+sub, sup { line-height: 0; }

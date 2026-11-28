@@ -1603,9 +1603,9 @@
 <p>Take out the common factor (k+1):</p>
 <p>= (k + 1) [ k(k + 5)/3 + (k + 4) ]</p>
 <p>Put the bracket over the single denominator 3, using (k + 4) = 3(k + 4)/3:</p>
-<div class="eq">= (k + 1) [ (k² + 5k + 3k + 12) / 3 ]<br>
-    = (k + 1)(k² + 8k + 12)/3</div>
-<p>Factor the quadratic: k² + 8k + 12 = (k + 2)(k + 6), since 2 + 6 = 8 and 2·6 = 12.</p>
+<div class="eq">= (k + 1) [ (k<sup>2</sup> + 5k + 3k + 12) / 3 ]<br>
+    = (k + 1)(k<sup>2</sup> + 8k + 12)/3</div>
+<p>Factor the quadratic: k<sup>2</sup> + 8k + 12 = (k + 2)(k + 6), since 2 + 6 = 8 and 2·6 = 12.</p>
 <p>= (k + 1)(k + 2)(k + 6)/3</p>
 <p>Now check this is the right side at k+1. Replacing k by k+1 in n(n+1)(n+5)/3 gives (k+1)(k+2)((k+1)+5)/3 = (k+1)(k+2)(k+6)/3. It matches. ∎</p>
 <p><strong>Numerical check.</strong> At n = 3 the left side is 1·4 + 2·5 + 3·6 = 4 + 10 + 18 = 32, and the right side is 3·4·8/3 = 32. ✓ At n = 4 the left side gains 4·7 = 28, giving 60, and the right side is 4·5·9/3 = 60. ✓ Checks against the closed form are a good way to catch a wrong factor at (k+2)(k+6).</p>
@@ -1635,9 +1635,9 @@
 <p>Take out the common factor (k+1):</p>
 <p>= (k + 1) [ k(k + 5)/3 + (k + 4) ]</p>
 <p>Put the bracket over the single denominator 3, using (k + 4) = 3(k + 4)/3:</p>
-<div class="eq">= (k + 1) [ (k² + 5k + 3k + 12) / 3 ]<br>
-    = (k + 1)(k² + 8k + 12)/3</div>
-<p>Factor the quadratic: k² + 8k + 12 = (k + 2)(k + 6), since 2 + 6 = 8 and 2·6 = 12.</p>
+<div class="eq">= (k + 1) [ (k<sup>2</sup> + 5k + 3k + 12) / 3 ]<br>
+    = (k + 1)(k<sup>2</sup> + 8k + 12)/3</div>
+<p>Factor the quadratic: k<sup>2</sup> + 8k + 12 = (k + 2)(k + 6), since 2 + 6 = 8 and 2·6 = 12.</p>
 <p>= (k + 1)(k + 2)(k + 6)/3</p>
 <p>Now check this is the right side at k+1. Replacing k by k+1 in n(n+1)(n+5)/3 gives (k+1)(k+2)((k+1)+5)/3 = (k+1)(k+2)(k+6)/3. It matches. ∎</p>
 <p><strong>Numerical check.</strong> At n = 3 the left side is 1·4 + 2·5 + 3·6 = 4 + 10 + 18 = 32, and the right side is 3·4·8/3 = 32. ✓ At n = 4 the left side gains 4·7 = 28, giving 60, and the right side is 4·5·9/3 = 60. ✓ Checks against the closed form are a good way to catch a wrong factor at (k+2)(k+6).</p>
@@ -1659,11 +1659,11 @@
 <p><strong>Step.</strong> Add the term for n = k+1, which is 4(k+1) − 3 = 4k + 1:</p>
 <div class="eq">1 + 5 + … + (4k − 3) + (4k + 1)
 = k(2k − 1) + (4k + 1) &nbsp;&nbsp; (by the hypothesis)
-= 2k² − k + 4k + 1
-= 2k² + 3k + 1
+= 2k<sup>2</sup> − k + 4k + 1
+= 2k<sup>2</sup> + 3k + 1
 = (k + 1)(2k + 1) &nbsp;&nbsp; (factorising)
 = (k + 1)(2(k + 1) − 1) &nbsp;&nbsp; (which is P(k+1))</div>
-<p><strong>A correction to the slide.</strong> Slide 104 writes the expansion of k(2k − 1) as "(2k)² − k + 4k + 1". That should be 2k² − k + 4k + 1; "(2k)²" means 4k² and gives the wrong polynomial. The final answer on the slide is correct, so this is a typesetting slip, but copy the correct expansion into your notes.</p>
+<p><strong>A correction to the slide.</strong> Slide 104 writes the expansion of k(2k − 1) as "(2k)<sup>2</sup> − k + 4k + 1". That should be 2k<sup>2</sup> − k + 4k + 1; "(2k)<sup>2</sup>" means 4k<sup>2</sup> and gives the wrong polynomial. The final answer on the slide is correct, so this is a typesetting slip, but copy the correct expansion into your notes.</p>
 </div>
 <div class="qa-final"><div class="qa-label">Final Answer</div>
 <p>Hence true for all n ≥ 1 by induction. ∎</p>
@@ -1712,7 +1712,7 @@
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <p>Let x and y be even integers. By definition there are integers m and n with x = 2m and y = 2n. Then</p>
 <div class="eq">x + y = 2m + 2n = 2(m + n).</div>
-<p>The whole method in one line: take the definition apart, do the algebra, put the definition back together. A direct proof of "if n is odd then n² is odd" runs the same way: n = 2k + 1 gives n² = 4k² + 4k + 1 = 2(2k² + 2k) + 1, which is odd.</p>
+<p>The whole method in one line: take the definition apart, do the algebra, put the definition back together. A direct proof of "if n is odd then n<sup>2</sup> is odd" runs the same way: n = 2k + 1 gives n<sup>2</sup> = 4k<sup>2</sup> + 4k + 1 = 2(2k<sup>2</sup> + 2k) + 1, which is odd.</p>
 </div>
 <div class="qa-final"><div class="qa-label">Final Answer</div>
 <p>Since m + n is an integer, x + y is twice an integer, hence even. ∎</p>
@@ -1720,20 +1720,20 @@
 </div>
 
   <div class="example qa">
-<div class="example-title">Contrapositive — if n² is even then n is even</div>
+<div class="example-title">Contrapositive — if n<sup>2</sup> is even then n is even</div>
 <div class="qa-question"><div class="qa-label">Question</div>
-<p>Prove by contrapositive that if n² is even, then n is even.</p>
+<p>Prove by contrapositive that if n<sup>2</sup> is even, then n is even.</p>
 </div>
 <div class="qa-solution"><div class="qa-label">Solution</div>
-<p>The direct route starts from "n² is even", which is awkward: it tells you about a square, not about n. The contrapositive is easy, because it starts from "n is odd".</p>
-<p><strong>Contrapositive statement.</strong> If n is odd, then n² is odd.</p>
+<p>The direct route starts from "n<sup>2</sup> is even", which is awkward: it tells you about a square, not about n. The contrapositive is easy, because it starts from "n is odd".</p>
+<p><strong>Contrapositive statement.</strong> If n is odd, then n<sup>2</sup> is odd.</p>
 <p><strong>Proof.</strong> Let n = 2k + 1 for some integer k. Then</p>
-<div class="eq">n² = (2k + 1)² = 4k² + 4k + 1 = 2(2k² + 2k) + 1.</div>
+<div class="eq">n<sup>2</sup> = (2k + 1)<sup>2</sup> = 4k<sup>2</sup> + 4k + 1 = 2(2k<sup>2</sup> + 2k) + 1.</div>
 <p>Since P → Q ≡ ¬Q → ¬P, the contrapositive proves the original.</p>
 <p><strong>A source correction worth knowing.</strong> The teacher's slide 97 presents this same argument under the heading "Direct Proof". It is not a direct proof — it begins by assuming the negation of the conclusion, which is the contrapositive (or, if you prefer, a contradiction). The mathematics on the slide is correct and the method is valid; only the label is wrong. In an exam, name it "proof by contrapositive" and you cannot be marked down for it.</p>
 </div>
 <div class="qa-final"><div class="qa-label">Final Answer</div>
-<p>Since 2k² + 2k is an integer, n² is odd. ∎</p>
+<p>Since 2k<sup>2</sup> + 2k is an integer, n<sup>2</sup> is odd. ∎</p>
 </div>
 </div>
 
@@ -1744,11 +1744,11 @@
 </div>
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <p>Suppose, for contradiction, that √2 is rational. Then √2 = a/b for integers a, b with b ≠ 0, chosen so that a and b have no common factor.</p>
-<div class="eq">Squaring gives 2 = a²/b², so a² = 2b². Hence a² is even, and by the contrapositive result above, a is even. Write a = 2k. Substituting:</div>
-<p>2b² = (2k)² = 4k², so b² = 2k².</p>
+<div class="eq">Squaring gives 2 = a<sup>2</sup>/b<sup>2</sup>, so a<sup>2</sup> = 2b<sup>2</sup>. Hence a<sup>2</sup> is even, and by the contrapositive result above, a is even. Write a = 2k. Substituting:</div>
+<p>2b<sup>2</sup> = (2k)<sup>2</sup> = 4k<sup>2</sup>, so b<sup>2</sup> = 2k<sup>2</sup>.</p>
 </div>
 <div class="qa-final"><div class="qa-label">Final Answer</div>
-<p>Hence b² is even, so b is even as well. But then a and b share the factor 2, contradicting the choice that they have no common factor. The assumption is false, so √2 is irrational. ∎</p>
+<p>Hence b<sup>2</sup> is even, so b is even as well. But then a and b share the factor 2, contradicting the choice that they have no common factor. The assumption is false, so √2 is irrational. ∎</p>
 <p>Notice the shape: the contradiction is not "1 = 0" but "the pair has no common factor, and also has common factor 2". Any contradiction with an earlier statement or a known fact closes the proof.</p>
 </div>
 </div>
@@ -1775,15 +1775,15 @@
 <div class="qa-question"><div class="qa-label">Question</div>
 <p>Determine whether each universal claim is true. If it is false, give a counterexample:</p>
 <p>(i) Every prime number is odd.</p>
-<p>(ii) n² + n + 41 is prime for every positive integer n.</p>
+<p>(ii) n<sup>2</sup> + n + 41 is prime for every positive integer n.</p>
 </div>
 <div class="qa-solution"><div class="qa-label">Solution</div>
 <p>Claim: "Every prime number is odd." A single counterexample kills it: 2 is prime and 2 is even. The claim is false, and no further work is needed.</p>
-<p>Claim: "n² + n + 41 is prime for every positive integer n." True for n = 1, 2, …, 39, which is why it looks convincing. At n = 41 the value is 41² + 41 + 41 = 41(41 + 1 + 1) = 41 · 43, which is composite. Counterexample found.</p>
+<p>Claim: "n<sup>2</sup> + n + 41 is prime for every positive integer n." True for n = 1, 2, …, 39, which is why it looks convincing. At n = 41 the value is 41<sup>2</sup> + 41 + 41 = 41(41 + 1 + 1) = 41 · 43, which is composite. Counterexample found.</p>
 <p>One counterexample is a complete disproof of a "for all" statement. It is not a proof of anything else, so never use it to establish a universal claim.</p>
 </div>
 <div class="qa-final"><div class="qa-label">Final Answer</div>
-<p class="qa-final-text">Both claims are false. For (i), 2 is prime and even. For (ii), n = 41 gives 41² + 41 + 41 = 41 × 43, which is composite.</p>
+<p class="qa-final-text">Both claims are false. For (i), 2 is prime and even. For (ii), n = 41 gives 41<sup>2</sup> + 41 + 41 = 41 × 43, which is composite.</p>
 </div>
 </div>
 
@@ -1918,7 +1918,7 @@
     <p><strong>Cartesian product:</strong> A × B = {(a, b) | a ∈ A, b ∈ B}, the set of all ordered pairs. Example: {1, 2} × {x} = {(1, x), (2, x)}.</p>
     <p><strong>Partition of a set:</strong> a collection of non-empty, pairwise disjoint subsets whose union is the whole set. Example: { {1, 2}, {3} } partitions {1, 2, 3}.</p>
     <p><strong>Power set:</strong> P(A) = {X | X ⊆ A}, the set of all subsets of A; if |A| = n then |P(A)| = 2<sup>n</sup>. Example: P({1, 2}) = {∅, {1}, {2}, {1, 2}}.</p>
-    <p><strong>Existential quantifier:</strong> ∃x P(x) asserts that P(x) is true for at least one x in the domain. Example: over the integers, ∃x (x² = 4) is true because x = 2 works.</p>
+    <p><strong>Existential quantifier:</strong> ∃x P(x) asserts that P(x) is true for at least one x in the domain. Example: over the integers, ∃x (x<sup>2</sup> = 4) is true because x = 2 works.</p>
   </div>
 
   <h2 id="revision">Last-minute revision sheet</h2>
@@ -2005,8 +2005,8 @@
 
     <h3>Corrections to the source slides</h3>
     <ul>
-      <li>Slide 97 labels the n² even ⇒ n even argument a "direct proof". It is a proof by contrapositive (equivalently, a contradiction). The mathematics is correct; only the label is wrong. Discussed in section 11.</li>
-      <li>Slide 104 writes "(2k)² − k + 4k + 1" where the expansion of k(2k − 1) is 2k² − k. Typographical, but it changes the polynomial. Noted in section 10.</li>
+      <li>Slide 97 labels the n<sup>2</sup> even ⇒ n even argument a "direct proof". It is a proof by contrapositive (equivalently, a contradiction). The mathematics is correct; only the label is wrong. Discussed in section 11.</li>
+      <li>Slide 104 writes "(2k)<sup>2</sup> − k + 4k + 1" where the expansion of k(2k − 1) is 2k<sup>2</sup> − k. Typographical, but it changes the polynomial. Noted in section 10.</li>
     </ul>
 
     <h3>Not covered</h3>
